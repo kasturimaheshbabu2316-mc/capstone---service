@@ -1,0 +1,1 @@
+Ola guarantees free cancellation within 5 minutes of driver assignment across all ride tiers.

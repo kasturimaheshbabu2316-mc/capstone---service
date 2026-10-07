@@ -1,0 +1,43 @@
+﻿======================================================================
+OLA DOMAIN SUPPORT AGENT — DATASET VALIDATION (TASK 1)
+======================================================================
+Track: Business Operations / Customer Support (Ola)
+Random Seed: 42
+Total Records Generated: 60
+
+--- 1. CATEGORY DISTRIBUTION (Requirement: each >= 3) ---
+  • Billing             :  22 records (PASS)
+  • Technical Issue     :   8 records (PASS)
+  • Account Access      :   8 records (PASS)
+  • Product Defect      :   9 records (PASS)
+  • General Inquiry     :  13 records (PASS)
+
+--- 2. STATUS DISTRIBUTION (Requirement: each >= 1) ---
+  • Open                :  11 records (PASS)
+  • In Progress         :  15 records (PASS)
+  • Escalated           :   9 records (PASS)
+  • Resolved            :  12 records (PASS)
+  • Closed              :  13 records (PASS)
+
+--- 3. ESCALATION RATE (Requirement: 10% - 30%) ---
+  • Escalated Count     : 12 / 60
+  • Escalation Percentage: 20.00% (PASS: within 10%-30% band)
+
+--- 4. RESOLUTION TIME RANGE (Log-Normal Distribution) ---
+  • Min Resolution Time : 1.7 hours
+  • Max Resolution Time : 48.6 hours
+  • Mean Resolution Time: 11.5 hours
+
+--- 5. REPRODUCIBILITY CHECK ---
+  • Ran generator twice with Seed 42: SUCCESS (byte-identical outputs verified)
+
+--- 6. SAMPLE RECORDS (First 5) ---
+  {'record_id': 'TKT-0001', 'category': 'Account Access', 'status': 'Open', 'resolution_time_hours': 8.3, 'days_since_created': 23, 'escalated': False}
+  {'record_id': 'TKT-0002', 'category': 'Product Defect', 'status': 'Escalated', 'resolution_time_hours': 15.8, 'days_since_created': 18, 'escalated': True}
+  {'record_id': 'TKT-0003', 'category': 'Billing', 'status': 'In Progress', 'resolution_time_hours': 7.5, 'days_since_created': 6, 'escalated': False}
+  {'record_id': 'TKT-0004', 'category': 'Product Defect', 'status': 'Escalated', 'resolution_time_hours': 9.0, 'days_since_created': 14, 'escalated': True}
+  {'record_id': 'TKT-0005', 'category': 'Product Defect', 'status': 'Open', 'resolution_time_hours': 13.8, 'days_since_created': 10, 'escalated': False}
+
+======================================================================
+TASK 1 ACCEPTANCE CRITERIA: ALL INVARIANTS SATISFIED
+======================================================================

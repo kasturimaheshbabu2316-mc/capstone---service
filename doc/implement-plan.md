@@ -5,6 +5,7 @@
 **Document Version:** 1.0.0  
 **Target File Location:** `doc/implement-plan.md`  
 **Reference Specifications:**
+
 - System Architecture: [doc/architecture.md](file:///c:/Users/kastu/Desktop/capstone%20-%20service/doc/architecture.md)
 - Problem Statement: [doc/problemStatement.md](file:///c:/Users/kastu/Desktop/capstone%20-%20service/doc/problemStatement.md)
 
@@ -15,6 +16,7 @@
 This document details the step-by-step implementation plan for the **Ola Domain Support Agent**. The implementation is structured into sequential phases covering all 16 tasks across Parts 1 through 4, accompanied by transcript generation, unit testing, and final submission auditing.
 
 ### 1.1 Non-Negotiable Operational Constraints
+
 1. **Zero External Network / Zero API Keys:** Execution operates completely under `MOCK_LLM=true` with pre-cached local embeddings (`sentence-transformers/all-MiniLM-L6-v2`) and offline flags (`HF_HUB_OFFLINE=1`, `TRANSFORMERS_OFFLINE=1`).
 2. **Telemetry Suppression:** Environment variables `CREWAI_DISABLE_TELEMETRY=true` and `OTEL_SDK_DISABLED=true` must be set prior to running any CrewAI logic.
 3. **Documentation Directory Boundary:** All markdown documentation files must reside strictly within the [`doc/`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/doc/) directory (with the sole exception of the required repository-level [`README.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/README.md) and [`governance/RISK_CLASSIFICATION.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/governance/RISK_CLASSIFICATION.md)).
@@ -25,7 +27,7 @@ This document details the step-by-step implementation plan for the **Ola Domain 
 
 ## 2. Phase-by-Phase Execution Roadmap
 
-```
+```text
 +---------------------------------------------------------------------------------------+
 |                                IMPLEMENTATION PHASES                                  |
 +-----------+-----------------------------------+-------------------+-------------------+
@@ -46,8 +48,10 @@ This document details the step-by-step implementation plan for the **Ola Domain 
 ## Phase 0: Scaffolding, Environment & Dependency Pinning
 
 ### 0.1 Directory Hierarchy Creation
+
 Create the production directory skeleton matching the architecture specification:
-```
+
+```text
 ola-support-agent/
 ├── doc/
 ├── kb/
@@ -66,7 +70,9 @@ ola-support-agent/
 ```
 
 ### 0.2 Environment Configuration (`.env.example` & `.env`)
+
 - Define required environment variables:
+
   ```ini
   MOCK_LLM=true
   CREWAI_DISABLE_TELEMETRY=true
@@ -77,7 +83,9 @@ ola-support-agent/
   ```
 
 ### 0.3 Pinned Dependencies (`requirements.txt`)
+
 Pin compatible library versions ensuring no packaging conflicts between CrewAI, LangChain, Autogen, and ChromaDB:
+
 - `fastapi>=0.110.0,<0.116.0`
 - `uvicorn[standard]>=0.28.0`
 - `pydantic>=2.6.0,<3.0.0`
@@ -106,6 +114,7 @@ flowchart LR
 ```
 
 ### Task 1: Synthetic Dataset Generator (`dataset.py`)
+
 - **Objective:** Generate $N = 60$ realistic Ola customer support records.
 - **Fields:**
   - `record_id`: String `"TKT-0001"` through `"TKT-0060"`.
@@ -122,6 +131,7 @@ flowchart LR
 - **Deliverable Transcript:** Output directed to `transcripts/task01_dataset.txt`.
 
 ### Task 2: Knowledge Base Authoring (`kb/`)
+
 - **Objective:** Author 12 distinct Markdown policy files (2–5 sentences each) with quantitative numbers, SLA hours, and specific terminology:
   1. [`kb/ticket_priority_rules.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/ticket_priority_rules.md) — P1 (safety emergency) to P4 (general request) definitions.
   2. [`kb/sla_by_severity.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/sla_by_severity.md) — Sev-1 (1h response, 4h fix), Sev-2 (4h/12h), Sev-3 (12h/48h), Sev-4 (24h/72h).
@@ -137,6 +147,7 @@ flowchart LR
   12. [`kb/data_retention_policy.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/data_retention_policy.md) — 180 days active storage, 3 years encrypted cold archival.
 
 ### Task 3: Dual Chunking Strategies & Chroma Vector Indexing (`rag/`)
+
 - **Implement Chunkers (`rag/chunking.py`):**
   - `fixed_chunking(text, chunk_size=200, overlap=40)`: Sliding character window.
   - `sentence_chunking(text)`: Regex punctuation splitter (`r'(?<=[.!?])\s+'`), preserving full sentences without external NLTK dependencies.
@@ -147,6 +158,7 @@ flowchart LR
 - **Deliverable Transcript:** Sample retrieval from both collections written to `transcripts/task03_chunking.txt`.
 
 ### Task 4: Grounded Generation & Empirical Threshold Calibration (`rag/generate.py`)
+
 - **Cosine Metric Alignment:**
   $$\text{Cosine Similarity } S = 1.0 - \text{distance}$$
 - **Threshold Calibration Protocol:**
@@ -160,6 +172,7 @@ flowchart LR
 - **Deliverable Transcript:** Calibration cluster printout, threshold justification, 5 in-scope query responses, and 1 out-of-scope fallback response written to `transcripts/task04_threshold.txt`.
 
 ### Task 5: Chunking Strategy Evaluation & Recommendation (`rag/evaluate.py`)
+
 - **Evaluation Benchmark:** 5 policy queries evaluated across both `ola_fixed` and `ola_sentence`.
 - **Deduplicated Parent Document Evaluation:**
   - Map retrieved chunks to parent doc IDs; deduplicate: $D_{retrieved}$.
@@ -185,6 +198,7 @@ flowchart TD
 ```
 
 ### Task 6: Ticket Status Tool & Escalation Formula (`tools/ticket_tool.py`)
+
 - **Implement `check_support_ticket_status(record_id: str) -> dict`:**
   - Lookup record in `dataset.SUPPORT_TICKETS`.
   - Return error dict if `record_id` not found: `{"error": f"Ticket {record_id} not found", "status": "Unknown"}`.
@@ -198,6 +212,7 @@ flowchart TD
 - **Deliverable Transcript:** Formula distribution, threshold justification, and status lookups written to `transcripts/task06_ticket_tool.txt`.
 
 ### Task 7: CrewAI 3-Agent Topology & Deterministic `MockLLM` (`crew/`, `llm/`)
+
 - **Build `llm/mock_llm.py` extending `crewai.llms.base_llm.BaseLLM`:**
   - Emulate ReAct loop deterministically:
     - Call 1: Detect intent $\to$ emit `Thought / Action / Action Input`.
@@ -214,6 +229,7 @@ flowchart TD
 - **Execution & Deliverable Transcript:** Kickoff crew on 1 policy query and 1 ticket query showing tool logs; written to `transcripts/task07_crew_kickoff.txt`.
 
 ### Task 8: Conversational Session Memory (`crew/memory.py`)
+
 - **Implement LangChain Memory:**
   - Use `InMemoryChatMessageHistory` with `RunnableWithMessageHistory` keyed by `session_id`.
 - **Pronoun & Entity Resolution:**
@@ -224,7 +240,9 @@ flowchart TD
   - `transcripts/task08_memory_session_b.txt`: Fresh session with same follow-up ("Is that one at risk?") showing state absence and prompt for ticket ID.
 
 ### Task 9: Structured Pydantic Output (`crew/schema.py`)
+
 - **Define `SupportResponse(BaseModel)`:**
+
   ```python
   class SupportResponse(BaseModel):
       answer: str
@@ -234,12 +252,14 @@ flowchart TD
       grounded: bool
       confidence: float
   ```
+
 - **Validation Pipeline:**
   - Enforce `response_format=SupportResponse` on CrewAI composer output.
   - Validate in code via `SupportResponse.model_validate()`.
 - **Deliverable Transcript:** Validated output json written to `transcripts/task09_structured_output.txt`.
 
 ### Task 10: Input/Output Guardrails (`guardrails/`)
+
 - **Input Guardrails (`guardrails/input_guard.py`):**
   - Indian phone regex: `(?:\+91[\-\s]?)?[6-9]\d{4}[\-\s]?\d{5}\b` replaced with `[PHONE_MASKED]`.
   - Prompt injection detection: Check keywords (`"ignore previous instructions"`, `"system prompt"`, `"you are now"`, `"override"`). Block and return refusal.
@@ -260,6 +280,7 @@ flowchart LR
 ```
 
 ### Task 11: FastAPI Endpoints & WebSocket Resilience (`api/`)
+
 - **Implement Endpoints (`api/main.py`):**
   - `POST /ask`: Request `{session_id, query}` $\to$ Response `{trace_id, data: SupportResponse, latency_ms}`.
   - `POST /add-document`: Request `{doc_id, text}` $\to$ chunk, embed, upsert to Chroma, invalidate cache.
@@ -270,6 +291,7 @@ flowchart LR
 - **Deliverable Transcript:** HTTP requests and WebSocket disconnect lifecycle written to `transcripts/task11_websocket.txt`.
 
 ### Task 12: Structured JSON-Lines Audit Logging (`api/logging_utils.py`)
+
 - **Logging Specifications:**
   - Append to `logs/requests.jsonl`.
   - Required fields: `trace_id` (uuid4), `timestamp`, `endpoint`, `session_id`, `masked_query`, `status_code`, `latency_ms`, `cache_hit`, `guardrail_flags`.
@@ -279,6 +301,7 @@ flowchart LR
 - **Deliverable Transcript:** Log entries and grep assertion test output written to `transcripts/task12_logging.txt`.
 
 ### Task 13: 15-Query Evaluation Suite & LLM-as-Judge (`eval/`)
+
 - **Query Dataset (`eval/test_queries.py`):**
   - 12 queries covering all 12 KB policy documents.
   - 1 ticket lookup query (`TKT-0007`).
@@ -307,6 +330,7 @@ flowchart TD
 ```
 
 ### Task 14: Autogen Multi-Agent Review Team (`review/autogen_review.py`)
+
 - **Review Architecture:**
   - Agents: `PolicyComplianceReviewer` and `FinalEditor`.
   - Chat: `RoundRobinGroupChat(agents=[...], max_turns=2, custom_message_types=[StructuredMessage[Verdict]])`.
@@ -319,6 +343,7 @@ flowchart TD
 - **Deliverable Transcript:** Transcripts of both review demos written to `transcripts/task14_autogen_review.txt`.
 
 ### Task 15: Four-Layer Governance (`governance/`)
+
 - **Application Layer — Least Autonomy (`governance/least_autonomy.py`):**
   - Tool binding registry: `{"rag_lookup": ["Retrieval Agent"], "check_support_ticket_status": ["Lookup Agent"]}`.
   - `assign_tool(agent_role, tool_name)` raises `PermissionError` if unauthorized.
@@ -332,6 +357,7 @@ flowchart TD
 - **Deliverable Transcript:** Written to `transcripts/task15_least_autonomy.txt`.
 
 ### Task 16: Response Caching Subsystem (`cache.py`)
+
 - **Cache Specifications:**
   - Key normalization: Lowercase, collapse whitespace, strip punctuation.
   - Scope: Caches only grounded policy queries (ignores dynamic ticket queries).
@@ -347,7 +373,9 @@ flowchart TD
 ## Phase 5: Automated Verification & Transcript Pipeline
 
 ### 5.1 Automated Script Runners (`scripts/`)
+
 Create standalone runner scripts to reproduce every task transcript deterministically:
+
 - `python -m scripts.run_task01` $\to$ `transcripts/task01_dataset.txt`
 - `python -m scripts.run_task03` $\to$ `transcripts/task03_chunking.txt`
 - `python -m scripts.run_task04` $\to$ `transcripts/task04_threshold.txt`
@@ -366,6 +394,7 @@ Create standalone runner scripts to reproduce every task transcript deterministi
 - Top-level master runner: `python scripts/run_all.py` (or `bash scripts/run_all.sh`).
 
 ### 5.2 Unit Test Suite (`tests/`)
+
 - `tests/test_dataset.py`: Assert record count $N=60$, category counts $\ge 3$, escalation band $10\%-30\%$, reproducibility.
 - `tests/test_mock_llm.py`: Assert no template contamination and correct tool dispatch by argument signature.
 - `tests/test_guardrails.py`: Assert phone masking and prompt injection detection.
@@ -377,7 +406,9 @@ Create standalone runner scripts to reproduce every task transcript deterministi
 ## Phase 6: README Authoring & Final Submission Audit
 
 ### 6.1 `README.md` Authoring Structure
+
 The root [`README.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/README.md) must follow the required outline:
+
 1. **Track Statement:** Ola (Business Operations / Customer Support).
 2. **Dataset Design Choices:** Seed `42`, 60 records, category weights, status weights, resolution-time range (0.5–72h), reasoning sentence.
 3. **Setup & Execution:** Instructions for running with `MOCK_LLM=true`, confirmation of `CREWAI_DISABLE_TELEMETRY=true` and `OTEL_SDK_DISABLED=true`, offline embedding model caching steps.
@@ -389,6 +420,7 @@ The root [`README.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/REA
 9. **Transcript Index:** Mapping each task to its transcript file in `transcripts/`.
 
 ### 6.2 Pre-Submission Acceptance Checklist
+
 - [ ] `dataset.py` produces $N=60$ records with category counts $\ge 3$, all statuses, escalation rate between $10\%-30\%$.
 - [ ] 12 Markdown knowledge base documents exist in `kb/` with quantitative SLAs and distinct vocabulary.
 - [ ] Dual chunking strategies (fixed 200/40 and sentence-based) indexed into ChromaDB collections `ola_fixed` and `ola_sentence`.
@@ -424,8 +456,8 @@ The root [`README.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/REA
 | **Day 7** | Session memory (multi-turn), Pydantic schemas | `crew/memory.py`, `crew/schema.py` | `task08_memory_session_a/b.txt`, `task09_structured_output.txt` |
 | **Day 8** | Guardrails (PII masking, injection, groundedness) | `guardrails/input_guard.py`, `output_guard.py` | `task10_guardrails.txt` |
 | **Day 9** | FastAPI HTTP endpoints, disconnect-resilient WS | `api/main.py`, `api/models.py` | `task11_websocket.txt` |
-| **Day 10**| Masked JSON-L logging, 15-query evaluation suite | `api/logging_utils.py`, `eval/` | `task12_logging.txt`, `task13_eval.txt` |
-| **Day 11**| Autogen review stage (approve & revise cases) | `review/autogen_review.py` | `task14_autogen_review.txt` |
-| **Day 12**| Governance (least autonomy, risk doc, budget, cache) | `governance/`, `cache.py` | `task15_least_autonomy.txt`, `task16_cache.txt` |
-| **Day 13**| Master transcript runner, full regression testing | `scripts/run_all.py`, `tests/` | All transcripts verified |
-| **Day 14**| README completion, acceptance audit, clean clone check | `README.md`, final audit | Submission ready |
+| **Day 10** | Masked JSON-L logging, 15-query evaluation suite | `api/logging_utils.py`, `eval/` | `task12_logging.txt`, `task13_eval.txt` |
+| **Day 11** | Autogen review stage (approve & revise cases) | `review/autogen_review.py` | `task14_autogen_review.txt` |
+| **Day 12** | Governance (least autonomy, risk doc, budget, cache) | `governance/`, `cache.py` | `task15_least_autonomy.txt`, `task16_cache.txt` |
+| **Day 13** | Master transcript runner, full regression testing | `scripts/run_all.py`, `tests/` | All transcripts verified |
+| **Day 14** | README completion, acceptance audit, clean clone check | `README.md`, final audit | Submission ready |

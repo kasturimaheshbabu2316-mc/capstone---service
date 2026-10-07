@@ -15,6 +15,7 @@ build/
 # Database & local vector stores
 chroma_db/
 .chroma/
+.chroma_db/
 
 # Testing & Coverage
 .pytest_cache/
@@ -23,3 +24,7 @@ htmlcov/
 
 # Environment variables & secrets
 .env
+
+# Editor & Scratch
+.vscode/
+scratch/

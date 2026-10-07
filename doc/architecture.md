@@ -19,7 +19,7 @@ The **Ola Domain Support Agent** is an enterprise-grade customer and operations 
 
 ### 1.2 Core Architectural Principles
 
-```
+```text
 +-------------------------------------------------------------------------------+
 |                             DESIGN PILLARS                                    |
 +-----------------------+-------------------------------+-----------------------+
@@ -213,7 +213,7 @@ sequenceDiagram
 
 The operational support dataset provides the ground truth for ticket-lookup inquiries. It is synthetically generated via fixed seeds to guarantee statistical realism while preserving absolute determinism.
 
-```
+```text
 +-----------------------------------------------------------------------+
 |                    DATASET GENERATION SCHEMA                          |
 +----------------------+--------------------+---------------------------+
@@ -266,7 +266,7 @@ The generator module runs standalone verification (`python dataset.py`) validati
 
 The Knowledge Base is composed of 12 distinct policy documents formatted in Markdown. Each document addresses an operational topic, spanning 2 to 5 concise sentences, enriched with distinguishable domain facts, quantitative SLAs, and explicit vocabulary boundaries to eliminate cross-document retrieval ambiguity.
 
-```
+```text
 kb/
 ├── ticket_priority_rules.md      # P1 (Critical), P2 (High), P3 (Medium), P4 (Low) definitions
 ├── sla_by_severity.md            # Sev-1 (1h response, 4h fix), Sev-2 (4h/12h), Sev-3 (12h/48h)
@@ -305,7 +305,7 @@ kb/
 
 To compare chunking performance empirically, the RAG core implements two parallel indexing pipelines backed by local ChromaDB vector stores and local embeddings.
 
-```
+```text
 +---------------------------------------------------------------------------------+
 |                              RAG CHUNKING & INDEXING                            |
 +------------------------------------+--------------------------------------------+
@@ -417,7 +417,7 @@ $$\text{risk\_flag} = \begin{cases} \text{High Risk (Recommend Escalation)} & \t
 
 To comply with zero-network and zero-API-key constraints, `MockLLM` inherits from `crewai.llms.base_llm.BaseLLM` and deterministically emulates the ReAct execution loop.
 
-```
+```text
 +-------------------------------------------------------------------------------+
 |                    MOCK_LLM REACT LOOP EMULATION PATTERN                      |
 +-------------------------------------------------------------------------------+
@@ -512,7 +512,7 @@ sequenceDiagram
 
 ### 3.6 Security, Guardrails & Governance Layer
 
-```
+```text
 +-------------------------------------------------------------------------------+
 |                       FOUR-LAYER GOVERNANCE MODEL                             |
 +-----------------------------------+-------------------------------------------+
@@ -632,7 +632,7 @@ Every transaction emits an append-only JSON-Lines entry into `logs/requests.json
 
 The evaluation harness evaluates agent performance across 15 structured test cases:
 
-```
+```text
 +-------------------------------------------------------------------------------+
 |                       15-QUERY EVALUATION BENCHMARK                           |
 +-------------------------------------------------------------------------------+
@@ -657,7 +657,7 @@ Scoring is executed by a deterministic, rule-based judge that analyzes lexical o
 
 ## 4. Repository Layout & Module Specifications
 
-```
+```text
 ola-support-agent/
 ├── README.md                      # Primary project overview, choices, and run commands
 ├── requirements.txt               # Strictly pinned Python dependencies
@@ -788,7 +788,7 @@ The architecture corresponds directly to the requirements in `doc/problemStateme
 
 ## 6. Implementation Phasing & Milestones
 
-```
+```text
 +-------------------------------------------------------------------------------+
 |                          14-DAY IMPLEMENTATION SCHEDULE                       |
 +--------+----------------------------------------------------+-----------------+

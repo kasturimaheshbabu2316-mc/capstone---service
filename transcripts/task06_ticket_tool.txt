@@ -1,0 +1,58 @@
+﻿======================================================================
+OLA DOMAIN SUPPORT AGENT — TICKET STATUS & ESCALATION (TASK 6)
+======================================================================
+Formula: S_esc = 0.6 * float(escalated) + 0.4 * (days_since_created / 30)
+Refinement: Recency term zeroed for 'Resolved' and 'Closed' tickets.
+
+--- 1. EMPIRICAL ESCALATION SCORE DISTRIBUTION (Seed 42, N=60) ---
+  • Min Score          : 0.0000
+  • Max Score          : 1.0000
+  • Mean Score         : 0.2416
+  • 50th Percentile (Median) : 0.1266
+  • 80th Percentile (Tau)    : 0.4400
+  • Chosen Threshold justification: T = 0.4400 corresponds to the 80th percentile of scores in seed-42 data.
+
+--- 2. SAMPLE LOOKUP DEMONSTRATIONS ---
+
+Query: check_support_ticket_status('TKT-0001')
+  • Status             : Open
+  • Category           : Account Access
+  • Resolution Time    : 8.3 hours
+  • Days Active        : 23 days
+  • Escalated Flag     : False
+  • Escalation Score   : 0.3067
+  • Risk Classification: Normal (Recommend Escalation: False)
+
+Query: check_support_ticket_status('TKT-0002')
+  • Status             : Escalated
+  • Category           : Product Defect
+  • Resolution Time    : 15.8 hours
+  • Days Active        : 18 days
+  • Escalated Flag     : True
+  • Escalation Score   : 0.8400
+  • Risk Classification: High Risk (Recommend Escalation: True)
+
+Query: check_support_ticket_status('TKT-0003')
+  • Status             : In Progress
+  • Category           : Billing
+  • Resolution Time    : 7.5 hours
+  • Days Active        : 6 days
+  • Escalated Flag     : False
+  • Escalation Score   : 0.0800
+  • Risk Classification: Normal (Recommend Escalation: False)
+
+Query: check_support_ticket_status('TKT-0007')
+  • Status             : Closed
+  • Category           : Billing
+  • Resolution Time    : 2.8 hours
+  • Days Active        : 23 days
+  • Escalated Flag     : False
+  • Escalation Score   : 0.0000
+  • Risk Classification: Normal (Recommend Escalation: False)
+
+Query: check_support_ticket_status('TKT-9999')
+  • Result: Ticket record 'TKT-9999' not found in operational database.
+
+======================================================================
+TASK 6 ACCEPTANCE CRITERIA: TICKET TOOL & THRESHOLD JUSTIFIED
+======================================================================

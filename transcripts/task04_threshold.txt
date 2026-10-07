@@ -1,0 +1,63 @@
+﻿======================================================================
+OLA DOMAIN SUPPORT AGENT — THRESHOLD CALIBRATION & GENERATION (TASK 4)
+======================================================================
+
+--- 1. EMPIRICAL THRESHOLD CALIBRATION (ola_sentence) ---
+IN-SCOPE CLUSTER:
+  • Sim: 0.6299 | Top Doc: sla_by_severity           | Q: "What is the resolution SLA for a Sev-1 safety incident?"
+  • Sim: 0.7153 | Top Doc: refund_compensation_policy | Q: "When does Ola provide monetary refunds for driver cancellations?"
+  • Sim: 0.6884 | Top Doc: repeat_complaint_handling | Q: "How does Ola handle repeat chronic complaints from passengers?"
+  • Sim: 0.5325 | Top Doc: vip_customer_policy       | Q: "What are the benefits and response times for VIP Ola Select customers?"
+
+OUT-OF-SCOPE CLUSTER:
+  • Sim: 0.1979 | Top Doc: communication_channels    | Q: "How do I book an international flight to London with British Airways?"
+  • Sim: 0.1801 | Top Doc: vip_customer_policy       | Q: "What is the current stock price and revenue of Tesla in NASDAQ?"
+  • Sim: 0.0733 | Top Doc: ticket_priority_rules     | Q: "What ingredients are needed to bake an authentic Italian margherita pizza?"
+
+Cluster Separation:
+  • Lowest In-Scope Similarity  (min_in) : 0.5325
+  • Highest Out-of-Scope Sim   (max_out): 0.1979
+  • Derived Midpoint Threshold (T)      : 0.3652
+  • Decision Rule: If Cosine Similarity >= 0.3652 -> Answer; Else -> Refuse
+
+--- 2. DEMONSTRATION OF IN-SCOPE GROUNDED GENERATION (>= 5 QUERIES) ---
+
+Query 1: "What is the SLA for a Sev-1 safety incident?"
+  • Top Sim : 0.5792 (Threshold: 0.3652 -> PASS)
+  • Grounded: True
+  • Sources : ['sla_by_severity', 'vip_customer_policy', 'communication_channels']
+  • Answer  : "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours."
+
+Query 2: "Under what condition are driver cancellation fees refunded?"
+  • Top Sim : 0.7492 (Threshold: 0.3652 -> PASS)
+  • Grounded: True
+  • Sources : ['refund_compensation_policy']
+  • Answer  : "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot."
+
+Query 3: "What happens when a customer logs 3 complaints within 14 days?"
+  • Top Sim : 0.5505 (Threshold: 0.3652 -> PASS)
+  • Grounded: True
+  • Sources : ['repeat_complaint_handling', 'outage_communication']
+  • Answer  : "When a customer logs three or more complaints regarding the same ride issue or driver partner within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect."
+
+Query 4: "What are the operating hours for driver partner physical centers?"
+  • Top Sim : 0.6116 (Threshold: 0.3652 -> PASS)
+  • Grounded: True
+  • Sources : ['business_hours_support', 'repeat_complaint_handling']
+  • Answer  : "General inquiry handling, billing dispute reviews, and driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time."
+
+Query 5: "What compensation is provided for ride delays exceeding 20 minutes?"
+  • Top Sim : 0.5372 (Threshold: 0.3652 -> PASS)
+  • Grounded: True
+  • Sources : ['service_credit_policy', 'ticket_priority_rules', 'business_hours_support']
+  • Answer  : "Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days."
+
+--- 3. DEMONSTRATION OF OUT-OF-SCOPE CALIBRATED REFUSAL (1 QUERY) ---
+Query: "Can you recommend the best tourist attractions to visit in Paris?"
+  • Top Sim : 0.1309 (Threshold: 0.3652 -> REJECT)
+  • Grounded: False
+  • Answer  : "I don't know based on the provided policies." (Calibrated Refusal Triggered)
+
+======================================================================
+TASK 4 ACCEPTANCE CRITERIA: THRESHOLD T = 0.3652 JUSTIFIED & DEMONSTRATED
+======================================================================

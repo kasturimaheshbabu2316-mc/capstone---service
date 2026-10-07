@@ -1,0 +1,2241 @@
+================================================================================
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+
+Pydantic Model Schema: SupportResponse
+- answer           : str
+- sources          : list[str]
+- ticket_id        : str | None
+- escalation_score : float | None
+- grounded         : bool
+- confidence       : float
+
+--- VALIDATED OUTPUT INSTANCE ---
+{
+  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "sources": [
+    "dataset.py"
+  ],
+  "ticket_id": "TKT-0007",
+  "escalation_score": 0.0,
+  "grounded": true,
+  "confidence": 0.98
+}
+
+Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
+
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=
+TASK 9 ACCEPTANCE CRITERIA: STRUCTURED PYDANTIC OUTPUT ENFORCED
+=

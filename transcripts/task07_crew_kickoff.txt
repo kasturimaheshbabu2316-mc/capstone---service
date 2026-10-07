@@ -1,0 +1,1921 @@
+================================================================================
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+OLA DOMAIN SUPPORT AGENT — CREWAI 3-AGENT CORE & TOOL LOGS (TASK 7)
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+
+--- DEMO 1: POLICY QUERY (Retrieval Agent -> Response Composer) ---
+User Query      : What is the SLA for a Sev-1 safety incident?
+Agent Dispatched: Policy Retrieval Specialist
+Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
+Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Grounded        : True
+Confidence      : 0.5792
+
+--- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
+User Query      : What is the status of ticket TKT-0007?
+Agent Dispatched: Ticket Operations Specialist
+Tool Invoked    : check_support_ticket_status(record_id='TKT-0007')
+Tool Result     : Status=Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+Ticket ID       : TKT-0007
+Escalation Score: 0.0
+Sources Cited   : dataset.py
+
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=
+TASK 7 ACCEPTANCE CRITERIA: 3-AGENT CREW WITH RAG AND LOOKUP TOOLS DEMONSTRATED
+=

@@ -1,0 +1,29 @@
+﻿======================================================================
+OLA DOMAIN SUPPORT AGENT — DUAL RAG CHUNKING & INDEXING (TASK 3)
+======================================================================
+Loading Knowledge Base documents and indexing into ChromaDB...
+
+--- 1. INDEXING SUMMARY ---
+  • Knowledge Base Docs   : 12 policy files
+  • Collection 'ola_fixed'    : 45 chunks (200 char window, 40 overlap)
+  • Collection 'ola_sentence' : 50 chunks (regex sentence-based)
+  • Embedding Model       : all-MiniLM-L6-v2 (384-dimensional dense vectors)
+  • Vector Space Metric   : Cosine (hnsw:space: cosine)
+
+--- 2. SAMPLE RETRIEVAL: 'ola_fixed' ---
+Query: "What is the resolution SLA for a Sev-1 safety incident?"
+  [1] Doc: sla_by_severity | Chunk: #0 | Cosine Similarity: 0.695
+      Text: "Ola enforces strict resolution Service Level Agreements based on ticket severity levels. Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution"
+  [2] Doc: sla_by_severity | Chunk: #1 | Cosine Similarity: 0.493
+      Text: "utes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate re"
+
+--- 3. SAMPLE RETRIEVAL: 'ola_sentence' ---
+Query: "What is the resolution SLA for a Sev-1 safety incident?"
+  [1] Doc: sla_by_severity | Chunk: #1 | Cosine Similarity: 0.6299
+      Text: "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours."
+  [2] Doc: sla_by_severity | Chunk: #2 | Cosine Similarity: 0.4799
+      Text: "Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours."
+
+======================================================================
+TASK 3 ACCEPTANCE CRITERIA: BOTH COLLECTIONS POPULATED & RETRIEVING
+======================================================================
