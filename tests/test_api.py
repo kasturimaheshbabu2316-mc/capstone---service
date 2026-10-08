@@ -1,8 +1,12 @@
 """Unit tests for FastAPI endpoints and WebSocket resilience (Task 11)."""
 
+import os
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
+import api.main
+import api.models
+import api.logging_utils
 
 client = TestClient(app)
 
@@ -32,6 +36,29 @@ def test_ask_budget_cap_endpoint():
     huge_query = "Ola policy question " * 1000
     res = client.post("/ask", json={"query": huge_query})
     assert res.status_code == 413
+
+
+def test_add_document_endpoint():
+    test_doc = "test_temp_policy.md"
+    test_text = "Ola ensures high reliability across all service categories."
+    kb_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "kb", test_doc)
+    try:
+        res = client.post("/add-document", json={"doc_id": test_doc, "text": test_text})
+        assert res.status_code == 200
+        json_data = res.json()
+        assert json_data["status"] == "indexed"
+        assert json_data["doc_id"] == test_doc
+        assert json_data["chunks_indexed"] >= 1
+    finally:
+        if os.path.exists(kb_path):
+            os.remove(kb_path)
+
+
+def test_api_module_imports():
+    assert hasattr(api.main, "app")
+    assert hasattr(api.main, "ask_endpoint")
+    assert hasattr(api.models, "AskRequest")
+    assert hasattr(api.logging_utils, "audit_logger")
 
 
 def test_websocket_chat_and_disconnect():

@@ -1,4 +1,11 @@
-from app.models import *
+from app.models import (
+    AskRequest,
+    AskResponse,
+    AddDocumentRequest,
+    AddDocumentResponse,
+    ErrorResponse,
+    SupportResponse,
+)
 
 __all__ = [
     "AskRequest",
@@ -6,4 +13,5 @@ __all__ = [
     "AddDocumentRequest",
     "AddDocumentResponse",
     "ErrorResponse",
+    "SupportResponse",
 ]

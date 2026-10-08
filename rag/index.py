@@ -8,9 +8,14 @@ Uses local SentenceTransformers ("all-MiniLM-L6-v2") with cosine distance.
 """
 
 import os
+import sys
 import glob
 from pathlib import Path
 from typing import Any
+
+# Ensure project root is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import chromadb
 from chromadb.config import Settings
 from sentence_transformers import SentenceTransformer

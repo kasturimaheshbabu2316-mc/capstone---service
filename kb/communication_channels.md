@@ -1,1 +1,3 @@
+# Official Communication Channels
+
 Riders and driver partners can engage Ola support through three designated official channels. Real-time in-app chat is the primary channel for booking assistance, ongoing trip support, and immediate receipt generation. For in-ride physical security concerns, the dedicated 24/7 SOS emergency telephone hotline connects riders directly to Ola Safety Response Team within 30 seconds. Formal administrative complaints and documentation submissions must be directed to support@olacabs.com with the registered phone number referenced.
