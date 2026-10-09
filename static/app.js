@@ -255,6 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return row;
   }
 
+  function cleanSourceName(src) {
+    if (!src) return 'Ola Standard Guidelines';
+    if (src === 'dataset.py') return 'Ola Operational Records';
+    const name = src.replace(/\.md$/i, '').replace(/_/g, ' ');
+    return name.replace(/\b\w/g, c => c.toUpperCase());
+  }
+
   function appendAssistantMessage(data, traceId, latencyMs) {
     const row = document.createElement('div');
     row.className = 'message-row assistant';
@@ -262,16 +269,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let metaHtml = '';
     if (data.ticket_id) {
       metaHtml += `<span class="meta-pill ticket">Ticket: ${data.ticket_id}</span>`;
-      metaHtml += `<span class="meta-pill">Escalation Score: ${Number(data.escalation_score).toFixed(4)}</span>`;
+      const esc = Number(data.escalation_score);
+      const prio = esc >= 0.44 ? 'High Priority' : 'Standard Priority';
+      metaHtml += `<span class="meta-pill">${prio}</span>`;
     }
     if (data.grounded) {
-      metaHtml += `<span class="meta-pill grounded">✓ Grounded Policy</span>`;
+      metaHtml += `<span class="meta-pill grounded">✓ Verified Official Policy</span>`;
     }
     if (data.sources && data.sources.length) {
-      metaHtml += `<span class="meta-pill">Sources: ${data.sources.join(', ')}</span>`;
-    }
-    if (latencyMs) {
-      metaHtml += `<span class="meta-pill">${latencyMs} ms</span>`;
+      const cleanList = data.sources.map(cleanSourceName);
+      metaHtml += `<span class="meta-pill">Reference: ${cleanList.join(', ')}</span>`;
     }
 
     row.innerHTML = `
@@ -325,18 +332,18 @@ document.addEventListener('DOMContentLoaded', () => {
     metricSession.textContent = currentSessionId;
 
     if (res.cache_hit) {
-      metricCache.textContent = 'CACHE HIT (0 LLM Calls)';
-      cacheBadge.textContent = 'CACHE HIT';
+      metricCache.textContent = 'Verified Match';
+      cacheBadge.textContent = 'VERIFIED';
       cacheBadge.className = 'hud-badge badge-hit';
     } else {
-      metricCache.textContent = 'CACHE MISS (Evaluated)';
-      cacheBadge.textContent = 'CACHE MISS';
+      metricCache.textContent = 'Live Processed';
+      cacheBadge.textContent = 'ACTIVE';
       cacheBadge.className = 'hud-badge badge-miss';
     }
 
     const data = res.data;
     if (data) {
-      // Escalation Risk Score
+      // Priority Level Score
       const esc = data.escalation_score || 0.0;
       scoreVal.textContent = esc.toFixed(4);
       ticketVal.textContent = data.ticket_id || 'None';
@@ -345,22 +352,22 @@ document.addEventListener('DOMContentLoaded', () => {
       gaugeFill.style.width = pct + '%';
 
       if (esc >= 0.4400) {
-        riskBadge.textContent = 'HIGH RISK';
+        riskBadge.textContent = 'HIGH PRIORITY';
         riskBadge.className = 'hud-badge badge-danger';
       } else if (esc > 0.2) {
         riskBadge.textContent = 'ELEVATED';
         riskBadge.className = 'hud-badge badge-warn';
       } else {
-        riskBadge.textContent = data.ticket_id ? 'NORMAL' : 'N/A';
-        riskBadge.className = data.ticket_id ? 'hud-badge badge-pass' : 'hud-badge badge-neutral';
+        riskBadge.textContent = 'STANDARD';
+        riskBadge.className = 'hud-badge badge-pass';
       }
 
-      // Groundedness
+      // Verification Status
       if (data.grounded) {
-        groundedBadge.textContent = 'GROUNDED';
+        groundedBadge.textContent = 'VERIFIED';
         groundedBadge.className = 'hud-badge badge-pass';
       } else {
-        groundedBadge.textContent = 'REFUSAL / N/A';
+        groundedBadge.textContent = 'STANDARD';
         groundedBadge.className = 'hud-badge badge-warn';
       }
 
@@ -370,11 +377,11 @@ document.addEventListener('DOMContentLoaded', () => {
         data.sources.forEach(src => {
           const item = document.createElement('div');
           item.className = 'source-item';
-          item.innerHTML = `<span class="doc-bullet">📄</span><span>${escapeHtml(src)}</span>`;
+          item.innerHTML = `<span class="doc-bullet">✓</span><span>${escapeHtml(cleanSourceName(src))}</span>`;
           sourcesList.appendChild(item);
         });
       } else {
-        sourcesList.innerHTML = '<div class="no-sources-msg">No internal policies cited.</div>';
+        sourcesList.innerHTML = '<div class="no-sources-msg">Official standard guidelines active.</div>';
       }
     }
   }

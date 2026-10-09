@@ -87,6 +87,27 @@ def check_support_ticket_status(record_id: str) -> dict[str, Any]:
     }
 
 
+def get_all_tickets() -> list[dict[str, Any]]:
+    """Returns all 60 support ticket records with computed escalation metrics."""
+    results = []
+    for record in SUPPORT_TICKETS:
+        score = calculate_escalation_score(record)
+        recommend_esc = score >= ESCALATION_THRESHOLD_TAU
+        results.append({
+            "ticket_id": record["record_id"],
+            "record_id": record["record_id"],
+            "category": record["category"],
+            "status": record["status"],
+            "resolution_time_hours": record["resolution_time_hours"],
+            "days_since_created": record["days_since_created"],
+            "escalated": record["escalated"],
+            "escalation_score": score,
+            "risk_level": "High Risk" if recommend_esc else "Normal",
+            "recommend_escalation": recommend_esc,
+        })
+    return results
+
+
 try:
     from crewai.tools import tool
 
