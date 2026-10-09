@@ -164,20 +164,19 @@ OLA DOMAIN SUPPORT AGENT — FASTAPI ENDPOINTS & WEBSOCKET DISCONNECT (TASK 11)
 Status Code: 200
 Response Body:
 {
-  "trace_id": "b2b578bd-ccd7-4ee4-a782-5c013e6a4070",
+  "trace_id": "0916ce99-1398-4dd3-ad59-5a35c53f82b2",
   "data": {
     "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
     "sources": [
       "sla_by_severity",
-      "vip_customer_policy",
-      "communication_channels"
+      "escalation_matrix"
     ],
     "ticket_id": null,
     "escalation_score": null,
     "grounded": true,
     "confidence": 0.5792
   },
-  "latency_ms": 251.92,
+  "latency_ms": 241.62,
   "cache_hit": false,
   "guardrail_flags": {
     "phone_masked": false

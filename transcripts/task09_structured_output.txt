@@ -160,1920 +160,1423 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
 OLA DOMAIN SUPPORT AGENT — STRUCTURED PYDANTIC OUTPUT VALIDATION (TASK 9)
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
+--- PYDANTIC MODEL SCHEMA: SupportResponse ---
+{
+  "description": "Structured response model for all customer support interactions.",
+  "properties": {
+    "answer": {
+      "description": "Grounded response text to the user query.",
+      "title": "Answer",
+      "type": "string"
+    },
+    "sources": {
+      "description": "List of source policy files or data references.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "ticket_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Ticket ID if query concerned a ticket lookup.",
+      "title": "Ticket Id"
+    },
+    "escalation_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Escalation risk score in [0.0, 1.0] if ticket query.",
+      "title": "Escalation Score"
+    },
+    "grounded": {
+      "default": true,
+      "description": "Flag indicating if the response is grounded in policy docs or verified data.",
+      "title": "Grounded",
+      "type": "boolean"
+    },
+    "confidence": {
+      "default": 1.0,
+      "description": "Confidence score in [0.0, 1.0].",
+      "title": "Confidence",
+      "type": "number"
+    }
+  },
+  "required": [
+    "answer"
+  ],
+  "title": "SupportResponse",
+  "type": "object"
+}
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
 
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
-
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.
 
 =
-
-Pydantic Model Schema: SupportResponse
-- answer           : str
-- sources          : list[str]
-- ticket_id        : str | None
-- escalation_score : float | None
-- grounded         : bool
-- confidence       : float
 
---- VALIDATED OUTPUT INSTANCE ---
+--- VALIDATED CREW RESPONSE INSTANCE ---
 {
-  "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "sources": [
-    "dataset.py"
+    "sla_by_severity",
+    "escalation_matrix"
   ],
-  "ticket_id": "TKT-0007",
-  "escalation_score": 0.0,
+  "ticket_id": null,
+  "escalation_score": null,
   "grounded": true,
-  "confidence": 0.98
+  "confidence": 0.5792
 }
 
 Validation Check: SupportResponse.model_validate(data) passed with 100% type safety.

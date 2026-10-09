@@ -185,7 +185,9 @@ AVG   | SUMMARY      | All 15 Benchmark Queries | 5.00  | 5.00  | 4.84  | 5.00
 --- DETAILED QUERY-BY-QUERY BREAKDOWN ---
 
 [Q01] (Policy) Query: What criteria classify an incident as a Sev-1 Priority ticket?
-  • Answer: Ola categorizes customer support tickets into four distinct priority tiers: P1 (Critical), P2 (High), P3 (Medium), and P4 (Low).
+  • Answer: # Ticket Priority Rules
+
+Ola categorizes customer support tickets into four distinct priority tiers: P1 (Critical), P2 (High), P3 (Medium), and P4 (Low).
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q02] (Policy) Query: What are the response and resolution SLAs for Sev-1 and Sev-2 incidents?
@@ -197,11 +199,15 @@ AVG   | SUMMARY      | All 15 Benchmark Queries | 5.00  | 5.00  | 4.84  | 5.00
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q04] (Policy) Query: Under what conditions is a passenger eligible for a monetary refund on cancelled rides?
-  • Answer: Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges.
+  • Answer: # Refund and Compensation Policy
+
+Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q05] (Policy) Query: Which communication channels are officially supported for driver and rider inquiries?
-  • Answer: Riders and driver partners can engage Ola support through three designated official channels.
+  • Answer: # Official Communication Channels
+
+Riders and driver partners can engage Ola support through three designated official channels.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q06] (Policy) Query: What are the operational hours for telephone support and in-person partner hubs?
@@ -217,19 +223,27 @@ AVG   | SUMMARY      | All 15 Benchmark Queries | 5.00  | 5.00  | 4.84  | 5.00
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q09] (Policy) Query: How is customer CSAT feedback collected following trip completion?
-  • Answer: Ola aggregates passenger and partner performance feedback through structured post-ride evaluation prompts.
+  • Answer: # Customer Feedback and CSAT Collection
+
+Ola aggregates passenger and partner performance feedback through structured post-ride evaluation prompts.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q10] (Policy) Query: What exclusive SLA benefits and support routing do Ola Select VIP members receive?
-  • Answer: Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers.
+  • Answer: # VIP Customer Support Policy
+
+Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q11] (Policy) Query: How does Ola notify riders and drivers during severe platform outages?
-  • Answer: Ola adheres to proactive communication protocols during platform technical disruptions.
+  • Answer: # Platform Outage Communication Guidelines
+
+Ola adheres to proactive communication protocols during platform technical disruptions.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q12] (Policy) Query: What is the retention period for ride telematics and customer support records?
-  • Answer: Customers may request complete account data erasure under statutory right-to-be-forgotten guidelines, with deletion executed within 30 days of verified identity proof.
+  • Answer: # Customer Support Data Retention Policy
+
+Ola governs the lifecycle of customer support records under stringent regulatory privacy standards.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q13] (Lookup) Query: What is the current status and escalation risk for ticket TKT-0007?

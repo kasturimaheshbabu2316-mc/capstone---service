@@ -168,8 +168,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -181,8 +182,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -194,8 +196,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -207,8 +210,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -220,8 +224,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -233,8 +238,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -246,8 +252,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -259,8 +266,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -272,8 +280,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -285,8 +294,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -298,8 +308,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -311,8 +322,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -324,8 +336,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -337,8 +350,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -350,8 +364,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -363,8 +378,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -376,8 +392,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -389,8 +406,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -402,8 +420,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -415,8 +434,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -428,8 +448,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -441,8 +462,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -454,8 +476,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -467,8 +490,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -480,8 +504,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -493,8 +518,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -506,8 +532,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -519,8 +546,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -532,8 +560,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -545,8 +574,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -558,8 +588,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -571,8 +602,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -584,8 +616,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -597,8 +630,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -610,8 +644,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -623,8 +658,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -636,8 +672,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -649,8 +686,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -662,8 +700,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -675,8 +714,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -688,8 +728,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -701,8 +742,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -714,8 +756,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -727,8 +770,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -740,8 +784,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -753,8 +798,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -766,8 +812,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -779,8 +826,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -792,8 +840,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -805,8 +854,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -818,8 +868,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -831,8 +882,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -844,8 +896,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -857,8 +910,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -870,8 +924,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -883,8 +938,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -896,8 +952,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -909,8 +966,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -922,8 +980,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -935,8 +994,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -948,8 +1008,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -961,8 +1022,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -974,8 +1036,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -987,8 +1050,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1000,8 +1064,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1013,8 +1078,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1026,8 +1092,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1039,8 +1106,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1052,8 +1120,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1065,8 +1134,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1078,8 +1148,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1091,8 +1162,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1104,8 +1176,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1117,8 +1190,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1130,8 +1204,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1143,8 +1218,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1156,8 +1232,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1169,8 +1246,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1182,8 +1260,9 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
 
@@ -1195,167 +1274,168 @@ Session ID: session_a_continuous
 
 [Turn 2] User: Is that one at risk of escalation?
 [Turn 2] Query Preprocessor: Resolved pronoun 'that one' -> 'Is TKT-0007 at risk of escalation?'
-[Turn 2] Was Resolved: True
 [Turn 2] Assistant: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Active Ticket ID Maintained: TKT-0007
+[Turn 2] Escalation Risk Score: 0.0
 
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =
-TASK 8 SESSION A: MULTI-TURN MEMORY PRONOUN RESOLUTION VERIFIED
+SESSION A RESULT: PRONOUN 'that one' RESOLVED TO TKT-0007 VIA IN-MEMORY HISTORY
 =

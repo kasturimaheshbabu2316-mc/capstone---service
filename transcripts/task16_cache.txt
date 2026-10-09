@@ -162,960 +162,960 @@ OLA DOMAIN SUPPORT AGENT — SEMANTIC RESPONSE CACHE (TASK 16)
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =
 
 Test Query: 'What is the SLA for a Sev-1 safety incident?'
 
-Turn 1 (Initial Request)      : Cache Hit = False | Latency = 257.39 ms
-Turn 2 (Identical Request)    : Cache Hit = True | Latency = 6.26 ms
-Latency Reduction             : 251.13 ms (97.6% faster)
+Turn 1 (Initial Request)      : Cache Hit = False | Latency = 267.93 ms
+Turn 2 (Identical Request)    : Cache Hit = True | Latency = 4.16 ms
+Latency Reduction             : 263.77 ms (98.4% faster)
 
 Cache Invalidation Trigger    : POST /add-document
-Invalidated Entries           : 2
+Invalidated Entries           : 16
 Turn 3 (Post-Invalidation)    : Cache Hit = False (Successfully cleared)
 
 =

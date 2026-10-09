@@ -59,14 +59,17 @@ set CREWAI_TRACING_ENABLED=false
 ### Running Tests & Transcripts
 
 ```bash
-# Run 17/17 pytest suite
-.\.service\Scripts\pytest -s -v
+# Run complete pytest suite (37 tests across API, Guardrails, Governance, RAG, Cache, Review, Tools)
+python -m pytest -v
 
 # Run 15-query evaluation benchmark
-.\.service\Scripts\python eval/run_eval.py
+python eval/run_eval.py
 
-# Regenerate all transcripts
-.\.service\Scripts\python scripts/generate_all_transcripts.py
+# Run master verification runner for all 16 tasks (or individual scripts/run_taskNN.py)
+python scripts/run_all.py
+
+# Or regenerate all transcripts via master pipeline
+python scripts/generate_all_transcripts.py
 ```
 
 ---
