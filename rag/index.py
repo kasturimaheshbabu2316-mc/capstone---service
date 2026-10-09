@@ -35,6 +35,11 @@ def get_embedding_model() -> SentenceTransformer:
     """Lazy loader for local SentenceTransformer model."""
     global _model
     if _model is None:
+        import logging
+        import os
+        os.environ["TOKENIZERS_PARALLELISM"] = "false"
+        logging.getLogger("sentence_transformers").setLevel(logging.ERROR)
+        logging.getLogger("transformers").setLevel(logging.ERROR)
         _model = SentenceTransformer(MODEL_NAME)
     return _model
 

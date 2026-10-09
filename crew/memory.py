@@ -4,10 +4,15 @@ Track: Business Operations / Customer Support (Ola)
 Implements InMemoryChatMessageHistory with ticket entity tracking and pronoun resolution.
 """
 
-from typing import Any
 import re
+import warnings
+from typing import Any
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.messages import HumanMessage, AIMessage
+
+# Suppress LangChain deprecation warning for in-memory chat history
+warnings.filterwarnings("ignore", message=".*InMemoryChatMessageHistory was deprecated.*")
+
 
 
 class SessionMemoryManager:

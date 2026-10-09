@@ -218,7 +218,7 @@ with st.sidebar:
     ]
 
     for label, query_text in prompt_options:
-        if st.button(label, use_container_width=True):
+        if st.button(label):
             st.session_state.pending_query = query_text
 
     st.divider()
@@ -256,7 +256,7 @@ with st.sidebar:
             }
             for t in filtered[:15]
         ]
-        st.dataframe(table_data, use_container_width=True)
+        st.dataframe(table_data)
 
     # Document Ingestion (Admin)
     with st.expander("⚙️ System Management (Admin)", expanded=False):
@@ -266,7 +266,7 @@ with st.sidebar:
             value="# Special Policy\nOla guarantees 2-minute safety callbacks.",
             height=80,
         )
-        if st.button("Update Knowledge Base", use_container_width=True):
+        if st.button("Update Knowledge Base"):
             if ingest_doc_id.strip() and ingest_text.strip():
                 with st.spinner("Updating policy database..."):
                     kb_dir = os.path.join(BASE_DIR, "kb")

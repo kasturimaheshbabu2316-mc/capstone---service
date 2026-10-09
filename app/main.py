@@ -81,6 +81,13 @@ def health_check() -> dict[str, Any]:
     }
 
 
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon_endpoint():
+    """Returns 204 No Content for browser favicon requests to avoid 404 logs."""
+    from fastapi import Response
+    return Response(status_code=204)
+
+
 @app.post("/ask", response_model=AskResponse)
 def ask_endpoint(payload: AskRequest) -> AskResponse:
     """Processes customer inquiries with full governance, safety, and caching gates."""
