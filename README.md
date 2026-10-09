@@ -49,17 +49,28 @@ set TRANSFORMERS_OFFLINE=1
 set CREWAI_TRACING_ENABLED=false
 ```
 
-### Running the FastAPI Backend (`app/`)
+### Running the FastAPI Backend & Glassmorphism Web Console (`app/`)
 
 ```bash
-# Start FastAPI application
+# Start FastAPI application with live Glassmorphism Web UI
 .\.service\Scripts\uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+Open **`http://localhost:8000/`** in your browser to access the **Interactive Glassmorphism Console** (`Ola Nexus AI`), featuring real-time WebSocket live chat, REST inspection, escalation gauge HUD, ticket explorer, and policy ingestion.
+
+### Containerized Deployment (Docker)
+
+```bash
+# Build production container image
+docker build -t ola-support-agent .
+
+# Run container (100% offline with pre-cached embeddings)
+docker run -d -p 8000:8000 --name ola-agent ola-support-agent
 ```
 
 ### Running Tests & Transcripts
 
 ```bash
-# Run complete pytest suite (37 tests across API, Guardrails, Governance, RAG, Cache, Review, Tools)
+# Run complete pytest suite (39 tests across API, UI, Guardrails, Governance, RAG, Cache, Review, Tools)
 python -m pytest -v
 
 # Run 15-query evaluation benchmark
@@ -139,6 +150,8 @@ Enforces strongly-typed Pydantic model `SupportResponse` (`answer`, `sources`, `
 ## 6. Part 3 Results — API, Observability & Evaluation
 
 ### FastAPI Endpoints (`app/main.py`)
+- `GET /`: Interactive Glassmorphism Web Console with live chat, telemetry HUD, and ticket explorer.
+- `GET /health`: Health status & offline capability flag.
 - `POST /ask`: Request `{query, session_id}` $\to$ Response `{trace_id, data, latency_ms, cache_hit, guardrail_flags}`.
 - `POST /add-document`: Ingests markdown doc, upserts into Chroma, and invalidates response cache.
 - `WS /ws/chat`: Disconnect-resilient WebSocket surviving abrupt client disconnects without server degradation.

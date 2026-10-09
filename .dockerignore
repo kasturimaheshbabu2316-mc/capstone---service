@@ -1,0 +1,17 @@
+.venv/
+.service/
+env/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.git/
+.gitignore
+.pytest_cache/
+.coverage
+htmlcov/
+.vscode/
+scratch/

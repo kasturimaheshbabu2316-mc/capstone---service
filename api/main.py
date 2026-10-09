@@ -1,5 +1,6 @@
 from app.main import (
     app,
+    index_endpoint,
     health_check,
     ask_endpoint,
     add_document_endpoint,
@@ -8,6 +9,7 @@ from app.main import (
 
 __all__ = [
     "app",
+    "index_endpoint",
     "health_check",
     "ask_endpoint",
     "add_document_endpoint",

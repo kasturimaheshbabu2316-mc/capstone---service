@@ -17,6 +17,22 @@ def test_health_endpoint():
     assert res.json()["status"] == "healthy"
 
 
+def test_index_ui_endpoint():
+    res = client.get("/")
+    assert res.status_code == 200
+    assert "OLA NEXUS" in res.text or "text/html" in res.headers.get("content-type", "")
+
+
+def test_static_assets_endpoint():
+    res_css = client.get("/static/style.css")
+    assert res_css.status_code == 200
+    assert "glass-nav" in res_css.text
+
+    res_js = client.get("/static/app.js")
+    assert res_js.status_code == 200
+    assert "Ola Nexus" in res_js.text
+
+
 def test_ask_policy_endpoint():
     res = client.post("/ask", json={"query": "What is the SLA for a Sev-1 safety incident?"})
     assert res.status_code == 200
