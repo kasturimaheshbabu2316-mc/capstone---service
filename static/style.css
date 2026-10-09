@@ -361,12 +361,13 @@ body.dark-theme {
   align-items: center;
   gap: 8px;
   overflow-x: auto;
-  scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
 .chips-scroll::-webkit-scrollbar {
   display: none;
+  width: 0;
+  height: 0;
 }
 
 .prompt-chip {
