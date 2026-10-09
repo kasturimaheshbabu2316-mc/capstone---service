@@ -11,7 +11,8 @@ from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.messages import HumanMessage, AIMessage
 
 # Suppress LangChain deprecation warning for in-memory chat history
-warnings.filterwarnings("ignore", message=".*InMemoryChatMessageHistory was deprecated.*")
+warnings.filterwarnings("ignore", message=".*InMemoryChatMessageHistory.*")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 

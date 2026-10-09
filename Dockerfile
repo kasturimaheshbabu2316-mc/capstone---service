@@ -29,15 +29,21 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
+# Pre-cache SentenceTransformer embeddings model for offline container execution
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
+
 # Copy application source code
 COPY . .
 
-# Expose service port
+# Ensure start script has executable permissions
+RUN chmod +x scripts/start.sh
+
+# Expose default port
 EXPOSE 8000
 
-# Healthcheck definition
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+# Healthcheck definition (honors dynamic PORT)
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+    CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
 
-# Start production ASGI service
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start production service via start.sh (dynamically selects API or Streamlit via APP_MODE)
+CMD ["./scripts/start.sh"]

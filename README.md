@@ -53,9 +53,43 @@ set CREWAI_TRACING_ENABLED=false
 
 ```bash
 # Start FastAPI application with live Glassmorphism Web UI
-.\.service\Scripts\uvicorn app.main:app --host 0.0.0.0 --port 8000
+uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 Open **`http://localhost:8000/`** in your browser to access the **Interactive Glassmorphism Console** (`Ola Nexus AI`), featuring real-time WebSocket live chat, REST inspection, escalation gauge HUD, ticket explorer, and policy ingestion.
+
+### Running the Streamlit Support Portal (`streamlit_app.py`)
+
+```bash
+# Start Streamlit application
+streamlit run streamlit_app.py --server.port 8501
+```
+Open **`http://localhost:8501/`** in your browser for the dedicated Streamlit dashboard with quick query prompts, ticket filtering directory, and administrative document ingestion.
+
+### Cloud Deployment on Render (render.com)
+
+This project includes first-class support for continuous deployment on [Render](https://render.com) using Infrastructure-as-Code:
+
+#### Method 1: 1-Click Render Blueprint (Recommended)
+1. Fork or push this repository to GitHub.
+2. In the [Render Dashboard](https://dashboard.render.com/), click **New +** $\to$ **Blueprint**.
+3. Connect your GitHub repository.
+4. Render will automatically detect [`render.yaml`](render.yaml) and configure:
+   - **`ola-support-service`**: FastAPI ASGI backend + full Glassmorphic Web App UI (Health check: `/health`).
+   - **`ola-support-streamlit`**: Streamlit interactive portal (Health check: `/_stcore/health`).
+5. Click **Apply** to deploy both services simultaneously with zero manual configuration.
+
+#### Method 2: Manual Web Service on Render (Python Native)
+If deploying an individual service manually via Render dashboard:
+- **Build Command**: `pip install --upgrade pip && pip install -r requirements.txt`
+- **Start Command (FastAPI + Web UI)**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+  *(Or for Streamlit)*: `streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.fileWatcherType none`
+- **Health Check Path**: `/health` (or `/_stcore/health` for Streamlit)
+- **Environment Variables**:
+  - `MOCK_LLM`: `true`
+  - `CREWAI_DISABLE_TELEMETRY`: `true`
+  - `OTEL_SDK_DISABLED`: `true`
+  - `HF_HUB_DISABLE_PROGRESS_BARS`: `1`
+  - `PYTHON_VERSION`: `3.12.0`
 
 ### Containerized Deployment (Docker)
 
@@ -63,8 +97,8 @@ Open **`http://localhost:8000/`** in your browser to access the **Interactive Gl
 # Build production container image
 docker build -t ola-support-agent .
 
-# Run container (100% offline with pre-cached embeddings)
-docker run -d -p 8000:8000 --name ola-agent ola-support-agent
+# Run container (dynamically binds to PORT, default 8000)
+docker run -d -p 8000:8000 -e PORT=8000 --name ola-agent ola-support-agent
 ```
 
 ### Running Tests & Transcripts

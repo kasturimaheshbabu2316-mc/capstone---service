@@ -10,8 +10,12 @@ import sys
 import time
 import uuid
 from typing import Any
+import warnings
 import requests
 import streamlit as st
+
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", message=".*InMemoryChatMessageHistory.*")
 
 # Ensure project root is in sys.path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -278,7 +282,7 @@ with st.sidebar:
                     sentence_col = get_or_create_collection("ola_sentence")
                     s_chunks = sentence_chunking(ingest_text)
                     if s_chunks:
-                        embs = model.encode(s_chunks).tolist()
+                        embs = model.encode(s_chunks, show_progress_bar=False).tolist()
                         sentence_col.upsert(
                             ids=[f"{ingest_doc_id}_sent_{i}" for i in range(len(s_chunks))],
                             embeddings=embs,
@@ -473,15 +477,15 @@ for msg in st.session_state.messages:
                     st.markdown(f"<div style='margin-top:6px;'>{meta_html}</div>", unsafe_allow_html=True)
 
 
-# Handle Pending Query or Chat Input
+# Handle Chat Input & Pending Query
+user_prompt = st.chat_input("Ask a policy question or look up a ticket (e.g. 'What is the SLA for Sev-1?')...")
+
 active_input = None
 if st.session_state.pending_query:
     active_input = st.session_state.pending_query
     st.session_state.pending_query = None
-else:
-    user_prompt = st.chat_input("Ask a policy question or look up a ticket (e.g. 'What is the SLA for Sev-1?')...")
-    if user_prompt:
-        active_input = user_prompt
+elif user_prompt:
+    active_input = user_prompt
 
 if active_input:
     # Append User Message

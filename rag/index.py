@@ -38,6 +38,12 @@ def get_embedding_model() -> SentenceTransformer:
         import logging
         import os
         os.environ["TOKENIZERS_PARALLELISM"] = "false"
+        os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+        try:
+            from transformers.utils import logging as hf_logging
+            hf_logging.disable_progress_bar()
+        except Exception:
+            pass
         logging.getLogger("sentence_transformers").setLevel(logging.ERROR)
         logging.getLogger("transformers").setLevel(logging.ERROR)
         _model = SentenceTransformer(MODEL_NAME)

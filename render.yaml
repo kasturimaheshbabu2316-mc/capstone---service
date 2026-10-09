@@ -1,0 +1,57 @@
+# ==============================================================================
+# Render Blueprint Specification (Infrastructure-as-Code)
+# Reference: https://render.com/docs/blueprint-spec
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # 1. FastAPI Web Service (Modern Glassmorphic Web App & REST API)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: ola-support-service
+    runtime: python
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: MOCK_LLM
+        value: "true"
+      - key: CREWAI_DISABLE_TELEMETRY
+        value: "true"
+      - key: OTEL_SDK_DISABLED
+        value: "true"
+      - key: HF_HUB_DISABLE_PROGRESS_BARS
+        value: "1"
+      - key: GROQ_API_KEY
+        sync: false
+
+  # ----------------------------------------------------------------------------
+  # 2. Streamlit Dashboard Service (Interactive Support Portal)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: ola-support-streamlit
+    runtime: python
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.fileWatcherType none
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: MOCK_LLM
+        value: "true"
+      - key: CREWAI_DISABLE_TELEMETRY
+        value: "true"
+      - key: OTEL_SDK_DISABLED
+        value: "true"
+      - key: HF_HUB_DISABLE_PROGRESS_BARS
+        value: "1"
+      - key: GROQ_API_KEY
+        sync: false

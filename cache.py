@@ -51,6 +51,10 @@ class ResponseCache:
             self._cache.clear()
             return count
 
+    def invalidate_all(self) -> int:
+        """Alias for clear()."""
+        return self.clear()
+
     def get_stats(self) -> dict[str, int]:
         """Returns cache telemetry: hits, misses, total entries."""
         with self._lock:
