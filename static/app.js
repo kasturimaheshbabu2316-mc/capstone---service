@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="timestamp-tag">Processing Crew...</span>
         </div>
         <div class="bubble-content">
-          <p style="color: var(--text-muted); font-style: italic;">
+          <p class="loading-subtext">
             Evaluating policy retrieval, escalation scoring, and AutoGen compliance review...
           </p>
         </div>
@@ -291,16 +291,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const row = document.createElement('div');
     row.className = 'message-row assistant';
     row.innerHTML = `
-      <div class="avatar-box ai-avatar" style="border-color: rgba(239, 68, 68, 0.4); color: var(--accent-danger);">
+      <div class="avatar-box ai-avatar danger-border">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       </div>
-      <div class="bubble-card ai-bubble" style="border-color: rgba(239, 68, 68, 0.3);">
+      <div class="bubble-card ai-bubble danger-card">
         <div class="bubble-header">
-          <span class="sender-name" style="color: var(--accent-danger);">Security / Governance Guardrail Triggered</span>
+          <span class="sender-name danger-text">Security / Governance Guardrail Triggered</span>
           <span class="timestamp-tag">Status ${statusCode}</span>
         </div>
         <div class="bubble-content">
-          <p style="color: #fca5a5;">${escapeHtml(errorDetail)}</p>
+          <p class="error-detail-text">${escapeHtml(errorDetail)}</p>
           <div class="bubble-meta-footer">
             <span class="meta-pill blocked">BLOCKED BY GATEWAY</span>
             <span class="meta-pill">HTTP ${statusCode}</span>
@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/`(.*?)`/g, '<code style="background: rgba(255,255,255,0.08); padding: 2px 5px; border-radius: 4px; font-family: monospace;">$1</code>');
+      .replace(/`(.*?)`/g, '<code class="inline-code">$1</code>');
   }
 
   // Modals Event Handlers
@@ -464,14 +464,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const tr = document.createElement('tr');
       const isHigh = t.score >= 0.4400;
       tr.innerHTML = `
-        <td style="font-family: var(--font-mono); font-weight: 600; color: var(--accent-cyan);">${t.id}</td>
+        <td class="ticket-id-cell">${t.id}</td>
         <td>${t.cat}</td>
         <td><span class="meta-pill ${t.st === 'Escalated' ? 'blocked' : ''}">${t.st}</span></td>
         <td>${t.res.toFixed(1)} h</td>
         <td>${t.days}d ago</td>
         <td>${t.esc ? '⚡ Yes' : 'No'}</td>
-        <td style="font-family: var(--font-mono); font-weight: 600; color: ${isHigh ? 'var(--accent-danger)' : 'var(--text-primary)'};">${t.score.toFixed(4)}</td>
-        <td><button class="table-btn" data-tid="${t.id}">Query</button></td>
+        <td class="ticket-score-cell ${isHigh ? 'danger' : ''}">${t.score.toFixed(4)}</td>
+        <td><button type="button" class="table-btn" data-tid="${t.id}">Query</button></td>
       `;
       ticketsTbody.appendChild(tr);
     });
