@@ -77,12 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       ws.onclose = () => {
         wsConnected = false;
+        const loading = document.getElementById('activeLoadingBubble');
+        if (loading) loading.remove();
         // Auto-reconnect after 2 seconds
         setTimeout(initWebSocket, 2000);
       };
 
       ws.onerror = () => {
         wsConnected = false;
+        const loading = document.getElementById('activeLoadingBubble');
+        if (loading) loading.remove();
       };
     } catch (e) {
       console.warn('WebSocket init error, falling back to HTTP:', e);
@@ -186,19 +190,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loading) loading.remove();
 
     if (msg.type === 'error') {
-      appendErrorMessage(msg.detail, 400);
-      updateHudForError(400, msg.latency_ms || 0.0);
+      const statusCode = msg.status_code || 400;
+      appendErrorMessage(msg.detail, statusCode);
+      updateHudForError(statusCode, msg.latency_ms || 0.0);
       return;
     }
 
     if (msg.type === 'response') {
       const data = msg.data;
-      appendAssistantMessage(data, 'ws-stream-' + Math.random().toString(36).substring(2, 7), msg.latency_ms);
+      const trace = msg.trace_id || ('ws-' + Math.random().toString(36).substring(2, 7));
+      appendAssistantMessage(data, trace, msg.latency_ms);
       updateHud({
-        trace_id: 'ws-stream',
+        trace_id: trace,
         data: data,
         latency_ms: msg.latency_ms,
-        cache_hit: false,
+        cache_hit: Boolean(msg.cache_hit),
         guardrail_flags: {}
       });
     }

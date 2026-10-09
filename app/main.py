@@ -8,6 +8,7 @@ Provides:
 - GET /health: Service health and offline status check
 """
 
+import asyncio
 import os
 import time
 import uuid
@@ -274,7 +275,7 @@ def add_document_endpoint(payload: AddDocumentRequest) -> AddDocumentResponse:
 
 @app.websocket("/ws/chat")
 async def chat_websocket(websocket: WebSocket) -> None:
-    """Disconnect-resilient WebSocket for multi-turn customer chat sessions."""
+    """Disconnect-resilient WebSocket for multi-turn customer chat sessions with full governance gating."""
     await websocket.accept()
     session_id = f"ws_{uuid.uuid4().hex[:8]}"
 
@@ -282,42 +283,167 @@ async def chat_websocket(websocket: WebSocket) -> None:
         while True:
             # Await user message
             user_msg = await websocket.receive_text()
-
-            # Process through agent pipeline
             start_time = time.perf_counter()
-            sanitized_q, was_masked = mask_phone_numbers(user_msg)
-            is_inj, reason = detect_prompt_injection(user_msg)
+            trace_id = f"trc_ws_{uuid.uuid4().hex[:8]}"
 
-            if is_inj:
+            # Gate 1: Token Budget Cap Check (Task 15)
+            within_budget, tokens, err_msg = check_budget_limit(user_msg)
+            if not within_budget:
+                latency_ms = (time.perf_counter() - start_time) * 1000.0
+                audit_logger.log_request(
+                    endpoint="/ws/chat",
+                    query=user_msg,
+                    status_code=413,
+                    latency_ms=latency_ms,
+                    session_id=session_id,
+                    trace_id=trace_id,
+                    guardrail_flags={"budget_exceeded": True, "tokens": tokens},
+                )
                 await websocket.send_json({
                     "type": "error",
-                    "detail": reason,
+                    "status_code": 413,
+                    "detail": err_msg,
                     "session_id": session_id,
+                    "latency_ms": round(latency_ms, 2),
                 })
                 continue
 
-            crew_output = run_support_crew(
+            # Gate 2: Input Guardrails — Prompt Injection & PII Masking (Task 10)
+            is_inj, inj_reason = detect_prompt_injection(user_msg)
+            if is_inj:
+                latency_ms = (time.perf_counter() - start_time) * 1000.0
+                audit_logger.log_request(
+                    endpoint="/ws/chat",
+                    query=user_msg,
+                    status_code=400,
+                    latency_ms=latency_ms,
+                    session_id=session_id,
+                    trace_id=trace_id,
+                    guardrail_flags={"prompt_injection_blocked": True},
+                )
+                await websocket.send_json({
+                    "type": "error",
+                    "status_code": 400,
+                    "detail": inj_reason,
+                    "session_id": session_id,
+                    "latency_ms": round(latency_ms, 2),
+                })
+                continue
+
+            sanitized_q, was_masked = mask_phone_numbers(user_msg)
+            guardrail_flags = {"phone_masked": was_masked}
+
+            # Gate 3: Semantic Response Cache (Task 16)
+            cached_result = response_cache.get(sanitized_q)
+            if cached_result is not None:
+                latency_ms = (time.perf_counter() - start_time) * 1000.0
+                audit_logger.log_request(
+                    endpoint="/ws/chat",
+                    query=user_msg,
+                    status_code=200,
+                    latency_ms=latency_ms,
+                    session_id=session_id,
+                    trace_id=trace_id,
+                    cache_hit=True,
+                    guardrail_flags=guardrail_flags,
+                )
+                await websocket.send_json({
+                    "type": "response",
+                    "session_id": session_id,
+                    "trace_id": trace_id,
+                    "data": cached_result.model_dump(),
+                    "latency_ms": round(latency_ms, 2),
+                    "cache_hit": True,
+                })
+                continue
+
+            # Gate 4: Execution Pipeline — CrewAI Multi-Agent Core (Tasks 7, 8, 9)
+            # Run in thread pool to prevent blocking the asyncio event loop
+            crew_output = await asyncio.to_thread(
+                run_support_crew,
                 query=sanitized_q,
                 session_id=session_id,
-                structured=True,
+                structured=False,
             )
 
+            draft_answer = crew_output["answer"]
+            sources = crew_output["sources"]
+            ticket_id = crew_output["ticket_id"]
+            esc_score = crew_output["escalation_score"]
+            grounded = crew_output["grounded"]
+            confidence = crew_output["confidence"]
+
+            # Gate 5: Autogen Secondary Review Stage (Task 14)
+            verdict = await asyncio.to_thread(
+                review_support_response,
+                query=sanitized_q,
+                draft_answer=draft_answer,
+                sources=sources,
+                grounded=grounded,
+                confidence=confidence,
+            )
+
+            final_text = verdict.final_answer
+            if verdict.redactions_made:
+                guardrail_flags["review_redactions_made"] = True
+
+            # Gate 6: Output Guardrail — Groundedness Check (Task 10)
+            final_text, is_grounded = verify_groundedness(
+                response_text=final_text,
+                grounded_flag=grounded,
+                confidence=confidence,
+            )
+
+            # Gate 7: Structured Output Schema Validation (Task 9)
+            support_data = SupportResponse(
+                answer=final_text,
+                sources=sources,
+                ticket_id=ticket_id,
+                escalation_score=esc_score,
+                grounded=is_grounded,
+                confidence=confidence,
+            )
+
+            # Store in Cache
+            response_cache.set(sanitized_q, support_data)
+
             latency_ms = (time.perf_counter() - start_time) * 1000.0
+
+            # Gate 8: Audit Logging (Task 12)
+            audit_logger.log_request(
+                endpoint="/ws/chat",
+                query=user_msg,
+                status_code=200,
+                latency_ms=latency_ms,
+                session_id=session_id,
+                trace_id=trace_id,
+                cache_hit=False,
+                guardrail_flags=guardrail_flags,
+            )
 
             # Send back validated structured payload
             await websocket.send_json({
                 "type": "response",
                 "session_id": session_id,
-                "data": crew_output.model_dump(),
+                "trace_id": trace_id,
+                "data": support_data.model_dump(),
                 "latency_ms": round(latency_ms, 2),
+                "cache_hit": False,
             })
 
     except WebSocketDisconnect:
         # Clean disconnect handling: server remains unaffected and stable
         pass
     except Exception as e:
-        # Catch unexpected exceptions without tearing down process
+        # Catch unexpected exceptions, log, and send structured error to client
         try:
+            await websocket.send_json({
+                "type": "error",
+                "status_code": 500,
+                "detail": f"Server processing error: {str(e)}",
+                "session_id": session_id,
+                "latency_ms": 0.0,
+            })
             await websocket.close()
         except Exception:
             pass
