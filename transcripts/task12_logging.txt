@@ -161,43 +161,43 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
 =
 
 Audit Log Destination: logs/requests.jsonl
-Total Logged Entries : 132
+Total Logged Entries : 205
 
 --- SAMPLE AUDIT LOG ENTRIES ---
 {
-  "trace_id": "0916ce99-1398-4dd3-ad59-5a35c53f82b2",
-  "timestamp": "2026-10-08T15:45:29.412587+00:00",
+  "trace_id": "b13886e8-f4a1-4237-98d5-eec3793c4146",
+  "timestamp": "2026-10-09T04:54:15.531713+00:00",
   "endpoint": "/ask",
   "session_id": "default_session",
   "masked_query": "What is the SLA for a Sev-1 safety incident?",
   "status_code": 200,
-  "latency_ms": 241.62,
+  "latency_ms": 256.23,
   "cache_hit": false,
   "guardrail_flags": {
     "phone_masked": false
   }
 }
 {
-  "trace_id": "f4d982df-ce90-4cb3-a16a-7e46ae8daa30",
-  "timestamp": "2026-10-08T15:45:29.526030+00:00",
+  "trace_id": "db7278a9-4f2c-40cf-a9fc-127e8e4634f5",
+  "timestamp": "2026-10-09T04:54:15.637459+00:00",
   "endpoint": "/add-document",
   "session_id": "default_session",
   "masked_query": "Ingested doc late_night_surge_policy.md",
   "status_code": 200,
-  "latency_ms": 104.56,
+  "latency_ms": 99.1,
   "cache_hit": false,
   "guardrail_flags": {
     "cache_invalidated": 1
   }
 }
 {
-  "trace_id": "d0e28baa-63fa-45be-93ac-831876742e78",
-  "timestamp": "2026-10-08T15:45:29.920592+00:00",
+  "trace_id": "a5c80e8e-efa2-48d7-aa00-ca38a5b3c6ce",
+  "timestamp": "2026-10-09T04:54:16.016822+00:00",
   "endpoint": "/ask",
   "session_id": "default_session",
   "masked_query": "Customer phone [PHONE_MASKED] asking for ticket TKT-0001 status.",
   "status_code": 200,
-  "latency_ms": 60.53,
+  "latency_ms": 54.65,
   "cache_hit": false,
   "guardrail_flags": {
     "phone_masked": true
