@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Production Startup Script (Render / Docker / Linux)
+# Production Startup Script (Docker / Linux)
 # Track: Business Operations / Customer Support (Ola)
 # ==============================================================================
 

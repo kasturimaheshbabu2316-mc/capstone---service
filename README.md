@@ -9,6 +9,7 @@
 ## 1. Domain Track Statement & Overview
 
 This system implements an enterprise-grade AI customer support agent tailored for **Ola** (ride-hailing, driver operations, and customer support). The platform addresses two primary operational intents:
+
 1. **Policy Inquiries:** Procedural and regulatory questions (SLAs, cancellation refunds, service credits, VIP benefits) grounded strictly in 12 internal policy documents via dual-index RAG.
 2. **Ticket Status Inquiries:** Operational lookup and escalation risk scoring for support tickets against a synthetic dataset of 60 records using structured tool invocation.
 
@@ -55,6 +56,7 @@ set CREWAI_TRACING_ENABLED=false
 # Start FastAPI application with live Glassmorphism Web UI
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
+
 Open **`http://localhost:8000/`** in your browser to access the **Interactive Glassmorphism Console** (`Ola Nexus AI`), featuring real-time WebSocket live chat, REST inspection, escalation gauge HUD, ticket explorer, and policy ingestion.
 
 ### Running the Streamlit Support Portal (`streamlit_app.py`)
@@ -63,33 +65,8 @@ Open **`http://localhost:8000/`** in your browser to access the **Interactive Gl
 # Start Streamlit application
 streamlit run streamlit_app.py --server.port 8501
 ```
+
 Open **`http://localhost:8501/`** in your browser for the dedicated Streamlit dashboard with quick query prompts, ticket filtering directory, and administrative document ingestion.
-
-### Cloud Deployment on Render (render.com)
-
-This project includes first-class support for continuous deployment on [Render](https://render.com) using Infrastructure-as-Code:
-
-#### Method 1: 1-Click Render Blueprint (Recommended)
-1. Fork or push this repository to GitHub.
-2. In the [Render Dashboard](https://dashboard.render.com/), click **New +** $\to$ **Blueprint**.
-3. Connect your GitHub repository.
-4. Render will automatically detect [`render.yaml`](render.yaml) and configure:
-   - **`ola-support-service`**: FastAPI ASGI backend + full Glassmorphic Web App UI (Health check: `/health`).
-   - **`ola-support-streamlit`**: Streamlit interactive portal (Health check: `/_stcore/health`).
-5. Click **Apply** to deploy both services simultaneously with zero manual configuration.
-
-#### Method 2: Manual Web Service on Render (Python Native)
-If deploying an individual service manually via Render dashboard:
-- **Build Command**: `pip install --upgrade pip && pip install -r requirements.txt`
-- **Start Command (FastAPI + Web UI)**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-  *(Or for Streamlit)*: `streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.fileWatcherType none`
-- **Health Check Path**: `/health` (or `/_stcore/health` for Streamlit)
-- **Environment Variables**:
-  - `MOCK_LLM`: `true`
-  - `CREWAI_DISABLE_TELEMETRY`: `true`
-  - `OTEL_SDK_DISABLED`: `true`
-  - `HF_HUB_DISABLE_PROGRESS_BARS`: `1`
-  - `PYTHON_VERSION`: `3.12.0`
 
 ### Containerized Deployment (Docker)
 
@@ -163,18 +140,22 @@ $$S_{esc} = 0.6 \cdot \mathbf{1}_{\{\text{escalated} = \text{True}\}} + 0.4 \cdo
 - **80th Percentile Empirical Threshold ($\tau_{esc}$):** **`0.4400`** (tickets with $S_{esc} \ge 0.4400$ flagged as *High Escalation Risk*).
 
 ### CrewAI Multi-Agent Architecture (Task 7)
+
 - **`Policy Retrieval Specialist`:** Bound exclusively to tool `rag_lookup`.
 - **`Ticket Operations Specialist`:** Bound exclusively to tool `check_support_ticket_status`.
 - **`Support Response Composer`:** Strictly toolless under Least Autonomy governance.
 
 ### Conversational Memory (Task 8)
+
 - **Session A (Continuous):** Demonstrates pronoun resolution ("that one" $\to$ `TKT-0007`).
 - **Session B (Fresh):** Demonstrates ungrounded pronoun rejection prompting for ticket ID.
 
 ### Structured Output Schema (Task 9)
+
 Enforces strongly-typed Pydantic model `SupportResponse` (`answer`, `sources`, `ticket_id`, `escalation_score`, `grounded`, `confidence`).
 
 ### Guardrails (Task 10)
+
 - **PII Masking:** Indian phone numbers (`+91 98765 43210`) masked to `[PHONE_MASKED]`.
 - **Prompt Injection Defense:** Blocks adversarial patterns (`"ignore previous instructions"` $\to$ HTTP 400).
 - **Groundedness Refusal:** Ungrounded out-of-scope queries return calibrated fallback.
@@ -184,6 +165,7 @@ Enforces strongly-typed Pydantic model `SupportResponse` (`answer`, `sources`, `
 ## 6. Part 3 Results — API, Observability & Evaluation
 
 ### FastAPI Endpoints (`app/main.py`)
+
 - `GET /`: Interactive Glassmorphism Web Console with live chat, telemetry HUD, and ticket explorer.
 - `GET /health`: Health status & offline capability flag.
 - `POST /ask`: Request `{query, session_id}` $\to$ Response `{trace_id, data, latency_ms, cache_hit, guardrail_flags}`.
@@ -191,7 +173,9 @@ Enforces strongly-typed Pydantic model `SupportResponse` (`answer`, `sources`, `
 - `WS /ws/chat`: Disconnect-resilient WebSocket surviving abrupt client disconnects without server degradation.
 
 ### Structured Audit Logging (`app/logging_utils.py`)
+
 Emits append-only JSON-L records to `logs/requests.jsonl` with UUID trace IDs, latencies, and verified zero-phone-number leakage:
+
 ```json
 {
   "trace_id": "aa3eec50-a691-4733-b78b-2c5b5cd0a1aa",
@@ -232,17 +216,21 @@ Emits append-only JSON-L records to `logs/requests.jsonl` with UUID trace IDs, l
 ## 7. Part 4 Results — Review, Governance & Caching
 
 ### AutoGen Secondary Review Stage (Task 14)
+
 2-agent review pipeline (`PolicyComplianceReviewer` + `FinalEditor`) emitting structured `Verdict`:
+
 - **Approve Case:** Faithful draft approved as-is.
 - **Revise Case:** Injected hallucination ("100% full compensation for any delay with unlimited credits") flagged and ungrounded claims redacted.
 
 ### Four-Layer Governance (Task 15)
+
 1. **Application Least Autonomy:** Unauthorized tool assignment raises `PermissionError`.
 2. **Runtime Token Budget Cap:** Queries $> 2,000$ estimated tokens rejected with HTTP 413.
 3. **Risk Tier:** Medium Risk documented in [`governance/RISK_CLASSIFICATION.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/governance/RISK_CLASSIFICATION.md).
 4. **Input Sanitization:** Indian phone regex masking enforced before agent ingestion.
 
 ### Semantic Response Cache (Task 16)
+
 - Identical queries served with cache hit and significant latency reduction.
 - Cache invalidated automatically upon `POST /add-document`.
 
