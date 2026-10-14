@@ -554,4 +554,163 @@ document.addEventListener('DOMContentLoaded', () => {
       ingestResult.textContent = 'Error: ' + err.message;
     }
   });
+
+  // ============================================================================
+  // Kokonut UI: Apple Activity Card Controller
+  // ============================================================================
+  const appleCard = document.getElementById('appleActivityCard');
+  if (appleCard) {
+    const ringMove = document.getElementById('ringMove');
+    const ringExercise = document.getElementById('ringExercise');
+    const ringStand = document.getElementById('ringStand');
+
+    const moveLabel = document.getElementById('moveLabel');
+    const movePercent = document.getElementById('movePercent');
+    const moveCurrent = document.getElementById('moveCurrent');
+    const moveTarget = document.getElementById('moveTarget');
+    const moveUnit = document.getElementById('moveUnit');
+
+    const exerciseLabel = document.getElementById('exerciseLabel');
+    const exercisePercent = document.getElementById('exercisePercent');
+    const exerciseCurrent = document.getElementById('exerciseCurrent');
+    const exerciseTarget = document.getElementById('exerciseTarget');
+    const exerciseUnit = document.getElementById('exerciseUnit');
+
+    const standLabel = document.getElementById('standLabel');
+    const standPercent = document.getElementById('standPercent');
+    const standCurrent = document.getElementById('standCurrent');
+    const standTarget = document.getElementById('standTarget');
+    const standUnit = document.getElementById('standUnit');
+
+    const btnToggleActivityMode = document.getElementById('btnToggleActivityMode');
+    const activityModeLabel = document.getElementById('activityModeLabel');
+    const btnReplayActivityRings = document.getElementById('btnReplayActivityRings');
+
+    // Circumferences for r=82, r=63, r=44
+    const C_MOVE = 515.22;
+    const C_EXERCISE = 395.84;
+    const C_STAND = 276.46;
+
+    // Modes data
+    const DATASETS = {
+      fitness: {
+        modeName: 'Fitness',
+        move: { label: 'MOVE', current: 479, target: 800, unit: 'CAL' },
+        exercise: { label: 'EXERCISE', current: 24, target: 30, unit: 'MIN' },
+        stand: { label: 'STAND', current: 6, target: 12, unit: 'HR' }
+      },
+      ops: {
+        modeName: 'Operations',
+        move: { label: 'TOKENS', current: 479, target: 2000, unit: 'TOK' },
+        exercise: { label: 'SLA ACCURACY', current: 94, target: 100, unit: '%' },
+        stand: { label: 'UPTIME', current: 12, target: 12, unit: 'HR' }
+      }
+    };
+
+    let currentMode = 'fitness';
+
+    function setRingsProgress(data, animate = true) {
+      const pMove = Math.min(data.move.current / data.move.target, 1);
+      const pEx = Math.min(data.exercise.current / data.exercise.target, 1);
+      const pStand = Math.min(data.stand.current / data.stand.target, 1);
+
+      // Update text
+      moveLabel.textContent = data.move.label;
+      moveCurrent.textContent = data.move.current;
+      moveTarget.textContent = data.move.target;
+      moveUnit.textContent = data.move.unit;
+      movePercent.textContent = Math.round(pMove * 100) + '%';
+
+      exerciseLabel.textContent = data.exercise.label;
+      exerciseCurrent.textContent = data.exercise.current;
+      exerciseTarget.textContent = data.exercise.target;
+      exerciseUnit.textContent = data.exercise.unit;
+      exercisePercent.textContent = Math.round(pEx * 100) + '%';
+
+      standLabel.textContent = data.stand.label;
+      standCurrent.textContent = data.stand.current;
+      standTarget.textContent = data.stand.target;
+      standUnit.textContent = data.stand.unit;
+      standPercent.textContent = Math.round(pStand * 100) + '%';
+
+      if (!animate) {
+        ringMove.style.strokeDashoffset = C_MOVE;
+        ringExercise.style.strokeDashoffset = C_EXERCISE;
+        ringStand.style.strokeDashoffset = C_STAND;
+        return;
+      }
+
+      // Animate progress with stroke-dashoffset
+      const offsetMove = (1 - pMove) * C_MOVE;
+      const offsetEx = (1 - pEx) * C_EXERCISE;
+      const offsetStand = (1 - pStand) * C_STAND;
+
+      ringMove.style.strokeDashoffset = offsetMove;
+      ringExercise.style.strokeDashoffset = offsetEx;
+      ringStand.style.strokeDashoffset = offsetStand;
+    }
+
+    function triggerRingsAnimation() {
+      // Reset to initial stroke-dashoffset then smoothly transition
+      ringMove.style.transition = 'none';
+      ringExercise.style.transition = 'none';
+      ringStand.style.transition = 'none';
+      ringMove.style.strokeDashoffset = C_MOVE;
+      ringExercise.style.strokeDashoffset = C_EXERCISE;
+      ringStand.style.strokeDashoffset = C_STAND;
+
+      // Force layout reflow
+      void ringMove.offsetWidth;
+
+      // Restore transitions with Motion spring easing
+      ringMove.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(0.23, 1, 0.32, 1) 0s';
+      ringExercise.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(0.23, 1, 0.32, 1) 0.18s';
+      ringStand.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(0.23, 1, 0.32, 1) 0.36s';
+
+      setRingsProgress(DATASETS[currentMode], true);
+    }
+
+    // Toggle button
+    btnToggleActivityMode.addEventListener('click', () => {
+      currentMode = currentMode === 'fitness' ? 'ops' : 'fitness';
+      activityModeLabel.textContent = DATASETS[currentMode].modeName;
+      triggerRingsAnimation();
+    });
+
+    // Replay button
+    btnReplayActivityRings.addEventListener('click', () => {
+      triggerRingsAnimation();
+    });
+
+    // Hover sync between stat rows and SVG rings
+    const statRows = appleCard.querySelectorAll('.activity-stat-row');
+    statRows.forEach(row => {
+      const ringType = row.getAttribute('data-ring');
+      row.addEventListener('mouseenter', () => {
+        appleCard.classList.add(`highlight-${ringType}`);
+      });
+      row.addEventListener('mouseleave', () => {
+        appleCard.classList.remove(`highlight-${ringType}`);
+      });
+    });
+
+    [ringMove, ringExercise, ringStand].forEach((ring, idx) => {
+      const type = idx === 0 ? 'move' : idx === 1 ? 'exercise' : 'stand';
+      ring.addEventListener('mouseenter', () => {
+        appleCard.classList.add(`highlight-${type}`);
+        const matchingRow = appleCard.querySelector(`.activity-stat-row[data-ring="${type}"]`);
+        if (matchingRow) matchingRow.classList.add('active');
+      });
+      ring.addEventListener('mouseleave', () => {
+        appleCard.classList.remove(`highlight-${type}`);
+        const matchingRow = appleCard.querySelector(`.activity-stat-row[data-ring="${type}"]`);
+        if (matchingRow) matchingRow.classList.remove('active');
+      });
+    });
+
+    // Initial delayed launch animation on page load for smooth entry
+    setTimeout(() => {
+      triggerRingsAnimation();
+    }, 250);
+  }
 });

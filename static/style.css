@@ -1254,3 +1254,273 @@ body.dark-theme {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==============================================================================
+   Kokonut UI: Apple Activity Card Component
+   ============================================================================== */
+.kokonut-activity-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(145deg, rgba(16, 24, 42, 0.75), rgba(10, 15, 29, 0.85));
+}
+
+.kokonut-activity-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(255, 45, 85, 0.12), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.activity-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.activity-icon {
+  background: linear-gradient(135deg, rgba(255, 45, 85, 0.2), rgba(4, 199, 221, 0.2)) !important;
+  border-color: rgba(255, 45, 85, 0.3) !important;
+}
+
+.activity-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.activity-title-group h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.activity-badge-kokonut {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #FF6B8B;
+  background: rgba(255, 45, 85, 0.14);
+  border: 1px solid rgba(255, 45, 85, 0.35);
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.5px;
+}
+
+.activity-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.activity-mode-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass-bright);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.activity-mode-toggle:hover {
+  background: rgba(0, 242, 254, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--text-highlight);
+}
+
+.activity-replay-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass-bright);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.activity-replay-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--accent-cyan);
+  transform: rotate(90deg);
+}
+
+.activity-card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+}
+
+.activity-rings-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.5));
+}
+
+.activity-rings-svg {
+  display: block;
+}
+
+/* Ring Tracks */
+.ring-track {
+  opacity: 0.45;
+  transition: opacity 0.25s ease;
+}
+
+.ring-track-move {
+  stroke: rgba(255, 45, 85, 0.2);
+}
+
+.ring-track-exercise {
+  stroke: rgba(163, 249, 0, 0.2);
+}
+
+.ring-track-stand {
+  stroke: rgba(4, 199, 221, 0.2);
+}
+
+/* Ring Progress */
+.ring-progress {
+  transition: stroke-dashoffset 1.1s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center;
+  cursor: pointer;
+}
+
+.ring-move {
+  transition-delay: 0s;
+}
+
+.ring-exercise {
+  transition-delay: 0.18s;
+}
+
+.ring-stand {
+  transition-delay: 0.36s;
+}
+
+.ring-progress:hover {
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+/* Activity Details Column */
+.activity-details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.activity-stat-row:hover,
+.activity-stat-row.active {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(3px);
+}
+
+.activity-stat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.activity-stat-label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+}
+
+.activity-stat-percent {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.activity-stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.activity-stat-unit {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-left: 3px;
+  font-family: var(--font-sans);
+}
+
+.move-color {
+  color: #FF2D55;
+}
+
+.exercise-color {
+  color: #A3F900;
+}
+
+.stand-color {
+  color: #04C7DD;
+}
+
+/* Ring Hover Highlight Sync */
+.kokonut-activity-card.highlight-move .ring-track:not(.ring-track-move),
+.kokonut-activity-card.highlight-move .ring-progress:not(.ring-move) {
+  opacity: 0.2;
+}
+
+.kokonut-activity-card.highlight-exercise .ring-track:not(.ring-track-exercise),
+.kokonut-activity-card.highlight-exercise .ring-progress:not(.ring-exercise) {
+  opacity: 0.2;
+}
+
+.kokonut-activity-card.highlight-stand .ring-track:not(.ring-track-stand),
+.kokonut-activity-card.highlight-stand .ring-progress:not(.ring-stand) {
+  opacity: 0.2;
+}
+
+@media (max-width: 480px) {
+  .activity-card-body {
+    flex-direction: column;
+    align-items: center;
+  }
+  .activity-details-col {
+    width: 100%;
+  }
+}
+
