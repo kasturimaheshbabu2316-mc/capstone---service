@@ -71,6 +71,7 @@ def index_endpoint():
 
 
 @app.get("/health")
+@app.head("/health")
 def health_check() -> dict[str, Any]:
     """Health status and offline capability flag."""
     return {
@@ -100,16 +101,18 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
     within_budget, tokens, err_msg = check_budget_limit(raw_query)
     if not within_budget:
         latency_ms = (time.perf_counter() - start_time) * 1000.0
+        log_query = (raw_query[:200] + "... [TRUNCATED]") if len(raw_query) > 200 else raw_query
         audit_logger.log_request(
             endpoint="/ask",
-            query=raw_query,
+            query=log_query,
             status_code=413,
             latency_ms=latency_ms,
             session_id=session_id,
             trace_id=trace_id,
             guardrail_flags={"budget_exceeded": True, "tokens": tokens},
         )
-        raise HTTPException(status_code=413, detail=err_msg)
+        clean_msg = err_msg or f"Payload exceeds maximum token budget of 2,000 tokens (estimated {tokens:,} tokens)."
+        raise HTTPException(status_code=413, detail=clean_msg)
 
     # Gate 2: Input Guardrails — PII Masking & Prompt Injection (Task 10)
     is_inj, inj_reason = detect_prompt_injection(raw_query)

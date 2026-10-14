@@ -40,6 +40,32 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# Backend API Configuration
+BACKEND_URL = os.environ.get("BACKEND_URL", "http://127.0.0.1:8000").rstrip("/")
+
+
+def check_backend_health() -> tuple[bool, str]:
+    """Queries GET /health on the FastAPI backend to verify connectivity."""
+    try:
+        res = requests.get(f"{BACKEND_URL}/health", timeout=1.5)
+        if res.status_code == 200:
+            return True, "Online"
+        return False, f"Status {res.status_code}"
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+        return False, "Offline"
+    except Exception as e:
+        return False, str(e)
+
+
+def format_display_query(text: str, max_chars: int = 240) -> str:
+    """Collapses or truncates oversized query payloads for clean UI display."""
+    if not text or len(text) <= max_chars:
+        return text
+    est_tokens = max(1, len(text) // 4)
+    preview = text[:max_chars].strip()
+    return f"{preview}...\n\n*(Truncated for display: {len(text):,} characters / ~{est_tokens:,} tokens)*"
+
+
 def clean_source_name(src: str) -> str:
     """Converts internal file paths into clean, official policy titles."""
     if not src:
@@ -284,10 +310,25 @@ with st.sidebar:
     st.divider()
 
     st.subheader("⚙️ Routing Protocol")
+    backend_online, backend_status = check_backend_health()
+    if backend_online:
+        st.caption(f"Backend Service: 🟢 **Online** (`{BACKEND_URL}`)")
+    else:
+        st.warning(
+            f"⚠️ **FastAPI Backend is Offline** (`{BACKEND_URL}`)\n\n"
+            "Start it in your terminal with:\n"
+            "```bash\n"
+            "uvicorn app.app:app --host 127.0.0.1 --port 8000\n"
+            "```\n"
+            "*(Or run `run.bat` / `run.sh`)*"
+        )
+
+    fastapi_option = f"FastAPI Service ({BACKEND_URL})"
     protocol = st.radio(
         "Routing Engine:",
-        ["Direct Core Pipeline", "FastAPI Service (http://127.0.0.1:8000)"],
-        index=0,
+        ["Direct Core Pipeline", fastapi_option],
+        index=1 if backend_online else 0,
+        help="Direct Core runs pipeline in-process. FastAPI sends HTTP requests to backend.",
     )
 
     st.divider()
@@ -454,23 +495,36 @@ def process_query_direct(raw_query: str) -> dict[str, Any]:
 
 
 def process_query_fastapi(raw_query: str) -> dict[str, Any]:
-    """Sends query to local FastAPI endpoint."""
+    """Sends query to local FastAPI endpoint with granular error handling."""
     t0 = time.perf_counter()
+    endpoint = f"{BACKEND_URL}/ask"
     try:
         resp = requests.post(
-            "http://127.0.0.1:8000/ask",
+            endpoint,
             json={"query": raw_query, "session_id": "st_fastapi_client"},
-            timeout=10,
+            timeout=15,
         )
         latency_ms = (time.perf_counter() - t0) * 1000.0
 
         if not resp.ok:
-            err_data = resp.json()
+            try:
+                err_data = resp.json()
+                detail = err_data.get("detail", f"HTTP {resp.status_code}")
+            except Exception:
+                detail = resp.text or f"HTTP {resp.status_code}"
+
+            if resp.status_code == 413:
+                title = "Payload Size Limit Exceeded"
+            elif resp.status_code == 400:
+                title = "Security Guardrail Triggered"
+            else:
+                title = f"Service Error (HTTP {resp.status_code})"
+
             return {
                 "is_error": True,
                 "status_code": resp.status_code,
-                "title": "Security Guardrail Triggered",
-                "detail": err_data.get("detail", f"HTTP {resp.status_code}"),
+                "title": title,
+                "detail": detail,
                 "latency_ms": round(latency_ms, 2),
                 "trace_id": f"http_{resp.status_code}",
             }
@@ -484,13 +538,39 @@ def process_query_fastapi(raw_query: str) -> dict[str, Any]:
             "trace_id": data.get("trace_id", "http_ok"),
             "phone_masked": False,
         }
-    except Exception as e:
+    except requests.exceptions.Timeout:
+        latency_ms = (time.perf_counter() - t0) * 1000.0
+        return {
+            "is_error": True,
+            "status_code": 504,
+            "title": "Backend Request Timeout",
+            "detail": f"Request to {endpoint} timed out after 15 seconds.",
+            "latency_ms": round(latency_ms, 2),
+            "trace_id": "err_timeout",
+            "offline": True,
+        }
+    except requests.exceptions.ConnectionError:
         latency_ms = (time.perf_counter() - t0) * 1000.0
         return {
             "is_error": True,
             "status_code": 503,
+            "title": "Backend Service Offline",
+            "detail": (
+                f"Failed to connect to FastAPI at {BACKEND_URL}.\n\n"
+                "Start the backend using:\n"
+                "`uvicorn app.app:app --host 127.0.0.1 --port 8000` (or run `run.bat` / `run.sh`)"
+            ),
+            "latency_ms": round(latency_ms, 2),
+            "trace_id": "err_conn",
+            "offline": True,
+        }
+    except Exception as e:
+        latency_ms = (time.perf_counter() - t0) * 1000.0
+        return {
+            "is_error": True,
+            "status_code": 500,
             "title": "Service Connection Error",
-            "detail": f"Failed to connect to backend service: {str(e)}",
+            "detail": f"Failed communicating with backend service: {str(e)}",
             "latency_ms": round(latency_ms, 2),
             "trace_id": "err_conn",
         }
@@ -513,7 +593,10 @@ for msg in st.session_state.messages:
                 unsafe_allow_html=True,
             )
         else:
-            st.markdown(msg["content"])
+            if msg["role"] == "user":
+                st.markdown(format_display_query(msg["content"]))
+            else:
+                st.markdown(msg["content"])
             if msg.get("meta"):
                 meta = msg["meta"]
                 meta_html = ""
@@ -550,13 +633,17 @@ if active_input:
         "content": active_input,
     })
     with st.chat_message("user"):
-        st.markdown(active_input)
+        st.markdown(format_display_query(active_input))
 
     # Process Query
     with st.chat_message("assistant"):
         with st.spinner("Processing request..."):
             if "FastAPI" in protocol:
                 result = process_query_fastapi(active_input)
+                # Auto-fallback to Direct Core Pipeline if backend is unreachable
+                if result.get("is_error") and result.get("offline"):
+                    st.info("ℹ️ **FastAPI backend is offline.** Automatically executed query via **Direct Core Pipeline**.")
+                    result = process_query_direct(active_input)
             else:
                 result = process_query_direct(active_input)
 
