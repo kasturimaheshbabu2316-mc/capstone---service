@@ -1,0 +1,10 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\kastu\Desktop\capstone - service
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT, default_loop_scope=None
+collected 11 items
+
+tests/test_smoke.py ...........                                          [100%]
+
+============================= 11 passed in 24.31s =============================

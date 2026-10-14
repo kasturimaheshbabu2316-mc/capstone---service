@@ -1,4 +1,4 @@
-"""Ola Domain Support Agent — Operational Dataset Generator.
+"""Ola Domain Support Agent — Operational Dataset Generator (Task 1).
 
 Track: Business Operations / Customer Support (Ola)
 Generates deterministic synthetic support ticket records for status lookups and risk evaluation.
@@ -24,11 +24,16 @@ CATEGORY_WEIGHTS = [0.25, 0.25, 0.20, 0.15, 0.15]
 STATUSES = ["Open", "In Progress", "Escalated", "Resolved", "Closed"]
 STATUS_WEIGHTS = [0.20, 0.20, 0.15, 0.25, 0.20]
 
-# Resolution time parameters (log-normal distribution skewed between 0.5h and 72.0h)
+# Resolution time parameters (log-normal distribution skewed between 1.0h and 72.0h)
+# Support ticket resolution times range from 1.0 to 72.0 hours, reflecting rapid first-tier billing corrections through to maximum multi-day technical and safety escalations.
+MIN_RESOLUTION_HOURS = 1.0
+MAX_RESOLUTION_HOURS = 72.0
+RESOLUTION_HOURS_JUSTIFICATION = (
+    "Support ticket resolution times range from 1.0 to 72.0 hours, reflecting rapid first-tier "
+    "billing corrections through to maximum multi-day technical and safety escalations."
+)
 LOGNORM_MU = 2.2
 LOGNORM_SIGMA = 0.8
-MIN_RESOLUTION_HOURS = 0.5
-MAX_RESOLUTION_HOURS = 72.0
 
 
 def generate_single_record(record_idx: int, rng: random.Random) -> dict[str, Any]:
@@ -37,7 +42,7 @@ def generate_single_record(record_idx: int, rng: random.Random) -> dict[str, Any
     category = rng.choices(CATEGORIES, weights=CATEGORY_WEIGHTS, k=1)[0]
     status = rng.choices(STATUSES, weights=STATUS_WEIGHTS, k=1)[0]
 
-    # Skewed resolution time (log-normal, clipped between 0.5h and 72h)
+    # Skewed resolution time (log-normal, clipped between 1.0h and 72.0h)
     raw_res = math.exp(rng.gauss(LOGNORM_MU, LOGNORM_SIGMA))
     resolution_time_hours = round(
         max(MIN_RESOLUTION_HOURS, min(MAX_RESOLUTION_HOURS, raw_res)), 1
@@ -80,7 +85,10 @@ SUPPORT_TICKETS_BY_ID: dict[str, dict[str, Any]] = {
 
 
 def validate_dataset(tickets: list[dict[str, Any]]) -> dict[str, Any]:
-    """Validates acceptance criteria and prints statistical breakdown."""
+    """Validates acceptance criteria and asserts every structural invariant.
+
+    If any rule fails, the resolution is tuning SEED or weights, never hand-editing records.
+    """
     total = len(tickets)
     cat_counts = {c: 0 for c in CATEGORIES}
     status_counts = {s: 0 for s in STATUSES}
@@ -93,6 +101,10 @@ def validate_dataset(tickets: list[dict[str, Any]]) -> dict[str, Any]:
         if t["escalated"]:
             escalated_count += 1
         res_times.append(t["resolution_time_hours"])
+        assert 0 <= t["days_since_created"] <= 30, f"Days since created {t['days_since_created']} out of [0, 30]"
+        assert MIN_RESOLUTION_HOURS <= t["resolution_time_hours"] <= MAX_RESOLUTION_HOURS, (
+            f"Resolution time {t['resolution_time_hours']} out of [{MIN_RESOLUTION_HOURS}, {MAX_RESOLUTION_HOURS}]"
+        )
 
     escalated_pct = (escalated_count / total) * 100.0
 
@@ -124,42 +136,40 @@ if __name__ == "__main__":
     print("=" * 70)
     print(f"Track: Business Operations / Customer Support (Ola)")
     print(f"Random Seed: {SEED}")
-    print(f"Total Records Generated: {TOTAL_RECORDS}\n")
+    print(f"Total Records Generated: {TOTAL_RECORDS}")
+    print(f"Category Weights: {dict(zip(CATEGORIES, CATEGORY_WEIGHTS))}")
+    print(f"Status Weights: {dict(zip(STATUSES, STATUS_WEIGHTS))}")
+    print(f"Resolution Time Range: [{MIN_RESOLUTION_HOURS}, {MAX_RESOLUTION_HOURS}] hours")
+    print(f"Resolution Justification: {RESOLUTION_HOURS_JUSTIFICATION}\n")
 
-    # Run 1
-    stats1 = validate_dataset(SUPPORT_TICKETS)
+    # Validate dataset
+    stats = validate_dataset(SUPPORT_TICKETS)
 
     print("--- 1. CATEGORY DISTRIBUTION (Requirement: each >= 3) ---")
-    for cat, count in stats1["category_counts"].items():
-        print(f"  • {cat:<20}: {count:>3} records (PASS)")
+    for cat, count in stats["category_counts"].items():
+        print(f"  • {cat:<20}: {count:>3} records (PASS: >= 3)")
 
     print("\n--- 2. STATUS DISTRIBUTION (Requirement: each >= 1) ---")
-    for st, count in stats1["status_counts"].items():
-        print(f"  • {st:<20}: {count:>3} records (PASS)")
+    for st, count in stats["status_counts"].items():
+        print(f"  • {st:<20}: {count:>3} records (PASS: >= 1)")
 
     print("\n--- 3. ESCALATION RATE (Requirement: 10% - 30%) ---")
-    print(
-        f"  • Escalated Count     : {stats1['escalated_count']} / {stats1['total']}"
-    )
-    print(
-        f"  • Escalation Percentage: {stats1['escalated_percentage']:.2f}% (PASS: within 10%-30% band)"
-    )
+    print(f"  • Escalated Count      : {stats['escalated_count']} / {stats['total']}")
+    print(f"  • Escalation Percentage: {stats['escalated_percentage']:.2f}% (PASS: within 10.0%-30.0% band)")
 
-    print("\n--- 4. RESOLUTION TIME RANGE (Log-Normal Distribution) ---")
-    print(f"  • Min Resolution Time : {stats1['min_res_hours']:.1f} hours")
-    print(f"  • Max Resolution Time : {stats1['max_res_hours']:.1f} hours")
-    print(f"  • Mean Resolution Time: {stats1['avg_res_hours']:.1f} hours")
+    print("\n--- 4. RESOLUTION TIME RANGE ---")
+    print(f"  • Min Resolution Time  : {stats['min_res_hours']:.1f} hours")
+    print(f"  • Max Resolution Time  : {stats['max_res_hours']:.1f} hours")
+    print(f"  • Mean Resolution Time : {stats['avg_res_hours']:.1f} hours")
 
-    # Reproducibility check: Run 2
+    # Reproducibility verification
     tickets_run2 = generate_dataset(SEED, TOTAL_RECORDS)
     stats2 = validate_dataset(tickets_run2)
     assert (
         SUPPORT_TICKETS == tickets_run2
     ), "Reproducibility failure: Run 1 and Run 2 produced different records!"
     print("\n--- 5. REPRODUCIBILITY CHECK ---")
-    print(
-        "  • Ran generator twice with Seed 42: SUCCESS (byte-identical outputs verified)"
-    )
+    print("  • Ran generator twice with Seed 42: SUCCESS (byte-identical outputs verified)")
 
     print("\n--- 6. SAMPLE RECORDS (First 5) ---")
     for rec in SUPPORT_TICKETS[:5]:

@@ -28,3 +28,4 @@ htmlcov/
 # Editor & Scratch
 .vscode/
 scratch/
+node_modules

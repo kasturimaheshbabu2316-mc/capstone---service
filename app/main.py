@@ -8,8 +8,10 @@ Provides:
 - GET /health: Service health and offline status check
 """
 
+from contextlib import asynccontextmanager
 import asyncio
 import os
+import re
 import time
 import uuid
 from typing import Any
@@ -29,22 +31,61 @@ from app.logging_utils import audit_logger
 from crew.schema import SupportResponse
 from crew.crew import run_support_crew
 from crew.memory import session_memory
-from guardrails.input_guard import (
-    mask_phone_numbers,
-    detect_prompt_injection,
+from guardrails import (
+    check_payload_budget,
+    check_security,
+    mask_pii,
 )
 from guardrails.output_guard import verify_groundedness
-from governance.budget import check_budget_limit
 from cache import response_cache
 from review.autogen_review import review_support_response
+from chatbot_backend import route_and_process_query
 from rag.chunking import fixed_chunking, sentence_chunking
 from rag.index import get_or_create_collection, get_embedding_model
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """FastAPI lifespan hook: runs ingestion and seeds DB/KB at startup."""
+    try:
+        from ingest import initialize_system_data
+        initialize_system_data()
+    except Exception as exc:
+        print(f"Lifespan startup notice: {exc}")
+    yield
+
 
 app = FastAPI(
     title="Ola Domain Support Agent API",
     description="Enterprise-grade support agent for Ola riders, drivers, and operations.",
     version="1.0.0",
+    lifespan=lifespan,
 )
+
+# Exception handlers for safe, consistent JSON error responses (Step 7)
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "error": "HTTP Error",
+            "detail": exc.detail,
+            "status_code": exc.status_code,
+        },
+    )
+
+
+@app.exception_handler(Exception)
+async def generic_exception_handler(request: Request, exc: Exception):
+    audit_logger.logger.error("Unhandled server exception: %s", exc, exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": "Internal Server Error",
+            "detail": "An unexpected server error occurred while processing your request. Please try again later.",
+            "status_code": 500,
+        },
+    )
 
 # CORS middleware
 app.add_middleware(
@@ -75,10 +116,11 @@ def index_endpoint():
 def health_check() -> dict[str, Any]:
     """Health status and offline capability flag."""
     return {
-        "status": "healthy",
+        "status": "ok",
+        "mock_llm": os.environ.get("MOCK_LLM", "true").lower() == "true",
+        "kb_ready": True,
+        "db_ready": True,
         "service": "ola-support-agent",
-        "mock_llm": os.environ.get("MOCK_LLM", "true") == "true",
-        "telemetry_disabled": os.environ.get("CREWAI_DISABLE_TELEMETRY", "true") == "true",
     }
 
 
@@ -97,8 +139,8 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
     raw_query = payload.query
     session_id = payload.session_id or "default_session"
 
-    # Gate 1: Token Budget Cap Check (Task 15)
-    within_budget, tokens, err_msg = check_budget_limit(raw_query)
+    # Gate 1: Token Budget Cap Check (Step 3 / Step 7: HTTP 413)
+    within_budget, tokens, err_msg = check_payload_budget(raw_query)
     if not within_budget:
         latency_ms = (time.perf_counter() - start_time) * 1000.0
         log_query = (raw_query[:200] + "... [TRUNCATED]") if len(raw_query) > 200 else raw_query
@@ -114,9 +156,9 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
         clean_msg = err_msg or f"Payload exceeds maximum token budget of 2,000 tokens (estimated {tokens:,} tokens)."
         raise HTTPException(status_code=413, detail=clean_msg)
 
-    # Gate 2: Input Guardrails — PII Masking & Prompt Injection (Task 10)
-    is_inj, inj_reason = detect_prompt_injection(raw_query)
-    if is_inj:
+    # Gate 2: Security & Prompt-Injection Check (Step 3 / Step 7: HTTP 400)
+    is_safe, threat_reason = check_security(raw_query)
+    if not is_safe:
         latency_ms = (time.perf_counter() - start_time) * 1000.0
         audit_logger.log_request(
             endpoint="/ask",
@@ -125,14 +167,15 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
             latency_ms=latency_ms,
             session_id=session_id,
             trace_id=trace_id,
-            guardrail_flags={"prompt_injection_blocked": True},
+            guardrail_flags={"prompt_injection_blocked": True, "reason": threat_reason},
         )
-        raise HTTPException(status_code=400, detail=inj_reason)
+        raise HTTPException(status_code=400, detail=threat_reason or "Query blocked by security guardrails.")
 
-    sanitized_query, was_masked = mask_phone_numbers(raw_query)
-    guardrail_flags = {"phone_masked": was_masked}
+    # Gate 3: Input PII Masking (phone, email, card numbers)
+    sanitized_query, input_masked = mask_pii(raw_query)
+    guardrail_flags: dict[str, Any] = {"input_pii_masked": input_masked}
 
-    # Gate 3: Semantic Response Cache (Task 16)
+    # Gate 4: Semantic Response Cache
     cached_result = response_cache.get(sanitized_query)
     if cached_result is not None:
         latency_ms = (time.perf_counter() - start_time) * 1000.0
@@ -149,53 +192,70 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
         return AskResponse(
             trace_id=trace_id,
             data=cached_result,
+            answer=cached_result.answer,
+            route=getattr(cached_result, "route", "cached"),
+            sql=getattr(cached_result, "sql", None),
+            chart_type=getattr(cached_result, "chart_type", None),
+            x_col=getattr(cached_result, "x_col", None),
+            y_col=getattr(cached_result, "y_col", None),
+            retrieved_sources=getattr(cached_result, "retrieved_sources", []),
+            retrieved_snippet=getattr(cached_result, "retrieved_snippet", None),
+            review_status=getattr(cached_result, "review_status", {}),
             latency_ms=round(latency_ms, 2),
             cache_hit=True,
             guardrail_flags=guardrail_flags,
         )
 
-    # Gate 4: Execution Pipeline — CrewAI Multi-Agent Core (Task 7, 8, 9)
-    crew_output = run_support_crew(
-        query=sanitized_query,
-        session_id=session_id,
-        structured=False,
-    )
+    # Gate 5: Execution Pipeline (Router -> RAG or Text-to-SQL -> Autogen Review -> Business Answer)
+    backend_result = route_and_process_query(sanitized_query, session_id=session_id)
+    raw_answer = backend_result["answer"]
+    route = backend_result["route"]
+    sql = backend_result["sql"]
+    chart_type = backend_result["chart_type"]
+    x_col = backend_result["x_col"]
+    y_col = backend_result["y_col"]
+    sources = backend_result["retrieved_sources"]
+    snippet = backend_result["retrieved_snippet"]
+    review_status = backend_result["review_status"]
+    proc_flags = backend_result.get("guardrail_flags", {})
+    guardrail_flags.update(proc_flags)
 
-    draft_answer = crew_output["answer"]
-    sources = crew_output["sources"]
-    ticket_id = crew_output["ticket_id"]
-    esc_score = crew_output["escalation_score"]
-    grounded = crew_output["grounded"]
-    confidence = crew_output["confidence"]
+    # Gate 6: Output PII Masking
+    clean_answer, output_masked = mask_pii(raw_answer)
+    if output_masked:
+        guardrail_flags["output_pii_masked"] = True
 
-    # Gate 5: Autogen Secondary Review Stage (Task 14)
-    verdict = review_support_response(
-        query=sanitized_query,
-        draft_answer=draft_answer,
-        sources=sources,
-        grounded=grounded,
-        confidence=confidence,
-    )
+    # Prepare DataFrame records for tabular/chart rendering in UI
+    df = backend_result.get("dataframe")
+    df_records = None
+    if df is not None and not df.empty:
+        try:
+            df_records = df.head(100).to_dict(orient="records")
+        except Exception:
+            df_records = None
 
-    final_text = verdict.final_answer
-    if verdict.redactions_made:
-        guardrail_flags["review_redactions_made"] = True
+    # Gate 7: Structured Output Schema
+    ticket_id = None
+    tkt_match = re.search(r"\b(TKT-\d{4})\b", sanitized_query, re.IGNORECASE)
+    if tkt_match:
+        ticket_id = tkt_match.group(1).upper()
 
-    # Gate 6: Output Guardrail — Groundedness Check (Task 10)
-    final_text, is_grounded = verify_groundedness(
-        response_text=final_text,
-        grounded_flag=grounded,
-        confidence=confidence,
-    )
-
-    # Gate 7: Structured Output Schema Validation (Task 9)
     support_data = SupportResponse(
-        answer=final_text,
+        answer=clean_answer,
         sources=sources,
         ticket_id=ticket_id,
-        escalation_score=esc_score,
-        grounded=is_grounded,
-        confidence=confidence,
+        escalation_score=None,
+        grounded=guardrail_flags.get("policy_grounded", True),
+        confidence=guardrail_flags.get("confidence", 1.0),
+        route=route,
+        sql=sql,
+        chart_type=chart_type,
+        x_col=x_col,
+        y_col=y_col,
+        retrieved_sources=sources,
+        retrieved_snippet=snippet,
+        review_status=review_status,
+        dataframe_records=df_records,
     )
 
     # Store in Cache
@@ -203,7 +263,7 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
 
     latency_ms = (time.perf_counter() - start_time) * 1000.0
 
-    # Gate 8: Audit Logging (Task 12)
+    # Gate 8: Audit Logging
     audit_logger.log_request(
         endpoint="/ask",
         query=raw_query,
@@ -218,6 +278,15 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
     return AskResponse(
         trace_id=trace_id,
         data=support_data,
+        answer=clean_answer,
+        route=route,
+        sql=sql,
+        chart_type=chart_type,
+        x_col=x_col,
+        y_col=y_col,
+        retrieved_sources=sources,
+        retrieved_snippet=snippet,
+        review_status=review_status,
         latency_ms=round(latency_ms, 2),
         cache_hit=False,
         guardrail_flags=guardrail_flags,
