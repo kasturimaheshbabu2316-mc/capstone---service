@@ -10,6 +10,29 @@ pinned: false
 
 Track completed: Ola (Business Operations / Customer Support)
 
+## Live Deployment (Hugging Face Space)
+
+- **Production Space URL**: `https://mahesh0123-ola-support-agent.hf.space`
+- **Interactive Swagger Documentation**: `https://mahesh0123-ola-support-agent.hf.space/docs`
+- **Healthcheck Endpoint**: `https://mahesh0123-ola-support-agent.hf.space/health`
+
+### Example Verification Commands
+
+```bash
+# Check service health
+curl -X GET "https://mahesh0123-ola-support-agent.hf.space/health"
+
+# Query the grounded support pipeline
+curl -X POST "https://mahesh0123-ola-support-agent.hf.space/ask" \
+  -H "Content-Type: application/json" \
+  -d '{"question": "What is the resolution SLA for a Sev-1 safety incident?"}'
+```
+
+> **Deployment Notes:**
+>
+> - **100% Offline & Deterministic**: The Space runs entirely under `MOCK_LLM=true` with zero external API keys and `CREWAI_DISABLE_TELEMETRY=true` (no outbound telemetry or tracking).
+> - **Ephemeral Storage & Self-Healing Index**: Hugging Face Spaces storage is ephemeral and resets on restart. The ChromaDB vector index is automatically checked and rebuilt at startup inside the FastAPI lifespan handler if absent, requiring no pre-committed database files.
+
 ## Ola Domain Support Agent — Operational Intelligence & Support System
 
 ## 1. Dataset Design Choices

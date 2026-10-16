@@ -44,3 +44,4 @@ htmlcov/
 scratch/
 node_modules/
 .DS_Store
+ola-support-agent/
