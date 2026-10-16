@@ -131,3 +131,20 @@ def test_recommended_json_and_evaluation():
     assert len(data.get("recommendation", "")) > 50
 
 
+def test_evaluate_query_precision_recall_arithmetic():
+    from rag.evaluate_chunking import evaluate_query
+    res = evaluate_query(
+        query="What is the resolution SLA for a Sev-1 safety incident?",
+        ground_truth_docs=["sla_by_severity"],
+        collection_name="kb_sentence",
+        k=3,
+    )
+    assert res["num_correct"] == 1
+    assert res["num_relevant"] == 1
+    assert res["precision"] == 1.0
+    assert res["recall"] == 1.0
+    assert res["precision_arithmetic"] == "1/1 = 1.000"
+    assert res["recall_arithmetic"] == "1/1 = 1.000"
+
+
+
