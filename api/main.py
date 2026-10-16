@@ -22,6 +22,7 @@ import time
 import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
+import hmac
 from typing import Any, Dict, Optional
 
 # Ensure project root is in sys.path
@@ -29,7 +30,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from fastapi import FastAPI, HTTPException, Request, WebSocket, WebSocketDisconnect
+from fastapi import Depends, FastAPI, Header, HTTPException, Request, WebSocket, WebSocketDisconnect
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -87,6 +88,7 @@ async def lifespan(app: FastAPI):
         try:
             import torch
             torch.set_num_threads(1)
+            torch.set_grad_enabled(False)
         except Exception:
             pass
 
@@ -128,6 +130,20 @@ async def lifespan(app: FastAPI):
             initialize_system_data()
         except Exception as exc:
             logger.info("Lifespan system data check: %s", exc)
+
+        # Pre-warm CrewAI agents and crews once in lifespan
+        try:
+            from crew.crew import get_policy_crew, get_ticket_crew
+            get_policy_crew()
+            get_ticket_crew()
+        except Exception as exc:
+            logger.info("Crew pre-warm: %s", exc)
+
+        try:
+            from review.autogen_review import get_shared_review_pool
+            get_shared_review_pool()
+        except Exception as exc:
+            logger.info("AutoGen pool pre-warm: %s", exc)
     except Exception as exc:
         logger.error("Lifespan initialization failure: %s", exc, exc_info=True)
 
@@ -375,18 +391,21 @@ def run_unified_pipeline(
         guardrail_flags["policy_grounded"] = crew_output.grounded
 
         # 6. Autogen Secondary Review Stage
-        from review.autogen_review import review_support_response
-        review_context = " ".join(crew_output.sources) if crew_output.sources else ""
-        review_verdict = review_support_response(
-            query=sanitized_question,
-            draft_answer=crew_output.answer,
-            sources=crew_output.sources,
-            grounded=crew_output.grounded,
-            context_text=review_context,
-        )
-        crew_output.answer = review_verdict.final_answer
-        crew_output.review_status = review_verdict.model_dump()
-        crew_output.grounded = crew_output.grounded and review_verdict.approved
+        # run_support_crew already executes review_support_response and sets crew_output.review_status.
+        # Avoid running a redundant secondary review team if already approved/reviewed.
+        if not crew_output.review_status or crew_output.review_status.get("approved") is None:
+            from review.autogen_review import review_support_response
+            review_context = " ".join(crew_output.sources) if crew_output.sources else ""
+            review_verdict = review_support_response(
+                query=sanitized_question,
+                draft_answer=crew_output.answer,
+                sources=crew_output.sources,
+                grounded=crew_output.grounded,
+                context_text=review_context,
+            )
+            crew_output.answer = review_verdict.final_answer
+            crew_output.review_status = review_verdict.model_dump()
+            crew_output.grounded = crew_output.grounded and review_verdict.approved
 
         # 7. Schema Validation & Cache Store
         from crew.schemas import validate_crew_response
@@ -462,8 +481,33 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
     )
 
 
+def verify_admin_token(x_admin_token: Optional[str] = Header(None, alias="X-Admin-Token")) -> str:
+    """Enforces admin authentication for privileged endpoints.
+
+    - If ADMIN_TOKEN is not configured in the server environment, returns HTTP 403 Forbidden.
+    - If X-Admin-Token header is missing or incorrect, returns HTTP 401 Unauthorized.
+    """
+    server_token = os.environ.get("ADMIN_TOKEN")
+    if not server_token or not server_token.strip():
+        raise HTTPException(
+            status_code=403,
+            detail="Admin endpoints are disabled because ADMIN_TOKEN is not configured on this server.",
+        )
+
+    if not x_admin_token or not hmac.compare_digest(x_admin_token.strip(), server_token.strip()):
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or missing X-Admin-Token header.",
+        )
+
+    return x_admin_token
+
+
 @app.post("/add-document", response_model=AddDocumentResponse)
-def add_document_endpoint(payload: AddDocumentRequest) -> AddDocumentResponse:
+def add_document_endpoint(
+    payload: AddDocumentRequest,
+    admin_token: str = Depends(verify_admin_token),
+) -> AddDocumentResponse:
     """Ingests a markdown document, sentence-chunks, embeds, and upserts into 'kb_sentence'."""
     start_time = time.perf_counter()
     doc_title = (payload.title or payload.doc_id or "document").strip()
@@ -548,6 +592,13 @@ def add_document_endpoint(payload: AddDocumentRequest) -> AddDocumentResponse:
             status_code=500,
             detail="An unexpected server error occurred while adding the document.",
         )
+
+
+@app.post("/clear-cache")
+def clear_cache_endpoint(admin_token: str = Depends(verify_admin_token)) -> Dict[str, Any]:
+    """Privileged admin endpoint to invalidate in-memory response cache."""
+    invalidated_count = response_cache.clear() if hasattr(response_cache, "clear") else 0
+    return {"status": "cleared", "invalidated_entries": invalidated_count}
 
 
 @app.websocket("/ws/chat")

@@ -391,10 +391,25 @@ async def run_autogen_review_async(
     return final_verdict, list(result.messages)
 
 
+_shared_review_pool: Optional[concurrent.futures.ThreadPoolExecutor] = None
+
+
+def get_shared_review_pool() -> concurrent.futures.ThreadPoolExecutor:
+    """Returns singleton thread pool executor for AutoGen review runs."""
+    global _shared_review_pool
+    if _shared_review_pool is None:
+        _shared_review_pool = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+    return _shared_review_pool
+
+
 def run_autogen_review_sync(draft_answer: str, context: str) -> Tuple[ReviewVerdict, List[Any]]:
     """Thread-safe synchronous runner for the AutoGen review team."""
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
-        return pool.submit(lambda: asyncio.run(run_autogen_review_async(draft_answer, context))).result()
+    pool = get_shared_review_pool()
+    future = pool.submit(lambda: asyncio.run(run_autogen_review_async(draft_answer, context)))
+    res = future.result()
+    import gc
+    gc.collect()
+    return res
 
 
 def _resolve_context_text(sources: list[str] | str | None, context_text: str = "") -> str:

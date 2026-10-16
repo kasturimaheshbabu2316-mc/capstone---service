@@ -92,6 +92,7 @@ def get_embedding_model() -> SentenceTransformer:
         try:
             import torch
             torch.set_num_threads(1)
+            torch.set_grad_enabled(False)
         except Exception:
             pass
         try:
@@ -102,6 +103,11 @@ def get_embedding_model() -> SentenceTransformer:
         logging.getLogger("sentence_transformers").setLevel(logging.ERROR)
         logging.getLogger("transformers").setLevel(logging.ERROR)
         _embedding_model = SentenceTransformer(EMBED_MODEL_NAME)
+        if hasattr(_embedding_model, "eval"):
+            try:
+                _embedding_model.eval()
+            except Exception:
+                pass
     return _embedding_model
 
 
@@ -297,7 +303,12 @@ def retrieve(
     model = get_embedding_model()
 
     col = client.get_collection(name=collection_name)
-    query_emb = model.encode([query], show_progress_bar=False).tolist()
+    try:
+        import torch
+        with torch.inference_mode():
+            query_emb = model.encode([query], show_progress_bar=False, batch_size=1).tolist()
+    except Exception:
+        query_emb = model.encode([query], show_progress_bar=False, batch_size=1).tolist()
 
     results = col.query(
         query_embeddings=query_emb,

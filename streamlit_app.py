@@ -5,11 +5,12 @@ Provides a clean, enterprise-grade, confidential-free user experience for custom
 policy assistance, and operational ticket tracking.
 """
 
+import hmac
 import os
 import sys
 import time
 import uuid
-from typing import Any
+from typing import Any, Optional
 import warnings
 import requests
 import streamlit as st
@@ -40,7 +41,6 @@ except ImportError:
     get_all_tickets = None
 
 
-# Backend API Configuration
 def get_backend_url() -> str:
     """Resolves backend URL: st.secrets["BACKEND_URL"] -> env var -> http://127.0.0.1:8000."""
     url = None
@@ -55,6 +55,34 @@ def get_backend_url() -> str:
 
 
 BACKEND_URL = get_backend_url()
+
+
+def get_admin_password() -> Optional[str]:
+    """Reads ADMIN_PASSWORD from st.secrets or os.environ."""
+    pwd = None
+    try:
+        if hasattr(st, "secrets") and "ADMIN_PASSWORD" in st.secrets:
+            pwd = str(st.secrets["ADMIN_PASSWORD"]).strip()
+    except Exception:
+        pwd = None
+    if not pwd:
+        pwd = os.environ.get("ADMIN_PASSWORD", "").strip() or None
+    return pwd
+
+
+def get_admin_token() -> Optional[str]:
+    """Reads ADMIN_TOKEN from st.secrets or os.environ (fallback to ADMIN_PASSWORD)."""
+    token = None
+    try:
+        if hasattr(st, "secrets") and "ADMIN_TOKEN" in st.secrets:
+            token = str(st.secrets["ADMIN_TOKEN"]).strip()
+    except Exception:
+        token = None
+    if not token:
+        token = os.environ.get("ADMIN_TOKEN", "").strip() or None
+    if not token:
+        token = get_admin_password()
+    return token
 
 
 def is_streamlit_running() -> bool:
@@ -672,38 +700,102 @@ def render_ui():
             else:
                 st.info("Direct ticket database query is available in local mode. Use the chat input (e.g. 'What is the status of TKT-0007?') to query tickets via the backend service.")
 
-        # Document Ingestion (Admin)
-        with st.expander("⚙️ System Management (Admin)", expanded=False):
-            if DIRECT_CORE_AVAILABLE:
-                ingest_doc_id = st.text_input("Document Name:", value="ola_special_policy.md")
-                ingest_text = st.text_area(
-                    "Content:",
-                    value="# Special Policy\nOla guarantees 2-minute safety callbacks.",
-                    height=80,
-                )
-                if st.button("Update Knowledge Base"):
-                    if ingest_doc_id.strip() and ingest_text.strip():
-                        with st.spinner("Updating policy database..."):
-                            kb_dir = os.path.join(BASE_DIR, "kb")
-                            os.makedirs(kb_dir, exist_ok=True)
-                            with open(os.path.join(kb_dir, ingest_doc_id.strip()), "w", encoding="utf-8") as f:
-                                f.write(ingest_text.strip())
+        # Document Ingestion (Admin) - Protected
+        configured_admin_pwd = get_admin_password()
+        if configured_admin_pwd:
+            with st.expander("⚙️ System Management (Admin)", expanded=False):
+                if not st.session_state.get("admin_authenticated", False):
+                    st.caption("🔒 Authentication required to access administrative tools.")
+                    input_pwd = st.text_input("Enter Admin Password:", type="password", key="admin_pwd_entry")
+                    if st.button("Unlock Admin Panel", key="btn_unlock_admin"):
+                        if input_pwd and hmac.compare_digest(input_pwd.strip(), configured_admin_pwd.strip()):
+                            st.session_state.admin_authenticated = True
+                            st.rerun()
+                        else:
+                            st.error("Incorrect password. Access denied.")
+                else:
+                    st.success("🔓 Admin Session Active")
+                    col_lock, _ = st.columns([1, 2])
+                    with col_lock:
+                        if st.button("Lock Panel", key="btn_lock_admin"):
+                            st.session_state.admin_authenticated = False
+                            st.rerun()
 
-                            model = get_embedding_model()
-                            sentence_col = get_or_create_collection("ola_sentence")
-                            s_chunks = sentence_chunking(ingest_text)
-                            if s_chunks:
-                                embs = model.encode(s_chunks, show_progress_bar=False).tolist()
-                                sentence_col.upsert(
-                                    ids=[f"{ingest_doc_id}_sent_{i}" for i in range(len(s_chunks))],
-                                    embeddings=embs,
-                                    documents=s_chunks,
-                                    metadatas=[{"doc_id": ingest_doc_id, "chunk_index": i} for i in range(len(s_chunks))],
-                                )
-                            inv_count = response_cache.invalidate_all()
-                            st.success(f"Successfully updated! Refreshed {inv_count} cached entries.")
-            else:
-                st.info("System Management & Ingestion requires direct local ML runtime.")
+                    st.markdown("##### 📄 Ingest New Policy Document")
+                    ingest_doc_id = st.text_input("Document Name:", value="ola_special_policy.md", key="admin_doc_id")
+                    ingest_text = st.text_area(
+                        "Content:",
+                        value="# Special Policy\nOla guarantees 2-minute safety callbacks.",
+                        height=80,
+                        key="admin_doc_text",
+                    )
+                    c_act1, c_act2 = st.columns(2)
+                    with c_act1:
+                        if st.button("Update Knowledge Base", key="btn_update_kb"):
+                            if ingest_doc_id.strip() and ingest_text.strip():
+                                with st.spinner("Updating policy database..."):
+                                    admin_tok = get_admin_token() or ""
+                                    if "FastAPI" in protocol:
+                                        target_url = f"{get_backend_url()}/add-document"
+                                        headers = {"X-Admin-Token": admin_tok}
+                                        try:
+                                            r = requests.post(
+                                                target_url,
+                                                json={"title": ingest_doc_id.strip(), "text": ingest_text.strip()},
+                                                headers=headers,
+                                                timeout=30,
+                                            )
+                                            if r.status_code == 200:
+                                                payload = r.json()
+                                                st.success(f"Successfully ingested! Chunks: {payload.get('chunks_indexed', 1)}, Inval: {payload.get('cache_invalidated_entries', 0)}")
+                                            elif r.status_code in (401, 403):
+                                                st.error(f"Authentication Failed (HTTP {r.status_code}): {r.json().get('detail', 'Unauthorized')}")
+                                            else:
+                                                st.error(f"Ingestion failed (HTTP {r.status_code}): {r.text}")
+                                        except Exception as e:
+                                            st.error(f"Connection error: {e}")
+                                    else:
+                                        if DIRECT_CORE_AVAILABLE:
+                                            kb_dir = os.path.join(BASE_DIR, "kb")
+                                            os.makedirs(kb_dir, exist_ok=True)
+                                            with open(os.path.join(kb_dir, ingest_doc_id.strip()), "w", encoding="utf-8") as f:
+                                                f.write(ingest_text.strip())
+
+                                            model = get_embedding_model()
+                                            sentence_col = get_or_create_collection("ola_sentence")
+                                            s_chunks = sentence_chunking(ingest_text)
+                                            if s_chunks:
+                                                embs = model.encode(s_chunks, show_progress_bar=False).tolist()
+                                                sentence_col.upsert(
+                                                    ids=[f"{ingest_doc_id}_sent_{i}" for i in range(len(s_chunks))],
+                                                    embeddings=embs,
+                                                    documents=s_chunks,
+                                                    metadatas=[{"doc_id": ingest_doc_id, "chunk_index": i} for i in range(len(s_chunks))],
+                                                )
+                                            inv_count = response_cache.invalidate_all()
+                                            st.success(f"Successfully updated locally! Refreshed {inv_count} cached entries.")
+                                        else:
+                                            st.warning("Direct core runtime not available.")
+                    with c_act2:
+                        if st.button("Clear Semantic Cache", key="btn_clear_cache"):
+                            with st.spinner("Clearing cache..."):
+                                admin_tok = get_admin_token() or ""
+                                if "FastAPI" in protocol:
+                                    target_url = f"{get_backend_url()}/clear-cache"
+                                    headers = {"X-Admin-Token": admin_tok}
+                                    try:
+                                        r = requests.post(target_url, headers=headers, timeout=10)
+                                        if r.status_code == 200:
+                                            st.success(f"Cache cleared! Invalidated: {r.json().get('invalidated_entries', 0)}")
+                                        elif r.status_code in (401, 403):
+                                            st.error(f"Authentication Failed (HTTP {r.status_code}): {r.json().get('detail', 'Unauthorized')}")
+                                        else:
+                                            st.error(f"Failed (HTTP {r.status_code}): {r.text}")
+                                    except Exception as e:
+                                        st.error(f"Connection error: {e}")
+                                else:
+                                    inv_count = response_cache.clear() if hasattr(response_cache, "clear") else 0
+                                    st.success(f"Local cache cleared! Invalidated: {inv_count}")
 
     # Render Chat History
     for msg in st.session_state.messages:
@@ -711,16 +803,16 @@ def render_ui():
             if msg.get("is_error"):
                 st.markdown(
                     f"""
-                    <div class="guardrail-card">
-                        <div class="guardrail-title">
+                    <div class="guardrail-card" style="margin-bottom:8px; padding:12px 16px;">
+                        <div class="guardrail-title" style="margin-bottom:0;">
                             <span>🛡️ {msg.get('title', 'Security Guardrail Triggered')}</span>
                             <span class="badge-cyan" style="color:#f87171; border-color:#f87171;">Status {msg.get('status_code', 400)}</span>
                         </div>
-                        <div class="guardrail-detail">{msg['content']}</div>
                     </div>
                     """,
                     unsafe_allow_html=True,
                 )
+                st.markdown(msg.get("content", ""))
             else:
                 raw_content = msg["content"]
                 if msg["role"] == "user":
@@ -799,16 +891,16 @@ def render_ui():
             if result.get("is_error"):
                 st.markdown(
                     f"""
-                    <div class="guardrail-card">
-                        <div class="guardrail-title">
+                    <div class="guardrail-card" style="margin-bottom:8px; padding:12px 16px;">
+                        <div class="guardrail-title" style="margin-bottom:0;">
                             <span>🛡️ {result.get('title', 'Security Guardrail Triggered')}</span>
                             <span class="badge-cyan" style="color:#f87171; border-color:#f87171;">Status {result.get('status_code', 400)}</span>
                         </div>
-                        <div class="guardrail-detail">{result.get('detail')}</div>
                     </div>
                     """,
                     unsafe_allow_html=True,
                 )
+                st.markdown(result.get("detail", ""))
                 st.session_state.messages.append({
                     "role": "assistant",
                     "content": result.get("detail"),

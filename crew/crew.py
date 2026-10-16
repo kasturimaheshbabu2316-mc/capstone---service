@@ -29,6 +29,75 @@ from tools.rag_tool import rag_lookup
 logger = logging.getLogger("ola_domain_agent.crew")
 
 
+_shared_llm = None
+_retrieval_agent = None
+_lookup_agent = None
+_composer_agent = None
+_policy_crew = None
+_ticket_crew = None
+
+
+def get_shared_agents():
+    """Returns singleton instances of mock LLM and the 3 specialized agents."""
+    global _shared_llm, _retrieval_agent, _lookup_agent, _composer_agent
+    if _shared_llm is None:
+        _shared_llm = get_mock_llm()
+        _retrieval_agent = create_retrieval_agent(_shared_llm)
+        _lookup_agent = create_lookup_agent(_shared_llm)
+        _composer_agent = create_composer_agent(_shared_llm)
+    return _shared_llm, _retrieval_agent, _lookup_agent, _composer_agent
+
+
+def get_policy_crew() -> Crew:
+    """Returns singleton instance of the policy RAG Crew."""
+    global _policy_crew
+    if _policy_crew is None:
+        _, retrieval_agent, lookup_agent, composer_agent = get_shared_agents()
+        task1 = Task(
+            description="Search internal policies for: '{query}'.",
+            expected_output="Relevant policy excerpts and citations.",
+            agent=retrieval_agent,
+        )
+        task2 = Task(
+            description="Compose a grounded answer to: '{query}' using retrieved policies.",
+            expected_output="Clear, grounded customer policy answer.",
+            agent=composer_agent,
+        )
+        _policy_crew = Crew(
+            agents=[retrieval_agent, lookup_agent, composer_agent],
+            tasks=[task1, task2],
+            process=Process.sequential,
+            verbose=False,
+            tracing=False,
+        )
+    return _policy_crew
+
+
+def get_ticket_crew() -> Crew:
+    """Returns singleton instance of the operational ticket lookup Crew."""
+    global _ticket_crew
+    if _ticket_crew is None:
+        _, retrieval_agent, lookup_agent, composer_agent = get_shared_agents()
+        task1 = Task(
+            description="Check the status, resolution time, and escalation risk for ticket {ticket_id}.",
+            expected_output="Operational status, metrics, and escalation risk calculation.",
+            agent=lookup_agent,
+        )
+        task2 = Task(
+            description="Draft a courteous, concise customer response explaining the status of ticket {ticket_id}.",
+            expected_output="Final customer-facing response text.",
+            agent=composer_agent,
+        )
+        _ticket_crew = Crew(
+            agents=[retrieval_agent, lookup_agent, composer_agent],
+            tasks=[task1, task2],
+            process=Process.sequential,
+            verbose=False,
+            tracing=False,
+        )
+    return _ticket_crew
+
+
 def run_support_crew(
     query: str,
     session_id: str = "default_session",
@@ -57,11 +126,6 @@ def run_support_crew(
         for kw in ("sla", "policy", "refund", "hour", "time", "rule", "sev-", "guideline", "credit", "vip")
     )
 
-    llm = get_mock_llm()
-    retrieval_agent = create_retrieval_agent(llm)
-    lookup_agent = create_lookup_agent(llm)
-    composer_agent = create_composer_agent(llm)
-
     if ticket_id and has_policy_interest:
         route = "both"
     elif ticket_id:
@@ -72,31 +136,15 @@ def run_support_crew(
     if ticket_id:
         # Route: Lookup Agent -> Composer Agent
         tool_invoked = "check_support_ticket_status"
-        task1 = Task(
-            description=f"Check the status, resolution time, and escalation risk for ticket {ticket_id}.",
-            expected_output="Operational status, metrics, and escalation risk calculation.",
-            agent=lookup_agent,
-        )
-        task2 = Task(
-            description=f"Draft a courteous, concise customer response explaining the status of ticket {ticket_id}.",
-            expected_output="Final customer-facing response text.",
-            agent=composer_agent,
-        )
-        crew = Crew(
-            agents=[retrieval_agent, lookup_agent, composer_agent],
-            tasks=[task1, task2],
-            process=Process.sequential,
-            verbose=False,
-            tracing=False,
-        )
-        crew_output = crew.kickoff()
+        crew = get_ticket_crew()
+        crew_output = crew.kickoff(inputs={"ticket_id": ticket_id})
         output_str = str(crew_output.raw if hasattr(crew_output, "raw") else crew_output)
         logger.info(f"Ticket Workflow: Tool '{tool_invoked}' executed for {ticket_id}")
 
         ticket_data = check_support_ticket_status(ticket_id)
         status = ticket_data.get("status", "Unknown")
-        res_time = ticket_data.get("resolution_time_hours", 0.0)
-        esc_score = ticket_data.get("escalation_score", 0.0)
+        res_time = ticket_data.get("resolution_time_hours") or 0.0
+        esc_score = ticket_data.get("escalation_score") or 0.0
         risk = ticket_data.get("risk_level", "Normal")
         escalation_recommended = ticket_data.get("recommend_escalation", False)
 
@@ -112,24 +160,8 @@ def run_support_crew(
     else:
         # Route: Retrieval Agent -> Composer Agent
         tool_invoked = "rag_lookup"
-        task1 = Task(
-            description=f"Search internal policies for: '{resolved_query}'.",
-            expected_output="Relevant policy excerpts and citations.",
-            agent=retrieval_agent,
-        )
-        task2 = Task(
-            description=f"Compose a grounded answer to: '{resolved_query}' using retrieved policies.",
-            expected_output="Clear, grounded customer policy answer.",
-            agent=composer_agent,
-        )
-        crew = Crew(
-            agents=[retrieval_agent, lookup_agent, composer_agent],
-            tasks=[task1, task2],
-            process=Process.sequential,
-            verbose=False,
-            tracing=False,
-        )
-        crew_output = crew.kickoff()
+        crew = get_policy_crew()
+        crew_output = crew.kickoff(inputs={"query": resolved_query})
         output_str = str(crew_output.raw if hasattr(crew_output, "raw") else crew_output)
         logger.info(f"Policy Workflow: Tool '{tool_invoked}' executed for '{resolved_query}'")
 

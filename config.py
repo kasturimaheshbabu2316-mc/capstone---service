@@ -19,9 +19,13 @@ MOCK_LLM: bool = os.environ.get("MOCK_LLM", "true").lower() == "true"
 CREWAI_DISABLE_TELEMETRY: bool = os.environ.get("CREWAI_DISABLE_TELEMETRY", "true").lower() == "true"
 OTEL_SDK_DISABLED: bool = os.environ.get("OTEL_SDK_DISABLED", "true").lower() == "true"
 
-# Enforce telemetry suppression immediately in runtime environment
+# Enforce telemetry suppression and single-thread execution for memory efficiency
 os.environ["CREWAI_DISABLE_TELEMETRY"] = "true" if CREWAI_DISABLE_TELEMETRY else "false"
 os.environ["OTEL_SDK_DISABLED"] = "true" if OTEL_SDK_DISABLED else "false"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
 
 # Model & Storage Settings
 EMBED_MODEL: str = os.environ.get("EMBED_MODEL", "sentence-transformers/all-MiniLM-L6-v2")

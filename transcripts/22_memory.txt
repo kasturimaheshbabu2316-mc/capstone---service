@@ -1,0 +1,14 @@
+﻿============================================================
+OLA SUPPORT AGENT - MEMORY USAGE PROFILING (psutil RSS)
+============================================================
+Initial process memory: 46.44 MB
+Peak RSS after startup:           636.33 MB
+Peak RSS after 1st /ask:          643.61 MB  (took 0.41s)
+Peak RSS after 5 /ask calls:      646.66 MB
+============================================================
+SUMMARY TABLE:
+  Startup Peak RSS:     636.33 MB
+  After 1st /ask:       643.61 MB
+  After 5 /ask calls:   646.66 MB
+============================================================
+ALERT: Peak memory (643.61 MB) EXCEEDS the 450 MB limit for Render's 512 MB free tier!

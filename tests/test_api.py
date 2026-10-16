@@ -121,13 +121,18 @@ def test_ask_safe_500_no_traceback():
         assert "RuntimeError" not in res.text
 
 
-def test_add_document_endpoint():
+def test_add_document_endpoint(monkeypatch):
     """POST /add-document chunks, embeds, and upserts into the recommended collection ('kb_sentence')."""
+    monkeypatch.setenv("ADMIN_TOKEN", "test-admin-secret-token")
     test_doc = "test_temp_policy.md"
     test_text = "Ola ensures high reliability across all service categories. Driver partners undergo comprehensive training."
     kb_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "kb", test_doc)
     try:
-        res = client.post("/add-document", json={"title": test_doc, "text": test_text})
+        res = client.post(
+            "/add-document",
+            json={"title": test_doc, "text": test_text},
+            headers={"X-Admin-Token": "test-admin-secret-token"},
+        )
         assert res.status_code == 200
         json_data = res.json()
         assert json_data["status"] == "indexed"
@@ -146,6 +151,62 @@ def test_add_document_endpoint():
             col.delete(where={"doc_id": test_doc})
         except Exception:
             pass
+
+
+def test_admin_endpoint_requires_token_401(monkeypatch):
+    """Admin endpoints reject requests missing X-Admin-Token with HTTP 401."""
+    monkeypatch.setenv("ADMIN_TOKEN", "super-secret-admin-token")
+    res = client.post("/add-document", json={"title": "foo.md", "text": "bar"})
+    assert res.status_code == 401
+    assert "Invalid or missing X-Admin-Token" in res.json().get("detail", "")
+
+
+def test_admin_endpoint_wrong_token_401(monkeypatch):
+    """Admin endpoints reject invalid tokens with HTTP 401."""
+    monkeypatch.setenv("ADMIN_TOKEN", "super-secret-admin-token")
+    res = client.post(
+        "/add-document",
+        json={"title": "foo.md", "text": "bar"},
+        headers={"X-Admin-Token": "wrong-token"},
+    )
+    assert res.status_code == 401
+    assert "Invalid or missing X-Admin-Token" in res.json().get("detail", "")
+
+
+def test_admin_endpoint_disabled_when_token_unset_403(monkeypatch):
+    """Admin endpoints return HTTP 403 if ADMIN_TOKEN is not configured on the server."""
+    monkeypatch.delenv("ADMIN_TOKEN", raising=False)
+    res = client.post(
+        "/add-document",
+        json={"title": "foo.md", "text": "bar"},
+        headers={"X-Admin-Token": "any-token"},
+    )
+    assert res.status_code == 403
+    assert "disabled because ADMIN_TOKEN is not configured" in res.json().get("detail", "")
+
+
+def test_clear_cache_endpoint_admin(monkeypatch):
+    """POST /clear-cache requires valid token and clears response cache."""
+    monkeypatch.setenv("ADMIN_TOKEN", "test-admin-secret-token")
+    # Missing token -> 401
+    res_unauth = client.post("/clear-cache")
+    assert res_unauth.status_code == 401
+
+    # Authorized -> 200
+    res_auth = client.post("/clear-cache", headers={"X-Admin-Token": "test-admin-secret-token"})
+    assert res_auth.status_code == 200
+    assert res_auth.json().get("status") == "cleared"
+
+
+def test_public_endpoints_accessible_without_token(monkeypatch):
+    """Public endpoints (/health, /ask, /) do not require admin credentials."""
+    monkeypatch.setenv("ADMIN_TOKEN", "super-secret-token")
+    res_health = client.get("/health")
+    assert res_health.status_code == 200
+
+    res_root = client.get("/")
+    assert res_root.status_code == 200
+
 
 
 def test_websocket_two_messages_abrupt_disconnect_reconnect():
