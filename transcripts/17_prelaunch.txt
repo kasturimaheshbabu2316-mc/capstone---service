@@ -1,0 +1,193 @@
+﻿{
+    "status":  "healthy",
+    "mock_llm":  true,
+    "kb_ready":  true,
+    "db_ready":  true,
+    "service":  "ola-support-agent"
+}
+{
+    "answer":  "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-4 low-priority items must receive an initial response within 12 hours and final closure within 48 hours.",
+    "route":  "rag",
+    "sources":  [
+                    "sla_by_severity",
+                    "vip_customer_policy"
+                ],
+    "ticket":  null,
+    "grounded":  true,
+    "escalation_recommended":  false,
+    "review_status":  {
+                          "approved":  true,
+                          "final_answer":  "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-4 low-priority items must receive an initial response within 12 hours and final closure within 48 hours.",
+                          "reason":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                          "feedback":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                          "redactions_made":  false,
+                          "review_notes":  "Verified facts against knowledge base. All claims grounded in retrieved context."
+                      },
+    "trace_id":  "31dd0e25-a25c-4d60-adff-1cab8310f7e5",
+    "latency_ms":  636.22,
+    "data":  {
+                 "answer":  "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-4 low-priority items must receive an initial response within 12 hours and final closure within 48 hours.",
+                 "route":  "rag",
+                 "sources":  [
+                                 "sla_by_severity",
+                                 "vip_customer_policy"
+                             ],
+                 "ticket":  null,
+                 "ticket_id":  null,
+                 "grounded":  true,
+                 "escalation_recommended":  false,
+                 "escalation_score":  null,
+                 "review_status":  {
+                                       "approved":  true,
+                                       "final_answer":  "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-4 low-priority items must receive an initial response within 12 hours and final closure within 48 hours.",
+                                       "reason":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                                       "feedback":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                                       "redactions_made":  false,
+                                       "review_notes":  "Verified facts against knowledge base. All claims grounded in retrieved context."
+                                   }
+             },
+    "sql":  null,
+    "chart_type":  null,
+    "x_col":  null,
+    "y_col":  null,
+    "retrieved_sources":  [
+                              "sla_by_severity",
+                              "vip_customer_policy"
+                          ],
+    "retrieved_snippet":  null,
+    "cache_hit":  false,
+    "guardrail_flags":  {
+                            "input_pii_masked":  false,
+                            "phone_masked":  false,
+                            "policy_grounded":  true
+                        }
+}
+{
+    "answer":  "I don\u0027t know based on the available policy documents.",
+    "route":  "rag",
+    "sources":  [
+
+                ],
+    "ticket":  null,
+    "grounded":  false,
+    "escalation_recommended":  false,
+    "review_status":  {
+                          "approved":  true,
+                          "final_answer":  "I don\u0027t know based on the available policy documents.",
+                          "reason":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                          "feedback":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                          "redactions_made":  false,
+                          "review_notes":  "Verified facts against knowledge base. All claims grounded in retrieved context."
+                      },
+    "trace_id":  "79aee0f5-c2e3-46f6-920c-a762d6e5a61c",
+    "latency_ms":  198.15,
+    "data":  {
+                 "answer":  "I don\u0027t know based on the available policy documents.",
+                 "route":  "rag",
+                 "sources":  [
+
+                             ],
+                 "ticket":  null,
+                 "ticket_id":  null,
+                 "grounded":  false,
+                 "escalation_recommended":  false,
+                 "escalation_score":  null,
+                 "review_status":  {
+                                       "approved":  true,
+                                       "final_answer":  "I don\u0027t know based on the available policy documents.",
+                                       "reason":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                                       "feedback":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                                       "redactions_made":  false,
+                                       "review_notes":  "Verified facts against knowledge base. All claims grounded in retrieved context."
+                                   }
+             },
+    "sql":  null,
+    "chart_type":  null,
+    "x_col":  null,
+    "y_col":  null,
+    "retrieved_sources":  [
+
+                          ],
+    "retrieved_snippet":  null,
+    "cache_hit":  false,
+    "guardrail_flags":  {
+                            "input_pii_masked":  true,
+                            "phone_masked":  true,
+                            "policy_grounded":  false
+                        }
+}
+{"trace_id": "79aee0f5-c2e3-46f6-920c-a762d6e5a61c", "timestamp": "2026-10-16T09:27:51.462943+00:00", "endpoint": "/ask", "session_id": "t2", "masked_question": "Customer with phone number [PHONE_MASKED] needs SLA information", "masked_query": "Customer with phone number [PHONE_MASKED] needs SLA information", "route": "rag", "latency_ms": 198.15, "status_code": 200, "cache_hit": false, "guardrail_flags": {"input_pii_masked": true, "phone_masked": true, "policy_grounded": false}}
+{
+    "answer":  "I don\u0027t know based on the available policy documents.",
+    "route":  "rag",
+    "sources":  [
+
+                ],
+    "ticket":  null,
+    "grounded":  false,
+    "escalation_recommended":  false,
+    "review_status":  {
+                          "approved":  true,
+                          "final_answer":  "I don\u0027t know based on the available policy documents.",
+                          "reason":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                          "feedback":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                          "redactions_made":  false,
+                          "review_notes":  "Verified facts against knowledge base. All claims grounded in retrieved context."
+                      },
+    "trace_id":  "ca32c3df-71d5-431c-a153-56792b25ba56",
+    "latency_ms":  270.87,
+    "data":  {
+                 "answer":  "I don\u0027t know based on the available policy documents.",
+                 "route":  "rag",
+                 "sources":  [
+
+                             ],
+                 "ticket":  null,
+                 "ticket_id":  null,
+                 "grounded":  false,
+                 "escalation_recommended":  false,
+                 "escalation_score":  null,
+                 "review_status":  {
+                                       "approved":  true,
+                                       "final_answer":  "I don\u0027t know based on the available policy documents.",
+                                       "reason":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                                       "feedback":  "Verified facts against knowledge base. All claims grounded in retrieved context.",
+                                       "redactions_made":  false,
+                                       "review_notes":  "Verified facts against knowledge base. All claims grounded in retrieved context."
+                                   }
+             },
+    "sql":  null,
+    "chart_type":  null,
+    "x_col":  null,
+    "y_col":  null,
+    "retrieved_sources":  [
+
+                          ],
+    "retrieved_snippet":  null,
+    "cache_hit":  false,
+    "guardrail_flags":  {
+                            "input_pii_masked":  false,
+                            "phone_masked":  false,
+                            "policy_grounded":  false
+                        }
+}
+{
+    "Endpoint":  "/docs",
+    "StatusCode":  200
+}
+........................................................................ [ 63%]
+..........................................                               [100%]
+============================== warnings summary ===============================
+crew\__init__.py:2
+  C:\Users\kastu\Desktop\capstone - service\crew\__init__.py:2: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
+    from crew.memory import session_memory
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+114 passed, 1 warning in 21.81s
+
+File            SizeMB
+----            ------
+data/support.db   0.02
+
+
+rm 'data/support.db'

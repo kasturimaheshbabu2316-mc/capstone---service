@@ -20,6 +20,9 @@ chroma_store/
 chroma_db/
 .chroma/
 .chroma_db/
+*.db
+*.sqlite
+data/*.db
 
 # Logs
 logs

@@ -78,6 +78,13 @@ async def lifespan(app: FastAPI):
         chroma_client = get_chroma_client()
         collection = get_or_create_collection("kb_sentence", chroma_client)
 
+        # Build ChromaDB index if missing or empty (for ephemeral container filesystems)
+        if collection.count() == 0:
+            logger.info("ChromaDB 'kb_sentence' is empty. Indexing knowledge base at startup...")
+            from rag.index import index_documents
+            index_documents(reset=False, collections=("kb_fixed", "kb_sentence"), client=chroma_client)
+            collection = get_or_create_collection("kb_sentence", chroma_client)
+
         app.state.embedding_model = embedding_model
         app.state.chroma_client = chroma_client
         app.state.collection = collection
