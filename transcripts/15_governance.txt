@@ -1,0 +1,55 @@
+================================================================================
+STEP 13 / TASK 15 - ENTERPRISE GOVERNANCE DEMONSTRATION TRANSCRIPT
+================================================================================
+System: Ola Domain Support Agent
+Governance Pillars:
+  1. Application Layer: Least Autonomy Tool Permissions Registry
+  2. System Layer: Enterprise Risk Classification (MEDIUM Risk)
+  3. Runtime Layer: Request Token Budget Enforcement (MAX_REQUEST_TOKENS = 2000)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+1. LEAST AUTONOMY TOOL PERMISSIONS REGISTRY
+--------------------------------------------------------------------------------
+Explicit Permissions Registry:
+  {'check_support_ticket_status': ['Lookup Agent', 'Ticket Operations Specialist']}
+
+Demo 1A: Calling check_support_ticket_status as 'Support Response Composer' (or 'Composer Agent'):
+  • Authorization Result: BLOCKED (PermissionError raised)
+  • Exception Message:    Least Autonomy Violation: Role 'Support Response Composer' is not authorized to call tool 'check_support_ticket_status'. Allowed roles: ['Lookup Agent', 'Ticket Operations Specialist'].
+
+Demo 1B: Calling check_support_ticket_status as 'Policy Retrieval Specialist' (or 'Retrieval Agent'):
+  • Authorization Result: BLOCKED (PermissionError raised)
+  • Exception Message:    Least Autonomy Violation: Role 'Policy Retrieval Specialist' is not authorized to call tool 'check_support_ticket_status'. Allowed roles: ['Lookup Agent', 'Ticket Operations Specialist'].
+
+Demo 1C: Calling check_support_ticket_status as 'Lookup Agent':
+  • Authorization Result: SUCCESS
+  • Returned Record ID:   TKT-0001
+  • Ticket Status:        Open
+  • Escalation Score:     0.3067
+
+================================================================================
+
+--------------------------------------------------------------------------------
+2. SYSTEM RISK CLASSIFICATION (MEDIUM RISK)
+--------------------------------------------------------------------------------
+Under the enterprise AI Low / Medium / High governance taxonomy, this system is classified as MEDIUM Risk (Customer Support Tickets). Customer support operations interact directly with end passengers and driver partners, handling sensitive operational inquiries, private ticket identifiers, operational resolution timelines, and policy-governed escalation determinations. While the system does not possess autonomous financial execution authority (refund disbursements require human-in-the-loop sign-off) and tool permissions are strictly read-only, erroneous policy advice or flawed escalation assessments can cause direct customer frustration, financial disputes, and operational SLA breaches. To mitigate these risks, the application enforces least autonomy tool binding (only the Lookup Agent may execute ticket status queries), strict input/output PII phone masking ([PHONE_MASKED]), a 2,000-token request budget, deterministic multi-agent secondary consensus review under AutoGen, and cosine similarity-calibrated refusals on out-of-scope prompts.
+
+================================================================================
+
+--------------------------------------------------------------------------------
+3. RUNTIME TOKEN BUDGET ENFORCEMENT (MAX_REQUEST_TOKENS = 2000)
+--------------------------------------------------------------------------------
+Demo 3A: Normal In-Scope Request:
+  • Query:            'What is the resolution SLA for a Sev-1 safety incident?'
+  • Estimated Tokens: 13 / 2000
+  • Gate Outcome:     PASSED (Status 200 OK)
+  • Error Message:    None
+
+Demo 3B: Deliberately Oversized Request:
+  • Query Length:     21,900 characters
+  • Estimated Tokens: 5,475 / 2000
+  • Gate Outcome:     REJECTED (HTTP 413 Payload Too Large)
+  • Error Message:    Payload exceeds maximum token budget of 2000 tokens (estimated 5,475 tokens).
+
+================================================================================

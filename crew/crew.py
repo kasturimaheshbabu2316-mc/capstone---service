@@ -142,17 +142,42 @@ def run_support_crew(
         escalation_recommended = False
         ticket_payload = None
 
-    # Step 2: Record in session memory
+    # Step 2: AutoGen Secondary Review Stage (Task 14)
+    from review.autogen_review import review_support_response
+
+    context_summary = ""
+    if route in ("rag", "both") and sources:
+        context_summary = " ".join(sources) if isinstance(sources, list) else str(sources)
+    elif ticket_payload:
+        context_summary = (
+            f"Ticket {ticket_id}: Status={ticket_payload.get('status')}, "
+            f"ResolutionTime={ticket_payload.get('resolution_time_hours')}h, "
+            f"Risk={ticket_payload.get('risk_level')}"
+        )
+
+    review_verdict = review_support_response(
+        query=resolved_query,
+        draft_answer=final_text,
+        sources=sources,
+        grounded=grounded,
+        confidence=confidence,
+        context_text=context_summary,
+    )
+    final_text = review_verdict.final_answer
+    review_status_dict = review_verdict.model_dump()
+
+    # Step 3: Record in session memory
     session_memory.record_interaction(session_id, query, final_text)
 
-    # Step 3: Construct structured response dictionary
+    # Step 4: Construct structured response dictionary
     response_data = {
         "answer": final_text,
         "route": route,
         "sources": sources,
         "ticket": ticket_payload,
-        "grounded": grounded,
+        "grounded": grounded and review_verdict.approved,
         "escalation_recommended": escalation_recommended,
+        "review_status": review_status_dict,
         "ticket_id": ticket_id,
         "escalation_score": esc_score,
         "confidence": confidence,
@@ -161,7 +186,7 @@ def run_support_crew(
         "tool_invoked": tool_invoked,
     }
 
-    # Step 4: Strict validation using CrewResponse.model_validate
+    # Step 5: Strict validation using CrewResponse.model_validate
     validated_model = validate_crew_response(response_data)
 
     if structured:

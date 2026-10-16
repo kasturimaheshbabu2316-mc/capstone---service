@@ -15,3 +15,9 @@ build/
 htmlcov/
 .vscode/
 scratch/
+chroma_store/
+chroma_db/
+.chroma/
+.chroma_db/
+logs/
+.env

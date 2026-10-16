@@ -195,3 +195,20 @@ def test_pii_masked_in_log_file_from_api_request():
     assert "route" in latest_entry
     assert "latency_ms" in latest_entry
     assert "status_code" in latest_entry
+
+
+def test_ask_cache_hit_endpoint():
+    """Validates that a repeated question through /ask is served from cache with cache_hit=True."""
+    question = "What are the rules regarding passenger baggage?"
+    # First request: Cache miss -> generated & cached
+    res1 = client.post("/ask", json={"question": question, "session_id": "cache_test_sess"})
+    assert res1.status_code == 200
+    data1 = res1.json()
+    assert "answer" in data1
+
+    # Second request: Cache hit -> served from cache with cache_hit=True
+    res2 = client.post("/ask", json={"question": question, "session_id": "cache_test_sess"})
+    assert res2.status_code == 200
+    data2 = res2.json()
+    assert data2["cache_hit"] is True
+    assert data2["answer"] == data1["answer"]

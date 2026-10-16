@@ -45,25 +45,38 @@ BACKEND_URL = os.environ.get("BACKEND_URL", "http://127.0.0.1:8000").rstrip("/")
 
 
 def check_backend_health() -> tuple[bool, str]:
-    """Queries GET /health on the FastAPI backend to verify connectivity."""
+    """Queries GET /health on the FastAPI backend with timeout to verify connectivity."""
     try:
-        res = requests.get(f"{BACKEND_URL}/health", timeout=1.5)
+        res = requests.get(f"{BACKEND_URL}/health", timeout=2.0)
         if res.status_code == 200:
             return True, "Online"
-        return False, f"Status {res.status_code}"
+        return False, f"Backend offline - start it with: uvicorn api.main:app --port 8000 (Status {res.status_code})"
     except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
-        return False, "Offline"
-    except Exception as e:
-        return False, str(e)
+        return False, "Backend offline - start it with: uvicorn api.main:app --port 8000"
+    except Exception:
+        return False, "Backend offline - start it with: uvicorn api.main:app --port 8000"
 
 
 def format_display_query(text: str, max_chars: int = 240) -> str:
-    """Collapses or truncates oversized query payloads for clean UI display."""
-    if not text or len(text) <= max_chars:
-        return text
-    est_tokens = max(1, len(text) // 4)
-    preview = text[:max_chars].strip()
-    return f"{preview}...\n\n*(Truncated for display: {len(text):,} characters / ~{est_tokens:,} tokens)*"
+    """Collapses repetitive patterns and truncates oversized text for clean UI display."""
+    if not text:
+        return ""
+    # Check for repeating word patterns (e.g. repeated benchmark queries)
+    words = text.split()
+    if len(words) > 12:
+        first_phrase = " ".join(words[:4])
+        count = text.count(first_phrase)
+        if count >= 4:
+            preview = " ".join(words[:12])
+            return (
+                f"{preview}... [Repeated text pattern detected x{count}]\n\n"
+                f"*(Truncated for display: {len(text):,} chars / ~{len(text)//4:,} tokens)*"
+            )
+    if len(text) > max_chars:
+        est_tokens = max(1, len(text) // 4)
+        preview = text[:max_chars].strip()
+        return f"{preview}...\n\n*(Truncated for display: {len(text):,} characters / ~{est_tokens:,} tokens)*"
+    return text
 
 
 def clean_source_name(src: str) -> str:
@@ -219,6 +232,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Startup Health Check Display
+backend_online, backend_status = check_backend_health()
+if not backend_online:
+    st.warning(f"⚠️ **{backend_status}**")
+
 # Sidebar: System Status, Tickets, Actions
 with st.sidebar:
     st.markdown(
@@ -314,21 +332,14 @@ with st.sidebar:
     if backend_online:
         st.caption(f"Backend Service: 🟢 **Online** (`{BACKEND_URL}`)")
     else:
-        st.warning(
-            f"⚠️ **FastAPI Backend is Offline** (`{BACKEND_URL}`)\n\n"
-            "Start it in your terminal with:\n"
-            "```bash\n"
-            "uvicorn app.app:app --host 127.0.0.1 --port 8000\n"
-            "```\n"
-            "*(Or run `run.bat` / `run.sh`)*"
-        )
+        st.warning(f"⚠️ **{backend_status}**")
 
     fastapi_option = f"FastAPI Service ({BACKEND_URL})"
     protocol = st.radio(
         "Routing Engine:",
-        ["Direct Core Pipeline", fastapi_option],
-        index=1 if backend_online else 0,
-        help="Direct Core runs pipeline in-process. FastAPI sends HTTP requests to backend.",
+        [fastapi_option, "Direct Core Pipeline"],
+        index=0 if backend_online else 1,
+        help="FastAPI sends HTTP requests to backend. Direct Core runs pipeline in-process as fallback.",
     )
 
     st.divider()
@@ -495,14 +506,19 @@ def process_query_direct(raw_query: str) -> dict[str, Any]:
 
 
 def process_query_fastapi(raw_query: str) -> dict[str, Any]:
-    """Sends query to local FastAPI endpoint with granular error handling."""
+    """Sends query to local FastAPI endpoint with granular error handling and friendly messages."""
     t0 = time.perf_counter()
     endpoint = f"{BACKEND_URL}/ask"
+    session_id = st.session_state.get("session_id", "st_fastapi_client")
     try:
         resp = requests.post(
             endpoint,
-            json={"query": raw_query, "session_id": "st_fastapi_client"},
-            timeout=15,
+            json={
+                "question": raw_query,
+                "query": raw_query,
+                "session_id": session_id,
+            },
+            timeout=15.0,
         )
         latency_ms = (time.perf_counter() - t0) * 1000.0
 
@@ -514,25 +530,51 @@ def process_query_fastapi(raw_query: str) -> dict[str, Any]:
                 detail = resp.text or f"HTTP {resp.status_code}"
 
             if resp.status_code == 413:
-                title = "Payload Size Limit Exceeded"
+                title = "Payload Token Budget Exceeded"
+                friendly_msg = (
+                    f"⚠️ **Request Exceeds Token Budget (HTTP 413)**\n\n"
+                    f"{detail}\n\n"
+                    "*(Policy Note: Customer inquiries are capped at 2,000 tokens to protect system resources and maintain sub-second response latency.)*"
+                )
             elif resp.status_code == 400:
                 title = "Security Guardrail Triggered"
+                friendly_msg = (
+                    f"🛡️ **Security Guardrail Block (HTTP 400)**\n\n"
+                    f"{detail}\n\n"
+                    "*(Security Note: Query was safely intercepted by the prompt-injection defense layer to protect system integrity.)*"
+                )
             else:
                 title = f"Service Error (HTTP {resp.status_code})"
+                friendly_msg = f"Service returned error HTTP {resp.status_code}: {detail}"
 
             return {
                 "is_error": True,
                 "status_code": resp.status_code,
                 "title": title,
-                "detail": detail,
+                "detail": friendly_msg,
                 "latency_ms": round(latency_ms, 2),
                 "trace_id": f"http_{resp.status_code}",
             }
 
         data = resp.json()
+        inner_data = data.get("data") or data
+        ticket_obj = data.get("ticket") or inner_data.get("ticket")
+        ticket_id = inner_data.get("ticket_id")
+        if not ticket_id and ticket_obj:
+            ticket_id = ticket_obj.get("ticket_id") or ticket_obj.get("record_id")
+
         return {
             "is_error": False,
-            "data": data["data"],
+            "data": {
+                "answer": inner_data.get("answer", data.get("answer", "")),
+                "sources": inner_data.get("sources", data.get("sources", [])),
+                "ticket_id": ticket_id,
+                "ticket": ticket_obj,
+                "escalation_score": inner_data.get("escalation_score") or (ticket_obj.get("escalation_score") if ticket_obj else None),
+                "grounded": inner_data.get("grounded", data.get("grounded", False)),
+                "confidence": inner_data.get("confidence", 0.95),
+                "review_status": inner_data.get("review_status", data.get("review_status")),
+            },
             "latency_ms": data.get("latency_ms", round(latency_ms, 2)),
             "cache_hit": data.get("cache_hit", False),
             "trace_id": data.get("trace_id", "http_ok"),
@@ -544,22 +586,18 @@ def process_query_fastapi(raw_query: str) -> dict[str, Any]:
             "is_error": True,
             "status_code": 504,
             "title": "Backend Request Timeout",
-            "detail": f"Request to {endpoint} timed out after 15 seconds.",
+            "detail": f"Request to {endpoint} timed out after 15 seconds. Please ensure the backend server is running and responsive.",
             "latency_ms": round(latency_ms, 2),
             "trace_id": "err_timeout",
             "offline": True,
         }
-    except requests.exceptions.ConnectionError:
+    except (requests.exceptions.ConnectionError, requests.exceptions.RequestException):
         latency_ms = (time.perf_counter() - t0) * 1000.0
         return {
             "is_error": True,
             "status_code": 503,
             "title": "Backend Service Offline",
-            "detail": (
-                f"Failed to connect to FastAPI at {BACKEND_URL}.\n\n"
-                "Start the backend using:\n"
-                "`uvicorn app.app:app --host 127.0.0.1 --port 8000` (or run `run.bat` / `run.sh`)"
-            ),
+            "detail": "Backend offline - start it with: uvicorn api.main:app --port 8000",
             "latency_ms": round(latency_ms, 2),
             "trace_id": "err_conn",
             "offline": True,
@@ -596,7 +634,7 @@ for msg in st.session_state.messages:
             if msg["role"] == "user":
                 st.markdown(format_display_query(msg["content"]))
             else:
-                st.markdown(msg["content"])
+                st.markdown(format_display_query(msg["content"]))
             if msg.get("meta"):
                 meta = msg["meta"]
                 meta_html = ""
@@ -670,7 +708,7 @@ if active_input:
         else:
             data = result["data"]
             answer = data["answer"]
-            st.markdown(answer)
+            st.markdown(format_display_query(answer))
 
             # Metadata Chips
             meta_info = {

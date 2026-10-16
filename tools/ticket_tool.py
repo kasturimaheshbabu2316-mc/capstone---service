@@ -56,17 +56,52 @@ def get_escalation_threshold() -> tuple[float, list[float]]:
 ESCALATION_THRESHOLD_TAU, _ALL_SCORES = get_escalation_threshold()
 ESCALATION_THRESHOLD: float = ESCALATION_THRESHOLD_TAU
 
+import contextvars
 
-def check_support_ticket_status(record_id: str) -> dict[str, Any]:
+# Application layer least autonomy tool permissions registry
+TOOL_PERMISSIONS: dict[str, list[str]] = {
+    "check_support_ticket_status": ["Lookup Agent", "Ticket Operations Specialist"],
+}
+
+CURRENT_CALLER_ROLE: contextvars.ContextVar[str] = contextvars.ContextVar(
+    "CURRENT_CALLER_ROLE", default="Lookup Agent"
+)
+
+
+def enforce_tool_role(tool_name: str, caller_role: str | None = None) -> str:
+    """Validates that the calling agent role is authorized under TOOL_PERMISSIONS.
+
+    Raises:
+        PermissionError: If caller_role is unauthorized for the requested tool.
+    """
+    effective_role = caller_role or CURRENT_CALLER_ROLE.get()
+    allowed_roles = TOOL_PERMISSIONS.get(tool_name, [])
+    if effective_role not in allowed_roles and not any(r.lower() == effective_role.lower() for r in allowed_roles):
+        raise PermissionError(
+            f"Least Autonomy Violation: Role '{effective_role}' is not authorized to call tool '{tool_name}'. "
+            f"Allowed roles: {allowed_roles}."
+        )
+    return effective_role
+
+
+def check_support_ticket_status(record_id: str, caller_role: str | None = None) -> dict[str, Any]:
     """Looks up customer support ticket status and escalation risk.
+
+    Guarded by least-autonomy role check against TOOL_PERMISSIONS.
 
     Args:
         record_id: The ticket identifier, e.g. 'TKT-0001' to 'TKT-0060'.
+        caller_role: Optional calling agent role name (defaults to 'Lookup Agent').
 
     Returns:
         Structured dictionary with status, resolution_time_hours, escalation_score,
         recommend_escalation, and an error key for unknown IDs.
+
+    Raises:
+        PermissionError: If caller_role is unauthorized to execute ticket lookups.
     """
+    enforce_tool_role("check_support_ticket_status", caller_role)
+
     clean_id = record_id.strip().upper()
     record = SUPPORT_TICKETS_BY_ID.get(clean_id)
 

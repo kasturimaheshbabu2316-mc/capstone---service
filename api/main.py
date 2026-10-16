@@ -196,44 +196,33 @@ def health_check() -> HealthResponse:
     )
 
 
-@app.post("/ask", response_model=AskResponse)
-def ask_endpoint(payload: AskRequest) -> AskResponse:
-    """Processes customer inquiries with full governance, safety, and caching gates.
+def run_unified_pipeline(
+    raw_question: str,
+    session_id: str,
+    endpoint: str = "/ask",
+    trace_id: Optional[str] = None,
+) -> AskResponse:
+    """One unified pipeline function executing the full governance and multi-agent lifecycle:
 
-    Returns:
-        AskResponse = CrewResponse + trace_id + latency_ms
+    1. Guardrails (input): Prompt-injection defense & PII masking.
+    2. Budget check: MAX_REQUEST_TOKENS enforcement (HTTP 413).
+    3. Cache: Normalized in-memory cache lookup.
+    4. Crew: Multi-agent execution (RAG / ticket lookup).
+    5. Output groundedness check: Validates context adherence.
+    6. Autogen review: Secondary consensus review stage (approval/redaction).
+    7. Schema validation: Strict CrewResponse / AskResponse contract validation.
+    8. Structured log: Thread-safe JSON-Lines audit logging with zero plaintext PII.
     """
     start_time = time.perf_counter()
-    trace_id = str(uuid.uuid4())
-    raw_question = payload.question or payload.query or ""
-    session_id = payload.session_id or "default_session"
+    trace_id = trace_id or str(uuid.uuid4())
 
     try:
-        # Gate 1: Token Budget Check (HTTP 413 on oversized payload)
-        within_budget, tokens, err_msg = check_payload_budget(raw_question)
-        if not within_budget:
-            latency_ms = (time.perf_counter() - start_time) * 1000.0
-            audit_logger.log_request(
-                endpoint="/ask",
-                question=raw_question,
-                status_code=413,
-                latency_ms=latency_ms,
-                session_id=session_id,
-                trace_id=trace_id,
-                route="blocked",
-                guardrail_flags={"budget_exceeded": True, "tokens": tokens},
-            )
-            raise HTTPException(
-                status_code=413,
-                detail=err_msg or f"Payload exceeds maximum token budget (estimated {tokens:,} tokens).",
-            )
-
-        # Gate 2: Security & Prompt Injection Check (HTTP 400 on guardrail block)
+        # 1. Input Guardrails (Prompt Injection Check - HTTP 400)
         inj_res = detect_prompt_injection(raw_question)
         if inj_res.fired:
             latency_ms = (time.perf_counter() - start_time) * 1000.0
             audit_logger.log_request(
-                endpoint="/ask",
+                endpoint=endpoint,
                 question=raw_question,
                 status_code=400,
                 latency_ms=latency_ms,
@@ -247,18 +236,37 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
                 detail=inj_res.detail or "Query blocked by security guardrails.",
             )
 
-        # Gate 3: Input PII Masking (Mask Indian phone numbers)
+        # 1b. Input Guardrails (PII Masking)
         pii_res = mask_pii(raw_question)
         sanitized_question = pii_res.sanitized_text
-        guardrail_flags: Dict[str, Any] = {"input_pii_masked": pii_res.fired}
+        guardrail_flags: Dict[str, Any] = {"input_pii_masked": pii_res.fired, "phone_masked": pii_res.fired}
 
-        # Gate 4: Semantic Response Cache
+        # 2. Token Budget Check (HTTP 413 on oversized payload)
+        within_budget, tokens, err_msg = check_payload_budget(sanitized_question)
+        if not within_budget:
+            latency_ms = (time.perf_counter() - start_time) * 1000.0
+            audit_logger.log_request(
+                endpoint=endpoint,
+                question=raw_question,
+                status_code=413,
+                latency_ms=latency_ms,
+                session_id=session_id,
+                trace_id=trace_id,
+                route="blocked",
+                guardrail_flags={"budget_exceeded": True, "tokens": tokens},
+            )
+            raise HTTPException(
+                status_code=413,
+                detail=err_msg or f"Payload exceeds maximum token budget of 2,000 tokens (estimated {tokens:,} tokens).",
+            )
+
+        # 3. Response Cache Check
         cached_result = response_cache.get(sanitized_question)
         if cached_result is not None:
             latency_ms = (time.perf_counter() - start_time) * 1000.0
             route_name = getattr(cached_result, "route", "cached")
             audit_logger.log_request(
-                endpoint="/ask",
+                endpoint=endpoint,
                 question=raw_question,
                 status_code=200,
                 latency_ms=latency_ms,
@@ -283,6 +291,7 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
                 "grounded": cached_result.grounded,
                 "escalation_recommended": cached_result.escalation_recommended,
                 "escalation_score": ticket_payload.get("escalation_score") if ticket_payload else None,
+                "review_status": getattr(cached_result, "review_status", None),
             }
 
             return AskResponse(
@@ -296,11 +305,12 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
                 latency_ms=round(latency_ms, 2),
                 data=data_obj,
                 retrieved_sources=cached_result.sources,
+                review_status=getattr(cached_result, "review_status", {}) or {},
                 cache_hit=True,
                 guardrail_flags=guardrail_flags,
             )
 
-        # Gate 5: CrewAI Multi-Agent Execution Pipeline (Tasks 7, 8, 9)
+        # 4. Multi-Agent Crew Execution (RAG / Lookup)
         crew_output = run_support_crew(
             query=sanitized_question,
             session_id=session_id,
@@ -309,7 +319,7 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
         if not isinstance(crew_output, CrewResponse):
             crew_output = CrewResponse.model_validate(crew_output)
 
-        # Gate 6: Groundedness Output Verification (Task 10) - applied to policy/RAG routes
+        # 5. Output Groundedness Check
         if crew_output.route in ("rag", "both"):
             context_text = " ".join(crew_output.sources) if crew_output.sources else ""
             grounded_res = check_groundedness(
@@ -325,51 +335,68 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
 
         guardrail_flags["policy_grounded"] = crew_output.grounded
 
-        # Store in Semantic Cache
-        response_cache.set(sanitized_question, crew_output)
+        # 6. Autogen Secondary Review Stage
+        from review.autogen_review import review_support_response
+        review_context = " ".join(crew_output.sources) if crew_output.sources else ""
+        review_verdict = review_support_response(
+            query=sanitized_question,
+            draft_answer=crew_output.answer,
+            sources=crew_output.sources,
+            grounded=crew_output.grounded,
+            context_text=review_context,
+        )
+        crew_output.answer = review_verdict.final_answer
+        crew_output.review_status = review_verdict.model_dump()
+        crew_output.grounded = crew_output.grounded and review_verdict.approved
+
+        # 7. Schema Validation & Cache Store
+        from crew.schemas import validate_crew_response
+        validated_crew = validate_crew_response(crew_output)
+        response_cache.set(sanitized_question, validated_crew)
 
         latency_ms = (time.perf_counter() - start_time) * 1000.0
 
-        # Gate 7: Structured Audit Logging (Guaranteed PII Phone Masking)
+        # 8. Structured Audit Logging
         audit_logger.log_request(
-            endpoint="/ask",
+            endpoint=endpoint,
             question=raw_question,
             status_code=200,
             latency_ms=latency_ms,
             session_id=session_id,
             trace_id=trace_id,
-            route=crew_output.route,
+            route=validated_crew.route,
             cache_hit=False,
             guardrail_flags=guardrail_flags,
         )
 
         ticket_id_val = None
-        if crew_output.ticket:
-            ticket_id_val = crew_output.ticket.get("ticket_id") or crew_output.ticket.get("record_id")
+        if validated_crew.ticket:
+            ticket_id_val = validated_crew.ticket.get("ticket_id") or validated_crew.ticket.get("record_id")
 
         data_obj = {
-            "answer": crew_output.answer,
-            "route": crew_output.route,
-            "sources": crew_output.sources,
-            "ticket": crew_output.ticket,
+            "answer": validated_crew.answer,
+            "route": validated_crew.route,
+            "sources": validated_crew.sources,
+            "ticket": validated_crew.ticket,
             "ticket_id": ticket_id_val,
-            "grounded": crew_output.grounded,
-            "escalation_recommended": crew_output.escalation_recommended,
-            "escalation_score": crew_output.ticket.get("escalation_score") if crew_output.ticket else None,
+            "grounded": validated_crew.grounded,
+            "escalation_recommended": validated_crew.escalation_recommended,
+            "escalation_score": validated_crew.ticket.get("escalation_score") if validated_crew.ticket else None,
+            "review_status": validated_crew.review_status,
         }
 
-        # Gate 8: Structured Response: AskResponse = CrewResponse + trace_id + latency_ms
         return AskResponse(
-            answer=crew_output.answer,
-            route=crew_output.route,
-            sources=crew_output.sources,
-            ticket=crew_output.ticket,
-            grounded=crew_output.grounded,
-            escalation_recommended=crew_output.escalation_recommended,
+            answer=validated_crew.answer,
+            route=validated_crew.route,
+            sources=validated_crew.sources,
+            ticket=validated_crew.ticket,
+            grounded=validated_crew.grounded,
+            escalation_recommended=validated_crew.escalation_recommended,
             trace_id=trace_id,
             latency_ms=round(latency_ms, 2),
             data=data_obj,
-            retrieved_sources=crew_output.sources,
+            retrieved_sources=validated_crew.sources,
+            review_status=validated_crew.review_status or {},
             cache_hit=False,
             guardrail_flags=guardrail_flags,
         )
@@ -377,11 +404,23 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
     except HTTPException:
         raise
     except Exception as exc:
-        logger.error("Internal processing error in ask_endpoint: %s", exc, exc_info=True)
+        logger.error("Internal processing error in run_unified_pipeline: %s", exc, exc_info=True)
         raise HTTPException(
             status_code=500,
             detail="An unexpected server error occurred while processing your request. Please try again later.",
         )
+
+
+@app.post("/ask", response_model=AskResponse)
+def ask_endpoint(payload: AskRequest) -> AskResponse:
+    """Processes customer inquiries via the unified pipeline function."""
+    raw_question = payload.question or payload.query or ""
+    session_id = payload.session_id or "default_session"
+    return run_unified_pipeline(
+        raw_question=raw_question,
+        session_id=session_id,
+        endpoint="/ask",
+    )
 
 
 @app.post("/add-document", response_model=AddDocumentResponse)
@@ -482,148 +521,37 @@ async def chat_websocket(websocket: WebSocket) -> None:
     try:
         while True:
             user_msg = await websocket.receive_text()
-            start_time = time.perf_counter()
-            trace_id = str(uuid.uuid4())
-
-            # Gate 1: Token Budget Check (413)
-            within_budget, tokens, err_msg = check_payload_budget(user_msg)
-            if not within_budget:
-                latency_ms = (time.perf_counter() - start_time) * 1000.0
-                audit_logger.log_request(
-                    endpoint="/ws/chat",
-                    question=user_msg,
-                    status_code=413,
-                    latency_ms=latency_ms,
+            try:
+                # Execute through the single unified pipeline function in thread pool
+                ask_res = await asyncio.to_thread(
+                    run_unified_pipeline,
+                    raw_question=user_msg,
                     session_id=session_id,
-                    trace_id=trace_id,
-                    route="blocked",
-                    guardrail_flags={"budget_exceeded": True, "tokens": tokens},
-                )
-                await websocket.send_json({
-                    "type": "error",
-                    "status_code": 413,
-                    "detail": err_msg or "Payload exceeds maximum token budget.",
-                    "session_id": session_id,
-                    "latency_ms": round(latency_ms, 2),
-                })
-                continue
-
-            # Gate 2: Prompt Injection Check (400)
-            inj_res = detect_prompt_injection(user_msg)
-            if inj_res.fired:
-                latency_ms = (time.perf_counter() - start_time) * 1000.0
-                audit_logger.log_request(
                     endpoint="/ws/chat",
-                    question=user_msg,
-                    status_code=400,
-                    latency_ms=latency_ms,
-                    session_id=session_id,
-                    trace_id=trace_id,
-                    route="blocked",
-                    guardrail_flags={"prompt_injection_blocked": True},
                 )
-                await websocket.send_json({
-                    "type": "error",
-                    "status_code": 400,
-                    "detail": inj_res.detail or "Query blocked by security guardrails.",
-                    "session_id": session_id,
-                    "latency_ms": round(latency_ms, 2),
-                })
-                continue
 
-            # Gate 3: PII Masking
-            pii_res = mask_pii(user_msg)
-            sanitized_msg = pii_res.sanitized_text
+                cached_data = ask_res.data or (
+                    ask_res.model_dump()
+                    if hasattr(ask_res, "model_dump")
+                    else dict(ask_res)
+                )
 
-            # Gate 4: Response Cache Check
-            cached_result = response_cache.get(sanitized_msg)
-            if cached_result is not None:
-                latency_ms = (time.perf_counter() - start_time) * 1000.0
-                route_name = getattr(cached_result, "route", "cached")
-                audit_logger.log_request(
-                    endpoint="/ws/chat",
-                    question=user_msg,
-                    status_code=200,
-                    latency_ms=latency_ms,
-                    session_id=session_id,
-                    trace_id=trace_id,
-                    route=route_name,
-                    cache_hit=True,
-                    guardrail_flags={"phone_masked": pii_res.fired},
-                )
-                cached_data = (
-                    cached_result.model_dump()
-                    if hasattr(cached_result, "model_dump")
-                    else dict(cached_result)
-                )
                 await websocket.send_json({
                     "type": "response",
                     "session_id": session_id,
-                    "trace_id": trace_id,
+                    "trace_id": ask_res.trace_id,
                     "data": cached_data,
-                    "latency_ms": round(latency_ms, 2),
-                    "cache_hit": True,
+                    "latency_ms": ask_res.latency_ms,
+                    "cache_hit": ask_res.cache_hit,
                 })
-                continue
-
-            # Gate 5: Multi-Agent Crew Execution (Offload to thread to keep event loop responsive)
-            crew_output = await asyncio.to_thread(
-                run_support_crew,
-                query=sanitized_msg,
-                session_id=session_id,
-                structured=True,
-            )
-            if not isinstance(crew_output, CrewResponse):
-                crew_output = CrewResponse.model_validate(crew_output)
-
-            # Gate 6: Groundedness Output Check
-            if crew_output.route in ("rag", "both"):
-                context_text = " ".join(crew_output.sources) if crew_output.sources else ""
-                grounded_res = check_groundedness(
-                    query=sanitized_msg,
-                    retrieved_context=context_text,
-                    response_text=crew_output.answer,
-                    similarity=1.0 if crew_output.grounded else 0.0,
-                    grounded_flag=crew_output.grounded,
-                )
-                if grounded_res.fired:
-                    crew_output.answer = grounded_res.sanitized_text
-                    crew_output.grounded = False
-
-            # Cache store
-            response_cache.set(sanitized_msg, crew_output)
-
-            latency_ms = (time.perf_counter() - start_time) * 1000.0
-
-            # Gate 7: Structured Audit Logging
-            audit_logger.log_request(
-                endpoint="/ws/chat",
-                question=user_msg,
-                status_code=200,
-                latency_ms=latency_ms,
-                session_id=session_id,
-                trace_id=trace_id,
-                route=crew_output.route,
-                cache_hit=False,
-                guardrail_flags={
-                    "phone_masked": pii_res.fired,
-                    "grounded": crew_output.grounded,
-                },
-            )
-
-            out_dict = crew_output.model_dump()
-            if crew_output.ticket and "ticket_id" not in out_dict:
-                out_dict["ticket_id"] = crew_output.ticket.get("ticket_id") or crew_output.ticket.get("record_id")
-
-            # Gate 8: Send response back
-            await websocket.send_json({
-                "type": "response",
-                "session_id": session_id,
-                "trace_id": trace_id,
-                "data": out_dict,
-                "latency_ms": round(latency_ms, 2),
-                "cache_hit": False,
-            })
+            except HTTPException as exc:
+                await websocket.send_json({
+                    "type": "error",
+                    "status_code": exc.status_code,
+                    "detail": exc.detail,
+                    "session_id": session_id,
+                    "latency_ms": 0.0,
+                })
 
     except WebSocketDisconnect:
         # Catch WebSocketDisconnect, log it, clean up, and keep server running for other clients

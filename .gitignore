@@ -1,10 +1,12 @@
 # Virtual environments
+.venv
 .venv/
 .service/
 env/
 venv/
 
 # Python cache & artifacts
+__pycache__
 __pycache__/
 *.py[cod]
 *$py.class
@@ -13,11 +15,16 @@ dist/
 build/
 
 # Database & local vector stores
-chroma_db/
+chroma_store
 chroma_store/
+chroma_db/
 .chroma/
 .chroma_db/
+
+# Logs
+logs
 logs/
+*.log
 
 # Testing & Coverage
 .pytest_cache/
@@ -26,8 +33,11 @@ htmlcov/
 
 # Environment variables & secrets
 .env
+.env.*
+!.env.example
 
 # Editor & Scratch
 .vscode/
 scratch/
-node_modules
+node_modules/
+.DS_Store

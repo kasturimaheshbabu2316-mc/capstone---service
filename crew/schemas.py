@@ -26,6 +26,7 @@ class CrewResponse(BaseModel):
     ticket: Optional[dict[str, Any]] = Field(default=None, description="Operational ticket data if ticket lookup.")
     grounded: bool = Field(default=True, description="Flag indicating if the response is grounded.")
     escalation_recommended: bool = Field(default=False, description="Flag indicating whether supervisor escalation is recommended.")
+    review_status: Optional[dict[str, Any]] = Field(default=None, description="Secondary AutoGen review stage verdict and compliance status.")
 
 
 def validate_crew_response(data: Any) -> CrewResponse:
