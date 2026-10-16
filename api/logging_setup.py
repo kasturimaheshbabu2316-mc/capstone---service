@@ -28,8 +28,11 @@ from safety.guardrails import mask_pii
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 LOG_DIR = Path(os.environ.get("LOG_DIR", str(PROJECT_ROOT / "logs")))
 LOG_FILE = Path(os.environ.get("LOG_FILE", str(LOG_DIR / "requests.jsonl")))
-LOG_DIR.mkdir(parents=True, exist_ok=True)
-LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+try:
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+    LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+except OSError:
+    pass
 
 _log_lock = threading.Lock()
 logger = logging.getLogger("ola_domain_agent.audit")
@@ -40,7 +43,10 @@ class AuditLogger:
 
     def __init__(self, log_path: Path | str = LOG_FILE):
         self.log_path = Path(log_path)
-        self.log_path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            self.log_path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         self.logger = logger
 
     def log_request(

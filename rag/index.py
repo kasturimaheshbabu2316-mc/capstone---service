@@ -83,12 +83,17 @@ def get_embedding_model() -> SentenceTransformer:
     """Loads SentenceTransformer model once as a thread-safe singleton.
 
     Disables tokenizers parallelism and progress bars to guarantee clean,
-    deterministic offline execution.
+    deterministic offline execution with minimal memory usage.
     """
     global _embedding_model
     if _embedding_model is None:
         os.environ["TOKENIZERS_PARALLELISM"] = "false"
         os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+        try:
+            import torch
+            torch.set_num_threads(1)
+        except Exception:
+            pass
         try:
             from transformers.utils import logging as hf_logging
             hf_logging.disable_progress_bar()
@@ -130,39 +135,46 @@ def load_knowledge_base_docs() -> dict[str, str]:
 
 def index_documents(
     reset: bool = False,
-    collections: tuple[str, str] = ("kb_fixed", "kb_sentence"),
+    collections: tuple[str, ...] | list[str] = ("kb_fixed", "kb_sentence"),
+    client: chromadb.PersistentClient | None = None,
 ) -> IndexResult:
-    """Chunks and indexes all KB documents into two ChromaDB collections.
+    """Chunks and indexes KB documents into specified ChromaDB collections.
 
     Indexes are created with cosine distance (`hnsw:space = cosine`) and populated
     using collection.upsert() with deterministic IDs to guarantee idempotency.
 
     Args:
         reset: If True, deletes existing collections prior to indexing.
-        collections: Tuple of collection names (fixed_collection, sentence_collection).
+        collections: Tuple or list of collection names to index.
+        client: Optional PersistentClient instance.
 
     Returns:
         IndexResult mapping collection names to their total chunk counts (also unpackable as tuple).
     """
-    client = get_chroma_client()
+    chroma = client or get_chroma_client()
     model = get_embedding_model()
     docs = load_knowledge_base_docs()
 
-    fixed_col_name, sent_col_name = collections
+    col_list = list(collections)
+    should_index_fixed = any(c in col_list for c in ("kb_fixed", "ola_fixed"))
+    should_index_sent = any(c in col_list for c in ("kb_sentence", "ola_sentence"))
+
+    fixed_col_name = "kb_fixed" if "kb_fixed" in col_list else ("ola_fixed" if "ola_fixed" in col_list else "kb_fixed")
+    sent_col_name = "kb_sentence" if "kb_sentence" in col_list else ("ola_sentence" if "ola_sentence" in col_list else "kb_sentence")
 
     if reset:
-        for cname in [fixed_col_name, sent_col_name, "ola_fixed", "ola_sentence"]:
+        for cname in set(col_list + ["ola_fixed", "ola_sentence", "kb_fixed", "kb_sentence"]):
             try:
-                client.delete_collection(cname)
+                chroma.delete_collection(cname)
             except Exception:
                 pass
 
-    col_fixed = get_or_create_collection(fixed_col_name, client)
-    col_sent = get_or_create_collection(sent_col_name, client)
+    col_fixed = get_or_create_collection(fixed_col_name, chroma) if should_index_fixed else None
+    col_sent = get_or_create_collection(sent_col_name, chroma) if should_index_sent else None
 
     # Secondary collections for backward compatibility with legacy routes
-    col_legacy_fixed = get_or_create_collection("ola_fixed", client)
-    col_legacy_sent = get_or_create_collection("ola_sentence", client)
+    col_legacy_fixed = get_or_create_collection("ola_fixed", chroma) if should_index_fixed else None
+    col_legacy_sent = get_or_create_collection("ola_sentence", chroma) if should_index_sent else None
 
     fixed_ids: list[str] = []
     fixed_texts: list[str] = []
@@ -174,62 +186,66 @@ def index_documents(
 
     for doc_id, text in docs.items():
         # 1. Fixed-size chunking (300 chars, 60 overlap)
-        f_chunks = fixed_size_overlap_chunks(text, size=300, overlap=60, doc_id=doc_id)
-        for chunk in f_chunks:
-            fixed_ids.append(chunk["chunk_id"])
-            fixed_texts.append(chunk["text"])
-            fixed_metas.append({
-                "doc_id": chunk["doc_id"],
-                "chunk_id": chunk["chunk_id"],
-                "strategy": chunk["strategy"],
-            })
+        if should_index_fixed:
+            f_chunks = fixed_size_overlap_chunks(text, size=300, overlap=60, doc_id=doc_id)
+            for chunk in f_chunks:
+                fixed_ids.append(chunk["chunk_id"])
+                fixed_texts.append(chunk["text"])
+                fixed_metas.append({
+                    "doc_id": chunk["doc_id"],
+                    "chunk_id": chunk["chunk_id"],
+                    "strategy": chunk["strategy"],
+                })
 
         # 2. Sentence-based chunking
-        s_chunks = sentence_chunks(text, doc_id=doc_id)
-        for chunk in s_chunks:
-            sent_ids.append(chunk["chunk_id"])
-            sent_texts.append(chunk["text"])
-            sent_metas.append({
-                "doc_id": chunk["doc_id"],
-                "chunk_id": chunk["chunk_id"],
-                "strategy": chunk["strategy"],
-            })
+        if should_index_sent:
+            s_chunks = sentence_chunks(text, doc_id=doc_id)
+            for chunk in s_chunks:
+                sent_ids.append(chunk["chunk_id"])
+                sent_texts.append(chunk["text"])
+                sent_metas.append({
+                    "doc_id": chunk["doc_id"],
+                    "chunk_id": chunk["chunk_id"],
+                    "strategy": chunk["strategy"],
+                })
 
     # Encode embeddings in batch
-    fixed_embeddings = model.encode(fixed_texts, show_progress_bar=False).tolist()
-    sent_embeddings = model.encode(sent_texts, show_progress_bar=False).tolist()
+    if should_index_fixed and fixed_texts:
+        fixed_embeddings = model.encode(fixed_texts, show_progress_bar=False, batch_size=32).tolist()
+        if fixed_ids and col_fixed:
+            col_fixed.upsert(
+                ids=fixed_ids,
+                documents=fixed_texts,
+                embeddings=fixed_embeddings,
+                metadatas=fixed_metas,
+            )
+            if col_legacy_fixed and col_legacy_fixed.name != col_fixed.name:
+                col_legacy_fixed.upsert(
+                    ids=fixed_ids,
+                    documents=fixed_texts,
+                    embeddings=fixed_embeddings,
+                    metadatas=fixed_metas,
+                )
 
-    # Idempotent upsert into target collections
-    if fixed_ids:
-        col_fixed.upsert(
-            ids=fixed_ids,
-            documents=fixed_texts,
-            embeddings=fixed_embeddings,
-            metadatas=fixed_metas,
-        )
-        col_legacy_fixed.upsert(
-            ids=fixed_ids,
-            documents=fixed_texts,
-            embeddings=fixed_embeddings,
-            metadatas=fixed_metas,
-        )
+    if should_index_sent and sent_texts:
+        sent_embeddings = model.encode(sent_texts, show_progress_bar=False, batch_size=32).tolist()
+        if sent_ids and col_sent:
+            col_sent.upsert(
+                ids=sent_ids,
+                documents=sent_texts,
+                embeddings=sent_embeddings,
+                metadatas=sent_metas,
+            )
+            if col_legacy_sent and col_legacy_sent.name != col_sent.name:
+                col_legacy_sent.upsert(
+                    ids=sent_ids,
+                    documents=sent_texts,
+                    embeddings=sent_embeddings,
+                    metadatas=sent_metas,
+                )
 
-    if sent_ids:
-        col_sent.upsert(
-            ids=sent_ids,
-            documents=sent_texts,
-            embeddings=sent_embeddings,
-            metadatas=sent_metas,
-        )
-        col_legacy_sent.upsert(
-            ids=sent_ids,
-            documents=sent_texts,
-            embeddings=sent_embeddings,
-            metadatas=sent_metas,
-        )
-
-    fixed_count = col_fixed.count()
-    sent_count = col_sent.count()
+    fixed_count = col_fixed.count() if col_fixed else 0
+    sent_count = col_sent.count() if col_sent else 0
 
     # Refresh persistent client reference so readers detect freshly created HNSW disk segments
     global _chroma_client

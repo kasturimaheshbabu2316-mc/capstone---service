@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: ola-support-agent
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: MOCK_LLM
+        value: "true"
+      - key: CREWAI_DISABLE_TELEMETRY
+        value: "true"
+      - key: OTEL_SDK_DISABLED
+        value: "true"
+      - key: PYTHON_VERSION
+        value: "3.11"

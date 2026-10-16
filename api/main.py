@@ -46,7 +46,6 @@ from api.models import (
     HealthResponse,
 )
 from cache import response_cache
-from crew.crew import run_support_crew
 from crew.schemas import CrewResponse
 from guardrails import check_payload_budget
 from rag.chunking import sentence_chunks
@@ -61,7 +60,20 @@ from safety.guardrails import (
     mask_pii,
 )
 
+# Limit torch threads to 1 for memory and CPU efficiency on Render
+try:
+    import torch
+    torch.set_num_threads(1)
+except Exception:
+    pass
+
 logger = logging.getLogger("ola_domain_agent.api")
+
+
+def run_support_crew(*args: Any, **kwargs: Any) -> Any:
+    """Wrapper function to allow lazy loading of crewai while preserving mockability in tests."""
+    from crew.crew import run_support_crew as _run
+    return _run(*args, **kwargs)
 
 
 # ==============================================================================
@@ -69,26 +81,46 @@ logger = logging.getLogger("ola_domain_agent.api")
 # ==============================================================================
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Loads SentenceTransformer model and ChromaDB index once at startup (never per-request)."""
+    """Loads SentenceTransformer model and winning ChromaDB index once at startup (never per-request)."""
     logger.info("Initializing API Lifespan: Preloading SentenceTransformer and ChromaDB collections...")
     try:
+        try:
+            import torch
+            torch.set_num_threads(1)
+        except Exception:
+            pass
+
         # Preload embedding model singleton once
         embedding_model = get_embedding_model()
         # Preload ChromaDB client & winning collection once
         chroma_client = get_chroma_client()
-        collection = get_or_create_collection("kb_sentence", chroma_client)
 
-        # Build ChromaDB index if missing or empty (for ephemeral container filesystems)
+        # Identify winning collection from rag/recommended.json (default: kb_sentence)
+        winning_col = "kb_sentence"
+        rec_path = PROJECT_ROOT / "rag" / "recommended.json"
+        if rec_path.exists():
+            try:
+                import json
+                with open(rec_path, "r", encoding="utf-8") as rf:
+                    rec_data = json.load(rf)
+                    winning_col = rec_data.get("winning_collection") or rec_data.get("recommended_collection") or "kb_sentence"
+            except Exception:
+                winning_col = "kb_sentence"
+
+        collection = get_or_create_collection(winning_col, chroma_client)
+
+        # Build ChromaDB index if missing or empty (index ONLY winning collection at startup for 512MB RAM constraint)
         if collection.count() == 0:
-            logger.info("ChromaDB 'kb_sentence' is empty. Indexing knowledge base at startup...")
+            logger.info("ChromaDB '%s' is empty. Indexing winning knowledge base collection at startup...", winning_col)
             from rag.index import index_documents
-            index_documents(reset=False, collections=("kb_fixed", "kb_sentence"), client=chroma_client)
-            collection = get_or_create_collection("kb_sentence", chroma_client)
+            index_documents(reset=False, collections=(winning_col,), client=chroma_client)
+            collection = get_or_create_collection(winning_col, chroma_client)
 
         app.state.embedding_model = embedding_model
         app.state.chroma_client = chroma_client
         app.state.collection = collection
-        logger.info("Lifespan: SentenceTransformer and 'kb_sentence' ChromaDB collection ready.")
+        app.state.winning_collection = winning_col
+        logger.info("Lifespan: SentenceTransformer and '%s' ChromaDB collection ready.", winning_col)
 
         # Initialize any background system datasets if needed
         try:
@@ -195,7 +227,7 @@ def favicon_endpoint():
 def health_check() -> HealthResponse:
     """Service health state and readiness status."""
     return HealthResponse(
-        status="healthy",
+        status="ok",
         mock_llm=os.environ.get("MOCK_LLM", "true").lower() == "true",
         kb_ready=True,
         db_ready=True,
@@ -450,8 +482,8 @@ def add_document_endpoint(payload: AddDocumentRequest) -> AddDocumentResponse:
         chunks = sentence_chunks(doc_text, doc_id=doc_title)
 
         # 3. Embed & upsert into recommended winning collection ('kb_sentence')
-        model = get_embedding_model()
-        target_collection = "kb_sentence"
+        model = getattr(app.state, "embedding_model", None) or get_embedding_model()
+        target_collection = getattr(app.state, "winning_collection", "kb_sentence")
         col = get_or_create_collection(target_collection)
 
         chunk_ids = [c["chunk_id"] for c in chunks]

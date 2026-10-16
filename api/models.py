@@ -81,7 +81,7 @@ class AddDocumentResponse(BaseModel):
 class HealthResponse(BaseModel):
     """Response payload for GET /health."""
 
-    status: str = Field(default="healthy", description="Service health state.")
+    status: str = Field(default="ok", description="Service health state.")
     mock_llm: bool = Field(default=True, description="Flag indicating offline deterministic mock LLM execution.")
     kb_ready: bool = Field(default=True, description="Flag indicating knowledge base vector store availability.")
     db_ready: bool = Field(default=True, description="Flag indicating operational ticket database readiness.")

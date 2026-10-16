@@ -1,47 +1,48 @@
 # ==============================================================================
-# Ola Domain Support Agent — Hugging Face Spaces Dockerfile Specification
+# Ola Domain Support Agent — Render Web Service Dockerfile Specification
 # Track: Business Operations / Customer Support (Ola)
+# Runtime: Docker on Render Free Tier (512 MB RAM, 0.1 CPU)
 # ==============================================================================
 
 FROM python:3.11-slim
 
-# 1. Create a non-root user with UID 1000 (named "user")
-RUN useradd -m -u 1000 user
-
-# 2. Set environment variables
-ENV HOME=/home/user \
-    PATH=/home/user/.local/bin:$PATH \
-    MOCK_LLM=true \
+# 1. Set environment variables
+ENV MOCK_LLM=true \
     CREWAI_DISABLE_TELEMETRY=true \
     OTEL_SDK_DISABLED=true \
-    HF_HOME=/home/user/.cache/huggingface \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    TOKENIZERS_PARALLELISM=false \
+    OMP_NUM_THREADS=1 \
+    MKL_NUM_THREADS=1
 
-WORKDIR /home/user/app
+WORKDIR /app
 
-# 3. Install build tools for compiling any C extensions
+# 2. Install minimal system packages for compiling C extensions & curl
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# 4. Switch to non-root user
-USER user
+# 3. Copy requirements.txt first for Docker layer caching
+COPY requirements.txt .
 
-# 5. Copy requirements.txt first for Docker layer caching
-COPY --chown=user requirements.txt .
-
-# 6. Install CPU-only PyTorch and application dependencies
+# 4. Install CPU-only PyTorch first, then application requirements
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
     pip install --no-cache-dir -r requirements.txt
 
-# 7. Pre-download the SentenceTransformer model at build time for offline execution
+# 5. Pre-download the SentenceTransformer model at build time for instant offline startup
 RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')"
 
-# 8. Copy the rest of the project with non-root ownership
-COPY --chown=user . .
+# 6. Copy the application source code
+COPY . .
 
-# 9. Expose port and start uvicorn
-EXPOSE 7860
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "7860"]
+# 7. Create writable application runtime directories and ensure full permissions
+RUN mkdir -p /app/chroma_store /app/.chroma_db /app/logs /app/data /app/transcripts && \
+    chmod -R 777 /app
+
+# 8. Expose Render default port (10000)
+EXPOSE 10000
+
+# 9. Start uvicorn dynamically bound to Render's injected $PORT (fallback to 10000)
+CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-10000} --workers 1"]

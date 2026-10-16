@@ -22,7 +22,6 @@ $testResults = [System.Collections.Generic.List[PSCustomObject]]::new()
 # ------------------------------------------------------------------------------
 Write-Host "`n[*] Test 1: Checking /health (up to 12 retries, 10s delay for waking Spaces)..."
 $healthOk = $false
-
 for ($i = 1; $i -le 12; $i++) {
     Write-Host "    [Attempt $i/12] GET $BaseUrl/health ..."
     try {

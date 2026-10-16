@@ -43,5 +43,7 @@ htmlcov/
 .vscode/
 scratch/
 node_modules/
-.DS_Store
 ola-support-agent/
+
+# Streamlit secrets
+.streamlit/secrets.toml

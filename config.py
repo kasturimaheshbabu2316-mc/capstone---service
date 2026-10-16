@@ -32,9 +32,9 @@ DATABASE_URL: str = os.environ.get("DATABASE_URL", "sqlite:///./data/support.db"
 BACKEND_URL: str = os.environ.get("BACKEND_URL", "http://127.0.0.1:8000").rstrip("/")
 LOG_FILE: Path = Path(os.environ.get("LOG_FILE", "./logs/requests.jsonl"))
 
-# Ensure directory structures exist
-CHROMA_DIR.mkdir(parents=True, exist_ok=True)
-LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
-Path("./transcripts").mkdir(parents=True, exist_ok=True)
-Path("./data").mkdir(parents=True, exist_ok=True)
-Path("./tests").mkdir(parents=True, exist_ok=True)
+# Ensure directory structures exist safely
+for d in [CHROMA_DIR, LOG_FILE.parent, Path("./transcripts"), Path("./data"), Path("./tests")]:
+    try:
+        d.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        pass

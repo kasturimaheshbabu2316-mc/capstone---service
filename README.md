@@ -1,37 +1,69 @@
----
-title: Ola Support Agent
-emoji: 🚗
-colorFrom: yellow
-colorTo: gray
-sdk: docker
-app_port: 7860
-pinned: false
----
-
 Track completed: Ola (Business Operations / Customer Support)
 
-## Live Deployment (Hugging Face Space)
+## Live Deployment (Render Free Web Service)
 
-- **Production Space URL**: `https://mahesh0123-ola-support-agent.hf.space`
-- **Interactive Swagger Documentation**: `https://mahesh0123-ola-support-agent.hf.space/docs`
-- **Healthcheck Endpoint**: `https://mahesh0123-ola-support-agent.hf.space/health`
+- **Production Service URL**: `<RENDER_URL>`
+- **Interactive Swagger Documentation**: `<RENDER_URL>/docs`
+- **Healthcheck Endpoint**: `<RENDER_URL>/health`
 
 ### Example Verification Commands
 
 ```bash
 # Check service health
-curl -X GET "https://mahesh0123-ola-support-agent.hf.space/health"
+curl -X GET "<RENDER_URL>/health"
 
 # Query the grounded support pipeline
-curl -X POST "https://mahesh0123-ola-support-agent.hf.space/ask" \
+curl -X POST "<RENDER_URL>/ask" \
   -H "Content-Type: application/json" \
   -d '{"question": "What is the resolution SLA for a Sev-1 safety incident?"}'
 ```
 
 > **Deployment Notes:**
 >
-> - **100% Offline & Deterministic**: The Space runs entirely under `MOCK_LLM=true` with zero external API keys and `CREWAI_DISABLE_TELEMETRY=true` (no outbound telemetry or tracking).
-> - **Ephemeral Storage & Self-Healing Index**: Hugging Face Spaces storage is ephemeral and resets on restart. The ChromaDB vector index is automatically checked and rebuilt at startup inside the FastAPI lifespan handler if absent, requiring no pre-committed database files.
+> - **Render Free Tier Spin-Down**: The service automatically sleeps after 15 minutes of inactivity. The initial wake-up request may take up to 60 seconds.
+> - **100% Offline & Deterministic**: The service runs entirely under `MOCK_LLM=true` with zero external API keys and `CREWAI_DISABLE_TELEMETRY=true` (no outbound telemetry or tracking).
+> - **Ephemeral Storage & Self-Healing Index**: Render's filesystem is ephemeral and resets on redeploy/spin-up. The ChromaDB vector index is automatically checked and rebuilt at startup inside the FastAPI lifespan handler if absent, requiring no pre-committed database files.
+
+## Streamlit UI Deployment & Usage
+
+- **Interactive Streamlit App URL**: `<STREAMLIT_URL>`
+
+### Running the Streamlit UI Locally
+
+The frontend reads `BACKEND_URL` in priority order from Streamlit secrets (`st.secrets["BACKEND_URL"]`), then the `BACKEND_URL` environment variable, falling back to `http://127.0.0.1:8000`.
+
+To run the Streamlit app locally in PowerShell connected to a local FastAPI backend:
+
+```powershell
+$env:BACKEND_URL="http://127.0.0.1:8000"; streamlit run streamlit_app.py
+```
+
+To run the Streamlit app locally targeting your deployed Render backend:
+
+```powershell
+$env:BACKEND_URL="https://<your-service>.onrender.com"; streamlit run streamlit_app.py
+```
+
+### Deploying to Streamlit Community Cloud
+
+1. Log into [Streamlit Community Cloud](https://share.streamlit.io/) and click **New app** (or **Create app**).
+2. Connect your public GitHub repository:
+   - **Repository**: `<your-username>/<your-repo>`
+   - **Branch**: `main`
+   - **Main file path**: `streamlit_app.py`
+3. Expand **Advanced settings**:
+   - **Python version**: `3.11` (or `3.12`)
+   - **Requirements file path**: `requirements-ui.txt` *(installs only lightweight UI dependencies: `streamlit`, `requests`, `pandas`, `plotly` without heavy ML engines)*.
+4. In the **Secrets** editor, configure your Render backend URL:
+
+   ```toml
+   BACKEND_URL = "https://<your-service>.onrender.com"
+   ```
+
+5. Click **Deploy!**. Streamlit Cloud will build and launch your application at `<STREAMLIT_URL>`.
+
+> **Cold-Start Handling:**
+> When the Render backend is sleeping, the Streamlit UI automatically initiates a cold-start wake-up sequence with a polling spinner (`"Waking up the backend, this can take up to a minute..."`) retrying every 5 seconds for up to 90 seconds, and gracefully displays warm-up and error states without crashing.
 
 ## Ola Domain Support Agent — Operational Intelligence & Support System
 
