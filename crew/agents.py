@@ -12,7 +12,7 @@ os.environ["CREWAI_DISABLE_TELEMETRY"] = "true"
 os.environ["OTEL_SDK_DISABLED"] = "true"
 
 from crewai import Agent
-from llm.mock_llm import MockLLM
+from crew.mock_llm import MockLLM
 from tools.rag_tool import rag_lookup_crew_tool
 from tools.ticket_tool import check_support_ticket_status_crew_tool
 

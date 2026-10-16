@@ -38,10 +38,45 @@ from kb_loader import load_kb
 KB_DIR: Path = Path("kb")
 CHROMA_DIR: Path = config.CHROMA_DIR
 EMBED_MODEL_NAME: str = config.EMBED_MODEL
+MODEL_NAME: str = EMBED_MODEL_NAME
 
 # Singleton instance for SentenceTransformer
 _embedding_model: SentenceTransformer | None = None
 _chroma_client: chromadb.PersistentClient | None = None
+
+
+class IndexResult(tuple):
+    """Dual-access result supporting both tuple unpacking and dict key lookups."""
+
+    def __new__(
+        cls,
+        fixed: int,
+        sent: int,
+        fixed_name: str = "kb_fixed",
+        sent_name: str = "kb_sentence",
+    ) -> IndexResult:
+        obj = super().__new__(cls, (fixed, sent))
+        obj._fixed_name = fixed_name
+        obj._sent_name = sent_name
+        obj._map = {fixed_name: fixed, sent_name: sent}
+        return obj
+
+    def __getitem__(self, key: Any) -> Any:
+        if isinstance(key, (int, slice)):
+            return super().__getitem__(key)
+        return self._map[key]
+
+    def get(self, key: str, default: Any = None) -> Any:
+        return self._map.get(key, default)
+
+    def keys(self) -> Any:
+        return self._map.keys()
+
+    def values(self) -> Any:
+        return self._map.values()
+
+    def items(self) -> Any:
+        return self._map.items()
 
 
 def get_embedding_model() -> SentenceTransformer:
@@ -96,7 +131,7 @@ def load_knowledge_base_docs() -> dict[str, str]:
 def index_documents(
     reset: bool = False,
     collections: tuple[str, str] = ("kb_fixed", "kb_sentence"),
-) -> dict[str, int]:
+) -> IndexResult:
     """Chunks and indexes all KB documents into two ChromaDB collections.
 
     Indexes are created with cosine distance (`hnsw:space = cosine`) and populated
@@ -107,7 +142,7 @@ def index_documents(
         collections: Tuple of collection names (fixed_collection, sentence_collection).
 
     Returns:
-        Dict mapping collection names to their total chunk counts.
+        IndexResult mapping collection names to their total chunk counts (also unpackable as tuple).
     """
     client = get_chroma_client()
     model = get_embedding_model()
@@ -193,16 +228,27 @@ def index_documents(
             metadatas=sent_metas,
         )
 
-    return {
-        fixed_col_name: col_fixed.count(),
-        sent_col_name: col_sent.count(),
-    }
+    fixed_count = col_fixed.count()
+    sent_count = col_sent.count()
+
+    # Refresh persistent client reference so readers detect freshly created HNSW disk segments
+    global _chroma_client
+    _chroma_client = None
+
+    return IndexResult(
+        fixed=fixed_count,
+        sent=sent_count,
+        fixed_name=fixed_col_name,
+        sent_name=sent_col_name,
+    )
 
 
 def retrieve(
     query: str,
     collection_name: str = "kb_sentence",
     k: int = 3,
+    top_k: int | None = None,
+    **kwargs: Any,
 ) -> list[dict[str, Any]]:
     """Retrieves top-k chunks from specified ChromaDB collection with cosine similarity.
 
@@ -210,6 +256,7 @@ def retrieve(
         query: Query string to match against indexed policy chunks.
         collection_name: Target collection ('kb_fixed' or 'kb_sentence').
         k: Maximum number of candidate chunks to retrieve.
+        top_k: Optional alias for k parameter.
 
     Returns:
         List of candidate dictionaries:
@@ -223,6 +270,13 @@ def retrieve(
             ...
         ]
     """
+    effective_k = top_k if top_k is not None else k
+    known_cols = {"kb_fixed", "kb_sentence", "ola_fixed", "ola_sentence"}
+
+    # Guard against swapped positional arguments
+    if query in known_cols and collection_name not in known_cols:
+        query, collection_name = collection_name, query
+
     client = get_chroma_client()
     model = get_embedding_model()
 
@@ -231,7 +285,7 @@ def retrieve(
 
     results = col.query(
         query_embeddings=query_emb,
-        n_results=k,
+        n_results=effective_k,
         include=["documents", "metadatas", "distances"],
     )
 
@@ -246,10 +300,19 @@ def retrieve(
             dist_val = float(dist)
             similarity = round(1.0 - dist_val, 4)
             meta_dict = meta or {}
+            chunk_id = meta_dict.get("chunk_id", "unknown")
+            chunk_idx = 0
+            if "_" in chunk_id:
+                try:
+                    chunk_idx = int(chunk_id.rsplit("_", 1)[-1])
+                except ValueError:
+                    chunk_idx = 0
+
             retrieved.append({
                 "text": doc_text,
                 "doc_id": meta_dict.get("doc_id", "unknown"),
-                "chunk_id": meta_dict.get("chunk_id", "unknown"),
+                "chunk_id": chunk_id,
+                "chunk_index": chunk_idx,
                 "similarity": similarity,
                 "strategy": meta_dict.get("strategy", "unknown"),
             })
@@ -257,38 +320,91 @@ def retrieve(
     return retrieved
 
 
-# Alias for backwards compatibility
-query_collection = retrieve
+def query_collection(*args: Any, **kwargs: Any) -> list[dict[str, Any]]:
+    """Flexible query wrapper supporting both retrieve and legacy signatures."""
+    known_cols = {"kb_fixed", "kb_sentence", "ola_fixed", "ola_sentence"}
+    k = kwargs.get("top_k", kwargs.get("k", 3))
+    query = ""
+    collection_name = "kb_sentence"
+
+    if len(args) == 1:
+        if args[0] in known_cols:
+            collection_name = args[0]
+        else:
+            query = args[0]
+    elif len(args) >= 2:
+        if args[0] in known_cols:
+            collection_name = args[0]
+            query = args[1]
+        elif args[1] in known_cols:
+            query = args[0]
+            collection_name = args[1]
+        else:
+            query = args[0]
+            collection_name = args[1]
+        if len(args) >= 3 and isinstance(args[2], int):
+            k = args[2]
+
+    if "query" in kwargs:
+        query = kwargs["query"]
+    if "collection_name" in kwargs:
+        collection_name = kwargs["collection_name"]
+
+    return retrieve(query=query, collection_name=collection_name, k=k)
 
 
 if __name__ == "__main__":
-    print("=" * 75)
-    print("OLA DOMAIN SUPPORT AGENT — TASK 3: CHUNKING & CHROMADB INDEXING")
-    print("=" * 75)
+    report_lines: list[str] = [
+        "=" * 75,
+        "OLA DOMAIN SUPPORT AGENT — TASK 3: CHUNKING & CHROMADB INDEXING",
+        "=" * 75,
+        "",
+        "1. INDEXING KNOWLEDGE BASE DOCUMENTS (IDEMPOTENT UPSERT)...",
+    ]
 
-    print("\n1. INDEXING KNOWLEDGE BASE DOCUMENTS (IDEMPOTENT UPSERT)...")
     counts = index_documents(reset=False, collections=("kb_fixed", "kb_sentence"))
-    print(f"  • Collection 'kb_fixed'    : {counts['kb_fixed']} chunks (300 chars, 60 overlap)")
-    print(f"  • Collection 'kb_sentence' : {counts['kb_sentence']} chunks (regex sentence-based)")
-    print(f"  • Embedding Model          : {EMBED_MODEL_NAME}")
-    print(f"  • Distance Metric          : Cosine (hnsw:space = cosine)")
+    report_lines.extend([
+        f"  • Collection 'kb_fixed'    : {counts['kb_fixed']} chunks (300 chars, 60 overlap)",
+        f"  • Collection 'kb_sentence' : {counts['kb_sentence']} chunks (regex sentence-based)",
+        f"  • Embedding Model          : {EMBED_MODEL_NAME}",
+        f"  • Distance Metric          : Cosine (hnsw:space = cosine)",
+        "",
+    ])
 
     sample_query = "What is the resolution SLA for a Sev-1 safety incident?"
-    print(f"\n2. SAMPLE QUERY RETRIEVAL:")
-    print(f"   Query: \"{sample_query}\"")
-
-    print(f"\n--- Top-3 Results from 'kb_fixed' ---")
+    report_lines.extend([
+        "2. SAMPLE QUERY RETRIEVAL:",
+        f"   Query: \"{sample_query}\"",
+        "",
+        "--- Top-3 Results from 'kb_fixed' ---",
+    ])
     fixed_res = retrieve(sample_query, collection_name="kb_fixed", k=3)
     for i, r in enumerate(fixed_res, 1):
-        print(f"  [{i}] Doc ID: {r['doc_id']} | Chunk ID: {r['chunk_id']} | Similarity: {r['similarity']}")
-        print(f"      Text: \"{r['text']}\"")
+        report_lines.append(f"  [{i}] Doc ID: {r['doc_id']} | Chunk ID: {r['chunk_id']} | Similarity: {r['similarity']}")
+        report_lines.append(f"      Text: \"{r['text']}\"")
 
-    print(f"\n--- Top-3 Results from 'kb_sentence' ---")
+    report_lines.extend([
+        "",
+        "--- Top-3 Results from 'kb_sentence' ---",
+    ])
     sent_res = retrieve(sample_query, collection_name="kb_sentence", k=3)
     for i, r in enumerate(sent_res, 1):
-        print(f"  [{i}] Doc ID: {r['doc_id']} | Chunk ID: {r['chunk_id']} | Similarity: {r['similarity']}")
-        print(f"      Text: \"{r['text']}\"")
+        report_lines.append(f"  [{i}] Doc ID: {r['doc_id']} | Chunk ID: {r['chunk_id']} | Similarity: {r['similarity']}")
+        report_lines.append(f"      Text: \"{r['text']}\"")
 
-    print("\n" + "=" * 75)
-    print("TASK 3 VERIFICATION COMPLETE: ALL CHUNKS INDEXED & RETRIEVED SUCCESSFULLY")
-    print("=" * 75)
+    report_lines.extend([
+        "",
+        "=" * 75,
+        "TASK 3 VERIFICATION COMPLETE: ALL CHUNKS INDEXED & RETRIEVED SUCCESSFULLY",
+        "=" * 75,
+    ])
+
+    full_output = "\n".join(report_lines)
+    print(full_output)
+
+    # Save transcript in UTF-8 format
+    transcript_path = Path("transcripts/03_indexing.txt")
+    transcript_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(transcript_path, "w", encoding="utf-8") as f:
+        f.write(full_output + "\n")
+    print(f"\n[Saved transcript to {transcript_path}]")

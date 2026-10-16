@@ -5,21 +5,32 @@ Provides check_support_ticket_status(record_id) tool returning status,
 resolution time, and an empirical escalation risk score.
 """
 
+import os
 from typing import Any
 import numpy as np
 from dataset import SUPPORT_TICKETS_BY_ID, SUPPORT_TICKETS
+
+# Designed weights for escalation score
+W1: float = 0.6
+W2: float = 0.4
+RECENCY_SCALE_DAYS: float = 30.0
+
+# 80th-percentile days_since_created from dataset.py
+DAYS_SINCE_CREATED_SERIES = [rec["days_since_created"] for rec in SUPPORT_TICKETS]
+DAYS_80TH_PERCENTILE: float = round(float(np.percentile(DAYS_SINCE_CREATED_SERIES, 80)), 4)
 
 
 def calculate_escalation_score(record: dict[str, Any]) -> float:
     """Calculates escalation risk score S_esc in [0, 1].
 
     Formula:
-        recency = days_since_created / 30.0 (in [0, 1])
-        S_esc = 0.6 * float(escalated) + 0.4 * recency
+        recency = days_since_created / 30.0 (clipped to [0, 1])
+        S_esc = w1 * float(escalated) + w2 * recency
+        with w1 = 0.6, w2 = 0.4.
 
     Operational refinement:
-        If status is 'Resolved' or 'Closed', the ticket has achieved resolution,
-        so the recency aging term is zeroed out (0.0).
+        If status is 'Resolved' or 'Closed', the ticket lifecycle has concluded,
+        so the recency aging term is operationalized as 0.0.
     """
     escalated_flag = 1.0 if record.get("escalated", False) else 0.0
     status = record.get("status", "")
@@ -28,9 +39,9 @@ def calculate_escalation_score(record: dict[str, Any]) -> float:
         recency = 0.0
     else:
         days = record.get("days_since_created", 0)
-        recency = min(1.0, max(0.0, days / 30.0))
+        recency = min(1.0, max(0.0, float(days) / RECENCY_SCALE_DAYS))
 
-    score = 0.6 * escalated_flag + 0.4 * recency
+    score = W1 * escalated_flag + W2 * recency
     return round(float(score), 4)
 
 
@@ -43,6 +54,7 @@ def get_escalation_threshold() -> tuple[float, list[float]]:
 
 # Freeze empirical 80th percentile threshold
 ESCALATION_THRESHOLD_TAU, _ALL_SCORES = get_escalation_threshold()
+ESCALATION_THRESHOLD: float = ESCALATION_THRESHOLD_TAU
 
 
 def check_support_ticket_status(record_id: str) -> dict[str, Any]:
@@ -52,7 +64,8 @@ def check_support_ticket_status(record_id: str) -> dict[str, Any]:
         record_id: The ticket identifier, e.g. 'TKT-0001' to 'TKT-0060'.
 
     Returns:
-        Structured dictionary with status, resolution time, and escalation score.
+        Structured dictionary with status, resolution_time_hours, escalation_score,
+        recommend_escalation, and an error key for unknown IDs.
     """
     clean_id = record_id.strip().upper()
     record = SUPPORT_TICKETS_BY_ID.get(clean_id)
@@ -69,7 +82,7 @@ def check_support_ticket_status(record_id: str) -> dict[str, Any]:
         }
 
     score = calculate_escalation_score(record)
-    recommend_escalation = score >= ESCALATION_THRESHOLD_TAU
+    recommend_escalation = score >= ESCALATION_THRESHOLD
 
     risk_level = "High Risk" if recommend_escalation else "Normal"
 
@@ -81,7 +94,7 @@ def check_support_ticket_status(record_id: str) -> dict[str, Any]:
         "days_since_created": record["days_since_created"],
         "escalated": record["escalated"],
         "escalation_score": score,
-        "escalation_threshold": ESCALATION_THRESHOLD_TAU,
+        "escalation_threshold": ESCALATION_THRESHOLD,
         "risk_level": risk_level,
         "recommend_escalation": recommend_escalation,
     }
@@ -92,7 +105,7 @@ def get_all_tickets() -> list[dict[str, Any]]:
     results = []
     for record in SUPPORT_TICKETS:
         score = calculate_escalation_score(record)
-        recommend_esc = score >= ESCALATION_THRESHOLD_TAU
+        recommend_esc = score >= ESCALATION_THRESHOLD
         results.append({
             "ticket_id": record["record_id"],
             "record_id": record["record_id"],
@@ -126,39 +139,92 @@ except ImportError:
     check_support_ticket_status_crew_tool = check_support_ticket_status
 
 
-if __name__ == "__main__":
-    print("=" * 70)
-    print("OLA DOMAIN SUPPORT AGENT — TICKET STATUS & ESCALATION (TASK 6)")
-    print("=" * 70)
-    print("Formula: S_esc = 0.6 * float(escalated) + 0.4 * (days_since_created / 30)")
-    print("Refinement: Recency term zeroed for 'Resolved' and 'Closed' tickets.\n")
-
+def generate_report() -> str:
+    """Generates the execution report string for Task 6."""
     p80_thresh, scores = get_escalation_threshold()
+    days = DAYS_SINCE_CREATED_SERIES
 
-    print("--- 1. EMPIRICAL ESCALATION SCORE DISTRIBUTION (Seed 42, N=60) ---")
-    print(f"  • Min Score          : {min(scores):.4f}")
-    print(f"  • Max Score          : {max(scores):.4f}")
-    print(f"  • Mean Score         : {sum(scores)/len(scores):.4f}")
-    print(f"  • 50th Percentile (Median) : {float(np.percentile(scores, 50)):.4f}")
-    print(f"  • 80th Percentile (Tau)    : {p80_thresh:.4f}")
-    print(f"  • Chosen Threshold justification: T = {p80_thresh:.4f} corresponds to the 80th percentile of scores in seed-42 data.")
+    lines = [
+        "=" * 70,
+        "OLA DOMAIN SUPPORT AGENT — TICKET STATUS & ESCALATION (TASK 6)",
+        "=" * 70,
+        f"Formula: S_esc = w1 * float(escalated) + w2 * (days_since_created / 30)",
+        f"Weights: w1 = {W1} (escalation flag), w2 = {W2} (recency aging over 30 days)",
+        "Refinement: Recency aging term zeroed for 'Resolved' and 'Closed' tickets.",
+        "",
+        "--- 1. EMPIRICAL DISTRIBUTION FROM DATASET (Seed 42, N=60) ---",
+        "A. Days Since Created Distribution:",
+        f"  • Min Days           : {min(days)}",
+        f"  • Max Days           : {max(days)}",
+        f"  • Mean Days          : {np.mean(days):.2f}",
+        f"  • 50th Percentile    : {float(np.percentile(days, 50)):.2f} days",
+        f"  • 80th Percentile    : {DAYS_80TH_PERCENTILE:.2f} days",
+        "",
+        "B. Escalation Score Distribution:",
+        f"  • Min Score          : {min(scores):.4f}",
+        f"  • Max Score          : {max(scores):.4f}",
+        f"  • Mean Score         : {sum(scores)/len(scores):.4f}",
+        f"  • 50th Percentile    : {float(np.percentile(scores, 50)):.4f}",
+        f"  • 80th Percentile (Tau): {p80_thresh:.4f}",
+        "",
+        "C. Threshold Justification:",
+        f"  • ESCALATION_THRESHOLD is set to tau = {p80_thresh:.4f}, matching the empirical 80th percentile of scores.",
+        f"  • At tau = {p80_thresh:.4f}, all explicitly escalated tickets (w1 * 1.0 = 0.60 >= 0.4400) trigger recommend_escalation = True.",
+        f"  • An unescalated ticket at the 80th percentile of age ({DAYS_80TH_PERCENTILE:.1f} days) scores 0.4 * ({DAYS_80TH_PERCENTILE:.1f}/30) = {0.4 * (DAYS_80TH_PERCENTILE / 30.0):.4f} < 0.4400.",
+        "  • This guarantees typical aging does not generate false alarms, while flagging the top 20% highest risk tickets.",
+        "",
+        "--- 2. SAMPLE LOOKUP DEMONSTRATIONS ---",
+    ]
 
-    print("\n--- 2. SAMPLE LOOKUP DEMONSTRATIONS ---")
-    test_ids = ["TKT-0001", "TKT-0002", "TKT-0003", "TKT-0007", "TKT-9999"]
-    for tid in test_ids:
+    test_ids = [
+        ("TKT-0001", "Known ID / Old Active Ticket (P80 Age: 23 days)"),
+        ("TKT-0002", "Known ID / Escalated Ticket"),
+        ("TKT-0007", "Known ID / Old Closed Ticket (Aging Zeroed)"),
+        ("TKT-0016", "Known ID / Max Age Active Ticket (30 days)"),
+        ("TKT-0031", "Known ID / Max Escalated Ticket (Escalated + 30 days)"),
+        ("TKT-9999", "Unknown ID (Error Handling)"),
+    ]
+
+    for tid, desc in test_ids:
         res = check_support_ticket_status(tid)
-        print(f"\nQuery: check_support_ticket_status('{tid}')")
+        lines.append(f"\nQuery: check_support_ticket_status('{tid}') [{desc}]")
         if "error" in res:
-            print(f"  • Result: {res['error']}")
+            lines.append(f"  • Error Key Present  : True")
+            lines.append(f"  • Error Message      : {res['error']}")
+            lines.append(f"  • Status             : {res['status']}")
+            lines.append(f"  • Resolution Time    : {res['resolution_time_hours']}")
+            lines.append(f"  • Escalation Score   : {res['escalation_score']}")
+            lines.append(f"  • Recommend Escalation: {res['recommend_escalation']}")
         else:
-            print(f"  • Status             : {res['status']}")
-            print(f"  • Category           : {res['category']}")
-            print(f"  • Resolution Time    : {res['resolution_time_hours']} hours")
-            print(f"  • Days Active        : {res['days_since_created']} days")
-            print(f"  • Escalated Flag     : {res['escalated']}")
-            print(f"  • Escalation Score   : {res['escalation_score']:.4f}")
-            print(f"  • Risk Classification: {res['risk_level']} (Recommend Escalation: {res['recommend_escalation']})")
+            lines.append(f"  • Status             : {res['status']}")
+            lines.append(f"  • Category           : {res['category']}")
+            lines.append(f"  • Resolution Time    : {res['resolution_time_hours']} hours")
+            lines.append(f"  • Days Active        : {res['days_since_created']} days")
+            lines.append(f"  • Escalated Flag     : {res['escalated']}")
+            lines.append(f"  • Escalation Score   : {res['escalation_score']:.4f}")
+            lines.append(f"  • Risk Classification: {res['risk_level']} (Recommend Escalation: {res['recommend_escalation']})")
 
-    print("\n" + "=" * 70)
-    print("TASK 6 ACCEPTANCE CRITERIA: TICKET TOOL & THRESHOLD JUSTIFIED")
-    print("=" * 70)
+    lines.extend([
+        "",
+        "=" * 70,
+        "TASK 6 ACCEPTANCE CRITERIA: TICKET TOOL & THRESHOLD JUSTIFIED",
+        "=" * 70,
+    ])
+    return "\n".join(lines)
+
+
+if __name__ == "__main__":
+    output = generate_report()
+    print(output)
+
+    transcripts_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "transcripts")
+    os.makedirs(transcripts_dir, exist_ok=True)
+
+    dest_files = [
+        os.path.join(transcripts_dir, "06_ticket_tool.txt"),
+        os.path.join(transcripts_dir, "task06_ticket_tool.txt"),
+    ]
+    for dest in dest_files:
+        with open(dest, "w", encoding="utf-8") as f:
+            f.write(output + "\n")
+        print(f"Transcript saved to: {dest}")

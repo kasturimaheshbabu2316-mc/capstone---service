@@ -1,0 +1,406 @@
+{
+  "timestamp": "2026-10-15T09:07:52Z",
+  "total_queries": 15,
+  "macro_averages": {
+    "accuracy": 4.6,
+    "grounding": 5.0,
+    "completeness": 4.27,
+    "safety": 5.0,
+    "overall": 4.72
+  },
+  "results": [
+    {
+      "id": "Q01",
+      "topic": "sla_by_severity",
+      "query": "What is the resolution SLA for a Sev-1 safety incident?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours.",
+      "reference_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+      "sources": [
+        "sla_by_severity"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 5,
+        "safety": 5,
+        "overall": 5.0
+      },
+      "reasoning": {
+        "accuracy": "High factual overlap: 13/13 key reference tokens (100.0%).",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
+        "completeness": "All 2/2 key points covered (100%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q02",
+      "topic": "refund_compensation_policy",
+      "query": "Under what conditions are driver cancellation fees refunded to passengers?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.",
+      "reference_answer": "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.",
+      "sources": [
+        "refund_compensation_policy",
+        "test_cancellation_clause"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 5,
+        "safety": 5,
+        "overall": 5.0
+      },
+      "reasoning": {
+        "accuracy": "High factual overlap: 14/14 key reference tokens (100.0%).",
+        "grounding": "1/1 sentences (100.0%) fully supported by context.",
+        "completeness": "All 3/3 key points covered (100%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q03",
+      "topic": "vip_customer_policy",
+      "query": "What are the benefits and response times for VIP Ola Select customers?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers. In the event of a vehicle breakdown during a VIP journey, Ola dispatches a replacement Prime luxury cab at zero additional fare within 10 minutes. First-response SLAs for VIP inquiries are capped at 15 minutes across all severity categories with guaranteed resolution within 6 hours.",
+      "reference_answer": "VIP support tickets assign directly to Senior Relationship Managers with a 15-minute first-response SLA across all severities and resolution within 6 hours. Vehicle breakdowns receive a replacement Prime luxury cab within 10 minutes at zero fare.",
+      "sources": [
+        "vip_customer_policy"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 4,
+        "grounding": 5,
+        "completeness": 4,
+        "safety": 5,
+        "overall": 4.5
+      },
+      "reasoning": {
+        "accuracy": "Good factual overlap: 16/27 key reference tokens (59.3%).",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
+        "completeness": "3/4 key points covered (75.0%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q04",
+      "topic": "repeat_complaint_handling",
+      "query": "What happens when a customer logs 3 complaints within a 14-day rolling window?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "When a customer logs three or more complaints regarding the same ride issue or driver partner within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect. Ola prioritizes chronic complaints through automated recurrence detection algorithms.",
+      "reference_answer": "When a customer logs three or more complaints within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect, routing to a Senior Quality Supervisor within 2 hours for outbound telephonic review and fleet audit within 24 hours.",
+      "sources": [
+        "repeat_complaint_handling",
+        "outage_communication"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 4,
+        "grounding": 5,
+        "completeness": 2,
+        "safety": 5,
+        "overall": 4.0
+      },
+      "reasoning": {
+        "accuracy": "Good factual overlap: 15/25 key reference tokens (60.0%).",
+        "grounding": "2/2 sentences (100.0%) fully supported by context.",
+        "completeness": "1/4 key points covered (25.0%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q05",
+      "topic": "business_hours_support",
+      "query": "What are the operating hours for driver partner physical onboarding centers and emergency desks?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "General inquiry handling, billing dispute reviews, and driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time. Passenger emergency support and active ride safety desks operate 24 hours a day, 7 days a week, 365 days a year without interruption.",
+      "reference_answer": "Driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time. Passenger emergency support desks operate 24/7/365 without interruption.",
+      "sources": [
+        "business_hours_support",
+        "repeat_complaint_handling"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 3,
+        "safety": 5,
+        "overall": 4.5
+      },
+      "reasoning": {
+        "accuracy": "High factual overlap: 20/20 key reference tokens (100.0%).",
+        "grounding": "2/2 sentences (100.0%) fully supported by context.",
+        "completeness": "2/3 key points covered (66.7%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q06",
+      "topic": "service_credit_policy",
+      "query": "What service credit or compensation is provided for ride delays exceeding 20 minutes?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Delays exceeding 20 minutes attributable to dispatch errors qualify for a \u20b950 service voucher valid for 30 days.",
+      "reference_answer": "Delays exceeding 20 minutes attributable to dispatch errors qualify for a \u20b950 service voucher valid for 30 days, deposited into the wallet within 24 hours.",
+      "sources": [
+        "service_credit_policy",
+        "test_cancellation_clause"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 4,
+        "safety": 5,
+        "overall": 4.75
+      },
+      "reasoning": {
+        "accuracy": "High factual overlap: 11/16 key reference tokens (68.8%).",
+        "grounding": "1/1 sentences (100.0%) fully supported by context.",
+        "completeness": "3/4 key points covered (75.0%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q07",
+      "topic": "escalation_matrix",
+      "query": "Who handles Tier-3 escalations for cases unresolved after 8 hours?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Cases remaining unresolved after 8 hours or involving legal liability escalate directly to the Tier-3 City Operations Head for final executive determination. Unresolved support tickets follow Ola's three-tier organizational escalation matrix. If an issue breaches its milestone threshold or requires specialized approval, the ticket automatically escalates to a Tier-2 Support Lead for investigation.",
+      "reference_answer": "Cases remaining unresolved after 8 hours or involving legal liability escalate directly to the Tier-3 City Operations Head for final executive determination.",
+      "sources": [
+        "escalation_matrix"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 5,
+        "safety": 5,
+        "overall": 5.0
+      },
+      "reasoning": {
+        "accuracy": "High factual overlap: 17/17 key reference tokens (100.0%).",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
+        "completeness": "All 3/3 key points covered (100%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q08",
+      "topic": "ticket_priority_rules",
+      "query": "How are P1 urgent priority tickets defined under Ola operational guidelines?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Ola categorizes customer support tickets into four distinct priority tiers: P1 (Critical), P2 (High), P3 (Medium), and P4 (Low). P1 tickets are strictly reserved for active passenger safety incidents, medical emergencies, and vehicular accidents occurring during a ride.",
+      "reference_answer": "P1 Critical tickets are strictly reserved for active passenger safety incidents, medical emergencies, and vehicular accidents occurring during a ride.",
+      "sources": [
+        "ticket_priority_rules",
+        "sla_by_severity"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 5,
+        "safety": 5,
+        "overall": 5.0
+      },
+      "reasoning": {
+        "accuracy": "High factual overlap: 15/15 key reference tokens (100.0%).",
+        "grounding": "2/2 sentences (100.0%) fully supported by context.",
+        "completeness": "All 3/3 key points covered (100%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q09",
+      "topic": "outage_communication",
+      "query": "How does Ola communicate technical platform outages via in-app banners and push notifications?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Ola adheres to proactive communication protocols during platform technical disruptions. Passenger notifications are transmitted via in-app banners, push notifications, and broadcast SMS alerts detailing estimated time to recovery.",
+      "reference_answer": "When an outage affects more than 5 percent of active bookings, incident status alerts initiate within 15 minutes via in-app banners, push notifications, and broadcast SMS, with post-mortem reports published within 48 hours.",
+      "sources": [
+        "outage_communication",
+        "communication_channels"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 2,
+        "grounding": 5,
+        "completeness": 3,
+        "safety": 5,
+        "overall": 3.75
+      },
+      "reasoning": {
+        "accuracy": "Low factual overlap: 8/24 key reference tokens (33.3%).",
+        "grounding": "2/2 sentences (100.0%) fully supported by context.",
+        "completeness": "2/4 key points covered (50.0%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q10",
+      "topic": "data_retention_policy",
+      "query": "How long are customer support chat transcripts and audit logs retained in live stores and cold storage?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution. Customers may request complete account data erasure under statutory right-to-be-forgotten guidelines, with deletion executed within 30 days of verified identity proof. Thereafter, personally identifiable contact numbers and ride coordinates are redacted and archived into encrypted cold storage for 3 years to comply with national transportation audit mandates.",
+      "reference_answer": "Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution, then PII is redacted and records are archived in encrypted cold storage for 3 years.",
+      "sources": [
+        "data_retention_policy"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 5,
+        "safety": 5,
+        "overall": 5.0
+      },
+      "reasoning": {
+        "accuracy": "High factual overlap: 20/23 key reference tokens (87.0%).",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
+        "completeness": "All 3/3 key points covered (100%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q11",
+      "topic": "communication_channels",
+      "query": "What official support channels like in-app chat, SOS hotline, and email are available for riders?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Real-time in-app chat is the primary channel for booking assistance, ongoing trip support, and immediate receipt generation. Riders and driver partners can engage Ola support through three designated official channels. For in-ride physical security concerns, the dedicated 24/7 SOS emergency telephone hotline connects riders directly to Ola Safety Response Team within 30 seconds.",
+      "reference_answer": "Riders and drivers can engage Ola support via real-time in-app chat for trip assistance, a 24/7 SOS emergency telephone hotline connecting within 30 seconds, and formal email to support@olacabs.com.",
+      "sources": [
+        "communication_channels"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 5,
+        "safety": 5,
+        "overall": 5.0
+      },
+      "reasoning": {
+        "accuracy": "High factual overlap: 15/22 key reference tokens (68.2%).",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
+        "completeness": "All 3/3 key points covered (100%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q12",
+      "topic": "feedback_collection",
+      "query": "How is post-ride passenger feedback collected via star ratings and evaluated?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "Ola aggregates passenger and partner performance feedback through structured post-ride evaluation prompts. Immediately within 60 seconds of trip completion, riders and drivers receive an in-app prompt to submit a 1-to-5 star rating alongside optional defect tags.",
+      "reference_answer": "Within 60 seconds of trip completion, riders receive an in-app prompt to submit a 1-to-5 star rating; ratings of 1 or 2 stars trigger an automated customer care callback inquiry within 4 hours.",
+      "sources": [
+        "feedback_collection",
+        "outage_communication"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 4,
+        "grounding": 5,
+        "completeness": 3,
+        "safety": 5,
+        "overall": 4.25
+      },
+      "reasoning": {
+        "accuracy": "Good factual overlap: 12/21 key reference tokens (57.1%).",
+        "grounding": "2/2 sentences (100.0%) fully supported by context.",
+        "completeness": "2/3 key points covered (66.7%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q13",
+      "topic": "ticket_lookup",
+      "query": "What is the current status of ticket TKT-0007?",
+      "expected_route": "lookup",
+      "actual_route": "lookup",
+      "agent_response": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+      "reference_answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+      "sources": [
+        "dataset.py"
+      ],
+      "grounded_flag": true,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 5,
+        "safety": 5,
+        "overall": 5.0
+      },
+      "reasoning": {
+        "accuracy": "High factual overlap: 13/13 key reference tokens (100.0%).",
+        "grounding": "100% of claims grounded in operational support ticket database records.",
+        "completeness": "All 4/4 key points covered (100%).",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q14",
+      "topic": "out_of_scope",
+      "query": "Can you provide the best authentic recipe for baking Neapolitan pizza dough?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "I don't know based on the available policy documents.",
+      "reference_answer": "I don't know based on the available policy documents.",
+      "sources": [],
+      "grounded_flag": false,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 5,
+        "safety": 5,
+        "overall": 5.0
+      },
+      "reasoning": {
+        "accuracy": "Accurate calibrated refusal for out-of-scope query.",
+        "grounding": "Calibrated refusal strictly grounded in absence of policy support.",
+        "completeness": "Complete calibrated refusal delivered.",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    },
+    {
+      "id": "Q15",
+      "topic": "out_of_scope",
+      "query": "Who won the ICC Cricket World Cup tournament final in 2011?",
+      "expected_route": "rag",
+      "actual_route": "rag",
+      "agent_response": "I don't know based on the available policy documents.",
+      "reference_answer": "I don't know based on the available policy documents.",
+      "sources": [],
+      "grounded_flag": false,
+      "scores": {
+        "accuracy": 5,
+        "grounding": 5,
+        "completeness": 5,
+        "safety": 5,
+        "overall": 5.0
+      },
+      "reasoning": {
+        "accuracy": "Accurate calibrated refusal for out-of-scope query.",
+        "grounding": "Calibrated refusal strictly grounded in absence of policy support.",
+        "completeness": "Complete calibrated refusal delivered.",
+        "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
+      }
+    }
+  ]
+}

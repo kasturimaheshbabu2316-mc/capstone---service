@@ -1,0 +1,86 @@
+======================================================================
+OLA DOMAIN SUPPORT AGENT — TICKET STATUS & ESCALATION (TASK 6)
+======================================================================
+Formula: S_esc = w1 * float(escalated) + w2 * (days_since_created / 30)
+Weights: w1 = 0.6 (escalation flag), w2 = 0.4 (recency aging over 30 days)
+Refinement: Recency aging term zeroed for 'Resolved' and 'Closed' tickets.
+
+--- 1. EMPIRICAL DISTRIBUTION FROM DATASET (Seed 42, N=60) ---
+A. Days Since Created Distribution:
+  • Min Days           : 0
+  • Max Days           : 30
+  • Mean Days          : 14.90
+  • 50th Percentile    : 15.00 days
+  • 80th Percentile    : 23.00 days
+
+B. Escalation Score Distribution:
+  • Min Score          : 0.0000
+  • Max Score          : 1.0000
+  • Mean Score         : 0.2416
+  • 50th Percentile    : 0.1266
+  • 80th Percentile (Tau): 0.4400
+
+C. Threshold Justification:
+  • ESCALATION_THRESHOLD is set to tau = 0.4400, matching the empirical 80th percentile of scores.
+  • At tau = 0.4400, all explicitly escalated tickets (w1 * 1.0 = 0.60 >= 0.4400) trigger recommend_escalation = True.
+  • An unescalated ticket at the 80th percentile of age (23.0 days) scores 0.4 * (23.0/30) = 0.3067 < 0.4400.
+  • This guarantees typical aging does not generate false alarms, while flagging the top 20% highest risk tickets.
+
+--- 2. SAMPLE LOOKUP DEMONSTRATIONS ---
+
+Query: check_support_ticket_status('TKT-0001') [Known ID / Old Active Ticket (P80 Age: 23 days)]
+  • Status             : Open
+  • Category           : Account Access
+  • Resolution Time    : 8.3 hours
+  • Days Active        : 23 days
+  • Escalated Flag     : False
+  • Escalation Score   : 0.3067
+  • Risk Classification: Normal (Recommend Escalation: False)
+
+Query: check_support_ticket_status('TKT-0002') [Known ID / Escalated Ticket]
+  • Status             : Escalated
+  • Category           : Product Defect
+  • Resolution Time    : 15.8 hours
+  • Days Active        : 18 days
+  • Escalated Flag     : True
+  • Escalation Score   : 0.8400
+  • Risk Classification: High Risk (Recommend Escalation: True)
+
+Query: check_support_ticket_status('TKT-0007') [Known ID / Old Closed Ticket (Aging Zeroed)]
+  • Status             : Closed
+  • Category           : Billing
+  • Resolution Time    : 2.8 hours
+  • Days Active        : 23 days
+  • Escalated Flag     : False
+  • Escalation Score   : 0.0000
+  • Risk Classification: Normal (Recommend Escalation: False)
+
+Query: check_support_ticket_status('TKT-0016') [Known ID / Max Age Active Ticket (30 days)]
+  • Status             : In Progress
+  • Category           : Technical Issue
+  • Resolution Time    : 15.1 hours
+  • Days Active        : 30 days
+  • Escalated Flag     : False
+  • Escalation Score   : 0.4000
+  • Risk Classification: Normal (Recommend Escalation: False)
+
+Query: check_support_ticket_status('TKT-0031') [Known ID / Max Escalated Ticket (Escalated + 30 days)]
+  • Status             : Escalated
+  • Category           : General Inquiry
+  • Resolution Time    : 20.6 hours
+  • Days Active        : 30 days
+  • Escalated Flag     : True
+  • Escalation Score   : 1.0000
+  • Risk Classification: High Risk (Recommend Escalation: True)
+
+Query: check_support_ticket_status('TKT-9999') [Unknown ID (Error Handling)]
+  • Error Key Present  : True
+  • Error Message      : Ticket record 'TKT-9999' not found in operational database.
+  • Status             : Unknown
+  • Resolution Time    : None
+  • Escalation Score   : None
+  • Recommend Escalation: False
+
+======================================================================
+TASK 6 ACCEPTANCE CRITERIA: TICKET TOOL & THRESHOLD JUSTIFIED
+======================================================================

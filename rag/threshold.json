@@ -1,0 +1,58 @@
+{
+  "threshold": 0.3652,
+  "min_in_scope": 0.5325,
+  "max_out_scope": 0.1979,
+  "margin": 0.1673,
+  "collection": "kb_sentence",
+  "metric": "cosine_similarity",
+  "justification": "Midpoint between lowest in-scope similarity (0.5325) and highest out-of-scope similarity (0.1979) yields T = 0.3652, providing a symmetric buffer margin of 0.1673 against false refusals and hallucinations.",
+  "in_scope_queries": [
+    {
+      "query": "What is the resolution SLA for a Sev-1 safety incident?",
+      "similarity": 0.6299,
+      "top_doc": "sla_by_severity"
+    },
+    {
+      "query": "When does Ola provide monetary refunds for driver cancellations?",
+      "similarity": 0.7153,
+      "top_doc": "refund_compensation_policy"
+    },
+    {
+      "query": "How does Ola handle repeat chronic complaints from passengers?",
+      "similarity": 0.6884,
+      "top_doc": "repeat_complaint_handling"
+    },
+    {
+      "query": "What are the benefits and response times for VIP Ola Select customers?",
+      "similarity": 0.5325,
+      "top_doc": "vip_customer_policy"
+    },
+    {
+      "query": "What compensation is provided for ride delays exceeding 20 minutes?",
+      "similarity": 0.5726,
+      "top_doc": "test_cancellation_clause"
+    }
+  ],
+  "out_of_scope_queries": [
+    {
+      "query": "Who won the cricket world cup?",
+      "similarity": 0.1158,
+      "top_doc": "feedback_collection"
+    },
+    {
+      "query": "What is the best authentic Italian pizza recipe?",
+      "similarity": 0.0794,
+      "top_doc": "ticket_priority_rules"
+    },
+    {
+      "query": "How do I book an international flight to London with British Airways?",
+      "similarity": 0.1979,
+      "top_doc": "communication_channels"
+    },
+    {
+      "query": "What is the current stock price of Tesla on NASDAQ?",
+      "similarity": 0.1449,
+      "top_doc": "business_hours_support"
+    }
+  ]
+}

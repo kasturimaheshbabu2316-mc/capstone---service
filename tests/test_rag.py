@@ -8,7 +8,14 @@ from rag.chunking import (
     sentence_chunks,
 )
 from rag.index import retrieve, get_or_create_collection
-from rag.generate import FALLBACK_REFUSAL, CALIBRATED_THRESHOLD, grounded_generate
+from rag.generate import (
+    FALLBACK_REFUSAL,
+    CALIBRATED_THRESHOLD,
+    grounded_generate,
+    grounded_answer,
+)
+import json
+from pathlib import Path
 
 
 def test_fixed_chunking_size_and_overlap():
@@ -83,3 +90,44 @@ def test_grounded_generation_out_of_scope_refusal():
     res = grounded_generate("How do I bake an authentic Italian pizza in Rome?")
     assert res["grounded"] is False
     assert res["answer"] == FALLBACK_REFUSAL
+
+
+def test_grounded_answer_structure_and_fallback():
+    # In-scope
+    in_res = grounded_answer("When does Ola provide monetary refunds for driver cancellations?", k=3, collection="recommended")
+    assert in_res["grounded"] is True
+    assert in_res["answer"] != "I don't know based on the available policy documents."
+    assert "refund_compensation_policy" in in_res["sources"]
+    assert in_res["top_similarity"] > 0.3652
+
+    # Out-of-scope exact fallback
+    out_res = grounded_answer("Who won the cricket world cup?", k=3, collection="recommended")
+    assert out_res["grounded"] is False
+    assert out_res["answer"] == "I don't know based on the available policy documents."
+    assert out_res["top_similarity"] < 0.3652
+
+
+def test_threshold_json_file():
+    threshold_file = Path("rag/threshold.json")
+    assert threshold_file.exists(), "rag/threshold.json must exist."
+    with open(threshold_file, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    assert "threshold" in data
+    assert data["threshold"] not in (0.5, 0.6, 0.7)
+    assert len(data.get("in_scope_queries", [])) >= 4
+    assert len(data.get("out_of_scope_queries", [])) >= 3
+    assert data["min_in_scope"] > data["max_out_scope"]
+
+
+def test_recommended_json_and_evaluation():
+    rec_file = Path("rag/recommended.json")
+    assert rec_file.exists(), "rag/recommended.json must exist."
+    with open(rec_file, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    assert data["winning_collection"] == "kb_sentence"
+    assert data["recommended_collection"] == "kb_sentence"
+    assert data["macro_precision_sentence"] > data["macro_precision_fixed"]
+    assert data["macro_recall_sentence"] >= 0.99
+    assert len(data.get("recommendation", "")) > 50
+
+

@@ -14,8 +14,10 @@ build/
 
 # Database & local vector stores
 chroma_db/
+chroma_store/
 .chroma/
 .chroma_db/
+logs/
 
 # Testing & Coverage
 .pytest_cache/
