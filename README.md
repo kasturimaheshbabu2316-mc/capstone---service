@@ -1,4 +1,14 @@
-# Track completed: Ola (Business Operations / Customer Support)
+---
+title: Ola Support Agent
+emoji: 🚗
+colorFrom: yellow
+colorTo: gray
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
+Track completed: Ola (Business Operations / Customer Support)
 
 ## Ola Domain Support Agent — Operational Intelligence & Support System
 
