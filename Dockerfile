@@ -11,8 +11,6 @@ ENV PYTHONUNBUFFERED=1 \
     MOCK_LLM=true \
     CREWAI_DISABLE_TELEMETRY=true \
     OTEL_SDK_DISABLED=true \
-    HF_HUB_OFFLINE=1 \
-    TRANSFORMERS_OFFLINE=1 \
     PORT=8000
 
 # Set working directory
