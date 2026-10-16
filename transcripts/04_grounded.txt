@@ -29,7 +29,7 @@ Query 1: "What is the resolution SLA for a Sev-1 safety incident?"
   • Top Sim : 0.6299 (Threshold: 0.3652 -> PASS)
   • Grounded: True
   • Sources : ['sla_by_severity']
-  • Answer  : "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours."
+  • Answer  : "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours."
 
 Query 2: "Under what condition are driver cancellation fees refunded to passengers?"
   • Top Sim : 0.7471 (Threshold: 0.3652 -> PASS)
@@ -41,13 +41,13 @@ Query 3: "What happens when a customer logs 3 complaints within a 14-day window?
   • Top Sim : 0.6229 (Threshold: 0.3652 -> PASS)
   • Grounded: True
   • Sources : ['repeat_complaint_handling', 'outage_communication']
-  • Answer  : "When a customer logs three or more complaints regarding the same ride issue or driver partner within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect."
+  • Answer  : "When a customer logs three or more complaints regarding the same ride issue or driver partner within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect. Ola prioritizes chronic complaints through automated recurrence detection algorithms."
 
 Query 4: "What are the operating hours for driver partner physical onboarding centers?"
   • Top Sim : 0.7251 (Threshold: 0.3652 -> PASS)
   • Grounded: True
   • Sources : ['business_hours_support', 'repeat_complaint_handling']
-  • Answer  : "General inquiry handling, billing dispute reviews, and driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time."
+  • Answer  : "General inquiry handling, billing dispute reviews, and driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time. Passenger emergency support and active ride safety desks operate 24 hours a day, 7 days a week, 365 days a year without interruption."
 
 Query 5: "What service credit or compensation is provided for ride delays exceeding 20 minutes?"
   • Top Sim : 0.5522 (Threshold: 0.3652 -> PASS)
@@ -59,7 +59,7 @@ Query 6: "What are the benefits and response times for VIP Ola Select customers?
   • Top Sim : 0.5325 (Threshold: 0.3652 -> PASS)
   • Grounded: True
   • Sources : ['vip_customer_policy']
-  • Answer  : "Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers."
+  • Answer  : "Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers. In the event of a vehicle breakdown during a VIP journey, Ola dispatches a replacement Prime luxury cab at zero additional fare within 10 minutes. First-response SLAs for VIP inquiries are capped at 15 minutes across all severity categories with guaranteed resolution within 6 hours."
 
 --- 3. DEMONSTRATION OF OUT-OF-SCOPE CALIBRATED REFUSAL (1 QUERY) ---
 Query: "Can you recommend the best authentic Italian pizza recipe in Rome?"
