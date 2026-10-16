@@ -239,62 +239,6 @@ if not backend_online:
 
 # Sidebar: System Status, Tickets, Actions
 with st.sidebar:
-    st.markdown(
-        """
-        <div style="background:linear-gradient(145deg, rgba(16, 24, 42, 0.85), rgba(10, 15, 29, 0.95)); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <span style="font-weight:700; font-size:0.95rem; color:#f1f5f9; display:flex; align-items:center; gap:6px;">
-                    <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#FF2D55;"></span>
-                    Activity Rings
-                </span>
-                <span style="font-size:0.65rem; color:#FF6B8B; background:rgba(255,45,85,0.14); border:1px solid rgba(255,45,85,0.35); padding:2px 7px; border-radius:100px; font-family:monospace; font-weight:600;">@kokonutui</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:16px;">
-                <svg viewBox="0 0 200 200" width="125" height="125" style="flex-shrink:0;">
-                    <defs>
-                        <linearGradient id="stGradMove" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#FF2D55" />
-                            <stop offset="100%" stop-color="#FF6B8B" />
-                        </linearGradient>
-                        <linearGradient id="stGradExercise" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#A3F900" />
-                            <stop offset="100%" stop-color="#C5FF4D" />
-                        </linearGradient>
-                        <linearGradient id="stGradStand" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#04C7DD" />
-                            <stop offset="100%" stop-color="#4DDFED" />
-                        </linearGradient>
-                    </defs>
-                    <circle cx="100" cy="100" r="16" fill="rgba(255, 255, 255, 0.03)" />
-                    <g transform="rotate(-90 100 100)">
-                        <circle cx="100" cy="100" r="82" stroke="rgba(255,45,85,0.18)" stroke-width="15" fill="none" />
-                        <circle cx="100" cy="100" r="82" stroke="url(#stGradMove)" stroke-width="15" fill="none" stroke-linecap="round" stroke-dasharray="515.22" stroke-dashoffset="206.7" />
-                        <circle cx="100" cy="100" r="63" stroke="rgba(163,249,0,0.18)" stroke-width="15" fill="none" />
-                        <circle cx="100" cy="100" r="63" stroke="url(#stGradExercise)" stroke-width="15" fill="none" stroke-linecap="round" stroke-dasharray="395.84" stroke-dashoffset="79.2" />
-                        <circle cx="100" cy="100" r="44" stroke="rgba(4,199,221,0.18)" stroke-width="15" fill="none" />
-                        <circle cx="100" cy="100" r="44" stroke="url(#stGradStand)" stroke-width="15" fill="none" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="138.2" />
-                    </g>
-                </svg>
-                <div style="display:flex; flex-direction:column; gap:6px; flex:1;">
-                    <div style="background:rgba(255,255,255,0.03); padding:4px 8px; border-radius:6px;">
-                        <div style="font-size:0.65rem; font-weight:700; color:#94a3b8; letter-spacing:0.5px;">MOVE</div>
-                        <div style="font-size:1.05rem; font-weight:700; color:#FF2D55; font-family:monospace; line-height:1.2;">479<span style="font-size:0.7rem; color:#64748b; font-weight:500;">/800 CAL</span></div>
-                    </div>
-                    <div style="background:rgba(255,255,255,0.03); padding:4px 8px; border-radius:6px;">
-                        <div style="font-size:0.65rem; font-weight:700; color:#94a3b8; letter-spacing:0.5px;">EXERCISE</div>
-                        <div style="font-size:1.05rem; font-weight:700; color:#A3F900; font-family:monospace; line-height:1.2;">24<span style="font-size:0.7rem; color:#64748b; font-weight:500;">/30 MIN</span></div>
-                    </div>
-                    <div style="background:rgba(255,255,255,0.03); padding:4px 8px; border-radius:6px;">
-                        <div style="font-size:0.65rem; font-weight:700; color:#94a3b8; letter-spacing:0.5px;">STAND</div>
-                        <div style="font-size:1.05rem; font-weight:700; color:#04C7DD; font-family:monospace; line-height:1.2;">6<span style="font-size:0.7rem; color:#64748b; font-weight:500;">/12 HR</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
     st.subheader("🛡️ Service & Security Status")
     c1, c2 = st.columns(2)
     with c1:
