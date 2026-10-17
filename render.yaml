@@ -14,3 +14,9 @@ services:
         value: "true"
       - key: PYTHON_VERSION
         value: "3.11"
+      - key: MALLOC_ARENA_MAX
+        value: "2"
+      - key: HF_HUB_OFFLINE
+        value: "1"
+      - key: TRANSFORMERS_OFFLINE
+        value: "1"

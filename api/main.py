@@ -61,13 +61,6 @@ from safety.guardrails import (
     mask_pii,
 )
 
-# Limit torch threads to 1 for memory and CPU efficiency on Render
-try:
-    import torch
-    torch.set_num_threads(1)
-except Exception:
-    pass
-
 logger = logging.getLogger("ola_domain_agent.api")
 
 
@@ -85,13 +78,6 @@ async def lifespan(app: FastAPI):
     """Loads SentenceTransformer model and winning ChromaDB index once at startup (never per-request)."""
     logger.info("Initializing API Lifespan: Preloading SentenceTransformer and ChromaDB collections...")
     try:
-        try:
-            import torch
-            torch.set_num_threads(1)
-            torch.set_grad_enabled(False)
-        except Exception:
-            pass
-
         # Preload embedding model singleton once
         embedding_model = get_embedding_model()
         # Preload ChromaDB client & winning collection once
@@ -144,6 +130,10 @@ async def lifespan(app: FastAPI):
             get_shared_review_pool()
         except Exception as exc:
             logger.info("AutoGen pool pre-warm: %s", exc)
+
+        # Reclaim temporary import memory for 512MB RAM budget
+        import gc
+        gc.collect()
     except Exception as exc:
         logger.error("Lifespan initialization failure: %s", exc, exc_info=True)
 

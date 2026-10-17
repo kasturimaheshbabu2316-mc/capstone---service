@@ -13,7 +13,10 @@ ENV MOCK_LLM=true \
     PYTHONUNBUFFERED=1 \
     TOKENIZERS_PARALLELISM=false \
     OMP_NUM_THREADS=1 \
-    MKL_NUM_THREADS=1
+    MKL_NUM_THREADS=1 \
+    MALLOC_ARENA_MAX=2 \
+    HF_HUB_OFFLINE=1 \
+    TRANSFORMERS_OFFLINE=1
 
 WORKDIR /app
 
@@ -31,8 +34,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
     pip install --no-cache-dir -r requirements.txt
 
-# 5. Pre-download the SentenceTransformer model at build time for instant offline startup
-RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')"
+# 5. Pre-download the embedding models at build time for instant offline startup
+RUN python -c "import chromadb.utils.embedding_functions as ef; ef.ONNXMiniLM_L6_V2()" && \
+    python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')"
 
 # 6. Copy the application source code
 COPY . .
