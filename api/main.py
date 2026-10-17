@@ -15,6 +15,9 @@ Provides:
 from __future__ import annotations
 
 import asyncio
+import gc
+import hmac
+import json
 import logging
 import os
 import sys
@@ -22,28 +25,34 @@ import time
 import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
-import hmac
-from typing import Any, Dict, Optional
+from typing import Any
 
 # Ensure project root is in sys.path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Request, WebSocket, WebSocketDisconnect
+from fastapi import (
+    Depends,
+    FastAPI,
+    Header,
+    HTTPException,
+    Request,
+    WebSocket,
+    WebSocketDisconnect,
+)
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
-from api.logging_setup import audit_logger, LOG_FILE
+from api.logging_setup import audit_logger
 from api.models import (
     AddDocumentRequest,
     AddDocumentResponse,
     AskRequest,
     AskResponse,
-    ErrorResponse,
     HealthResponse,
 )
 from cache import response_cache
@@ -70,6 +79,23 @@ def run_support_crew(*args: Any, **kwargs: Any) -> Any:
     return _run(*args, **kwargs)
 
 
+def _read_winning_collection() -> str:
+    """Reads winning collection from recommended.json synchronously."""
+    rec_path = PROJECT_ROOT / "rag" / "recommended.json"
+    if rec_path.exists():
+        try:
+            with open(rec_path, "r", encoding="utf-8") as rf:
+                rec_data = json.load(rf)
+                return (
+                    rec_data.get("winning_collection")
+                    or rec_data.get("recommended_collection")
+                    or "kb_sentence"
+                )
+        except (OSError, ValueError, TypeError):
+            return "kb_sentence"
+    return "kb_sentence"
+
+
 # ==============================================================================
 # Lifespan Handler: Preload Model & Chroma Index ONCE at startup
 # ==============================================================================
@@ -84,16 +110,7 @@ async def lifespan(app: FastAPI):
         chroma_client = get_chroma_client()
 
         # Identify winning collection from rag/recommended.json (default: kb_sentence)
-        winning_col = "kb_sentence"
-        rec_path = PROJECT_ROOT / "rag" / "recommended.json"
-        if rec_path.exists():
-            try:
-                import json
-                with open(rec_path, "r", encoding="utf-8") as rf:
-                    rec_data = json.load(rf)
-                    winning_col = rec_data.get("winning_collection") or rec_data.get("recommended_collection") or "kb_sentence"
-            except Exception:
-                winning_col = "kb_sentence"
+        winning_col = _read_winning_collection()
 
         collection = get_or_create_collection(winning_col, chroma_client)
 
@@ -114,7 +131,7 @@ async def lifespan(app: FastAPI):
         try:
             from ingest import initialize_system_data
             initialize_system_data()
-        except Exception as exc:
+        except (ImportError, OSError, RuntimeError) as exc:
             logger.info("Lifespan system data check: %s", exc)
 
         # Pre-warm CrewAI agents and crews once in lifespan
@@ -122,20 +139,19 @@ async def lifespan(app: FastAPI):
             from crew.crew import get_policy_crew, get_ticket_crew
             get_policy_crew()
             get_ticket_crew()
-        except Exception as exc:
+        except (ImportError, RuntimeError, AttributeError) as exc:
             logger.info("Crew pre-warm: %s", exc)
 
         try:
             from review.autogen_review import get_shared_review_pool
             get_shared_review_pool()
-        except Exception as exc:
+        except (ImportError, RuntimeError, AttributeError) as exc:
             logger.info("AutoGen pool pre-warm: %s", exc)
 
         # Reclaim temporary import memory for 512MB RAM budget
-        import gc
         gc.collect()
-    except Exception as exc:
-        logger.error("Lifespan initialization failure: %s", exc, exc_info=True)
+    except Exception:
+        logger.exception("Lifespan initialization failure.")
 
     yield
 
@@ -173,6 +189,14 @@ if static_dir.exists():
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request: Request, exc: HTTPException):
     """Returns safe JSON for standard HTTPExceptions."""
+    if isinstance(exc.detail, dict):
+        content = {
+            "error": exc.detail.get("error", "HTTP Error"),
+            "detail": exc.detail.get("detail", exc.detail.get("message", "HTTP Error")),
+            "status_code": exc.status_code,
+            **exc.detail,
+        }
+        return JSONResponse(status_code=exc.status_code, content=content)
     return JSONResponse(
         status_code=exc.status_code,
         content={
@@ -199,7 +223,7 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 @app.exception_handler(Exception)
 async def generic_exception_handler(request: Request, exc: Exception):
     """Guarantees safe JSON 500 response without internal traceback leaks."""
-    logger.error("Unhandled server exception on %s: %s", request.url.path, exc, exc_info=True)
+    logger.error("Unhandled server exception on %s: %s", request.url.path, exc)
     return JSONResponse(
         status_code=500,
         content={
@@ -245,7 +269,7 @@ def run_unified_pipeline(
     raw_question: str,
     session_id: str,
     endpoint: str = "/ask",
-    trace_id: Optional[str] = None,
+    trace_id: str | None = None,
 ) -> AskResponse:
     """One unified pipeline function executing the full governance and multi-agent lifecycle:
 
@@ -274,17 +298,22 @@ def run_unified_pipeline(
                 session_id=session_id,
                 trace_id=trace_id,
                 route="blocked",
-                guardrail_flags={"prompt_injection_blocked": True, "detail": inj_res.detail},
+                guardrail_flags={"prompt_injection_blocked": True, "detail": "guardrail_blocked"},
             )
+            safe_guardrail_msg = "This request was blocked by the safety policy. Please rephrase your question."
             raise HTTPException(
                 status_code=400,
-                detail=inj_res.detail or "Query blocked by security guardrails.",
+                detail={
+                    "error": "guardrail_blocked",
+                    "message": safe_guardrail_msg,
+                    "detail": safe_guardrail_msg,
+                },
             )
 
         # 1b. Input Guardrails (PII Masking)
         pii_res = mask_pii(raw_question)
         sanitized_question = pii_res.sanitized_text
-        guardrail_flags: Dict[str, Any] = {"input_pii_masked": pii_res.fired, "phone_masked": pii_res.fired}
+        guardrail_flags: dict[str, Any] = {"input_pii_masked": pii_res.fired, "phone_masked": pii_res.fired}
 
         # 2. Token Budget Check (HTTP 413 on oversized payload)
         within_budget, tokens, err_msg = check_payload_budget(sanitized_question)
@@ -451,8 +480,8 @@ def run_unified_pipeline(
 
     except HTTPException:
         raise
-    except Exception as exc:
-        logger.error("Internal processing error in run_unified_pipeline: %s", exc, exc_info=True)
+    except Exception:
+        logger.exception("Internal processing error in run_unified_pipeline.")
         raise HTTPException(
             status_code=500,
             detail="An unexpected server error occurred while processing your request. Please try again later.",
@@ -471,7 +500,7 @@ def ask_endpoint(payload: AskRequest) -> AskResponse:
     )
 
 
-def verify_admin_token(x_admin_token: Optional[str] = Header(None, alias="X-Admin-Token")) -> str:
+def verify_admin_token(x_admin_token: str | None = Header(None, alias="X-Admin-Token")) -> str:
     """Enforces admin authentication for privileged endpoints.
 
     - If ADMIN_TOKEN is not configured in the server environment, returns HTTP 403 Forbidden.
@@ -537,16 +566,17 @@ def add_document_endpoint(
             )
 
             # Also upsert into legacy collections for backwards compatibility if needed
-            try:
-                legacy_col = get_or_create_collection("ola_sentence")
-                legacy_col.upsert(
-                    ids=chunk_ids,
-                    documents=chunk_texts,
-                    embeddings=embeddings,
-                    metadatas=chunk_metas,
-                )
-            except Exception:
-                pass
+            if target_collection == "kb_sentence":
+                try:
+                    legacy_col = get_or_create_collection("ola_sentence")
+                    legacy_col.upsert(
+                        ids=chunk_ids,
+                        documents=chunk_texts,
+                        embeddings=embeddings,
+                        metadatas=chunk_metas,
+                    )
+                except (RuntimeError, ValueError) as exc:
+                    logger.debug("Legacy collection upsert skipped: %s", exc)
 
         # 4. Invalidate semantic response cache
         invalidated_count = response_cache.clear() if hasattr(response_cache, "clear") else 0
@@ -576,8 +606,8 @@ def add_document_endpoint(
 
     except HTTPException:
         raise
-    except Exception as exc:
-        logger.error("Internal processing error in add_document_endpoint: %s", exc, exc_info=True)
+    except Exception:
+        logger.exception("Internal processing error in add_document_endpoint.")
         raise HTTPException(
             status_code=500,
             detail="An unexpected server error occurred while adding the document.",
@@ -585,7 +615,7 @@ def add_document_endpoint(
 
 
 @app.post("/clear-cache")
-def clear_cache_endpoint(admin_token: str = Depends(verify_admin_token)) -> Dict[str, Any]:
+def clear_cache_endpoint(admin_token: str = Depends(verify_admin_token)) -> dict[str, Any]:
     """Privileged admin endpoint to invalidate in-memory response cache."""
     invalidated_count = response_cache.clear() if hasattr(response_cache, "clear") else 0
     return {"status": "cleared", "invalidated_entries": invalidated_count}
@@ -636,8 +666,8 @@ async def chat_websocket(websocket: WebSocket) -> None:
     except WebSocketDisconnect:
         # Catch WebSocketDisconnect, log it, clean up, and keep server running for other clients
         logger.info("WebSocketDisconnect caught for session %s. Cleaned up state successfully.", session_id)
-    except Exception as exc:
-        logger.error("Unexpected WebSocket exception for session %s: %s", session_id, exc, exc_info=True)
+    except Exception:
+        logger.exception("Unexpected WebSocket exception for session %s", session_id)
         try:
             await websocket.send_json({
                 "type": "error",
@@ -647,10 +677,22 @@ async def chat_websocket(websocket: WebSocket) -> None:
                 "latency_ms": 0.0,
             })
             await websocket.close()
-        except Exception:
-            pass
+        except (RuntimeError, OSError) as close_exc:
+            logger.debug("Clean WebSocket close skipped: %s", close_exc)
     finally:
         logger.info("WebSocket connection finalized for session %s.", session_id)
+
+
+@app.get("/tickets")
+def get_tickets_endpoint() -> list[dict[str, Any]]:
+    """Returns directory of support tickets for the dispatch desk."""
+    from tools.ticket_tool import get_all_tickets
+    return get_all_tickets()
+
+
+# Mount static files directory at root AFTER all API routes so no API route is shadowed
+if static_dir.exists():
+    app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="site")
 
 
 # Direct execution entrypoint

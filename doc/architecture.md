@@ -4,7 +4,7 @@
 **Domain Track:** Business Operations & Customer Support (Ola)  
 **Document Version:** 1.0.0  
 **Target Execution Environment:** Zero-network, offline-capable environment operating under deterministic `MOCK_LLM`  
-**Reference Document:** [problemStatement.md](file:///c:/Users/kastu/Desktop/capstone%20-%20service/doc/problemStatement.md)
+**Reference Document:** [problemStatement.md](doc/problemStatement.md)
 
 ---
 

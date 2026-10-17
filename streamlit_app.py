@@ -222,7 +222,11 @@ def process_query_direct(raw_query: str) -> dict[str, Any]:
             "is_error": True,
             "status_code": 400,
             "title": "Security Guardrail Triggered",
-            "detail": inj_reason,
+            "detail": (
+                "🛡️ **Security Guardrail Block (HTTP 400)**\n\n"
+                "This request was blocked by the safety policy. Please rephrase your question.\n\n"
+                "*(Security Note: Query was safely intercepted by the prompt-injection defense layer to protect system integrity.)*"
+            ),
             "latency_ms": round(latency_ms, 2),
             "trace_id": trace_id,
         }
@@ -392,8 +396,8 @@ def process_query_fastapi(raw_query: str) -> dict[str, Any]:
             elif resp.status_code == 400:
                 title = "Security Guardrail Triggered"
                 friendly_msg = (
-                    f"🛡️ **Security Guardrail Block (HTTP 400)**\n\n"
-                    f"{detail}\n\n"
+                    "🛡️ **Security Guardrail Block (HTTP 400)**\n\n"
+                    "This request was blocked by the safety policy. Please rephrase your question.\n\n"
                     "*(Security Note: Query was safely intercepted by the prompt-injection defense layer to protect system integrity.)*"
                 )
             elif resp.status_code == 503:
@@ -592,6 +596,12 @@ def render_ui():
     if "pending_query" not in st.session_state:
         st.session_state.pending_query = None
 
+    if "context_history" not in st.session_state:
+        st.session_state.context_history = []
+
+    if "is_processing" not in st.session_state:
+        st.session_state.is_processing = False
+
     # Top Navigation / Hero Bar
     st.markdown(
         """
@@ -644,21 +654,23 @@ def render_ui():
             ("⚠️ Test Payload Budget", "Ola enterprise policy verification rule inquiry " * 200),
         ]
 
+        is_proc = st.session_state.get("is_processing", False)
         for label, query_text in prompt_options:
-            if st.button(label):
-                st.session_state.pending_query = query_text
+            if st.button(label, disabled=is_proc):
+                if not is_proc and st.session_state.get("last_processed_query") != query_text:
+                    st.session_state.pending_query = query_text
 
         st.divider()
 
         st.subheader("⚙️ Routing Protocol")
-        active_backend_url = get_backend_url()
         if backend_online:
-            st.caption(f"Backend Service: 🟢 **Online** (`{active_backend_url}`)")
+            st.caption("Backend: 🟢 **Online**")
+        elif "warm" in str(backend_status).lower():
+            st.caption("Backend: ⏳ **Warming up**")
         else:
-            st.warning(f"⚠️ **{backend_status}**")
+            st.caption("Backend: 🔴 **Offline**")
 
-        fastapi_option = f"FastAPI Service ({active_backend_url})"
-        routing_options = [fastapi_option]
+        routing_options = ["FastAPI Service"]
         if DIRECT_CORE_AVAILABLE:
             routing_options.append("Direct Core Pipeline")
 
@@ -816,9 +828,10 @@ def render_ui():
             else:
                 raw_content = msg["content"]
                 if msg["role"] == "user":
-                    if len(raw_content) > 300:
-                        st.markdown(raw_content[:300].strip() + " ... (truncated)")
-                        with st.expander("Full Prompt Text"):
+                    if len(raw_content) > 150:
+                        est_tok = max(1, len(raw_content) // 4)
+                        st.markdown(f"{raw_content[:150].strip()} ... (truncated, {len(raw_content):,} characters, about {est_tok:,} tokens)")
+                        with st.expander("Full Prompt Text", expanded=False):
                             st.text(raw_content)
                     else:
                         st.markdown(format_display_query(raw_content))
@@ -864,9 +877,10 @@ def render_ui():
             "content": active_input,
         })
         with st.chat_message("user"):
-            if len(active_input) > 300:
-                st.markdown(active_input[:300].strip() + " ... (truncated)")
-                with st.expander("Full Prompt Text"):
+            if len(active_input) > 150:
+                est_tok = max(1, len(active_input) // 4)
+                st.markdown(f"{active_input[:150].strip()} ... (truncated, {len(active_input):,} characters, about {est_tok:,} tokens)")
+                with st.expander("Full Prompt Text", expanded=False):
                     st.text(active_input)
             else:
                 st.markdown(format_display_query(active_input))
@@ -948,6 +962,15 @@ def render_ui():
                     "content": answer,
                     "meta": meta_info,
                 })
+
+                # Context Hygiene: Add valid turn to context_history capped at 500 chars
+                if "context_history" not in st.session_state:
+                    st.session_state.context_history = []
+                st.session_state.context_history.append({"role": "user", "content": active_input[:500]})
+                st.session_state.context_history.append({"role": "assistant", "content": str(answer)[:500]})
+
+        st.session_state.is_processing = False
+        st.session_state.last_processed_query = active_input
 
 
 if is_streamlit_running():

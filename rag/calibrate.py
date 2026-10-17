@@ -140,5 +140,5 @@ if __name__ == "__main__":
     print(f"  • Highest Out-of-Scope Sim   (max_out): {max_out:.4f}")
     print(f"  • Derived Midpoint Threshold (T)      : {T:.4f}")
     print(f"  • Buffer Margin                        : {(min_in - max_out) / 2.0:.4f}")
-    print(f"  • Threshold JSON saved to              : {THRESHOLD_JSON_PATH}")
+    print(f"  • Threshold JSON saved to              : rag/threshold.json")
     print("=" * 75)

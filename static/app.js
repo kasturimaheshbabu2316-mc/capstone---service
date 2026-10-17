@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       ops: {
         modeName: 'Operations',
-        move: { label: 'TOKENS', current: 479, target: 2000, unit: 'TOK' },
+        move: { label: 'Tokens', current: 479, target: 2000, unit: 'TOK' },
         exercise: { label: 'SLA ACCURACY', current: 94, target: 100, unit: '%' },
         stand: { label: 'UPTIME', current: 12, target: 12, unit: 'HR' }
       }

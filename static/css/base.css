@@ -1,0 +1,136 @@
+/* ==============================================================================
+   Ola Support Intelligence — Base Stylesheet
+   Normative reset, typography foundations, focus indicators, print media.
+   ============================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  color-scheme: light dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem; /* ~17px base on mobile, scales to 18px */
+  line-height: 1.45;
+  color: var(--color-ink);
+  background-color: var(--color-page);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 1.125rem; /* 18px base */
+  }
+}
+
+/* Tabular figures for all numerical readouts */
+.tabular-nums,
+[data-num] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Headings: Archivo with expanded width */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-stretch: 115%;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-ink);
+  letter-spacing: -0.015em;
+}
+
+/* Focus Visibility: Lane Yellow Ring with outline offset */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  box-shadow: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Button & Interactive Control Foundations */
+button, input, textarea, select {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* Screen Reader Only Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Print Stylesheet: Clean Dispatch Transcript */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .site-header,
+  .composer-dock,
+  .quick-prompts-bar,
+  .settings-sheet,
+  .settings-backdrop,
+  .btn-settings {
+    display: none !important;
+  }
+
+  .conversation-col {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .policy-slip,
+  .ticket-stub {
+    border: 1px solid #000000 !important;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    margin-bottom: 24pt !important;
+  }
+}

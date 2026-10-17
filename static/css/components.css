@@ -1,0 +1,965 @@
+/* ==============================================================================
+   Ola Support Intelligence — Components Stylesheet ("The Dispatch Desk")
+   Clean, road-grounded aesthetics. Zero gradients, zero emoji, zero purple orbs.
+   ============================================================================== */
+
+/* ------------------------------------------------------------------------------
+   1. Site Header & Operational Status
+   ------------------------------------------------------------------------------ */
+.site-header {
+  height: var(--header-height);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-page);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-md);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.brand-mark {
+  width: 24px;
+  height: 24px;
+  fill: var(--color-ink);
+}
+
+.brand-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  font-stretch: 120%;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-ink-muted);
+}
+
+.status-dot.online {
+  background-color: var(--color-verified);
+}
+
+.status-dot.waking {
+  background-color: var(--color-accent);
+  animation: pulse-waking 1.2s infinite ease-in-out;
+}
+
+.status-dot.offline {
+  background-color: var(--color-blocked);
+}
+
+@keyframes pulse-waking {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.btn-settings {
+  padding: 6px 14px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  gap: 6px;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.btn-settings:hover {
+  background-color: var(--color-surface-sunken);
+  border-color: var(--color-ink);
+}
+
+/* ------------------------------------------------------------------------------
+   2. Main Layout & Conversation Column
+   ------------------------------------------------------------------------------ */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-md) var(--space-md) calc(var(--composer-min-height) + var(--space-xl));
+  width: 100%;
+}
+
+.conversation-col {
+  width: 100%;
+  max-width: var(--max-col-width);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ------------------------------------------------------------------------------
+   3. Welcome Box & Disappearing Suggestions
+   ------------------------------------------------------------------------------ */
+.welcome-box {
+  margin: var(--space-lg) 0;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.welcome-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  font-stretch: 115%;
+  margin-bottom: var(--space-xxs);
+}
+
+.welcome-sub {
+  color: var(--color-ink-secondary);
+  font-size: 0.9375rem;
+  margin-bottom: var(--space-md);
+}
+
+.suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.suggestion-chip {
+  padding: 6px 12px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 120ms ease;
+}
+
+.suggestion-chip:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-subtle);
+}
+
+/* ------------------------------------------------------------------------------
+   4. Chat Messages: User Chip & Rejected State
+   ------------------------------------------------------------------------------ */
+.chat-turn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: 100%;
+}
+
+.msg-user-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.msg-user {
+  max-width: min(85%, var(--measure-chip));
+  background-color: var(--color-chip-user);
+  color: var(--color-chip-user-ink);
+  padding: 10px 16px;
+  border-radius: var(--radius-control);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.msg-user.rejected {
+  border: 1px solid var(--color-blocked);
+}
+
+.btn-expand-msg {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.8125rem;
+  color: var(--color-accent);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  min-height: 0;
+  min-width: 0;
+}
+
+.full-prompt-container {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.8125rem;
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+/* ------------------------------------------------------------------------------
+   5. Policy Slip (Paper Surface with Perforated Edge)
+   ------------------------------------------------------------------------------ */
+.policy-slip {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-slip) var(--radius-slip) 0 0;
+  padding: var(--space-md) var(--space-md) var(--space-xs);
+  position: relative;
+  width: 100%;
+}
+
+.slip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-xs);
+  margin-bottom: var(--space-sm);
+  border-bottom: 1px dashed var(--color-border);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-muted);
+}
+
+.slip-content {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  max-width: var(--measure-prose);
+  color: var(--color-ink);
+}
+
+.slip-meta-line {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--color-border-subtle);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-ink-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.verified-mark {
+  color: var(--color-verified);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reviewer-mark {
+  color: var(--color-ink-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Perforated Edge */
+.perforated-edge {
+  height: 10px;
+  width: 100%;
+  background: radial-gradient(circle at 8px -3px, transparent 5px, var(--color-surface) 6px) repeat-x;
+  background-size: 16px 10px;
+  border-bottom: 1px dashed var(--color-border);
+  margin-bottom: var(--space-sm);
+}
+
+/* ------------------------------------------------------------------------------
+   6. Ticket Stub (The Memorable Printed Element)
+   ------------------------------------------------------------------------------ */
+.ticket-stub {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-slip) var(--radius-slip) 0 0;
+  padding: var(--space-md);
+  position: relative;
+  width: 100%;
+  animation: ticketPrint 450ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes ticketPrint {
+  from {
+    transform: translateY(-24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.stub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--space-xs);
+  border-bottom: 2px solid var(--color-ink);
+  margin-bottom: var(--space-md);
+}
+
+.stub-id {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.stub-category {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink-secondary);
+}
+
+/* Status Progression Track */
+.status-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: var(--space-md) 0 var(--space-lg);
+  padding: var(--space-xs) 0;
+  border-top: 1px dashed var(--color-border);
+  border-bottom: 1px dashed var(--color-border);
+  overflow-x: auto;
+}
+
+.track-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  flex: 1;
+  min-width: 64px;
+  text-align: center;
+}
+
+.step-marker {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--color-ink-muted);
+  background-color: var(--color-surface);
+}
+
+.step-name {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.track-step.lit .step-marker {
+  background-color: var(--color-accent);
+  border-color: var(--color-ink);
+  box-shadow: 0 0 0 3px var(--color-accent-subtle);
+}
+
+.track-step.lit .step-name {
+  color: var(--color-ink);
+  font-weight: 800;
+}
+
+.track-step.passed .step-marker {
+  background-color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.track-step.passed .step-name {
+  color: var(--color-ink-secondary);
+}
+
+/* Ticket Metrics Grid */
+.stub-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.metric-card {
+  padding: 8px 10px;
+  background-color: var(--color-surface-sunken);
+  border-radius: var(--radius-slip);
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: var(--color-ink-muted);
+  margin-bottom: 2px;
+}
+
+.metric-value {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+/* Taxi Meter Segmented Escalation Gauge */
+.meter-box {
+  margin: var(--space-md) 0 var(--space-xs);
+  padding: 10px 12px;
+  background-color: var(--color-surface-sunken);
+  border-radius: var(--radius-slip);
+}
+
+.meter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.meter-gauge {
+  height: 18px;
+  display: flex;
+  gap: 3px;
+  position: relative;
+  background: transparent;
+  padding: 2px 0;
+}
+
+.gauge-block {
+  flex: 1;
+  background-color: var(--color-border);
+  border-radius: 1px;
+}
+
+.gauge-block.filled {
+  background-color: var(--color-ink);
+}
+
+.gauge-block.alert {
+  background-color: var(--color-blocked);
+}
+
+.meter-threshold-line {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 2px;
+  background-color: var(--color-accent);
+  z-index: 2;
+}
+
+.meter-threshold-label {
+  font-size: 0.6875rem;
+  color: var(--color-ink-muted);
+  margin-top: 4px;
+}
+
+.recommendation-banner {
+  margin-top: var(--space-sm);
+  padding: 8px 12px;
+  border-radius: var(--radius-slip);
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recommendation-banner.escalate {
+  background-color: var(--color-blocked-bg);
+  color: var(--color-blocked);
+  border: 1px solid var(--color-blocked);
+}
+
+.recommendation-banner.standard {
+  background-color: var(--color-verified-bg);
+  color: var(--color-verified);
+  border: 1px solid var(--color-verified);
+}
+
+/* ------------------------------------------------------------------------------
+   7. Error & Guardrail Alert Slips
+   ------------------------------------------------------------------------------ */
+.alert-slip {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-blocked);
+  border-radius: var(--radius-slip);
+  padding: var(--space-md);
+  color: var(--color-ink);
+}
+
+.alert-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-blocked);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.alert-message {
+  font-size: 0.9375rem;
+  color: var(--color-ink);
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------------------------
+   8. Waiting State Indicator
+   ------------------------------------------------------------------------------ */
+.msg-waiting {
+  padding: var(--space-md);
+  font-size: 0.9375rem;
+  color: var(--color-ink-secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.waiting-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-ink);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ------------------------------------------------------------------------------
+   9. Composer Dock & Live Token Gauge
+   ------------------------------------------------------------------------------ */
+.composer-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-page);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  justify-content: center;
+  z-index: 30;
+}
+
+@supports (backdrop-filter: blur(12px)) {
+  .composer-dock {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(12px);
+  }
+}
+
+.composer-form {
+  width: 100%;
+  max-width: var(--max-col-width);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.composer-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  padding: 6px 8px 6px 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: border-color 150ms ease;
+}
+
+.composer-row:focus-within {
+  border-color: var(--color-ink);
+  box-shadow: var(--focus-ring);
+}
+
+.composer-textarea {
+  flex: 1;
+  resize: none;
+  min-height: 36px;
+  max-height: 160px;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--color-ink);
+  background: transparent;
+  padding: 4px 0;
+}
+
+.composer-textarea::placeholder {
+  color: var(--color-ink-muted);
+}
+
+.btn-send {
+  background-color: var(--color-ink);
+  color: var(--color-page);
+  border-radius: var(--radius-control);
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  gap: 6px;
+  transition: background-color 120ms ease;
+}
+
+.btn-send:hover:not(:disabled) {
+  background-color: var(--color-accent);
+  color: #1B2230;
+}
+
+/* Live Token Meter */
+.token-gauge-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--color-ink-muted);
+  padding: 0 4px;
+}
+
+.token-track {
+  flex: 1;
+  max-width: 180px;
+  height: 4px;
+  background-color: var(--color-border);
+  border-radius: 2px;
+  margin: 0 8px;
+  overflow: hidden;
+}
+
+.token-progress {
+  height: 100%;
+  width: 0%;
+  background-color: var(--color-ink);
+  transition: width 100ms ease, background-color 100ms ease;
+}
+
+.token-progress.limit-near {
+  background-color: var(--color-accent);
+}
+
+.token-progress.limit-exceeded {
+  background-color: var(--color-blocked);
+}
+
+.token-warning {
+  color: var(--color-blocked);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------------------
+   10. Settings Sheet (Focus-Trapped Drawer / Bottom Sheet)
+   ------------------------------------------------------------------------------ */
+.settings-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.settings-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.settings-sheet {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--color-page);
+  border-left: 1px solid var(--color-border);
+  box-shadow: var(--glass-shadow);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@supports (backdrop-filter: blur(16px)) {
+  .settings-sheet {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(16px);
+  }
+}
+
+.settings-sheet.open {
+  transform: translateX(0);
+}
+
+/* Mobile bottom sheet behavior */
+@media (max-width: 640px) {
+  .settings-sheet {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    max-height: 88vh;
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    transform: translateY(100%);
+  }
+
+  .settings-sheet.open {
+    transform: translateY(0);
+  }
+}
+
+.sheet-header {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sheet-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.btn-close-sheet {
+  padding: 6px;
+  border-radius: var(--radius-control);
+  color: var(--color-ink-muted);
+}
+
+.btn-close-sheet:hover {
+  color: var(--color-ink);
+  background-color: var(--color-surface-sunken);
+}
+
+/* Sheet Tabs */
+.sheet-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  overflow-x: auto;
+  background-color: var(--color-surface);
+}
+
+.tab-btn {
+  padding: 10px 14px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-ink-secondary);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.tab-btn.active {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-accent);
+}
+
+.sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+}
+
+.tab-pane {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.tab-pane.active {
+  display: flex;
+}
+
+/* Quick Actions List in Settings */
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.btn-action-row:hover:not(:disabled) {
+  border-color: var(--color-ink);
+  background-color: var(--color-surface-sunken);
+}
+
+/* Ticket Directory Table */
+.ticket-table-container {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-slip);
+}
+
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  text-align: left;
+}
+
+.ticket-table th {
+  background-color: var(--color-surface-sunken);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-border);
+  font-weight: 700;
+}
+
+.ticket-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.ticket-table tr:hover td {
+  background-color: var(--color-accent-subtle);
+  cursor: pointer;
+}
+
+/* Drawer & Settings Component Utilities */
+.sheet-intro {
+  font-size: 0.875rem;
+  color: var(--color-ink-secondary);
+  margin-bottom: 8px;
+}
+
+.action-sub {
+  font-size: 0.75rem;
+  color: var(--color-ink-muted);
+}
+
+.form-row-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.875rem;
+}
+
+.form-row-toggle.bordered {
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.form-row-select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.form-select {
+  padding: 6px 10px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.conn-card {
+  background-color: var(--color-surface-sunken);
+  padding: 12px;
+  border-radius: var(--radius-control);
+  margin-bottom: 12px;
+}
+
+.conn-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
+
+.conn-row:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.conn-sub {
+  font-size: 0.75rem;
+  color: var(--color-ink-muted);
+  margin-top: 8px;
+}
+
+.ticket-search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.ticket-filters-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ticket-filter-select {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  font-size: 0.75rem;
+}
+
+.table-empty-cell {
+  text-align: center;
+  padding: 12px;
+}
+
+.privacy-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  margin-bottom: 12px;
+}
+
+.privacy-info {
+  font-size: 0.875rem;
+  color: var(--color-ink-secondary);
+  line-height: 1.5;
+}
+

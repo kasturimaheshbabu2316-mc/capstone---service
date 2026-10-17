@@ -258,7 +258,7 @@ def check_security(text: str) -> Tuple[bool, Optional[str]]:
     lower = text.lower()
     for pattern in INJECTION_SIGNATURES:
         if re.search(pattern, lower, re.IGNORECASE):
-            return False, f"Blocked security violation matching signature: '{pattern}'"
+            return False, "Blocked security violation: This request was blocked by the safety policy. Please rephrase your question."
 
     return True, None
 

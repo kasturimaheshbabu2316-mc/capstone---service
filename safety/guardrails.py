@@ -135,7 +135,7 @@ def detect_prompt_injection(text: str) -> InjectionGuardrailResult:
     lower = text.lower()
     for pattern in INJECTION_PATTERNS:
         if re.search(pattern, lower, re.IGNORECASE):
-            reason = f"Blocked prompt injection pattern: '{pattern}'"
+            reason = "Blocked prompt injection: This request was blocked by the safety policy. Please rephrase your question."
             return InjectionGuardrailResult(
                 fired=True,
                 kind="prompt_injection",

@@ -12,7 +12,7 @@ RUN 1: INITIAL QUERY (EXPECTED: CACHE MISS, GENERATION CALL = 1)
 Query:                   'What is the resolution SLA for a Sev-1 safety incident?'
 Cache Status:            MISS (Cold Generation)
 Grounded Answer:         Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours.
-Latency:                 865.85 ms
+Latency:                 612.38 ms
 Generation Call Counter: 1
 Hit / Miss Stats:        Hits=0, Misses=1
 
@@ -25,9 +25,9 @@ Query Variant:           '   WHAT IS THE RESOLUTION SLA FOR A SEV-1 SAFETY INCID
 Normalized Key:          'what is the resolution sla for a sev1 safety incident'
 Cache Status:            HIT (Instant Retrieval)
 Grounded Answer:         Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours.
-Latency:                 0.1069 ms
+Latency:                 0.0255 ms
 Generation Call Counter: 1 (Remained at 1 - no generation call!)
 Hit / Miss Stats:        Hits=1, Misses=1
-Latency Speedup:         8099.6x faster (865.85 ms -> 0.1069 ms)
+Latency Speedup:         24014.9x faster (612.38 ms -> 0.0255 ms)
 
 ================================================================================

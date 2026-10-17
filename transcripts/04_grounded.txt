@@ -8,7 +8,7 @@ IN-SCOPE CLUSTER (>= 4 queries):
   • Sim: 0.7153 | Top Doc: refund_compensation_policy | Q: "When does Ola provide monetary refunds for driver cancellations?"
   • Sim: 0.6884 | Top Doc: repeat_complaint_handling  | Q: "How does Ola handle repeat chronic complaints from passengers?"
   • Sim: 0.5325 | Top Doc: vip_customer_policy        | Q: "What are the benefits and response times for VIP Ola Select customers?"
-  • Sim: 0.5726 | Top Doc: test_cancellation_clause   | Q: "What compensation is provided for ride delays exceeding 20 minutes?"
+  • Sim: 0.5372 | Top Doc: service_credit_policy      | Q: "What compensation is provided for ride delays exceeding 20 minutes?"
 
 OUT-OF-SCOPE CLUSTER (>= 3 queries):
   • Sim: 0.1158 | Top Doc: feedback_collection        | Q: "Who won the cricket world cup?"
@@ -34,8 +34,8 @@ Query 1: "What is the resolution SLA for a Sev-1 safety incident?"
 Query 2: "Under what condition are driver cancellation fees refunded to passengers?"
   • Top Sim : 0.7471 (Threshold: 0.3652 -> PASS)
   • Grounded: True
-  • Sources : ['refund_compensation_policy', 'test_cancellation_clause']
-  • Answer  : "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot."
+  • Sources : ['refund_compensation_policy']
+  • Answer  : "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot. Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges. Cash trip adjustments are disbursed directly into the passenger's linked bank account upon verification of ride telemetry."
 
 Query 3: "What happens when a customer logs 3 complaints within a 14-day window?"
   • Top Sim : 0.6229 (Threshold: 0.3652 -> PASS)
@@ -52,8 +52,8 @@ Query 4: "What are the operating hours for driver partner physical onboarding ce
 Query 5: "What service credit or compensation is provided for ride delays exceeding 20 minutes?"
   • Top Sim : 0.5522 (Threshold: 0.3652 -> PASS)
   • Grounded: True
-  • Sources : ['service_credit_policy', 'test_cancellation_clause']
-  • Answer  : "Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days."
+  • Sources : ['service_credit_policy']
+  • Answer  : "Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days. Ola issues service credits in the form of Ola Money cashback balances and ride discount coupons for minor service deficiencies. Service credits are instantly deposited into the customer's wallet within 24 hours of ticket validation and cannot be converted into cash withdrawals."
 
 Query 6: "What are the benefits and response times for VIP Ola Select customers?"
   • Top Sim : 0.5325 (Threshold: 0.3652 -> PASS)

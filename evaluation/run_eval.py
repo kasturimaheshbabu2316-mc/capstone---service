@@ -172,8 +172,8 @@ def run_benchmark_evaluation() -> Dict[str, Any]:
         json.dump(output_json_data, f, indent=2)
 
     print("\n" + table_text)
-    print(f"\nEvaluation transcript saved to: {TRANSCRIPT_TXT_PATH}")
-    print(f"Results JSON saved to: {RESULTS_JSON_PATH}")
+    print(f"\nEvaluation transcript saved to: transcripts/13_eval.txt")
+    print(f"Results JSON saved to: evaluation/results.json")
 
     return output_json_data
 

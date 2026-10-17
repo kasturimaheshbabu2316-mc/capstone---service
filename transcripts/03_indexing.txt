@@ -3,8 +3,8 @@ OLA DOMAIN SUPPORT AGENT — TASK 3: CHUNKING & CHROMADB INDEXING
 ===========================================================================
 
 1. INDEXING KNOWLEDGE BASE DOCUMENTS (IDEMPOTENT UPSERT)...
-  • Collection 'kb_fixed'    : 30 chunks (300 chars, 60 overlap)
-  • Collection 'kb_sentence' : 53 chunks (regex sentence-based)
+  • Collection 'kb_fixed'    : 28 chunks (300 chars, 60 overlap)
+  • Collection 'kb_sentence' : 50 chunks (regex sentence-based)
   • Embedding Model          : sentence-transformers/all-MiniLM-L6-v2
   • Distance Metric          : Cosine (hnsw:space = cosine)
 

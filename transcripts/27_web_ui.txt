@@ -1,0 +1,9 @@
+﻿........................................................................ [ 56%]
+........................................................                 [100%]
+============================== warnings summary ===============================
+crew\crew.py:25
+  C:\Users\kastu\Desktop\capstone - service\crew\crew.py:25: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
+    from crew.memory import session_memory, crew_runnable_with_history
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+128 passed, 1 warning in 18.81s

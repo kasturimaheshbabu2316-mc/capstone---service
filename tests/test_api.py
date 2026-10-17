@@ -2,6 +2,7 @@
 
 import json
 import os
+from pathlib import Path
 from unittest.mock import patch
 import pytest
 from fastapi.testclient import TestClient
@@ -121,12 +122,19 @@ def test_ask_safe_500_no_traceback():
         assert "RuntimeError" not in res.text
 
 
-def test_add_document_endpoint(monkeypatch):
-    """POST /add-document chunks, embeds, and upserts into the recommended collection ('kb_sentence')."""
+def test_add_document_endpoint(monkeypatch, tmp_path):
+    """POST /add-document chunks, embeds, and upserts into isolated temporary collection."""
+    import api.main
+    from rag.index import get_chroma_client
+
     monkeypatch.setenv("ADMIN_TOKEN", "test-admin-secret-token")
+    monkeypatch.setattr(api.main, "PROJECT_ROOT", tmp_path)
+    temp_col_name = "test_temp_isolated_collection"
+    monkeypatch.setattr(api.main.app.state, "winning_collection", temp_col_name, raising=False)
+
     test_doc = "test_temp_policy.md"
     test_text = "Ola ensures high reliability across all service categories. Driver partners undergo comprehensive training."
-    kb_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "kb", test_doc)
+
     try:
         res = client.post(
             "/add-document",
@@ -137,18 +145,14 @@ def test_add_document_endpoint(monkeypatch):
         json_data = res.json()
         assert json_data["status"] == "indexed"
         assert json_data["doc_id"] == test_doc
-        assert json_data["collection"] == "kb_sentence"
+        assert json_data["collection"] == temp_col_name
         assert json_data["chunks_indexed"] >= 1
+        assert (tmp_path / "kb" / test_doc).exists()
+        assert not (Path("kb") / test_doc).exists()
     finally:
-        if os.path.exists(kb_path):
-            try:
-                os.remove(kb_path)
-            except Exception:
-                pass
         try:
-            from rag.index import get_or_create_collection
-            col = get_or_create_collection("kb_sentence")
-            col.delete(where={"doc_id": test_doc})
+            client_chroma = get_chroma_client()
+            client_chroma.delete_collection(temp_col_name)
         except Exception:
             pass
 

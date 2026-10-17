@@ -3,7 +3,7 @@
   "min_in_scope": 0.5325,
   "max_out_scope": 0.1979,
   "margin": 0.1673,
-  "collection": "ola_sentence",
+  "collection": "kb_sentence",
   "metric": "cosine_similarity",
   "justification": "Midpoint between lowest in-scope similarity (0.5325) and highest out-of-scope similarity (0.1979) yields T = 0.3652, providing a symmetric buffer margin of 0.1673 against false refusals and hallucinations.",
   "in_scope_queries": [
@@ -29,8 +29,8 @@
     },
     {
       "query": "What compensation is provided for ride delays exceeding 20 minutes?",
-      "similarity": 0.5726,
-      "top_doc": "test_cancellation_clause"
+      "similarity": 0.5372,
+      "top_doc": "service_credit_policy"
     }
   ],
   "out_of_scope_queries": [

@@ -1,21 +1,22 @@
 """Unit tests for RAG chunking, indexing, thresholding, and generation (Tasks 3, 4, 5)."""
 
-import pytest
-from rag.chunking import (
-    fixed_chunking,
-    sentence_chunking,
-    fixed_size_overlap_chunks,
-    sentence_chunks,
-)
-from rag.index import retrieve, get_or_create_collection
-from rag.generate import (
-    FALLBACK_REFUSAL,
-    CALIBRATED_THRESHOLD,
-    grounded_generate,
-    grounded_answer,
-)
 import json
 from pathlib import Path
+
+import pytest
+
+from rag.chunking import (
+    fixed_chunking,
+    fixed_size_overlap_chunks,
+    sentence_chunking,
+    sentence_chunks,
+)
+from rag.generate import (
+    FALLBACK_REFUSAL,
+    grounded_answer,
+    grounded_generate,
+)
+from rag.index import retrieve
 
 
 def test_fixed_chunking_size_and_overlap():
@@ -145,6 +146,34 @@ def test_evaluate_query_precision_recall_arithmetic():
     assert res["recall"] == 1.0
     assert res["precision_arithmetic"] == "1/1 = 1.000"
     assert res["recall_arithmetic"] == "1/1 = 1.000"
+
+
+def test_collections_contain_only_official_12_docs():
+    """Asserts that real ChromaDB collections contain only the 12 official policy documents."""
+    from kb_loader import REQUIRED_TOPIC_IDS
+    from rag.index import get_chroma_client
+
+    client = get_chroma_client()
+    official_set = set(REQUIRED_TOPIC_IDS)
+    assert len(official_set) == 12, "Expected exactly 12 official policy topics."
+
+    for col_name in ("kb_sentence", "kb_fixed", "ola_sentence", "ola_fixed"):
+        try:
+            col = client.get_collection(col_name)
+        except (RuntimeError, ValueError) as exc:
+            pytest.fail(f"Could not open collection '{col_name}': {exc}")
+
+        data = col.get(include=["metadatas"])
+        metas = data.get("metadatas") or []
+        found_doc_ids = {m["doc_id"] for m in metas if "doc_id" in m}
+
+        alien_docs = found_doc_ids - official_set
+        assert not alien_docs, (
+            f"Collection '{col_name}' contains unapproved/polluting document IDs: {alien_docs}"
+        )
+        assert found_doc_ids == official_set, (
+            f"Collection '{col_name}' is missing some official documents: {official_set - found_doc_ids}"
+        )
 
 
 

@@ -6,8 +6,8 @@
 **Target File Location:** `doc/implement-plan.md`  
 **Reference Specifications:**
 
-- System Architecture: [doc/architecture.md](file:///c:/Users/kastu/Desktop/capstone%20-%20service/doc/architecture.md)
-- Problem Statement: [doc/problemStatement.md](file:///c:/Users/kastu/Desktop/capstone%20-%20service/doc/problemStatement.md)
+- System Architecture: [doc/architecture.md](doc/architecture.md)
+- Problem Statement: [doc/problemStatement.md](doc/problemStatement.md)
 
 ---
 
@@ -19,9 +19,9 @@ This document details the step-by-step implementation plan for the **Ola Domain 
 
 1. **Zero External Network / Zero API Keys:** Execution operates completely under `MOCK_LLM=true` with pre-cached local embeddings (`sentence-transformers/all-MiniLM-L6-v2`) and offline flags (`HF_HUB_OFFLINE=1`, `TRANSFORMERS_OFFLINE=1`).
 2. **Telemetry Suppression:** Environment variables `CREWAI_DISABLE_TELEMETRY=true` and `OTEL_SDK_DISABLED=true` must be set prior to running any CrewAI logic.
-3. **Documentation Directory Boundary:** All markdown documentation files must reside strictly within the [`doc/`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/doc/) directory (with the sole exception of the required repository-level [`README.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/README.md) and [`governance/RISK_CLASSIFICATION.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/governance/RISK_CLASSIFICATION.md)).
+3. **Documentation Directory Boundary:** All markdown documentation files must reside strictly within the [`doc/`](doc/) directory (with the sole exception of the required repository-level [`README.md`](README.md) and [`governance/RISK_CLASSIFICATION.md`](governance/RISK_CLASSIFICATION.md)).
 4. **Media Asset Restriction:** Zero images, PDFs, audio, video, or external slides anywhere in the repository. Architectural diagrams and workflows must use Markdown/Mermaid or text tables.
-5. **Deterministic Verifiability:** Every task must output its verification evidence to an individual transcript in [`transcripts/`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/transcripts/).
+5. **Deterministic Verifiability:** Every task must output its verification evidence to an individual transcript in [`transcripts/`](transcripts/).
 
 ---
 
@@ -133,18 +133,18 @@ flowchart LR
 ### Task 2: Knowledge Base Authoring (`kb/`)
 
 - **Objective:** Author 12 distinct Markdown policy files (2–5 sentences each) with quantitative numbers, SLA hours, and specific terminology:
-  1. [`kb/ticket_priority_rules.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/ticket_priority_rules.md) — P1 (safety emergency) to P4 (general request) definitions.
-  2. [`kb/sla_by_severity.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/sla_by_severity.md) — Sev-1 (1h response, 4h fix), Sev-2 (4h/12h), Sev-3 (12h/48h), Sev-4 (24h/72h).
-  3. [`kb/escalation_matrix.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/escalation_matrix.md) — Tier-1 Support $\to$ Team Lead $\to$ Operations Head.
-  4. [`kb/refund_compensation_policy.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/refund_compensation_policy.md) — Driver cancellation fee waiver, 5–7 business days gateway refund.
-  5. [`kb/communication_channels.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/communication_channels.md) — In-app chat, SOS emergency button (<30s response), registered email.
-  6. [`kb/business_hours_support.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/business_hours_support.md) — 24/7 passenger emergency desk vs 09:00–18:00 partner support hubs.
-  7. [`kb/repeat_complaint_handling.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/repeat_complaint_handling.md) — 3+ incidents within 14 days escalates to supervisor queue within 2h.
-  8. [`kb/service_credit_policy.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/service_credit_policy.md) — Ola Money ride credit issued within 24h for route deviations.
-  9. [`kb/feedback_collection.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/feedback_collection.md) — 60-second post-trip star rating, CSAT surveys.
-  10. [`kb/vip_customer_policy.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/vip_customer_policy.md) — Ola Select and Prime Plus expedited queues (<15 min first response).
-  11. [`kb/outage_communication.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/outage_communication.md) — In-app broadcast and SMS alerts within 15 mins of Sev-1 outages.
-  12. [`kb/data_retention_policy.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/kb/data_retention_policy.md) — 180 days active storage, 3 years encrypted cold archival.
+  1. [`kb/ticket_priority_rules.md`](kb/ticket_priority_rules.md) — P1 (safety emergency) to P4 (general request) definitions.
+  2. [`kb/sla_by_severity.md`](kb/sla_by_severity.md) — Sev-1 (1h response, 4h fix), Sev-2 (4h/12h), Sev-3 (12h/48h), Sev-4 (24h/72h).
+  3. [`kb/escalation_matrix.md`](kb/escalation_matrix.md) — Tier-1 Support $\to$ Team Lead $\to$ Operations Head.
+  4. [`kb/refund_compensation_policy.md`](kb/refund_compensation_policy.md) — Driver cancellation fee waiver, 5–7 business days gateway refund.
+  5. [`kb/communication_channels.md`](kb/communication_channels.md) — In-app chat, SOS emergency button (<30s response), registered email.
+  6. [`kb/business_hours_support.md`](kb/business_hours_support.md) — 24/7 passenger emergency desk vs 09:00–18:00 partner support hubs.
+  7. [`kb/repeat_complaint_handling.md`](kb/repeat_complaint_handling.md) — 3+ incidents within 14 days escalates to supervisor queue within 2h.
+  8. [`kb/service_credit_policy.md`](kb/service_credit_policy.md) — Ola Money ride credit issued within 24h for route deviations.
+  9. [`kb/feedback_collection.md`](kb/feedback_collection.md) — 60-second post-trip star rating, CSAT surveys.
+  10. [`kb/vip_customer_policy.md`](kb/vip_customer_policy.md) — Ola Select and Prime Plus expedited queues (<15 min first response).
+  11. [`kb/outage_communication.md`](kb/outage_communication.md) — In-app broadcast and SMS alerts within 15 mins of Sev-1 outages.
+  12. [`kb/data_retention_policy.md`](kb/data_retention_policy.md) — 180 days active storage, 3 years encrypted cold archival.
 
 ### Task 3: Dual Chunking Strategies & Chroma Vector Indexing (`rag/`)
 
@@ -407,7 +407,7 @@ Create standalone runner scripts to reproduce every task transcript deterministi
 
 ### 6.1 `README.md` Authoring Structure
 
-The root [`README.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/README.md) must follow the required outline:
+The root [`README.md`](README.md) must follow the required outline:
 
 1. **Track Statement:** Ola (Business Operations / Customer Support).
 2. **Dataset Design Choices:** Seed `42`, 60 records, category weights, status weights, resolution-time range (0.5–72h), reasoning sentence.

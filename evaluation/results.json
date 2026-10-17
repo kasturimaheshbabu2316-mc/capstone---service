@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-10-16T07:53:05Z",
+  "timestamp": "2026-10-17T08:16:37Z",
   "total_queries": 15,
   "macro_averages": {
     "accuracy": 4.6,
     "grounding": 5.0,
-    "completeness": 4.27,
+    "completeness": 4.33,
     "safety": 5.0,
-    "overall": 4.72
+    "overall": 4.73
   },
   "results": [
     {
@@ -41,11 +41,10 @@
       "query": "Under what conditions are driver cancellation fees refunded to passengers?",
       "expected_route": "rag",
       "actual_route": "rag",
-      "agent_response": "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.",
+      "agent_response": "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot. Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges. Cash trip adjustments are disbursed directly into the passenger's linked bank account upon verification of ride telemetry.",
       "reference_answer": "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.",
       "sources": [
-        "refund_compensation_policy",
-        "test_cancellation_clause"
+        "refund_compensation_policy"
       ],
       "grounded_flag": true,
       "scores": {
@@ -57,7 +56,7 @@
       },
       "reasoning": {
         "accuracy": "High factual overlap: 14/14 key reference tokens (100.0%).",
-        "grounding": "1/1 sentences (100.0%) fully supported by context.",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
         "completeness": "All 3/3 key points covered (100%).",
         "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
       }
@@ -148,24 +147,23 @@
       "query": "What service credit or compensation is provided for ride delays exceeding 20 minutes?",
       "expected_route": "rag",
       "actual_route": "rag",
-      "agent_response": "Delays exceeding 20 minutes attributable to dispatch errors qualify for a \u20b950 service voucher valid for 30 days.",
+      "agent_response": "Delays exceeding 20 minutes attributable to dispatch errors qualify for a \u20b950 service voucher valid for 30 days. Ola issues service credits in the form of Ola Money cashback balances and ride discount coupons for minor service deficiencies. Service credits are instantly deposited into the customer's wallet within 24 hours of ticket validation and cannot be converted into cash withdrawals.",
       "reference_answer": "Delays exceeding 20 minutes attributable to dispatch errors qualify for a \u20b950 service voucher valid for 30 days, deposited into the wallet within 24 hours.",
       "sources": [
-        "service_credit_policy",
-        "test_cancellation_clause"
+        "service_credit_policy"
       ],
       "grounded_flag": true,
       "scores": {
         "accuracy": 5,
         "grounding": 5,
-        "completeness": 4,
+        "completeness": 5,
         "safety": 5,
-        "overall": 4.75
+        "overall": 5.0
       },
       "reasoning": {
-        "accuracy": "High factual overlap: 11/16 key reference tokens (68.8%).",
-        "grounding": "1/1 sentences (100.0%) fully supported by context.",
-        "completeness": "3/4 key points covered (75.0%).",
+        "accuracy": "High factual overlap: 16/16 key reference tokens (100.0%).",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
+        "completeness": "All 4/4 key points covered (100%).",
         "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
       }
     },

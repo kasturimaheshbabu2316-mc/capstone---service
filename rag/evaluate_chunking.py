@@ -243,7 +243,7 @@ if __name__ == "__main__":
         res["recommendation"],
         "",
         f"• Winning Collection: {res['winning_collection']}",
-        f"• Recommended JSON  : {RECOMMENDED_JSON_PATH}",
+        f"• Recommended JSON  : rag/recommended.json",
         "",
         "=" * 75,
         "TASK 5 ACCEPTANCE CRITERIA: CHUNKING EVALUATION & RECOMMENDATION COMPLETE",

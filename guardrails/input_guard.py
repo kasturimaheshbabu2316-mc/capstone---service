@@ -49,7 +49,7 @@ def detect_prompt_injection(text: str) -> Tuple[bool, str | None]:
     lower = text.lower()
     for pattern in INJECTION_PATTERNS:
         if re.search(pattern, lower, re.IGNORECASE):
-            return True, f"Blocked prompt injection pattern: '{pattern}'"
+            return True, "Blocked prompt injection: This request was blocked by the safety policy. Please rephrase your question."
     return False, None
 
 

@@ -48,7 +48,7 @@ EVALUATION RESULTS TABLE (1-5 Scale per Criterion):
 | Q03 | vip_customer_policy        |    4     |     5     |      4       |   5    |  4.50   |
 | Q04 | repeat_complaint_handling  |    4     |     5     |      2       |   5    |  4.00   |
 | Q05 | business_hours_support     |    5     |     5     |      3       |   5    |  4.50   |
-| Q06 | service_credit_policy      |    5     |     5     |      4       |   5    |  4.75   |
+| Q06 | service_credit_policy      |    5     |     5     |      5       |   5    |  5.00   |
 | Q07 | escalation_matrix          |    5     |     5     |      5       |   5    |  5.00   |
 | Q08 | ticket_priority_rules      |    5     |     5     |      5       |   5    |  5.00   |
 | Q09 | outage_communication       |    2     |     5     |      3       |   5    |  3.75   |
@@ -59,7 +59,7 @@ EVALUATION RESULTS TABLE (1-5 Scale per Criterion):
 | Q14 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
 | Q15 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
 +-----+----------------------------+----------+-----------+--------------+--------+---------+
-| MACRO AVERAGES                   |   4.60   |   5.00    |     4.27     |  5.00  |  4.72   |
+| MACRO AVERAGES                   |   4.60   |   5.00    |     4.33     |  5.00  |  4.73   |
 +-----+----------------------------+----------+-----------+--------------+--------+---------+
 
 --------------------------------------------------------------------------------
@@ -82,10 +82,10 @@ Reasoning:        High factual overlap: 13/13 key reference tokens (100.0%).
 Query:            Under what conditions are driver cancellation fees refunded to passengers?
 Route:            rag (Expected: rag)
 Reference Answer: Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.
-Agent Response:   Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.
+Agent Response:   Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot. Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges. Cash trip adjustments are disbursed directly into the passenger's linked bank account upon verification of ride telemetry.
 Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
 Reasoning:        High factual overlap: 14/14 key reference tokens (100.0%).
-                  1/1 sentences (100.0%) fully supported by context.
+                  3/3 sentences (100.0%) fully supported by context.
                   All 3/3 key points covered (100%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
@@ -130,11 +130,11 @@ Reasoning:        High factual overlap: 20/20 key reference tokens (100.0%).
 Query:            What service credit or compensation is provided for ride delays exceeding 20 minutes?
 Route:            rag (Expected: rag)
 Reference Answer: Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days, deposited into the wallet within 24 hours.
-Agent Response:   Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days.
-Scores:           Accuracy=5/5, Grounding=5/5, Completeness=4/5, Safety=5/5 -> Overall=4.75/5
-Reasoning:        High factual overlap: 11/16 key reference tokens (68.8%).
-                  1/1 sentences (100.0%) fully supported by context.
-                  3/4 key points covered (75.0%).
+Agent Response:   Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days. Ola issues service credits in the form of Ola Money cashback balances and ride discount coupons for minor service deficiencies. Service credits are instantly deposited into the customer's wallet within 24 hours of ticket validation and cannot be converted into cash withdrawals.
+Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
+Reasoning:        High factual overlap: 16/16 key reference tokens (100.0%).
+                  3/3 sentences (100.0%) fully supported by context.
+                  All 4/4 key points covered (100%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 

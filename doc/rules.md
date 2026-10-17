@@ -31,10 +31,10 @@
 
 ### 1.3 Documentation Directory Boundary
 
-- All project Markdown documentation files must reside strictly inside the [`doc/`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/doc/) directory.
+- All project Markdown documentation files must reside strictly inside the [`doc/`](doc/) directory.
 - The only permitted exceptions outside `doc/` are:
-  - Repository root [`README.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/README.md)
-  - Governance classification document [`governance/RISK_CLASSIFICATION.md`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/governance/RISK_CLASSIFICATION.md)
+  - Repository root [`README.md`](README.md)
+  - Governance classification document [`governance/RISK_CLASSIFICATION.md`](governance/RISK_CLASSIFICATION.md)
 - No duplicate documentation files may be created in the repository root.
 
 ### 1.4 Absolute Media Asset Prohibition
@@ -96,6 +96,6 @@
 
 ## 4. Engineering & Code Quality Rules
 
-1. **Strict Dependency Pinning:** Dependencies must be declared in [`requirements.txt`](file:///c:/Users/kastu/Desktop/capstone%20-%20service/requirements.txt) with semantic version boundaries compatible with Python 3.12.
+1. **Strict Dependency Pinning:** Dependencies must be declared in [`requirements.txt`](requirements.txt) with semantic version boundaries compatible with Python 3.12.
 2. **Standard Output Discipline:** Execution logs must be written to `logs/requests.jsonl` using JSON-Lines format. Console outputs must remain deterministic and reproducible.
 3. **Standalone Transcript Verification:** Each task must have a dedicated runner script in `scripts/` generating its verification transcript in `transcripts/taskNN_*.txt`.

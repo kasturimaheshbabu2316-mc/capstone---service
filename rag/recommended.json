@@ -2,11 +2,11 @@
   "winning_collection": "kb_sentence",
   "recommended_collection": "kb_sentence",
   "k": 3,
-  "macro_precision_sentence": 0.6667,
+  "macro_precision_sentence": 0.8333,
   "macro_recall_sentence": 1.0,
-  "macro_precision_fixed": 0.4722,
+  "macro_precision_fixed": 0.5,
   "macro_recall_fixed": 1.0,
-  "recommendation": "Across the benchmark evaluation queries, sentence-based chunking ('kb_sentence') achieved a macro-averaged precision of 66.7% and recall of 100.0%, significantly outperforming fixed-size chunking ('kb_fixed') which scored 47.2% precision. Fixed-size chunking frequently splits operational policy rules across character windows and introduces irrelevant cross-document neighbors. Consequently, 'kb_sentence' is designated as the winning collection and primary index for all downstream grounded generation.",
+  "recommendation": "Across the benchmark evaluation queries, sentence-based chunking ('kb_sentence') achieved a macro-averaged precision of 83.3% and recall of 100.0%, significantly outperforming fixed-size chunking ('kb_fixed') which scored 50.0% precision. Fixed-size chunking frequently splits operational policy rules across character windows and introduces irrelevant cross-document neighbors. Consequently, 'kb_sentence' is designated as the winning collection and primary index for all downstream grounded generation.",
   "eval_fixed": {
     "collection_name": "kb_fixed",
     "k": 3,
@@ -35,7 +35,7 @@
       {
         "retrieved_docs": [
           "refund_compensation_policy",
-          "test_cancellation_clause"
+          "service_credit_policy"
         ],
         "ground_truth_docs": [
           "refund_compensation_policy"
@@ -98,7 +98,6 @@
       {
         "retrieved_docs": [
           "service_credit_policy",
-          "test_cancellation_clause",
           "refund_compensation_policy"
         ],
         "ground_truth_docs": [
@@ -108,11 +107,11 @@
           "service_credit_policy"
         ],
         "num_correct": 1,
-        "num_retrieved": 3,
+        "num_retrieved": 2,
         "num_relevant": 1,
-        "precision": 0.3333333333333333,
+        "precision": 0.5,
         "recall": 1.0,
-        "precision_arithmetic": "1/3 = 0.333",
+        "precision_arithmetic": "1/2 = 0.500",
         "recall_arithmetic": "1/1 = 1.000",
         "query_id": "Q5",
         "query": "What service credit or compensation is provided for ride delays exceeding 20 minutes?"
@@ -139,7 +138,7 @@
         "query": "What are the benefits and response times for VIP Ola Select customers?"
       }
     ],
-    "macro_precision": 0.4722,
+    "macro_precision": 0.5,
     "macro_recall": 1.0
   },
   "eval_sentence": {
@@ -168,8 +167,7 @@
       },
       {
         "retrieved_docs": [
-          "refund_compensation_policy",
-          "test_cancellation_clause"
+          "refund_compensation_policy"
         ],
         "ground_truth_docs": [
           "refund_compensation_policy"
@@ -178,11 +176,11 @@
           "refund_compensation_policy"
         ],
         "num_correct": 1,
-        "num_retrieved": 2,
+        "num_retrieved": 1,
         "num_relevant": 1,
-        "precision": 0.5,
+        "precision": 1.0,
         "recall": 1.0,
-        "precision_arithmetic": "1/2 = 0.500",
+        "precision_arithmetic": "1/1 = 1.000",
         "recall_arithmetic": "1/1 = 1.000",
         "query_id": "Q2",
         "query": "Under what condition are driver cancellation fees refunded to passengers?"
@@ -231,8 +229,7 @@
       },
       {
         "retrieved_docs": [
-          "service_credit_policy",
-          "test_cancellation_clause"
+          "service_credit_policy"
         ],
         "ground_truth_docs": [
           "service_credit_policy"
@@ -241,11 +238,11 @@
           "service_credit_policy"
         ],
         "num_correct": 1,
-        "num_retrieved": 2,
+        "num_retrieved": 1,
         "num_relevant": 1,
-        "precision": 0.5,
+        "precision": 1.0,
         "recall": 1.0,
-        "precision_arithmetic": "1/2 = 0.500",
+        "precision_arithmetic": "1/1 = 1.000",
         "recall_arithmetic": "1/1 = 1.000",
         "query_id": "Q5",
         "query": "What service credit or compensation is provided for ride delays exceeding 20 minutes?"
@@ -271,7 +268,7 @@
         "query": "What are the benefits and response times for VIP Ola Select customers?"
       }
     ],
-    "macro_precision": 0.6667,
+    "macro_precision": 0.8333,
     "macro_recall": 1.0
   }
 }

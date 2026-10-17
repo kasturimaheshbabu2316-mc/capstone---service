@@ -1,0 +1,110 @@
+/* ==============================================================================
+   Ola Support Intelligence — CSS Tokens ("The Dispatch Desk")
+   Road-grounded palette: Kerb chalk, Asphalt, Lane yellow, Signal teal, Brake red.
+   Zero external fonts/CDNs. Local system fallback with tabular lining figures.
+   ============================================================================== */
+
+:root, [data-theme="light"] {
+  /* Core Colors */
+  --color-page: #ECEEE8;              /* Kerb chalk */
+  --color-surface: #FFFFFF;           /* Policy slip paper white */
+  --color-surface-sunken: #DFE2DA;    /* Sunken road grey */
+  --color-ink: #1B2230;               /* Asphalt */
+  --color-ink-secondary: #586069;     /* Deep verge */
+  --color-ink-muted: #8A9199;         /* Verge grey */
+  --color-border: #CFD4C9;            /* Kerb boundary */
+  --color-border-subtle: #DEE2D9;     /* Hairline road divider */
+
+  /* Semantic Highlighter & Status Accents */
+  --color-accent: #F4C20D;            /* Lane yellow: focus, active stage */
+  --color-accent-subtle: rgba(244, 194, 13, 0.15);
+  --color-verified: #0E7C7B;          /* Signal teal: verified, grounded */
+  --color-verified-bg: rgba(14, 124, 123, 0.08);
+  --color-blocked: #C5412B;           /* Brake red: safety block, limit exceeded */
+  --color-blocked-bg: rgba(197, 65, 43, 0.08);
+
+  /* User Message Chip */
+  --color-chip-user: #1B2230;         /* Asphalt chip */
+  --color-chip-user-ink: #ECEEE8;     /* Chalk ink */
+
+  /* Glass Floating Layers */
+  --glass-bg: rgba(236, 238, 232, 0.88);
+  --glass-border: rgba(27, 34, 48, 0.12);
+  --glass-shadow: 0 8px 32px rgba(27, 34, 48, 0.08);
+
+  /* Typography Stacks */
+  --font-sans: Archivo, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Iowan Old Style", "Times New Roman", serif;
+
+  /* Hierarchical Radius System */
+  --radius-slip: 4px;                 /* Policy slip & ticket receipt */
+  --radius-control: 10px;             /* Buttons, inputs, interactive chips */
+  --radius-sheet: 20px;               /* Settings drawer / bottom sheet */
+  --radius-pill: 100px;               /* Status pills & state markers */
+
+  /* Spacing Scale */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  /* Layout Boundaries */
+  --max-col-width: 44rem;
+  --measure-prose: 68ch;
+  --measure-chip: 56ch;
+  --header-height: 56px;
+  --composer-min-height: 72px;
+
+  /* Focus Indicator */
+  --focus-ring: 0 0 0 2px var(--color-page), 0 0 0 4px var(--color-accent);
+}
+
+[data-theme="dark"] {
+  /* Dark Theme: Remapping the same tokens */
+  --color-page: #121722;              /* Deep asphalt */
+  --color-surface: #1B2230;           /* Asphalt surface */
+  --color-surface-sunken: #151A24;    /* Pit dark */
+  --color-ink: #ECEEE8;               /* Kerb chalk */
+  --color-ink-secondary: #B0B7BF;     /* Light verge */
+  --color-ink-muted: #8A9199;         /* Verge grey */
+  --color-border: #2B3444;            /* Dark asphalt divider */
+  --color-border-subtle: #202735;     /* Dark hairline */
+
+  --color-accent: #F4C20D;            /* Lane yellow */
+  --color-accent-subtle: rgba(244, 194, 13, 0.18);
+  --color-verified: #18A9A8;          /* Lightened signal teal */
+  --color-verified-bg: rgba(24, 169, 168, 0.12);
+  --color-blocked: #E0533C;           /* Lightened brake red */
+  --color-blocked-bg: rgba(224, 83, 60, 0.12);
+
+  --color-chip-user: #242D3D;         /* Elevated asphalt chip */
+  --color-chip-user-ink: #ECEEE8;     /* Kerb chalk */
+
+  --glass-bg: rgba(27, 34, 48, 0.90);
+  --glass-border: rgba(236, 238, 232, 0.12);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
+  --focus-ring: 0 0 0 2px var(--color-page), 0 0 0 4px var(--color-accent);
+}
+
+/* Compact Density Modifier */
+[data-density="compact"] {
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 18px;
+  --space-xl: 24px;
+  --header-height: 48px;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
