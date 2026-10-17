@@ -16,13 +16,14 @@ from __future__ import annotations
 import asyncio
 from collections.abc import AsyncGenerator, Mapping, Sequence
 import concurrent.futures
+import logging
 from pathlib import Path
 import re
 from typing import Any
 
-from pydantic import BaseModel, Field, model_validator
-
-# Autogen v0.4+ imports
+from autogen_agentchat.agents import AssistantAgent
+from autogen_agentchat.messages import StructuredMessage
+from autogen_agentchat.teams import RoundRobinGroupChat
 from autogen_core import CancellationToken
 from autogen_core.models import (
     ChatCompletionClient,
@@ -33,9 +34,7 @@ from autogen_core.models import (
     RequestUsage,
     UserMessage,
 )
-from autogen_agentchat.agents import AssistantAgent
-from autogen_agentchat.messages import StructuredMessage
-from autogen_agentchat.teams import RoundRobinGroupChat
+from pydantic import BaseModel, Field, model_validator
 
 from rag.generate import FALLBACK_REFUSAL
 from safety.guardrails import mask_pii
@@ -303,7 +302,7 @@ class MockChatCompletionClient(ChatCompletionClient):
         self,
         messages: Sequence[LLMMessage],
         **kwargs: Any,
-    ) -> AsyncGenerator[Union[str, CreateResult], None]:
+    ) -> AsyncGenerator[str | CreateResult, None]:
         res = await self.create(messages, **kwargs)
         yield res
 
@@ -432,8 +431,8 @@ def _resolve_context_text(sources: list[str] | str | None, context_text: str = "
             for doc in load_kb():
                 kb_map[doc["doc_id"].lower()] = doc["text"]
                 kb_map[doc["doc_id"].lower() + ".md"] = doc["text"]
-        except Exception:
-            pass
+        except (ImportError, OSError, ValueError) as exc:
+            logging.getLogger("ola_domain_agent.review").debug("load_kb skipped: %s", exc)
 
         for src in sources_list:
             clean_src = str(src).strip()
