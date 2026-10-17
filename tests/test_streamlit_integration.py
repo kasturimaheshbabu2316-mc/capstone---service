@@ -9,15 +9,16 @@ Verifies:
 6. Extraction of answer, sources, ticket, and escalation data.
 """
 
-from unittest.mock import patch, MagicMock
-import pytest
+from unittest.mock import MagicMock, patch
+
 import requests
 
 from streamlit_app import (
     BACKEND_URL,
     check_backend_health,
     format_display_query,
-    clean_source_name,
+    get_admin_password,
+    get_admin_token,
     process_query_fastapi,
 )
 
@@ -108,3 +109,25 @@ def test_process_query_fastapi_offline_advice():
         assert res["status_code"] == 503
         assert res["title"] == "Backend Service Offline"
         assert res["detail"] == "Backend offline - start it with: uvicorn api.main:app --port 8000"
+
+
+def test_get_admin_credentials_from_env(monkeypatch):
+    """Verifies reading admin password and token from environment variables."""
+    monkeypatch.setenv("ADMIN_PASSWORD", "secret_pass_123")
+    monkeypatch.setenv("ADMIN_TOKEN", "secret_token_456")
+    assert get_admin_password() == "secret_pass_123"
+    assert get_admin_token() == "secret_token_456"
+
+
+def test_get_admin_credentials_fallback_and_missing(monkeypatch):
+    """Verifies fallback when ADMIN_TOKEN is absent and behavior when both are missing."""
+    monkeypatch.setenv("ADMIN_PASSWORD", "secret_pass_123")
+    monkeypatch.delenv("ADMIN_TOKEN", raising=False)
+    # Token falls back to password
+    assert get_admin_token() == "secret_pass_123"
+
+    # Both missing
+    monkeypatch.delenv("ADMIN_PASSWORD", raising=False)
+    assert get_admin_password() is None
+    assert get_admin_token() is None
+
