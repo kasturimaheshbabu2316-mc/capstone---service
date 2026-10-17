@@ -14,10 +14,11 @@ Uses autogen-agentchat v0.4+ and autogen-core API:
 from __future__ import annotations
 
 import asyncio
+from collections.abc import AsyncGenerator, Mapping, Sequence
 import concurrent.futures
 from pathlib import Path
 import re
-from typing import Any, AsyncGenerator, List, Mapping, Optional, Sequence, Set, Tuple, Union
+from typing import Any
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -42,15 +43,15 @@ from safety.guardrails import mask_pii
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 TRANSCRIPT_PATH = PROJECT_ROOT / "transcripts" / "14_review.txt"
 
-STOPWORDS: Set[str] = {
+STOPWORDS: set[str] = {
     "a", "an", "the", "and", "or", "in", "on", "at", "to", "for", "with", "by", "of",
     "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "do",
     "does", "did", "can", "could", "will", "would", "should", "what", "which", "who",
     "when", "where", "why", "how", "this", "that", "these", "those", "it", "its",
-    "in", "also", "addition", "further", "under", "all", "our", "per", "from",
+    "also", "addition", "further", "under", "all", "our", "per", "from",
 }
 
-UNGROUNDED_PHRASES: List[str] = [
+UNGROUNDED_PHRASES: list[str] = [
     "refunds are instant",
     "refunds are instant for all riders",
     "instant refund",
@@ -90,19 +91,19 @@ class ReviewVerdict(BaseModel):
 Verdict = ReviewVerdict
 
 
-def _extract_tokens(text: str) -> Set[str]:
+def _extract_tokens(text: str) -> set[str]:
     """Extracts substantive lowercase alphanumeric tokens longer than 2 characters."""
     raw = re.findall(r"\b[a-zA-Z0-9_\-]{3,}\b", text.lower())
     return set(raw) - STOPWORDS
 
 
-def _split_into_sentences(text: str) -> List[str]:
+def _split_into_sentences(text: str) -> list[str]:
     """Splits text into non-empty sentence strings."""
     sentences = re.split(r"(?<=[.!?])\s+", text.strip())
     return [s.strip() for s in sentences if len(s.strip()) > 3]
 
 
-def _parse_task_content(messages: Sequence[LLMMessage]) -> Tuple[str, str]:
+def _parse_task_content(messages: Sequence[LLMMessage]) -> tuple[str, str]:
     """Extracts draft answer and retrieved context from conversation input."""
     full_text = ""
     for m in messages:
@@ -157,9 +158,9 @@ class MockChatCompletionClient(ChatCompletionClient):
         *,
         tools: Sequence[Any] = [],
         tool_choice: Any = "auto",
-        json_output: Optional[Union[bool, type[BaseModel]]] = None,
+        json_output: bool | type[BaseModel] | None = None,
         extra_create_args: Mapping[str, Any] = {},
-        cancellation_token: Optional[CancellationToken] = None,
+        cancellation_token: CancellationToken | None = None,
     ) -> CreateResult:
         draft_text, context_text = _parse_task_content(messages)
         conv_text = " ".join(str(getattr(m, "content", "")) for m in messages)
@@ -174,8 +175,8 @@ class MockChatCompletionClient(ChatCompletionClient):
             # Check if Reviewer flagged unsupported claims
             if "FLAGGED:" in conv_text:
                 # Find which sentences contain ungrounded claims or match flagged patterns
-                supported_sentences: List[str] = []
-                flagged_sentences: List[str] = []
+                supported_sentences: list[str] = []
+                flagged_sentences: list[str] = []
 
                 context_tokens = _extract_tokens(context_text)
 
@@ -266,7 +267,7 @@ class MockChatCompletionClient(ChatCompletionClient):
             sentences = _split_into_sentences(draft_text)
             context_tokens = _extract_tokens(context_text)
 
-            unsupported: List[str] = []
+            unsupported: list[str] = []
             for s in sentences:
                 s_lower = s.lower()
                 if any(phrase in s_lower for phrase in UNGROUNDED_PHRASES):
@@ -356,7 +357,7 @@ def build_review_team() -> RoundRobinGroupChat:
 async def run_autogen_review_async(
     draft_answer: str,
     context: str,
-) -> Tuple[ReviewVerdict, List[Any]]:
+) -> tuple[ReviewVerdict, list[Any]]:
     """Executes the AutoGen RoundRobinGroupChat team asynchronously.
 
     Returns:
@@ -371,7 +372,7 @@ async def run_autogen_review_async(
     result = await team.run(task=task_input)
 
     # Extract final ReviewVerdict from messages
-    final_verdict: Optional[ReviewVerdict] = None
+    final_verdict: ReviewVerdict | None = None
     for msg in reversed(result.messages):
         if isinstance(msg, StructuredMessage) and isinstance(msg.content, ReviewVerdict):
             final_verdict = msg.content
@@ -391,7 +392,7 @@ async def run_autogen_review_async(
     return final_verdict, list(result.messages)
 
 
-_shared_review_pool: Optional[concurrent.futures.ThreadPoolExecutor] = None
+_shared_review_pool: concurrent.futures.ThreadPoolExecutor | None = None
 
 
 def get_shared_review_pool() -> concurrent.futures.ThreadPoolExecutor:
@@ -402,7 +403,7 @@ def get_shared_review_pool() -> concurrent.futures.ThreadPoolExecutor:
     return _shared_review_pool
 
 
-def run_autogen_review_sync(draft_answer: str, context: str) -> Tuple[ReviewVerdict, List[Any]]:
+def run_autogen_review_sync(draft_answer: str, context: str) -> tuple[ReviewVerdict, list[Any]]:
     """Thread-safe synchronous runner for the AutoGen review team."""
     pool = get_shared_review_pool()
     future = pool.submit(lambda: asyncio.run(run_autogen_review_async(draft_answer, context)))
@@ -414,7 +415,7 @@ def run_autogen_review_sync(draft_answer: str, context: str) -> Tuple[ReviewVerd
 
 def _resolve_context_text(sources: list[str] | str | None, context_text: str = "") -> str:
     """Resolves full policy context text from explicit context strings or knowledge base doc IDs."""
-    parts: List[str] = []
+    parts: list[str] = []
     if context_text and len(context_text.strip()) > 0:
         parts.append(context_text.strip())
 
@@ -425,7 +426,7 @@ def _resolve_context_text(sources: list[str] | str | None, context_text: str = "
             sources_list = list(sources)
 
         # Lazy load KB documents map
-        kb_map: Dict[str, str] = {}
+        kb_map: dict[str, str] = {}
         try:
             from kb_loader import load_kb
             for doc in load_kb():
@@ -467,7 +468,7 @@ def review_support_response(
     return verdict
 
 
-def run_review_demos() -> Dict[str, Any]:
+def run_review_demos() -> dict[str, Any]:
     """Executes Demo A (clean draft) and Demo B (injected ungrounded claim) and records transcript."""
     TRANSCRIPT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
@@ -503,7 +504,7 @@ def run_review_demos() -> Dict[str, Any]:
     assert "Sev-1 safety incidents require" in verdict_b.final_answer, "Demo B supported text must be retained"
 
     # Format transcript
-    lines: List[str] = []
+    lines: list[str] = []
     lines.append("================================================================================")
     lines.append("STEP 12 / TASK 14 - AUTOGEN SECONDARY REVIEW STAGE TRANSCRIPT")
     lines.append("================================================================================")
@@ -525,7 +526,7 @@ def run_review_demos() -> Dict[str, Any]:
         m_type = type(m).__name__
         content = getattr(m, "content", "")
         lines.append(f"  [{src}] ({m_type}):\n    {content}")
-    lines.append(f"\nFinal ReviewVerdict (Demo A):")
+    lines.append("\nFinal ReviewVerdict (Demo A):")
     lines.append(f"  • approved:       {verdict_a.approved}")
     lines.append(f"  • final_answer:   {verdict_a.final_answer}")
     lines.append(f"  • reason:         {verdict_a.reason}")
@@ -543,7 +544,7 @@ def run_review_demos() -> Dict[str, Any]:
         m_type = type(m).__name__
         content = getattr(m, "content", "")
         lines.append(f"  [{src}] ({m_type}):\n    {content}")
-    lines.append(f"\nFinal ReviewVerdict (Demo B):")
+    lines.append("\nFinal ReviewVerdict (Demo B):")
     lines.append(f"  • approved:       {verdict_b.approved}")
     lines.append(f"  • final_answer:   {verdict_b.final_answer}")
     lines.append(f"  • reason:         {verdict_b.reason}")
