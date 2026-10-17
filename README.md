@@ -492,8 +492,18 @@ Navigate to the **Environment** tab in Render and add the following variables:
 | `CREWAI_DISABLE_TELEMETRY` | `true` | Prevents outbound telemetry pings |
 | `OTEL_SDK_DISABLED` | `true` | Disables OpenTelemetry SDK tracking |
 | `PYTHONUNBUFFERED` | `1` | Ensures real-time stdout/stderr log streaming |
+| `ADMIN_TOKEN` | `your-secret-token` | Protects privileged endpoints (`POST /add-document`, `POST /clear-cache`) |
+| `ADMIN_PASSWORD` | `your-admin-password` | Protects Streamlit System Management Admin panel |
 
 *(Note: Render automatically sets the `PORT` variable. The `Dockerfile` binds uvicorn to `${PORT:-8000}`)*.
+
+### Admin Panel Security & API Token Protection
+
+- **Privileged Backend Endpoints**: `POST /add-document` and `POST /clear-cache` require the `X-Admin-Token` HTTP header matching `ADMIN_TOKEN` (validated using `hmac.compare_digest`).
+  - Missing or incorrect token returns **HTTP 401 Unauthorized**.
+  - If `ADMIN_TOKEN` is not configured in the server environment, privileged endpoints return **HTTP 403 Forbidden** (fail-closed disabled).
+- **Public Endpoints**: `/`, `/health`, `/ask`, and `/ws/chat` remain open with zero authentication.
+- **Streamlit Admin Panel**: The **⚙️ System Management (Admin)** expander is completely hidden if `ADMIN_PASSWORD` is unset. When configured, entering the password verifies credentials via `hmac.compare_digest` and keeps session state in memory only (`st.session_state`). Includes a one-click "Lock Panel" button.
 
 ### 5. Health Check Path & Verification
 

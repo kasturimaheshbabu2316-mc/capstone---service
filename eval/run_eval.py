@@ -36,12 +36,13 @@ def run_benchmark():
         try:
             req = AskRequest(query=q, session_id=f"eval_{qid}")
             resp = ask_endpoint(req)
+            data_dict = resp.data if isinstance(resp.data, dict) else (resp.data.model_dump() if hasattr(resp.data, "model_dump") else resp.data.__dict__)
             resp_dict = {
-                "answer": resp.data.answer,
-                "grounded": resp.data.grounded,
-                "confidence": resp.data.confidence,
-                "sources": resp.data.sources,
-                "ticket_id": resp.data.ticket_id,
+                "answer": data_dict.get("answer", ""),
+                "grounded": data_dict.get("grounded", False),
+                "confidence": data_dict.get("confidence", 0.0),
+                "sources": data_dict.get("sources", []),
+                "ticket_id": data_dict.get("ticket_id"),
             }
         except HTTPException as e:
             resp_dict = {

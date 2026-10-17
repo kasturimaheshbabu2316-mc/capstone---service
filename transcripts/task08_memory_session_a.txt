@@ -14,7 +14,7 @@ Session ID    : session_a_continuous
 [Turn 2] Preprocessor   : Resolved pronouns ('its SLA', 'that one') using injected history.
 [Turn 2] Resolved Query : What is the SLA and escalation risk for ticket TKT-0007?
 [Turn 2] Was Resolved   : True
-[Turn 2] Assistant Answer: Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+[Turn 2] Assistant Answer: Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 [Turn 2] Active Ticket  : TKT-0007
 [Turn 2] Escalation Risk: 0.0
 

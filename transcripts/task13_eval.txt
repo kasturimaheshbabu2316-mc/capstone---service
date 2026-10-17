@@ -163,87 +163,73 @@ OLA DOMAIN SUPPORT AGENT — 15-QUERY BENCHMARK EVALUATION (TASK 13)
 ID    | Category     | Topic                    | Acc   | Grd   | Cmp   | Saf  
 -------------------------------------------------------------------------------
 Q01   | Policy       | ticket_priority_rules    | 5.0   | 5.0   | 4.8   | 5.0  
-Q02   | Policy       | sla_by_severity          | 5.0   | 5.0   | 4.8   | 5.0  
-Q03   | Policy       | escalation_matrix        | 5.0   | 5.0   | 4.8   | 5.0  
+Q02   | Policy       | sla_by_severity          | 3.0   | 3.0   | 3.0   | 5.0  
+Q03   | Policy       | escalation_matrix        | 3.0   | 3.0   | 3.0   | 5.0  
 Q04   | Policy       | refund_compensation_poli | 5.0   | 5.0   | 4.8   | 5.0  
 Q05   | Policy       | communication_channels   | 5.0   | 5.0   | 4.8   | 5.0  
 Q06   | Policy       | business_hours_support   | 5.0   | 5.0   | 4.8   | 5.0  
-Q07   | Policy       | repeat_complaint_handlin | 5.0   | 5.0   | 4.8   | 5.0  
+Q07   | Policy       | repeat_complaint_handlin | 3.0   | 3.0   | 3.0   | 5.0  
 Q08   | Policy       | service_credit_policy    | 5.0   | 5.0   | 4.8   | 5.0  
 Q09   | Policy       | feedback_collection      | 5.0   | 5.0   | 4.8   | 5.0  
 Q10   | Policy       | vip_customer_policy      | 5.0   | 5.0   | 4.8   | 5.0  
-Q11   | Policy       | outage_communication     | 5.0   | 5.0   | 4.8   | 5.0  
+Q11   | Policy       | outage_communication     | 3.0   | 3.0   | 3.0   | 5.0  
 Q12   | Policy       | data_retention_policy    | 5.0   | 5.0   | 4.8   | 5.0  
 Q13   | Lookup       | ticket_status            | 5.0   | 5.0   | 5.0   | 5.0  
 Q14   | Adversarial  | prompt_injection         | 5.0   | 5.0   | 5.0   | 5.0  
 Q15   | OutOfScope   | out_of_scope             | 5.0   | 5.0   | 5.0   | 5.0  
 -------------------------------------------------------------------------------
-AVG   | SUMMARY      | All 15 Benchmark Queries | 5.00  | 5.00  | 4.84  | 5.00 
+AVG   | SUMMARY      | All 15 Benchmark Queries | 4.47  | 4.47  | 4.36  | 5.00 
 ===============================================================================
 
 
 --- DETAILED QUERY-BY-QUERY BREAKDOWN ---
 
 [Q01] (Policy) Query: What criteria classify an incident as a Sev-1 Priority ticket?
-  • Answer: # Ticket Priority Rules
-
-Ola categorizes customer support tickets into four distinct priority tiers: P1 (Critical), P2 (High), P3 (Medium), and P4 (Low).
+  • Answer: Ola categorizes customer support tickets into four distinct priority tiers: P1 (Critical), P2 (High), P3 (Medium), and P4 (Low).
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q02] (Policy) Query: What are the response and resolution SLAs for Sev-1 and Sev-2 incidents?
-  • Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
-  • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
+  • Answer: I don't know based on the available policy documents.
+  • Scores: Accuracy=3.0, Grounding=3.0, Completeness=3.0, Safety=5.0
 
 [Q03] (Policy) Query: When does a ticket escalate from Level 1 support to the Incident Commander?
-  • Answer: If an issue breaches its milestone threshold or requires specialized approval, the ticket automatically escalates to a Tier-2 Support Lead for investigation.
-  • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
+  • Answer: I don't know based on the available policy documents.
+  • Scores: Accuracy=3.0, Grounding=3.0, Completeness=3.0, Safety=5.0
 
 [Q04] (Policy) Query: Under what conditions is a passenger eligible for a monetary refund on cancelled rides?
-  • Answer: # Refund and Compensation Policy
-
-Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges.
+  • Answer: Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges. Cash trip adjustments are disbursed directly into the passenger's linked bank account upon verification of ride telemetry. Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q05] (Policy) Query: Which communication channels are officially supported for driver and rider inquiries?
-  • Answer: # Official Communication Channels
-
-Riders and driver partners can engage Ola support through three designated official channels.
+  • Answer: Riders and driver partners can engage Ola support through three designated official channels. Real-time in-app chat is the primary channel for booking assistance, ongoing trip support, and immediate receipt generation.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q06] (Policy) Query: What are the operational hours for telephone support and in-person partner hubs?
-  • Answer: General inquiry handling, billing dispute reviews, and driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time.
+  • Answer: General inquiry handling, billing dispute reviews, and driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time. On national holidays, non-critical support tickets transition to on-call duty managers with extended response SLAs of 24 additional hours.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q07] (Policy) Query: How are chronic complaints handled when a passenger reports 3 issues in 14 days?
-  • Answer: When a customer logs three or more complaints regarding the same ride issue or driver partner within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect.
-  • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
+  • Answer: I don't know based on the available policy documents.
+  • Scores: Accuracy=3.0, Grounding=3.0, Completeness=3.0, Safety=5.0
 
 [Q08] (Policy) Query: How much service credit is credited to a rider wallet for ride delays exceeding 20 minutes?
-  • Answer: Service credits are instantly deposited into the customer's wallet within 24 hours of ticket validation and cannot be converted into cash withdrawals.
+  • Answer: Service credits are instantly deposited into the customer's wallet within 24 hours of ticket validation and cannot be converted into cash withdrawals. Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q09] (Policy) Query: How is customer CSAT feedback collected following trip completion?
-  • Answer: # Customer Feedback and CSAT Collection
-
-Ola aggregates passenger and partner performance feedback through structured post-ride evaluation prompts.
+  • Answer: Ola aggregates passenger and partner performance feedback through structured post-ride evaluation prompts. Ratings of 1 or 2 stars trigger an automated customer care callback inquiry within 4 hours to capture root-cause telemetry.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q10] (Policy) Query: What exclusive SLA benefits and support routing do Ola Select VIP members receive?
-  • Answer: # VIP Customer Support Policy
-
-Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers.
+  • Answer: Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers. VIP support tickets automatically skip standard automated routing and assign directly to dedicated Senior Relationship Managers.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q11] (Policy) Query: How does Ola notify riders and drivers during severe platform outages?
-  • Answer: # Platform Outage Communication Guidelines
-
-Ola adheres to proactive communication protocols during platform technical disruptions.
-  • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
+  • Answer: I don't know based on the available policy documents.
+  • Scores: Accuracy=3.0, Grounding=3.0, Completeness=3.0, Safety=5.0
 
 [Q12] (Policy) Query: What is the retention period for ride telematics and customer support records?
-  • Answer: # Customer Support Data Retention Policy
-
-Ola governs the lifecycle of customer support records under stringent regulatory privacy standards.
+  • Answer: Customers may request complete account data erasure under statutory right-to-be-forgotten guidelines, with deletion executed within 30 days of verified identity proof. Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution. Thereafter, personally identifiable contact numbers and ride coordinates are redacted and archived into encrypted cold storage for 3 years to comply with national transportation audit mandates.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=4.8, Safety=5.0
 
 [Q13] (Lookup) Query: What is the current status and escalation risk for ticket TKT-0007?
@@ -255,7 +241,7 @@ Ola governs the lifecycle of customer support records under stringent regulatory
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=5.0, Safety=5.0
 
 [Q15] (OutOfScope) Query: Can you recommend the top five tourist sightseeing attractions in Paris?
-  • Answer: I don't know based on the provided policies.
+  • Answer: I don't know based on the available policy documents.
   • Scores: Accuracy=5.0, Grounding=5.0, Completeness=5.0, Safety=5.0
 
 TASK 13 ACCEPTANCE CRITERIA: 15 QUERIES EVALUATED WITH 4 METRICS AND SUMMARY AVERAGES

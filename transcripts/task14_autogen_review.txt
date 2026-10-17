@@ -163,15 +163,15 @@ OLA DOMAIN SUPPORT AGENT — AUTOGEN SECONDARY REVIEW STAGE (TASK 14)
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -179,15 +179,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -195,15 +195,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -211,15 +211,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -227,15 +227,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -243,15 +243,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -259,15 +259,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -275,15 +275,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -291,15 +291,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -307,15 +307,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -323,15 +323,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -339,15 +339,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -355,15 +355,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -371,15 +371,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -387,15 +387,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -403,15 +403,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -419,15 +419,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -435,15 +435,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -451,15 +451,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -467,15 +467,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -483,15 +483,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -499,15 +499,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -515,15 +515,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -531,15 +531,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -547,15 +547,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -563,15 +563,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -579,15 +579,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -595,15 +595,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -611,15 +611,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -627,15 +627,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -643,15 +643,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -659,15 +659,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -675,15 +675,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -691,15 +691,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -707,15 +707,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -723,15 +723,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -739,15 +739,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -755,15 +755,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -771,15 +771,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -787,15 +787,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -803,15 +803,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -819,15 +819,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -835,15 +835,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -851,15 +851,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -867,15 +867,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -883,15 +883,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -899,15 +899,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -915,15 +915,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -931,15 +931,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -947,15 +947,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -963,15 +963,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -979,15 +979,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -995,15 +995,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1011,15 +1011,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1027,15 +1027,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1043,15 +1043,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1059,15 +1059,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1075,15 +1075,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1091,15 +1091,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1107,15 +1107,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1123,15 +1123,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1139,15 +1139,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1155,15 +1155,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1171,15 +1171,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1187,15 +1187,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1203,15 +1203,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1219,15 +1219,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1235,15 +1235,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1251,15 +1251,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1267,15 +1267,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1283,15 +1283,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1299,15 +1299,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1315,15 +1315,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1331,15 +1331,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1347,15 +1347,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1363,15 +1363,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1379,15 +1379,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1395,15 +1395,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1411,15 +1411,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =
@@ -1427,15 +1427,15 @@ Redactions Made: True
 --- DEMO 1: FAITHFUL RESPONSE (APPROVED) ---
 Draft Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Verdict Approved: True
-Feedback       : PolicyComplianceReviewer: Verified facts against knowledge base. FinalEditor: Tone and compliance approved.
+Feedback       : Verified facts against knowledge base. All claims grounded in retrieved context.
 Final Answer   : Sev-1 critical incidents require acknowledgement within 15 minutes and resolution within 2 hours.
 Redactions Made: False
 
 --- DEMO 2: INJECTED HALLUCINATION (REVISED) ---
 Draft Answer   : Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.
 Verdict Approved: False
-Feedback       : PolicyComplianceReviewer: Detected ungrounded policy claim. FinalEditor: Redacted unverified claim.
-Final Answer   : Under standard Ola policy, compensation and refunds are assessed strictly based on investigation findings and documented delay tiers as outlined in the Service Credit Policy.
+Feedback       : Policy-Compliance-Reviewer flagged ungrounded claims: ['Ola provides 100% full compensation for any delay regardless of circumstances with unlimited credits.']. Final-Editor removed the ungrounded sentence(s) to guarantee context fidelity.
+Final Answer   : Under standard Ola operational policy, service actions and refunds are strictly governed by documented SLA tiers and verified ride dispatch logs.
 Redactions Made: True
 
 =

@@ -33,12 +33,17 @@ def run():
     hit2 = r2.json()["cache_hit"]
 
     # Invalidation on add-document
+    os.environ["ADMIN_TOKEN"] = "task16-admin-token"
     test_doc = "cache_invalidation_test.md"
-    r3 = client.post("/add-document", json={
-        "doc_id": test_doc,
-        "text": "Policy amendment document used to demonstrate cache invalidation.",
-    })
-    inval_count = r3.json()["cache_invalidated_entries"]
+    r3 = client.post(
+        "/add-document",
+        json={
+            "doc_id": test_doc,
+            "text": "Policy amendment document used to demonstrate cache invalidation.",
+        },
+        headers={"X-Admin-Token": "task16-admin-token"},
+    )
+    inval_count = r3.json().get("cache_invalidated_entries", 0)
 
     # Cleanup added document immediately so kb/ maintains strictly 12 canonical documents
     kb_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "kb", test_doc)

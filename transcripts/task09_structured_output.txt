@@ -54,6 +54,20 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED CREWRESPONSE VALIDATION (TASK 9)
       "description": "Flag indicating whether supervisor escalation is recommended.",
       "title": "Escalation Recommended",
       "type": "boolean"
+    },
+    "review_status": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Secondary AutoGen review stage verdict and compliance status.",
+      "title": "Review Status"
     }
   },
   "required": [
@@ -75,7 +89,15 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED CREWRESPONSE VALIDATION (TASK 9)
   ],
   "ticket": null,
   "grounded": true,
-  "escalation_recommended": false
+  "escalation_recommended": false,
+  "review_status": {
+    "approved": true,
+    "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+    "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "redactions_made": false,
+    "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
+  }
 }
 
 --- 3. VALIDATED TICKET LOOKUP INSTANCE (route='lookup') ---
@@ -98,7 +120,15 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED CREWRESPONSE VALIDATION (TASK 9)
     "recommend_escalation": true
   },
   "grounded": true,
-  "escalation_recommended": true
+  "escalation_recommended": true,
+  "review_status": {
+    "approved": true,
+    "final_answer": "Ticket TKT-0002 (Product Defect) is currently Escalated with a resolution time of 15.8 hours. Escalation risk score is 0.8400 (High Risk).",
+    "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "redactions_made": false,
+    "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
+  }
 }
 
 --- 4. SCHEMA MISMATCH REJECTION TEST ---

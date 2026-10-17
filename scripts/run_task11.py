@@ -246,9 +246,15 @@ def run_demonstration():
     full_transcript = "\n".join(lines)
     with open(TRANSCRIPT_PATH, "w", encoding="utf-8") as f:
         f.write(full_transcript)
+    ws_transcript_path = PROJECT_ROOT / "transcripts" / "task11_websocket.txt"
+    with open(ws_transcript_path, "w", encoding="utf-8") as f:
+        f.write(full_transcript)
 
-    print(f"Transcript written to {TRANSCRIPT_PATH} ({len(full_transcript)} characters).")
+    print(f"Transcript written to {TRANSCRIPT_PATH} and {ws_transcript_path}.")
 
+
+run = run_demonstration
 
 if __name__ == "__main__":
     run_demonstration()
+

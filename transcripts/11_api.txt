@@ -10,7 +10,7 @@ $ curl -X GET http://localhost:8000/health -H "Accept: application/json"
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
-  "status": "healthy",
+  "status": "ok",
   "mock_llm": true,
   "kb_ready": true,
   "db_ready": true,
@@ -32,27 +32,43 @@ Content-Type: application/json
   "route": "rag",
   "sources": [
     "sla_by_severity",
-    "test_temp_policy.md",
-    "vip_customer_policy"
+    "vip_customer_policy",
+    "communication_channels"
   ],
   "ticket": null,
   "grounded": true,
   "escalation_recommended": false,
-  "trace_id": "e4464d78-65c3-4ac4-872e-4a4ff33f4c92",
-  "latency_ms": 1208.59,
+  "review_status": {
+    "approved": true,
+    "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+    "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "redactions_made": false,
+    "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
+  },
+  "trace_id": "cbe5fc65-a327-46da-9595-985b690b1603",
+  "latency_ms": 240.7,
   "data": {
     "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
     "route": "rag",
     "sources": [
       "sla_by_severity",
-      "test_temp_policy.md",
-      "vip_customer_policy"
+      "vip_customer_policy",
+      "communication_channels"
     ],
     "ticket": null,
     "ticket_id": null,
     "grounded": true,
     "escalation_recommended": false,
-    "escalation_score": null
+    "escalation_score": null,
+    "review_status": {
+      "approved": true,
+      "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+      "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+      "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+      "redactions_made": false,
+      "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
+    }
   },
   "sql": null,
   "chart_type": null,
@@ -60,14 +76,14 @@ Content-Type: application/json
   "y_col": null,
   "retrieved_sources": [
     "sla_by_severity",
-    "test_temp_policy.md",
-    "vip_customer_policy"
+    "vip_customer_policy",
+    "communication_channels"
   ],
   "retrieved_snippet": null,
-  "review_status": {},
   "cache_hit": false,
   "guardrail_flags": {
     "input_pii_masked": false,
+    "phone_masked": false,
     "policy_grounded": true
   }
 }
@@ -102,8 +118,16 @@ Content-Type: application/json
   },
   "grounded": true,
   "escalation_recommended": false,
-  "trace_id": "8d34229b-f04e-478d-8631-8681eb9c5840",
-  "latency_ms": 95.59,
+  "review_status": {
+    "approved": true,
+    "final_answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+    "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "redactions_made": false,
+    "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
+  },
+  "trace_id": "f1fa80d0-47db-450c-b210-9abee7061e86",
+  "latency_ms": 185.29,
   "data": {
     "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
     "route": "lookup",
@@ -125,7 +149,15 @@ Content-Type: application/json
     "ticket_id": "TKT-0007",
     "grounded": true,
     "escalation_recommended": false,
-    "escalation_score": 0.0
+    "escalation_score": 0.0,
+    "review_status": {
+      "approved": true,
+      "final_answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+      "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+      "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+      "redactions_made": false,
+      "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
+    }
   },
   "sql": null,
   "chart_type": null,
@@ -135,10 +167,10 @@ Content-Type: application/json
     "dataset.py"
   ],
   "retrieved_snippet": null,
-  "review_status": {},
   "cache_hit": false,
   "guardrail_flags": {
     "input_pii_masked": false,
+    "phone_masked": false,
     "policy_grounded": true
   }
 }
@@ -173,8 +205,16 @@ Content-Type: application/json
   },
   "grounded": true,
   "escalation_recommended": false,
-  "trace_id": "be75623c-1ffe-4b9c-866c-a1eb2554c78b",
-  "latency_ms": 101.95,
+  "review_status": {
+    "approved": true,
+    "final_answer": "Ticket TKT-0001 (Account Access) is currently Open with a resolution time of 8.3 hours. Escalation risk score is 0.3067 (Normal).",
+    "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+    "redactions_made": false,
+    "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
+  },
+  "trace_id": "ec103426-2127-4cd0-8a01-03330df67bda",
+  "latency_ms": 210.46,
   "data": {
     "answer": "Ticket TKT-0001 (Account Access) is currently Open with a resolution time of 8.3 hours. Escalation risk score is 0.3067 (Normal).",
     "route": "lookup",
@@ -196,7 +236,15 @@ Content-Type: application/json
     "ticket_id": "TKT-0001",
     "grounded": true,
     "escalation_recommended": false,
-    "escalation_score": 0.3067
+    "escalation_score": 0.3067,
+    "review_status": {
+      "approved": true,
+      "final_answer": "Ticket TKT-0001 (Account Access) is currently Open with a resolution time of 8.3 hours. Escalation risk score is 0.3067 (Normal).",
+      "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+      "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
+      "redactions_made": false,
+      "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
+    }
   },
   "sql": null,
   "chart_type": null,
@@ -206,10 +254,10 @@ Content-Type: application/json
     "dataset.py"
   ],
   "retrieved_snippet": null,
-  "review_status": {},
   "cache_hit": false,
   "guardrail_flags": {
     "input_pii_masked": true,
+    "phone_masked": true,
     "policy_grounded": true
   }
 }
@@ -284,15 +332,12 @@ $ curl -X POST http://localhost:8000/add-document \
     -H "Content-Type: application/json" \
     -d '{"title": "sample_demo_policy.md", "text": "Ola guarantees transparent pricing across all rides. Airport toll surcharges are clearly itemized."}'
 
-HTTP/1.1 200 OK
+HTTP/1.1 403 OK
 Content-Type: application/json
 {
-  "status": "indexed",
-  "title": "sample_demo_policy.md",
-  "doc_id": "sample_demo_policy.md",
-  "collection": "kb_sentence",
-  "chunks_indexed": 2,
-  "cache_invalidated_entries": 3
+  "error": "HTTP Error",
+  "detail": "Admin endpoints are disabled because ADMIN_TOKEN is not configured on this server.",
+  "status_code": 403
 }
 
 
@@ -301,14 +346,14 @@ Content-Type: application/json
 --------------------------------------------------------------------------------
 Client 1 connecting to ws://localhost:8000/ws/chat ...
   Client 1 -> Sent: 'What is the SLA for a Sev-1 safety incident?'
-  Client 1 <- Received: type=response, grounded=True, latency_ms=229.92
+  Client 1 <- Received: type=response, grounded=True, latency_ms=0.07
   Client 1 -> Sent: 'What is the status of TKT-0001?'
-  Client 1 <- Received: type=response, ticket=TKT-0001, latency_ms=113.08
+  Client 1 <- Received: type=response, ticket=TKT-0001, latency_ms=200.57
   Client 1 -> Abruptly terminating connection without close handshake.
 Server successfully caught WebSocketDisconnect, logged, and cleaned up state.
 Client 2 connecting immediately to ws://localhost:8000/ws/chat ...
   Client 2 -> Sent: 'What is the status of TKT-0002?'
-  Client 2 <- Received: type=response, ticket=TKT-0002, latency_ms=115.41
+  Client 2 <- Received: type=response, ticket=TKT-0002, latency_ms=208.32
 Client 2 session concluded successfully.
 
 --------------------------------------------------------------------------------
@@ -318,52 +363,54 @@ Zero PII Assertion: Raw phone '+91 98765 43210' present in log: False (Expected:
 
 Latest 3 JSON-Lines Audit Entries:
 {
-  "trace_id": "40f2c3d3-e800-49ca-95d0-c4a04a2015e1",
-  "timestamp": "2026-10-15T08:48:17.575660+00:00",
+  "trace_id": "1b88904a-6fcc-45a0-aa05-70162243e320",
+  "timestamp": "2026-10-17T05:08:53.305044+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_d3dcbd98",
+  "session_id": "ws_b51b056e",
   "masked_question": "What is the SLA for a Sev-1 safety incident?",
   "masked_query": "What is the SLA for a Sev-1 safety incident?",
   "route": "rag",
-  "latency_ms": 229.92,
+  "latency_ms": 0.07,
   "status_code": 200,
-  "cache_hit": false,
+  "cache_hit": true,
   "guardrail_flags": {
-    "phone_masked": false,
-    "grounded": true
+    "input_pii_masked": false,
+    "phone_masked": false
   }
 }
 
 {
-  "trace_id": "71acb842-0dd1-4d95-bf7c-9f4bc5218f3f",
-  "timestamp": "2026-10-15T08:48:17.690684+00:00",
+  "trace_id": "c27d9ef5-f4a3-4aa5-9c6b-e15ec002716f",
+  "timestamp": "2026-10-17T05:08:53.506100+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_d3dcbd98",
+  "session_id": "ws_b51b056e",
   "masked_question": "What is the status of TKT-0001?",
   "masked_query": "What is the status of TKT-0001?",
   "route": "lookup",
-  "latency_ms": 113.08,
+  "latency_ms": 200.57,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {
+    "input_pii_masked": false,
     "phone_masked": false,
-    "grounded": true
+    "policy_grounded": true
   }
 }
 
 {
-  "trace_id": "921aca61-625e-4345-b720-feb8c07c1deb",
-  "timestamp": "2026-10-15T08:48:17.813093+00:00",
+  "trace_id": "e1933cde-ace5-424e-a537-ee60cc69c636",
+  "timestamp": "2026-10-17T05:08:53.722089+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_a66ddcec",
+  "session_id": "ws_0235af34",
   "masked_question": "What is the status of TKT-0002?",
   "masked_query": "What is the status of TKT-0002?",
   "route": "lookup",
-  "latency_ms": 115.41,
+  "latency_ms": 208.32,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {
+    "input_pii_masked": false,
     "phone_masked": false,
-    "grounded": true
+    "policy_grounded": true
   }
 }

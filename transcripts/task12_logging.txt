@@ -161,46 +161,58 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
 =
 
 Audit Log Destination: logs/requests.jsonl
-Total Logged Entries : 243
+Total Logged Entries : 1007
 
 --- SAMPLE AUDIT LOG ENTRIES ---
 {
-  "trace_id": "d096898b-a583-4efa-9397-964330f9fa5b",
-  "timestamp": "2026-10-09T05:33:21.930369+00:00",
-  "endpoint": "/ask",
-  "session_id": "default_session",
-  "masked_query": "What is the SLA for a Sev-1 safety incident?",
+  "trace_id": "c27d9ef5-f4a3-4aa5-9c6b-e15ec002716f",
+  "timestamp": "2026-10-17T05:08:53.506100+00:00",
+  "endpoint": "/ws/chat",
+  "session_id": "ws_b51b056e",
+  "masked_question": "What is the status of TKT-0001?",
+  "masked_query": "What is the status of TKT-0001?",
+  "route": "lookup",
+  "latency_ms": 200.57,
   "status_code": 200,
-  "latency_ms": 298.24,
   "cache_hit": false,
   "guardrail_flags": {
-    "phone_masked": false
+    "input_pii_masked": false,
+    "phone_masked": false,
+    "policy_grounded": true
   }
 }
 {
-  "trace_id": "05562fd8-e18b-4e94-8944-cb44950fb3ba",
-  "timestamp": "2026-10-09T05:33:22.056127+00:00",
-  "endpoint": "/add-document",
-  "session_id": "default_session",
-  "masked_query": "Ingested doc late_night_surge_policy.md",
+  "trace_id": "e1933cde-ace5-424e-a537-ee60cc69c636",
+  "timestamp": "2026-10-17T05:08:53.722089+00:00",
+  "endpoint": "/ws/chat",
+  "session_id": "ws_0235af34",
+  "masked_question": "What is the status of TKT-0002?",
+  "masked_query": "What is the status of TKT-0002?",
+  "route": "lookup",
+  "latency_ms": 208.32,
   "status_code": 200,
-  "latency_ms": 117.38,
   "cache_hit": false,
   "guardrail_flags": {
-    "cache_invalidated": 1
+    "input_pii_masked": false,
+    "phone_masked": false,
+    "policy_grounded": true
   }
 }
 {
-  "trace_id": "038cc1f1-2079-4970-8c53-cd502737345b",
-  "timestamp": "2026-10-09T05:33:22.518883+00:00",
+  "trace_id": "40b6debe-41af-427c-a0fc-18e32d40abff",
+  "timestamp": "2026-10-17T05:08:53.957009+00:00",
   "endpoint": "/ask",
   "session_id": "default_session",
+  "masked_question": "Customer phone [PHONE_MASKED] asking for ticket TKT-0001 status.",
   "masked_query": "Customer phone [PHONE_MASKED] asking for ticket TKT-0001 status.",
+  "route": "lookup",
+  "latency_ms": 190.69,
   "status_code": 200,
-  "latency_ms": 66.17,
   "cache_hit": false,
   "guardrail_flags": {
-    "phone_masked": true
+    "input_pii_masked": true,
+    "phone_masked": true,
+    "policy_grounded": true
   }
 }
 

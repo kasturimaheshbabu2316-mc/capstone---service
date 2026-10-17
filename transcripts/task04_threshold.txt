@@ -1,27 +1,26 @@
-===========================================================================
-OLA DOMAIN SUPPORT AGENT — TASK 4: GROUNDED GENERATION & CALIBRATION
-===========================================================================
+======================================================================
+OLA DOMAIN SUPPORT AGENT — THRESHOLD CALIBRATION & GENERATION (TASK 4)
+======================================================================
 
---- 1. EMPIRICAL THRESHOLD CALIBRATION (kb_sentence) ---
-IN-SCOPE CLUSTER (>= 4 queries):
-  • Sim: 0.6299 | Top Doc: sla_by_severity            | Q: "What is the resolution SLA for a Sev-1 safety incident?"
+--- 1. EMPIRICAL THRESHOLD CALIBRATION (ola_sentence) ---
+IN-SCOPE CLUSTER:
+  • Sim: 0.6299 | Top Doc: sla_by_severity           | Q: "What is the resolution SLA for a Sev-1 safety incident?"
   • Sim: 0.7153 | Top Doc: refund_compensation_policy | Q: "When does Ola provide monetary refunds for driver cancellations?"
-  • Sim: 0.6884 | Top Doc: repeat_complaint_handling  | Q: "How does Ola handle repeat chronic complaints from passengers?"
-  • Sim: 0.5325 | Top Doc: vip_customer_policy        | Q: "What are the benefits and response times for VIP Ola Select customers?"
-  • Sim: 0.5726 | Top Doc: test_cancellation_clause   | Q: "What compensation is provided for ride delays exceeding 20 minutes?"
+  • Sim: 0.6884 | Top Doc: repeat_complaint_handling | Q: "How does Ola handle repeat chronic complaints from passengers?"
+  • Sim: 0.5325 | Top Doc: vip_customer_policy       | Q: "What are the benefits and response times for VIP Ola Select customers?"
+  • Sim: 0.5726 | Top Doc: test_cancellation_clause  | Q: "What compensation is provided for ride delays exceeding 20 minutes?"
 
-OUT-OF-SCOPE CLUSTER (>= 3 queries):
-  • Sim: 0.1158 | Top Doc: feedback_collection        | Q: "Who won the cricket world cup?"
-  • Sim: 0.0794 | Top Doc: ticket_priority_rules      | Q: "What is the best authentic Italian pizza recipe?"
-  • Sim: 0.1979 | Top Doc: communication_channels     | Q: "How do I book an international flight to London with British Airways?"
-  • Sim: 0.1449 | Top Doc: business_hours_support     | Q: "What is the current stock price of Tesla on NASDAQ?"
+OUT-OF-SCOPE CLUSTER:
+  • Sim: 0.1158 | Top Doc: feedback_collection       | Q: "Who won the cricket world cup?"
+  • Sim: 0.0794 | Top Doc: ticket_priority_rules     | Q: "What is the best authentic Italian pizza recipe?"
+  • Sim: 0.1979 | Top Doc: communication_channels    | Q: "How do I book an international flight to London with British Airways?"
+  • Sim: 0.1449 | Top Doc: business_hours_support    | Q: "What is the current stock price of Tesla on NASDAQ?"
 
 Cluster Separation:
   • Lowest In-Scope Similarity  (min_in) : 0.5325
   • Highest Out-of-Scope Sim   (max_out): 0.1979
   • Derived Midpoint Threshold (T)      : 0.3652
-  • Symmetric Safety Margin             : 0.1673
-  • Decision Rule: If Cosine Sim >= 0.3652 -> Answer; Else -> "I don't know based on the available policy documents."
+  • Decision Rule: If Cosine Similarity >= 0.3652 -> Answer; Else -> Refuse
 
 --- 2. DEMONSTRATION OF IN-SCOPE GROUNDED GENERATION (>= 5 QUERIES) ---
 
@@ -65,9 +64,8 @@ Query 6: "What are the benefits and response times for VIP Ola Select customers?
 Query: "Can you recommend the best authentic Italian pizza recipe in Rome?"
   • Top Sim : 0.0629 (Threshold: 0.3652 -> REJECT)
   • Grounded: False
-  • Sources : []
   • Answer  : "I don't know based on the available policy documents." (Calibrated Refusal Triggered)
 
-===========================================================================
+======================================================================
 TASK 4 ACCEPTANCE CRITERIA: THRESHOLD T = 0.3652 JUSTIFIED & DEMONSTRATED
-===========================================================================
+======================================================================
