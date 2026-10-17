@@ -14,11 +14,11 @@ Uses autogen-agentchat v0.4+ and autogen-core API:
 from __future__ import annotations
 
 import asyncio
-from collections.abc import AsyncGenerator, Mapping, Sequence
 import concurrent.futures
 import logging
-from pathlib import Path
 import re
+from collections.abc import AsyncGenerator, Mapping, Sequence
+from pathlib import Path
 from typing import Any
 
 from autogen_agentchat.agents import AssistantAgent
