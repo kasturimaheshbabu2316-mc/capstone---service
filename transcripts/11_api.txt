@@ -46,8 +46,8 @@ Content-Type: application/json
     "redactions_made": false,
     "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
   },
-  "trace_id": "42a68e29-5aff-44e3-b82c-30640cc2661a",
-  "latency_ms": 512.55,
+  "trace_id": "8843873a-ef6a-4a82-b6e9-3deab4b7e9a1",
+  "latency_ms": 286.45,
   "data": {
     "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
     "route": "rag",
@@ -126,8 +126,8 @@ Content-Type: application/json
     "redactions_made": false,
     "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
   },
-  "trace_id": "4e77bc19-f008-49b1-96d0-a748d09951c2",
-  "latency_ms": 156.62,
+  "trace_id": "a57ddb28-9ba9-406d-bc33-e9b4e173941b",
+  "latency_ms": 80.66,
   "data": {
     "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
     "route": "lookup",
@@ -213,8 +213,8 @@ Content-Type: application/json
     "redactions_made": false,
     "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
   },
-  "trace_id": "e98daf02-4afe-4895-bf0f-b276122b6743",
-  "latency_ms": 139.79,
+  "trace_id": "0c500508-35e5-4c7c-9a8d-0c5e1b6f16e1",
+  "latency_ms": 92.42,
   "data": {
     "answer": "Ticket TKT-0001 (Account Access) is currently Open with a resolution time of 8.3 hours. Escalation risk score is 0.3067 (Normal).",
     "route": "lookup",
@@ -346,14 +346,14 @@ Content-Type: application/json
 --------------------------------------------------------------------------------
 Client 1 connecting to ws://localhost:8000/ws/chat ...
   Client 1 -> Sent: 'What is the SLA for a Sev-1 safety incident?'
-  Client 1 <- Received: type=response, grounded=True, latency_ms=0.07
+  Client 1 <- Received: type=response, grounded=True, latency_ms=0.08
   Client 1 -> Sent: 'What is the status of TKT-0001?'
-  Client 1 <- Received: type=response, ticket=TKT-0001, latency_ms=134.0
+  Client 1 <- Received: type=response, ticket=TKT-0001, latency_ms=104.77
   Client 1 -> Abruptly terminating connection without close handshake.
 Server successfully caught WebSocketDisconnect, logged, and cleaned up state.
 Client 2 connecting immediately to ws://localhost:8000/ws/chat ...
   Client 2 -> Sent: 'What is the status of TKT-0002?'
-  Client 2 <- Received: type=response, ticket=TKT-0002, latency_ms=149.83
+  Client 2 <- Received: type=response, ticket=TKT-0002, latency_ms=101.16
 Client 2 session concluded successfully.
 
 --------------------------------------------------------------------------------
@@ -363,14 +363,14 @@ Zero PII Assertion: Raw phone '+91 98765 43210' present in log: False (Expected:
 
 Latest 3 JSON-Lines Audit Entries:
 {
-  "trace_id": "98e2afca-84e5-44b4-b195-2adfe223384f",
-  "timestamp": "2026-10-17T06:12:00.901155+00:00",
+  "trace_id": "bf07952c-e225-4232-aa40-bfb4c4938b89",
+  "timestamp": "2026-10-17T06:14:49.088018+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_7f53eb10",
+  "session_id": "ws_f1a0de0c",
   "masked_question": "What is the SLA for a Sev-1 safety incident?",
   "masked_query": "What is the SLA for a Sev-1 safety incident?",
   "route": "rag",
-  "latency_ms": 0.07,
+  "latency_ms": 0.08,
   "status_code": 200,
   "cache_hit": true,
   "guardrail_flags": {
@@ -380,14 +380,14 @@ Latest 3 JSON-Lines Audit Entries:
 }
 
 {
-  "trace_id": "14cd470b-5b18-4d0f-b296-1664ab0e5a40",
-  "timestamp": "2026-10-17T06:12:01.036904+00:00",
+  "trace_id": "49175556-19a0-4c2f-a38e-3736a964ede8",
+  "timestamp": "2026-10-17T06:14:49.195060+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_7f53eb10",
+  "session_id": "ws_f1a0de0c",
   "masked_question": "What is the status of TKT-0001?",
   "masked_query": "What is the status of TKT-0001?",
   "route": "lookup",
-  "latency_ms": 134.0,
+  "latency_ms": 104.77,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {
@@ -398,14 +398,14 @@ Latest 3 JSON-Lines Audit Entries:
 }
 
 {
-  "trace_id": "36e40be9-9eb8-4ff1-83dd-91fa9ce5ed3c",
-  "timestamp": "2026-10-17T06:12:01.196537+00:00",
+  "trace_id": "04ef757b-8571-4268-8abb-cee21740d208",
+  "timestamp": "2026-10-17T06:14:49.301726+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_c21a5028",
+  "session_id": "ws_597a2925",
   "masked_question": "What is the status of TKT-0002?",
   "masked_query": "What is the status of TKT-0002?",
   "route": "lookup",
-  "latency_ms": 149.83,
+  "latency_ms": 101.16,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {
