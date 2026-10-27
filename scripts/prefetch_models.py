@@ -29,7 +29,7 @@ def prefetch() -> int:
         print(f"[+] Successfully loaded and cached model: {model}")
         print("[+] One-time prefetch completed successfully.")
         return 0
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001
         print(
             f"[!] WARNING: Failed to download model '{MODEL_NAME}': {exc}\n"
             "    If you already have the model cached or are working in an air-gapped environment,\n"

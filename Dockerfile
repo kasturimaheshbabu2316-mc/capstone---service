@@ -1,7 +1,6 @@
 # ==============================================================================
-# Ola Domain Support Agent — Render Web Service Dockerfile Specification
+# Ola Domain Support Agent — Local Container Execution (Optional)
 # Track: Business Operations / Customer Support (Ola)
-# Runtime: Docker on Render Free Tier (512 MB RAM, 0.1 CPU)
 # ==============================================================================
 
 FROM python:3.11-slim
@@ -14,7 +13,7 @@ ENV MOCK_LLM=true \
     TOKENIZERS_PARALLELISM=false \
     OMP_NUM_THREADS=1 \
     MKL_NUM_THREADS=1 \
-    MALLOC_ARENA_MAX=2 \
+    PORT=8000 \
     HF_HUB_OFFLINE=1 \
     TRANSFORMERS_OFFLINE=1
 
@@ -26,17 +25,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# 3. Copy requirements.txt first for Docker layer caching
+# 3. Copy requirements.txt and prefetch script
 COPY requirements.txt .
+COPY scripts/prefetch_models.py scripts/prefetch_models.py
 
 # 4. Install CPU-only PyTorch first, then application requirements
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
     pip install --no-cache-dir -r requirements.txt
 
-# 5. Pre-download the embedding models at build time for instant offline startup
-RUN python -c "import chromadb.utils.embedding_functions as ef; ef.ONNXMiniLM_L6_V2()" && \
-    python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')"
+# 5. Pre-download the embedding model at build time (non-fatal if offline)
+RUN python scripts/prefetch_models.py || true
 
 # 6. Copy the application source code
 COPY . .
@@ -45,8 +44,8 @@ COPY . .
 RUN mkdir -p /app/chroma_store /app/.chroma_db /app/logs /app/data /app/transcripts && \
     chmod -R 777 /app
 
-# 8. Expose Render default port (10000)
-EXPOSE 10000
+# 8. Expose application port
+EXPOSE 8000
 
-# 9. Start uvicorn dynamically bound to Render's injected $PORT (fallback to 10000)
-CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-10000} --workers 1"]
+# 9. Start uvicorn bound to port 8000
+CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1"]

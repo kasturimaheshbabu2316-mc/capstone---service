@@ -147,8 +147,7 @@ def wake_up_backend_if_needed(max_wait_seconds: int = 90, interval_seconds: int 
     url = get_backend_url()
     render_msg = (
         f"Backend at {url} did not respond within {max_wait_seconds}s. "
-        "Render free web service may still be spinning up, sleeping, or out of memory. "
-        "Check your service status at: https://dashboard.render.com"
+        "Start the local backend with: uvicorn api.main:app --port 8000"
     )
     return False, render_msg
 
@@ -475,11 +474,9 @@ def render_ui():
     st.markdown(
         """
         <style>
-        /* Dark Futuristic Theme */
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
+        /* Dark Futuristic Theme (Zero External Network Dependencies) */
         html, body, [class*="css"] {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
         .stApp {

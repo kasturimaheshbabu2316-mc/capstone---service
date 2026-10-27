@@ -78,82 +78,102 @@ class IndexResult(tuple):
         return self._map.items()
 
 
-class ONNXEmbeddingAdapter:
-    """Lightweight ONNX Runtime embedding adapter for sentence-transformers/all-MiniLM-L6-v2.
+class LocalSTEmbeddingFunction:
+    """Embedding function delegating to local SentenceTransformer, zero network access."""
 
-    Provides 100% mathematical cosine equivalence to PyTorch SentenceTransformer
-    while reducing startup memory from 550MB down to <150MB, guaranteeing zero
-    OOM crashes on Render 512MB free tier containers.
-    """
+    def __call__(self, input: list[str]) -> list[list[float]]:
+        model = get_embedding_model()
+        emb = model.encode(input, show_progress_bar=False, batch_size=32)
+        return emb.tolist() if hasattr(emb, "tolist") else [list(x) for x in emb]
 
-    def __init__(self, model_name: str = "sentence-transformers/all-MiniLM-L6-v2"):
-        import chromadb.utils.embedding_functions as ef
-        self.model_name = model_name
-        self._fn = ef.ONNXMiniLM_L6_V2()
+    def embed_query(self, query: str) -> list[float]:
+        return self([query])[0]
 
-    def encode(
-        self,
-        texts: list[str] | str,
-        show_progress_bar: bool = False,
-        batch_size: int = 32,
-        **kwargs: Any,
-    ) -> Any:
-        import numpy as np
 
-        if isinstance(texts, str):
-            texts = [texts]
-        if not texts:
-            return np.empty((0, 384), dtype=np.float32)
+_chroma_ef: LocalSTEmbeddingFunction | None = None
 
-        all_embeddings = []
-        for i in range(0, len(texts), batch_size):
-            batch = texts[i : i + batch_size]
-            emb = self._fn(batch)
-            all_embeddings.extend(emb)
-        return np.array(all_embeddings, dtype=np.float32)
 
-    def eval(self):
-        pass
+def get_chroma_embedding_function() -> LocalSTEmbeddingFunction:
+    """Returns singleton LocalSTEmbeddingFunction for ChromaDB."""
+    global _chroma_ef
+    if _chroma_ef is None:
+        _chroma_ef = LocalSTEmbeddingFunction()
+    return _chroma_ef
 
 
 def get_embedding_model() -> Any:
     """Loads embedding model once as a thread-safe singleton.
 
-    Uses high-efficiency ONNXMiniLM_L6_V2 by default for Render 512MB RAM constraints,
-    falling back to SentenceTransformer if ONNX runtime is unavailable.
+    Loads SentenceTransformer locally with zero network calls.
+    Fails fast with clear instruction if model is not cached.
     """
     global _embedding_model
     if _embedding_model is None:
         os.environ["TOKENIZERS_PARALLELISM"] = "false"
         os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
         try:
-            _embedding_model = ONNXEmbeddingAdapter(EMBED_MODEL_NAME)
+            import torch
+            torch.set_num_threads(1)
+            torch.set_grad_enabled(False)
         except Exception:
+            pass
+
+        from sentence_transformers import SentenceTransformer
+        logging.getLogger("sentence_transformers").setLevel(logging.ERROR)
+        logging.getLogger("transformers").setLevel(logging.ERROR)
+
+        # Attempt offline load first
+        try:
+            _embedding_model = SentenceTransformer(
+                EMBED_MODEL_NAME,
+                local_files_only=True,
+            )
+        except Exception:
+            # If in offline mode, fail fast immediately
+            if os.environ.get("HF_HUB_OFFLINE", "0") == "1" or os.environ.get("TRANSFORMERS_OFFLINE", "0") == "1":
+                raise RuntimeError(
+                    "Embedding model not found. Run: python scripts/prefetch_models.py (one-time, needs internet)."
+                ) from None
             try:
-                import torch
-                torch.set_num_threads(1)
-                torch.set_grad_enabled(False)
+                _embedding_model = SentenceTransformer(EMBED_MODEL_NAME)
+            except Exception:
+                raise RuntimeError(
+                    "Embedding model not found. Run: python scripts/prefetch_models.py (one-time, needs internet)."
+                ) from None
+
+        if hasattr(_embedding_model, "eval"):
+            try:
+                _embedding_model.eval()
             except Exception:
                 pass
-            from sentence_transformers import SentenceTransformer
-            logging.getLogger("sentence_transformers").setLevel(logging.ERROR)
-            logging.getLogger("transformers").setLevel(logging.ERROR)
-            _embedding_model = SentenceTransformer(EMBED_MODEL_NAME)
-            if hasattr(_embedding_model, "eval"):
-                try:
-                    _embedding_model.eval()
-                except Exception:
-                    pass
     return _embedding_model
 
 
 def get_chroma_client(chroma_dir: Path | str | None = None) -> chromadb.PersistentClient:
-    """Returns singleton persistent ChromaDB client."""
+    """Returns singleton persistent ChromaDB client with safe embedding function default."""
     global _chroma_client
     if _chroma_client is None:
         target_dir = Path(chroma_dir) if chroma_dir else CHROMA_DIR
         target_dir.mkdir(parents=True, exist_ok=True)
-        _chroma_client = chromadb.PersistentClient(path=str(target_dir))
+        client = chromadb.PersistentClient(path=str(target_dir))
+
+        # Wrap get_collection and get_or_create_collection to always use LocalSTEmbeddingFunction
+        orig_get = client.get_collection
+        orig_get_or_create = client.get_or_create_collection
+
+        def safe_get_collection(name: str, embedding_function: Any = None, **kwargs: Any) -> Any:
+            if embedding_function is None:
+                embedding_function = get_chroma_embedding_function()
+            return orig_get(name=name, embedding_function=embedding_function, **kwargs)
+
+        def safe_get_or_create_collection(name: str, embedding_function: Any = None, **kwargs: Any) -> Any:
+            if embedding_function is None:
+                embedding_function = get_chroma_embedding_function()
+            return orig_get_or_create(name=name, embedding_function=embedding_function, **kwargs)
+
+        client.get_collection = safe_get_collection  # type: ignore[assignment]
+        client.get_or_create_collection = safe_get_or_create_collection  # type: ignore[assignment]
+        _chroma_client = client
     return _chroma_client
 
 
@@ -161,11 +181,12 @@ def get_or_create_collection(
     name: str,
     client: chromadb.PersistentClient | None = None,
 ) -> Any:
-    """Gets or creates a Chroma collection configured with cosine similarity."""
+    """Gets or creates a Chroma collection configured with cosine similarity and local embedding function."""
     chroma = client or get_chroma_client()
     return chroma.get_or_create_collection(
         name=name,
         metadata={"hnsw:space": "cosine"},
+        embedding_function=get_chroma_embedding_function(),
     )
 
 

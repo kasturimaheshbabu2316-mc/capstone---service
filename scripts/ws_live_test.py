@@ -1,8 +1,8 @@
-"""Live WebSocket client test for deployed Hugging Face Space or local server.
+"""WebSocket client test for local Ola Support Intelligence server.
 
+Track: Business Operations / Customer Support (Ola)
 Usage:
-    python scripts/ws_live_test.py https://<username>-ola-support-agent.hf.space
-    python scripts/ws_live_test.py http://localhost:7860
+    python scripts/ws_live_test.py http://127.0.0.1:8000
 """
 
 from __future__ import annotations
@@ -19,7 +19,6 @@ def convert_http_to_ws(base_url: str) -> str:
     """Converts http(s):// base URL to ws(s):// with /ws/chat path."""
     parsed = urlparse(base_url.rstrip("/"))
     scheme = parsed.scheme.lower()
-    netloc = parsed.netloc or parsed.path
 
     if scheme == "https":
         ws_scheme = "wss"
@@ -28,9 +27,8 @@ def convert_http_to_ws(base_url: str) -> str:
     elif scheme in ("ws", "wss"):
         ws_scheme = scheme
     else:
-        ws_scheme = "wss" if "hf.space" in netloc else "ws"
+        ws_scheme = "ws"
 
-    # Handle URL that may have been passed without scheme
     if "://" in base_url:
         host_port = parsed.netloc
     else:
@@ -82,7 +80,7 @@ async def run_websocket_test(base_url: str) -> bool:
 
 
 def main() -> None:
-    base_url = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:7860"
+    base_url = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8000"
     success = asyncio.run(run_websocket_test(base_url))
     sys.exit(0 if success else 1)
 
