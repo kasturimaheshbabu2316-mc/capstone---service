@@ -116,9 +116,9 @@ async def lifespan(app: FastAPI):
 
         # Build ChromaDB index if missing or empty (index ONLY winning collection at startup for 512MB RAM constraint)
         if collection.count() == 0:
-            logger.info("ChromaDB '%s' is empty. Indexing winning knowledge base collection at startup...", winning_col)
+            logger.info("ChromaDB '%s' is empty. Indexing knowledge base collections at startup...", winning_col)
             from rag.index import index_documents
-            index_documents(reset=False, collections=(winning_col,), client=chroma_client)
+            index_documents(reset=False, collections=("kb_fixed", "kb_sentence"), client=chroma_client)
             collection = get_or_create_collection(winning_col, chroma_client)
 
         app.state.embedding_model = embedding_model

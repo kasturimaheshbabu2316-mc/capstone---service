@@ -10,28 +10,32 @@ Write-Host "====================================================================
 
 # 1. Locate or create Python virtual environment
 if (-not (Test-Path ".venv")) {
-    Write-Host "[1/4] Creating virtual environment (.venv)..." -ForegroundColor Yellow
+    Write-Host "[1/5] Creating virtual environment (.venv)..." -ForegroundColor Yellow
     py -3.11 -m venv .venv 2>$null
     if ($LASTEXITCODE -ne 0 -or -not (Test-Path ".venv\Scripts\python.exe")) {
         python -m venv .venv
     }
 } else {
-    Write-Host "[1/4] Existing virtual environment found (.venv)." -ForegroundColor Green
+    Write-Host "[1/5] Existing virtual environment found (.venv)." -ForegroundColor Green
 }
 
 $PyExe = if (Test-Path ".venv\Scripts\python.exe") { ".venv\Scripts\python.exe" } else { "python" }
 
 # 2. Install requirements
-Write-Host "[2/4] Installing dependencies from requirements.txt..." -ForegroundColor Yellow
+Write-Host "[2/5] Installing dependencies from requirements.txt..." -ForegroundColor Yellow
 & $PyExe -m pip install --upgrade pip --quiet
 & $PyExe -m pip install -r requirements.txt --quiet
 
 # 3. Run model prefetch
-Write-Host "[3/4] Running one-time model prefetch (sentence-transformers/all-MiniLM-L6-v2)..." -ForegroundColor Yellow
+Write-Host "[3/5] Running one-time model prefetch (sentence-transformers/all-MiniLM-L6-v2)..." -ForegroundColor Yellow
 & $PyExe scripts/prefetch_models.py
 
-# 4. Copy .env.example to .env if missing
-Write-Host "[4/4] Verifying local configuration (.env)..." -ForegroundColor Yellow
+# 4. Ingest and index ChromaDB collections
+Write-Host "[4/5] Indexing policy documents into ChromaDB (rag/index.py)..." -ForegroundColor Yellow
+& $PyExe rag/index.py
+
+# 5. Copy .env.example to .env if missing
+Write-Host "[5/5] Verifying local configuration (.env)..." -ForegroundColor Yellow
 if (-not (Test-Path ".env")) {
     Copy-Item ".env.example" ".env"
     Write-Host "  -> Created .env from .env.example" -ForegroundColor Green
