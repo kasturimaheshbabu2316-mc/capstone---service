@@ -81,9 +81,14 @@ class IndexResult(tuple):
 class LocalSTEmbeddingFunction:
     """Embedding function delegating to local SentenceTransformer, zero network access."""
 
-    def __call__(self, input: list[str]) -> list[list[float]]:
+    def name(self) -> str:
+        return "default"
+
+    def __call__(self, input: Any) -> Any:
         model = get_embedding_model()
-        emb = model.encode(input, show_progress_bar=False, batch_size=32)
+        if isinstance(input, str):
+            input = [input]
+        emb = model.encode(list(input), show_progress_bar=False, batch_size=32)
         return emb.tolist() if hasattr(emb, "tolist") else [list(x) for x in emb]
 
     def embed_query(self, query: str) -> list[float]:
