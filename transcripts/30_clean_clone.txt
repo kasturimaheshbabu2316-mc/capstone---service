@@ -1,6 +1,6 @@
 ================================================================================
 OLA SUPPORT INTELLIGENCE — CLEAN-CLONE OFFLINE VERIFICATION
-Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793114513
+Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793261262
 ================================================================================
 
 [1/6] Cloning repository into clean temporary directory...
@@ -71,14 +71,22 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe rag/
 Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe -m pytest -q
 ================================================================================
   ........................................................................ [ 55%]
-  ........................................................s                [100%]
+  ..................┌─────────────────────────────.┌───────────────────────────── Execution Traces ──────────────────────────────┐
+  │                                                                             │
+  │.  🔍 Detailed execution traces are available!                                │
+  │                                                                             │
+  │  View insights including:                                                   │
+  │    • Agent decision-making process                                          │
+  │    • Task execution flow and timing                                         │
+  │    • Tool usage details                                                     │
+  │....................................s                [100%]
   ============================== warnings summary ===============================
   crew\crew.py:25
-    C:\Users\kastu\AppData\Local\Temp\cleancheck_1793114513\crew\crew.py:25: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
+    C:\Users\kastu\AppData\Local\Temp\cleancheck_1793261262\crew\crew.py:25: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
       from crew.memory import session_memory, crew_runnable_with_history
   
   -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-  128 passed, 1 skipped, 1 warning in 120.67s (0:02:00)
+  128 passed, 1 skipped, 1 warning in 122.91s (0:02:02)
 [+] Full PyTest Suite (Offline Socket Guard Active): PASS
 
 ================================================================================
@@ -136,7 +144,7 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe eval
   Running AutoGen Review Demo A (Faithful Draft)...
   Running AutoGen Review Demo B (Draft with Injected Ungrounded Claim)...
   
-  Transcript successfully saved to: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793114513\transcripts\14_review.txt
+  Transcript successfully saved to: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793261262\transcripts\14_review.txt
 [+] AutoGen Review Demo: PASS
 
 ================================================================================

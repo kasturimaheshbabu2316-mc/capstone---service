@@ -7,6 +7,7 @@ network access across the entire test session.
 
 from __future__ import annotations
 
+import contextlib
 import os
 import socket
 import sys
@@ -38,11 +39,7 @@ def _is_loopback(host: object) -> bool:
     if not isinstance(host, str):
         return False
     h = host.strip().lower()
-    if h in ("127.0.0.1", "localhost", "::1", "0.0.0.0", "testserver"):
-        return True
-    if h.startswith("127."):
-        return True
-    return False
+    return h in ("127.0.0.1", "localhost", "::1", "0.0.0.0", "testserver") or h.startswith("127.")
 
 
 def _guarded_connect(self: socket.socket, address: object) -> None:
@@ -79,12 +76,11 @@ try:
     _orig_reset_all = colorama.initialise.reset_all
 
     def _safe_reset_all():
-        try:
+        with contextlib.suppress(Exception):
             if sys.stdout and not sys.stdout.closed and hasattr(sys.stdout, "isatty"):
                 _orig_reset_all()
-        except Exception:
-            pass
 
     colorama.initialise.reset_all = _safe_reset_all
 except ImportError:
     pass
+

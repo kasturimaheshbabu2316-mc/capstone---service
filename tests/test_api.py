@@ -129,7 +129,8 @@ def test_add_document_endpoint(monkeypatch, tmp_path):
 
     monkeypatch.setenv("ADMIN_TOKEN", "test-admin-secret-token")
     monkeypatch.setattr(api.main, "PROJECT_ROOT", tmp_path)
-    temp_col_name = "test_temp_isolated_collection"
+    import uuid
+    temp_col_name = f"test_temp_{uuid.uuid4().hex[:8]}"
     monkeypatch.setattr(api.main.app.state, "winning_collection", temp_col_name, raising=False)
 
     test_doc = "test_temp_policy.md"
