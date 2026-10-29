@@ -67,9 +67,9 @@ def test_import_api():
 
 def test_import_evaluation():
     import evaluation.judge
-    import evaluation.test_queries
+    import evaluation.queries
     import evaluation.run_eval
-    assert len(evaluation.test_queries.EVAL_BENCHMARK_QUERIES) == 15
+    assert len(evaluation.queries.EVAL_BENCHMARK_QUERIES) == 15
     assert callable(evaluation.judge.judge_response)
     assert callable(evaluation.run_eval.run_benchmark_evaluation)
 

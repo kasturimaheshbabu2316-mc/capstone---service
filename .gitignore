@@ -44,6 +44,9 @@ htmlcov/
 scratch/
 node_modules/
 ola-support-agent/
+body.json
+package*.json
+pnpm-lock.yaml
 
 # Streamlit secrets
 .streamlit/secrets.toml

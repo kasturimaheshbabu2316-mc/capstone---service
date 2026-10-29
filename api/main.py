@@ -57,7 +57,7 @@ from api.models import (
 )
 from cache import response_cache
 from crew.schemas import CrewResponse
-from guardrails import check_payload_budget
+from safety.guardrails import check_payload_budget
 from rag.chunking import sentence_chunks
 from rag.index import (
     get_chroma_client,

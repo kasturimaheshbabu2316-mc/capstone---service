@@ -23,7 +23,7 @@ if str(PROJECT_ROOT) not in sys.path:
 from crew.crew import run_support_crew
 from crew.schemas import CrewResponse
 from evaluation.judge import judge_response, JUDGE_PROMPT_TEMPLATE
-from evaluation.test_queries import EVAL_BENCHMARK_QUERIES
+from evaluation.queries import EVAL_BENCHMARK_QUERIES
 from rag.index import retrieve
 
 RESULTS_JSON_PATH = PROJECT_ROOT / "evaluation" / "results.json"

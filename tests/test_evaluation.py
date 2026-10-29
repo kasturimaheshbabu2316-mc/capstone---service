@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 import pytest
 
-from evaluation.test_queries import EVAL_BENCHMARK_QUERIES
+from evaluation.queries import EVAL_BENCHMARK_QUERIES
 from evaluation.judge import (
     judge_response,
     score_accuracy,

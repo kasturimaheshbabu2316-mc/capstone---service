@@ -303,7 +303,7 @@ A fallback operator console is maintained in [streamlit_app.py](streamlit_app.py
 
 ## 6. 15-Query Evaluation Benchmark & MOCK LLM-as-Judge
 
-A deterministic MOCK LLM-as-judge benchmark is implemented in [evaluation/](evaluation) to evaluate end-to-end multi-agent support performance across 15 curated queries ([evaluation/test_queries.py](evaluation/test_queries.py)):
+A deterministic MOCK LLM-as-judge benchmark is implemented in [evaluation/](evaluation) to evaluate end-to-end multi-agent support performance across 15 curated queries ([evaluation/queries.py](evaluation/queries.py)):
 
 - **12 Canonical Policy Queries**: One targeted query for each knowledge base policy document.
 - **1 Operational Ticket Lookup Query**: Real database status and escalation lookup for ticket `TKT-0007`.

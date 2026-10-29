@@ -26,8 +26,7 @@ if BASE_DIR not in sys.path:
 # Optional direct pipeline imports (gracefully omitted in Streamlit Cloud client mode)
 try:
     from governance.budget import check_budget_limit, MAX_TOKEN_BUDGET
-    from guardrails.input_guard import detect_prompt_injection, mask_phone_numbers
-    from guardrails.output_guard import verify_groundedness
+    from safety.guardrails import detect_prompt_injection, mask_phone_numbers, verify_groundedness
     from cache import response_cache
     from crew.crew import run_support_crew
     from review.autogen_review import review_support_response

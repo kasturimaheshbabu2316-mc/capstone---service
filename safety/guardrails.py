@@ -259,15 +259,107 @@ def verify_groundedness(
 
 
 # ==============================================================================
-# 5. Re-exported SQL & Token Budget Guardrails
+# 5. Self-Contained Token Budget & SQL Guardrails (Zero sqlparse dependency)
 # ==============================================================================
-from guardrails import (
-    SQLValidationResult,
-    strip_markdown_fences,
-    validate_sql,
-    check_payload_budget,
-    check_budget_limit,
-)
+@dataclass(frozen=True)
+class SQLValidationResult:
+    """Immutable structured result of SQL validation."""
+    is_safe: bool
+    sanitized_query: str
+    error_message: Optional[str] = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "is_safe": self.is_safe,
+            "sanitized_query": self.sanitized_query,
+            "error_message": self.error_message,
+        }
+
+    def __getitem__(self, item: str) -> Any:
+        return getattr(self, item)
+
+
+def strip_markdown_fences(sql: str) -> str:
+    """Strips markdown code fences (```sql ... ```) and whitespace."""
+    cleaned = sql.strip()
+    cleaned = re.sub(r"^```(?:sql)?\s*", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\s*```$", "", cleaned)
+    return cleaned.strip()
+
+
+BLOCKED_SQL_KEYWORDS = [
+    "DROP", "DELETE", "UPDATE", "INSERT", "ALTER", "TRUNCATE",
+    "EXEC", "EXECUTE", "GRANT", "REVOKE", "PRAGMA", "ATTACH",
+    "DETACH", "CREATE", "REPLACE", "LOAD_EXTENSION",
+]
+
+
+def validate_sql(raw_sql: str, default_limit: int = 100) -> SQLValidationResult:
+    """Pure-python SQL validation without sqlparse dependency.
+    Validates that query is non-empty, read-only SELECT, and contains no blocked keywords.
+    """
+    if not raw_sql or not raw_sql.strip():
+        return SQLValidationResult(
+            is_safe=False,
+            sanitized_query="",
+            error_message="Empty query provided.",
+        )
+    clean_sql = strip_markdown_fences(raw_sql)
+    statements = [s.strip() for s in clean_sql.split(";") if s.strip()]
+    if len(statements) > 1:
+        return SQLValidationResult(
+            is_safe=False,
+            sanitized_query=clean_sql,
+            error_message="Multiple statements detected. Only exactly ONE SQL statement is permitted.",
+        )
+    if not statements:
+        return SQLValidationResult(
+            is_safe=False,
+            sanitized_query=clean_sql,
+            error_message="No executable SQL statement found.",
+        )
+    trimmed = statements[0]
+    first_word_match = re.match(r"^\s*([a-zA-Z]+)", trimmed)
+    if not first_word_match or first_word_match.group(1).upper() not in ("SELECT", "WITH"):
+        return SQLValidationResult(
+            is_safe=False,
+            sanitized_query=clean_sql,
+            error_message="Only read-only SELECT or WITH statements are permitted.",
+        )
+    upper_query = trimmed.upper()
+    for kw in BLOCKED_SQL_KEYWORDS:
+        if re.search(rf"\b{kw}\b", upper_query):
+            return SQLValidationResult(
+                is_safe=False,
+                sanitized_query=clean_sql,
+                error_message=f"Destructive SQL command '{kw}' detected. Query rejected.",
+            )
+    return SQLValidationResult(
+        is_safe=True,
+        sanitized_query=trimmed,
+        error_message=None,
+    )
+
+
+def check_security(text: str) -> Tuple[bool, Optional[str]]:
+    """Inspects text for prompt injection patterns. Returns (is_safe, rejection_reason)."""
+    if not text:
+        return True, None
+    is_injection, reason = detect_prompt_injection(text)
+    return (not is_injection), reason
+
+
+def check_payload_budget(text: str, max_tokens: Optional[int] = None) -> Tuple[bool, int, Optional[str]]:
+    """Enforces token budget cap using governance.budget logic."""
+    from governance.budget import check_budget_limit as _cbl, MAX_REQUEST_TOKENS
+    limit = max_tokens or MAX_REQUEST_TOKENS
+    return _cbl(text, max_tokens=limit)
+
+
+def check_budget_limit(text: str, context: str = "", max_tokens: int = 2000) -> Tuple[bool, int, Optional[str]]:
+    from governance.budget import check_budget_limit as _cbl
+    return _cbl(text, context=context, max_tokens=max_tokens)
+
 
 __all__ = [
     "GuardrailResult",
