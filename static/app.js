@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Session ID
   let currentSessionId = 'session_' + Math.random().toString(36).substring(2, 9);
-  metricSession.textContent = currentSessionId;
+  if (metricSession) metricSession.textContent = 'Active';
 
   // WebSocket Connection
   let ws = null;
@@ -256,10 +256,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function cleanSourceName(src) {
-    if (!src) return 'Ola Standard Guidelines';
-    if (src === 'dataset.py') return 'Ola Operational Records';
+    if (!src) return 'Official policy';
+    if (src.toLowerCase().includes('dataset') || src === 'Ola Operational Records') return 'Ticket records';
     const name = src.replace(/\.md$/i, '').replace(/_/g, ' ');
-    return name.replace(/\b\w/g, c => c.toUpperCase());
+    const acronyms = ['SLA', 'VIP', 'KB', 'CSAT'];
+    return name.split(' ').map((w, idx) => {
+      const upper = w.toUpperCase();
+      if (acronyms.includes(upper)) return upper;
+      if (idx === 0) return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+      return w.toLowerCase();
+    }).join(' ');
   }
 
   function appendAssistantMessage(data, traceId, latencyMs) {
@@ -267,20 +273,30 @@ document.addEventListener('DOMContentLoaded', () => {
     row.className = 'message-row assistant';
 
     let metaHtml = '';
-    if (data.ticket_id) {
-      metaHtml += `<span class="meta-pill ticket">Ticket: ${data.ticket_id}</span>`;
-      const esc = Number(data.escalation_score);
-      const prio = esc >= 0.44 ? 'High Priority' : 'Standard Priority';
+    const hasTicket = Boolean(data.ticket_id || data.ticket);
+    if (hasTicket) {
+      const tid = data.ticket_id || (data.ticket && (data.ticket.ticket_id || data.ticket.record_id));
+      if (tid) {
+        metaHtml += `<span class="meta-pill ticket">Ticket: ${escapeHtml(tid)}</span>`;
+      }
+      const esc = Number(data.escalation_score || (data.ticket && data.ticket.escalation_score) || 0.0);
+      const prio = esc >= 0.44 ? 'High priority' : 'Standard priority';
       metaHtml += `<span class="meta-pill">${prio}</span>`;
+      metaHtml += `<span class="meta-pill">From ticket records</span>`;
+    } else if (data.grounded) {
+      metaHtml += `<span class="meta-pill grounded">Verified against policy</span>`;
     }
-    if (data.grounded) {
-      metaHtml += `<span class="meta-pill grounded">✓ Verified Official Policy</span>`;
+
+    if (data.review_status && data.review_status.approved) {
+      const isRevised = Boolean(data.review_status.revised);
+      metaHtml += `<span class="meta-pill reviewer">${isRevised ? 'Revised by reviewer' : 'Checked by reviewer'}</span>`;
     }
+
     if (data.source_titles && data.source_titles.length) {
       metaHtml += `<span class="meta-pill source-titles">Sources: ${data.source_titles.map(s => escapeHtml(cleanSourceName(s))).join(', ')}</span>`;
     } else if (data.sources && data.sources.length) {
       const cleanList = data.sources.map(cleanSourceName);
-      metaHtml += `<span class="meta-pill">Reference: ${cleanList.join(', ')}</span>`;
+      metaHtml += `<span class="meta-pill">Sources: ${cleanList.map(escapeHtml).join(', ')}</span>`;
     }
 
     row.innerHTML = `
@@ -329,26 +345,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // HUD Update
   function updateHud(res) {
-    metricTrace.textContent = res.trace_id || '--';
-    metricLatency.textContent = (res.latency_ms || 0.0) + ' ms';
-    metricSession.textContent = currentSessionId;
+    if (metricTrace) metricTrace.textContent = res.trace_id ? res.trace_id.slice(-6) : '--';
+    if (metricLatency) metricLatency.textContent = (res.latency_ms || 0.0) + ' ms';
+    if (metricSession) metricSession.textContent = 'Active';
 
     if (res.cache_hit) {
-      metricCache.textContent = 'Verified Match';
-      cacheBadge.textContent = 'VERIFIED';
-      cacheBadge.className = 'hud-badge badge-hit';
+      if (metricCache) metricCache.textContent = 'Verified Match';
+      if (cacheBadge) {
+        cacheBadge.textContent = 'VERIFIED';
+        cacheBadge.className = 'hud-badge badge-hit';
+      }
     } else {
-      metricCache.textContent = 'Live Processed';
-      cacheBadge.textContent = 'ACTIVE';
-      cacheBadge.className = 'hud-badge badge-miss';
+      if (metricCache) metricCache.textContent = 'Live Processed';
+      if (cacheBadge) {
+        cacheBadge.textContent = 'ACTIVE';
+        cacheBadge.className = 'hud-badge badge-miss';
+      }
     }
 
     const data = res.data;
     if (data) {
       // Priority Level Score
       const esc = data.escalation_score || 0.0;
-      scoreVal.textContent = esc.toFixed(4);
-      ticketVal.textContent = data.ticket_id || 'None';
+      if (scoreVal) scoreVal.textContent = esc.toFixed(2);
+      if (ticketVal) ticketVal.textContent = data.ticket_id || 'None';
 
       const pct = Math.min(100, Math.round(esc * 100));
       gaugeFill.style.width = pct + '%';

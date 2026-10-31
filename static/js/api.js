@@ -98,18 +98,25 @@ export async function sendQuery(question, sessionId) {
       return {
         is_error: true,
         status_code: 400,
-        title: "Request Blocked",
+        title: "Request blocked",
         message: "This request was blocked by the safety policy. Rephrase your question.",
         latency_ms: latencyMs,
       };
     }
 
     if (res.status === 413) {
+      let est = "";
+      if (errorDetail) {
+        const match = errorDetail.match(/estimated ([\d,]+) tokens/i);
+        if (match) {
+          est = ` About ${match[1]} tokens.`;
+        }
+      }
       return {
         is_error: true,
         status_code: 413,
-        title: "Question Too Long",
-        message: "Your question is too long. Keep it under 2,000 tokens.",
+        title: "Question too long",
+        message: `Your question is too long. Keep it under 2,000 tokens.${est}`,
         latency_ms: latencyMs,
       };
     }
@@ -118,8 +125,8 @@ export async function sendQuery(question, sessionId) {
       return {
         is_error: true,
         status_code: 503,
-        title: "Desk Initializing",
-        message: "The desk is warming up. Trying again.",
+        title: "Desk warming up",
+        message: "The desk is warming up. Try again in a moment.",
         latency_ms: latencyMs,
         waking: true,
       };
@@ -129,7 +136,7 @@ export async function sendQuery(question, sessionId) {
     return {
       is_error: true,
       status_code: res.status || 500,
-      title: "Service Notice",
+      title: "Service notice",
       message: "Something went wrong on our side. Try again in a moment.",
       latency_ms: latencyMs,
     };
@@ -139,7 +146,7 @@ export async function sendQuery(question, sessionId) {
     return {
       is_error: true,
       status_code: 503,
-      title: "Service Offline",
+      title: "Service offline",
       message: "Something went wrong on our side. Try again in a moment.",
       latency_ms: latencyMs,
     };

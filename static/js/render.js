@@ -15,7 +15,7 @@ export function escapeHtml(str) {
 
 export function cleanSourceName(src) {
   if (!src) return "Official policy";
-  if (src === "dataset.py" || src === "dataset" || src === "Ola Operational Records") {
+  if (src.toLowerCase().includes("dataset") || src === "Ola Operational Records") {
     return "Ticket records";
   }
   const clean = src.replace(/\.md$/i, "").replace(/_/g, " ");

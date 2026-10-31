@@ -143,4 +143,149 @@ def test_normal_question_after_rejected_one_returns_200():
     assert "15 minutes" in data["answer"]
 
 
+def test_ui_assets_forbidden_privacy_strings():
+    """Asserts that /, JS, and CSS files contain none of the sensitive internal strings."""
+    forbidden = [
+        "FastAPI Service",
+        "approved'",
+        "final_answer",
+        "review_notes",
+        "redactions_made",
+        "feedback",
+        "{'",
+        "dataset.py",
+    ]
+
+    endpoints = [
+        "/",
+        "/static/css/tokens.css",
+        "/static/css/base.css",
+        "/static/css/components.css",
+        "/static/js/main.js",
+        "/static/js/render.js",
+        "/static/js/settings.js",
+        "/static/js/api.js",
+        "/static/app.js",
+    ]
+
+    for ep in endpoints:
+        res = client.get(ep)
+        assert res.status_code == 200, f"Endpoint {ep} failed with {res.status_code}"
+        text = res.text
+        for term in forbidden:
+            assert term not in text, f"Forbidden term '{term}' leaked in {ep}"
+
+
+def test_node_render_policy_slip_no_dict_leak():
+    """If Node is available, executes render.js on mock response containing full review dict and asserts clean output."""
+    import shutil
+    import subprocess
+
+    node_bin = shutil.which("node")
+    if not node_bin:
+        return
+
+    node_script = """
+class MockElement {
+  constructor(tag) {
+    this.tagName = tag;
+    this.children = [];
+    this.className = '';
+    this._text = '';
+    this._html = '';
+  }
+  set textContent(val) { this._text = val; }
+  get textContent() { return this._text || this.children.map(c => c.textContent).join(' '); }
+  set innerHTML(val) { this._html = val; }
+  get innerHTML() { return this._html || this._text || this.children.map(c => c.innerHTML).join(''); }
+  appendChild(c) { this.children.push(c); return c; }
+  setAttribute() {}
+  querySelector() { return null; }
+}
+global.document = {
+  createElement: (tag) => new MockElement(tag)
+};
+import { createPolicySlipElement } from './static/js/render.js';
+const el = createPolicySlipElement({
+  answer: 'Sev-1 safety incidents require a mandatory first response within 15 minutes.',
+  grounded: true,
+  sources: ['sla_by_severity'],
+  source_titles: ['SLA by severity policy'],
+  review_status: {
+    approved: true,
+    final_answer: 'Sev-1 safety incidents require a mandatory first response within 15 minutes.',
+    reason: 'Internal secret audit reasoning',
+    feedback: 'Internal secret feedback note',
+    review_notes: 'Internal secret review notes',
+    redactions_made: false
+  }
+});
+console.log('OUTPUT_HTML:' + el.innerHTML);
+"""
+    result = subprocess.run(
+        [node_bin, "--input-type=module", "-e", node_script],
+        cwd=str(STATIC_DIR.parent),
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, f"Node script error: {result.stderr}"
+    output = result.stdout
+    assert "Checked by reviewer" in output
+    assert "Verified against policy" in output
+    assert "Internal secret" not in output
+    assert "feedback" not in output
+    assert "review_notes" not in output
+    assert "final_answer" not in output
+    assert "{'" not in output
+
+
+def test_ask_review_status_trimmed_unless_admin(monkeypatch):
+    """Verifies /ask returns review_status with only approved and revised publicly, and full verdict with admin token."""
+    test_token = "secure_admin_token_xyz"
+    monkeypatch.setenv("ADMIN_TOKEN", test_token)
+
+    # 1. Normal public request: only approved and revised
+    res_public = client.post(
+        "/ask",
+        json={"question": "What is the resolution SLA for a Sev-1 safety incident?"},
+    )
+    assert res_public.status_code == 200
+    data_public = res_public.json()
+    rev_public = data_public.get("review_status", {})
+
+    assert "approved" in rev_public
+    assert "revised" in rev_public
+    assert "final_answer" not in rev_public
+    assert "feedback" not in rev_public
+    assert "review_notes" not in rev_public
+    assert "reason" not in rev_public
+
+    # 2. Privileged request with valid admin token: full review verdict present
+    res_admin = client.post(
+        "/ask",
+        headers={"X-Admin-Token": test_token},
+        json={"question": "What is the resolution SLA for a Sev-1 safety incident?"},
+    )
+    assert res_admin.status_code == 200
+    data_admin = res_admin.json()
+    rev_admin = data_admin.get("review_status", {})
+
+    assert rev_admin.get("approved") is True
+    assert "final_answer" in rev_admin
+    assert "reason" in rev_admin
+    assert "review_notes" in rev_admin
+
+    # 3. Request with invalid admin token: public trimmed version
+    res_invalid = client.post(
+        "/ask",
+        headers={"X-Admin-Token": "wrong_token_123"},
+        json={"question": "What is the resolution SLA for a Sev-1 safety incident?"},
+    )
+    assert res_invalid.status_code == 200
+    rev_invalid = res_invalid.json().get("review_status", {})
+    assert "final_answer" not in rev_invalid
+    assert "approved" in rev_invalid
+
+
+
 
