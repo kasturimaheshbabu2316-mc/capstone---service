@@ -20,7 +20,7 @@ Demo 1A: Calling check_support_ticket_status as 'Support Response Composer' (or 
 
 Demo 1B: Calling check_support_ticket_status as 'Policy Retrieval Specialist' (or 'Retrieval Agent'):
   • Authorization Result: BLOCKED (PermissionError raised)
-  • Exception Message:    Least Autonomy Violation: Agent 'Policy Retrieval Specialist' is not authorized to use tool 'check_support_ticket_status'. Allowed tools: ['rag_lookup', 'rag_lookup_crew_tool'].
+  • Exception Message:    Least Autonomy Violation: Agent 'Policy Retrieval Specialist' is not authorized to use tool 'check_support_ticket_status'. Allowed tools: ['rag_lookup_crew_tool', 'rag_lookup'].
 
 Demo 1C: Calling check_support_ticket_status as 'Lookup Agent':
   • Authorization Result: SUCCESS

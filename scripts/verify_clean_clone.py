@@ -23,7 +23,10 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 TRANSCRIPTS_DIR = PROJECT_ROOT / "transcripts"
-TRANSCRIPT_FILE = TRANSCRIPTS_DIR / "30_clean_clone.txt"
+TRANSCRIPT_FILES = [
+    TRANSCRIPTS_DIR / "31_final_clean_clone.txt",
+    TRANSCRIPTS_DIR / "30_clean_clone.txt",
+]
 
 
 def run_clean_clone_proof() -> int:
@@ -50,6 +53,7 @@ def run_clean_clone_proof() -> int:
     log("=" * 80)
     log("OLA SUPPORT INTELLIGENCE — CLEAN-CLONE OFFLINE VERIFICATION")
     log(f"Target Directory: {temp_dir}")
+    log(f"Python Executable: {sys.executable} ({sys.version.split()[0]})")
     log("=" * 80)
 
     # 1. Git clone
@@ -64,33 +68,31 @@ def run_clean_clone_proof() -> int:
         return 1
     log("    -> git clone completed successfully.")
 
-    # 2. Sync uncommitted working tree changes
+    # 2. Sync all uncommitted working tree changes into clone
     log("\n[2/6] Syncing working tree changes into clone...")
-    files_to_sync = [
-        "README.md",
-        ".markdownlint.json",
-        "Dockerfile",
-        "api/main.py",
-        "api/models.py",
-        "crew/__init__.py",
-        "rag/index.py",
-        "scripts/prefetch_models.py",
-        "scripts/run_offline.py",
-        "scripts/setup.ps1",
-        "scripts/run_all.ps1",
-        "scripts/setup.sh",
-        "scripts/run_all.sh",
-        "scripts/ws_live_test.py",
-        "tests/conftest.py",
-        "tests/test_web_ui.py",
-    ]
-    for rel in files_to_sync:
-        src = PROJECT_ROOT / rel
-        dest = temp_dir / rel
-        if src.exists():
+    status_proc = subprocess.run(
+        ["git", "status", "--porcelain"],
+        cwd=str(PROJECT_ROOT),
+        capture_output=True,
+        text=True,
+    )
+    for line in status_proc.stdout.splitlines():
+        if not line.strip():
+            continue
+        status_code = line[:2]
+        rel_path = line[3:].strip().strip('"')
+        src = PROJECT_ROOT / rel_path
+        dest = temp_dir / rel_path
+        if "D" in status_code:
+            if dest.exists():
+                if dest.is_dir():
+                    shutil.rmtree(dest, ignore_errors=True)
+                else:
+                    dest.unlink()
+        elif src.exists() and not src.is_dir():
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dest)
-    log("    -> Working tree changes synchronized.")
+    log("    -> All working tree changes synchronized.")
 
     # Remove render.yaml and obsolete scripts in clone if present
     for obsolete in ["render.yaml", "scripts/verify_render_native.ps1", "scripts/smoke_test_live.ps1"]:
@@ -170,11 +172,13 @@ def run_clean_clone_proof() -> int:
         log("CLEAN-CLONE OFFLINE VERIFICATION FAILED.")
     log("=" * 80)
 
-    # Save to transcripts/30_clean_clone.txt
+    # Save to transcripts
     TRANSCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
-    with open(TRANSCRIPT_FILE, "w", encoding="utf-8") as f:
-        f.write("\n".join(output_lines) + "\n")
-    print(f"\n[+] Output saved to: {TRANSCRIPT_FILE}")
+    full_output = "\n".join(output_lines) + "\n"
+    for tf in TRANSCRIPT_FILES:
+        with open(tf, "w", encoding="utf-8") as f:
+            f.write(full_output)
+        print(f"[+] Output saved to: {tf}")
 
     return 0 if all_passed else 1
 

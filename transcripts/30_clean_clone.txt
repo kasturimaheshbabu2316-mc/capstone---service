@@ -1,13 +1,14 @@
 ================================================================================
 OLA SUPPORT INTELLIGENCE — CLEAN-CLONE OFFLINE VERIFICATION
-Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793450571
+Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793458023
+Python Executable: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe (3.11.15)
 ================================================================================
 
 [1/6] Cloning repository into clean temporary directory...
     -> git clone completed successfully.
 
 [2/6] Syncing working tree changes into clone...
-    -> Working tree changes synchronized.
+    -> All working tree changes synchronized.
 
 ================================================================================
 [3/6] Running One-Time Model Prefetch Check...
@@ -24,6 +25,7 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe scri
     (2): Normalize({'module_input_name': 'sentence_embedding', 'module_output_name': 'sentence_embedding'})
   )
   [+] One-time prefetch completed successfully.
+  [stderr] Could not reach the Hub (Cannot reach https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable.). Using cached commit hash for 'sentence-transformers/all-MiniLM-L6-v2'.
 [+] One-Time Model Prefetch Check: PASS
 
 ================================================================================
@@ -70,84 +72,15 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe rag/
 [5/6] Running Full PyTest Suite (Offline Socket Guard Active)...
 Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe -m pytest -q
 ================================================================================
-  .......................................................................
-  
-  . [ 55%]
-  ┌───────────────────────── Tracing Preference Saved ──────────────────────────┐
-  │                                                                             │
-  │  Info: Tracing has been disabled.                                           │
-  │                                                                             │
-  │        │
-  │  collect traces.                                                            │
-  │                                                                             │
-  │  To enable tracing later, do any one of these:                            │
-  │  • Set tracing=True in your Crew/Flow code                                  │
-  │  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
-  │  • Run: crewai traces enable                                                │
-  │                                                                             │.
-  └─────────────────────────────────────────────────────────────────────────────┘
-  
-  .............┌───────────────────────────── Execution Traces ──────────────────────────────┐
-  │                                                                             │.
-  │  🔍 Detailed execution traces are available!                                │
-  │                                                                             │
-  │  View insights including:                                                   │
-  │    • Agent decision-making process                                          │
-  │    • Task execution flow and timing....┌───────────────────────────── Execution Traces ──────────────────────────────┐
-  │                                                                             │
-  │  🔍 Detailed execution traces are available!                                │
-  │                                                                             │
-  │  View insights including:                                                   │
-  │    • Agent decision-making process                                          │
-  │    • Task execution flow and timing                                         │
-  │    • Tool usage details                                                     │
-  │                                                                             │
-  └─────────────────────────────────────────────────────────────────────────────┘
-  Would you like to view your execution traces? [y/N] (20s timeout): .
-  
-  ┌───────────────────────── Tracing Preference Saved ──────────────────────────┐
-  │
-  │  Info: Tracing has been disabled.                                           │
-  │                                                                             │
-  │  Your preference has been saved. Future Crew/Flow executions will not       │
-  │  collect traces.                                                            │
-  │                                                                             │
-  │  To enable tracing later, do any one of these:                              .....................................                [100%]
+  ........................................................................ [ 55%]
+  .........................................................                [100%]
   ============================== warnings summary ===============================
-  crew\crew.py:25
-    C:\Users\kastu\AppData\Local\Temp\cleancheck_1793450571\crew\crew.py:25: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
+  crew\crew.py:31
+    C:\Users\kastu\AppData\Local\Temp\cleancheck_1793458023\crew\crew.py:31: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
       from crew.memory import session_memory, crew_runnable_with_history
   
   -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-  129 passed, 1 warning in 73.26s (0:01:13)
-  
-  
-  ┌───────────────────────────── Execution Traces ──────────────────────────────┐
-  │                                                                             │
-  │  🔍 Detailed execution traces are available!                                │
-  │                                                                             │
-  │  View insights including:                                                   │
-  │    • Agent decision-making process                                          │
-  │    • Task execution flow and timing                                         │
-  │    • Tool usage details                                                     │
-  │                                                                             │
-  └─────────────────────────────────────────────────────────────────────────────┘
-  Would you like to view your execution traces? [y/N] (20s timeout): 
-  
-  ┌───────────────────────── Tracing Preference Saved ──────────────────────────┐
-  │                                                                             │
-  │  Info: Tracing has been disabled.                                           │
-  │                                                                             │
-  │  Your preference has been saved. Future Crew/Flow executions will not       │
-  │  collect traces.                                                            │
-  │                                                                             │
-  │  To enable tracing later, do any one of these:                              │
-  │  • Set tracing=True in your Crew/Flow code                                  │
-  │  • Set CREWAI_TRACING_ENABLED=true in your project's .env file              │
-  │  • Run: crewai traces enable                                                │
-  │                                                                             │
-  └─────────────────────────────────────────────────────────────────────────────┘
-  
+  129 passed, 1 warning in 54.21s
 [+] Full PyTest Suite (Offline Socket Guard Active): PASS
 
 ================================================================================
@@ -174,38 +107,79 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe eval
   +-----+----------------------------+----------+-----------+--------------+--------+---------+
   | ID  | Topic                      | Accuracy | Grounding | Completeness | Safety | Overall |
   +-----+----------------------------+----------+-----------+--------------+--------+---------+
-  | Q01 | sla_by_severity            |    5     |     5     |      5       |   5    |  5.00   |
+  | Q01 | sla_by_severity            |    5     |     4     |      5       |   5    |  4.75   |
   | Q02 | refund_compensation_policy |    5     |     5     |      5       |   5    |  5.00   |
-  | Q03 | vip_customer_policy        |    4     |     5     |      4       |   5    |  4.50   |
+  | Q03 | vip_customer_policy        |    1     |     5     |      1       |   5    |  3.00   |
   | Q04 | repeat_complaint_handling  |    4     |     5     |      2       |   5    |  4.00   |
   | Q05 | business_hours_support     |    5     |     5     |      3       |   5    |  4.50   |
-  | Q06 | service_credit_policy      |    5     |     5     |      5       |   5    |  5.00   |
+  | Q06 | service_credit_policy      |    5     |     5     |      4       |   5    |  4.75   |
   | Q07 | escalation_matrix          |    5     |     5     |      5       |   5    |  5.00   |
   | Q08 | ticket_priority_rules      |    5     |     5     |      5       |   5    |  5.00   |
-  | Q09 | outage_communication       |    2     |     5     |      3       |   5    |  3.75   |
-  | Q10 | data_retention_policy      |    5     |     5     |      5       |   5    |  5.00   |
+  | Q09 | outage_communication       |    1     |     5     |      1       |   5    |  3.00   |
+  | Q10 | data_retention_policy      |    5     |     4     |      2       |   5    |  4.00   |
   | Q11 | communication_channels     |    5     |     5     |      5       |   5    |  5.00   |
   | Q12 | feedback_collection        |    4     |     5     |      3       |   5    |  4.25   |
   | Q13 | ticket_lookup              |    5     |     5     |      5       |   5    |  5.00   |
   | Q14 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
   | Q15 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
   +-----+----------------------------+----------+-----------+--------------+--------+---------+
-  | MACRO AVERAGES                   |   4.60   |   5.00    |     4.33     |  5.00  |  4.73   |
+  | MACRO AVERAGES                   |   4.33   |   4.87    |     3.73     |  5.00  |  4.48   |
   +-----+----------------------------+----------+-----------+--------------+--------+---------+
   
   Evaluation transcript saved to: transcripts/13_eval.txt
   Results JSON saved to: evaluation/results.json
   [stderr]   from crew.memory import session_memory, crew_runnable_with_history
-  [stderr]   SESSION_STORE[session_id] = InMemoryChatMessageHistory()
+  [stderr]   hist = InMemoryChatMessageHistory()
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
+  [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
 [+] 15-Query Evaluation Benchmark: PASS
 
 ================================================================================
 [Bonus] Running AutoGen Secondary Review Demo...
 ================================================================================
-  Running AutoGen Review Demo A (Faithful Draft)...
-  Running AutoGen Review Demo B (Draft with Injected Ungrounded Claim)...
-  
-  Transcript successfully saved to: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793450571\transcripts\14_review.txt
 [+] AutoGen Review Demo: PASS
 
 ================================================================================
