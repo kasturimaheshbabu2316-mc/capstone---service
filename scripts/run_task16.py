@@ -49,6 +49,17 @@ def run():
     kb_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "kb", test_doc)
     if os.path.exists(kb_path):
         os.remove(kb_path)
+    try:
+        from rag.index import get_chroma_client
+        chroma_c = get_chroma_client()
+        for cname in ("kb_sentence", "kb_fixed", "ola_sentence", "ola_fixed"):
+            try:
+                col = chroma_c.get_collection(cname)
+                col.delete(where={"doc_id": test_doc})
+            except Exception:
+                pass
+    except Exception:
+        pass
 
     # Third call after invalidation: Cache Miss again
     r4 = client.post("/ask", json={"query": query})

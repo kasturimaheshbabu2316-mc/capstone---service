@@ -46,8 +46,8 @@ Content-Type: application/json
     "redactions_made": false,
     "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
   },
-  "trace_id": "8843873a-ef6a-4a82-b6e9-3deab4b7e9a1",
-  "latency_ms": 286.45,
+  "trace_id": "30fb7a36-1706-4f3c-9856-3532db49e9dc",
+  "latency_ms": 269.32,
   "data": {
     "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
     "route": "rag",
@@ -126,8 +126,8 @@ Content-Type: application/json
     "redactions_made": false,
     "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
   },
-  "trace_id": "a57ddb28-9ba9-406d-bc33-e9b4e173941b",
-  "latency_ms": 80.66,
+  "trace_id": "dc77143e-b681-46b4-ba24-d1f79dc5a04b",
+  "latency_ms": 208.29,
   "data": {
     "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
     "route": "lookup",
@@ -213,8 +213,8 @@ Content-Type: application/json
     "redactions_made": false,
     "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
   },
-  "trace_id": "0c500508-35e5-4c7c-9a8d-0c5e1b6f16e1",
-  "latency_ms": 92.42,
+  "trace_id": "e984cd56-3711-4a03-a847-236942d9a6df",
+  "latency_ms": 207.94,
   "data": {
     "answer": "Ticket TKT-0001 (Account Access) is currently Open with a resolution time of 8.3 hours. Escalation risk score is 0.3067 (Normal).",
     "route": "lookup",
@@ -273,9 +273,10 @@ $ curl -X POST http://localhost:8000/ask \
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 {
-  "error": "HTTP Error",
-  "detail": "Blocked prompt injection pattern: 'ignore (?:all )?(?:previous|above) instructions'",
-  "status_code": 400
+  "error": "guardrail_blocked",
+  "detail": "This request was blocked by the safety policy. Please rephrase your question.",
+  "status_code": 400,
+  "message": "This request was blocked by the safety policy. Please rephrase your question."
 }
 
 
@@ -290,7 +291,7 @@ HTTP/1.1 413 Payload Too Large
 Content-Type: application/json
 {
   "error": "HTTP Error",
-  "detail": "Payload of 4400 tokens exceeds the maximum budget of 2000 tokens.",
+  "detail": "Payload exceeds maximum token budget of 2000 tokens (estimated 4,400 tokens).",
   "status_code": 413
 }
 
@@ -346,14 +347,14 @@ Content-Type: application/json
 --------------------------------------------------------------------------------
 Client 1 connecting to ws://localhost:8000/ws/chat ...
   Client 1 -> Sent: 'What is the SLA for a Sev-1 safety incident?'
-  Client 1 <- Received: type=response, grounded=True, latency_ms=0.08
+  Client 1 <- Received: type=response, grounded=True, latency_ms=0.25
   Client 1 -> Sent: 'What is the status of TKT-0001?'
-  Client 1 <- Received: type=response, ticket=TKT-0001, latency_ms=104.77
+  Client 1 <- Received: type=response, ticket=TKT-0001, latency_ms=202.9
   Client 1 -> Abruptly terminating connection without close handshake.
 Server successfully caught WebSocketDisconnect, logged, and cleaned up state.
 Client 2 connecting immediately to ws://localhost:8000/ws/chat ...
   Client 2 -> Sent: 'What is the status of TKT-0002?'
-  Client 2 <- Received: type=response, ticket=TKT-0002, latency_ms=101.16
+  Client 2 <- Received: type=response, ticket=TKT-0002, latency_ms=213.57
 Client 2 session concluded successfully.
 
 --------------------------------------------------------------------------------
@@ -363,14 +364,14 @@ Zero PII Assertion: Raw phone '+91 98765 43210' present in log: False (Expected:
 
 Latest 3 JSON-Lines Audit Entries:
 {
-  "trace_id": "bf07952c-e225-4232-aa40-bfb4c4938b89",
-  "timestamp": "2026-10-17T06:14:49.088018+00:00",
+  "trace_id": "933870cd-fc4a-404b-b99d-cc6243fabea7",
+  "timestamp": "2026-10-31T12:21:08.144579+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_f1a0de0c",
+  "session_id": "ws_17e797c7",
   "masked_question": "What is the SLA for a Sev-1 safety incident?",
   "masked_query": "What is the SLA for a Sev-1 safety incident?",
   "route": "rag",
-  "latency_ms": 0.08,
+  "latency_ms": 0.25,
   "status_code": 200,
   "cache_hit": true,
   "guardrail_flags": {
@@ -380,14 +381,14 @@ Latest 3 JSON-Lines Audit Entries:
 }
 
 {
-  "trace_id": "49175556-19a0-4c2f-a38e-3736a964ede8",
-  "timestamp": "2026-10-17T06:14:49.195060+00:00",
+  "trace_id": "8af853b2-680e-4b9f-9311-f6f72bab4bda",
+  "timestamp": "2026-10-31T12:21:08.349546+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_f1a0de0c",
+  "session_id": "ws_17e797c7",
   "masked_question": "What is the status of TKT-0001?",
   "masked_query": "What is the status of TKT-0001?",
   "route": "lookup",
-  "latency_ms": 104.77,
+  "latency_ms": 202.9,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {
@@ -398,14 +399,14 @@ Latest 3 JSON-Lines Audit Entries:
 }
 
 {
-  "trace_id": "04ef757b-8571-4268-8abb-cee21740d208",
-  "timestamp": "2026-10-17T06:14:49.301726+00:00",
+  "trace_id": "db91513e-6be8-4d2a-bffa-28ff570eee81",
+  "timestamp": "2026-10-31T12:21:08.570565+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_597a2925",
+  "session_id": "ws_33f74de5",
   "masked_question": "What is the status of TKT-0002?",
   "masked_query": "What is the status of TKT-0002?",
   "route": "lookup",
-  "latency_ms": 101.16,
+  "latency_ms": 213.57,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {

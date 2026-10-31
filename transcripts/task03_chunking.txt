@@ -5,8 +5,8 @@ Loading Knowledge Base documents and indexing into ChromaDB...
 
 --- 1. INDEXING SUMMARY ---
   • Knowledge Base Docs   : 12 policy files
-  • Collection 'ola_fixed'    : 30 chunks (200 char window, 40 overlap)
-  • Collection 'ola_sentence' : 53 chunks (regex sentence-based)
+  • Collection 'ola_fixed'    : 28 chunks (200 char window, 40 overlap)
+  • Collection 'ola_sentence' : 50 chunks (regex sentence-based)
   • Embedding Model       : sentence-transformers/all-MiniLM-L6-v2 (384-dimensional dense vectors)
   • Vector Space Metric   : Cosine (hnsw:space: cosine)
 

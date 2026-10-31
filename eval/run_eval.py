@@ -35,7 +35,12 @@ def run_benchmark():
 
         try:
             req = AskRequest(query=q, session_id=f"eval_{qid}")
-            resp = ask_endpoint(req)
+            resp_obj = ask_endpoint(req)
+            if hasattr(resp_obj, "__await__"):
+                import asyncio
+                resp = asyncio.run(resp_obj)
+            else:
+                resp = resp_obj
             data_dict = resp.data if isinstance(resp.data, dict) else (resp.data.model_dump() if hasattr(resp.data, "model_dump") else resp.data.__dict__)
             resp_dict = {
                 "answer": data_dict.get("answer", ""),
