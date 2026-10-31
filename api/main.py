@@ -20,12 +20,16 @@ import hmac
 import json
 import logging
 import os
+import re
 import sys
 import time
 import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any
+
+import anyio
+import anyio.to_thread
 
 # Ensure project root is in sys.path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -334,8 +338,16 @@ def run_unified_pipeline(
                 detail=err_msg or f"Payload exceeds maximum token budget of 2,000 tokens (estimated {tokens:,} tokens).",
             )
 
-        # 3. Response Cache Check
-        cached_result = response_cache.get(sanitized_question)
+        # Check if query targets an operational ticket or policy knowledge base
+        is_ticket_query = bool(re.search(r"\b(TKT-\d{4})\b", raw_question, re.IGNORECASE))
+        cache_namespace = "ticket" if is_ticket_query else "policy"
+
+        # 3. Response Cache Check (Policy queries cached globally; ticket queries strictly session-scoped)
+        cached_result = response_cache.get(
+            sanitized_question,
+            namespace=cache_namespace,
+            session_id=session_id if is_ticket_query else None,
+        )
         if cached_result is not None:
             latency_ms = (time.perf_counter() - start_time) * 1000.0
             route_name = getattr(cached_result, "route", "cached")
@@ -425,11 +437,22 @@ def run_unified_pipeline(
             crew_output.answer = review_verdict.final_answer
             crew_output.review_status = review_verdict.model_dump()
             crew_output.grounded = crew_output.grounded and review_verdict.approved
+        else:
+            if crew_output.review_status.get("approved") is False:
+                crew_output.grounded = False
 
         # 7. Schema Validation & Cache Store
         from crew.schemas import validate_crew_response
         validated_crew = validate_crew_response(crew_output)
-        response_cache.set(sanitized_question, validated_crew)
+
+        # Dynamic tickets without session are never cached globally
+        if cache_namespace == "policy" or (cache_namespace == "ticket" and session_id):
+            response_cache.set(
+                sanitized_question,
+                validated_crew,
+                namespace=cache_namespace,
+                session_id=session_id if is_ticket_query else None,
+            )
 
         latency_ms = (time.perf_counter() - start_time) * 1000.0
 
@@ -489,14 +512,15 @@ def run_unified_pipeline(
 
 
 @app.post("/ask", response_model=AskResponse)
-def ask_endpoint(payload: AskRequest) -> AskResponse:
-    """Processes customer inquiries via the unified pipeline function."""
+async def ask_endpoint(payload: AskRequest) -> AskResponse:
+    """Processes customer inquiries via the unified pipeline in an AnyIO worker thread without event loop blocking."""
     raw_question = payload.question or payload.query or ""
     session_id = payload.session_id or "default_session"
-    return run_unified_pipeline(
-        raw_question=raw_question,
-        session_id=session_id,
-        endpoint="/ask",
+    return await anyio.to_thread.run_sync(
+        run_unified_pipeline,
+        raw_question,
+        session_id,
+        "/ask",
     )
 
 
@@ -522,15 +546,9 @@ def verify_admin_token(x_admin_token: str | None = Header(None, alias="X-Admin-T
     return x_admin_token
 
 
-@app.post("/add-document", response_model=AddDocumentResponse)
-def add_document_endpoint(
-    payload: AddDocumentRequest,
-    admin_token: str = Depends(verify_admin_token),
-) -> AddDocumentResponse:
-    """Ingests a markdown document, sentence-chunks, embeds, and upserts into 'kb_sentence'."""
+def _sync_add_document(doc_title: str, doc_text: str) -> AddDocumentResponse:
+    """Synchronous core ingestion pipeline executed in background worker thread."""
     start_time = time.perf_counter()
-    doc_title = (payload.title or payload.doc_id or "document").strip()
-    doc_text = payload.text.strip()
 
     try:
         # 1. Save document to kb/ directory
@@ -543,6 +561,11 @@ def add_document_endpoint(
 
         # 2. Chunk using the recommended strategy (sentence chunking for kb_sentence)
         chunks = sentence_chunks(doc_text, doc_id=doc_title)
+        if not chunks:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Document '{doc_title}' contains no valid text sentences for indexing.",
+            )
 
         # 3. Embed & upsert into recommended winning collection ('kb_sentence')
         model = getattr(app.state, "embedding_model", None) or get_embedding_model()
@@ -578,8 +601,8 @@ def add_document_endpoint(
                 except (RuntimeError, ValueError) as exc:
                     logger.debug("Legacy collection upsert skipped: %s", exc)
 
-        # 4. Invalidate semantic response cache
-        invalidated_count = response_cache.clear() if hasattr(response_cache, "clear") else 0
+        # 4. Invalidate policy response cache (isolated from ticket caches)
+        invalidated_count = response_cache.clear(namespace="policy")
 
         latency_ms = (time.perf_counter() - start_time) * 1000.0
         trace_id = str(uuid.uuid4())
@@ -614,6 +637,17 @@ def add_document_endpoint(
         )
 
 
+@app.post("/add-document", response_model=AddDocumentResponse)
+async def add_document_endpoint(
+    payload: AddDocumentRequest,
+    admin_token: str = Depends(verify_admin_token),
+) -> AddDocumentResponse:
+    """Ingests a markdown document, sentence-chunks, embeds, and upserts in an AnyIO worker thread."""
+    doc_title = (payload.title or payload.doc_id or "document").strip()
+    doc_text = payload.text.strip()
+    return await anyio.to_thread.run_sync(_sync_add_document, doc_title, doc_text)
+
+
 @app.post("/clear-cache")
 def clear_cache_endpoint(admin_token: str = Depends(verify_admin_token)) -> dict[str, Any]:
     """Privileged admin endpoint to invalidate in-memory response cache."""
@@ -632,12 +666,12 @@ async def chat_websocket(websocket: WebSocket) -> None:
         while True:
             user_msg = await websocket.receive_text()
             try:
-                # Execute through the single unified pipeline function in thread pool
-                ask_res = await asyncio.to_thread(
+                # Execute through the single unified pipeline function in AnyIO worker thread
+                ask_res = await anyio.to_thread.run_sync(
                     run_unified_pipeline,
-                    raw_question=user_msg,
-                    session_id=session_id,
-                    endpoint="/ws/chat",
+                    user_msg,
+                    session_id,
+                    "/ws/chat",
                 )
 
                 cached_data = ask_res.data or (

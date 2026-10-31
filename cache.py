@@ -35,9 +35,36 @@ class ResponseCache:
         clean = re.sub(r"[^\w\s]", "", query.lower())
         return " ".join(clean.strip().split())
 
-    def get(self, query: str) -> Optional[Any]:
-        """Retrieves cached response if present, updating stats."""
-        key = self._normalize_key(query)
+    def _build_key(
+        self,
+        query: str,
+        namespace: str = "policy",
+        session_id: str | None = None,
+    ) -> str:
+        """Constructs isolated cache keys separating policy queries from session-specific ticket lookups."""
+        norm = self._normalize_key(query)
+        if namespace == "ticket" or (session_id and namespace != "policy"):
+            sess = (session_id or "session").strip()
+            return f"ticket:{sess}:{norm}"
+        return f"policy:{norm}"
+
+    def get(
+        self,
+        query: str,
+        namespace: str = "policy",
+        session_id: str | None = None,
+    ) -> Optional[Any]:
+        """Retrieves cached response if present, updating stats.
+        
+        Dynamic ticket queries without a session_id bypass global cache to prevent stale operational data.
+        """
+        # Guard: never serve dynamic ticket lookups from an unscoped global cache
+        if namespace == "ticket" and not session_id:
+            with self._lock:
+                self._misses += 1
+            return None
+
+        key = self._build_key(query, namespace=namespace, session_id=session_id)
         with self._lock:
             if key in self._cache:
                 self._hits += 1
@@ -45,9 +72,19 @@ class ResponseCache:
             self._misses += 1
             return None
 
-    def set(self, query: str, response: Any) -> None:
-        """Stores response in cache under normalized key."""
-        key = self._normalize_key(query)
+    def set(
+        self,
+        query: str,
+        response: Any,
+        namespace: str = "policy",
+        session_id: str | None = None,
+    ) -> None:
+        """Stores response in cache under isolated namespace/session key."""
+        # Guard: do not cache dynamic ticket lookups globally without a session_id
+        if namespace == "ticket" and not session_id:
+            return
+
+        key = self._build_key(query, namespace=namespace, session_id=session_id)
         with self._lock:
             self._cache[key] = response
 
@@ -55,13 +92,21 @@ class ResponseCache:
         self,
         query: str,
         compute_fn: Callable[[str], Any],
+        namespace: str = "policy",
+        session_id: str | None = None,
     ) -> Tuple[Any, bool]:
         """Gets response from cache or invokes compute_fn, updating generation counter.
 
         Returns:
             Tuple of (response_value, is_cache_hit).
         """
-        key = self._normalize_key(query)
+        if namespace == "ticket" and not session_id:
+            with self._lock:
+                self._misses += 1
+                self._generation_calls += 1
+            return compute_fn(query), False
+
+        key = self._build_key(query, namespace=namespace, session_id=session_id)
         with self._lock:
             if key in self._cache:
                 self._hits += 1
@@ -78,12 +123,18 @@ class ResponseCache:
             self._cache[key] = result
             return result, False
 
-    def clear(self) -> int:
-        """Invalidates entire cache (e.g. after knowledge base update).
+    def clear(self, namespace: Optional[str] = None) -> int:
+        """Invalidates cache entries. If namespace is provided, clears only that namespace.
 
         Returns number of invalidated entries.
         """
         with self._lock:
+            if namespace:
+                prefix = f"{namespace}:"
+                to_delete = [k for k in self._cache if k.startswith(prefix)]
+                for k in to_delete:
+                    del self._cache[k]
+                return len(to_delete)
             count = len(self._cache)
             self._cache.clear()
             return count

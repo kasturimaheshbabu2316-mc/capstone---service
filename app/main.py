@@ -11,6 +11,7 @@ from api.main import (
     add_document_endpoint,
     chat_websocket,
     lifespan,
+    run_unified_pipeline,
 )
 
 __all__ = [
@@ -21,6 +22,7 @@ __all__ = [
     "add_document_endpoint",
     "chat_websocket",
     "lifespan",
+    "run_unified_pipeline",
 ]
 
 if __name__ == "__main__":

@@ -57,8 +57,18 @@ def grounded_answer(
 
     chunks = retrieve(query=query, collection_name=target_collection, k=k)
 
-    if not chunks or chunks[0]["similarity"] < active_threshold:
-        top_sim = chunks[0]["similarity"] if chunks else 0.0
+    # Sanitize and validate retrieved chunks, rejecting empty or malformed text
+    valid_chunks = [
+        c for c in chunks
+        if isinstance(c, dict)
+        and c.get("text")
+        and isinstance(c["text"], str)
+        and c["text"].strip()
+        and "similarity" in c
+    ]
+
+    if not valid_chunks or valid_chunks[0].get("similarity", 0.0) < active_threshold:
+        top_sim = valid_chunks[0]["similarity"] if valid_chunks else (chunks[0].get("similarity", 0.0) if chunks and isinstance(chunks[0], dict) else 0.0)
         return {
             "query": query,
             "answer": FALLBACK_REFUSAL,
@@ -66,16 +76,32 @@ def grounded_answer(
             "top_similarity": top_sim,
             "grounded": False,
             "threshold": active_threshold,
-            "retrieved_chunks": chunks,
+            "retrieved_chunks": valid_chunks,
         }
 
     # Deterministic extractive generation under MOCK_LLM:
     # Compose answer directly from top retrieved chunks from the primary matching document
-    top_chunk = chunks[0]
+    top_chunk = valid_chunks[0]
     top_doc_id = top_chunk.get("doc_id")
-    matching_chunks = [c["text"].strip() for c in chunks if c.get("doc_id") == top_doc_id]
+    matching_chunks = [
+        c["text"].strip()
+        for c in valid_chunks
+        if c.get("doc_id") == top_doc_id and c["text"].strip()
+    ]
     extracted_answer = " ".join(matching_chunks) if matching_chunks else top_chunk["text"].strip()
-    sources = list(dict.fromkeys(c["doc_id"] for c in chunks if c.get("doc_id")))
+
+    if not extracted_answer.strip():
+        return {
+            "query": query,
+            "answer": FALLBACK_REFUSAL,
+            "sources": [],
+            "top_similarity": top_chunk.get("similarity", 0.0),
+            "grounded": False,
+            "threshold": active_threshold,
+            "retrieved_chunks": valid_chunks,
+        }
+
+    sources = list(dict.fromkeys(c["doc_id"] for c in valid_chunks if c.get("doc_id")))
 
     return {
         "query": query,
@@ -84,7 +110,7 @@ def grounded_answer(
         "top_similarity": top_chunk["similarity"],
         "grounded": True,
         "threshold": active_threshold,
-        "retrieved_chunks": chunks,
+        "retrieved_chunks": valid_chunks,
     }
 
 

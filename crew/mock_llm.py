@@ -198,37 +198,64 @@ class MockLLM(BaseLLM):
         # STEP 2: ReAct Final Answer or Direct Synthesis (Turn 2 or Toolless Agent)
         # -------------------------------------------------------------
 
-        # Case A: Structured Pydantic Output requested (Task 9)
-        if response_model is not None:
+        # Case A: Structured Pydantic Output requested (Task 9) or JSON requested in prompt
+        wants_json = (response_model is not None) or ("json" in full_text.lower() and ("crewresponse" in full_text.lower() or "route" in full_text.lower()))
+
+        if wants_json:
             if ticket_id:
                 ticket_res = check_support_ticket_status(ticket_id)
                 status = ticket_res.get("status", "Unknown")
                 res_time = ticket_res.get("resolution_time_hours", 0.0)
                 esc_score = ticket_res.get("escalation_score", 0.0)
                 risk = ticket_res.get("risk_level", "Normal")
+                esc_rec = ticket_res.get("recommend_escalation", False)
                 ans = (
                     f"Ticket {ticket_id} is currently {status} with resolution time of {res_time} hours. "
                     f"Escalation score is {esc_score:.4f} ({risk})."
                 )
                 payload = {
                     "answer": ans,
+                    "route": "lookup",
                     "sources": ["dataset.py"],
+                    "ticket": ticket_res,
                     "ticket_id": ticket_id,
                     "escalation_score": esc_score,
+                    "escalation_recommended": esc_rec,
                     "grounded": True,
                     "confidence": 0.98,
+                    "review_status": {
+                        "approved": True,
+                        "final_answer": ans,
+                        "reason": "Verified operational ticket data against dataset.",
+                        "redactions_made": False,
+                    },
                 }
             else:
-                rag_res = rag_lookup(full_text)
+                clean_q = extract_query_text(full_text)
+                rag_res = rag_lookup(clean_q)
+                ans = rag_res["answer"]
                 payload = {
-                    "answer": rag_res["answer"],
+                    "answer": ans,
+                    "route": "rag",
                     "sources": rag_res["sources"],
+                    "ticket": None,
                     "ticket_id": None,
                     "escalation_score": None,
+                    "escalation_recommended": False,
                     "grounded": rag_res["grounded"],
                     "confidence": rag_res["confidence"],
+                    "review_status": {
+                        "approved": True,
+                        "final_answer": ans,
+                        "reason": "Verified policy guidelines against knowledge base.",
+                        "redactions_made": False,
+                    },
                 }
-            return json.dumps(payload)
+
+            json_str = json.dumps(payload)
+            if response_model is not None:
+                return json_str
+            return f"Thought: I now know the final answer.\nFinal Answer: {json_str}"
 
         # Case B: Ticket query synthesis
         if ticket_id:

@@ -381,6 +381,10 @@ def retrieve(
         distances = results["distances"][0] if results.get("distances") else [0.0] * len(docs)
 
         for doc_text, meta, dist in zip(docs, metas, distances):
+            # Guard against empty, non-string, or whitespace-only malformed chunks
+            if not doc_text or not isinstance(doc_text, str) or not doc_text.strip():
+                continue
+
             # Chroma returns cosine distance d in [0, 2]; similarity = 1 - d
             dist_val = float(dist)
             similarity = round(1.0 - dist_val, 4)
@@ -394,7 +398,7 @@ def retrieve(
                     chunk_idx = 0
 
             retrieved.append({
-                "text": doc_text,
+                "text": doc_text.strip(),
                 "doc_id": meta_dict.get("doc_id", "unknown"),
                 "chunk_id": chunk_id,
                 "chunk_index": chunk_idx,

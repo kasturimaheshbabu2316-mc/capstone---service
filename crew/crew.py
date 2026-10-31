@@ -174,7 +174,7 @@ def run_support_crew(
         escalation_recommended = False
         ticket_payload = None
 
-    # Step 2: AutoGen Secondary Review Stage (Task 14)
+    # Step 2: AutoGen Secondary Review Stage (Task 14) with Coordinator Feedback Loop
     from review.autogen_review import review_support_response
 
     context_summary = ""
@@ -195,7 +195,43 @@ def run_support_crew(
         confidence=confidence,
         context_text=context_summary,
     )
-    final_text = review_verdict.final_answer
+
+    # Compliance retry loop back to agent coordinator
+    if not review_verdict.approved:
+        logger.warning(
+            "Compliance review flagged issue in draft: '%s'. Initiating coordinator retry loop...",
+            review_verdict.reason,
+        )
+        # Attempt coordinator retry with reviewer feedback
+        max_retries = 1
+        for _ in range(max_retries):
+            if route in ("rag", "both"):
+                rag_res = rag_lookup(resolved_query)
+                retry_draft = rag_res["answer"]
+            elif ticket_payload:
+                retry_draft = review_verdict.final_answer
+            else:
+                retry_draft = review_verdict.final_answer
+
+            # Re-review corrected draft against grounded context
+            retry_verdict = review_support_response(
+                query=resolved_query,
+                draft_answer=retry_draft,
+                sources=sources,
+                grounded=grounded,
+                confidence=confidence,
+                context_text=context_summary,
+            )
+            if retry_verdict.approved:
+                review_verdict = retry_verdict
+                final_text = retry_verdict.final_answer
+                break
+        else:
+            # Fallback: strictly enforce redacted safe answer from reviewer
+            final_text = review_verdict.final_answer
+    else:
+        final_text = review_verdict.final_answer
+
     review_status_dict = review_verdict.model_dump()
 
     # Step 3: Record in session memory
