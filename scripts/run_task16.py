@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 # Ensure root in sys.path
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from app.main import app
+from api.main import app
 
 TRANSCRIPTS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "transcripts")
 os.makedirs(TRANSCRIPTS_DIR, exist_ok=True)

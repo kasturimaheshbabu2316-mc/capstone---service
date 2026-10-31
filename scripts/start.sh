@@ -14,16 +14,7 @@ echo " Starting Ola Domain Support Intelligence Service"
 echo " Mode: $APP_MODE | Port: $PORT"
 echo "===================================================================="
 
-if [ "$APP_MODE" = "streamlit" ]; then
-    echo "Launching Streamlit application..."
-    exec streamlit run streamlit_app.py \
-        --server.port "$PORT" \
-        --server.address 0.0.0.0 \
-        --server.headless true \
-        --server.fileWatcherType none
-else
-    echo "Launching FastAPI ASGI application..."
-    exec uvicorn app.main:app \
-        --host 0.0.0.0 \
-        --port "$PORT"
-fi
+echo "Launching FastAPI ASGI application..."
+exec uvicorn api.main:app \
+    --host 0.0.0.0 \
+    --port "$PORT"

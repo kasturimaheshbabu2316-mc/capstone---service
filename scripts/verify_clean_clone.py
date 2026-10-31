@@ -81,7 +81,6 @@ def run_clean_clone_proof() -> int:
         "scripts/setup.sh",
         "scripts/run_all.sh",
         "scripts/ws_live_test.py",
-        "streamlit_app.py",
         "tests/conftest.py",
         "tests/test_web_ui.py",
     ]

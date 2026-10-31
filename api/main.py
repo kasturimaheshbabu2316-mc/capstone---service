@@ -131,13 +131,6 @@ async def lifespan(app: FastAPI):
         app.state.winning_collection = winning_col
         logger.info("Lifespan: SentenceTransformer and '%s' ChromaDB collection ready.", winning_col)
 
-        # Initialize any background system datasets if needed
-        try:
-            from ingest import initialize_system_data
-            initialize_system_data()
-        except (ImportError, OSError, RuntimeError) as exc:
-            logger.info("Lifespan system data check: %s", exc)
-
         # Pre-warm CrewAI agents and crews once in lifespan
         try:
             from crew.crew import get_policy_crew, get_ticket_crew

@@ -18,7 +18,7 @@ __all__ = [
 
 def __getattr__(name: str) -> Any:
     if name == "SupportResponse":
-        from crew.schema import SupportResponse
+        from crew.schemas import SupportResponse
         return SupportResponse
     elif name == "session_memory":
         from crew.memory import session_memory
