@@ -68,6 +68,7 @@ from rag.index import (
     get_embedding_model,
     get_or_create_collection,
 )
+from kb_loader import load_kb
 from safety.guardrails import (
     check_groundedness,
     detect_prompt_injection,
@@ -288,6 +289,29 @@ def check_readiness() -> tuple[bool, bool]:
     return bool(kb_ready), bool(db_ready)
 
 
+def format_human_source_title(raw_title: str) -> str:
+    """Formats human source title in sentence case while preserving uppercase acronyms (SLA, VIP, KB)."""
+    if not raw_title:
+        return ""
+    if raw_title in ("dataset.py", "dataset", "Ola Operational Records"):
+        return "Ticket records"
+    acronyms = {"SLA", "VIP", "KB", "CSAT"}
+    clean = raw_title.replace("_", " ").replace(".md", "")
+    words = clean.strip().split()
+    if not words:
+        return ""
+    result = []
+    for i, w in enumerate(words):
+        upper_w = w.upper()
+        if upper_w in acronyms:
+            result.append(upper_w)
+        elif i == 0:
+            result.append(w.capitalize())
+        else:
+            result.append(w.lower())
+    return " ".join(result)
+
+
 def _resolve_source_titles(sources: list[str] | None) -> list[str]:
     """Resolves raw source identifiers or filenames to human-readable document titles."""
     if not sources:
@@ -306,12 +330,14 @@ def _resolve_source_titles(sources: list[str] | None) -> list[str]:
     for s in sources:
         clean_s = str(s).strip()
         stem = Path(clean_s).stem
-        if clean_s in doc_title_map:
-            titles.append(doc_title_map[clean_s])
+        if clean_s in ("dataset.py", "dataset") or stem == "dataset":
+            titles.append("Ticket records")
+        elif clean_s in doc_title_map:
+            titles.append(format_human_source_title(doc_title_map[clean_s]))
         elif stem in doc_title_map:
-            titles.append(doc_title_map[stem])
+            titles.append(format_human_source_title(doc_title_map[stem]))
         else:
-            titles.append(stem.replace("_", " ").title())
+            titles.append(format_human_source_title(clean_s))
     return list(dict.fromkeys(titles))
 
 
@@ -334,6 +360,7 @@ def run_unified_pipeline(
     session_id: str,
     endpoint: str = "/ask",
     trace_id: str | None = None,
+    is_admin: bool = False,
 ) -> AskResponse:
     """One unified pipeline function executing the full governance and multi-agent lifecycle:
 
@@ -384,7 +411,7 @@ def run_unified_pipeline(
             )
             raise HTTPException(
                 status_code=413,
-                detail=err_msg or f"Payload exceeds maximum token budget of {MAX_REQUEST_TOKENS:,} tokens (estimated {tokens:,} tokens).",
+                detail=f"Your question is too long. Keep it under {MAX_REQUEST_TOKENS:,} tokens (estimated {tokens:,} tokens).",
             )
 
         # 3. Prompt Injection Check (HTTP 400)
@@ -462,6 +489,23 @@ def run_unified_pipeline(
 
             source_titles = _resolve_source_titles(cached_result.sources)
 
+            raw_review = getattr(cached_result, "review_status", None) or {}
+            is_revised = bool(
+                raw_review.get("redactions_made", False)
+                or (
+                    raw_review.get("final_answer")
+                    and raw_review.get("final_answer").strip() != cached_result.answer.strip()
+                )
+            )
+            if is_admin:
+                resp_review = dict(raw_review)
+                resp_review["revised"] = is_revised
+            else:
+                resp_review = {
+                    "approved": bool(raw_review.get("approved", True)),
+                    "revised": is_revised,
+                }
+
             data_obj = {
                 "answer": cached_result.answer,
                 "route": route_name,
@@ -472,7 +516,7 @@ def run_unified_pipeline(
                 "grounded": cached_result.grounded,
                 "escalation_recommended": cached_result.escalation_recommended,
                 "escalation_score": ticket_payload.get("escalation_score") if ticket_payload else None,
-                "review_status": getattr(cached_result, "review_status", None),
+                "review_status": resp_review,
             }
 
             return AskResponse(
@@ -487,7 +531,7 @@ def run_unified_pipeline(
                 latency_ms=round(latency_ms, 2),
                 data=data_obj,
                 retrieved_sources=cached_result.sources,
-                review_status=getattr(cached_result, "review_status", {}) or {},
+                review_status=resp_review,
                 cache_hit=True,
                 guardrail_flags=guardrail_flags,
             )
@@ -571,6 +615,23 @@ def run_unified_pipeline(
 
         source_titles = _resolve_source_titles(validated_crew.sources)
 
+        raw_review = validated_crew.review_status or {}
+        is_revised = bool(
+            raw_review.get("redactions_made", False)
+            or (
+                raw_review.get("final_answer")
+                and raw_review.get("final_answer").strip() != validated_crew.answer.strip()
+            )
+        )
+        if is_admin:
+            resp_review = dict(raw_review)
+            resp_review["revised"] = is_revised
+        else:
+            resp_review = {
+                "approved": bool(raw_review.get("approved", True)),
+                "revised": is_revised,
+            }
+
         data_obj = {
             "answer": validated_crew.answer,
             "route": validated_crew.route,
@@ -581,7 +642,7 @@ def run_unified_pipeline(
             "grounded": validated_crew.grounded,
             "escalation_recommended": validated_crew.escalation_recommended,
             "escalation_score": validated_crew.ticket.get("escalation_score") if validated_crew.ticket else None,
-            "review_status": validated_crew.review_status,
+            "review_status": resp_review,
         }
 
         return AskResponse(
@@ -596,7 +657,7 @@ def run_unified_pipeline(
             latency_ms=round(latency_ms, 2),
             data=data_obj,
             retrieved_sources=validated_crew.sources,
-            review_status=validated_crew.review_status or {},
+            review_status=resp_review,
             cache_hit=False,
             guardrail_flags=guardrail_flags,
         )
@@ -612,15 +673,27 @@ def run_unified_pipeline(
 
 
 @app.post("/ask", response_model=AskResponse)
-async def ask_endpoint(payload: AskRequest) -> AskResponse:
+async def ask_endpoint(
+    payload: AskRequest,
+    x_admin_token: str | None = Header(None, alias="X-Admin-Token"),
+) -> AskResponse:
     """Processes customer inquiries via the unified pipeline in an AnyIO worker thread without event loop blocking."""
     raw_question = payload.question or payload.query or ""
     session_id = payload.session_id or "default_session"
+    server_token = os.environ.get("ADMIN_TOKEN")
+    is_admin = bool(
+        server_token
+        and server_token.strip()
+        and x_admin_token
+        and hmac.compare_digest(x_admin_token.strip(), server_token.strip())
+    )
     return await anyio.to_thread.run_sync(
         run_unified_pipeline,
         raw_question,
         session_id,
         "/ask",
+        None,
+        is_admin,
     )
 
 

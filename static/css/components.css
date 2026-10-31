@@ -131,10 +131,11 @@
 }
 
 .welcome-title {
-  font-size: 1.375rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 800;
   font-stretch: 115%;
-  margin-bottom: var(--space-xxs);
+  margin-bottom: var(--space-xs);
+  color: var(--color-ink);
 }
 
 .welcome-sub {
@@ -150,19 +151,31 @@
 }
 
 .suggestion-chip {
-  padding: 6px 12px;
+  min-height: 44px;
+  padding: 8px 16px;
   border-radius: var(--radius-control);
   border: 1px solid var(--color-border);
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-sunken);
   color: var(--color-ink);
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 500;
-  transition: all 120ms ease;
+  display: inline-flex;
+  align-items: center;
+  transition: border-color 150ms ease, background-color 150ms ease, transform 80ms ease;
 }
 
 .suggestion-chip:hover {
-  border-color: var(--color-accent);
-  background-color: var(--color-accent-subtle);
+  border-color: var(--color-ink);
+  background-color: var(--color-surface);
+}
+
+.suggestion-chip:focus-visible {
+  outline: 2px solid var(--color-ink);
+  box-shadow: var(--focus-ring);
+}
+
+.suggestion-chip:active {
+  transform: scale(0.98);
 }
 
 /* ------------------------------------------------------------------------------
@@ -226,9 +239,9 @@
    5. Policy Slip (Paper Surface with Perforated Edge)
    ------------------------------------------------------------------------------ */
 .policy-slip {
-  background-color: var(--color-surface);
-  color: var(--color-ink);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-slip-bg, #FFFFFF);
+  color: var(--color-slip-ink, #1B2230);
+  border: 1px solid var(--color-slip-border, #D1D6CC);
   border-radius: var(--radius-slip) var(--radius-slip) 0 0;
   padding: var(--space-md) var(--space-md) var(--space-xs);
   position: relative;
@@ -241,28 +254,28 @@
   align-items: center;
   padding-bottom: var(--space-xs);
   margin-bottom: var(--space-sm);
-  border-bottom: 1px dashed var(--color-border);
+  border-bottom: 1px dashed var(--color-slip-border, #D1D6CC);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: var(--color-ink-muted);
+  color: var(--color-slip-muted, #586069);
 }
 
 .slip-content {
   font-family: var(--font-serif);
-  font-size: 1.0625rem;
+  font-size: 17px;
   line-height: 1.6;
   max-width: var(--measure-prose);
-  color: var(--color-ink);
+  color: var(--color-slip-ink, #1B2230);
 }
 
 .slip-meta-line {
   margin-top: var(--space-sm);
   padding-top: var(--space-xs);
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid var(--color-slip-border, #D1D6CC);
   font-family: var(--font-sans);
   font-size: 0.8125rem;
-  color: var(--color-ink-secondary);
+  color: var(--color-slip-muted, #586069);
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
@@ -288,9 +301,9 @@
 .perforated-edge {
   height: 10px;
   width: 100%;
-  background: radial-gradient(circle at 8px -3px, transparent 5px, var(--color-surface) 6px) repeat-x;
+  background: radial-gradient(circle at 8px -3px, transparent 5px, var(--color-slip-bg, #FFFFFF) 6px) repeat-x;
   background-size: 16px 10px;
-  border-bottom: 1px dashed var(--color-border);
+  border-bottom: 1px dashed var(--color-slip-border, #D1D6CC);
   margin-bottom: var(--space-sm);
 }
 
@@ -618,19 +631,28 @@
 }
 
 .btn-send {
-  background-color: var(--color-ink);
-  color: var(--color-page);
   border-radius: var(--radius-control);
-  padding: 8px 16px;
-  font-size: 0.875rem;
+  padding: 8px 18px;
+  font-size: 14px;
   font-weight: 700;
   gap: 6px;
-  transition: background-color 120ms ease;
+  min-height: 44px;
+  transition: background-color 150ms ease, opacity 150ms ease;
 }
 
-.btn-send:hover:not(:disabled) {
+.btn-send:not(:disabled) {
   background-color: var(--color-accent);
   color: #1B2230;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.btn-send:disabled {
+  background-color: transparent;
+  color: var(--color-ink-muted);
+  border: 1px solid var(--color-border);
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* Live Token Meter */
@@ -638,7 +660,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.75rem;
+  font-size: 13px;
   color: var(--color-ink-muted);
   padding: 0 4px;
 }
@@ -763,26 +785,44 @@
   background-color: var(--color-surface-sunken);
 }
 
-/* Sheet Tabs */
+/* Sheet Tabs: Horizontally scrollable with edge fade */
 .sheet-tabs {
   display: flex;
   border-bottom: 1px solid var(--color-border);
   overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
   background-color: var(--color-surface);
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  padding: 0 4px;
+}
+
+.sheet-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-btn {
-  padding: 10px 14px;
-  font-size: 0.8125rem;
+  padding: 10px 16px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--color-ink-secondary);
   border-bottom: 2px solid transparent;
   white-space: nowrap;
+  min-height: 44px;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.tab-btn:hover {
+  color: var(--color-ink);
 }
 
 .tab-btn.active {
-  color: var(--color-ink);
+  color: #1B2230;
+  background-color: var(--color-accent);
   border-bottom-color: var(--color-accent);
+  border-radius: var(--radius-slip) var(--radius-slip) 0 0;
 }
 
 .sheet-body {

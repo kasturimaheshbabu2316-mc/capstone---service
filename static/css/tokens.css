@@ -58,12 +58,18 @@
   --header-height: 56px;
   --composer-min-height: 72px;
 
+  /* Policy Slip Dedicated Tokens (Always Paper-White for High Contrast) */
+  --color-slip-bg: #FFFFFF;
+  --color-slip-ink: #1B2230;
+  --color-slip-border: #D1D6CC;
+  --color-slip-muted: #586069;
+
   /* Focus Indicator */
   --focus-ring: 0 0 0 2px var(--color-page), 0 0 0 4px var(--color-accent);
 }
 
 [data-theme="dark"] {
-  /* Dark Theme: Remapping the same tokens */
+  /* Dark Theme: Asphalt page, Chalk ink, Lane yellow single accent */
   --color-page: #121722;              /* Deep asphalt */
   --color-surface: #1B2230;           /* Asphalt surface */
   --color-surface-sunken: #151A24;    /* Pit dark */
@@ -73,7 +79,7 @@
   --color-border: #2B3444;            /* Dark asphalt divider */
   --color-border-subtle: #202735;     /* Dark hairline */
 
-  --color-accent: #F4C20D;            /* Lane yellow */
+  --color-accent: #F4C20D;            /* Lane yellow: ONLY for Send button, active tab, focus rings, active ticket stage */
   --color-accent-subtle: rgba(244, 194, 13, 0.18);
   --color-verified: #18A9A8;          /* Lightened signal teal */
   --color-verified-bg: rgba(24, 169, 168, 0.12);
@@ -82,6 +88,12 @@
 
   --color-chip-user: #242D3D;         /* Elevated asphalt chip */
   --color-chip-user-ink: #ECEEE8;     /* Kerb chalk */
+
+  /* Policy Slip Paper-White in Dark Mode */
+  --color-slip-bg: #FFFFFF;
+  --color-slip-ink: #1B2230;
+  --color-slip-border: rgba(27, 34, 48, 0.2);
+  --color-slip-muted: #586069;
 
   --glass-bg: rgba(27, 34, 48, 0.90);
   --glass-border: rgba(236, 238, 232, 0.12);

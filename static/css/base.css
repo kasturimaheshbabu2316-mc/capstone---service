@@ -64,9 +64,10 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
 }
 
-/* Button & Interactive Control Foundations */
+/* Button & Interactive Control Foundations: 14px minimum */
 button, input, textarea, select {
   font: inherit;
+  font-size: max(14px, 0.875rem);
   color: inherit;
   background: transparent;
   border: none;

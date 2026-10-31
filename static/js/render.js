@@ -14,9 +14,21 @@ export function escapeHtml(str) {
 }
 
 export function cleanSourceName(src) {
-  if (!src) return "Ola Standard Guidelines";
-  if (src === "dataset.py") return "Ola Operational Records";
-  return src.replace(".md", "").replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+  if (!src) return "Official policy";
+  if (src === "dataset.py" || src === "dataset" || src === "Ola Operational Records") {
+    return "Ticket records";
+  }
+  const clean = src.replace(/\.md$/i, "").replace(/_/g, " ");
+  const acronyms = ["SLA", "VIP", "KB", "CSAT"];
+  return clean
+    .split(" ")
+    .map((w, idx) => {
+      const upper = w.toUpperCase();
+      if (acronyms.includes(upper)) return upper;
+      if (idx === 0) return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+      return w.toLowerCase();
+    })
+    .join(" ");
 }
 
 /**
@@ -78,7 +90,7 @@ export function createPolicySlipElement(data, showSources = true, showReviewBadg
 
   const header = document.createElement("div");
   header.className = "slip-header";
-  header.innerHTML = `<span>POLICY RESOLUTION DISPATCH</span><span class="tabular-nums">#${Math.floor(1000 + Math.random() * 9000)}</span>`;
+  header.innerHTML = `<span>POLICY RESOLUTION SLIP</span><span class="tabular-nums">#${Math.floor(1000 + Math.random() * 9000)}</span>`;
   slip.appendChild(header);
 
   const content = document.createElement("div");
@@ -90,21 +102,25 @@ export function createPolicySlipElement(data, showSources = true, showReviewBadg
   const metaLine = document.createElement("div");
   metaLine.className = "slip-meta-line";
 
-  if (showSources && data.sources && data.sources.length > 0) {
-    const srcNames = data.sources.map(cleanSourceName).join(", ");
+  const displaySources = (data.source_titles && data.source_titles.length)
+    ? data.source_titles
+    : (data.sources || []);
+
+  if (showSources && displaySources.length > 0) {
+    const srcNames = displaySources.map(cleanSourceName).join(", ");
     const srcSpan = document.createElement("span");
     srcSpan.textContent = `From: ${srcNames}`;
     metaLine.appendChild(srcSpan);
   }
 
-  if (data.grounded) {
+  if (data.grounded && !data.ticket) {
     const verSpan = document.createElement("span");
     verSpan.className = "verified-mark";
     verSpan.innerHTML = `
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="20 6 9 17 4 12"></polyline>
       </svg>
-      Verified against policy
+      <span>Verified against policy</span>
     `;
     metaLine.appendChild(verSpan);
   }
@@ -112,11 +128,12 @@ export function createPolicySlipElement(data, showSources = true, showReviewBadg
   if (showReviewBadges && data.review_status && data.review_status.approved) {
     const revSpan = document.createElement("span");
     revSpan.className = "reviewer-mark";
+    const isRevised = Boolean(data.review_status.revised);
     revSpan.innerHTML = `
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
       </svg>
-      Checked by reviewer
+      <span>${isRevised ? "Revised by reviewer" : "Checked by reviewer"}</span>
     `;
     metaLine.appendChild(revSpan);
   }
@@ -153,7 +170,7 @@ export function createTicketStubElement(ticket) {
   // Accessible sentence description
   stub.setAttribute(
     "aria-label",
-    `Ticket ${ticketId}, category ${category}, current status is ${status}. Resolution target is ${resHours} hours, age is ${ageDays} days. Escalation risk is ${escScore.toFixed(3)}, ${isHighRisk ? "exceeding safety threshold" : "within standard limits"}.`
+    `Ticket ${ticketId}, category ${category}, current status is ${status}. Resolution target is ${resHours} hours, age is ${ageDays} days. Escalation risk is ${escScore.toFixed(2)}, ${isHighRisk ? "exceeding safety threshold" : "within standard limits"}.`
   );
 
   // 1. Header
@@ -202,7 +219,7 @@ export function createTicketStubElement(ticket) {
     </div>
     <div class="metric-card">
       <div class="metric-label">Priority risk</div>
-      <div class="metric-value">${isHighRisk ? "High Risk" : "Standard"}</div>
+      <div class="metric-value">${isHighRisk ? "High risk" : "Standard"}</div>
     </div>
   `;
   stub.appendChild(metrics);
@@ -214,8 +231,8 @@ export function createTicketStubElement(ticket) {
   const meterHeader = document.createElement("div");
   meterHeader.className = "meter-header";
   meterHeader.innerHTML = `
-    <span>Escalation Risk Gauge</span>
-    <span class="tabular-nums" style="font-weight:700;">${escScore.toFixed(3)}</span>
+    <span>Escalation risk gauge</span>
+    <span class="tabular-nums" style="font-weight:700;">${escScore.toFixed(2)}</span>
   `;
   meterBox.appendChild(meterHeader);
 
@@ -226,7 +243,7 @@ export function createTicketStubElement(ticket) {
   const threshLine = document.createElement("div");
   threshLine.className = "meter-threshold-line";
   threshLine.style.left = "44%";
-  threshLine.title = "Escalation Threshold (0.440)";
+  threshLine.title = "Escalation threshold (0.44)";
   gauge.appendChild(threshLine);
 
   // 10 Segments
@@ -244,12 +261,26 @@ export function createTicketStubElement(ticket) {
 
   const threshLabel = document.createElement("div");
   threshLabel.className = "meter-threshold-label";
-  threshLabel.textContent = `Threshold notch at 0.440 ${isHighRisk ? "• Exceeded" : "• Nominal"}`;
+  threshLabel.textContent = `Threshold notch at 0.44 ${isHighRisk ? "• Exceeded" : "• Nominal"}`;
   meterBox.appendChild(threshLabel);
 
   stub.appendChild(meterBox);
 
-  // 5. Recommendation Banner
+  // 5. Verification & Source Tags
+  const metaLine = document.createElement("div");
+  metaLine.className = "slip-meta-line";
+  metaLine.innerHTML = `
+    <span>From ticket records</span>
+    <span class="reviewer-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+      <span>Checked by reviewer</span>
+    </span>
+  `;
+  stub.appendChild(metaLine);
+
+  // 6. Recommendation Banner
   const recBanner = document.createElement("div");
   recBanner.className = `recommendation-banner ${isHighRisk ? "escalate" : "standard"}`;
   recBanner.textContent = isHighRisk

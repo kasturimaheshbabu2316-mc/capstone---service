@@ -291,9 +291,9 @@ class MockLLM(BaseLLM):
                 rt = t_data.get("resolution_time_hours", 0.0)
                 esc = t_data.get("escalation_score", 0.0)
                 rk = t_data.get("risk_level", "Normal")
+                prio_str = "High priority" if esc >= 0.44 else "Standard priority"
                 ans = (
-                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours. "
-                    f"Escalation risk score is {esc:.4f} ({rk}).\n\nPolicy Guidelines: {policy_text}"
+                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str}).\n\nPolicy Guidelines: {policy_text}"
                 )
             elif has_ticket:
                 tid = t_data.get("record_id", "TKT-0001")
@@ -302,9 +302,9 @@ class MockLLM(BaseLLM):
                 rt = t_data.get("resolution_time_hours", 0.0)
                 esc = t_data.get("escalation_score", 0.0)
                 rk = t_data.get("risk_level", "Normal")
+                prio_str = "High priority" if esc >= 0.44 else "Standard priority"
                 ans = (
-                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours. "
-                    f"Escalation risk score is {esc:.4f} ({rk})."
+                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str})."
                 )
             else:
                 ans = policy_text or context_text
@@ -384,9 +384,9 @@ class MockLLM(BaseLLM):
                 esc_score = ticket_res.get("escalation_score", 0.0)
                 risk = ticket_res.get("risk_level", "Normal")
                 esc_rec = ticket_res.get("recommend_escalation", False)
+                prio_str = "High priority" if esc_score >= 0.44 else "Standard priority"
                 ans = (
-                    f"Ticket {ticket_id} is currently {status} with resolution time of {res_time} hours. "
-                    f"Escalation score is {esc_score:.4f} ({risk})."
+                    f"Ticket {ticket_id} is currently {status} with resolution time of {res_time} hours ({prio_str})."
                 )
                 payload = {
                     "answer": ans,
