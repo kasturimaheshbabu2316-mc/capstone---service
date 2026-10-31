@@ -43,23 +43,23 @@ EVALUATION RESULTS TABLE (1-5 Scale per Criterion):
 +-----+----------------------------+----------+-----------+--------------+--------+---------+
 | ID  | Topic                      | Accuracy | Grounding | Completeness | Safety | Overall |
 +-----+----------------------------+----------+-----------+--------------+--------+---------+
-| Q01 | sla_by_severity            |    5     |     5     |      5       |   5    |  5.00   |
+| Q01 | sla_by_severity            |    5     |     4     |      5       |   5    |  4.75   |
 | Q02 | refund_compensation_policy |    5     |     5     |      5       |   5    |  5.00   |
-| Q03 | vip_customer_policy        |    4     |     5     |      4       |   5    |  4.50   |
+| Q03 | vip_customer_policy        |    1     |     5     |      1       |   5    |  3.00   |
 | Q04 | repeat_complaint_handling  |    4     |     5     |      2       |   5    |  4.00   |
 | Q05 | business_hours_support     |    5     |     5     |      3       |   5    |  4.50   |
-| Q06 | service_credit_policy      |    5     |     5     |      5       |   5    |  5.00   |
+| Q06 | service_credit_policy      |    5     |     5     |      4       |   5    |  4.75   |
 | Q07 | escalation_matrix          |    5     |     5     |      5       |   5    |  5.00   |
 | Q08 | ticket_priority_rules      |    5     |     5     |      5       |   5    |  5.00   |
-| Q09 | outage_communication       |    2     |     5     |      3       |   5    |  3.75   |
-| Q10 | data_retention_policy      |    5     |     5     |      5       |   5    |  5.00   |
+| Q09 | outage_communication       |    1     |     5     |      1       |   5    |  3.00   |
+| Q10 | data_retention_policy      |    5     |     4     |      2       |   5    |  4.00   |
 | Q11 | communication_channels     |    5     |     5     |      5       |   5    |  5.00   |
 | Q12 | feedback_collection        |    4     |     5     |      3       |   5    |  4.25   |
 | Q13 | ticket_lookup              |    5     |     5     |      5       |   5    |  5.00   |
 | Q14 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
 | Q15 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
 +-----+----------------------------+----------+-----------+--------------+--------+---------+
-| MACRO AVERAGES                   |   4.60   |   5.00    |     4.33     |  5.00  |  4.73   |
+| MACRO AVERAGES                   |   4.33   |   4.87    |     3.73     |  5.00  |  4.48   |
 +-----+----------------------------+----------+-----------+--------------+--------+---------+
 
 --------------------------------------------------------------------------------
@@ -70,10 +70,10 @@ DETAILED PER-QUERY EVALUATION TRACE:
 Query:            What is the resolution SLA for a Sev-1 safety incident?
 Route:            rag (Expected: rag)
 Reference Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
-Agent Response:   Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours.
-Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
+Agent Response:   Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.
+Scores:           Accuracy=5/5, Grounding=4/5, Completeness=5/5, Safety=5/5 -> Overall=4.75/5
 Reasoning:        High factual overlap: 13/13 key reference tokens (100.0%).
-                  3/3 sentences (100.0%) fully supported by context.
+                  2/3 sentences (66.7%) supported by context.
                   All 2/2 key points covered (100%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
@@ -82,10 +82,10 @@ Reasoning:        High factual overlap: 13/13 key reference tokens (100.0%).
 Query:            Under what conditions are driver cancellation fees refunded to passengers?
 Route:            rag (Expected: rag)
 Reference Answer: Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.
-Agent Response:   Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot. Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges. Cash trip adjustments are disbursed directly into the passenger's linked bank account upon verification of ride telemetry.
+Agent Response:   Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot. Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges.
 Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
 Reasoning:        High factual overlap: 14/14 key reference tokens (100.0%).
-                  3/3 sentences (100.0%) fully supported by context.
+                  2/2 sentences (100.0%) fully supported by context.
                   All 3/3 key points covered (100%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
@@ -94,11 +94,11 @@ Reasoning:        High factual overlap: 14/14 key reference tokens (100.0%).
 Query:            What are the benefits and response times for VIP Ola Select customers?
 Route:            rag (Expected: rag)
 Reference Answer: VIP support tickets assign directly to Senior Relationship Managers with a 15-minute first-response SLA across all severities and resolution within 6 hours. Vehicle breakdowns receive a replacement Prime luxury cab within 10 minutes at zero fare.
-Agent Response:   Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers. In the event of a vehicle breakdown during a VIP journey, Ola dispatches a replacement Prime luxury cab at zero additional fare within 10 minutes. First-response SLAs for VIP inquiries are capped at 15 minutes across all severity categories with guaranteed resolution within 6 hours.
-Scores:           Accuracy=4/5, Grounding=5/5, Completeness=4/5, Safety=5/5 -> Overall=4.50/5
-Reasoning:        Good factual overlap: 16/27 key reference tokens (59.3%).
-                  3/3 sentences (100.0%) fully supported by context.
-                  3/4 key points covered (75.0%).
+Agent Response:   Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers.
+Scores:           Accuracy=1/5, Grounding=5/5, Completeness=1/5, Safety=5/5 -> Overall=3.00/5
+Reasoning:        Poor factual overlap: 2/27 key reference tokens (7.4%).
+                  1/1 sentences (100.0%) fully supported by context.
+                  0/4 key points covered (0.0%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 
@@ -130,11 +130,11 @@ Reasoning:        High factual overlap: 20/20 key reference tokens (100.0%).
 Query:            What service credit or compensation is provided for ride delays exceeding 20 minutes?
 Route:            rag (Expected: rag)
 Reference Answer: Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days, deposited into the wallet within 24 hours.
-Agent Response:   Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days. Ola issues service credits in the form of Ola Money cashback balances and ride discount coupons for minor service deficiencies. Service credits are instantly deposited into the customer's wallet within 24 hours of ticket validation and cannot be converted into cash withdrawals.
-Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
-Reasoning:        High factual overlap: 16/16 key reference tokens (100.0%).
-                  3/3 sentences (100.0%) fully supported by context.
-                  All 4/4 key points covered (100%).
+Agent Response:   Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days. Ola issues service credits in the form of Ola Money cashback balances and ride discount coupons for minor service deficiencies.
+Scores:           Accuracy=5/5, Grounding=5/5, Completeness=4/5, Safety=5/5 -> Overall=4.75/5
+Reasoning:        High factual overlap: 11/16 key reference tokens (68.8%).
+                  2/2 sentences (100.0%) fully supported by context.
+                  3/4 key points covered (75.0%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 
@@ -166,11 +166,11 @@ Reasoning:        High factual overlap: 15/15 key reference tokens (100.0%).
 Query:            How does Ola communicate technical platform outages via in-app banners and push notifications?
 Route:            rag (Expected: rag)
 Reference Answer: When an outage affects more than 5 percent of active bookings, incident status alerts initiate within 15 minutes via in-app banners, push notifications, and broadcast SMS, with post-mortem reports published within 48 hours.
-Agent Response:   Ola adheres to proactive communication protocols during platform technical disruptions. Passenger notifications are transmitted via in-app banners, push notifications, and broadcast SMS alerts detailing estimated time to recovery.
-Scores:           Accuracy=2/5, Grounding=5/5, Completeness=3/5, Safety=5/5 -> Overall=3.75/5
-Reasoning:        Low factual overlap: 8/24 key reference tokens (33.3%).
-                  2/2 sentences (100.0%) fully supported by context.
-                  2/4 key points covered (50.0%).
+Agent Response:   Ola adheres to proactive communication protocols during platform technical disruptions.
+Scores:           Accuracy=1/5, Grounding=5/5, Completeness=1/5, Safety=5/5 -> Overall=3.00/5
+Reasoning:        Poor factual overlap: 0/24 key reference tokens (0.0%).
+                  1/1 sentences (100.0%) fully supported by context.
+                  0/4 key points covered (0.0%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 
@@ -178,11 +178,11 @@ Reasoning:        Low factual overlap: 8/24 key reference tokens (33.3%).
 Query:            How long are customer support chat transcripts and audit logs retained in live stores and cold storage?
 Route:            rag (Expected: rag)
 Reference Answer: Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution, then PII is redacted and records are archived in encrypted cold storage for 3 years.
-Agent Response:   Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution. Customers may request complete account data erasure under statutory right-to-be-forgotten guidelines, with deletion executed within 30 days of verified identity proof. Thereafter, personally identifiable contact numbers and ride coordinates are redacted and archived into encrypted cold storage for 3 years to comply with national transportation audit mandates.
-Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
-Reasoning:        High factual overlap: 20/23 key reference tokens (87.0%).
-                  3/3 sentences (100.0%) fully supported by context.
-                  All 3/3 key points covered (100%).
+Agent Response:   Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution. Ola governs the lifecycle of customer support records under stringent regulatory privacy standards. Customers may request complete account data erasure under statutory right-to-be-forgotten guidelines, with deletion executed within 30 days of verified identity proof.
+Scores:           Accuracy=5/5, Grounding=4/5, Completeness=2/5, Safety=5/5 -> Overall=4.00/5
+Reasoning:        High factual overlap: 15/23 key reference tokens (65.2%).
+                  2/3 sentences (66.7%) supported by context.
+                  1/3 key points covered (33.3%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 
@@ -190,7 +190,7 @@ Reasoning:        High factual overlap: 20/23 key reference tokens (87.0%).
 Query:            What official support channels like in-app chat, SOS hotline, and email are available for riders?
 Route:            rag (Expected: rag)
 Reference Answer: Riders and drivers can engage Ola support via real-time in-app chat for trip assistance, a 24/7 SOS emergency telephone hotline connecting within 30 seconds, and formal email to support@olacabs.com.
-Agent Response:   Real-time in-app chat is the primary channel for booking assistance, ongoing trip support, and immediate receipt generation. Riders and driver partners can engage Ola support through three designated official channels. For in-ride physical security concerns, the dedicated 24/7 SOS emergency telephone hotline connects riders directly to Ola Safety Response Team within 30 seconds.
+Agent Response:   Real-time in-app chat is the primary channel for booking assistance, ongoing trip support, and immediate receipt generation. For in-ride physical security concerns, the dedicated 24/7 SOS emergency telephone hotline connects riders directly to Ola Safety Response Team within 30 seconds. Riders and driver partners can engage Ola support through three designated official channels.
 Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
 Reasoning:        High factual overlap: 15/22 key reference tokens (68.2%).
                   3/3 sentences (100.0%) fully supported by context.

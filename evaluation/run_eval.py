@@ -28,6 +28,7 @@ from rag.index import retrieve
 
 RESULTS_JSON_PATH = PROJECT_ROOT / "evaluation" / "results.json"
 TRANSCRIPT_TXT_PATH = PROJECT_ROOT / "transcripts" / "13_eval.txt"
+TRANSCRIPT_TASK_PATH = PROJECT_ROOT / "transcripts" / "task13_eval.txt"
 
 
 def run_benchmark_evaluation() -> Dict[str, Any]:
@@ -159,6 +160,8 @@ def run_benchmark_evaluation() -> Dict[str, Any]:
 
     # Save transcript
     with open(TRANSCRIPT_TXT_PATH, "w", encoding="utf-8") as f:
+        f.write(full_transcript)
+    with open(TRANSCRIPT_TASK_PATH, "w", encoding="utf-8") as f:
         f.write(full_transcript)
 
     # Save JSON results

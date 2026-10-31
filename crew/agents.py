@@ -37,7 +37,7 @@ def create_retrieval_agent(llm: MockLLM | None = None) -> Agent:
 def create_lookup_agent(llm: MockLLM | None = None) -> Agent:
     """Creates the Lookup Agent with exclusive access to ticket status and escalation tools."""
     return Agent(
-        role="Ticket Operations Specialist",
+        role="Lookup Agent",
         goal="Lookup customer support tickets, calculate empirical escalation risk, and report operational status.",
         backstory="Senior operations lead analyzing ticket resolution times, active aging, and escalation thresholds.",
         tools=[check_support_ticket_status_crew_tool],

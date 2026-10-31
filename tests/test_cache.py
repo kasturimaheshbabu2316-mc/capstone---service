@@ -95,3 +95,97 @@ def test_cache_transcript_file_exists():
     assert "RUN 2: IDENTICAL QUERY WITH WHITESPACE & CASING VARIATION" in content
     assert "Generation Call Counter" in content
     assert "Latency Speedup" in content
+
+
+def test_session_isolation_and_policy_cache_hit():
+    """Session A asks about TKT-0007, then 'what about its SLA?'; session B asks only
+    'what about its SLA?' and must not receive A's answer; a repeated policy question
+    produces a cache hit with generation counter unchanged.
+    """
+    from api.main import run_unified_pipeline
+    from crew.memory import session_memory
+    from cache import response_cache
+
+    session_memory.clear()
+    response_cache.clear()
+    response_cache.reset_stats()
+
+    # 1. Session A asks about TKT-0007
+    resp_a1 = run_unified_pipeline(
+        raw_question="What is the status of TKT-0007?",
+        session_id="session_A_test",
+    )
+    assert resp_a1.ticket is not None
+    assert resp_a1.ticket["record_id"] == "TKT-0007"
+
+    # 2. Session A follow-up: "what about its SLA?" -> resolves to TKT-0007
+    resp_a2 = run_unified_pipeline(
+        raw_question="what about its SLA?",
+        session_id="session_A_test",
+    )
+    assert "TKT-0007" in resp_a2.answer or (resp_a2.ticket and resp_a2.ticket.get("record_id") == "TKT-0007")
+
+    # 3. Session B asks only "what about its SLA?" -> must NOT receive Session A's TKT-0007 answer
+    resp_b1 = run_unified_pipeline(
+        raw_question="what about its SLA?",
+        session_id="session_B_test",
+    )
+    assert "TKT-0007" not in resp_b1.answer
+    assert resp_b1.ticket is None or resp_b1.ticket.get("record_id") != "TKT-0007"
+
+    # 4. Repeated policy question produces cache hit with generation counter unchanged
+    policy_q = "What is the resolution SLA for a Sev-1 safety incident?"
+
+    # First call: cache miss
+    resp_p1 = run_unified_pipeline(
+        raw_question=policy_q,
+        session_id="session_P1",
+    )
+    assert resp_p1.cache_hit is False
+
+    stats_mid = response_cache.get_stats()
+    gen_before = stats_mid["generation_calls"]
+
+    # Second call (same or different session for policy query): cache hit
+    resp_p2 = run_unified_pipeline(
+        raw_question=policy_q,
+        session_id="session_P2",
+    )
+    assert resp_p2.cache_hit is True
+    assert resp_p2.answer == resp_p1.answer
+    gen_after = response_cache.get_stats()["generation_calls"]
+    assert gen_after == gen_before  # Generation counter unchanged
+
+
+def test_interaction_recorded_in_history_exactly_once():
+    """Interaction recorded in history exactly once (2 messages: Human + AI)."""
+    from crew.crew import run_support_crew
+    from crew.memory import session_memory, get_session_history
+
+    session_memory.clear("single_record_sess")
+    res = run_support_crew("Check status of TKT-0007", session_id="single_record_sess")
+    hist = get_session_history("single_record_sess")
+    assert len(hist.messages) == 2
+
+
+def test_session_memory_caps_and_lru():
+    """Verifies per-session message cap and LRU session eviction."""
+    from crew.memory import session_memory, get_session_history, MAX_MESSAGES_PER_SESSION, MAX_SESSIONS, SESSION_STORE
+
+    session_memory.clear()
+
+    # Message cap test
+    sess = "cap_test_sess"
+    for i in range(MAX_MESSAGES_PER_SESSION + 5):
+        session_memory.record_interaction(sess, f"Q{i}", f"A{i}")
+    hist = get_session_history(sess)
+    assert len(hist.messages) <= MAX_MESSAGES_PER_SESSION
+
+    # LRU eviction test
+    session_memory.clear()
+    for i in range(MAX_SESSIONS + 10):
+        get_session_history(f"sess_{i}")
+    assert len(SESSION_STORE) <= MAX_SESSIONS
+    assert "sess_0" not in SESSION_STORE
+    assert f"sess_{MAX_SESSIONS + 9}" in SESSION_STORE
+

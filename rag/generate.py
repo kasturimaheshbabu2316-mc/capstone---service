@@ -52,7 +52,7 @@ def grounded_answer(
         Dict with keys: {answer, sources, top_similarity, grounded} (plus query, threshold, chunks).
     """
     # Map "recommended" or legacy names to sentence-based collection
-    target_collection = "kb_sentence" if collection in ("recommended", "ola_sentence") else collection
+    target_collection = "kb_sentence" if collection in ("recommended", "kb_sentence") else collection
     active_threshold = threshold if threshold is not None else load_threshold()
 
     chunks = retrieve(query=query, collection_name=target_collection, k=k)

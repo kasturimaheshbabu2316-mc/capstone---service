@@ -16,6 +16,7 @@ PLACEHOLDER_SUBSTRINGS = [
     "replace me",
     "insert here",
     "unimplemented",
+    "the result of the action",
 ]
 
 
@@ -157,3 +158,66 @@ def test_no_placeholder_in_ticket_status_response():
     assert "2.8" in ans  # Resolution time for TKT-0007
     assert res["ticket_id"] == "TKT-0007"
     assert res["tool_invoked"] == "check_support_ticket_status"
+
+
+def test_ticket_query_calls_tool_exactly_once_under_lookup_agent(monkeypatch):
+    """A ticket query calls check_support_ticket_status exactly once, and only under the Lookup Agent role."""
+    import tools.ticket_tool as tt
+
+    call_records = []
+    real_func = tt.check_support_ticket_status
+
+    def tracked_check_support_ticket_status(record_id, caller_role=None):
+        effective_role = caller_role or tt.CURRENT_CALLER_ROLE.get()
+        call_records.append((record_id, effective_role))
+        return real_func(record_id, caller_role=caller_role)
+
+    monkeypatch.setattr(tt, "check_support_ticket_status", tracked_check_support_ticket_status)
+
+    res = run_support_crew("status of TKT-0007", session_id="test_single_call")
+    assert len(call_records) == 1, f"Expected exactly 1 call, got {len(call_records)}: {call_records}"
+    assert call_records[0][0] == "TKT-0007"
+    assert call_records[0][1] in ("Lookup Agent", "Ticket Operations Specialist")
+    assert res["ticket"]["status"] == "Closed"
+
+
+def test_composer_calling_any_tool_raises_permission_error():
+    """The Composer role calling any tool raises PermissionError."""
+    from tools.ticket_tool import check_support_ticket_status, check_support_ticket_status_crew_tool
+    from tools.rag_tool import rag_lookup, rag_lookup_crew_tool
+    from governance.least_autonomy import CURRENT_CALLER_ROLE
+
+    # Test direct function calls with caller_role="Support Response Composer"
+    with pytest.raises(PermissionError):
+        check_support_ticket_status("TKT-0001", caller_role="Support Response Composer")
+
+    with pytest.raises(PermissionError):
+        rag_lookup("What is the SLA?", caller_role="Support Response Composer")
+
+    # Test when CURRENT_CALLER_ROLE is set to Composer
+    token = CURRENT_CALLER_ROLE.set("Support Response Composer")
+    try:
+        with pytest.raises(PermissionError):
+            check_support_ticket_status("TKT-0001")
+        with pytest.raises(PermissionError):
+            rag_lookup("What is the SLA?")
+        with pytest.raises(PermissionError):
+            check_support_ticket_status_crew_tool.run(record_id="TKT-0001")
+        with pytest.raises(PermissionError):
+            rag_lookup_crew_tool.run(query="What is the SLA?")
+    finally:
+        CURRENT_CALLER_ROLE.reset(token)
+
+
+def test_both_query_returns_route_both_with_sources_and_ticket():
+    """A 'both' query returns route 'both' with policy sources and ticket data."""
+    query = "What is the status of TKT-0007 and what is the SLA policy for Sev-1?"
+    res = run_support_crew(query, session_id="test_route_both")
+
+    assert res["route"] == "both"
+    assert res["ticket"] is not None
+    assert res["ticket"]["record_id"] == "TKT-0007"
+    assert len(res["sources"]) > 0
+    assert res["grounded"] is True
+    assert "TKT-0007" in res["answer"]
+

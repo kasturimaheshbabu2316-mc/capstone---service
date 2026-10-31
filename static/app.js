@@ -276,7 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (data.grounded) {
       metaHtml += `<span class="meta-pill grounded">✓ Verified Official Policy</span>`;
     }
-    if (data.sources && data.sources.length) {
+    if (data.source_titles && data.source_titles.length) {
+      metaHtml += `<span class="meta-pill source-titles">Sources: ${data.source_titles.map(s => escapeHtml(cleanSourceName(s))).join(', ')}</span>`;
+    } else if (data.sources && data.sources.length) {
       const cleanList = data.sources.map(cleanSourceName);
       metaHtml += `<span class="meta-pill">Reference: ${cleanList.join(', ')}</span>`;
     }
@@ -373,8 +375,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Sources
       sourcesList.innerHTML = '';
-      if (data.sources && data.sources.length) {
-        data.sources.forEach(src => {
+      const displaySources = (data.source_titles && data.source_titles.length) ? data.source_titles : data.sources;
+      if (displaySources && displaySources.length) {
+        displaySources.forEach(src => {
           const item = document.createElement('div');
           item.className = 'source-item';
           item.innerHTML = `<span class="doc-bullet">✓</span><span>${escapeHtml(cleanSourceName(src))}</span>`;

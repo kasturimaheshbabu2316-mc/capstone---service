@@ -161,18 +161,18 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
 =
 
 Audit Log Destination: logs/requests.jsonl
-Total Logged Entries : 1990
+Total Logged Entries : 2235
 
 --- SAMPLE AUDIT LOG ENTRIES ---
 {
-  "trace_id": "8af853b2-680e-4b9f-9311-f6f72bab4bda",
-  "timestamp": "2026-10-31T12:21:08.349546+00:00",
+  "trace_id": "57fe1798-56ef-4324-b424-d9904f096e86",
+  "timestamp": "2026-10-31T14:13:25.454808+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_17e797c7",
+  "session_id": "ws_2c27b956",
   "masked_question": "What is the status of TKT-0001?",
   "masked_query": "What is the status of TKT-0001?",
   "route": "lookup",
-  "latency_ms": 202.9,
+  "latency_ms": 375.83,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {
@@ -182,14 +182,14 @@ Total Logged Entries : 1990
   }
 }
 {
-  "trace_id": "db91513e-6be8-4d2a-bffa-28ff570eee81",
-  "timestamp": "2026-10-31T12:21:08.570565+00:00",
+  "trace_id": "26a55db6-3166-4ee3-9d37-f07f33d2125d",
+  "timestamp": "2026-10-31T14:13:25.863388+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_33f74de5",
+  "session_id": "ws_4968bdfb",
   "masked_question": "What is the status of TKT-0002?",
   "masked_query": "What is the status of TKT-0002?",
   "route": "lookup",
-  "latency_ms": 213.57,
+  "latency_ms": 396.03,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {
@@ -199,14 +199,14 @@ Total Logged Entries : 1990
   }
 }
 {
-  "trace_id": "c2483ea6-374d-4eb5-9ed5-2b5a51c9856f",
-  "timestamp": "2026-10-31T12:21:08.855408+00:00",
+  "trace_id": "050e5157-e0c7-42f2-a5fc-a6e4f21e28df",
+  "timestamp": "2026-10-31T14:13:26.295235+00:00",
   "endpoint": "/ask",
   "session_id": "default_session",
   "masked_question": "Customer phone [PHONE_MASKED] asking for ticket TKT-0001 status.",
   "masked_query": "Customer phone [PHONE_MASKED] asking for ticket TKT-0001 status.",
   "route": "lookup",
-  "latency_ms": 230.22,
+  "latency_ms": 347.29,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {

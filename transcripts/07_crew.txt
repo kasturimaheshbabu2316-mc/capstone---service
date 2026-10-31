@@ -10,10 +10,10 @@ Process: Sequential (Process.sequential) across 3 specialized agents
 User Query      : What is the SLA for a Sev-1 safety incident?
 Agent Dispatched: Policy Retrieval Specialist
 Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
-Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
-Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.
+Sources Cited   : sla_by_severity, data_retention_policy
 Grounded        : True
-Confidence      : 0.5792
+Confidence      : 0.525
 
 --- DEMO 2: TICKET STATUS QUERY (Lookup Agent -> Response Composer) ---
 User Query      : status of TKT-0007

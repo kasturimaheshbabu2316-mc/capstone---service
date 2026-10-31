@@ -28,33 +28,35 @@ $ curl -X POST http://localhost:8000/ask \
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
-  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.",
   "route": "rag",
   "sources": [
     "sla_by_severity",
-    "vip_customer_policy",
-    "communication_channels"
+    "data_retention_policy"
   ],
   "ticket": null,
   "grounded": true,
   "escalation_recommended": false,
   "review_status": {
     "approved": true,
-    "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+    "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.",
     "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
     "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
     "redactions_made": false,
     "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
   },
-  "trace_id": "30fb7a36-1706-4f3c-9856-3532db49e9dc",
-  "latency_ms": 269.32,
+  "trace_id": "da4b3926-c032-4b70-9dae-cef0c815a9cd",
+  "latency_ms": 445.56,
   "data": {
-    "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+    "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.",
     "route": "rag",
     "sources": [
       "sla_by_severity",
-      "vip_customer_policy",
-      "communication_channels"
+      "data_retention_policy"
+    ],
+    "source_titles": [
+      "Sla By Severity",
+      "Data Retention Policy"
     ],
     "ticket": null,
     "ticket_id": null,
@@ -63,7 +65,7 @@ Content-Type: application/json
     "escalation_score": null,
     "review_status": {
       "approved": true,
-      "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+      "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.",
       "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
       "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
       "redactions_made": false,
@@ -76,8 +78,11 @@ Content-Type: application/json
   "y_col": null,
   "retrieved_sources": [
     "sla_by_severity",
-    "vip_customer_policy",
-    "communication_channels"
+    "data_retention_policy"
+  ],
+  "source_titles": [
+    "Sla By Severity",
+    "Data Retention Policy"
   ],
   "retrieved_snippet": null,
   "cache_hit": false,
@@ -106,15 +111,15 @@ Content-Type: application/json
   ],
   "ticket": {
     "record_id": "TKT-0007",
-    "category": "Billing",
     "status": "Closed",
+    "category": "Billing",
     "resolution_time_hours": 2.8,
     "days_since_created": 23,
     "escalated": false,
     "escalation_score": 0.0,
-    "escalation_threshold": 0.44,
     "risk_level": "Normal",
-    "recommend_escalation": false
+    "recommend_escalation": false,
+    "ticket_id": "TKT-0007"
   },
   "grounded": true,
   "escalation_recommended": false,
@@ -126,25 +131,28 @@ Content-Type: application/json
     "redactions_made": false,
     "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
   },
-  "trace_id": "dc77143e-b681-46b4-ba24-d1f79dc5a04b",
-  "latency_ms": 208.29,
+  "trace_id": "96d9a3ff-c950-4caf-bb41-3ad9c0bd7f68",
+  "latency_ms": 424.99,
   "data": {
     "answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
     "route": "lookup",
     "sources": [
       "dataset.py"
     ],
+    "source_titles": [
+      "Dataset"
+    ],
     "ticket": {
       "record_id": "TKT-0007",
-      "category": "Billing",
       "status": "Closed",
+      "category": "Billing",
       "resolution_time_hours": 2.8,
       "days_since_created": 23,
       "escalated": false,
       "escalation_score": 0.0,
-      "escalation_threshold": 0.44,
       "risk_level": "Normal",
-      "recommend_escalation": false
+      "recommend_escalation": false,
+      "ticket_id": "TKT-0007"
     },
     "ticket_id": "TKT-0007",
     "grounded": true,
@@ -165,6 +173,9 @@ Content-Type: application/json
   "y_col": null,
   "retrieved_sources": [
     "dataset.py"
+  ],
+  "source_titles": [
+    "Dataset"
   ],
   "retrieved_snippet": null,
   "cache_hit": false,
@@ -193,15 +204,15 @@ Content-Type: application/json
   ],
   "ticket": {
     "record_id": "TKT-0001",
-    "category": "Account Access",
     "status": "Open",
+    "category": "Account Access",
     "resolution_time_hours": 8.3,
     "days_since_created": 23,
     "escalated": false,
     "escalation_score": 0.3067,
-    "escalation_threshold": 0.44,
     "risk_level": "Normal",
-    "recommend_escalation": false
+    "recommend_escalation": false,
+    "ticket_id": "TKT-0001"
   },
   "grounded": true,
   "escalation_recommended": false,
@@ -213,25 +224,28 @@ Content-Type: application/json
     "redactions_made": false,
     "review_notes": "Verified facts against knowledge base. All claims grounded in retrieved context."
   },
-  "trace_id": "e984cd56-3711-4a03-a847-236942d9a6df",
-  "latency_ms": 207.94,
+  "trace_id": "0eb0e0c0-fa39-460b-9401-bfeac0d58204",
+  "latency_ms": 385.07,
   "data": {
     "answer": "Ticket TKT-0001 (Account Access) is currently Open with a resolution time of 8.3 hours. Escalation risk score is 0.3067 (Normal).",
     "route": "lookup",
     "sources": [
       "dataset.py"
     ],
+    "source_titles": [
+      "Dataset"
+    ],
     "ticket": {
       "record_id": "TKT-0001",
-      "category": "Account Access",
       "status": "Open",
+      "category": "Account Access",
       "resolution_time_hours": 8.3,
       "days_since_created": 23,
       "escalated": false,
       "escalation_score": 0.3067,
-      "escalation_threshold": 0.44,
       "risk_level": "Normal",
-      "recommend_escalation": false
+      "recommend_escalation": false,
+      "ticket_id": "TKT-0001"
     },
     "ticket_id": "TKT-0001",
     "grounded": true,
@@ -252,6 +266,9 @@ Content-Type: application/json
   "y_col": null,
   "retrieved_sources": [
     "dataset.py"
+  ],
+  "source_titles": [
+    "Dataset"
   ],
   "retrieved_snippet": null,
   "cache_hit": false,
@@ -347,14 +364,14 @@ Content-Type: application/json
 --------------------------------------------------------------------------------
 Client 1 connecting to ws://localhost:8000/ws/chat ...
   Client 1 -> Sent: 'What is the SLA for a Sev-1 safety incident?'
-  Client 1 <- Received: type=response, grounded=True, latency_ms=0.25
+  Client 1 <- Received: type=response, grounded=True, latency_ms=0.26
   Client 1 -> Sent: 'What is the status of TKT-0001?'
-  Client 1 <- Received: type=response, ticket=TKT-0001, latency_ms=202.9
+  Client 1 <- Received: type=response, ticket=TKT-0001, latency_ms=375.83
   Client 1 -> Abruptly terminating connection without close handshake.
 Server successfully caught WebSocketDisconnect, logged, and cleaned up state.
 Client 2 connecting immediately to ws://localhost:8000/ws/chat ...
   Client 2 -> Sent: 'What is the status of TKT-0002?'
-  Client 2 <- Received: type=response, ticket=TKT-0002, latency_ms=213.57
+  Client 2 <- Received: type=response, ticket=TKT-0002, latency_ms=396.03
 Client 2 session concluded successfully.
 
 --------------------------------------------------------------------------------
@@ -364,14 +381,14 @@ Zero PII Assertion: Raw phone '+91 98765 43210' present in log: False (Expected:
 
 Latest 3 JSON-Lines Audit Entries:
 {
-  "trace_id": "933870cd-fc4a-404b-b99d-cc6243fabea7",
-  "timestamp": "2026-10-31T12:21:08.144579+00:00",
+  "trace_id": "be713dbe-3496-4784-b754-1d9c6901edf6",
+  "timestamp": "2026-10-31T14:13:25.076936+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_17e797c7",
+  "session_id": "ws_2c27b956",
   "masked_question": "What is the SLA for a Sev-1 safety incident?",
   "masked_query": "What is the SLA for a Sev-1 safety incident?",
   "route": "rag",
-  "latency_ms": 0.25,
+  "latency_ms": 0.26,
   "status_code": 200,
   "cache_hit": true,
   "guardrail_flags": {
@@ -381,14 +398,14 @@ Latest 3 JSON-Lines Audit Entries:
 }
 
 {
-  "trace_id": "8af853b2-680e-4b9f-9311-f6f72bab4bda",
-  "timestamp": "2026-10-31T12:21:08.349546+00:00",
+  "trace_id": "57fe1798-56ef-4324-b424-d9904f096e86",
+  "timestamp": "2026-10-31T14:13:25.454808+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_17e797c7",
+  "session_id": "ws_2c27b956",
   "masked_question": "What is the status of TKT-0001?",
   "masked_query": "What is the status of TKT-0001?",
   "route": "lookup",
-  "latency_ms": 202.9,
+  "latency_ms": 375.83,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {
@@ -399,14 +416,14 @@ Latest 3 JSON-Lines Audit Entries:
 }
 
 {
-  "trace_id": "db91513e-6be8-4d2a-bffa-28ff570eee81",
-  "timestamp": "2026-10-31T12:21:08.570565+00:00",
+  "trace_id": "26a55db6-3166-4ee3-9d37-f07f33d2125d",
+  "timestamp": "2026-10-31T14:13:25.863388+00:00",
   "endpoint": "/ws/chat",
-  "session_id": "ws_33f74de5",
+  "session_id": "ws_4968bdfb",
   "masked_question": "What is the status of TKT-0002?",
   "masked_query": "What is the status of TKT-0002?",
   "route": "lookup",
-  "latency_ms": 213.57,
+  "latency_ms": 396.03,
   "status_code": 200,
   "cache_hit": false,
   "guardrail_flags": {

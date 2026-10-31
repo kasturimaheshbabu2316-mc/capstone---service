@@ -34,7 +34,7 @@ from rag.chunking import fixed_size_overlap_chunks, sentence_chunks
 from kb_loader import load_kb
 
 # Paths and configuration defaults
-KB_DIR: Path = Path("kb")
+KB_DIR: Path = config.KB_DIR
 CHROMA_DIR: Path = config.CHROMA_DIR
 EMBED_MODEL_NAME: str = config.EMBED_MODEL
 MODEL_NAME: str = EMBED_MODEL_NAME
@@ -224,14 +224,14 @@ def index_documents(
     docs = load_knowledge_base_docs()
 
     col_list = list(collections)
-    should_index_fixed = any(c in col_list for c in ("kb_fixed", "ola_fixed"))
-    should_index_sent = any(c in col_list for c in ("kb_sentence", "ola_sentence"))
+    should_index_fixed = "kb_fixed" in col_list
+    should_index_sent = "kb_sentence" in col_list
 
-    fixed_col_name = "kb_fixed" if "kb_fixed" in col_list else ("ola_fixed" if "ola_fixed" in col_list else "kb_fixed")
-    sent_col_name = "kb_sentence" if "kb_sentence" in col_list else ("ola_sentence" if "ola_sentence" in col_list else "kb_sentence")
+    fixed_col_name = "kb_fixed"
+    sent_col_name = "kb_sentence"
 
     if reset:
-        for cname in set(col_list + ["ola_fixed", "ola_sentence", "kb_fixed", "kb_sentence"]):
+        for cname in ("kb_fixed", "kb_sentence"):
             try:
                 chroma.delete_collection(cname)
             except Exception:
@@ -239,10 +239,6 @@ def index_documents(
 
     col_fixed = get_or_create_collection(fixed_col_name, chroma) if should_index_fixed else None
     col_sent = get_or_create_collection(sent_col_name, chroma) if should_index_sent else None
-
-    # Secondary collections for backward compatibility with legacy routes
-    col_legacy_fixed = get_or_create_collection("ola_fixed", chroma) if should_index_fixed else None
-    col_legacy_sent = get_or_create_collection("ola_sentence", chroma) if should_index_sent else None
 
     fixed_ids: list[str] = []
     fixed_texts: list[str] = []
@@ -287,13 +283,6 @@ def index_documents(
                 embeddings=fixed_embeddings,
                 metadatas=fixed_metas,
             )
-            if col_legacy_fixed and col_legacy_fixed.name != col_fixed.name:
-                col_legacy_fixed.upsert(
-                    ids=fixed_ids,
-                    documents=fixed_texts,
-                    embeddings=fixed_embeddings,
-                    metadatas=fixed_metas,
-                )
 
     if should_index_sent and sent_texts:
         sent_embeddings = model.encode(sent_texts, show_progress_bar=False, batch_size=32).tolist()
@@ -304,13 +293,6 @@ def index_documents(
                 embeddings=sent_embeddings,
                 metadatas=sent_metas,
             )
-            if col_legacy_sent and col_legacy_sent.name != col_sent.name:
-                col_legacy_sent.upsert(
-                    ids=sent_ids,
-                    documents=sent_texts,
-                    embeddings=sent_embeddings,
-                    metadatas=sent_metas,
-                )
 
     fixed_count = col_fixed.count() if col_fixed else 0
     sent_count = col_sent.count() if col_sent else 0
@@ -355,7 +337,7 @@ def retrieve(
         ]
     """
     effective_k = top_k if top_k is not None else k
-    known_cols = {"kb_fixed", "kb_sentence", "ola_fixed", "ola_sentence"}
+    known_cols = {"kb_fixed", "kb_sentence"}
 
     # Guard against swapped positional arguments
     if query in known_cols and collection_name not in known_cols:
@@ -411,7 +393,7 @@ def retrieve(
 
 def query_collection(*args: Any, **kwargs: Any) -> list[dict[str, Any]]:
     """Flexible query wrapper supporting both retrieve and legacy signatures."""
-    known_cols = {"kb_fixed", "kb_sentence", "ola_fixed", "ola_sentence"}
+    known_cols = {"kb_fixed", "kb_sentence"}
     k = kwargs.get("top_k", kwargs.get("k", 3))
     query = ""
     collection_name = "kb_sentence"

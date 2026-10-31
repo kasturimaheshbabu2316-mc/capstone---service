@@ -8,6 +8,8 @@ Adheres strictly to the ReAct framework and resolves both known silent pitfalls:
    never by tool name substring matching.
 """
 
+from __future__ import annotations
+
 import os
 # Suppress telemetry prior to any CrewAI imports
 os.environ["CREWAI_DISABLE_TELEMETRY"] = "true"
@@ -19,8 +21,7 @@ import re
 from typing import Any
 from pydantic import BaseModel
 from crewai.llms.base_llm import BaseLLM
-from tools.ticket_tool import check_support_ticket_status
-from tools.rag_tool import rag_lookup
+from governance.least_autonomy import CURRENT_CALLER_ROLE
 
 
 def get_tool_arg_names(tool: Any) -> list[str]:
@@ -110,12 +111,51 @@ def extract_query_text(text: str) -> str:
     return text.strip()
 
 
+def parse_ticket_from_text(text: str) -> dict[str, Any]:
+    """Reconstructs ticket metadata fields from tool output text or synthesized string."""
+    data: dict[str, Any] = {}
+    patterns = {
+        "record_id": r"(?:Ticket ID|ticket_id|record_id|Ticket)\s*:?\s*(TKT-\d{4})",
+        "status": r"(?:Status:\s*([A-Za-z ]+?)(?:\.|\n|$)|is currently\s+([A-Za-z ]+?)(?:\.|\n|,|$))",
+        "category": r"(?:Category:\s*([A-Za-z0-9_ -]+)|\((Billing|Technical Issue|Account Access|Product Defect|General Inquiry)\))",
+        "resolution_time_hours": r"(?:Resolution Time:\s*([0-9.]+)|resolution time (?:is|of)\s*([0-9.]+))",
+        "days_since_created": r"Days Since Created:\s*([0-9]+)",
+        "escalated": r"Escalated:\s*(True|False)",
+        "escalation_score": r"Escalation [Ss]core(?:\s*is)?:\s*([0-9.]+)",
+        "risk_level": r"(?:Risk Level:\s*([^\n]+)|\((High Risk|Normal|Unknown)\))",
+        "recommend_escalation": r"Recommend Escalation:\s*(True|False)",
+    }
+    for key, pat in patterns.items():
+        m = re.search(pat, text, re.IGNORECASE)
+        if m:
+            val = next((g for g in m.groups() if g is not None), "").strip()
+            if key in ("resolution_time_hours", "escalation_score"):
+                try:
+                    data[key] = float(val)
+                except ValueError:
+                    pass
+            elif key == "days_since_created":
+                try:
+                    data[key] = int(val)
+                except ValueError:
+                    pass
+            elif key in ("escalated", "recommend_escalation"):
+                data[key] = val.lower() == "true"
+            else:
+                data[key] = val
+    if "record_id" in data:
+        data["ticket_id"] = data["record_id"]
+    return data
+
+
 class MockLLM(BaseLLM):
     """Deterministic, offline Mock LLM subclassing CrewAI BaseLLM.
 
     Emits ReAct sequences:
       Turn 1 (Tool turn) : Thought / Action / Action Input
       Turn 2 (Answer turn): Thought: I now know the final answer / Final Answer: ...
+    For Composer agents:
+      Composes answers exclusively from input context, never invoking tools.
     """
 
     def __init__(self, model: str = "mock-ola-support-v1", **kwargs: Any):
@@ -145,6 +185,11 @@ class MockLLM(BaseLLM):
         else:
             full_text = str(messages)
 
+        # Propagate calling agent role to thread/contextvar for least-autonomy checks
+        agent_role = getattr(from_agent, "role", None) if from_agent else None
+        if agent_role:
+            CURRENT_CALLER_ROLE.set(agent_role)
+
         # 1. Collect candidate tools available for this step
         candidate_tools: list[Any] = []
         if tools:
@@ -167,13 +212,19 @@ class MockLLM(BaseLLM):
 
         # 3. Check for real observation (Pitfall A)
         has_real_obs, obs_content = check_for_real_observation(messages)
-
         ticket_id = extract_ticket_id(full_text)
+
+        # Determine if current execution is under the Composer agent
+        is_composer = (
+            (from_agent and any(term in getattr(from_agent, "role", "") for term in ("Composer", "Support Response")))
+            or (from_task and any(term in getattr(from_task, "description", "").lower() for term in ("compose", "draft", "synthesize")))
+            or (not candidate_tools and ("this is the context you're working with:" in full_text.lower() or "expected criteria" in full_text.lower()))
+        )
 
         # -------------------------------------------------------------
         # STEP 1: ReAct Action dispatch (Turn 1 when tool is present and no observation yet)
         # -------------------------------------------------------------
-        if (ticket_tool or rag_tool) and not has_real_obs:
+        if (ticket_tool or rag_tool) and not has_real_obs and not is_composer:
             if ticket_tool:
                 tid = ticket_id or "TKT-0001"
                 tool_name = getattr(ticket_tool, "name", "check_support_ticket_status")
@@ -195,15 +246,139 @@ class MockLLM(BaseLLM):
                 )
 
         # -------------------------------------------------------------
-        # STEP 2: ReAct Final Answer or Direct Synthesis (Turn 2 or Toolless Agent)
+        # STEP 2: Response Composer Agent (Context-only, ZERO tool calls)
         # -------------------------------------------------------------
+        if is_composer:
+            context_text = ""
+            if "This is the context you're working with:" in full_text:
+                context_text = full_text.split("This is the context you're working with:", 1)[1]
+                if "Provide your complete response:" in context_text:
+                    context_text = context_text.split("Provide your complete response:")[0]
+                context_text = context_text.strip()
+            elif has_real_obs:
+                context_text = obs_content.strip()
+            else:
+                context_text = full_text.strip()
 
-        # Case A: Structured Pydantic Output requested (Task 9) or JSON requested in prompt
-        wants_json = (response_model is not None) or ("json" in full_text.lower() and ("crewresponse" in full_text.lower() or "route" in full_text.lower()))
+            t_data = parse_ticket_from_text(context_text)
+            has_ticket = bool(t_data.get("record_id"))
+
+            policy_text = ""
+            sources_list: list[str] = []
+            if "Policy Answer:" in context_text or "Sources:" in context_text:
+                clean_p = context_text
+                if "Policy Answer:" in clean_p:
+                    clean_p = clean_p.split("Policy Answer:", 1)[1]
+                if "Sources:" in clean_p:
+                    p_body, p_src = clean_p.split("Sources:", 1)
+                    policy_text = p_body.rstrip(" (").strip()
+                    src_raw = p_src.split("Grounded:")[0].split("\n")[0].strip()
+                    sources_list = [s.strip() for s in src_raw.split(",") if s.strip() and s.strip() != "None"]
+                else:
+                    policy_text = clean_p.strip()
+            elif "(Sources:" in context_text:
+                m_src = re.search(r"\(Sources:\s*([^\)]+)\)", context_text)
+                if m_src:
+                    sources_list = [s.strip() for s in m_src.group(1).split(",") if s.strip() and s.strip() != "None"]
+                policy_text = context_text
+            elif not has_ticket:
+                policy_text = context_text
+
+            if has_ticket and policy_text and "ticket" not in policy_text.lower():
+                tid = t_data.get("record_id", "TKT-0001")
+                cat = t_data.get("category", "General")
+                st = t_data.get("status", "Open")
+                rt = t_data.get("resolution_time_hours", 0.0)
+                esc = t_data.get("escalation_score", 0.0)
+                rk = t_data.get("risk_level", "Normal")
+                ans = (
+                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours. "
+                    f"Escalation risk score is {esc:.4f} ({rk}).\n\nPolicy Guidelines: {policy_text}"
+                )
+            elif has_ticket:
+                tid = t_data.get("record_id", "TKT-0001")
+                cat = t_data.get("category", "General")
+                st = t_data.get("status", "Open")
+                rt = t_data.get("resolution_time_hours", 0.0)
+                esc = t_data.get("escalation_score", 0.0)
+                rk = t_data.get("risk_level", "Normal")
+                ans = (
+                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours. "
+                    f"Escalation risk score is {esc:.4f} ({rk})."
+                )
+            else:
+                ans = policy_text or context_text
+
+            wants_json = (response_model is not None) or (
+                "json" in full_text.lower() and ("crewresponse" in full_text.lower() or "route" in full_text.lower())
+            )
+            if wants_json:
+                route_name = "both" if (has_ticket and policy_text) else ("lookup" if has_ticket else "rag")
+                payload = {
+                    "answer": ans,
+                    "route": route_name,
+                    "sources": sources_list if sources_list else (["dataset.py"] if has_ticket else []),
+                    "ticket": t_data if has_ticket else None,
+                    "ticket_id": t_data.get("record_id") if has_ticket else None,
+                    "escalation_score": t_data.get("escalation_score") if has_ticket else None,
+                    "escalation_recommended": t_data.get("recommend_escalation", False) if has_ticket else False,
+                    "grounded": True,
+                    "confidence": 0.98 if has_ticket else 0.85,
+                    "review_status": {
+                        "approved": True,
+                        "final_answer": ans,
+                        "reason": "Composed from verified agent context.",
+                        "redactions_made": False,
+                    },
+                }
+                json_str = json.dumps(payload)
+                if response_model is not None:
+                    return json_str
+                return f"Thought: I now know the final answer.\nFinal Answer: {json_str}"
+
+            return f"Thought: I now know the final answer.\nFinal Answer: {ans}"
+
+        # -------------------------------------------------------------
+        # STEP 3: ReAct Turn 2 Answer synthesis for Tool-Calling Agents
+        # -------------------------------------------------------------
+        if has_real_obs:
+            if ticket_tool or "Ticket ID:" in obs_content or "check_support_ticket_status" in full_text:
+                t_data = parse_ticket_from_text(obs_content)
+                tid = t_data.get("record_id", ticket_id or "TKT-0001")
+                cat = t_data.get("category", "General")
+                st = t_data.get("status", "Open")
+                rt = t_data.get("resolution_time_hours", 0.0)
+                esc = t_data.get("escalation_score", 0.0)
+                rk = t_data.get("risk_level", "Normal")
+                ans = f"Ticket {tid} ({cat}) is currently {st}. Recorded resolution time is {rt} hours. Escalation score: {esc:.4f} ({rk})."
+                return f"Thought: I now know the final answer.\nFinal Answer: {ans}"
+
+            if rag_tool or "Policy Answer:" in obs_content or "rag_lookup" in full_text:
+                clean_ans = obs_content
+                if "Policy Answer:" in obs_content:
+                    clean_ans = obs_content.split("Policy Answer:", 1)[1]
+                    if "Sources:" in clean_ans:
+                        p_ans, p_src = clean_ans.split("Sources:", 1)
+                        clean_ans = p_ans.rstrip(" (").strip()
+                        src_str = p_src.split("Grounded:")[0].strip()
+                        clean_ans = f"{clean_ans} (Sources: {src_str})"
+                    else:
+                        clean_ans = clean_ans.strip()
+                return f"Thought: I now know the final answer.\nFinal Answer: {clean_ans}"
+
+        # -------------------------------------------------------------
+        # STEP 4: Fallback Standalone Synthesis (Direct MockLLM calls without Crew)
+        # -------------------------------------------------------------
+        from tools.ticket_tool import check_support_ticket_status
+        from tools.rag_tool import rag_lookup
+
+        wants_json = (response_model is not None) or (
+            "json" in full_text.lower() and ("crewresponse" in full_text.lower() or "route" in full_text.lower())
+        )
 
         if wants_json:
             if ticket_id:
-                ticket_res = check_support_ticket_status(ticket_id)
+                ticket_res = check_support_ticket_status(ticket_id, caller_role="Lookup Agent")
                 status = ticket_res.get("status", "Unknown")
                 res_time = ticket_res.get("resolution_time_hours", 0.0)
                 esc_score = ticket_res.get("escalation_score", 0.0)
@@ -232,7 +407,7 @@ class MockLLM(BaseLLM):
                 }
             else:
                 clean_q = extract_query_text(full_text)
-                rag_res = rag_lookup(clean_q)
+                rag_res = rag_lookup(clean_q, caller_role="Policy Retrieval Specialist")
                 ans = rag_res["answer"]
                 payload = {
                     "answer": ans,
@@ -257,9 +432,8 @@ class MockLLM(BaseLLM):
                 return json_str
             return f"Thought: I now know the final answer.\nFinal Answer: {json_str}"
 
-        # Case B: Ticket query synthesis
         if ticket_id:
-            ticket_res = check_support_ticket_status(ticket_id)
+            ticket_res = check_support_ticket_status(ticket_id, caller_role="Lookup Agent")
             if "error" in ticket_res:
                 ans = f"Ticket {ticket_id} could not be found in the operational database."
             else:
@@ -270,9 +444,8 @@ class MockLLM(BaseLLM):
                 )
             return f"Thought: I now know the final answer.\nFinal Answer: {ans}"
 
-        # Case C: Policy query synthesis
         clean_q = extract_query_text(full_text)
-        rag_res = rag_lookup(clean_q)
+        rag_res = rag_lookup(clean_q, caller_role="Policy Retrieval Specialist")
         sources_str = ", ".join(rag_res["sources"]) if rag_res["sources"] else "None"
         ans = f"{rag_res['answer']} (Sources: {sources_str})"
         return f"Thought: I now know the final answer.\nFinal Answer: {ans}"

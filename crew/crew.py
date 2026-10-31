@@ -2,18 +2,23 @@
 
 Track: Business Operations / Customer Support (Ola)
 Coordinates the 3-agent crew (Retrieval Agent, Lookup Agent, Response Composer),
-executes sequential workflows via Crew.kickoff(), and validates output using CrewResponse.
+executes sequential workflows via Crew.kickoff(), chains task contexts,
+and validates output using CrewResponse.
 """
+
+from __future__ import annotations
 
 import os
 # Suppress telemetry prior to CrewAI imports
 os.environ["CREWAI_DISABLE_TELEMETRY"] = "true"
 os.environ["OTEL_SDK_DISABLED"] = "true"
 
-import re
 import json
 import logging
+import re
+import threading
 from typing import Any
+
 from crewai import Crew, Task, Process
 from crew.agents import (
     create_retrieval_agent,
@@ -21,81 +26,167 @@ from crew.agents import (
     create_composer_agent,
     get_mock_llm,
 )
+from crew.mock_llm import parse_ticket_from_text
 from crew.schemas import CrewResponse, validate_crew_response
 from crew.memory import session_memory, crew_runnable_with_history
-from tools.ticket_tool import check_support_ticket_status
-from tools.rag_tool import rag_lookup
 
 logger = logging.getLogger("ola_domain_agent.crew")
 
-
-_shared_llm = None
-_retrieval_agent = None
-_lookup_agent = None
-_composer_agent = None
-_policy_crew = None
-_ticket_crew = None
+_crew_lock = threading.Lock()
 
 
-def get_shared_agents():
-    """Returns singleton instances of mock LLM and the 3 specialized agents."""
-    global _shared_llm, _retrieval_agent, _lookup_agent, _composer_agent
-    if _shared_llm is None:
-        _shared_llm = get_mock_llm()
-        _retrieval_agent = create_retrieval_agent(_shared_llm)
-        _lookup_agent = create_lookup_agent(_shared_llm)
-        _composer_agent = create_composer_agent(_shared_llm)
-    return _shared_llm, _retrieval_agent, _lookup_agent, _composer_agent
+def parse_ticket_from_output(task_output: Any) -> dict[str, Any]:
+    """Extracts operational ticket metadata directly from the Lookup task's tool output."""
+    text = ""
+    if hasattr(task_output, "messages") and task_output.messages:
+        for msg in task_output.messages:
+            content = msg.get("content", "") if isinstance(msg, dict) else getattr(msg, "content", "")
+            if "Observation:" in content and "Ticket ID:" in content:
+                text = content.split("Observation:", 1)[1]
+                break
+    if not text and hasattr(task_output, "raw"):
+        text = str(task_output.raw)
+
+    return parse_ticket_from_text(text)
+
+
+def parse_rag_from_output(task_output: Any) -> dict[str, Any]:
+    """Extracts policy sources, grounding status, and confidence directly from Retrieval task output."""
+    text = ""
+    if hasattr(task_output, "messages") and task_output.messages:
+        for msg in task_output.messages:
+            content = msg.get("content", "") if isinstance(msg, dict) else getattr(msg, "content", "")
+            if "Observation:" in content and "Policy Answer:" in content:
+                text = content.split("Observation:", 1)[1]
+                break
+    if not text and hasattr(task_output, "raw"):
+        text = str(task_output.raw)
+
+    sources: list[str] = []
+    grounded = True
+    confidence = 0.85
+
+    m_src = re.search(r"Sources:\s*([^\n]+)", text)
+    if m_src:
+        src_str = m_src.group(1).split("Grounded:")[0].strip()
+        sources = [s.strip() for s in src_str.split(",") if s.strip() and s.strip() != "None"]
+    else:
+        m_paren = re.search(r"\(Sources:\s*([^\)]+)\)", text)
+        if m_paren:
+            sources = [s.strip() for s in m_paren.group(1).split(",") if s.strip() and s.strip() != "None"]
+
+    m_grounded = re.search(r"Grounded:\s*(True|False)", text, re.IGNORECASE)
+    if m_grounded:
+        grounded = m_grounded.group(1).lower() == "true"
+
+    m_conf = re.search(r"Confidence:\s*([0-9.]+)", text)
+    if m_conf:
+        try:
+            confidence = float(m_conf.group(1))
+        except ValueError:
+            pass
+
+    return {
+        "sources": sources,
+        "grounded": grounded,
+        "confidence": confidence,
+    }
+
+
+def create_policy_crew(
+    retrieval_agent=None, composer_agent=None
+) -> tuple[Crew, Task, Task]:
+    """Creates a fresh Policy Crew with sequential task context chaining."""
+    rag_agent = retrieval_agent or create_retrieval_agent()
+    comp_agent = composer_agent or create_composer_agent()
+    task1 = Task(
+        description="Search internal policies for: '{query}'.",
+        expected_output="Relevant policy excerpts and citations.",
+        agent=rag_agent,
+    )
+    task2 = Task(
+        description="Compose a grounded customer answer to: '{query}' using retrieved policies.",
+        expected_output="Clear, grounded customer policy answer.",
+        agent=comp_agent,
+        context=[task1],
+    )
+    crew = Crew(
+        agents=[rag_agent, comp_agent],
+        tasks=[task1, task2],
+        process=Process.sequential,
+        verbose=False,
+    )
+    return crew, task1, task2
+
+
+def create_ticket_crew(
+    lookup_agent=None, composer_agent=None
+) -> tuple[Crew, Task, Task]:
+    """Creates a fresh Ticket Crew with sequential task context chaining."""
+    look_agent = lookup_agent or create_lookup_agent()
+    comp_agent = composer_agent or create_composer_agent()
+    task1 = Task(
+        description="Check the status, resolution time, and escalation risk for ticket {ticket_id}.",
+        expected_output="Operational status, metrics, and escalation risk calculation.",
+        agent=look_agent,
+    )
+    task2 = Task(
+        description="Draft a courteous, concise customer response explaining the status of ticket {ticket_id}.",
+        expected_output="Final customer-facing response text.",
+        agent=comp_agent,
+        context=[task1],
+    )
+    crew = Crew(
+        agents=[look_agent, comp_agent],
+        tasks=[task1, task2],
+        process=Process.sequential,
+        verbose=False,
+    )
+    return crew, task1, task2
+
+
+def create_both_crew(
+    retrieval_agent=None, lookup_agent=None, composer_agent=None
+) -> tuple[Crew, Task, Task, Task]:
+    """Creates a fresh Crew for hybrid ticket + policy queries, chaining both contexts to Composer."""
+    rag_agent = retrieval_agent or create_retrieval_agent()
+    look_agent = lookup_agent or create_lookup_agent()
+    comp_agent = composer_agent or create_composer_agent()
+    task_retrieval = Task(
+        description="Search internal policies for: '{query}'.",
+        expected_output="Relevant policy excerpts and citations.",
+        agent=rag_agent,
+    )
+    task_lookup = Task(
+        description="Check the status, resolution time, and escalation risk for ticket {ticket_id}.",
+        expected_output="Operational status, metrics, and escalation risk calculation.",
+        agent=look_agent,
+    )
+    task_composer = Task(
+        description="Synthesize both ticket status for {ticket_id} and policy guidelines for '{query}' into a comprehensive customer response.",
+        expected_output="Final customer-facing response covering ticket details and policy.",
+        agent=comp_agent,
+        context=[task_retrieval, task_lookup],
+    )
+    crew = Crew(
+        agents=[rag_agent, look_agent, comp_agent],
+        tasks=[task_retrieval, task_lookup, task_composer],
+        process=Process.sequential,
+        verbose=False,
+    )
+    return crew, task_retrieval, task_lookup, task_composer
 
 
 def get_policy_crew() -> Crew:
-    """Returns singleton instance of the policy RAG Crew."""
-    global _policy_crew
-    if _policy_crew is None:
-        _, retrieval_agent, lookup_agent, composer_agent = get_shared_agents()
-        task1 = Task(
-            description="Search internal policies for: '{query}'.",
-            expected_output="Relevant policy excerpts and citations.",
-            agent=retrieval_agent,
-        )
-        task2 = Task(
-            description="Compose a grounded answer to: '{query}' using retrieved policies.",
-            expected_output="Clear, grounded customer policy answer.",
-            agent=composer_agent,
-        )
-        _policy_crew = Crew(
-            agents=[retrieval_agent, lookup_agent, composer_agent],
-            tasks=[task1, task2],
-            process=Process.sequential,
-            verbose=False,
-            tracing=False,
-        )
-    return _policy_crew
+    """Legacy helper returning a fresh policy crew."""
+    crew, _, _ = create_policy_crew()
+    return crew
 
 
 def get_ticket_crew() -> Crew:
-    """Returns singleton instance of the operational ticket lookup Crew."""
-    global _ticket_crew
-    if _ticket_crew is None:
-        _, retrieval_agent, lookup_agent, composer_agent = get_shared_agents()
-        task1 = Task(
-            description="Check the status, resolution time, and escalation risk for ticket {ticket_id}.",
-            expected_output="Operational status, metrics, and escalation risk calculation.",
-            agent=lookup_agent,
-        )
-        task2 = Task(
-            description="Draft a courteous, concise customer response explaining the status of ticket {ticket_id}.",
-            expected_output="Final customer-facing response text.",
-            agent=composer_agent,
-        )
-        _ticket_crew = Crew(
-            agents=[retrieval_agent, lookup_agent, composer_agent],
-            tasks=[task1, task2],
-            process=Process.sequential,
-            verbose=False,
-            tracing=False,
-        )
-    return _ticket_crew
+    """Legacy helper returning a fresh ticket crew."""
+    crew, _, _ = create_ticket_crew()
+    return crew
 
 
 def run_support_crew(
@@ -105,9 +196,9 @@ def run_support_crew(
 ) -> dict[str, Any] | CrewResponse:
     """Executes the CrewAI 3-agent pipeline on the given user query.
 
-    Handles pronoun resolution via session_memory and RunnableWithMessageHistory.
-    Enforces sequential Process with Least Autonomy tool bindings and validates
-    every output against CrewResponse.model_validate.
+    Chains tasks with context=[...] so the Composer receives retrieval or lookup output.
+    Uses the crew's result as the answer, extracts ticket data directly from Lookup task output,
+    handles route 'both', and enforces least autonomy boundaries.
     """
     # Step 1: Pronoun and entity resolution via RunnableWithMessageHistory
     resolved_query = crew_runnable_with_history.invoke(
@@ -133,58 +224,70 @@ def run_support_crew(
     else:
         route = "rag"
 
-    if ticket_id:
-        # Route: Lookup Agent -> Composer Agent
-        tool_invoked = "check_support_ticket_status"
-        crew = get_ticket_crew()
-        crew_output = crew.kickoff(inputs={"ticket_id": ticket_id})
-        output_str = str(crew_output.raw if hasattr(crew_output, "raw") else crew_output)
-        logger.info(f"Ticket Workflow: Tool '{tool_invoked}' executed for {ticket_id}")
+    # Step 2: Thread-safe execution of fresh Crew per request
+    with _crew_lock:
+        if route == "both":
+            crew, task_retrieval, task_lookup, task_composer = create_both_crew()
+            crew_output = crew.kickoff(inputs={"query": resolved_query, "ticket_id": ticket_id})
+            final_text = str(crew_output.raw if hasattr(crew_output, "raw") else crew_output).strip()
 
-        ticket_data = check_support_ticket_status(ticket_id)
-        status = ticket_data.get("status", "Unknown")
-        res_time = ticket_data.get("resolution_time_hours") or 0.0
-        esc_score = ticket_data.get("escalation_score") or 0.0
-        risk = ticket_data.get("risk_level", "Normal")
-        escalation_recommended = ticket_data.get("recommend_escalation", False)
+            ticket_payload = parse_ticket_from_output(task_lookup.output)
+            rag_meta = parse_rag_from_output(task_retrieval.output)
+            sources = rag_meta.get("sources", [])
+            grounded = rag_meta.get("grounded", True)
+            confidence = rag_meta.get("confidence", 0.95)
+            esc_score = ticket_payload.get("escalation_score")
+            escalation_recommended = ticket_payload.get("recommend_escalation", False)
+            tool_invoked = "check_support_ticket_status, rag_lookup"
 
-        final_text = (
-            f"Ticket {ticket_id} ({ticket_data.get('category', 'General')}) is currently {status} "
-            f"with a resolution time of {res_time} hours. Escalation risk score is {esc_score:.4f} ({risk})."
-        )
-        sources = ["dataset.py"]
-        grounded = True
-        confidence = 0.98
-        ticket_payload = ticket_data
+        elif route == "lookup":
+            crew, task_lookup, task_composer = create_ticket_crew()
+            crew_output = crew.kickoff(inputs={"ticket_id": ticket_id})
+            final_text = str(crew_output.raw if hasattr(crew_output, "raw") else crew_output).strip()
 
-    else:
-        # Route: Retrieval Agent -> Composer Agent
-        tool_invoked = "rag_lookup"
-        crew = get_policy_crew()
-        crew_output = crew.kickoff(inputs={"query": resolved_query})
-        output_str = str(crew_output.raw if hasattr(crew_output, "raw") else crew_output)
-        logger.info(f"Policy Workflow: Tool '{tool_invoked}' executed for '{resolved_query}'")
+            ticket_payload = parse_ticket_from_output(task_lookup.output)
+            sources = ["dataset.py"]
+            grounded = True
+            confidence = 0.98
+            esc_score = ticket_payload.get("escalation_score")
+            escalation_recommended = ticket_payload.get("recommend_escalation", False)
+            tool_invoked = "check_support_ticket_status"
 
-        rag_res = rag_lookup(resolved_query)
-        final_text = rag_res["answer"]
-        sources = rag_res["sources"]
-        grounded = rag_res["grounded"]
-        confidence = rag_res["confidence"]
-        esc_score = None
-        escalation_recommended = False
-        ticket_payload = None
+        else:
+            crew, task_retrieval, task_composer = create_policy_crew()
+            crew_output = crew.kickoff(inputs={"query": resolved_query})
+            final_text = str(crew_output.raw if hasattr(crew_output, "raw") else crew_output).strip()
 
-    # Step 2: AutoGen Secondary Review Stage (Task 14) with Coordinator Feedback Loop
+            rag_meta = parse_rag_from_output(task_retrieval.output)
+            sources = rag_meta.get("sources", [])
+            grounded = rag_meta.get("grounded", True)
+            confidence = rag_meta.get("confidence", 0.85)
+            esc_score = None
+            escalation_recommended = False
+            ticket_payload = None
+            tool_invoked = "rag_lookup"
+
+    # Step 3: AutoGen Secondary Review Stage (Task 14) with Coordinator Feedback Loop
     from review.autogen_review import review_support_response
 
     context_summary = ""
-    if route in ("rag", "both") and sources:
+    if route == "both":
+        ticket_ctx = (
+            f"Ticket {ticket_id}: Status={ticket_payload.get('status')}, "
+            f"ResolutionTime={ticket_payload.get('resolution_time_hours')}h, "
+            f"Risk={ticket_payload.get('risk_level')}, "
+            f"EscalationScore={ticket_payload.get('escalation_score')}"
+        ) if ticket_payload else ""
+        sources_ctx = " ".join(sources) if isinstance(sources, list) else str(sources)
+        context_summary = f"{ticket_ctx} {sources_ctx}".strip()
+    elif route in ("rag", "both") and sources:
         context_summary = " ".join(sources) if isinstance(sources, list) else str(sources)
     elif ticket_payload:
         context_summary = (
             f"Ticket {ticket_id}: Status={ticket_payload.get('status')}, "
             f"ResolutionTime={ticket_payload.get('resolution_time_hours')}h, "
-            f"Risk={ticket_payload.get('risk_level')}"
+            f"Risk={ticket_payload.get('risk_level')}, "
+            f"EscalationScore={ticket_payload.get('escalation_score')}"
         )
 
     review_verdict = review_support_response(
@@ -196,48 +299,21 @@ def run_support_crew(
         context_text=context_summary,
     )
 
-    # Compliance retry loop back to agent coordinator
     if not review_verdict.approved:
         logger.warning(
-            "Compliance review flagged issue in draft: '%s'. Initiating coordinator retry loop...",
+            "Compliance review flagged issue in draft: '%s'. Adopting compliant revised text.",
             review_verdict.reason,
         )
-        # Attempt coordinator retry with reviewer feedback
-        max_retries = 1
-        for _ in range(max_retries):
-            if route in ("rag", "both"):
-                rag_res = rag_lookup(resolved_query)
-                retry_draft = rag_res["answer"]
-            elif ticket_payload:
-                retry_draft = review_verdict.final_answer
-            else:
-                retry_draft = review_verdict.final_answer
-
-            # Re-review corrected draft against grounded context
-            retry_verdict = review_support_response(
-                query=resolved_query,
-                draft_answer=retry_draft,
-                sources=sources,
-                grounded=grounded,
-                confidence=confidence,
-                context_text=context_summary,
-            )
-            if retry_verdict.approved:
-                review_verdict = retry_verdict
-                final_text = retry_verdict.final_answer
-                break
-        else:
-            # Fallback: strictly enforce redacted safe answer from reviewer
-            final_text = review_verdict.final_answer
+        final_text = review_verdict.final_answer
     else:
         final_text = review_verdict.final_answer
 
     review_status_dict = review_verdict.model_dump()
 
-    # Step 3: Record in session memory
+    # Step 4: Record in session memory
     session_memory.record_interaction(session_id, query, final_text)
 
-    # Step 4: Construct structured response dictionary
+    # Step 5: Construct structured response dictionary
     response_data = {
         "answer": final_text,
         "route": route,
@@ -254,7 +330,7 @@ def run_support_crew(
         "tool_invoked": tool_invoked,
     }
 
-    # Step 5: Strict validation using CrewResponse.model_validate
+    # Step 6: Strict validation using CrewResponse.model_validate
     validated_model = validate_crew_response(response_data)
 
     if structured:

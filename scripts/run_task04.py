@@ -15,12 +15,15 @@ from rag.generate import (
 
 TRANSCRIPTS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "transcripts")
 os.makedirs(TRANSCRIPTS_DIR, exist_ok=True)
-TRANSCRIPT_FILE = os.path.join(TRANSCRIPTS_DIR, "task04_threshold.txt")
+TRANSCRIPT_FILES = [
+    os.path.join(TRANSCRIPTS_DIR, "04_grounded.txt"),
+    os.path.join(TRANSCRIPTS_DIR, "task04_threshold.txt"),
+]
 
 
 def run():
     print("Executing Task 04: Empirical Cosine Threshold Calibration...")
-    col_name = "ola_sentence"
+    col_name = "kb_sentence"
     T, in_res, out_res = calibrate_threshold(col_name)
 
     min_in = min(r['similarity'] for r in in_res)
@@ -83,9 +86,10 @@ def run():
 
     output = "\n".join(lines)
     print(output)
-    with open(TRANSCRIPT_FILE, "w", encoding="utf-8") as f:
-        f.write(output)
-    print(f"Transcript written to: {TRANSCRIPT_FILE}")
+    for tf in TRANSCRIPT_FILES:
+        with open(tf, "w", encoding="utf-8") as f:
+            f.write(output)
+        print(f"Transcript written to: {tf}")
 
 
 if __name__ == "__main__":

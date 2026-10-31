@@ -16,8 +16,8 @@ from crew.schemas import CrewResponse, SupportResponse
 class AskRequest(BaseModel):
     """Payload for POST /ask endpoint."""
 
-    question: str | None = Field(default=None, description="Customer question or operational inquiry.")
-    query: str | None = Field(default=None, description="Backwards-compatible alias for question.")
+    question: str | None = Field(default=None, max_length=20000, description="Customer question or operational inquiry.")
+    query: str | None = Field(default=None, max_length=20000, description="Backwards-compatible alias for question.")
     session_id: str | None = Field(default="default_session", description="Conversation session ID.")
 
     @model_validator(mode="after")
@@ -44,6 +44,7 @@ class AskResponse(CrewResponse):
     x_col: str | None = Field(default=None, description="Optional x-axis column.")
     y_col: str | None = Field(default=None, description="Optional y-axis column.")
     retrieved_sources: list[str] = Field(default_factory=list, description="Direct list of retrieved sources.")
+    source_titles: list[str] = Field(default_factory=list, description="Unique list of titles extracted from sources metadata or titles.")
     retrieved_snippet: str | None = Field(default=None, description="Direct excerpt snippet.")
     review_status: dict[str, Any] = Field(default_factory=dict, description="Secondary review stage metadata.")
     cache_hit: bool = Field(default=False, description="Flag indicating if served from semantic cache.")

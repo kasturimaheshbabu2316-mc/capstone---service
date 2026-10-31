@@ -5,12 +5,23 @@ Enforces strict role-based tool authorization boundaries.
 Raises PermissionError if an agent or caller attempts unauthorized tool invocation.
 """
 
-from typing import Any, Callable
+from __future__ import annotations
+
+import contextvars
+from typing import Any
+
+CURRENT_CALLER_ROLE: contextvars.ContextVar[str] = contextvars.ContextVar(
+    "CURRENT_CALLER_ROLE", default="Lookup Agent"
+)
 
 ROLE_PERMISSIONS: dict[str, set[str]] = {
     "Policy Retrieval Specialist": {"rag_lookup", "rag_lookup_crew_tool"},
+    "Retrieval Agent": {"rag_lookup", "rag_lookup_crew_tool"},
     "Ticket Operations Specialist": {"check_support_ticket_status", "check_support_ticket_status_crew_tool"},
+    "Lookup Agent": {"check_support_ticket_status", "check_support_ticket_status_crew_tool"},
     "Support Response Composer": set(),  # Toolless
+    "Composer Agent": set(),
+    "Composer": set(),
     "Customer Support Agent": set(),
 }
 

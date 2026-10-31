@@ -2,7 +2,7 @@
 OLA DOMAIN SUPPORT AGENT — THRESHOLD CALIBRATION & GENERATION (TASK 4)
 ======================================================================
 
---- 1. EMPIRICAL THRESHOLD CALIBRATION (ola_sentence) ---
+--- 1. EMPIRICAL THRESHOLD CALIBRATION (kb_sentence) ---
 IN-SCOPE CLUSTER:
   • Sim: 0.6299 | Top Doc: sla_by_severity           | Q: "What is the resolution SLA for a Sev-1 safety incident?"
   • Sim: 0.7153 | Top Doc: refund_compensation_policy | Q: "When does Ola provide monetary refunds for driver cancellations?"

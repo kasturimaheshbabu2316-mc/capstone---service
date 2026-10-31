@@ -105,20 +105,32 @@ def _read_winning_collection() -> str:
 # ==============================================================================
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Loads SentenceTransformer model and winning ChromaDB index once at startup (never per-request)."""
+    """Loads SentenceTransformer model, ChromaDB index, and validates ticket dataset readiness."""
     logger.info("Initializing API Lifespan: Preloading SentenceTransformer and ChromaDB collections...")
+    app.state.kb_ready = False
+    app.state.db_ready = False
+
     try:
         # Preload embedding model singleton once
         embedding_model = get_embedding_model()
-        # Preload ChromaDB client & winning collection once
         chroma_client = get_chroma_client()
+
+        # Check DB readiness
+        try:
+            from dataset import SUPPORT_TICKETS
+            app.state.db_ready = len(SUPPORT_TICKETS) > 0
+        except Exception as exc:
+            logger.exception("Lifespan: Ticket dataset failed to load: %s", exc)
+            app.state.db_ready = False
 
         # Identify winning collection from rag/recommended.json (default: kb_sentence)
         winning_col = _read_winning_collection()
+        if winning_col in ("ola_sentence", "ola_fixed"):
+            winning_col = "kb_sentence"
 
         collection = get_or_create_collection(winning_col, chroma_client)
 
-        # Build ChromaDB index if missing or empty (index ONLY winning collection at startup for 512MB RAM constraint)
+        # Build ChromaDB index if missing or empty
         if collection.count() == 0:
             logger.info("ChromaDB '%s' is empty. Indexing knowledge base collections at startup...", winning_col)
             from rag.index import index_documents
@@ -129,7 +141,8 @@ async def lifespan(app: FastAPI):
         app.state.chroma_client = chroma_client
         app.state.collection = collection
         app.state.winning_collection = winning_col
-        logger.info("Lifespan: SentenceTransformer and '%s' ChromaDB collection ready.", winning_col)
+        app.state.kb_ready = collection.count() > 0
+        logger.info("Lifespan: SentenceTransformer and '%s' collection ready (count=%d).", winning_col, collection.count())
 
         # Pre-warm CrewAI agents and crews once in lifespan
         try:
@@ -147,8 +160,8 @@ async def lifespan(app: FastAPI):
 
         # Reclaim temporary import memory for 512MB RAM budget
         gc.collect()
-    except Exception:
-        logger.exception("Lifespan initialization failure.")
+    except Exception as exc:
+        logger.exception("Lifespan initialization failure: %s", exc)
 
     yield
 
@@ -165,10 +178,13 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS Middleware
+# CORS Middleware (configurable allow_origins from env)
+cors_origins_env = os.environ.get("CORS_ORIGINS", "http://127.0.0.1:8000,http://localhost:8000")
+allow_origins = [o.strip() for o in cors_origins_env.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -249,15 +265,66 @@ def favicon_endpoint():
     return Response(status_code=204)
 
 
+def check_readiness() -> tuple[bool, bool]:
+    """Checks whether the KB collection and ticket DB are ready."""
+    kb_ready = getattr(app.state, "kb_ready", None)
+    db_ready = getattr(app.state, "db_ready", None)
+    if kb_ready is None or db_ready is None:
+        try:
+            from tools.ticket_tool import get_all_tickets
+            t = get_all_tickets()
+            db_ready = bool(t and len(t) > 0)
+        except Exception:
+            db_ready = False
+        try:
+            from rag.index import get_or_create_collection
+            col = get_or_create_collection("kb_sentence")
+            cnt = col.count() if hasattr(col, "count") else 0
+            kb_ready = cnt > 0
+        except Exception:
+            kb_ready = False
+        app.state.kb_ready = kb_ready
+        app.state.db_ready = db_ready
+    return bool(kb_ready), bool(db_ready)
+
+
+def _resolve_source_titles(sources: list[str] | None) -> list[str]:
+    """Resolves raw source identifiers or filenames to human-readable document titles."""
+    if not sources:
+        return []
+    titles: list[str] = []
+    kb_dir = Path(os.environ.get("KB_DIR", str(PROJECT_ROOT / "kb"))).resolve()
+    doc_title_map: dict[str, str] = {}
+    try:
+        if kb_dir.exists():
+            for doc in load_kb(kb_dir):
+                doc_title_map[doc["doc_id"]] = doc["title"]
+                doc_title_map[f"{doc['doc_id']}.md"] = doc["title"]
+    except Exception:
+        pass
+
+    for s in sources:
+        clean_s = str(s).strip()
+        stem = Path(clean_s).stem
+        if clean_s in doc_title_map:
+            titles.append(doc_title_map[clean_s])
+        elif stem in doc_title_map:
+            titles.append(doc_title_map[stem])
+        else:
+            titles.append(stem.replace("_", " ").title())
+    return list(dict.fromkeys(titles))
+
+
 @app.get("/health", response_model=HealthResponse)
 @app.head("/health")
 def health_check() -> HealthResponse:
     """Service health state and readiness status."""
+    kb_ready, db_ready = check_readiness()
     return HealthResponse(
-        status="ok",
+        status="ok" if (kb_ready and db_ready) else "warming_up",
         mock_llm=os.environ.get("MOCK_LLM", "true").lower() == "true",
-        kb_ready=True,
-        db_ready=True,
+        kb_ready=kb_ready,
+        db_ready=db_ready,
         service="ola-support-agent",
     )
 
@@ -270,20 +337,57 @@ def run_unified_pipeline(
 ) -> AskResponse:
     """One unified pipeline function executing the full governance and multi-agent lifecycle:
 
-    1. Guardrails (input): Prompt-injection defense & PII masking.
-    2. Budget check: MAX_REQUEST_TOKENS enforcement (HTTP 413).
-    3. Cache: Normalized in-memory cache lookup.
-    4. Crew: Multi-agent execution (RAG / ticket lookup).
-    5. Output groundedness check: Validates context adherence.
-    6. Autogen review: Secondary consensus review stage (approval/redaction).
-    7. Schema validation: Strict CrewResponse / AskResponse contract validation.
-    8. Structured log: Thread-safe JSON-Lines audit logging with zero plaintext PII.
+    1. Readiness check: Verifies KB and DB are ready (HTTP 503 if warming up).
+    2. Length cap check: Max length 20,000 chars (HTTP 422).
+    3. Budget check: MAX_REQUEST_TOKENS enforcement (HTTP 413).
+    4. Input Guardrails: Prompt-injection defense (HTTP 400).
+    5. PII masking: Mask phone, email, credentials.
+    6. Session resolution: Pronoun & follow-up rewriting.
+    7. Cache: Partitioned namespace lookup (policy vs session-scoped ticket).
+    8. Crew: Multi-agent execution (RAG / ticket lookup).
+    9. Output groundedness & Autogen review.
+    10. Schema validation & structured logging.
     """
     start_time = time.perf_counter()
     trace_id = trace_id or str(uuid.uuid4())
 
     try:
-        # 1. Input Guardrails (Prompt Injection Check - HTTP 400)
+        # 0. Readiness Check (HTTP 503 if warming up)
+        kb_ready, db_ready = check_readiness()
+        if not (kb_ready and db_ready):
+            raise HTTPException(
+                status_code=503,
+                detail="Service is warming up and not yet ready to process requests. Please try again shortly.",
+            )
+
+        # 1. Length Cap Check (HTTP 422)
+        if len(raw_question) > 20000:
+            raise HTTPException(
+                status_code=422,
+                detail="Question exceeds maximum allowed length of 20,000 characters.",
+            )
+
+        # 2. Token Budget Check (HTTP 413 on oversized payload)
+        from governance.budget import check_payload_budget, MAX_REQUEST_TOKENS
+        within_budget, tokens, err_msg = check_payload_budget(raw_question)
+        if not within_budget:
+            latency_ms = (time.perf_counter() - start_time) * 1000.0
+            audit_logger.log_request(
+                endpoint=endpoint,
+                question=raw_question,
+                status_code=413,
+                latency_ms=latency_ms,
+                session_id=session_id,
+                trace_id=trace_id,
+                route="blocked",
+                guardrail_flags={"budget_exceeded": True, "tokens": tokens},
+            )
+            raise HTTPException(
+                status_code=413,
+                detail=err_msg or f"Payload exceeds maximum token budget of {MAX_REQUEST_TOKENS:,} tokens (estimated {tokens:,} tokens).",
+            )
+
+        # 3. Prompt Injection Check (HTTP 400)
         inj_res = detect_prompt_injection(raw_question)
         if inj_res.fired:
             latency_ms = (time.perf_counter() - start_time) * 1000.0
@@ -307,39 +411,34 @@ def run_unified_pipeline(
                 },
             )
 
-        # 1b. Input Guardrails (PII Masking)
+        # 4. Input Guardrails (PII Masking)
         pii_res = mask_pii(raw_question)
         sanitized_question = pii_res.sanitized_text
         guardrail_flags: dict[str, Any] = {"input_pii_masked": pii_res.fired, "phone_masked": pii_res.fired}
 
-        # 2. Token Budget Check (HTTP 413 on oversized payload)
-        within_budget, tokens, err_msg = check_payload_budget(sanitized_question)
-        if not within_budget:
-            latency_ms = (time.perf_counter() - start_time) * 1000.0
-            audit_logger.log_request(
-                endpoint=endpoint,
-                question=raw_question,
-                status_code=413,
-                latency_ms=latency_ms,
-                session_id=session_id,
-                trace_id=trace_id,
-                route="blocked",
-                guardrail_flags={"budget_exceeded": True, "tokens": tokens},
-            )
-            raise HTTPException(
-                status_code=413,
-                detail=err_msg or f"Payload exceeds maximum token budget of 2,000 tokens (estimated {tokens:,} tokens).",
-            )
+        # 3. Resolve follow-up query through session memory BEFORE the cache check
+        from crew.memory import session_memory
+        resolved_question, was_resolved = session_memory.resolve_query(session_id, sanitized_question)
 
-        # Check if query targets an operational ticket or policy knowledge base
-        is_ticket_query = bool(re.search(r"\b(TKT-\d{4})\b", raw_question, re.IGNORECASE))
-        cache_namespace = "ticket" if is_ticket_query else "policy"
+        # If query was rewritten from history (pronoun resolution) or contains a ticket ID,
+        # use the session-scoped ticket namespace; only history-free policy questions use the global cache.
+        ticket_match = re.search(r"\b(TKT-\d{4})\b", resolved_question, re.IGNORECASE)
+        is_ticket_or_history = was_resolved or bool(ticket_match)
 
-        # 3. Response Cache Check (Policy queries cached globally; ticket queries strictly session-scoped)
+        if is_ticket_or_history:
+            cache_namespace = "ticket"
+            cache_session_id = session_id
+            cache_query_key = resolved_question
+        else:
+            cache_namespace = "policy"
+            cache_session_id = None
+            cache_query_key = sanitized_question
+
+        # Response Cache Check (Policy queries cached globally; ticket/history queries strictly session-scoped)
         cached_result = response_cache.get(
-            sanitized_question,
+            cache_query_key,
             namespace=cache_namespace,
-            session_id=session_id if is_ticket_query else None,
+            session_id=cache_session_id,
         )
         if cached_result is not None:
             latency_ms = (time.perf_counter() - start_time) * 1000.0
@@ -361,10 +460,13 @@ def run_unified_pipeline(
             if ticket_payload:
                 ticket_id_val = ticket_payload.get("ticket_id") or ticket_payload.get("record_id")
 
+            source_titles = _resolve_source_titles(cached_result.sources)
+
             data_obj = {
                 "answer": cached_result.answer,
                 "route": route_name,
                 "sources": cached_result.sources,
+                "source_titles": source_titles,
                 "ticket": ticket_payload,
                 "ticket_id": ticket_id_val,
                 "grounded": cached_result.grounded,
@@ -377,6 +479,7 @@ def run_unified_pipeline(
                 answer=cached_result.answer,
                 route=route_name,
                 sources=cached_result.sources,
+                source_titles=source_titles,
                 ticket=ticket_payload,
                 grounded=cached_result.grounded,
                 escalation_recommended=cached_result.escalation_recommended,
@@ -439,12 +542,12 @@ def run_unified_pipeline(
         validated_crew = validate_crew_response(crew_output)
 
         # Dynamic tickets without session are never cached globally
-        if cache_namespace == "policy" or (cache_namespace == "ticket" and session_id):
+        if cache_namespace == "policy" or (cache_namespace == "ticket" and cache_session_id):
             response_cache.set(
-                sanitized_question,
+                cache_query_key,
                 validated_crew,
                 namespace=cache_namespace,
-                session_id=session_id if is_ticket_query else None,
+                session_id=cache_session_id,
             )
 
         latency_ms = (time.perf_counter() - start_time) * 1000.0
@@ -466,10 +569,13 @@ def run_unified_pipeline(
         if validated_crew.ticket:
             ticket_id_val = validated_crew.ticket.get("ticket_id") or validated_crew.ticket.get("record_id")
 
+        source_titles = _resolve_source_titles(validated_crew.sources)
+
         data_obj = {
             "answer": validated_crew.answer,
             "route": validated_crew.route,
             "sources": validated_crew.sources,
+            "source_titles": source_titles,
             "ticket": validated_crew.ticket,
             "ticket_id": ticket_id_val,
             "grounded": validated_crew.grounded,
@@ -482,6 +588,7 @@ def run_unified_pipeline(
             answer=validated_crew.answer,
             route=validated_crew.route,
             sources=validated_crew.sources,
+            source_titles=source_titles,
             ticket=validated_crew.ticket,
             grounded=validated_crew.grounded,
             escalation_recommended=validated_crew.escalation_recommended,
@@ -540,29 +647,52 @@ def verify_admin_token(x_admin_token: str | None = Header(None, alias="X-Admin-T
 
 
 def _sync_add_document(doc_title: str, doc_text: str) -> AddDocumentResponse:
-    """Synchronous core ingestion pipeline executed in background worker thread."""
+    """Synchronous core ingestion pipeline executed in background worker thread.
+
+    - Validates document title matches ^[A-Za-z0-9_-]{1,64}$ (stripping trailing .md).
+    - Checks target path resides inside KB directory to prevent path traversal.
+    - Chunks with sentence_chunks and indexes into kb_sentence.
+    - Invalidates the policy response cache.
+    """
     start_time = time.perf_counter()
 
+    # 1. Title validation: strip a trailing .md and validate regex
+    clean_title = doc_title[:-3] if doc_title.endswith(".md") else doc_title
+    if not re.match(r"^[A-Za-z0-9_-]{1,64}$", clean_title):
+        raise HTTPException(
+            status_code=422,
+            detail=f"Invalid document title '{clean_title}'. Titles must match ^[A-Za-z0-9_-]{{1,64}}$ (letters, numbers, underscores, hyphens up to 64 characters).",
+        )
+
+    # 2. Path resolution & Path Traversal Guard
+    kb_dir = Path(os.environ.get("KB_DIR", str(PROJECT_ROOT / "kb"))).resolve()
+    kb_dir.mkdir(parents=True, exist_ok=True)
+    file_path = (kb_dir / f"{clean_title}.md").resolve()
+
     try:
-        # 1. Save document to kb/ directory
-        kb_dir = PROJECT_ROOT / "kb"
-        kb_dir.mkdir(parents=True, exist_ok=True)
-        doc_filename = doc_title if doc_title.endswith(".md") else f"{doc_title}.md"
-        file_path = kb_dir / doc_filename
+        file_path.relative_to(kb_dir)
+    except ValueError:
+        raise HTTPException(
+            status_code=422,
+            detail="Path traversal detected. Document target must reside inside the KB directory.",
+        )
+
+    try:
+        # 3. Save document to kb/ directory
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(doc_text)
 
-        # 2. Chunk using the recommended strategy (sentence chunking for kb_sentence)
-        chunks = sentence_chunks(doc_text, doc_id=doc_title)
+        # 4. Chunk using the recommended strategy (sentence chunking for kb_sentence)
+        chunks = sentence_chunks(doc_text, doc_id=clean_title)
         if not chunks:
             raise HTTPException(
                 status_code=400,
-                detail=f"Document '{doc_title}' contains no valid text sentences for indexing.",
+                detail=f"Document '{clean_title}' contains no valid text sentences for indexing.",
             )
 
-        # 3. Embed & upsert into recommended winning collection ('kb_sentence')
+        # 5. Embed & upsert into winning collection ('kb_sentence')
+        target_collection = os.environ.get("WINNING_COLLECTION", "kb_sentence")
         model = getattr(app.state, "embedding_model", None) or get_embedding_model()
-        target_collection = getattr(app.state, "winning_collection", "kb_sentence")
         col = get_or_create_collection(target_collection)
 
         chunk_ids = [c["chunk_id"] for c in chunks]
@@ -581,20 +711,7 @@ def _sync_add_document(doc_title: str, doc_text: str) -> AddDocumentResponse:
                 metadatas=chunk_metas,
             )
 
-            # Also upsert into legacy collections for backwards compatibility if needed
-            if target_collection == "kb_sentence":
-                try:
-                    legacy_col = get_or_create_collection("ola_sentence")
-                    legacy_col.upsert(
-                        ids=chunk_ids,
-                        documents=chunk_texts,
-                        embeddings=embeddings,
-                        metadatas=chunk_metas,
-                    )
-                except (RuntimeError, ValueError) as exc:
-                    logger.debug("Legacy collection upsert skipped: %s", exc)
-
-        # 4. Invalidate policy response cache (isolated from ticket caches)
+        # 6. Invalidate policy response cache (isolated from ticket caches)
         invalidated_count = response_cache.clear(namespace="policy")
 
         latency_ms = (time.perf_counter() - start_time) * 1000.0
@@ -602,7 +719,7 @@ def _sync_add_document(doc_title: str, doc_text: str) -> AddDocumentResponse:
 
         audit_logger.log_request(
             endpoint="/add-document",
-            question=f"Ingested document: {doc_title}",
+            question=f"Ingested document: {clean_title}",
             status_code=200,
             latency_ms=latency_ms,
             session_id="system",
@@ -613,8 +730,8 @@ def _sync_add_document(doc_title: str, doc_text: str) -> AddDocumentResponse:
 
         return AddDocumentResponse(
             status="indexed",
-            title=doc_title,
-            doc_id=doc_title,
+            title=clean_title,
+            doc_id=clean_title,
             collection=target_collection,
             chunks_indexed=len(chunks),
             cache_invalidated_entries=invalidated_count,

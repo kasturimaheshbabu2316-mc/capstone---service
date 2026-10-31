@@ -2,8 +2,8 @@
 
 Track: Business Operations / Customer Support (Ola)
 Evaluates deduplicated parent-document precision and recall across:
-- `ola_fixed`: Fixed-size chunks (200 char window, 40 overlap)
-- `ola_sentence`: Pure sentence-based chunks
+- `kb_fixed`: Fixed-size chunks (300 char window, 60 overlap)
+- `kb_sentence`: Pure sentence-based chunks
 Generates detailed arithmetic comparison tables and empirical recommendation.
 """
 

@@ -10,7 +10,10 @@ from rag.index import index_documents, query_collection, MODEL_NAME
 
 TRANSCRIPTS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "transcripts")
 os.makedirs(TRANSCRIPTS_DIR, exist_ok=True)
-TRANSCRIPT_FILE = os.path.join(TRANSCRIPTS_DIR, "task03_chunking.txt")
+TRANSCRIPT_FILES = [
+    os.path.join(TRANSCRIPTS_DIR, "03_indexing.txt"),
+    os.path.join(TRANSCRIPTS_DIR, "task03_chunking.txt"),
+]
 
 
 def run():
@@ -18,8 +21,8 @@ def run():
     num_fixed, num_sent = index_documents(reset=True)
 
     sample_query = "What is the resolution SLA for a Sev-1 safety incident?"
-    fixed_results = query_collection("ola_fixed", sample_query, top_k=2)
-    sent_results = query_collection("ola_sentence", sample_query, top_k=2)
+    fixed_results = query_collection("kb_fixed", sample_query, top_k=2)
+    sent_results = query_collection("kb_sentence", sample_query, top_k=2)
 
     lines = [
         "=" * 70,
@@ -29,12 +32,12 @@ def run():
         "",
         "--- 1. INDEXING SUMMARY ---",
         "  • Knowledge Base Docs   : 12 policy files",
-        f"  • Collection 'ola_fixed'    : {num_fixed} chunks (200 char window, 40 overlap)",
-        f"  • Collection 'ola_sentence' : {num_sent} chunks (regex sentence-based)",
+        f"  • Collection 'kb_fixed'    : {num_fixed} chunks (300 char window, 60 overlap)",
+        f"  • Collection 'kb_sentence' : {num_sent} chunks (regex sentence-based)",
         f"  • Embedding Model       : {MODEL_NAME} (384-dimensional dense vectors)",
         "  • Vector Space Metric   : Cosine (hnsw:space: cosine)",
         "",
-        "--- 2. SAMPLE RETRIEVAL: 'ola_fixed' ---",
+        "--- 2. SAMPLE RETRIEVAL: 'kb_fixed' ---",
         f"Query: \"{sample_query}\"",
     ]
     for i, res in enumerate(fixed_results, 1):
@@ -43,7 +46,7 @@ def run():
 
     lines.extend([
         "",
-        "--- 3. SAMPLE RETRIEVAL: 'ola_sentence' ---",
+        "--- 3. SAMPLE RETRIEVAL: 'kb_sentence' ---",
         f"Query: \"{sample_query}\"",
     ])
     for i, res in enumerate(sent_results, 1):
@@ -60,9 +63,10 @@ def run():
 
     output = "\n".join(lines)
     print(output)
-    with open(TRANSCRIPT_FILE, "w", encoding="utf-8") as f:
-        f.write(output)
-    print(f"Transcript written to: {TRANSCRIPT_FILE}")
+    for tf in TRANSCRIPT_FILES:
+        with open(tf, "w", encoding="utf-8") as f:
+            f.write(output)
+        print(f"Transcript written to: {tf}")
 
 
 if __name__ == "__main__":

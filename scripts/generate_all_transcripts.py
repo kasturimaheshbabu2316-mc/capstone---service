@@ -27,6 +27,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from scripts import (
     run_task01,
+    run_task02,
     run_task03,
     run_task04,
     run_task05,
@@ -50,6 +51,7 @@ def generate_all():
     print("=" * 80)
 
     run_task01.run()
+    run_task02.run()
     run_task03.run()
     run_task04.run()
     run_task05.run()

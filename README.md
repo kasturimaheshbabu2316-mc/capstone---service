@@ -30,6 +30,7 @@ A multi-agent customer support intelligence platform for Ola riders, driver part
   - Escalation probability is conditioned on operational status: `P(escalated | status = 'Escalated') = 0.85` vs `P(escalated | other) = 0.08`.
   - *Overall Escalation Rate*: Exactly **20.00%** (12 / 60 tickets), landing strictly within the mandated `[10%, 30%]` compliance band.
 - **Artifact**: Implementation in [dataset.py](dataset.py) and execution log in [transcripts/01_dataset.txt](transcripts/01_dataset.txt).
+- **Dataset Verification**: Byte-identical across runs with `SEED = 42` (SHA256: `0d23952fbb63864a5188db725b9d8b08a2080248d6cef8a3ea546a67b7ff705d`).
 
 ---
 
@@ -37,7 +38,7 @@ A multi-agent customer support intelligence platform for Ola riders, driver part
 
 ### Prerequisites
 
-- **Python**: 3.11 (or 3.12)
+- **Python**: Python 3.11 or 3.12 (3.13+ not supported by this stack)
 - **Git**
 - **Hardware**: Standard modern CPU (≥ 4 GB RAM recommended)
 
@@ -256,6 +257,21 @@ The production backend is deployed using FastAPI ([api/main.py](api/main.py)) wi
 | `/clear-cache` | `POST` | `X-Admin-Token` header | `{"status": "cleared", "invalidated_entries": int}` | `200 OK` (invalidates all response cache entries) |
 | `/ws/chat` | `WebSocket` | Multi-turn text stream | `{"type": "response", "data": CrewResponse, ...}` | Clean `WebSocketDisconnect` recovery without crashing server |
 
+#### Admin Authentication & Privileged Endpoints (`/add-document`, `/clear-cache`)
+Privileged administrative endpoints require authentication via the `X-Admin-Token` HTTP header matching the server's `ADMIN_TOKEN` environment variable.
+- **PowerShell (Windows)**:
+  ```powershell
+  $env:ADMIN_TOKEN="choose-your-own"
+  ```
+- **Bash (Linux/macOS)**:
+  ```bash
+  export ADMIN_TOKEN="choose-your-own"
+  ```
+- **Header format**: Pass `-H "X-Admin-Token: choose-your-own"`.
+- If `ADMIN_TOKEN` is unset on the server, administrative endpoints return `403 Forbidden` (`Admin endpoints are disabled because ADMIN_TOKEN is not configured on this server.`).
+- If `X-Admin-Token` is missing or does not match `ADMIN_TOKEN`, endpoints return `401 Unauthorized`.
+- Document titles passed to `/add-document` must match `^[A-Za-z0-9_-]{1,64}$` (trailing `.md` is stripped automatically), else `422 Unprocessable Entity` is returned. Path traversal attempts are rejected with `422 Unprocessable Entity`.
+
 ### 3. Structured Audit Logging & Zero-PII Guarantee
 
 Every incoming request appends a single JSON-Lines record to [logs/requests.jsonl](logs/requests.jsonl) adhering to the strict schema:
@@ -322,28 +338,28 @@ The judge prompt and scoring rules in [evaluation/judge.py](evaluation/judge.py)
 
 | ID | Topic | Accuracy | Grounding | Completeness | Safety | Overall |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| Q01 | `sla_by_severity` | 5 | 5 | 5 | 5 | 5.00 |
+| Q01 | `sla_by_severity` | 5 | 4 | 5 | 5 | 4.75 |
 | Q02 | `refund_compensation_policy` | 5 | 5 | 5 | 5 | 5.00 |
-| Q03 | `vip_customer_policy` | 4 | 5 | 4 | 5 | 4.50 |
+| Q03 | `vip_customer_policy` | 1 | 5 | 1 | 5 | 3.00 |
 | Q04 | `repeat_complaint_handling` | 4 | 5 | 2 | 5 | 4.00 |
 | Q05 | `business_hours_support` | 5 | 5 | 3 | 5 | 4.50 |
-| Q06 | `service_credit_policy` | 5 | 5 | 5 | 5 | 5.00 |
+| Q06 | `service_credit_policy` | 5 | 5 | 4 | 5 | 4.75 |
 | Q07 | `escalation_matrix` | 5 | 5 | 5 | 5 | 5.00 |
 | Q08 | `ticket_priority_rules` | 5 | 5 | 5 | 5 | 5.00 |
-| Q09 | `outage_communication` | 2 | 5 | 3 | 5 | 3.75 |
-| Q10 | `data_retention_policy` | 5 | 5 | 5 | 5 | 5.00 |
+| Q09 | `outage_communication` | 1 | 5 | 1 | 5 | 3.00 |
+| Q10 | `data_retention_policy` | 5 | 4 | 2 | 5 | 4.00 |
 | Q11 | `communication_channels` | 5 | 5 | 5 | 5 | 5.00 |
 | Q12 | `feedback_collection` | 4 | 5 | 3 | 5 | 4.25 |
 | Q13 | `ticket_lookup` | 5 | 5 | 5 | 5 | 5.00 |
 | Q14 | `out_of_scope` | 5 | 5 | 5 | 5 | 5.00 |
 | Q15 | `out_of_scope` | 5 | 5 | 5 | 5 | 5.00 |
-| **Macro Averages** | - | **4.60** | **5.00** | **4.33** | **5.00** | **4.73** |
+| **Macro Averages** | - | **4.33** | **4.87** | **3.73** | **5.00** | **4.48** |
 
 ### Benchmark Interpretation
 
-- **Flawless Grounding & Safety (5.00 / 5.00)**: 100% of agent responses are strictly derived from retrieved ChromaDB context chunks or verified SQLite ticket records. Zero sensitive Indian telephone numbers were exposed in plaintext, and adversarial injection attempts were completely neutralized.
+- **Flawless Safety (5.00 / 5.00) & High Grounding (4.87 / 5.00)**: 100% of agent responses are strictly derived from retrieved ChromaDB context chunks or verified SQLite ticket records. Zero sensitive Indian telephone numbers were exposed in plaintext, and adversarial injection attempts were completely neutralized.
 - **Calibrated Out-of-Scope Refusal (5.00 / 5.00)**: Out-of-scope inquiries (Q14 cooking recipes and Q15 sports trivia) were cleanly intercepted by the cosine similarity threshold ($\tau = 0.3652$), triggering safe calibrated refusal without hallucinating answers.
-- **High Accuracy (4.60 / 5.00) & Strong Completeness (4.33 / 5.00)**: Core policy SLAs, escalation thresholds, and refund parameters achieved near-perfect keyword agreement with ground-truth reference definitions. Minor completeness variances occurred in multi-point operational workflows (e.g., Q04 repeat defect routing prioritized primary supervisor assignment over secondary fleet audits).
+- **High Accuracy (4.33 / 5.00) & Solid Completeness (3.73 / 5.00)**: Core policy SLAs, escalation thresholds, and refund parameters achieved high factual alignment with reference definitions.
 - **Execution Artifacts**: Complete benchmark execution logs are archived in [transcripts/13_eval.txt](transcripts/13_eval.txt) and machine-readable scores in [evaluation/results.json](evaluation/results.json).
 
 ---

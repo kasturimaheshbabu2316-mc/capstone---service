@@ -10,7 +10,10 @@ from rag.evaluate import run_comparative_evaluation
 
 TRANSCRIPTS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "transcripts")
 os.makedirs(TRANSCRIPTS_DIR, exist_ok=True)
-TRANSCRIPT_FILE = os.path.join(TRANSCRIPTS_DIR, "task05_chunking_comparison.txt")
+TRANSCRIPT_FILES = [
+    os.path.join(TRANSCRIPTS_DIR, "05_chunk_eval.txt"),
+    os.path.join(TRANSCRIPTS_DIR, "task05_chunking_comparison.txt"),
+]
 
 
 def run():
@@ -22,7 +25,7 @@ def run():
         "OLA DOMAIN SUPPORT AGENT — CHUNKING STRATEGY COMPARISON (TASK 5)",
         "=" * 70,
         "",
-        "--- 1. FIXED-SIZE CHUNKING EVALUATION ('ola_fixed') ---",
+        "--- 1. FIXED-SIZE CHUNKING EVALUATION ('kb_fixed') ---",
         f"{'ID':<4} | {'Relevant':<24} | {'Retrieved Docs':<32} | {'Precision Formula':<18} | {'Recall Formula':<16}",
         "-" * 102,
     ]
@@ -34,11 +37,11 @@ def run():
 
     lines.extend([
         "",
-        "Summary for 'ola_fixed':",
+        "Summary for 'kb_fixed':",
         f"  • Mean Precision : {eval_data['avg_precision_fixed'] * 100:.1f}%",
         f"  • Mean Recall    : {eval_data['avg_recall_fixed'] * 100:.1f}%",
         "",
-        "--- 2. SENTENCE-BASED CHUNKING EVALUATION ('ola_sentence') ---",
+        "--- 2. SENTENCE-BASED CHUNKING EVALUATION ('kb_sentence') ---",
         f"{'ID':<4} | {'Relevant':<24} | {'Retrieved Docs':<32} | {'Precision Formula':<18} | {'Recall Formula':<16}",
         "-" * 102,
     ])
@@ -54,13 +57,13 @@ def run():
         f"compared to {eval_data['avg_precision_fixed']*100:.1f}% precision for fixed-size chunking. "
         f"Fixed-size chunking frequently splits critical quantitative SLAs across arbitrary character boundaries, "
         f"introducing irrelevant cross-document neighbors in the top-k results. "
-        f"Consequently, sentence-based chunking ('ola_sentence') is recommended as the primary production collection "
+        f"Consequently, sentence-based chunking ('kb_sentence') is recommended as the primary production collection "
         f"for high-fidelity grounded generation."
     )
 
     lines.extend([
         "",
-        "Summary for 'ola_sentence':",
+        "Summary for 'kb_sentence':",
         f"  • Mean Precision : {eval_data['avg_precision_sentence'] * 100:.1f}%",
         f"  • Mean Recall    : {eval_data['avg_recall_sentence'] * 100:.1f}%",
         "",
@@ -75,9 +78,10 @@ def run():
 
     output = "\n".join(lines)
     print(output)
-    with open(TRANSCRIPT_FILE, "w", encoding="utf-8") as f:
-        f.write(output)
-    print(f"Transcript written to: {TRANSCRIPT_FILE}")
+    for tf in TRANSCRIPT_FILES:
+        with open(tf, "w", encoding="utf-8") as f:
+            f.write(output)
+        print(f"Transcript written to: {tf}")
 
 
 if __name__ == "__main__":

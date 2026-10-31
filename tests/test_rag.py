@@ -157,7 +157,7 @@ def test_collections_contain_only_official_12_docs():
     official_set = set(REQUIRED_TOPIC_IDS)
     assert len(official_set) == 12, "Expected exactly 12 official policy topics."
 
-    for col_name in ("kb_sentence", "kb_fixed", "ola_sentence", "ola_fixed"):
+    for col_name in ("kb_sentence", "kb_fixed"):
         try:
             col = client.get_collection(col_name)
         except (RuntimeError, ValueError) as exc:

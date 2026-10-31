@@ -1,32 +1,29 @@
-===========================================================================
-OLA DOMAIN SUPPORT AGENT — TASK 3: CHUNKING & CHROMADB INDEXING
-===========================================================================
+======================================================================
+OLA DOMAIN SUPPORT AGENT — DUAL RAG CHUNKING & INDEXING (TASK 3)
+======================================================================
+Loading Knowledge Base documents and indexing into ChromaDB...
 
-1. INDEXING KNOWLEDGE BASE DOCUMENTS (IDEMPOTENT UPSERT)...
-  • Collection 'kb_fixed'    : 28 chunks (300 chars, 60 overlap)
+--- 1. INDEXING SUMMARY ---
+  • Knowledge Base Docs   : 12 policy files
+  • Collection 'kb_fixed'    : 28 chunks (300 char window, 60 overlap)
   • Collection 'kb_sentence' : 50 chunks (regex sentence-based)
-  • Embedding Model          : sentence-transformers/all-MiniLM-L6-v2
-  • Distance Metric          : Cosine (hnsw:space = cosine)
+  • Embedding Model       : sentence-transformers/all-MiniLM-L6-v2 (384-dimensional dense vectors)
+  • Vector Space Metric   : Cosine (hnsw:space: cosine)
 
-2. SAMPLE QUERY RETRIEVAL:
-   Query: "What is the resolution SLA for a Sev-1 safety incident?"
-
---- Top-3 Results from 'kb_fixed' ---
-  [1] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_fixed_0 | Similarity: 0.6679
+--- 2. SAMPLE RETRIEVAL: 'kb_fixed' ---
+Query: "What is the resolution SLA for a Sev-1 safety incident?"
+  [1] Doc: sla_by_severity | Chunk: #0 | Cosine Similarity: 0.6679
       Text: "Ola enforces strict resolution Service Level Agreements based on ticket severity levels. Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and res"
-  [2] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_fixed_1 | Similarity: 0.4343
+  [2] Doc: sla_by_severity | Chunk: #1 | Cosine Similarity: 0.4343
       Text: "ues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours. Sev-4 low-priority items must receive an initial response within 12 hours and final closure within 48 hours."
-  [3] Doc ID: escalation_matrix | Chunk ID: escalation_matrix_fixed_0 | Similarity: 0.4245
-      Text: "Unresolved support tickets follow Ola's three-tier organizational escalation matrix. Frontline Tier-1 customer representatives own ticket resolution for the initial 2 hours following creation. If an issue breaches its milestone threshold or requires specialized approval, the ticket automatically esc"
 
---- Top-3 Results from 'kb_sentence' ---
-  [1] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_sent_1 | Similarity: 0.6299
+--- 3. SAMPLE RETRIEVAL: 'kb_sentence' ---
+Query: "What is the resolution SLA for a Sev-1 safety incident?"
+  [1] Doc: sla_by_severity | Chunk: #1 | Cosine Similarity: 0.6299
       Text: "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours."
-  [2] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_sent_2 | Similarity: 0.4799
+  [2] Doc: sla_by_severity | Chunk: #2 | Cosine Similarity: 0.4799
       Text: "Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours."
-  [3] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_sent_3 | Similarity: 0.4755
-      Text: "Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours."
 
-===========================================================================
-TASK 3 VERIFICATION COMPLETE: ALL CHUNKS INDEXED & RETRIEVED SUCCESSFULLY
-===========================================================================
+======================================================================
+TASK 3 ACCEPTANCE CRITERIA: BOTH COLLECTIONS POPULATED & RETRIEVING
+======================================================================

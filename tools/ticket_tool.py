@@ -56,16 +56,12 @@ def get_escalation_threshold() -> tuple[float, list[float]]:
 ESCALATION_THRESHOLD_TAU, _ALL_SCORES = get_escalation_threshold()
 ESCALATION_THRESHOLD: float = ESCALATION_THRESHOLD_TAU
 
-import contextvars
+from governance.least_autonomy import ToolAccessControl, CURRENT_CALLER_ROLE
 
 # Application layer least autonomy tool permissions registry
 TOOL_PERMISSIONS: dict[str, list[str]] = {
     "check_support_ticket_status": ["Lookup Agent", "Ticket Operations Specialist"],
 }
-
-CURRENT_CALLER_ROLE: contextvars.ContextVar[str] = contextvars.ContextVar(
-    "CURRENT_CALLER_ROLE", default="Lookup Agent"
-)
 
 
 def enforce_tool_role(tool_name: str, caller_role: str | None = None) -> str:
@@ -75,12 +71,7 @@ def enforce_tool_role(tool_name: str, caller_role: str | None = None) -> str:
         PermissionError: If caller_role is unauthorized for the requested tool.
     """
     effective_role = caller_role or CURRENT_CALLER_ROLE.get()
-    allowed_roles = TOOL_PERMISSIONS.get(tool_name, [])
-    if effective_role not in allowed_roles and not any(r.lower() == effective_role.lower() for r in allowed_roles):
-        raise PermissionError(
-            f"Least Autonomy Violation: Role '{effective_role}' is not authorized to call tool '{tool_name}'. "
-            f"Allowed roles: {allowed_roles}."
-        )
+    ToolAccessControl.verify_agent_tool_access(effective_role, tool_name)
     return effective_role
 
 
@@ -160,14 +151,17 @@ try:
     from crewai.tools import tool
 
     @tool("check_support_ticket_status")
-    def check_support_ticket_status_crew_tool(record_id: str) -> str:
+    def check_support_ticket_status_crew_tool(record_id: str, caller_role: str | None = None) -> str:
         """Looks up status, category, resolution time, and escalation risk of a ticket by record ID."""
-        res = check_support_ticket_status(record_id)
+        effective_role = caller_role or CURRENT_CALLER_ROLE.get()
+        ToolAccessControl.verify_agent_tool_access(effective_role, "check_support_ticket_status_crew_tool")
+        res = check_support_ticket_status(record_id, caller_role=effective_role)
         if "error" in res:
             return f"Ticket Lookup Error: {res['error']}"
         return (
             f"Ticket ID: {res['record_id']}\nStatus: {res['status']}\nCategory: {res['category']}\n"
-            f"Resolution Time: {res['resolution_time_hours']} hours\nEscalation Score: {res['escalation_score']}\n"
+            f"Resolution Time: {res['resolution_time_hours']} hours\nDays Since Created: {res.get('days_since_created', 0)}\n"
+            f"Escalated: {res.get('escalated', False)}\nEscalation Score: {res['escalation_score']}\n"
             f"Risk Level: {res['risk_level']}\nRecommend Escalation: {res['recommend_escalation']}"
         )
 except ImportError:

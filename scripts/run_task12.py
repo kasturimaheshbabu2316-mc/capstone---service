@@ -13,7 +13,10 @@ from api.logging_utils import LOG_FILE
 
 TRANSCRIPTS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "transcripts")
 os.makedirs(TRANSCRIPTS_DIR, exist_ok=True)
-TRANSCRIPT_FILE = os.path.join(TRANSCRIPTS_DIR, "task12_logging.txt")
+TRANSCRIPT_FILES = [
+    os.path.join(TRANSCRIPTS_DIR, "12_logging.txt"),
+    os.path.join(TRANSCRIPTS_DIR, "task12_logging.txt"),
+]
 
 
 def run():
@@ -46,9 +49,10 @@ def run():
     )
 
     print(text)
-    with open(TRANSCRIPT_FILE, "w", encoding="utf-8") as f:
-        f.write(text)
-    print(f"Transcript written to: {TRANSCRIPT_FILE}")
+    for tf in TRANSCRIPT_FILES:
+        with open(tf, "w", encoding="utf-8") as f:
+            f.write(text)
+        print(f"Transcript written to: {tf}")
 
 
 if __name__ == "__main__":

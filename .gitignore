@@ -1,3 +1,7 @@
+# Antigravity agent workflows & rules
+.agent/
+.agent
+
 # Virtual environments
 .venv
 .venv/
@@ -9,6 +13,7 @@ venv/
 __pycache__
 __pycache__/
 *.py[cod]
+*.pyc
 *$py.class
 *.egg-info/
 dist/
@@ -17,9 +22,11 @@ build/
 # Database & local vector stores
 chroma_store
 chroma_store/
+chroma_db
 chroma_db/
 .chroma/
 .chroma_db/
+.chroma_db
 *.db
 *.sqlite
 data/*.db
@@ -28,6 +35,9 @@ data/*.db
 logs
 logs/
 *.log
+
+# Transcripts temporary files
+transcripts/*.tmp
 
 # Testing & Coverage
 .pytest_cache/

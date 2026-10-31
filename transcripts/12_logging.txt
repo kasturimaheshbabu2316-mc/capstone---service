@@ -1,0 +1,937 @@
+================================================================================
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)
+=
+
+Audit Log Destination: logs/requests.jsonl
+Total Logged Entries : 2235
+
+--- SAMPLE AUDIT LOG ENTRIES ---
+{
+  "trace_id": "57fe1798-56ef-4324-b424-d9904f096e86",
+  "timestamp": "2026-10-31T14:13:25.454808+00:00",
+  "endpoint": "/ws/chat",
+  "session_id": "ws_2c27b956",
+  "masked_question": "What is the status of TKT-0001?",
+  "masked_query": "What is the status of TKT-0001?",
+  "route": "lookup",
+  "latency_ms": 375.83,
+  "status_code": 200,
+  "cache_hit": false,
+  "guardrail_flags": {
+    "input_pii_masked": false,
+    "phone_masked": false,
+    "policy_grounded": true
+  }
+}
+{
+  "trace_id": "26a55db6-3166-4ee3-9d37-f07f33d2125d",
+  "timestamp": "2026-10-31T14:13:25.863388+00:00",
+  "endpoint": "/ws/chat",
+  "session_id": "ws_4968bdfb",
+  "masked_question": "What is the status of TKT-0002?",
+  "masked_query": "What is the status of TKT-0002?",
+  "route": "lookup",
+  "latency_ms": 396.03,
+  "status_code": 200,
+  "cache_hit": false,
+  "guardrail_flags": {
+    "input_pii_masked": false,
+    "phone_masked": false,
+    "policy_grounded": true
+  }
+}
+{
+  "trace_id": "050e5157-e0c7-42f2-a5fc-a6e4f21e28df",
+  "timestamp": "2026-10-31T14:13:26.295235+00:00",
+  "endpoint": "/ask",
+  "session_id": "default_session",
+  "masked_question": "Customer phone [PHONE_MASKED] asking for ticket TKT-0001 status.",
+  "masked_query": "Customer phone [PHONE_MASKED] asking for ticket TKT-0001 status.",
+  "route": "lookup",
+  "latency_ms": 347.29,
+  "status_code": 200,
+  "cache_hit": false,
+  "guardrail_flags": {
+    "input_pii_masked": true,
+    "phone_masked": true,
+    "policy_grounded": true
+  }
+}
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+
+--- PRE-LOG SANITIZATION ASSERTION TEST ---
+Test Phone Sent   : +91 91234 56789
+Leakage Detected  : False
+Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)
+
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=
+TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED
+=

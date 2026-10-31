@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 from typing import Any, Dict, Tuple
 
-MAX_REQUEST_TOKENS: int = 2000
+MAX_REQUEST_TOKENS: int = int(os.environ.get("MAX_REQUEST_TOKENS", 2000))
 MAX_TOKEN_BUDGET: int = MAX_REQUEST_TOKENS
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -43,6 +43,9 @@ def check_budget_limit(
         )
         return False, tokens, err_msg
     return True, tokens, None
+
+
+check_payload_budget = check_budget_limit
 
 
 def run_governance_demonstration() -> Dict[str, Any]:

@@ -21,6 +21,14 @@ if (-not (Test-Path ".venv")) {
 
 $PyExe = if (Test-Path ".venv\Scripts\python.exe") { ".venv\Scripts\python.exe" } else { "python" }
 
+# Validate Python version: Python 3.11 or 3.12 (3.13+ not supported by this stack)
+$PyMajor = & $PyExe -c "import sys; print(sys.version_info.major)"
+$PyMinor = & $PyExe -c "import sys; print(sys.version_info.minor)"
+if ([int]$PyMajor -ne 3 -or [int]$PyMinor -lt 11 -or [int]$PyMinor -ge 13) {
+    Write-Host "[ERROR] Python 3.11 or 3.12 (3.13+ not supported by this stack). Detected Python $PyMajor.$PyMinor." -ForegroundColor Red
+    exit 1
+}
+
 # 2. Install requirements
 Write-Host "[2/5] Installing dependencies from requirements.txt..." -ForegroundColor Yellow
 & $PyExe -m pip install --upgrade pip --quiet

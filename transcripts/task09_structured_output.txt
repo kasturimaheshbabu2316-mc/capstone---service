@@ -80,19 +80,18 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED CREWRESPONSE VALIDATION (TASK 9)
 
 --- 2. VALIDATED POLICY INSTANCE (route='rag') ---
 {
-  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.",
   "route": "rag",
   "sources": [
     "sla_by_severity",
-    "vip_customer_policy",
-    "communication_channels"
+    "data_retention_policy"
   ],
   "ticket": null,
   "grounded": true,
   "escalation_recommended": false,
   "review_status": {
     "approved": true,
-    "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
+    "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.",
     "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
     "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
     "redactions_made": false,
@@ -109,15 +108,15 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED CREWRESPONSE VALIDATION (TASK 9)
   ],
   "ticket": {
     "record_id": "TKT-0002",
-    "category": "Product Defect",
     "status": "Escalated",
+    "category": "Product Defect",
     "resolution_time_hours": 15.8,
     "days_since_created": 18,
     "escalated": true,
     "escalation_score": 0.84,
-    "escalation_threshold": 0.44,
     "risk_level": "High Risk",
-    "recommend_escalation": true
+    "recommend_escalation": true,
+    "ticket_id": "TKT-0002"
   },
   "grounded": true,
   "escalation_recommended": true,
@@ -137,10 +136,10 @@ Validation Error Output      :
 2 validation errors for CrewResponse
 answer
   Field required [type=missing, input_value={'route': 'invalid_engine...ion_recommended': False}, input_type=dict]
-    For further information visit https://errors.pydantic.dev/2.13/v/missing
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
 route
   Input should be 'rag', 'lookup' or 'both' [type=literal_error, input_value='invalid_engine_route', input_type=str]
-    For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+    For further information visit https://errors.pydantic.dev/2.12/v/literal_error
 
 ================================================================================
 TASK 9 ACCEPTANCE CRITERIA: CREWRESPONSE ENFORCED & VALIDATED VIA model_validate

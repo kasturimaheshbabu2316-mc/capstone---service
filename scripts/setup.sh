@@ -23,6 +23,14 @@ else
     PY_EXE="python3"
 fi
 
+# Validate Python version: Python 3.11 or 3.12 (3.13+ not supported by this stack)
+PY_MAJOR=$("$PY_EXE" -c 'import sys; print(sys.version_info.major)')
+PY_MINOR=$("$PY_EXE" -c 'import sys; print(sys.version_info.minor)')
+if [ "$PY_MAJOR" -ne 3 ] || [ "$PY_MINOR" -lt 11 ] || [ "$PY_MINOR" -ge 13 ]; then
+    echo "[ERROR] Python 3.11 or 3.12 (3.13+ not supported by this stack). Detected Python $PY_MAJOR.$PY_MINOR." >&2
+    exit 1
+fi
+
 # 2. Install requirements
 echo "[2/5] Installing dependencies from requirements.txt..."
 "$PY_EXE" -m pip install --upgrade pip --quiet

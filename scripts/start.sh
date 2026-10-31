@@ -16,5 +16,5 @@ echo "===================================================================="
 
 echo "Launching FastAPI ASGI application..."
 exec uvicorn api.main:app \
-    --host 0.0.0.0 \
+    --host 127.0.0.1 \
     --port "$PORT"

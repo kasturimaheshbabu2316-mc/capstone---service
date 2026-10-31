@@ -56,11 +56,14 @@ def test_ask_policy_endpoint():
     assert body["route"] == "rag"
     assert "sources" in body
     assert len(body["sources"]) > 0
+    assert "source_titles" in body
+    assert isinstance(body["source_titles"], list)
     assert body["grounded"] is True
     assert "trace_id" in body
     assert "latency_ms" in body
     # Legacy data dict support
     assert body["data"]["grounded"] is True
+    assert "source_titles" in body["data"]
 
 
 def test_ask_ticket_endpoint():
@@ -93,11 +96,29 @@ def test_ask_guardrail_block_400():
 
 
 def test_ask_budget_cap_413():
-    """Returns 413 for an oversized payload exceeding token budget."""
-    huge_query = "Ola policy question " * 1000
+    """Returns 413 for an oversized payload exceeding token budget (>2000 tokens, <20000 chars)."""
+    # 600 words of 4 tokens each ~ 2400 tokens, but ~12000 chars (< 20000)
+    huge_query = "Ola cancellation refund compensation policy inquiry " * 250
     res = client.post("/ask", json={"question": huge_query})
     assert res.status_code == 413
     assert "detail" in res.json()
+    assert "budget" in res.json()["detail"].lower() or "token" in res.json()["detail"].lower()
+
+
+def test_ask_char_length_cap_422():
+    """Returns 422 for a query exceeding maximum character length of 20000 chars."""
+    over_limit_query = "A" * 20005
+    res = client.post("/ask", json={"question": over_limit_query})
+    assert res.status_code == 422
+    assert "detail" in res.json()
+
+
+def test_ask_readiness_503(monkeypatch):
+    """Returns 503 when service is warming up (KB or DB not ready)."""
+    monkeypatch.setattr(api.main.app.state, "kb_ready", False, raising=False)
+    res = client.post("/ask", json={"question": "What is the SLA?"})
+    assert res.status_code == 503
+    assert "warming up" in res.json().get("detail", "").lower()
 
 
 def test_ask_validation_error_422():
@@ -122,40 +143,53 @@ def test_ask_safe_500_no_traceback():
         assert "RuntimeError" not in res.text
 
 
-def test_add_document_endpoint(monkeypatch, tmp_path):
+def test_add_document_endpoint(isolated_kb_and_chroma, monkeypatch):
     """POST /add-document chunks, embeds, and upserts into isolated temporary collection."""
-    import api.main
-    from rag.index import get_chroma_client
+    temp_col_name = isolated_kb_and_chroma["collection"]
+    temp_kb_dir = isolated_kb_and_chroma["kb_dir"]
 
     monkeypatch.setenv("ADMIN_TOKEN", "test-admin-secret-token")
-    monkeypatch.setattr(api.main, "PROJECT_ROOT", tmp_path)
-    import uuid
-    temp_col_name = f"test_temp_{uuid.uuid4().hex[:8]}"
-    monkeypatch.setattr(api.main.app.state, "winning_collection", temp_col_name, raising=False)
 
     test_doc = "test_temp_policy.md"
     test_text = "Ola ensures high reliability across all service categories. Driver partners undergo comprehensive training."
 
-    try:
-        res = client.post(
-            "/add-document",
-            json={"title": test_doc, "text": test_text},
-            headers={"X-Admin-Token": "test-admin-secret-token"},
-        )
-        assert res.status_code == 200
-        json_data = res.json()
-        assert json_data["status"] == "indexed"
-        assert json_data["doc_id"] == test_doc
-        assert json_data["collection"] == temp_col_name
-        assert json_data["chunks_indexed"] >= 1
-        assert (tmp_path / "kb" / test_doc).exists()
-        assert not (Path("kb") / test_doc).exists()
-    finally:
-        try:
-            client_chroma = get_chroma_client()
-            client_chroma.delete_collection(temp_col_name)
-        except Exception:
-            pass
+    res = client.post(
+        "/add-document",
+        json={"title": test_doc, "text": test_text},
+        headers={"X-Admin-Token": "test-admin-secret-token"},
+    )
+    assert res.status_code == 200
+    json_data = res.json()
+    assert json_data["status"] == "indexed"
+    assert json_data["doc_id"] == "test_temp_policy"
+    assert json_data["title"] == "test_temp_policy"
+    assert json_data["collection"] == temp_col_name
+    assert json_data["chunks_indexed"] >= 1
+    assert (temp_kb_dir / "test_temp_policy.md").exists()
+    assert not (Path("kb") / "test_temp_policy.md").exists()
+
+
+def test_add_document_invalid_title_422(isolated_kb_and_chroma, monkeypatch):
+    """POST /add-document rejects titles with illegal characters or spaces with HTTP 422."""
+    monkeypatch.setenv("ADMIN_TOKEN", "test-admin-secret-token")
+    res = client.post(
+        "/add-document",
+        json={"title": "invalid title with spaces!", "text": "Some text content for indexing."},
+        headers={"X-Admin-Token": "test-admin-secret-token"},
+    )
+    assert res.status_code == 422
+    assert "Invalid document title" in res.json().get("detail", "")
+
+
+def test_add_document_path_traversal_422(isolated_kb_and_chroma, monkeypatch):
+    """POST /add-document rejects path traversal attempts with HTTP 422."""
+    monkeypatch.setenv("ADMIN_TOKEN", "test-admin-secret-token")
+    res = client.post(
+        "/add-document",
+        json={"title": "../evil_doc", "text": "Malicious payload attempt."},
+        headers={"X-Admin-Token": "test-admin-secret-token"},
+    )
+    assert res.status_code == 422
 
 
 def test_admin_endpoint_requires_token_401(monkeypatch):

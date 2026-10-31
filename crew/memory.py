@@ -4,24 +4,48 @@ Track: Business Operations / Customer Support (Ola)
 Uses InMemoryChatMessageHistory + RunnableWithMessageHistory with a session_id store.
 NOTE: LangChainDeprecationWarning is expected and NOT silenced per system specification.
 Injects conversation history into tasks for pronoun resolution (e.g., 'what about its SLA?').
+Enforces single interaction recording, per-session message cap, and LRU session eviction.
 """
 
+from __future__ import annotations
+
 import re
+from collections import OrderedDict
 from typing import Any
+
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.messages import HumanMessage, AIMessage, BaseMessage
 from langchain_core.runnables import RunnableLambda
 from langchain_core.runnables.history import RunnableWithMessageHistory
 
-# Session store mapping session_id -> InMemoryChatMessageHistory
-SESSION_STORE: dict[str, InMemoryChatMessageHistory] = {}
+# Configuration constants
+MAX_MESSAGES_PER_SESSION: int = 20
+MAX_SESSIONS: int = 100
+
+# LRU Session store mapping session_id -> InMemoryChatMessageHistory
+SESSION_STORE: OrderedDict[str, InMemoryChatMessageHistory] = OrderedDict()
 
 
 def get_session_history(session_id: str) -> InMemoryChatMessageHistory:
-    """Retrieves or creates an InMemoryChatMessageHistory instance for the given session."""
-    if session_id not in SESSION_STORE:
-        SESSION_STORE[session_id] = InMemoryChatMessageHistory()
-    return SESSION_STORE[session_id]
+    """Retrieves or creates an InMemoryChatMessageHistory instance with LRU eviction."""
+    if session_id in SESSION_STORE:
+        SESSION_STORE.move_to_end(session_id)
+        return SESSION_STORE[session_id]
+
+    # Evict least recently used session if capacity reached
+    if len(SESSION_STORE) >= MAX_SESSIONS:
+        SESSION_STORE.popitem(last=False)
+
+    hist = InMemoryChatMessageHistory()
+    SESSION_STORE[session_id] = hist
+    SESSION_STORE.move_to_end(session_id)
+    return hist
+
+
+def get_runnable_history(session_id: str) -> InMemoryChatMessageHistory:
+    """Provides a snapshot copy of history to RunnableWithMessageHistory to prevent duplicate writes."""
+    real_hist = get_session_history(session_id)
+    return InMemoryChatMessageHistory(messages=list(real_hist.messages))
 
 
 def extract_last_entities_from_history(history: list[BaseMessage]) -> tuple[str | None, str | None]:
@@ -106,7 +130,7 @@ def resolve_pronouns_with_history(query: str, history: list[BaseMessage]) -> tup
 
 
 class SessionMemoryManager:
-    """Object manager encapsulating session memory state and pronoun resolution."""
+    """Object manager encapsulating session memory state, caps, and pronoun resolution."""
 
     def __init__(self):
         self._store = SESSION_STORE
@@ -115,9 +139,12 @@ class SessionMemoryManager:
         return get_session_history(session_id)
 
     def record_interaction(self, session_id: str, user_query: str, ai_response: str) -> None:
+        """Records an interaction exactly once, enforcing the per-session message cap."""
         hist = self.get_history(session_id)
         hist.add_message(HumanMessage(content=user_query))
         hist.add_message(AIMessage(content=ai_response))
+        if len(hist.messages) > MAX_MESSAGES_PER_SESSION:
+            hist.messages = hist.messages[-MAX_MESSAGES_PER_SESSION:]
 
     def get_last_ticket_id(self, session_id: str) -> str | None:
         hist = self.get_history(session_id)
@@ -148,10 +175,10 @@ def _raw_runnable_worker(inputs: dict[str, Any]) -> str:
     return resolved_query
 
 
-# Core RunnableWithMessageHistory wrapper
+# Core RunnableWithMessageHistory wrapper with snapshot isolation to prevent duplicate writes
 crew_runnable_with_history = RunnableWithMessageHistory(
     RunnableLambda(_raw_runnable_worker),
-    get_session_history=get_session_history,
+    get_session_history=get_runnable_history,
     input_messages_key="input",
     history_messages_key="history",
 )
@@ -160,6 +187,8 @@ __all__ = [
     "InMemoryChatMessageHistory",
     "RunnableWithMessageHistory",
     "SESSION_STORE",
+    "MAX_MESSAGES_PER_SESSION",
+    "MAX_SESSIONS",
     "get_session_history",
     "resolve_pronouns_with_history",
     "session_memory",

@@ -84,3 +84,28 @@ try:
 except ImportError:
     pass
 
+
+import pytest
+import uuid
+from pathlib import Path
+
+
+@pytest.fixture
+def isolated_kb_and_chroma(tmp_path, monkeypatch):
+    """Isolates KB_DIR and winning_collection to a temporary directory and collection."""
+    temp_kb = tmp_path / "temp_kb"
+    temp_kb.mkdir(parents=True, exist_ok=True)
+    temp_col = f"test_temp_{uuid.uuid4().hex[:8]}"
+
+    monkeypatch.setenv("KB_DIR", str(temp_kb))
+    monkeypatch.setenv("WINNING_COLLECTION", temp_col)
+
+    yield {"kb_dir": temp_kb, "collection": temp_col}
+
+    try:
+        from rag.index import get_chroma_client
+        chroma = get_chroma_client()
+        chroma.delete_collection(temp_col)
+    except Exception:
+        pass
+
