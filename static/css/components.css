@@ -1,19 +1,64 @@
 /* ==============================================================================
-   Ola Support Intelligence — Components Stylesheet ("The Dispatch Desk")
-   Clean, road-grounded aesthetics. Zero gradients, zero emoji, zero purple orbs.
+   Ola Support Intelligence — Components Stylesheet
+   Enterprise Glassmorphism UI (3-Zone Spatial Architecture)
    ============================================================================== */
 
 /* ------------------------------------------------------------------------------
-   1. Site Header & Operational Status
+   0. Global Glassmorphism Surface Primitives
+   ------------------------------------------------------------------------------ */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card-interactive {
+  background: var(--card-interactive-bg);
+  border: 1px solid var(--card-interactive-border);
+  border-radius: var(--radius-interactive);
+  padding: 14px 16px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card-interactive:hover {
+  background: var(--card-interactive-hover-bg);
+  border-color: var(--card-interactive-hover-border);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 242, 254, 0.16);
+}
+
+.glass-card-interactive:focus-visible {
+  outline: 2px solid var(--color-highlight);
+  box-shadow: var(--focus-ring);
+}
+
+.glass-card-interactive:active {
+  transform: scale(0.98);
+}
+
+/* ------------------------------------------------------------------------------
+   Zone 1: Sticky Glass Top Navbar (height: 64px)
    ------------------------------------------------------------------------------ */
 .site-header {
   height: var(--header-height);
-  border-bottom: 1px solid var(--color-border);
-  background-color: var(--color-page);
+  border-bottom: 1px solid var(--glass-border);
+  background: var(--glass-nav-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--space-md);
+  padding: 0 var(--space-lg);
   position: sticky;
   top: 0;
   z-index: 40;
@@ -23,23 +68,73 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  min-width: 220px;
 }
 
 .brand-mark {
-  width: 24px;
-  height: 24px;
-  fill: var(--color-ink);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-highlight);
+}
+
+.brand-text-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .brand-title {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 800;
-  font-stretch: 120%;
   letter-spacing: -0.02em;
   color: var(--color-ink);
   white-space: nowrap;
 }
 
+.brand-subtitle {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.02em;
+}
+
+/* Center: Segmented Glass Pill Switcher */
+.nav-switcher {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 2px;
+}
+
+.nav-pill-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-ink-secondary);
+  border: 1px solid transparent;
+  min-height: 32px;
+  transition: all 150ms ease;
+}
+
+.nav-pill-btn:hover {
+  color: var(--color-ink);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-pill-btn.active {
+  background: var(--color-highlight-bg);
+  border-color: var(--color-highlight-border);
+  color: var(--color-highlight);
+  box-shadow: 0 2px 8px rgba(0, 242, 254, 0.15);
+}
+
+/* Right: Header Controls (Status, Theme Toggle, Settings) */
 .header-controls {
   display: flex;
   align-items: center;
@@ -49,13 +144,13 @@
 .status-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
+  gap: 8px;
+  padding: 6px 12px;
   border-radius: var(--radius-pill);
   font-size: 0.8125rem;
   font-weight: 600;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface);
+  border: 1px solid var(--glass-border);
+  background: var(--card-interactive-bg);
   color: var(--color-ink);
 }
 
@@ -68,6 +163,7 @@
 
 .status-dot.online {
   background-color: var(--color-verified);
+  box-shadow: 0 0 8px var(--color-verified);
 }
 
 .status-dot.waking {
@@ -84,32 +180,51 @@
   50% { opacity: 0.4; transform: scale(0.85); }
 }
 
+.btn-theme-toggle {
+  padding: 8px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--glass-border);
+  background: var(--card-interactive-bg);
+  color: var(--color-ink-secondary);
+  transition: all 150ms ease;
+  min-height: 36px;
+  min-width: 36px;
+}
+
+.btn-theme-toggle:hover {
+  color: var(--color-ink);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-highlight-border);
+}
+
 .btn-settings {
   padding: 6px 14px;
   border-radius: var(--radius-control);
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface);
+  border: 1px solid var(--glass-border);
+  background: var(--card-interactive-bg);
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-ink);
-  gap: 6px;
-  transition: background-color 150ms ease, border-color 150ms ease;
+  gap: 8px;
+  min-height: 36px;
+  transition: all 150ms ease;
 }
 
 .btn-settings:hover {
-  background-color: var(--color-surface-sunken);
-  border-color: var(--color-ink);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-highlight-border);
+  color: var(--color-highlight);
 }
 
 /* ------------------------------------------------------------------------------
-   2. Main Layout & Conversation Column
+   Zone 2: Main Center Stage (Welcome Hero + Chat Stream + Bottom Dock)
    ------------------------------------------------------------------------------ */
 .app-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-md) var(--space-md) calc(var(--composer-min-height) + var(--space-xl));
+  padding: var(--space-lg) var(--space-md) calc(var(--composer-min-height) + var(--space-xxl));
   width: 100%;
 }
 
@@ -121,73 +236,143 @@
   gap: var(--space-md);
 }
 
-/* ------------------------------------------------------------------------------
-   3. Welcome Box & Disappearing Suggestions
-   ------------------------------------------------------------------------------ */
-.welcome-box {
-  margin: var(--space-lg) 0;
-  padding: var(--space-md) 0;
-  border-bottom: 1px solid var(--color-border-subtle);
+/* Default Welcome Hero Card */
+.welcome-hero-card {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-hero-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-highlight);
+  background: var(--color-highlight-bg);
+  border: 1px solid var(--color-highlight-border);
 }
 
 .welcome-title {
-  font-size: 1.5rem;
+  font-size: 1.875rem;
   font-weight: 800;
-  font-stretch: 115%;
-  margin-bottom: var(--space-xs);
+  letter-spacing: -0.025em;
   color: var(--color-ink);
+  line-height: 1.2;
 }
 
 .welcome-sub {
   color: var(--color-ink-secondary);
   font-size: 0.9375rem;
-  margin-bottom: var(--space-md);
+  max-width: 52ch;
+  line-height: 1.5;
 }
 
-.suggestion-chips {
+/* 3 Core Capability Badges */
+.capability-badges-row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-xs);
+  justify-content: center;
+  gap: var(--space-sm);
+  margin: var(--space-xs) 0;
 }
 
-.suggestion-chip {
-  min-height: 44px;
-  padding: 8px 16px;
-  border-radius: var(--radius-control);
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface-sunken);
-  color: var(--color-ink);
-  font-size: 14px;
-  font-weight: 500;
+.cap-badge {
   display: inline-flex;
   align-items: center;
-  transition: border-color 150ms ease, background-color 150ms ease, transform 80ms ease;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  color: var(--color-ink-secondary);
 }
 
-.suggestion-chip:hover {
-  border-color: var(--color-ink);
-  background-color: var(--color-surface);
+.cap-badge svg {
+  color: var(--color-highlight);
 }
 
-.suggestion-chip:focus-visible {
-  outline: 2px solid var(--color-ink);
-  box-shadow: var(--focus-ring);
+/* 2x3 Grid of Interactive Quick-Action Glass Cards */
+.quick-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  width: 100%;
+  margin-top: var(--space-xs);
 }
 
-.suggestion-chip:active {
-  transform: scale(0.98);
+@media (max-width: 680px) {
+  .quick-action-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-highlight);
+}
+
+.card-desc {
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted);
+  line-height: 1.4;
 }
 
 /* ------------------------------------------------------------------------------
-   4. Chat Messages: User Chip & Rejected State
+   Conversation Stream (Messages)
    ------------------------------------------------------------------------------ */
-.chat-turn {
+.chat-messages-container {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: var(--space-lg);
   width: 100%;
 }
 
+.chat-turn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+/* User Message: Frosted Cyan Tint, Right-Aligned */
 .msg-user-wrapper {
   display: flex;
   justify-content: flex-end;
@@ -195,25 +380,30 @@
 }
 
 .msg-user {
-  max-width: min(85%, var(--measure-chip));
-  background-color: var(--color-chip-user);
+  max-width: min(85%, 54ch);
+  background: var(--color-chip-user);
+  border: 1px solid var(--color-chip-user-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: var(--color-chip-user-ink);
-  padding: 10px 16px;
-  border-radius: var(--radius-control);
+  padding: 12px 18px;
+  border-radius: 16px 16px 4px 16px;
   font-size: 0.9375rem;
-  line-height: 1.45;
+  line-height: 1.5;
   word-break: break-word;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .msg-user.rejected {
-  border: 1px solid var(--color-blocked);
+  border-color: var(--color-blocked);
+  background: var(--color-blocked-bg);
 }
 
 .btn-expand-msg {
   display: inline-block;
   margin-top: 6px;
   font-size: 0.8125rem;
-  color: var(--color-accent);
+  color: var(--color-highlight);
   text-decoration: underline;
   cursor: pointer;
   background: none;
@@ -225,9 +415,9 @@
 
 .full-prompt-container {
   margin-top: 8px;
-  padding: 8px 10px;
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 6px;
   font-family: monospace;
   font-size: 0.8125rem;
   max-height: 200px;
@@ -236,16 +426,21 @@
 }
 
 /* ------------------------------------------------------------------------------
-   5. Policy Slip (Paper Surface with Perforated Edge)
+   Assistant Response: Policy Resolution Slip (Paper-White / High Contrast Serif)
    ------------------------------------------------------------------------------ */
+.policy-slip-container {
+  width: 100%;
+}
+
 .policy-slip {
-  background-color: var(--color-slip-bg, #FFFFFF);
-  color: var(--color-slip-ink, #1B2230);
-  border: 1px solid var(--color-slip-border, #D1D6CC);
+  background-color: var(--color-slip-bg);
+  color: var(--color-slip-ink);
+  border: 1px solid var(--color-slip-border);
   border-radius: var(--radius-slip) var(--radius-slip) 0 0;
-  padding: var(--space-md) var(--space-md) var(--space-xs);
+  padding: var(--space-lg) var(--space-lg) var(--space-sm);
   position: relative;
   width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20);
 }
 
 .slip-header {
@@ -253,76 +448,108 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: var(--space-xs);
-  margin-bottom: var(--space-sm);
-  border-bottom: 1px dashed var(--color-slip-border, #D1D6CC);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px dashed var(--color-slip-border);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--color-slip-muted, #586069);
+  letter-spacing: 0.05em;
+  color: var(--color-slip-muted);
 }
 
 .slip-content {
   font-family: var(--font-serif);
   font-size: 17px;
-  line-height: 1.6;
+  line-height: 1.65;
   max-width: var(--measure-prose);
-  color: var(--color-slip-ink, #1B2230);
+  color: var(--color-slip-ink);
 }
 
+/* Structured Metadata Chips Row */
 .slip-meta-line {
-  margin-top: var(--space-sm);
-  padding-top: var(--space-xs);
-  border-top: 1px solid var(--color-slip-border, #D1D6CC);
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-slip-border);
   font-family: var(--font-sans);
   font-size: 0.8125rem;
-  color: var(--color-slip-muted, #586069);
+  color: var(--color-slip-muted);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   align-items: center;
 }
 
-.verified-mark {
-  color: var(--color-verified);
+.chip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
   font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+  border: 1px solid var(--color-slip-border);
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--color-slip-ink);
 }
 
-.reviewer-mark {
-  color: var(--color-ink-secondary);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.chip-badge.verified-mark {
+  background: var(--color-verified-bg);
+  border-color: var(--color-verified-border);
+  color: var(--color-verified);
+  font-weight: 700;
 }
 
-/* Perforated Edge */
+.chip-badge.reviewer-mark {
+  background: rgba(15, 23, 42, 0.05);
+  border-color: var(--color-slip-border);
+  color: var(--color-slip-ink);
+}
+
+.chip-badge.chip-route {
+  background: var(--color-highlight-bg);
+  border-color: var(--color-highlight-border);
+  color: #0369A1;
+  font-weight: 600;
+}
+
+.chip-badge.chip-ticket {
+  background: rgba(244, 194, 13, 0.12);
+  border-color: rgba(244, 194, 13, 0.35);
+  color: #854D0E;
+  font-weight: 700;
+}
+
 .perforated-edge {
   height: 10px;
   width: 100%;
-  background: radial-gradient(circle at 8px -3px, transparent 5px, var(--color-slip-bg, #FFFFFF) 6px) repeat-x;
+  background: radial-gradient(circle at 8px -3px, transparent 5px, var(--color-slip-bg) 6px) repeat-x;
   background-size: 16px 10px;
-  border-bottom: 1px dashed var(--color-slip-border, #D1D6CC);
+  border-bottom: 1px dashed var(--color-slip-border);
   margin-bottom: var(--space-sm);
 }
 
 /* ------------------------------------------------------------------------------
-   6. Ticket Stub (The Memorable Printed Element)
+   Specialized Component: Glass Ticket Stub Card
    ------------------------------------------------------------------------------ */
-.ticket-stub {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-slip) var(--radius-slip) 0 0;
-  padding: var(--space-md);
-  position: relative;
+.ticket-stub-container {
   width: 100%;
-  animation: ticketPrint 450ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes ticketPrint {
+.ticket-stub {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  padding: var(--space-lg);
+  position: relative;
+  width: 100%;
+  box-shadow: var(--glass-shadow);
+  animation: ticketSlideIn 350ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes ticketSlideIn {
   from {
-    transform: translateY(-24px);
+    transform: translateY(-16px);
     opacity: 0;
   }
   to {
@@ -335,8 +562,8 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding-bottom: var(--space-xs);
-  border-bottom: 2px solid var(--color-ink);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--glass-border);
   margin-bottom: var(--space-md);
 }
 
@@ -344,6 +571,7 @@
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.01em;
+  color: var(--color-highlight);
 }
 
 .stub-category {
@@ -352,15 +580,15 @@
   color: var(--color-ink-secondary);
 }
 
-/* Status Progression Track */
+/* 5-Step Horizontal Status Progression Track */
 .status-track {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: var(--space-md) 0 var(--space-lg);
-  padding: var(--space-xs) 0;
-  border-top: 1px dashed var(--color-border);
-  border-bottom: 1px dashed var(--color-border);
+  padding: var(--space-sm) 0;
+  border-top: 1px dashed var(--glass-border);
+  border-bottom: 1px dashed var(--glass-border);
   overflow-x: auto;
 }
 
@@ -368,19 +596,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   position: relative;
   flex: 1;
-  min-width: 64px;
+  min-width: 68px;
   text-align: center;
 }
 
 .step-marker {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   border: 2px solid var(--color-ink-muted);
   background-color: var(--color-surface);
+  transition: all 200ms ease;
 }
 
 .step-name {
@@ -392,8 +621,8 @@
 
 .track-step.lit .step-marker {
   background-color: var(--color-accent);
-  border-color: var(--color-ink);
-  box-shadow: 0 0 0 3px var(--color-accent-subtle);
+  border-color: #FFFFFF;
+  box-shadow: 0 0 12px var(--color-accent);
 }
 
 .track-step.lit .step-name {
@@ -402,8 +631,9 @@
 }
 
 .track-step.passed .step-marker {
-  background-color: var(--color-ink);
-  border-color: var(--color-ink);
+  background-color: var(--color-verified);
+  border-color: var(--color-verified);
+  box-shadow: 0 0 8px var(--color-verified);
 }
 
 .track-step.passed .step-name {
@@ -419,9 +649,10 @@
 }
 
 .metric-card {
-  padding: 8px 10px;
-  background-color: var(--color-surface-sunken);
-  border-radius: var(--radius-slip);
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-interactive);
 }
 
 .metric-label {
@@ -436,12 +667,13 @@
   color: var(--color-ink);
 }
 
-/* Taxi Meter Segmented Escalation Gauge */
+/* Escalation Risk Progress Bar & Gauge */
 .meter-box {
   margin: var(--space-md) 0 var(--space-xs);
-  padding: 10px 12px;
-  background-color: var(--color-surface-sunken);
-  border-radius: var(--radius-slip);
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-interactive);
 }
 
 .meter-header {
@@ -450,7 +682,7 @@
   align-items: center;
   font-size: 0.75rem;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .meter-gauge {
@@ -464,12 +696,12 @@
 
 .gauge-block {
   flex: 1;
-  background-color: var(--color-border);
-  border-radius: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
 }
 
 .gauge-block.filled {
-  background-color: var(--color-ink);
+  background-color: var(--color-highlight);
 }
 
 .gauge-block.alert {
@@ -483,18 +715,19 @@
   width: 2px;
   background-color: var(--color-accent);
   z-index: 2;
+  box-shadow: 0 0 6px var(--color-accent);
 }
 
 .meter-threshold-label {
   font-size: 0.6875rem;
   color: var(--color-ink-muted);
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .recommendation-banner {
   margin-top: var(--space-sm);
-  padding: 8px 12px;
-  border-radius: var(--radius-slip);
+  padding: 10px 14px;
+  border-radius: var(--radius-control);
   font-size: 0.875rem;
   font-weight: 600;
   display: flex;
@@ -505,24 +738,34 @@
 .recommendation-banner.escalate {
   background-color: var(--color-blocked-bg);
   color: var(--color-blocked);
-  border: 1px solid var(--color-blocked);
+  border: 1px solid var(--color-blocked-border);
 }
 
 .recommendation-banner.standard {
   background-color: var(--color-verified-bg);
   color: var(--color-verified);
-  border: 1px solid var(--color-verified);
+  border: 1px solid var(--color-verified-border);
 }
 
 /* ------------------------------------------------------------------------------
-   7. Error & Guardrail Alert Slips
+   Guardrail Alert Card (HTTP 400 / 413 Red Glass Card)
    ------------------------------------------------------------------------------ */
 .alert-slip {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-blocked);
-  border-radius: var(--radius-slip);
-  padding: var(--space-md);
+  background: var(--color-blocked-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-blocked-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-md) var(--space-lg);
   color: var(--color-ink);
+  box-shadow: 0 8px 32px rgba(248, 113, 113, 0.15);
+}
+
+.alert-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
 }
 
 .alert-title {
@@ -532,7 +775,16 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 4px;
+}
+
+.alert-code-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(248, 113, 113, 0.20);
+  border: 1px solid var(--color-blocked-border);
+  color: var(--color-blocked);
 }
 
 .alert-message {
@@ -542,7 +794,7 @@
 }
 
 /* ------------------------------------------------------------------------------
-   8. Waiting State Indicator
+   Waiting State Indicator
    ------------------------------------------------------------------------------ */
 .msg-waiting {
   padding: var(--space-md);
@@ -550,14 +802,14 @@
   color: var(--color-ink-secondary);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .waiting-spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--color-border);
-  border-top-color: var(--color-ink);
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--glass-border);
+  border-top-color: var(--color-highlight);
   border-radius: 50%;
   animation: spin 700ms linear infinite;
 }
@@ -567,26 +819,22 @@
 }
 
 /* ------------------------------------------------------------------------------
-   9. Composer Dock & Live Token Gauge
+   Floating Glass Composer Dock (Pinned Bottom, max-width: 48rem)
    ------------------------------------------------------------------------------ */
 .composer-dock {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--color-page);
-  border-top: 1px solid var(--color-border);
+  background: var(--glass-composer-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-top: 1px solid var(--glass-border);
   padding: var(--space-sm) var(--space-md);
   display: flex;
   justify-content: center;
   z-index: 30;
-}
-
-@supports (backdrop-filter: blur(12px)) {
-  .composer-dock {
-    background-color: var(--glass-bg);
-    backdrop-filter: blur(12px);
-  }
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.25);
 }
 
 .composer-form {
@@ -601,29 +849,28 @@
   display: flex;
   align-items: flex-end;
   gap: var(--space-xs);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-control);
-  padding: 6px 8px 6px 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: border-color 150ms ease;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-interactive);
+  padding: 6px 8px 6px 14px;
+  transition: all 150ms ease;
 }
 
 .composer-row:focus-within {
-  border-color: var(--color-ink);
-  box-shadow: var(--focus-ring);
+  border-color: var(--color-highlight-border);
+  box-shadow: 0 0 0 2px var(--color-highlight-bg);
 }
 
 .composer-textarea {
   flex: 1;
   resize: none;
-  min-height: 36px;
+  min-height: 38px;
   max-height: 160px;
   font-size: 0.9375rem;
   line-height: 1.45;
   color: var(--color-ink);
   background: transparent;
-  padding: 4px 0;
+  padding: 6px 0;
 }
 
 .composer-textarea::placeholder {
@@ -636,8 +883,8 @@
   font-size: 14px;
   font-weight: 700;
   gap: 6px;
-  min-height: 44px;
-  transition: background-color 150ms ease, opacity 150ms ease;
+  min-height: 40px;
+  transition: all 150ms ease;
 }
 
 .btn-send:not(:disabled) {
@@ -645,13 +892,14 @@
   color: #1B2230;
   cursor: pointer;
   opacity: 1;
+  box-shadow: 0 2px 12px rgba(244, 194, 13, 0.25);
 }
 
 .btn-send:disabled {
   background-color: transparent;
   color: var(--color-ink-muted);
-  border: 1px solid var(--color-border);
-  opacity: 0.45;
+  border: 1px solid var(--glass-border);
+  opacity: 0.40;
   cursor: not-allowed;
 }
 
@@ -662,23 +910,23 @@
   justify-content: space-between;
   font-size: 13px;
   color: var(--color-ink-muted);
-  padding: 0 4px;
+  padding: 0 6px;
 }
 
 .token-track {
   flex: 1;
   max-width: 180px;
   height: 4px;
-  background-color: var(--color-border);
+  background-color: var(--glass-border);
   border-radius: 2px;
-  margin: 0 8px;
+  margin: 0 10px;
   overflow: hidden;
 }
 
 .token-progress {
   height: 100%;
   width: 0%;
-  background-color: var(--color-ink);
+  background-color: var(--color-highlight);
   transition: width 100ms ease, background-color 100ms ease;
 }
 
@@ -696,12 +944,14 @@
 }
 
 /* ------------------------------------------------------------------------------
-   10. Settings Sheet (Focus-Trapped Drawer / Bottom Sheet)
+   Zone 3: Collapsible Glass Settings Drawer / Sidebar
    ------------------------------------------------------------------------------ */
 .settings-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 50;
   opacity: 0;
   pointer-events: none;
@@ -719,29 +969,23 @@
   right: 0;
   bottom: 0;
   width: 100%;
-  max-width: 440px;
-  background-color: var(--color-page);
-  border-left: 1px solid var(--color-border);
-  box-shadow: var(--glass-shadow);
+  max-width: 460px;
+  background: var(--glass-drawer-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-left: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-lg);
   z-index: 60;
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@supports (backdrop-filter: blur(16px)) {
-  .settings-sheet {
-    background-color: var(--glass-bg);
-    backdrop-filter: blur(16px);
-  }
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .settings-sheet.open {
   transform: translateX(0);
 }
 
-/* Mobile bottom sheet behavior */
 @media (max-width: 640px) {
   .settings-sheet {
     top: auto;
@@ -749,10 +993,10 @@
     right: 0;
     bottom: 0;
     max-width: 100%;
-    max-height: 88vh;
+    max-height: 90vh;
     border-left: none;
-    border-top: 1px solid var(--color-border);
-    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    border-top: 1px solid var(--glass-border);
+    border-radius: var(--radius-drawer) var(--radius-drawer) 0 0;
     transform: translateY(100%);
   }
 
@@ -762,8 +1006,8 @@
 }
 
 .sheet-header {
-  padding: var(--space-md);
-  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--glass-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -772,6 +1016,7 @@
 .sheet-title {
   font-size: 1.125rem;
   font-weight: 700;
+  color: var(--color-ink);
 }
 
 .btn-close-sheet {
@@ -782,18 +1027,18 @@
 
 .btn-close-sheet:hover {
   color: var(--color-ink);
-  background-color: var(--color-surface-sunken);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* Sheet Tabs: Horizontally scrollable with edge fade */
+/* Horizontally Scrollable Drawer Tabs */
 .sheet-tabs {
   display: flex;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--glass-border);
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-  background-color: var(--color-surface);
+  background: rgba(255, 255, 255, 0.02);
   mask-image: linear-gradient(to right, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
   padding: 0 4px;
@@ -804,14 +1049,14 @@
 }
 
 .tab-btn {
-  padding: 10px 16px;
+  padding: 10px 14px;
   font-size: 14px;
   font-weight: 600;
   color: var(--color-ink-secondary);
   border-bottom: 2px solid transparent;
   white-space: nowrap;
   min-height: 44px;
-  transition: background-color 120ms ease, color 120ms ease;
+  transition: all 120ms ease;
 }
 
 .tab-btn:hover {
@@ -819,16 +1064,15 @@
 }
 
 .tab-btn.active {
-  color: #1B2230;
-  background-color: var(--color-accent);
-  border-bottom-color: var(--color-accent);
-  border-radius: var(--radius-slip) var(--radius-slip) 0 0;
+  color: var(--color-highlight);
+  border-bottom-color: var(--color-highlight);
+  background: var(--color-highlight-bg);
 }
 
 .sheet-body {
   flex: 1;
   overflow-y: auto;
-  padding: var(--space-md);
+  padding: var(--space-lg);
 }
 
 .tab-pane {
@@ -841,7 +1085,7 @@
   display: flex;
 }
 
-/* Quick Actions List in Settings */
+/* Action Rows & Cards Inside Drawer */
 .action-list {
   display: flex;
   flex-direction: column;
@@ -852,25 +1096,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-control);
   text-align: left;
   font-size: 0.875rem;
   font-weight: 500;
+  color: var(--color-ink);
+  transition: all 120ms ease;
 }
 
 .btn-action-row:hover:not(:disabled) {
-  border-color: var(--color-ink);
-  background-color: var(--color-surface-sunken);
+  border-color: var(--color-highlight-border);
+  background: var(--color-highlight-bg);
+}
+
+.action-sub {
+  font-size: 0.75rem;
+  color: var(--color-ink-muted);
 }
 
 /* Ticket Directory Table */
 .ticket-table-container {
   overflow-x: auto;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-slip);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-interactive);
+  background: rgba(0, 0, 0, 0.20);
 }
 
 .ticket-table {
@@ -881,66 +1133,64 @@
 }
 
 .ticket-table th {
-  background-color: var(--color-surface-sunken);
+  background: rgba(255, 255, 255, 0.05);
   padding: 8px 10px;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--glass-border);
   font-weight: 700;
+  color: var(--color-ink-secondary);
 }
 
 .ticket-table td {
   padding: 8px 10px;
-  border-bottom: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--glass-border-subtle);
+  color: var(--color-ink);
 }
 
 .ticket-table tr:hover td {
-  background-color: var(--color-accent-subtle);
+  background: var(--color-highlight-bg);
   cursor: pointer;
 }
 
-/* Drawer & Settings Component Utilities */
-.sheet-intro {
+.ticket-search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-control);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-ink);
   font-size: 0.875rem;
-  color: var(--color-ink-secondary);
   margin-bottom: 8px;
 }
 
-.action-sub {
+.ticket-filters-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ticket-filter-select {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-ink);
   font-size: 0.75rem;
+}
+
+.table-empty-cell {
+  text-align: center;
+  padding: 14px;
   color: var(--color-ink-muted);
 }
 
-.form-row-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  font-size: 0.875rem;
-}
-
-.form-row-toggle.bordered {
-  border-top: 1px solid var(--color-border-subtle);
-}
-
-.form-row-select {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.875rem;
-  margin-bottom: 8px;
-}
-
-.form-select {
-  padding: 6px 10px;
-  border-radius: var(--radius-control);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-}
-
+/* Connection Health Card */
 .conn-card {
-  background-color: var(--color-surface-sunken);
-  padding: 12px;
-  border-radius: var(--radius-control);
-  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  padding: 14px;
+  border-radius: var(--radius-interactive);
+  margin-bottom: 8px;
 }
 
 .conn-row {
@@ -957,36 +1207,76 @@
   font-size: 0.75rem;
   color: var(--color-ink-muted);
   margin-top: 8px;
+  line-height: 1.4;
 }
 
-.ticket-search-input {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-control);
-  background: var(--color-surface);
+/* Routing Protocol Selector Cards */
+.protocol-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-interactive);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.protocol-card.active {
+  border-color: var(--color-highlight-border);
+  background: var(--color-highlight-bg);
+}
+
+.protocol-radio {
+  margin-top: 3px;
+}
+
+.protocol-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.protocol-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.protocol-desc {
+  font-size: 0.75rem;
+  color: var(--color-ink-muted);
+  line-height: 1.35;
+}
+
+/* Form Controls Inside Drawer */
+.form-row-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 0.875rem;
+}
+
+.form-row-toggle.bordered {
+  border-top: 1px solid var(--glass-border);
+}
+
+.form-row-select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.875rem;
   margin-bottom: 8px;
 }
 
-.ticket-filters-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.ticket-filter-select {
-  flex: 1;
-  padding: 6px 8px;
-  border: 1px solid var(--color-border);
+.form-select {
+  padding: 6px 10px;
   border-radius: var(--radius-control);
+  border: 1px solid var(--glass-border);
   background: var(--color-surface);
-  font-size: 0.75rem;
-}
-
-.table-empty-cell {
-  text-align: center;
-  padding: 12px;
+  color: var(--color-ink);
 }
 
 .privacy-toggle {
@@ -998,8 +1288,7 @@
 }
 
 .privacy-info {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--color-ink-secondary);
   line-height: 1.5;
 }
-

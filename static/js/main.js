@@ -1,12 +1,14 @@
 /**
  * Ola Support Intelligence — Main Application Controller (main.js)
- * Orchestrates user interactions, live token budgeting, API dispatches,
- * and seamless scroll choreography.
+ * Enterprise Glassmorphism Architecture:
+ * 1. Default Welcome Hero & Interactive Starter Cards on Center Stage
+ * 2. Sticky Glass Top Navbar with Segmented Pill Switcher & Theme Toggle
+ * 3. Collapsible Glass Settings Drawer & Token-Budgeted Composer
  */
 
 import { state } from "./state.js";
 import { checkHealth, sendQuery } from "./api.js";
-import { initSettingsSheet } from "./settings.js";
+import { initSettingsSheet, openSettingsSheet } from "./settings.js";
 import {
   createUserMessageElement,
   createPolicySlipElement,
@@ -25,7 +27,6 @@ function initApp() {
   const composerInput = document.getElementById("composerInput");
   const composerForm = document.getElementById("composerForm");
   const btnSend = document.getElementById("btnSend");
-  const chatMessages = document.getElementById("chatMessages");
   const welcomeBox = document.getElementById("welcomeBox");
 
   // Initialize Settings Drawer
@@ -33,15 +34,16 @@ function initApp() {
     handleUserDispatch(query);
   });
 
-  // Suggestion Chips Click
-  document.querySelectorAll(".suggestion-chip").forEach(chip => {
-    chip.addEventListener("click", () => {
-      const q = chip.getAttribute("data-query");
-      if (q) handleUserDispatch(q);
-    });
-  });
+  // Wire up Top Navbar Segmented Switcher
+  initNavSwitcher();
 
-  // Composer Textarea Auto-Resize & Token Gauge
+  // Wire up Theme Toggle in Navbar
+  initThemeToggle();
+
+  // Wire up 2x3 Interactive Starter Cards on Center Stage
+  initStarterCards();
+
+  // Composer Textarea Auto-Resize & Live Token Budget Gauge
   if (composerInput) {
     composerInput.addEventListener("input", () => {
       autoResizeTextarea(composerInput);
@@ -56,7 +58,7 @@ function initApp() {
     });
   }
 
-  // Form Submit Listener
+  // Composer Form Submit Listener
   if (composerForm) {
     composerForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -78,11 +80,85 @@ function initApp() {
 }
 
 /**
+ * Connects 2x3 Interactive Quick-Action Starter Cards on Center Stage.
+ * Clicking immediately dispatches query to /ask without opening settings.
+ */
+function initStarterCards() {
+  const cards = document.querySelectorAll(".starter-card, .glass-card-interactive");
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      const q = card.getAttribute("data-query");
+      if (q && !state.isProcessing) {
+        handleUserDispatch(q);
+      }
+    });
+  });
+}
+
+/**
+ * Top Navbar Segmented Pill Switcher (Chat Desk | Ticket Directory | Policy Explorer)
+ */
+function initNavSwitcher() {
+  const pillChat = document.getElementById("pillChatDesk");
+  const pillTickets = document.getElementById("pillTicketDir");
+  const pillPolicy = document.getElementById("pillPolicyExp");
+  const pills = [pillChat, pillTickets, pillPolicy].filter(Boolean);
+
+  function setActivePill(activePill) {
+    pills.forEach(p => p.classList.remove("active"));
+    if (activePill) activePill.classList.add("active");
+  }
+
+  if (pillChat) {
+    pillChat.addEventListener("click", () => {
+      setActivePill(pillChat);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  if (pillTickets) {
+    pillTickets.addEventListener("click", () => {
+      setActivePill(pillTickets);
+      openSettingsSheet("tickets");
+    });
+  }
+
+  if (pillPolicy) {
+    pillPolicy.addEventListener("click", () => {
+      setActivePill(pillPolicy);
+      const composer = document.getElementById("composerInput");
+      if (composer) {
+        composer.focus();
+        composer.placeholder = "Search policy guidelines (e.g. cancellation refund, Sev-1 SLA)...";
+      }
+    });
+  }
+}
+
+/**
+ * Navbar Theme Toggle (Dark Slate-Navy vs Frosted Light)
+ */
+function initThemeToggle() {
+  const btnToggle = document.getElementById("btnThemeToggle");
+  if (!btnToggle) return;
+
+  btnToggle.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    state.updatePreference("theme", next);
+    document.documentElement.setAttribute("data-theme", next);
+
+    const prefSelect = document.getElementById("prefTheme");
+    if (prefSelect) prefSelect.value = next;
+  });
+}
+
+/**
  * Textarea vertical auto-sizing up to max height
  */
 function autoResizeTextarea(textarea) {
   textarea.style.height = "auto";
-  const newHeight = Math.min(160, Math.max(36, textarea.scrollHeight));
+  const newHeight = Math.min(160, Math.max(38, textarea.scrollHeight));
   textarea.style.height = `${newHeight}px`;
 }
 
@@ -137,7 +213,7 @@ async function handleUserDispatch(queryText) {
   state.lastSubmittedQuery = queryText;
   if (btnSend) btnSend.disabled = true;
 
-  // Hide welcome box on first query
+  // Smoothly hide welcome hero card on first query
   if (!state.firstQuerySent) {
     state.firstQuerySent = true;
     if (welcomeBox) welcomeBox.style.display = "none";
@@ -147,7 +223,7 @@ async function handleUserDispatch(queryText) {
   const turnEl = document.createElement("div");
   turnEl.className = "chat-turn";
 
-  // 1. Render User Message Chip
+  // 1. Render User Message Bubble
   const userChip = createUserMessageElement(queryText);
   turnEl.appendChild(userChip);
   chatContainer.appendChild(turnEl);
@@ -172,7 +248,7 @@ async function handleUserDispatch(queryText) {
     const userChipInner = userChip.querySelector(".msg-user");
     if (userChipInner) userChipInner.classList.add("rejected");
 
-    // Render Alert Slip
+    // Render Alert Card
     const alertSlip = createAlertSlipElement(
       result.title || "Service Notice",
       result.message || "Something went wrong on our side. Try again in a moment.",
@@ -248,19 +324,18 @@ function scrollToBottom() {
 }
 
 /**
- * Polls backend health on page load with up to 90s retries for cold start
+ * Polls backend health on page load
  */
 async function pollInitialHealth() {
   const headerChip = document.getElementById("headerStatusText");
   const headerDot = document.getElementById("headerStatusDot");
 
   const h = await checkHealth();
-  if (headerChip) headerChip.textContent = h.status;
+  if (headerChip) headerChip.textContent = h.online ? "System Active" : h.status;
   if (headerDot) {
     headerDot.className = "status-dot " + (h.online ? "online" : h.waking ? "waking" : "offline");
   }
 
-  // If cold-starting (Render free tier), retry every 5s up to 90s
   if (h.waking || !h.online) {
     let elapsed = 0;
     const interval = setInterval(async () => {
@@ -268,7 +343,7 @@ async function pollInitialHealth() {
       const retryHealth = await checkHealth();
       if (retryHealth.online || elapsed >= 90) {
         clearInterval(interval);
-        if (headerChip) headerChip.textContent = retryHealth.status;
+        if (headerChip) headerChip.textContent = retryHealth.online ? "System Active" : retryHealth.status;
         if (headerDot) {
           headerDot.className = "status-dot " + (retryHealth.online ? "online" : "offline");
         }

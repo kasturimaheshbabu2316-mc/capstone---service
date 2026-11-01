@@ -1,7 +1,7 @@
 /**
  * Ola Support Intelligence — DOM Rendering Module (render.js)
  * Clean, safe, zero-leak rendering of policy slips, ticket stubs, and alerts.
- * Strictly uses textContent / safe escaping for untrusted server content.
+ * Strictly uses textContent and safe escaping for untrusted server content.
  */
 
 import { maskAllPII } from "./mask.js";
@@ -32,7 +32,7 @@ export function cleanSourceName(src) {
 }
 
 /**
- * Renders user message chip (with 150-char compact truncation for long prompts).
+ * Renders user message bubble (frosted cyan tint, 150-char compact truncation toggle).
  */
 export function createUserMessageElement(text, isRejected = false) {
   const wrapper = document.createElement("div");
@@ -98,24 +98,29 @@ export function createPolicySlipElement(data, showSources = true, showReviewBadg
   content.textContent = data.answer || "No specific policy guidelines were found for this inquiry. Please rephrase with specific details.";
   slip.appendChild(content);
 
-  // Meta line
+  // Metadata chips row
   const metaLine = document.createElement("div");
   metaLine.className = "slip-meta-line";
 
-  const displaySources = (data.source_titles && data.source_titles.length)
-    ? data.source_titles
-    : (data.sources || []);
+  // Route Chip
+  const routeSpan = document.createElement("span");
+  routeSpan.className = "chip-badge chip-route";
+  routeSpan.textContent = "Route: Core Desk";
+  metaLine.appendChild(routeSpan);
 
-  if (showSources && displaySources.length > 0) {
-    const srcNames = displaySources.map(cleanSourceName).join(", ");
-    const srcSpan = document.createElement("span");
-    srcSpan.textContent = `From: ${srcNames}`;
-    metaLine.appendChild(srcSpan);
+  // Optional Ticket ID chip if attached
+  if (data.ticket && (data.ticket.ticket_id || data.ticket.record_id)) {
+    const tId = data.ticket.ticket_id || data.ticket.record_id;
+    const ticketChip = document.createElement("span");
+    ticketChip.className = "chip-badge chip-ticket";
+    ticketChip.textContent = `Ticket ID: ${tId}`;
+    metaLine.appendChild(ticketChip);
   }
 
+  // Verified Policy Badge
   if (data.grounded && !data.ticket) {
     const verSpan = document.createElement("span");
-    verSpan.className = "verified-mark";
+    verSpan.className = "chip-badge verified-mark";
     verSpan.innerHTML = `
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <polyline points="20 6 9 17 4 12"></polyline>
@@ -125,9 +130,10 @@ export function createPolicySlipElement(data, showSources = true, showReviewBadg
     metaLine.appendChild(verSpan);
   }
 
+  // Reviewer Approval Badge
   if (showReviewBadges && data.review_status && data.review_status.approved) {
     const revSpan = document.createElement("span");
-    revSpan.className = "reviewer-mark";
+    revSpan.className = "chip-badge reviewer-mark";
     const isRevised = Boolean(data.review_status.revised);
     revSpan.innerHTML = `
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -136,6 +142,19 @@ export function createPolicySlipElement(data, showSources = true, showReviewBadg
       <span>${isRevised ? "Revised by reviewer" : "Checked by reviewer"}</span>
     `;
     metaLine.appendChild(revSpan);
+  }
+
+  // Source Titles
+  const displaySources = (data.source_titles && data.source_titles.length)
+    ? data.source_titles
+    : (data.sources || []);
+
+  if (showSources && displaySources.length > 0) {
+    const srcNames = displaySources.map(cleanSourceName).join(", ");
+    const srcSpan = document.createElement("span");
+    srcSpan.className = "chip-badge";
+    srcSpan.textContent = `Reference: ${srcNames}`;
+    metaLine.appendChild(srcSpan);
   }
 
   slip.appendChild(metaLine);
@@ -150,7 +169,7 @@ export function createPolicySlipElement(data, showSources = true, showReviewBadg
 }
 
 /**
- * Renders physical Ticket Stub (The Central Memorable Moment).
+ * Renders physical Glass Ticket Stub Card.
  */
 export function createTicketStubElement(ticket) {
   const container = document.createElement("div");
@@ -167,7 +186,6 @@ export function createTicketStubElement(ticket) {
   const escScore = typeof ticket.escalation_score === "number" ? ticket.escalation_score : 0.0;
   const isHighRisk = escScore >= 0.44;
 
-  // Accessible sentence description
   stub.setAttribute(
     "aria-label",
     `Ticket ${ticketId}, category ${category}, current status is ${status}. Resolution target is ${resHours} hours, age is ${ageDays} days. Escalation risk is ${escScore.toFixed(2)}, ${isHighRisk ? "exceeding safety threshold" : "within standard limits"}.`
@@ -182,7 +200,7 @@ export function createTicketStubElement(ticket) {
   `;
   stub.appendChild(header);
 
-  // 2. Progression Track
+  // 2. 5-Step Horizontal Status Progression Track
   const track = document.createElement("div");
   track.className = "status-track";
 
@@ -224,14 +242,14 @@ export function createTicketStubElement(ticket) {
   `;
   stub.appendChild(metrics);
 
-  // 4. Segmented Taxi Meter Escalation Gauge
+  // 4. Escalation Risk Gauge with 0.44 threshold
   const meterBox = document.createElement("div");
   meterBox.className = "meter-box";
 
   const meterHeader = document.createElement("div");
   meterHeader.className = "meter-header";
   meterHeader.innerHTML = `
-    <span>Escalation risk gauge</span>
+    <span>Escalation Risk Gauge</span>
     <span class="tabular-nums" style="font-weight:700;">${escScore.toFixed(2)}</span>
   `;
   meterBox.appendChild(meterHeader);
@@ -261,7 +279,7 @@ export function createTicketStubElement(ticket) {
 
   const threshLabel = document.createElement("div");
   threshLabel.className = "meter-threshold-label";
-  threshLabel.textContent = `Threshold notch at 0.44 ${isHighRisk ? "• Exceeded" : "• Nominal"}`;
+  threshLabel.textContent = `Safety threshold at 0.44 ${isHighRisk ? "• Exceeded" : "• Nominal"}`;
   meterBox.appendChild(threshLabel);
 
   stub.appendChild(meterBox);
@@ -270,8 +288,8 @@ export function createTicketStubElement(ticket) {
   const metaLine = document.createElement("div");
   metaLine.className = "slip-meta-line";
   metaLine.innerHTML = `
-    <span>From ticket records</span>
-    <span class="reviewer-mark">
+    <span class="chip-badge">From ticket records</span>
+    <span class="chip-badge reviewer-mark">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
       </svg>
@@ -299,7 +317,7 @@ export function createTicketStubElement(ticket) {
 }
 
 /**
- * Renders structured alert slip for 400, 413, 503, and 500 errors.
+ * Renders Guardrail Alert Card for HTTP 400 (Prompt Injection) & 413 (Payload Budget).
  */
 export function createAlertSlipElement(title, message, statusCode) {
   const container = document.createElement("div");
@@ -307,6 +325,9 @@ export function createAlertSlipElement(title, message, statusCode) {
 
   const slip = document.createElement("div");
   slip.className = "alert-slip";
+
+  const headerRow = document.createElement("div");
+  headerRow.className = "alert-header-row";
 
   const titleEl = document.createElement("div");
   titleEl.className = "alert-title";
@@ -318,7 +339,18 @@ export function createAlertSlipElement(title, message, statusCode) {
     </svg>
     <span>${escapeHtml(title)}</span>
   `;
-  slip.appendChild(titleEl);
+  headerRow.appendChild(titleEl);
+
+  const codeBadge = document.createElement("span");
+  codeBadge.className = "alert-code-badge tabular-nums";
+  codeBadge.textContent = statusCode === 400
+    ? "HTTP 400 - Guardrail Block"
+    : statusCode === 413
+    ? "HTTP 413 - Payload Budget Exceeded"
+    : `HTTP ${statusCode}`;
+  headerRow.appendChild(codeBadge);
+
+  slip.appendChild(headerRow);
 
   const msgEl = document.createElement("div");
   msgEl.className = "alert-message";
@@ -344,7 +376,7 @@ export function createWaitingElement(isWaking = false) {
   const text = document.createElement("span");
   text.textContent = isWaking
     ? "Waking up the support desk, this can take up to a minute..."
-    : "Looking up the policy...";
+    : "Looking up official guidelines and records...";
   el.appendChild(text);
 
   return el;

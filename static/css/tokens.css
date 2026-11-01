@@ -1,46 +1,80 @@
 /* ==============================================================================
-   Ola Support Intelligence — CSS Tokens ("The Dispatch Desk")
-   Road-grounded palette: Kerb chalk, Asphalt, Lane yellow, Signal teal, Brake red.
-   Zero external fonts/CDNs. Local system fallback with tabular lining figures.
+   Ola Support Intelligence — CSS Tokens (Enterprise Glassmorphism Design System)
+   Canvas: Deep slate-navy (#070B14) with ambient mesh gradients.
+   Surfaces: Frosted glass panels with saturate(180%) blur.
+   Semantic Accents: Emerald (#10B981), Cyan (#00F2FE), Coral (#F87171), Lane Yellow (#F4C20D).
    ============================================================================== */
 
-:root, [data-theme="light"] {
-  /* Core Colors */
-  --color-page: #ECEEE8;              /* Kerb chalk */
-  --color-surface: #FFFFFF;           /* Policy slip paper white */
-  --color-surface-sunken: #DFE2DA;    /* Sunken road grey */
-  --color-ink: #1B2230;               /* Asphalt */
-  --color-ink-secondary: #586069;     /* Deep verge */
-  --color-ink-muted: #8A9199;         /* Verge grey */
-  --color-border: #CFD4C9;            /* Kerb boundary */
-  --color-border-subtle: #DEE2D9;     /* Hairline road divider */
+:root, [data-theme="dark"] {
+  /* Canvas Background & Ambient Gradients */
+  --color-page: #070B14;
+  --color-canvas-gradient-1: rgba(0, 242, 254, 0.06);
+  --color-canvas-gradient-2: rgba(79, 172, 254, 0.06);
 
-  /* Semantic Highlighter & Status Accents */
-  --color-accent: #F4C20D;            /* Lane yellow: focus, active stage */
-  --color-accent-subtle: rgba(244, 194, 13, 0.15);
-  --color-verified: #0E7C7B;          /* Signal teal: verified, grounded */
-  --color-verified-bg: rgba(14, 124, 123, 0.08);
-  --color-blocked: #C5412B;           /* Brake red: safety block, limit exceeded */
-  --color-blocked-bg: rgba(197, 65, 43, 0.08);
+  /* Primary Glass Surface */
+  --glass-bg: rgba(15, 23, 42, 0.65);
+  --glass-nav-bg: rgba(10, 16, 30, 0.82);
+  --glass-drawer-bg: rgba(11, 18, 33, 0.92);
+  --glass-composer-bg: rgba(15, 23, 42, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --glass-border-subtle: rgba(255, 255, 255, 0.06);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.50);
+  --glass-blur: blur(16px) saturate(180%);
 
-  /* User Message Chip */
-  --color-chip-user: #1B2230;         /* Asphalt chip */
-  --color-chip-user-ink: #ECEEE8;     /* Chalk ink */
+  /* Interactive Starter Cards */
+  --card-interactive-bg: rgba(255, 255, 255, 0.04);
+  --card-interactive-border: rgba(255, 255, 255, 0.08);
+  --card-interactive-hover-bg: rgba(0, 242, 254, 0.08);
+  --card-interactive-hover-border: rgba(0, 242, 254, 0.35);
 
-  /* Glass Floating Layers */
-  --glass-bg: rgba(236, 238, 232, 0.88);
-  --glass-border: rgba(27, 34, 48, 0.12);
-  --glass-shadow: 0 8px 32px rgba(27, 34, 48, 0.08);
+  /* User Message Bubble (Frosted Cyan Tint) */
+  --color-chip-user: rgba(0, 242, 254, 0.10);
+  --color-chip-user-border: rgba(0, 242, 254, 0.25);
+  --color-chip-user-ink: #ECEEE8;
+
+  /* Policy Slip Dedicated Tokens (Paper-White for High Contrast) */
+  --color-slip-bg: #FFFFFF;
+  --color-slip-ink: #1B2230;
+  --color-slip-border: #D1D6CC;
+  --color-slip-muted: #586069;
+
+  /* Typography Colors */
+  --color-ink: #ECEEE8;               /* Chalk ink */
+  --color-ink-secondary: #94A3B8;     /* Slate-cyan secondary */
+  --color-ink-muted: #64748B;         /* Slate muted */
+  --color-surface: #0F172A;
+  --color-surface-sunken: #0B1120;
+  --color-border: rgba(255, 255, 255, 0.10);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Semantic Status Accents */
+  --color-verified: #10B981;          /* Emerald glass badge */
+  --color-verified-bg: rgba(16, 185, 129, 0.14);
+  --color-verified-border: rgba(16, 185, 129, 0.35);
+
+  --color-highlight: #00F2FE;         /* Cyan glass badge */
+  --color-highlight-bg: rgba(0, 242, 254, 0.12);
+  --color-highlight-border: rgba(0, 242, 254, 0.35);
+
+  --color-blocked: #F87171;           /* Coral red translucent alert */
+  --color-blocked-bg: rgba(248, 113, 113, 0.10);
+  --color-blocked-border: rgba(248, 113, 113, 0.35);
+
+  --color-accent: #F4C20D;            /* Lane yellow: send button, focus ring, active stage */
+  --color-accent-subtle: rgba(244, 194, 13, 0.18);
 
   /* Typography Stacks */
   --font-sans: Archivo, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-serif: "Source Serif 4", Georgia, "Iowan Old Style", "Times New Roman", serif;
 
   /* Hierarchical Radius System */
-  --radius-slip: 4px;                 /* Policy slip & ticket receipt */
-  --radius-control: 10px;             /* Buttons, inputs, interactive chips */
-  --radius-sheet: 20px;               /* Settings drawer / bottom sheet */
-  --radius-pill: 100px;               /* Status pills & state markers */
+  --radius-card: 16px;
+  --radius-slip: 12px;
+  --radius-interactive: 12px;
+  --radius-control: 10px;
+  --radius-drawer: 20px;
+  --radius-pill: 9999px;
 
   /* Spacing Scale */
   --space-xxs: 4px;
@@ -52,54 +86,68 @@
   --space-xxl: 48px;
 
   /* Layout Boundaries */
-  --max-col-width: 44rem;
+  --header-height: 64px;
+  --max-col-width: 48rem;
   --measure-prose: 68ch;
-  --measure-chip: 56ch;
-  --header-height: 56px;
   --composer-min-height: 72px;
 
-  /* Policy Slip Dedicated Tokens (Always Paper-White for High Contrast) */
-  --color-slip-bg: #FFFFFF;
-  --color-slip-ink: #1B2230;
-  --color-slip-border: #D1D6CC;
-  --color-slip-muted: #586069;
-
   /* Focus Indicator */
-  --focus-ring: 0 0 0 2px var(--color-page), 0 0 0 4px var(--color-accent);
+  --focus-ring: 0 0 0 2px var(--color-page), 0 0 0 4px var(--color-highlight);
 }
 
-[data-theme="dark"] {
-  /* Dark Theme: Asphalt page, Chalk ink, Lane yellow single accent */
-  --color-page: #121722;              /* Deep asphalt */
-  --color-surface: #1B2230;           /* Asphalt surface */
-  --color-surface-sunken: #151A24;    /* Pit dark */
-  --color-ink: #ECEEE8;               /* Kerb chalk */
-  --color-ink-secondary: #B0B7BF;     /* Light verge */
-  --color-ink-muted: #8A9199;         /* Verge grey */
-  --color-border: #2B3444;            /* Dark asphalt divider */
-  --color-border-subtle: #202735;     /* Dark hairline */
+[data-theme="light"] {
+  /* Light Theme Glassmorphism Variant */
+  --color-page: #F1F5F9;
+  --color-canvas-gradient-1: rgba(0, 242, 254, 0.08);
+  --color-canvas-gradient-2: rgba(79, 172, 254, 0.08);
 
-  --color-accent: #F4C20D;            /* Lane yellow: ONLY for Send button, active tab, focus rings, active ticket stage */
-  --color-accent-subtle: rgba(244, 194, 13, 0.18);
-  --color-verified: #18A9A8;          /* Lightened signal teal */
-  --color-verified-bg: rgba(24, 169, 168, 0.12);
-  --color-blocked: #E0533C;           /* Lightened brake red */
-  --color-blocked-bg: rgba(224, 83, 60, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-nav-bg: rgba(255, 255, 255, 0.88);
+  --glass-drawer-bg: rgba(255, 255, 255, 0.94);
+  --glass-composer-bg: rgba(255, 255, 255, 0.90);
+  --glass-border: rgba(15, 23, 42, 0.10);
+  --glass-border-subtle: rgba(15, 23, 42, 0.06);
+  --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+  --glass-shadow-lg: 0 16px 48px rgba(15, 23, 42, 0.12);
 
-  --color-chip-user: #242D3D;         /* Elevated asphalt chip */
-  --color-chip-user-ink: #ECEEE8;     /* Kerb chalk */
+  --card-interactive-bg: rgba(255, 255, 255, 0.65);
+  --card-interactive-border: rgba(15, 23, 42, 0.08);
+  --card-interactive-hover-bg: rgba(0, 242, 254, 0.12);
+  --card-interactive-hover-border: rgba(0, 242, 254, 0.50);
 
-  /* Policy Slip Paper-White in Dark Mode */
+  --color-chip-user: rgba(14, 116, 144, 0.12);
+  --color-chip-user-border: rgba(14, 116, 144, 0.30);
+  --color-chip-user-ink: #0F172A;
+
   --color-slip-bg: #FFFFFF;
-  --color-slip-ink: #1B2230;
-  --color-slip-border: rgba(27, 34, 48, 0.2);
-  --color-slip-muted: #586069;
+  --color-slip-ink: #0F172A;
+  --color-slip-border: #CBD5E1;
+  --color-slip-muted: #64748B;
 
-  --glass-bg: rgba(27, 34, 48, 0.90);
-  --glass-border: rgba(236, 238, 232, 0.12);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --color-ink: #0F172A;
+  --color-ink-secondary: #475569;
+  --color-ink-muted: #64748B;
+  --color-surface: #FFFFFF;
+  --color-surface-sunken: #E2E8F0;
+  --color-border: rgba(15, 23, 42, 0.12);
+  --color-border-subtle: rgba(15, 23, 42, 0.06);
 
-  --focus-ring: 0 0 0 2px var(--color-page), 0 0 0 4px var(--color-accent);
+  --color-verified: #059669;
+  --color-verified-bg: rgba(5, 150, 105, 0.12);
+  --color-verified-border: rgba(5, 150, 105, 0.30);
+
+  --color-highlight: #0284C7;
+  --color-highlight-bg: rgba(2, 132, 199, 0.10);
+  --color-highlight-border: rgba(2, 132, 199, 0.30);
+
+  --color-blocked: #DC2626;
+  --color-blocked-bg: rgba(220, 38, 38, 0.10);
+  --color-blocked-border: rgba(220, 38, 38, 0.30);
+
+  --color-accent: #EAB308;
+  --color-accent-subtle: rgba(234, 179, 8, 0.18);
+
+  --focus-ring: 0 0 0 2px var(--color-page), 0 0 0 4px var(--color-highlight);
 }
 
 /* Compact Density Modifier */
@@ -108,7 +156,7 @@
   --space-md: 12px;
   --space-lg: 18px;
   --space-xl: 24px;
-  --header-height: 48px;
+  --header-height: 56px;
 }
 
 /* Reduced Motion Override */
