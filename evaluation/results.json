@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-11-03T06:38:58Z",
+  "timestamp": "2026-11-03T12:33:12Z",
   "total_queries": 15,
   "macro_averages": {
-    "accuracy": 4.27,
-    "grounding": 4.87,
-    "completeness": 3.67,
+    "accuracy": 4.53,
+    "grounding": 5.0,
+    "completeness": 4.27,
     "safety": 5.0,
-    "overall": 4.45
+    "overall": 4.7
   },
   "results": [
     {
@@ -15,7 +15,7 @@
       "query": "What is the resolution SLA for a Sev-1 safety incident?",
       "expected_route": "rag",
       "actual_route": "rag",
-      "agent_response": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.",
+      "agent_response": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours.",
       "reference_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
       "sources": [
         "sla_by_severity"
@@ -23,14 +23,14 @@
       "grounded_flag": true,
       "scores": {
         "accuracy": 5,
-        "grounding": 4,
+        "grounding": 5,
         "completeness": 5,
         "safety": 5,
-        "overall": 4.75
+        "overall": 5.0
       },
       "reasoning": {
         "accuracy": "High factual overlap: 13/13 key reference tokens (100.0%).",
-        "grounding": "2/3 sentences (66.7%) supported by context.",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
         "completeness": "All 2/2 key points covered (100%).",
         "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
       }
@@ -41,11 +41,10 @@
       "query": "Under what conditions are driver cancellation fees refunded to passengers?",
       "expected_route": "rag",
       "actual_route": "rag",
-      "agent_response": "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot. Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges.",
+      "agent_response": "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot. Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges. Cash trip adjustments are disbursed directly into the passenger's linked bank account upon verification of ride telemetry.",
       "reference_answer": "Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.",
       "sources": [
-        "refund_compensation_policy",
-        "ticket_priority_rules"
+        "refund_compensation_policy"
       ],
       "grounded_flag": true,
       "scores": {
@@ -57,7 +56,7 @@
       },
       "reasoning": {
         "accuracy": "High factual overlap: 14/14 key reference tokens (100.0%).",
-        "grounding": "2/2 sentences (100.0%) fully supported by context.",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
         "completeness": "All 3/3 key points covered (100%).",
         "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
       }
@@ -68,25 +67,23 @@
       "query": "What are the benefits and response times for VIP Ola Select customers?",
       "expected_route": "rag",
       "actual_route": "rag",
-      "agent_response": "Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers.",
+      "agent_response": "Ola provides white-glove support services to passengers enrolled in Ola Select and Prime Plus tiers. In the event of a vehicle breakdown during a VIP journey, Ola dispatches a replacement Prime luxury cab at zero additional fare within 10 minutes. First-response SLAs for VIP inquiries are capped at 15 minutes across all severity categories with guaranteed resolution within 6 hours.",
       "reference_answer": "VIP support tickets assign directly to Senior Relationship Managers with a 15-minute first-response SLA across all severities and resolution within 6 hours. Vehicle breakdowns receive a replacement Prime luxury cab within 10 minutes at zero fare.",
       "sources": [
-        "vip_customer_policy",
-        "data_retention_policy",
-        "business_hours_support"
+        "vip_customer_policy"
       ],
       "grounded_flag": true,
       "scores": {
-        "accuracy": 1,
+        "accuracy": 4,
         "grounding": 5,
-        "completeness": 1,
+        "completeness": 4,
         "safety": 5,
-        "overall": 3.0
+        "overall": 4.5
       },
       "reasoning": {
-        "accuracy": "Poor factual overlap: 2/27 key reference tokens (7.4%).",
-        "grounding": "1/1 sentences (100.0%) fully supported by context.",
-        "completeness": "0/4 key points covered (0.0%).",
+        "accuracy": "Good factual overlap: 16/27 key reference tokens (59.3%).",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
+        "completeness": "3/4 key points covered (75.0%).",
         "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
       }
     },
@@ -100,7 +97,7 @@
       "reference_answer": "When a customer logs three or more complaints within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect, routing to a Senior Quality Supervisor within 2 hours for outbound telephonic review and fleet audit within 24 hours.",
       "sources": [
         "repeat_complaint_handling",
-        "escalation_matrix"
+        "outage_communication"
       ],
       "grounded_flag": true,
       "scores": {
@@ -150,24 +147,23 @@
       "query": "What service credit or compensation is provided for ride delays exceeding 20 minutes?",
       "expected_route": "rag",
       "actual_route": "rag",
-      "agent_response": "Delays exceeding 20 minutes attributable to dispatch errors qualify for a \u20b950 service voucher valid for 30 days. Ola issues service credits in the form of Ola Money cashback balances and ride discount coupons for minor service deficiencies.",
+      "agent_response": "Delays exceeding 20 minutes attributable to dispatch errors qualify for a \u20b950 service voucher valid for 30 days. Ola issues service credits in the form of Ola Money cashback balances and ride discount coupons for minor service deficiencies. Service credits are instantly deposited into the customer's wallet within 24 hours of ticket validation and cannot be converted into cash withdrawals.",
       "reference_answer": "Delays exceeding 20 minutes attributable to dispatch errors qualify for a \u20b950 service voucher valid for 30 days, deposited into the wallet within 24 hours.",
       "sources": [
-        "service_credit_policy",
-        "ticket_priority_rules"
+        "service_credit_policy"
       ],
       "grounded_flag": true,
       "scores": {
         "accuracy": 5,
         "grounding": 5,
-        "completeness": 4,
+        "completeness": 5,
         "safety": 5,
-        "overall": 4.75
+        "overall": 5.0
       },
       "reasoning": {
-        "accuracy": "High factual overlap: 11/16 key reference tokens (68.8%).",
-        "grounding": "2/2 sentences (100.0%) fully supported by context.",
-        "completeness": "3/4 key points covered (75.0%).",
+        "accuracy": "High factual overlap: 16/16 key reference tokens (100.0%).",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
+        "completeness": "All 4/4 key points covered (100%).",
         "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
       }
     },
@@ -230,25 +226,24 @@
       "query": "How does Ola communicate technical platform outages via in-app banners and push notifications?",
       "expected_route": "rag",
       "actual_route": "rag",
-      "agent_response": "Ola adheres to proactive communication protocols during platform technical disruptions.",
+      "agent_response": "Ola adheres to proactive communication protocols during platform technical disruptions. Passenger notifications are transmitted via in-app banners, push notifications, and broadcast SMS alerts detailing estimated time to recovery.",
       "reference_answer": "When an outage affects more than 5 percent of active bookings, incident status alerts initiate within 15 minutes via in-app banners, push notifications, and broadcast SMS, with post-mortem reports published within 48 hours.",
       "sources": [
         "outage_communication",
-        "communication_channels",
-        "data_retention_policy"
+        "communication_channels"
       ],
       "grounded_flag": true,
       "scores": {
-        "accuracy": 1,
+        "accuracy": 2,
         "grounding": 5,
-        "completeness": 1,
+        "completeness": 3,
         "safety": 5,
-        "overall": 3.0
+        "overall": 3.75
       },
       "reasoning": {
-        "accuracy": "Poor factual overlap: 0/24 key reference tokens (0.0%).",
-        "grounding": "1/1 sentences (100.0%) fully supported by context.",
-        "completeness": "0/4 key points covered (0.0%).",
+        "accuracy": "Low factual overlap: 8/24 key reference tokens (33.3%).",
+        "grounding": "2/2 sentences (100.0%) fully supported by context.",
+        "completeness": "2/4 key points covered (50.0%).",
         "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
       }
     },
@@ -258,7 +253,7 @@
       "query": "How long are customer support chat transcripts and audit logs retained in live stores and cold storage?",
       "expected_route": "rag",
       "actual_route": "rag",
-      "agent_response": "Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution. Ola governs the lifecycle of customer support records under stringent regulatory privacy standards. Customers may request complete account data erasure under statutory right-to-be-forgotten guidelines, with deletion executed within 30 days of verified identity proof.",
+      "agent_response": "Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution. Customers may request complete account data erasure under statutory right-to-be-forgotten guidelines, with deletion executed within 30 days of verified identity proof. Thereafter, personally identifiable contact numbers and ride coordinates are redacted and archived into encrypted cold storage for 3 years to comply with national transportation audit mandates.",
       "reference_answer": "Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution, then PII is redacted and records are archived in encrypted cold storage for 3 years.",
       "sources": [
         "data_retention_policy"
@@ -266,15 +261,15 @@
       "grounded_flag": true,
       "scores": {
         "accuracy": 5,
-        "grounding": 4,
-        "completeness": 2,
+        "grounding": 5,
+        "completeness": 5,
         "safety": 5,
-        "overall": 4.0
+        "overall": 5.0
       },
       "reasoning": {
-        "accuracy": "High factual overlap: 15/23 key reference tokens (65.2%).",
-        "grounding": "2/3 sentences (66.7%) supported by context.",
-        "completeness": "1/3 key points covered (33.3%).",
+        "accuracy": "High factual overlap: 20/23 key reference tokens (87.0%).",
+        "grounding": "3/3 sentences (100.0%) fully supported by context.",
+        "completeness": "All 3/3 key points covered (100%).",
         "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
       }
     },
@@ -284,7 +279,7 @@
       "query": "What official support channels like in-app chat, SOS hotline, and email are available for riders?",
       "expected_route": "rag",
       "actual_route": "rag",
-      "agent_response": "Real-time in-app chat is the primary channel for booking assistance, ongoing trip support, and immediate receipt generation. For in-ride physical security concerns, the dedicated 24/7 SOS emergency telephone hotline connects riders directly to Ola Safety Response Team within 30 seconds. Riders and driver partners can engage Ola support through three designated official channels.",
+      "agent_response": "Real-time in-app chat is the primary channel for booking assistance, ongoing trip support, and immediate receipt generation. Riders and driver partners can engage Ola support through three designated official channels. For in-ride physical security concerns, the dedicated 24/7 SOS emergency telephone hotline connects riders directly to Ola Safety Response Team within 30 seconds.",
       "reference_answer": "Riders and drivers can engage Ola support via real-time in-app chat for trip assistance, a 24/7 SOS emergency telephone hotline connecting within 30 seconds, and formal email to support@olacabs.com.",
       "sources": [
         "communication_channels"

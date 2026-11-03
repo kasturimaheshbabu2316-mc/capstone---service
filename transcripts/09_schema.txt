@@ -80,18 +80,19 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED CREWRESPONSE VALIDATION (TASK 9)
 
 --- 2. VALIDATED POLICY INSTANCE (route='rag') ---
 {
-  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.",
+  "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "route": "rag",
   "sources": [
     "sla_by_severity",
-    "data_retention_policy"
+    "vip_customer_policy",
+    "communication_channels"
   ],
   "ticket": null,
   "grounded": true,
   "escalation_recommended": false,
   "review_status": {
     "approved": true,
-    "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Ola enforces strict resolution Service Level Agreements based on ticket severity levels.",
+    "final_answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
     "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
     "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
     "redactions_made": false,
@@ -101,7 +102,7 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED CREWRESPONSE VALIDATION (TASK 9)
 
 --- 3. VALIDATED TICKET LOOKUP INSTANCE (route='lookup') ---
 {
-  "answer": "Ticket TKT-0002 (Product Defect) is currently Escalated with a resolution time of 15.8 hours. Escalation risk score is 0.8400 (High Risk).",
+  "answer": "Ticket TKT-0002 (Product Defect) is currently Escalated with a resolution time of 15.8 hours (High priority).",
   "route": "lookup",
   "sources": [
     "dataset.py"
@@ -122,7 +123,7 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED CREWRESPONSE VALIDATION (TASK 9)
   "escalation_recommended": true,
   "review_status": {
     "approved": true,
-    "final_answer": "Ticket TKT-0002 (Product Defect) is currently Escalated with a resolution time of 15.8 hours. Escalation risk score is 0.8400 (High Risk).",
+    "final_answer": "Ticket TKT-0002 (Product Defect) is currently Escalated with a resolution time of 15.8 hours (High priority).",
     "reason": "Verified facts against knowledge base. All claims grounded in retrieved context.",
     "feedback": "Verified facts against knowledge base. All claims grounded in retrieved context.",
     "redactions_made": false,

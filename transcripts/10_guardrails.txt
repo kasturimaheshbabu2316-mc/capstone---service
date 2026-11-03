@@ -15,7 +15,7 @@ Sanitized Text         : Please check status of TKT-0007, my mobile number is [P
   • Input Passed to Crew : "Please check status of TKT-0007, my mobile number is [PHONE_MASKED]."
   • Raw Phone in Crew In?: False (Strictly False)
   • Mask Token Present   : True (Strictly True)
-  • Crew Answer Output   : Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).
+  • Crew Answer Output   : Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours (Standard priority).
   • Crew Ticket ID       : TKT-0007
 
 --- DEMO 2: PROMPT INJECTION DEFENSE (Input Guardrail) ---
