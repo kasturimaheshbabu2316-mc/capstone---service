@@ -11,6 +11,7 @@ set "CREWAI_DISABLE_TELEMETRY=true"
 set "OTEL_SDK_DISABLED=true"
 set "PORT=8000"
 set "PYTHONUNBUFFERED=1"
+if "%ADMIN_TOKEN%"=="" set "ADMIN_TOKEN=change-me-demo-token"
 
 :: Locate Python in .venv, .service, or PATH
 set "PY_EXE=python"

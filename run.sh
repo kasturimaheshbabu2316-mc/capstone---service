@@ -11,6 +11,7 @@ export CREWAI_DISABLE_TELEMETRY="true"
 export OTEL_SDK_DISABLED="true"
 export PORT="${PORT:-8000}"
 export PYTHONUNBUFFERED="1"
+export ADMIN_TOKEN="${ADMIN_TOKEN:-change-me-demo-token}"
 
 # Determine Python executable
 if [ -f ".venv/bin/python" ]; then

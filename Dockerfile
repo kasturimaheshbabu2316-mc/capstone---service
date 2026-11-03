@@ -3,8 +3,8 @@
 # Track: Business Operations / Customer Support (Ola)
 # ==============================================================================
 
-# Python 3.11 or 3.12 (3.13+ not supported by this stack)
-FROM python:3.11-slim
+# Python 3.12 base image
+FROM python:3.12-slim
 
 # 1. Base runtime environment variables
 ENV PYTHONUNBUFFERED=1 \

@@ -1,6 +1,6 @@
 ================================================================================
 OLA SUPPORT INTELLIGENCE — CLEAN-CLONE OFFLINE VERIFICATION
-Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793458023
+Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793686367
 Python Executable: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe (3.11.15)
 ================================================================================
 
@@ -72,15 +72,15 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe rag/
 [5/6] Running Full PyTest Suite (Offline Socket Guard Active)...
 Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe -m pytest -q
 ================================================================================
-  ........................................................................ [ 55%]
-  .........................................................                [100%]
+  ........................................................................ [ 54%]
+  ............................................................             [100%]
   ============================== warnings summary ===============================
   crew\crew.py:31
-    C:\Users\kastu\AppData\Local\Temp\cleancheck_1793458023\crew\crew.py:31: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
+    C:\Users\kastu\AppData\Local\Temp\cleancheck_1793686367\crew\crew.py:31: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
       from crew.memory import session_memory, crew_runnable_with_history
   
   -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-  129 passed, 1 warning in 54.21s
+  132 passed, 1 warning in 57.75s
 [+] Full PyTest Suite (Offline Socket Guard Active): PASS
 
 ================================================================================
@@ -119,11 +119,11 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe eval
   | Q10 | data_retention_policy      |    5     |     4     |      2       |   5    |  4.00   |
   | Q11 | communication_channels     |    5     |     5     |      5       |   5    |  5.00   |
   | Q12 | feedback_collection        |    4     |     5     |      3       |   5    |  4.25   |
-  | Q13 | ticket_lookup              |    5     |     5     |      5       |   5    |  5.00   |
+  | Q13 | ticket_lookup              |    4     |     5     |      4       |   5    |  4.50   |
   | Q14 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
   | Q15 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
   +-----+----------------------------+----------+-----------+--------------+--------+---------+
-  | MACRO AVERAGES                   |   4.33   |   4.87    |     3.73     |  5.00  |  4.48   |
+  | MACRO AVERAGES                   |   4.27   |   4.87    |     3.67     |  5.00  |  4.45   |
   +-----+----------------------------+----------+-----------+--------------+--------+---------+
   
   Evaluation transcript saved to: transcripts/13_eval.txt

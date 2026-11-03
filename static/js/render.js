@@ -90,7 +90,17 @@ export function createPolicySlipElement(data, showSources = true, showReviewBadg
 
   const header = document.createElement("div");
   header.className = "slip-header";
-  header.innerHTML = `<span>POLICY RESOLUTION SLIP</span><span class="tabular-nums">#${Math.floor(1000 + Math.random() * 9000)}</span>`;
+  const titleSpan = document.createElement("span");
+  titleSpan.textContent = "POLICY RESOLUTION SLIP";
+  header.appendChild(titleSpan);
+
+  const traceId = data.trace_id || data.request_id || data.traceId;
+  if (traceId) {
+    const traceSpan = document.createElement("span");
+    traceSpan.className = "tabular-nums";
+    traceSpan.textContent = `#${traceId}`;
+    header.appendChild(traceSpan);
+  }
   slip.appendChild(header);
 
   const content = document.createElement("div");

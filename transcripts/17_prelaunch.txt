@@ -1,4 +1,4 @@
-﻿{
+{
     "status":  "healthy",
     "mock_llm":  true,
     "kb_ready":  true,

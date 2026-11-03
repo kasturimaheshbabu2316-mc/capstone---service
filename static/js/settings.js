@@ -338,20 +338,47 @@ async function renderTicketsTable() {
   });
 
   if (filtered.length === 0) {
-    tableBody.innerHTML = `<tr><td colspan="5" class="table-empty-cell">No matching tickets found.</td></tr>`;
+    const emptyTr = document.createElement("tr");
+    const emptyTd = document.createElement("td");
+    emptyTd.colSpan = 5;
+    emptyTd.className = "table-empty-cell";
+    emptyTd.textContent = "No matching tickets found.";
+    emptyTr.appendChild(emptyTd);
+    tableBody.replaceChildren(emptyTr);
     return;
   }
 
-  tableBody.innerHTML = "";
+  tableBody.textContent = "";
   filtered.slice(0, 25).forEach(ticket => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td class="tabular-nums" style="font-weight:700;">${ticket.ticket_id}</td>
-      <td>${ticket.category}</td>
-      <td>${ticket.status}</td>
-      <td class="tabular-nums">${ticket.resolution_time_hours} h</td>
-      <td><span style="font-weight:600; color:${ticket.risk_level === "High Risk" ? "var(--color-blocked)" : "var(--color-ink-secondary)"};">${ticket.risk_level}</span></td>
-    `;
+
+    const tdId = document.createElement("td");
+    tdId.className = "tabular-nums";
+    tdId.style.fontWeight = "700";
+    tdId.textContent = ticket.ticket_id;
+
+    const tdCat = document.createElement("td");
+    tdCat.textContent = ticket.category;
+
+    const tdStatus = document.createElement("td");
+    tdStatus.textContent = ticket.status;
+
+    const tdRes = document.createElement("td");
+    tdRes.className = "tabular-nums";
+    tdRes.textContent = `${ticket.resolution_time_hours} h`;
+
+    const tdRisk = document.createElement("td");
+    const spanRisk = document.createElement("span");
+    spanRisk.style.fontWeight = "600";
+    spanRisk.style.color = ticket.risk_level === "High Risk" ? "var(--color-blocked)" : "var(--color-ink-secondary)";
+    spanRisk.textContent = ticket.risk_level;
+    tdRisk.appendChild(spanRisk);
+
+    tr.appendChild(tdId);
+    tr.appendChild(tdCat);
+    tr.appendChild(tdStatus);
+    tr.appendChild(tdRes);
+    tr.appendChild(tdRisk);
 
     tr.addEventListener("click", () => {
       closeSettingsSheet();
