@@ -101,6 +101,9 @@ def extract_ticket_id(text: str) -> str | None:
 
 def extract_query_text(text: str) -> str:
     """Extracts the underlying user question or task description from message text."""
+    m_search = re.search(r"Search internal policies for:\s*['\"]([^'\"]+)['\"]", text)
+    if m_search:
+        return m_search.group(1).strip()
     task_match = re.search(r"(?:Task:|User:)\s*([^\n]+)", text)
     if task_match:
         return task_match.group(1).strip()

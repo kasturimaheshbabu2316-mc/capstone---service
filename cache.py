@@ -80,6 +80,14 @@ class ResponseCache:
         session_id: str | None = None,
     ) -> None:
         """Stores response in cache under isolated namespace/session key."""
+        # Guard: never cache fallback ("I don't know") or ungrounded responses
+        if isinstance(response, dict):
+            if not response.get("grounded", True) or "don't know" in str(response.get("answer", "")).lower():
+                return
+        else:
+            if getattr(response, "grounded", True) is False or "don't know" in str(getattr(response, "answer", "")).lower():
+                return
+
         # Guard: do not cache dynamic ticket lookups globally without a session_id
         if namespace == "ticket" and not session_id:
             return
@@ -119,9 +127,19 @@ class ResponseCache:
         # Compute outside lock to avoid holding lock during generation
         result = compute_fn(query)
 
-        with self._lock:
-            self._cache[key] = result
-            return result, False
+        # Guard: never cache fallback ("I don't know") or ungrounded responses
+        should_cache = True
+        if isinstance(result, dict):
+            if not result.get("grounded", True) or "don't know" in str(result.get("answer", "")).lower():
+                should_cache = False
+        else:
+            if getattr(result, "grounded", True) is False or "don't know" in str(getattr(result, "answer", "")).lower():
+                should_cache = False
+
+        if should_cache:
+            with self._lock:
+                self._cache[key] = result
+        return result, False
 
     def clear(self, namespace: Optional[str] = None) -> int:
         """Invalidates cache entries. If namespace is provided, clears only that namespace.

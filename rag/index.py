@@ -17,6 +17,7 @@ from __future__ import annotations
 import glob
 import logging
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -346,8 +347,13 @@ def retrieve(
     client = get_chroma_client()
     model = get_embedding_model()
 
+    # Clean PII placeholder tags from query before embedding so masking does not degrade semantic retrieval
+    clean_query = re.sub(r"\[(PHONE|EMAIL|CARD)_MASKED\]", "", str(query)).strip()
+    if not clean_query:
+        clean_query = str(query)
+
     col = client.get_collection(name=collection_name)
-    emb_res = model.encode([query], show_progress_bar=False, batch_size=1)
+    emb_res = model.encode([clean_query], show_progress_bar=False, batch_size=1)
     query_emb = emb_res.tolist() if hasattr(emb_res, "tolist") else list(emb_res)
 
     results = col.query(

@@ -302,7 +302,7 @@ def test_pii_masked_in_log_file_from_api_request():
 
 def test_ask_cache_hit_endpoint():
     """Validates that a repeated question through /ask is served from cache with cache_hit=True."""
-    question = "What are the rules regarding passenger baggage?"
+    question = "What is the resolution SLA for a Sev-1 safety incident?"
     # First request: Cache miss -> generated & cached
     res1 = client.post("/ask", json={"question": question, "session_id": "cache_test_sess"})
     assert res1.status_code == 200

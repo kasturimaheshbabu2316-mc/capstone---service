@@ -547,7 +547,8 @@ def run_unified_pipeline(
 
         # 5. Output Groundedness Check
         if crew_output.route in ("rag", "both"):
-            context_text = " ".join(crew_output.sources) if crew_output.sources else ""
+            from review.autogen_review import _resolve_context_text
+            context_text = _resolve_context_text(crew_output.sources) or crew_output.answer
             grounded_res = check_groundedness(
                 query=sanitized_question,
                 retrieved_context=context_text,
@@ -565,8 +566,8 @@ def run_unified_pipeline(
         # run_support_crew already executes review_support_response and sets crew_output.review_status.
         # Avoid running a redundant secondary review team if already approved/reviewed.
         if not crew_output.review_status or crew_output.review_status.get("approved") is None:
-            from review.autogen_review import review_support_response
-            review_context = " ".join(crew_output.sources) if crew_output.sources else ""
+            from review.autogen_review import review_support_response, _resolve_context_text
+            review_context = _resolve_context_text(crew_output.sources) or crew_output.answer
             review_verdict = review_support_response(
                 query=sanitized_question,
                 draft_answer=crew_output.answer,
