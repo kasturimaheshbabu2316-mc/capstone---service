@@ -56,9 +56,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Update stage visibility
-    if (stageChat) stageChat.style.display = stageName === "chat-stage" ? "block" : "none";
-    if (stageDirectory) stageDirectory.style.display = stageName === "directory-stage" ? "block" : "none";
-    if (stagePolicies) stagePolicies.style.display = stageName === "policies-stage" ? "block" : "none";
+    if (stageChat) {
+      stageChat.classList.toggle("stage-hidden", stageName !== "chat-stage");
+      stageChat.style.display = stageName === "chat-stage" ? "block" : "none";
+    }
+    if (stageDirectory) {
+      stageDirectory.classList.toggle("stage-hidden", stageName !== "directory-stage");
+      stageDirectory.style.display = stageName === "directory-stage" ? "block" : "none";
+    }
+    if (stagePolicies) {
+      stagePolicies.classList.toggle("stage-hidden", stageName !== "policies-stage");
+      stagePolicies.style.display = stageName === "policies-stage" ? "block" : "none";
+    }
 
     // Lazy load data on switch
     if (stageName === "directory-stage" && !isDirectoryLoaded) {
@@ -705,6 +714,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openPalette() {
     if (!commandPalette) return;
+    commandPalette.classList.remove("stage-hidden");
     commandPalette.style.display = "flex";
     if (paletteInput) {
       paletteInput.value = "";
@@ -714,7 +724,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function closePalette() {
-    if (commandPalette) commandPalette.style.display = "none";
+    if (commandPalette) {
+      commandPalette.classList.add("stage-hidden");
+      commandPalette.style.display = "none";
+    }
   }
 
   function renderPaletteItems(items) {
