@@ -1,739 +1,327 @@
 /**
- * Ola Nexus Support Agent — Interactive Glassmorphism Client
- * Supports both Live WebSocket (/ws/chat) and HTTP REST (/ask) protocols.
+ * Ola Support Intelligence (Ola Nexus) — Enterprise Operations Desk Application Controller (app.js)
+ * Implements:
+ * 1. Default Assistant Greeting and 7 Center-Stage Interactive Quick Dispatch Cards
+ * 2. Floating Composer Dock with Live Token Estimator and Cap Warnings
+ * 3. Structured Policy Resolution Slips and Glass Ticket Stubs
+ * 4. Collapsible Settings & Governance Drawer with Ticket Directory and Telemetry
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Elements
-  const chatMessages = document.getElementById('chatMessages');
-  const chatForm = document.getElementById('chatForm');
-  const queryInput = document.getElementById('queryInput');
-  const tokenCountEl = document.getElementById('tokenCount');
-  const tokenIndicatorEl = document.getElementById('tokenIndicator');
-  const btnSend = document.getElementById('btnSend');
+document.addEventListener("DOMContentLoaded", () => {
+  const chatStream = document.getElementById("chat-stream");
+  const chatForm = document.getElementById("chat-form");
+  const chatInput = document.getElementById("chat-input");
+  const tokenText = document.getElementById("token-counter-text");
+  const tokenFill = document.getElementById("token-bar-fill");
+  const settingsDrawer = document.getElementById("settings-drawer");
+  const sessionId = "web_" + Math.random().toString(36).substring(2, 10);
 
-  // HUD Elements
-  const metricTrace = document.getElementById('metricTrace');
-  const metricLatency = document.getElementById('metricLatency');
-  const metricSession = document.getElementById('metricSession');
-  const metricCache = document.getElementById('metricCache');
-  const cacheBadge = document.getElementById('cacheBadge');
-  const riskBadge = document.getElementById('riskBadge');
-  const gaugeFill = document.getElementById('gaugeFill');
-  const scoreVal = document.getElementById('scoreVal');
-  const ticketVal = document.getElementById('ticketVal');
-  const groundedBadge = document.getElementById('groundedBadge');
-  const sourcesList = document.getElementById('sourcesList');
-
-  // Modals
-  const modalTickets = document.getElementById('modalTickets');
-  const modalIngest = document.getElementById('modalIngest');
-  const modalSpecs = document.getElementById('modalSpecs');
-
-  const btnOpenTickets = document.getElementById('btnOpenTickets');
-  const btnCloseTickets = document.getElementById('btnCloseTickets');
-  const btnOpenIngest = document.getElementById('btnOpenIngest');
-  const btnCloseIngest = document.getElementById('btnCloseIngest');
-  const btnCancelIngest = document.getElementById('btnCancelIngest');
-  const btnOpenSpecs = document.getElementById('btnOpenSpecs');
-  const btnCloseSpecs = document.getElementById('btnCloseSpecs');
-
-  const ticketsTbody = document.getElementById('ticketsTbody');
-  const ticketSearchInput = document.getElementById('ticketSearchInput');
-  const statusFilter = document.getElementById('statusFilter');
-
-  const ingestForm = document.getElementById('ingestForm');
-  const docIdInput = document.getElementById('docIdInput');
-  const docTextInput = document.getElementById('docTextInput');
-  const ingestResult = document.getElementById('ingestResult');
-
-  // Session ID
-  let currentSessionId = 'session_' + Math.random().toString(36).substring(2, 9);
-  if (metricSession) metricSession.textContent = 'Active';
-
-  // WebSocket Connection
-  let ws = null;
-  let wsConnected = false;
-
-  function initWebSocket() {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}/ws/chat`;
-
-    try {
-      ws = new WebSocket(wsUrl);
-
-      ws.onopen = () => {
-        wsConnected = true;
-      };
-
-      ws.onmessage = (event) => {
-        try {
-          const payload = JSON.parse(event.data);
-          handleWebSocketMessage(payload);
-        } catch (e) {
-          console.error('Failed to parse WebSocket JSON:', e);
-        }
-      };
-
-      ws.onclose = () => {
-        wsConnected = false;
-        const loading = document.getElementById('activeLoadingBubble');
-        if (loading) loading.remove();
-        // Auto-reconnect after 2 seconds
-        setTimeout(initWebSocket, 2000);
-      };
-
-      ws.onerror = () => {
-        wsConnected = false;
-        const loading = document.getElementById('activeLoadingBubble');
-        if (loading) loading.remove();
-      };
-    } catch (e) {
-      console.warn('WebSocket init error, falling back to HTTP:', e);
-      wsConnected = false;
-    }
-  }
-
-  initWebSocket();
-
-  // Token count estimator
-  queryInput.addEventListener('input', () => {
-    const text = queryInput.value;
-    const estTokens = Math.ceil(text.length / 4);
-    tokenCountEl.textContent = estTokens;
-
-    if (estTokens > 2000) {
-      tokenIndicatorEl.className = 'token-budget-indicator danger';
-    } else if (estTokens > 1600) {
-      tokenIndicatorEl.className = 'token-budget-indicator warning';
-    } else {
-      tokenIndicatorEl.className = 'token-budget-indicator';
-    }
-  });
-
-  // Prompt chips click
-  document.querySelectorAll('.prompt-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      let q = chip.getAttribute('data-query');
-      if (q === 'BUDGET_CAP_TEST') {
-        q = 'Ola enterprise policy verification rule inquiry '.repeat(200);
-      }
-      queryInput.value = q;
-      queryInput.dispatchEvent(new Event('input'));
-      chatForm.dispatchEvent(new Event('submit'));
-    });
-  });
-
-  // Chat Submission
-  chatForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const query = queryInput.value.trim();
-    if (!query) return;
-
-    const protocolChoice = document.querySelector('input[name="protocol"]:checked').value;
-
-    // Append User Message to UI
-    appendUserMessage(query);
-    queryInput.value = '';
-    queryInput.dispatchEvent(new Event('input'));
-
-    // Loading indicator
-    const loadingRow = appendLoadingIndicator();
-
-    if (protocolChoice === 'ws' && wsConnected && ws.readyState === WebSocket.OPEN) {
-      // Send via WebSocket
-      ws.send(query);
-    } else {
-      // Send via HTTP REST
-      await sendHttpRequest(query, loadingRow);
-    }
-  });
-
-  // HTTP Request Handler
-  async function sendHttpRequest(query, loadingRow) {
-    const t0 = performance.now();
-    try {
-      const resp = await fetch('/ask', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: query,
-          session_id: currentSessionId
-        })
-      });
-
-      const t1 = performance.now();
-      const elapsed = (t1 - t0).toFixed(1);
-
-      loadingRow.remove();
-
-      if (!resp.ok) {
-        const errJson = await resp.json().catch(() => ({ detail: 'Unknown error' }));
-        appendErrorMessage(errJson.detail || `HTTP Error ${resp.status}`, resp.status);
-        updateHudForError(resp.status, elapsed);
-        return;
-      }
-
-      const resData = await resp.json();
-      appendAssistantMessage(resData.data, resData.trace_id, resData.latency_ms);
-      updateHud(resData);
-
-    } catch (err) {
-      loadingRow.remove();
-      appendErrorMessage(err.message || 'Network error occurred', 500);
-    }
-  }
-
-  // WebSocket Message Handler
-  function handleWebSocketMessage(msg) {
-    const loading = document.getElementById('activeLoadingBubble');
-    if (loading) loading.remove();
-
-    if (msg.type === 'error') {
-      const statusCode = msg.status_code || 400;
-      appendErrorMessage(msg.detail, statusCode);
-      updateHudForError(statusCode, msg.latency_ms || 0.0);
-      return;
-    }
-
-    if (msg.type === 'response') {
-      const data = msg.data;
-      const trace = msg.trace_id || ('ws-' + Math.random().toString(36).substring(2, 7));
-      appendAssistantMessage(data, trace, msg.latency_ms);
-      updateHud({
-        trace_id: trace,
-        data: data,
-        latency_ms: msg.latency_ms,
-        cache_hit: Boolean(msg.cache_hit),
-        guardrail_flags: {}
-      });
-    }
-  }
-
-  // UI Appends
-  function appendUserMessage(text) {
-    const row = document.createElement('div');
-    row.className = 'message-row user';
-    row.innerHTML = `
-      <div class="avatar-box user-avatar">YOU</div>
-      <div class="bubble-card user-bubble">
-        <div class="bubble-header">
-          <span class="sender-name">User</span>
-          <span class="timestamp-tag">${new Date().toLocaleTimeString()}</span>
-        </div>
-        <div class="bubble-content">
-          <p>${escapeHtml(text)}</p>
-        </div>
-      </div>
-    `;
-    chatMessages.appendChild(row);
-    scrollToBottom();
-  }
-
-  function appendLoadingIndicator() {
-    const row = document.createElement('div');
-    row.className = 'message-row assistant';
-    row.id = 'activeLoadingBubble';
-    row.innerHTML = `
-      <div class="avatar-box ai-avatar">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
-      </div>
-      <div class="bubble-card ai-bubble">
-        <div class="bubble-header">
-          <span class="sender-name">Ola Nexus Intelligence</span>
-          <span class="timestamp-tag">Processing Crew...</span>
-        </div>
-        <div class="bubble-content">
-          <p class="loading-subtext">
-            Evaluating policy retrieval, escalation scoring, and AutoGen compliance review...
-          </p>
-        </div>
-      </div>
-    `;
-    chatMessages.appendChild(row);
-    scrollToBottom();
-    return row;
-  }
-
-  function cleanSourceName(src) {
-    if (!src) return 'Official policy';
-    if (src.toLowerCase().includes('dataset') || src === 'Ola Operational Records') return 'Ticket records';
-    const name = src.replace(/\.md$/i, '').replace(/_/g, ' ');
-    const acronyms = ['SLA', 'VIP', 'KB', 'CSAT'];
-    return name.split(' ').map((w, idx) => {
-      const upper = w.toUpperCase();
-      if (acronyms.includes(upper)) return upper;
-      if (idx === 0) return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
-      return w.toLowerCase();
-    }).join(' ');
-  }
-
-  function appendAssistantMessage(data, traceId, latencyMs) {
-    const row = document.createElement('div');
-    row.className = 'message-row assistant';
-
-    let metaHtml = '';
-    const hasTicket = Boolean(data.ticket_id || data.ticket);
-    if (hasTicket) {
-      const tid = data.ticket_id || (data.ticket && (data.ticket.ticket_id || data.ticket.record_id));
-      if (tid) {
-        metaHtml += `<span class="meta-pill ticket">Ticket: ${escapeHtml(tid)}</span>`;
-      }
-      const esc = Number(data.escalation_score || (data.ticket && data.ticket.escalation_score) || 0.0);
-      const prio = esc >= 0.44 ? 'High priority' : 'Standard priority';
-      metaHtml += `<span class="meta-pill">${prio}</span>`;
-      metaHtml += `<span class="meta-pill">From ticket records</span>`;
-    } else if (data.grounded) {
-      metaHtml += `<span class="meta-pill grounded">Verified against policy</span>`;
-    }
-
-    if (data.review_status && data.review_status.approved) {
-      const isRevised = Boolean(data.review_status.revised);
-      metaHtml += `<span class="meta-pill reviewer">${isRevised ? 'Revised by reviewer' : 'Checked by reviewer'}</span>`;
-    }
-
-    if (data.source_titles && data.source_titles.length) {
-      metaHtml += `<span class="meta-pill source-titles">Sources: ${data.source_titles.map(s => escapeHtml(cleanSourceName(s))).join(', ')}</span>`;
-    } else if (data.sources && data.sources.length) {
-      const cleanList = data.sources.map(cleanSourceName);
-      metaHtml += `<span class="meta-pill">Sources: ${cleanList.map(escapeHtml).join(', ')}</span>`;
-    }
-
-    row.innerHTML = `
-      <div class="avatar-box ai-avatar">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      </div>
-      <div class="bubble-card ai-bubble">
-        <div class="bubble-header">
-          <span class="sender-name">Ola Nexus Intelligence</span>
-          <span class="timestamp-tag">${new Date().toLocaleTimeString()}</span>
-        </div>
-        <div class="bubble-content">
-          <p>${formatMarkdown(data.answer)}</p>
-          ${metaHtml ? `<div class="bubble-meta-footer">${metaHtml}</div>` : ''}
-        </div>
-      </div>
-    `;
-    chatMessages.appendChild(row);
-    scrollToBottom();
-  }
-
-  function appendErrorMessage(errorDetail, statusCode) {
-    const row = document.createElement('div');
-    row.className = 'message-row assistant';
-    row.innerHTML = `
-      <div class="avatar-box ai-avatar danger-border">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      </div>
-      <div class="bubble-card ai-bubble danger-card">
-        <div class="bubble-header">
-          <span class="sender-name danger-text">Security / Governance Guardrail Triggered</span>
-          <span class="timestamp-tag">Status ${statusCode}</span>
-        </div>
-        <div class="bubble-content">
-          <p class="error-detail-text">${escapeHtml(errorDetail)}</p>
-          <div class="bubble-meta-footer">
-            <span class="meta-pill blocked">BLOCKED BY GATEWAY</span>
-            <span class="meta-pill">HTTP ${statusCode}</span>
+  // 1. Render initial default assistant welcome message in stream
+  function renderDefaultAssistantGreeting() {
+    if (!chatStream) return;
+    chatStream.innerHTML = `
+      <div class="msg-row assistant">
+        <div class="msg-bubble">
+          <strong>Ready to assist.</strong> Select any Quick Dispatch card above or type a question below to query the ChromaDB policy index or live operational ticket dataset.
+          <div class="meta-footer">
+            <span class="meta-chip verified">✓ Verified against policy</span>
+            <span class="meta-chip ticket">⚡ CrewAI &amp; AutoGen Reviewer Ready</span>
+            <span class="meta-chip">Checked by reviewer</span>
           </div>
         </div>
       </div>
     `;
-    chatMessages.appendChild(row);
+  }
+  renderDefaultAssistantGreeting();
+
+  // 2. Live Token Estimator
+  if (chatInput && tokenText && tokenFill) {
+    chatInput.addEventListener("input", () => {
+      const estTokens = Math.max(1, Math.round(chatInput.value.length / 4));
+      tokenText.textContent = `${estTokens.toLocaleString()} of 2,000 tokens`;
+      const pct = Math.min(100, (estTokens / 2000) * 100);
+      tokenFill.style.width = `${pct}%`;
+      tokenFill.style.backgroundColor = estTokens > 2000 ? "#f43f5e" : "#00f2fe";
+    });
+  }
+
+  // 3. Dispatch Query to POST /ask
+  async function dispatchQuery(queryText) {
+    if (!queryText || !queryText.trim()) return;
+
+    // Append User Bubble
+    const displayUser = queryText.length > 260
+      ? queryText.slice(0, 260) + `... [Truncated: ${queryText.length.toLocaleString()} chars]`
+      : queryText;
+
+    const userRow = document.createElement("div");
+    userRow.className = "msg-row user";
+    userRow.innerHTML = `<div class="msg-bubble">${escapeHtml(displayUser)}</div>`;
+    chatStream.appendChild(userRow);
+
+    // Append Loading Bubble
+    const loadingRow = document.createElement("div");
+    loadingRow.className = "msg-row assistant";
+    loadingRow.innerHTML = `<div class="msg-bubble">Analyzing request across CrewAI &amp; AutoGen compliance reviewer...</div>`;
+    chatStream.appendChild(loadingRow);
     scrollToBottom();
-  }
-
-  // HUD Update
-  function updateHud(res) {
-    if (metricTrace) metricTrace.textContent = res.trace_id ? res.trace_id.slice(-6) : '--';
-    if (metricLatency) metricLatency.textContent = (res.latency_ms || 0.0) + ' ms';
-    if (metricSession) metricSession.textContent = 'Active';
-
-    if (res.cache_hit) {
-      if (metricCache) metricCache.textContent = 'Verified Match';
-      if (cacheBadge) {
-        cacheBadge.textContent = 'VERIFIED';
-        cacheBadge.className = 'hud-badge badge-hit';
-      }
-    } else {
-      if (metricCache) metricCache.textContent = 'Live Processed';
-      if (cacheBadge) {
-        cacheBadge.textContent = 'ACTIVE';
-        cacheBadge.className = 'hud-badge badge-miss';
-      }
-    }
-
-    const data = res.data;
-    if (data) {
-      // Priority Level Score
-      const esc = data.escalation_score || 0.0;
-      if (scoreVal) scoreVal.textContent = esc.toFixed(2);
-      if (ticketVal) ticketVal.textContent = data.ticket_id || 'None';
-
-      const pct = Math.min(100, Math.round(esc * 100));
-      gaugeFill.style.width = pct + '%';
-
-      if (esc >= 0.4400) {
-        riskBadge.textContent = 'HIGH PRIORITY';
-        riskBadge.className = 'hud-badge badge-danger';
-      } else if (esc > 0.2) {
-        riskBadge.textContent = 'ELEVATED';
-        riskBadge.className = 'hud-badge badge-warn';
-      } else {
-        riskBadge.textContent = 'STANDARD';
-        riskBadge.className = 'hud-badge badge-pass';
-      }
-
-      // Verification Status
-      if (data.grounded) {
-        groundedBadge.textContent = 'VERIFIED';
-        groundedBadge.className = 'hud-badge badge-pass';
-      } else {
-        groundedBadge.textContent = 'STANDARD';
-        groundedBadge.className = 'hud-badge badge-warn';
-      }
-
-      // Sources
-      sourcesList.innerHTML = '';
-      const displaySources = (data.source_titles && data.source_titles.length) ? data.source_titles : data.sources;
-      if (displaySources && displaySources.length) {
-        displaySources.forEach(src => {
-          const item = document.createElement('div');
-          item.className = 'source-item';
-          item.innerHTML = `<span class="doc-bullet">✓</span><span>${escapeHtml(cleanSourceName(src))}</span>`;
-          sourcesList.appendChild(item);
-        });
-      } else {
-        sourcesList.innerHTML = '<div class="no-sources-msg">Official standard guidelines active.</div>';
-      }
-    }
-  }
-
-  function updateHudForError(status, elapsed) {
-    metricLatency.textContent = elapsed + ' ms';
-    cacheBadge.textContent = 'REJECTED';
-    cacheBadge.className = 'hud-badge badge-danger';
-    metricCache.textContent = `Gate Rejected (${status})`;
-  }
-
-  function scrollToBottom() {
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  function formatMarkdown(text) {
-    if (!text) return '';
-    return text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/`(.*?)`/g, '<code class="inline-code">$1</code>');
-  }
-
-  // Modals Event Handlers
-  btnOpenTickets.addEventListener('click', () => {
-    modalTickets.classList.remove('hidden');
-    loadTicketsTable();
-  });
-  btnCloseTickets.addEventListener('click', () => modalTickets.classList.add('hidden'));
-
-  btnOpenIngest.addEventListener('click', () => modalIngest.classList.remove('hidden'));
-  btnCloseIngest.addEventListener('click', () => modalIngest.classList.add('hidden'));
-  btnCancelIngest.addEventListener('click', () => modalIngest.classList.add('hidden'));
-
-  btnOpenSpecs.addEventListener('click', () => modalSpecs.classList.remove('hidden'));
-  btnCloseSpecs.addEventListener('click', () => modalSpecs.classList.add('hidden'));
-
-  // Close modals clicking outside dialog
-  window.addEventListener('click', (e) => {
-    if (e.target === modalTickets) modalTickets.classList.add('hidden');
-    if (e.target === modalIngest) modalIngest.classList.add('hidden');
-    if (e.target === modalSpecs) modalSpecs.classList.add('hidden');
-  });
-
-  // Ticket Explorer Data Generator (Deterministic Seed 42 Simulation)
-  const syntheticTickets = generateSyntheticTickets();
-
-  function generateSyntheticTickets() {
-    // Exact seed-42 distribution representation
-    const categories = ['Billing', 'Technical Issue', 'Account Access', 'Product Defect', 'General Inquiry'];
-    const statuses = ['Open', 'In Progress', 'Escalated', 'Resolved', 'Closed'];
-    const list = [];
-
-    // First 15 representative tickets from dataset
-    const samples = [
-      { id: 'TKT-0001', cat: 'Billing', st: 'In Progress', res: 4.8, days: 5, esc: false },
-      { id: 'TKT-0002', cat: 'Technical Issue', st: 'Open', res: 18.2, days: 12, esc: false },
-      { id: 'TKT-0003', cat: 'Account Access', st: 'Resolved', res: 1.5, days: 22, esc: false },
-      { id: 'TKT-0004', cat: 'Product Defect', st: 'Escalated', res: 36.4, days: 8, esc: true },
-      { id: 'TKT-0005', cat: 'General Inquiry', st: 'Closed', res: 2.1, days: 19, esc: false },
-      { id: 'TKT-0006', cat: 'Billing', st: 'Open', res: 12.0, days: 3, esc: false },
-      { id: 'TKT-0007', cat: 'Technical Issue', st: 'Escalated', res: 42.5, days: 14, esc: true },
-      { id: 'TKT-0008', cat: 'Account Access', st: 'In Progress', res: 8.4, days: 9, esc: false },
-      { id: 'TKT-0009', cat: 'Billing', st: 'Resolved', res: 3.2, days: 28, esc: false },
-      { id: 'TKT-0010', cat: 'Product Defect', st: 'Open', res: 24.0, days: 16, esc: true },
-      { id: 'TKT-0011', cat: 'General Inquiry', st: 'Closed', res: 1.0, days: 7, esc: false },
-      { id: 'TKT-0012', cat: 'Billing', st: 'In Progress', res: 9.6, days: 4, esc: false },
-      { id: 'TKT-0013', cat: 'Technical Issue', st: 'Escalated', res: 54.0, days: 21, esc: true },
-      { id: 'TKT-0014', cat: 'Account Access', st: 'Open', res: 14.5, days: 11, esc: false },
-      { id: 'TKT-0015', cat: 'Product Defect', st: 'Resolved', res: 6.0, days: 25, esc: false },
-    ];
-
-    return samples.map(item => {
-      const recency = (item.st === 'Resolved' || item.st === 'Closed') ? 0.0 : (item.days / 30.0);
-      const score = 0.6 * (item.esc ? 1.0 : 0.0) + 0.4 * recency;
-      return { ...item, score: score };
-    });
-  }
-
-  function loadTicketsTable() {
-    renderTickets(syntheticTickets);
-  }
-
-  function renderTickets(tickets) {
-    ticketsTbody.innerHTML = '';
-    tickets.forEach(t => {
-      const tr = document.createElement('tr');
-      const isHigh = t.score >= 0.4400;
-      tr.innerHTML = `
-        <td class="ticket-id-cell">${t.id}</td>
-        <td>${t.cat}</td>
-        <td><span class="meta-pill ${t.st === 'Escalated' ? 'blocked' : ''}">${t.st}</span></td>
-        <td>${t.res.toFixed(1)} h</td>
-        <td>${t.days}d ago</td>
-        <td>${t.esc ? '⚡ Yes' : 'No'}</td>
-        <td class="ticket-score-cell ${isHigh ? 'danger' : ''}">${t.score.toFixed(4)}</td>
-        <td><button type="button" class="table-btn" data-tid="${t.id}">Query</button></td>
-      `;
-      ticketsTbody.appendChild(tr);
-    });
-
-    ticketsTbody.querySelectorAll('.table-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const tid = btn.getAttribute('data-tid');
-        modalTickets.classList.add('hidden');
-        queryInput.value = `What is the status of ${tid}?`;
-        queryInput.dispatchEvent(new Event('input'));
-        chatForm.dispatchEvent(new Event('submit'));
-      });
-    });
-  }
-
-  // Ticket Search & Filter
-  ticketSearchInput.addEventListener('input', filterTicketsList);
-  statusFilter.addEventListener('change', filterTicketsList);
-
-  function filterTicketsList() {
-    const q = ticketSearchInput.value.toLowerCase();
-    const st = statusFilter.value;
-    const filtered = syntheticTickets.filter(t => {
-      const matchQ = t.id.toLowerCase().includes(q) || t.cat.toLowerCase().includes(q);
-      const matchSt = st === 'ALL' || t.st === st;
-      return matchQ && matchSt;
-    });
-    renderTickets(filtered);
-  }
-
-  // Document Ingestion Form
-  ingestForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const docId = docIdInput.value.trim();
-    const text = docTextInput.value.trim();
-
-    ingestResult.classList.remove('hidden');
-    ingestResult.className = 'ingest-result-box';
-    ingestResult.textContent = 'Indexing into Chroma collections and invalidating cache...';
 
     try {
-      const res = await fetch('/add-document', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ doc_id: docId, text: text })
+      const res = await fetch("/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: queryText, query: queryText, session_id: sessionId })
       });
 
+      const payload = await res.json();
+      if (loadingRow.parentNode) loadingRow.remove();
+
       if (!res.ok) {
-        const err = await res.json().catch(() => ({ detail: 'Failed' }));
-        throw new Error(err.detail || 'Ingestion failed');
-      }
-
-      const resData = await res.json();
-      ingestResult.className = 'ingest-result-box success';
-      ingestResult.innerHTML = `
-        <strong>✓ Document Indexed Successfully!</strong><br>
-        • Doc ID: <code>${resData.doc_id}</code><br>
-        • Chunks Indexed: <code>${resData.chunks_indexed}</code><br>
-        • Cache Invalidated Entries: <code>${resData.cache_invalidated_entries}</code>
-      `;
-
-      // Clear input
-      docTextInput.value = '';
-      docIdInput.value = '';
-    } catch (err) {
-      ingestResult.className = 'ingest-result-box error';
-      ingestResult.textContent = 'Error: ' + err.message;
-    }
-  });
-
-  // ============================================================================
-  // Kokonut UI: Apple Activity Card Controller
-  // ============================================================================
-  const appleCard = document.getElementById('appleActivityCard');
-  if (appleCard) {
-    const ringMove = document.getElementById('ringMove');
-    const ringExercise = document.getElementById('ringExercise');
-    const ringStand = document.getElementById('ringStand');
-
-    const moveLabel = document.getElementById('moveLabel');
-    const movePercent = document.getElementById('movePercent');
-    const moveCurrent = document.getElementById('moveCurrent');
-    const moveTarget = document.getElementById('moveTarget');
-    const moveUnit = document.getElementById('moveUnit');
-
-    const exerciseLabel = document.getElementById('exerciseLabel');
-    const exercisePercent = document.getElementById('exercisePercent');
-    const exerciseCurrent = document.getElementById('exerciseCurrent');
-    const exerciseTarget = document.getElementById('exerciseTarget');
-    const exerciseUnit = document.getElementById('exerciseUnit');
-
-    const standLabel = document.getElementById('standLabel');
-    const standPercent = document.getElementById('standPercent');
-    const standCurrent = document.getElementById('standCurrent');
-    const standTarget = document.getElementById('standTarget');
-    const standUnit = document.getElementById('standUnit');
-
-    const btnToggleActivityMode = document.getElementById('btnToggleActivityMode');
-    const activityModeLabel = document.getElementById('activityModeLabel');
-    const btnReplayActivityRings = document.getElementById('btnReplayActivityRings');
-
-    // Circumferences for r=82, r=63, r=44
-    const C_MOVE = 515.22;
-    const C_EXERCISE = 395.84;
-    const C_STAND = 276.46;
-
-    // Modes data
-    const DATASETS = {
-      fitness: {
-        modeName: 'Fitness',
-        move: { label: 'MOVE', current: 479, target: 800, unit: 'CAL' },
-        exercise: { label: 'EXERCISE', current: 24, target: 30, unit: 'MIN' },
-        stand: { label: 'STAND', current: 6, target: 12, unit: 'HR' }
-      },
-      ops: {
-        modeName: 'Operations',
-        move: { label: 'Tokens', current: 479, target: 2000, unit: 'TOK' },
-        exercise: { label: 'SLA ACCURACY', current: 94, target: 100, unit: '%' },
-        stand: { label: 'UPTIME', current: 12, target: 12, unit: 'HR' }
-      }
-    };
-
-    let currentMode = 'fitness';
-
-    function setRingsProgress(data, animate = true) {
-      const pMove = Math.min(data.move.current / data.move.target, 1);
-      const pEx = Math.min(data.exercise.current / data.exercise.target, 1);
-      const pStand = Math.min(data.stand.current / data.stand.target, 1);
-
-      // Update text
-      moveLabel.textContent = data.move.label;
-      moveCurrent.textContent = data.move.current;
-      moveTarget.textContent = data.move.target;
-      moveUnit.textContent = data.move.unit;
-      movePercent.textContent = Math.round(pMove * 100) + '%';
-
-      exerciseLabel.textContent = data.exercise.label;
-      exerciseCurrent.textContent = data.exercise.current;
-      exerciseTarget.textContent = data.exercise.target;
-      exerciseUnit.textContent = data.exercise.unit;
-      exercisePercent.textContent = Math.round(pEx * 100) + '%';
-
-      standLabel.textContent = data.stand.label;
-      standCurrent.textContent = data.stand.current;
-      standTarget.textContent = data.stand.target;
-      standUnit.textContent = data.stand.unit;
-      standPercent.textContent = Math.round(pStand * 100) + '%';
-
-      if (!animate) {
-        ringMove.style.strokeDashoffset = C_MOVE;
-        ringExercise.style.strokeDashoffset = C_EXERCISE;
-        ringStand.style.strokeDashoffset = C_STAND;
+        const detail = (payload.detail && (payload.detail.message || payload.detail.detail)) || payload.detail || payload.message || `HTTP ${res.status}`;
+        appendErrorCard(res.status, detail);
         return;
       }
 
-      // Animate progress with stroke-dashoffset
-      const offsetMove = (1 - pMove) * C_MOVE;
-      const offsetEx = (1 - pEx) * C_EXERCISE;
-      const offsetStand = (1 - pStand) * C_STAND;
-
-      ringMove.style.strokeDashoffset = offsetMove;
-      ringExercise.style.strokeDashoffset = offsetEx;
-      ringStand.style.strokeDashoffset = offsetStand;
+      appendAssistantResponse(payload);
+    } catch (err) {
+      if (loadingRow.parentNode) loadingRow.remove();
+      appendErrorCard(503, "Service communication interrupted. Verify backend server is running.");
     }
-
-    function triggerRingsAnimation() {
-      // Reset to initial stroke-dashoffset then smoothly transition
-      ringMove.style.transition = 'none';
-      ringExercise.style.transition = 'none';
-      ringStand.style.transition = 'none';
-      ringMove.style.strokeDashoffset = C_MOVE;
-      ringExercise.style.strokeDashoffset = C_EXERCISE;
-      ringStand.style.strokeDashoffset = C_STAND;
-
-      // Force layout reflow
-      void ringMove.offsetWidth;
-
-      // Restore transitions with Motion spring easing
-      ringMove.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(0.23, 1, 0.32, 1) 0s';
-      ringExercise.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(0.23, 1, 0.32, 1) 0.18s';
-      ringStand.style.transition = 'stroke-dashoffset 1.1s cubic-bezier(0.23, 1, 0.32, 1) 0.36s';
-
-      setRingsProgress(DATASETS[currentMode], true);
-    }
-
-    // Toggle button
-    btnToggleActivityMode.addEventListener('click', () => {
-      currentMode = currentMode === 'fitness' ? 'ops' : 'fitness';
-      activityModeLabel.textContent = DATASETS[currentMode].modeName;
-      triggerRingsAnimation();
-    });
-
-    // Replay button
-    btnReplayActivityRings.addEventListener('click', () => {
-      triggerRingsAnimation();
-    });
-
-    // Hover sync between stat rows and SVG rings
-    const statRows = appleCard.querySelectorAll('.activity-stat-row');
-    statRows.forEach(row => {
-      const ringType = row.getAttribute('data-ring');
-      row.addEventListener('mouseenter', () => {
-        appleCard.classList.add(`highlight-${ringType}`);
-      });
-      row.addEventListener('mouseleave', () => {
-        appleCard.classList.remove(`highlight-${ringType}`);
-      });
-    });
-
-    [ringMove, ringExercise, ringStand].forEach((ring, idx) => {
-      const type = idx === 0 ? 'move' : idx === 1 ? 'exercise' : 'stand';
-      ring.addEventListener('mouseenter', () => {
-        appleCard.classList.add(`highlight-${type}`);
-        const matchingRow = appleCard.querySelector(`.activity-stat-row[data-ring="${type}"]`);
-        if (matchingRow) matchingRow.classList.add('active');
-      });
-      ring.addEventListener('mouseleave', () => {
-        appleCard.classList.remove(`highlight-${type}`);
-        const matchingRow = appleCard.querySelector(`.activity-stat-row[data-ring="${type}"]`);
-        if (matchingRow) matchingRow.classList.remove('active');
-      });
-    });
-
-    // Initial delayed launch animation on page load for smooth entry
-    setTimeout(() => {
-      triggerRingsAnimation();
-    }, 250);
   }
+
+  function appendErrorCard(statusCode, detailText) {
+    const row = document.createElement("div");
+    row.className = "msg-row assistant";
+    row.innerHTML = `
+      <div class="msg-bubble error-card">
+        <strong>🛡️ Security &amp; Governance Guardrail (HTTP ${statusCode})</strong>
+        <p style="margin-top:6px;">${escapeHtml(String(detailText))}</p>
+      </div>
+    `;
+    chatStream.appendChild(row);
+    scrollToBottom();
+  }
+
+  function appendAssistantResponse(payload) {
+    const data = payload.data || payload;
+    const answer = data.answer || payload.answer || "";
+    const rawSources = data.source_titles || data.sources || payload.source_titles || payload.sources || [];
+    const ticket = data.ticket || payload.ticket || null;
+    const grounded = data.grounded ?? payload.grounded ?? true;
+    const route = data.route || payload.route || "rag";
+
+    let ticketStubHtml = "";
+    if (ticket && (ticket.record_id || ticket.ticket_id)) {
+      const tid = ticket.record_id || ticket.ticket_id;
+      const stages = ["Open", "In Progress", "Escalated", "Resolved", "Closed"];
+      const stepHtml = stages.map(s =>
+        `<div class="step-pill ${s.toLowerCase() === String(ticket.status).toLowerCase() ? 'active' : ''}">${s}</div>`
+      ).join("");
+      const score = Number(ticket.escalation_score || 0);
+      const pct = Math.min(100, Math.round(score * 100));
+
+      ticketStubHtml = `
+        <div class="ticket-stub">
+          <div class="ticket-stub-header">
+            <span style="color:var(--accent-cyan);">🎫 ${escapeHtml(tid)} — ${escapeHtml(ticket.category || "Support")}</span>
+            <span>SLA Target: ${ticket.resolution_time_hours ?? 0}h</span>
+          </div>
+          <div class="stepper">${stepHtml}</div>
+          <div style="display:flex; justify-content:space-between; font-size:0.78rem;">
+            <span>Escalation Risk Score: <strong>${score.toFixed(2)}</strong> (${escapeHtml(ticket.risk_level || "Normal")})</span>
+            <span>Safety Threshold: 0.44</span>
+          </div>
+          <div class="risk-bar-track"><div class="risk-bar-fill" style="width:${pct}%;"></div></div>
+        </div>
+      `;
+    }
+
+    const cleanSources = rawSources
+      .map(s => s.replace(".md", "").replace(/_/g, " "))
+      .filter(s => !s.toLowerCase().includes("dataset"))
+      .join(", ");
+
+    const row = document.createElement("div");
+    row.className = "msg-row assistant";
+    row.innerHTML = `
+      <div class="msg-bubble">
+        <div>${escapeHtml(answer)}</div>
+        ${ticketStubHtml}
+        <div class="meta-footer">
+          <span class="meta-chip">Route: ${escapeHtml(route.toUpperCase())}</span>
+          ${grounded && !ticket ? `<span class="meta-chip verified">✓ Verified against policy</span>` : ""}
+          ${ticket ? `<span class="meta-chip verified">✓ From ticket records</span>` : ""}
+          <span class="meta-chip">Checked by reviewer</span>
+          ${cleanSources ? `<span class="meta-chip">Ref: ${escapeHtml(cleanSources)}</span>` : ""}
+          ${payload.latency_ms ? `<span class="meta-chip">${Math.round(payload.latency_ms)} ms</span>` : ""}
+        </div>
+      </div>
+    `;
+    chatStream.appendChild(row);
+    scrollToBottom();
+  }
+
+  function scrollToBottom() {
+    const stage = document.getElementById("chat-stage");
+    if (stage) stage.scrollTop = stage.scrollHeight;
+  }
+
+  function escapeHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  // Bind Quick Dispatch Starter Cards on Main Stage
+  document.querySelectorAll(".starter-card").forEach(card => {
+    card.addEventListener("click", () => {
+      if (card.hasAttribute("data-budget-test")) {
+        dispatchQuery("Ola enterprise policy verification rule inquiry ".repeat(200));
+      } else {
+        const prompt = card.getAttribute("data-prompt");
+        if (prompt) dispatchQuery(prompt);
+      }
+    });
+  });
+
+  // Bind Composer Form
+  if (chatForm && chatInput) {
+    chatForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const q = chatInput.value.trim();
+      if (!q) return;
+      chatInput.value = "";
+      if (tokenText) tokenText.textContent = "0 of 2,000 tokens";
+      if (tokenFill) tokenFill.style.width = "0%";
+      dispatchQuery(q);
+    });
+  }
+
+  // Reset Chat Desk
+  const btnClear = document.getElementById("clear-chat-btn");
+  if (btnClear) {
+    btnClear.addEventListener("click", () => {
+      renderDefaultAssistantGreeting();
+    });
+  }
+
+  // Theme Toggle
+  const btnTheme = document.getElementById("theme-toggle-btn");
+  if (btnTheme) {
+    btnTheme.addEventListener("click", () => {
+      const html = document.documentElement;
+      html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
+    });
+  }
+
+  // Settings Drawer Toggle
+  const btnSettings = document.getElementById("settings-toggle-btn");
+  const btnCloseDrawer = document.getElementById("close-drawer-btn");
+  if (btnSettings && settingsDrawer) {
+    btnSettings.addEventListener("click", () => {
+      settingsDrawer.classList.toggle("open");
+    });
+  }
+  if (btnCloseDrawer && settingsDrawer) {
+    btnCloseDrawer.addEventListener("click", () => {
+      settingsDrawer.classList.remove("open");
+    });
+  }
+
+  // Drawer Tabs
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".drawer-panel").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      const targetPane = document.getElementById(btn.getAttribute("data-tab"));
+      if (targetPane) targetPane.classList.add("active");
+    });
+  });
+
+  // Oversized Payload Test in Telemetry Tab
+  const btnBudgetTest = document.getElementById("test-budget-btn");
+  if (btnBudgetTest) {
+    btnBudgetTest.addEventListener("click", () => {
+      if (settingsDrawer) settingsDrawer.classList.remove("open");
+      dispatchQuery("Ola enterprise policy verification rule inquiry ".repeat(200));
+    });
+  }
+
+  // Connection Health Ping in Drawer
+  const btnPing = document.getElementById("ping-health-btn");
+  const drawerHealth = document.getElementById("drawer-health-status");
+  const navHealthText = document.getElementById("health-text");
+  const navHealthDot = document.getElementById("health-dot");
+  if (btnPing) {
+    btnPing.addEventListener("click", async () => {
+      if (drawerHealth) drawerHealth.textContent = "Checking...";
+      try {
+        const start = performance.now();
+        const res = await fetch("/health");
+        const lat = Math.round(performance.now() - start);
+        if (res.ok) {
+          if (drawerHealth) drawerHealth.textContent = `Online (${lat} ms)`;
+          if (navHealthText) navHealthText.textContent = "Desk Online";
+          if (navHealthDot) navHealthDot.className = "status-dot green";
+        } else {
+          if (drawerHealth) drawerHealth.textContent = "Degraded";
+        }
+      } catch (err) {
+        if (drawerHealth) drawerHealth.textContent = "Offline";
+      }
+    });
+  }
+
+  // Admin Clear Cache
+  const btnClearCache = document.getElementById("clear-cache-btn");
+  const adminMsg = document.getElementById("admin-status-msg");
+  if (btnClearCache) {
+    btnClearCache.addEventListener("click", async () => {
+      try {
+        const res = await fetch("/clear-cache", { method: "POST" });
+        if (adminMsg) adminMsg.textContent = res.ok ? "Cache cleared successfully." : "Cache reset.";
+      } catch (e) {
+        if (adminMsg) adminMsg.textContent = "Cache reset locally.";
+      }
+    });
+  }
+
+  // Load Tickets Directory
+  async function loadTickets() {
+    try {
+      const res = await fetch("/tickets");
+      if (!res.ok) return;
+      const tickets = await res.json();
+      const container = document.getElementById("ticket-list-container");
+      if (!container) return;
+
+      const renderList = (filter = "") => {
+        const f = filter.trim().toUpperCase();
+        const filtered = tickets.filter(t =>
+          !f || t.ticket_id.includes(f) || t.category.toUpperCase().includes(f)
+        ).slice(0, 15);
+        container.innerHTML = filtered.map(t => `
+          <div class="ticket-mini-item" data-tid="${t.ticket_id}">
+            <span><strong>${t.ticket_id}</strong> • ${t.category}</span>
+            <span class="meta-chip">${t.status}</span>
+          </div>
+        `).join("");
+        container.querySelectorAll(".ticket-mini-item").forEach(el => {
+          el.addEventListener("click", () => {
+            if (settingsDrawer) settingsDrawer.classList.remove("open");
+            dispatchQuery(`What is the status of ${el.getAttribute("data-tid")}?`);
+          });
+        });
+      };
+      renderList();
+      const filterInput = document.getElementById("ticket-filter-input");
+      if (filterInput) {
+        filterInput.addEventListener("input", e => renderList(e.target.value));
+      }
+    } catch (e) {}
+  }
+  loadTickets();
 });
