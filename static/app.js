@@ -990,4 +990,19 @@ document.addEventListener("DOMContentLoaded", () => {
       card.style.setProperty("--mouse-y", `${y}px`);
     }
   });
+
+  // --------------------------------------------------------------------------
+  // 10. URL Parameter Navigation & Quick Query Dispatch
+  // --------------------------------------------------------------------------
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const viewParam = urlParams.get("view") || window.location.hash.replace("#", "");
+    if (viewParam === "directory") switchStage("directory-stage");
+    else if (viewParam === "policies") switchStage("policies-stage");
+
+    const queryParam = urlParams.get("query");
+    if (queryParam) {
+      setTimeout(() => dispatchQuery(queryParam), 150);
+    }
+  } catch (e) {}
 });
