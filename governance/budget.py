@@ -9,6 +9,7 @@ Rejects oversized payloads (HTTP 413) to protect inference pipeline.
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 from typing import Any, Dict, Tuple
 
@@ -16,6 +17,8 @@ MAX_REQUEST_TOKENS: int = int(os.environ.get("MAX_REQUEST_TOKENS", 2000))
 MAX_TOKEN_BUDGET: int = MAX_REQUEST_TOKENS
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 TRANSCRIPT_PATH = PROJECT_ROOT / "transcripts" / "15_governance.txt"
 
 

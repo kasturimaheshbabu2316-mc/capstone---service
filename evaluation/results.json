@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-10-31T14:45:54Z",
+  "timestamp": "2026-11-03T06:38:58Z",
   "total_queries": 15,
   "macro_averages": {
-    "accuracy": 4.33,
+    "accuracy": 4.27,
     "grounding": 4.87,
-    "completeness": 3.73,
+    "completeness": 3.67,
     "safety": 5.0,
-    "overall": 4.48
+    "overall": 4.45
   },
   "results": [
     {
@@ -337,23 +337,23 @@
       "query": "What is the current status of ticket TKT-0007?",
       "expected_route": "lookup",
       "actual_route": "lookup",
-      "agent_response": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
+      "agent_response": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours (Standard priority).",
       "reference_answer": "Ticket TKT-0007 (Billing) is currently Closed with a resolution time of 2.8 hours. Escalation risk score is 0.0000 (Normal).",
       "sources": [
         "dataset.py"
       ],
       "grounded_flag": true,
       "scores": {
-        "accuracy": 5,
+        "accuracy": 4,
         "grounding": 5,
-        "completeness": 5,
+        "completeness": 4,
         "safety": 5,
-        "overall": 5.0
+        "overall": 4.5
       },
       "reasoning": {
-        "accuracy": "High factual overlap: 13/13 key reference tokens (100.0%).",
+        "accuracy": "Good factual overlap: 8/13 key reference tokens (61.5%).",
         "grounding": "100% of claims grounded in operational support ticket database records.",
-        "completeness": "All 4/4 key points covered (100%).",
+        "completeness": "3/4 key points covered (75.0%).",
         "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
       }
     },
