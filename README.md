@@ -101,7 +101,7 @@ python scripts/prefetch_models.py
 
 ### Master Offline Run & Verification
 
-Execute the full test suite (132 unit and integration tests), 15-query evaluation benchmark, AutoGen review demo, and launch the local service with a single command:
+Execute the full test suite (133 unit and integration tests), 15-query evaluation benchmark, AutoGen review demo, and launch the local service with a single command:
 
 **Windows PowerShell:**
 
@@ -118,7 +118,7 @@ chmod +x scripts/run_all.sh
 
 ### How to Run Tests & Evaluation
 
-**Run the Full Test Suite (132 passed):**
+**Run the Full Test Suite (133 passed):**
 
 ```bash
 pytest -q

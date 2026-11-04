@@ -101,6 +101,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // AI Animated Bot Click in Empty State
+  const emptyStateBot = document.getElementById("empty-state-bot");
+  if (emptyStateBot) {
+    emptyStateBot.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setExamplesPopoverVisible(true);
+    });
+  }
+
+  // AI Bot Popover Filter Tabs
+  document.querySelectorAll(".bot-filter-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      document.querySelectorAll(".bot-filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.getAttribute("data-filter") || "all";
+      document.querySelectorAll(".starter-card").forEach(card => {
+        if (filter === "all") {
+          card.style.display = "";
+        } else {
+          const cat = card.getAttribute("data-category");
+          card.style.display = (cat === filter) ? "" : "none";
+        }
+      });
+    });
+  });
+
   document.addEventListener("click", (e) => {
     if (examplesPopover && !examplesPopover.classList.contains("stage-hidden")) {
       if (!examplesPopover.contains(e.target) && e.target !== examplesToggleBtn) {
