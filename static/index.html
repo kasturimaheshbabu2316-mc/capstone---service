@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ola Support Intelligence — Enterprise Operations Desk</title>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' ws: wss:; script-src 'self' 'unsafe-inline';">
-  <link rel="stylesheet" href="/static/style.css?v=7.0">
+  <link rel="stylesheet" href="/static/style.css?v=8.0">
 </head>
 <body>
 
@@ -358,14 +358,14 @@
         type="text"
         id="chat-input"
         class="composer-input"
-        placeholder="Ask an official policy question or enter a ticket ID (e.g., What is the status of TKT-0007?)..."
+        placeholder="Enter your quire..."
         autocomplete="off"
-        aria-label="Query or ticket input"
-        title="Chat Input"
+        aria-label="Enter your quire"
+        title="Enter your quire"
       >
       <button type="submit" class="send-btn" id="send-btn">Send ↵</button>
     </form>
-    <div class="composer-footer">
+    <div class="composer-footer stage-hidden">
       <span id="token-counter-text">0 of 2,000 tokens</span>
       <div class="token-bar">
         <div class="token-bar-fill" id="token-bar-fill"></div>
@@ -387,6 +387,6 @@
     </div>
   </div>
 
-  <script src="/static/app.js?v=7.0"></script>
+  <script src="/static/app.js?v=8.0"></script>
 </body>
 </html>
