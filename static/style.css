@@ -1231,8 +1231,18 @@ body {
 
 .btn-examples-toggle {
   font-size: 0.82rem;
-  padding: 8px 12px;
+  padding: 8px 14px;
   white-space: nowrap;
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.45);
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.2);
+  transition: all 0.25s ease;
+}
+
+.btn-examples-toggle:hover {
+  background: rgba(0, 242, 254, 0.18);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 18px rgba(0, 242, 254, 0.4);
 }
 
 /* Guardrail Notices */
