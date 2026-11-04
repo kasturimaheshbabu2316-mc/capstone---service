@@ -257,7 +257,10 @@ def index_endpoint():
     """Serves the interactive Glassmorphism UI or JSON status."""
     index_file = static_dir / "index.html"
     if index_file.exists():
-        return FileResponse(str(index_file))
+        return FileResponse(
+            str(index_file),
+            headers={"Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"},
+        )
     return {"message": "Ola Domain Support Agent API", "status": "running"}
 
 
