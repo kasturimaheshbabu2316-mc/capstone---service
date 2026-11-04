@@ -256,7 +256,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------------------------------------------------------------------
   let isDetailsOn = false;
   try {
-    isDetailsOn = localStorage.getItem("ola_show_details") === "true";
+    localStorage.setItem("ola_show_details", "false");
+    isDetailsOn = false;
   } catch (e) {
     isDetailsOn = false;
   }
@@ -697,11 +698,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!ticket && cleanSources.length > 0) {
       const sourcesBtn = document.createElement("button");
       sourcesBtn.type = "button";
-      sourcesBtn.className = "sources-toggle-btn";
+      sourcesBtn.className = "sources-toggle-btn stage-hidden";
+      sourcesBtn.style.display = "none";
       sourcesBtn.textContent = `Sources (${cleanSources.length}) ▾`;
 
       const sourcesPane = document.createElement("div");
-      sourcesPane.className = "sources-expand-pane";
+      sourcesPane.className = "sources-expand-pane stage-hidden";
       sourcesPane.style.display = "none";
 
       const ul = document.createElement("ul");
@@ -724,9 +726,10 @@ document.addEventListener("DOMContentLoaded", () => {
       bubble.appendChild(sourcesPane);
     }
 
-    // 5. Technical Details (Route, Reviewer, Timing, Pipeline — Shown only when Details is ON)
+    // 5. Technical Details (Route, Reviewer, Timing, Pipeline — Hidden for all retrieval answers to protect sensitive information)
     const techDetails = document.createElement("div");
-    techDetails.className = "technical-details";
+    techDetails.className = "technical-details stage-hidden";
+    techDetails.style.display = "none";
 
     const metaFooter = document.createElement("div");
     metaFooter.className = "meta-footer";

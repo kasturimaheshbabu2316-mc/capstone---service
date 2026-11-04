@@ -1279,57 +1279,22 @@ body {
   gap: 4px;
 }
 
-/* Sources Accordion */
+/* Sources Accordion & Technical Details (Hidden for all retrieval answers to protect sensitive information) */
 .sources-toggle-btn {
-  background: transparent;
-  border: 1px solid var(--glass-border);
-  color: var(--text-secondary);
-  font-size: 0.75rem;
-  padding: 3px 9px;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.15s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.sources-toggle-btn:hover {
-  border-color: var(--glass-border-highlight);
-  color: var(--text-primary);
+  display: none !important;
 }
 
 .sources-expand-pane {
-  margin-top: 8px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--glass-border);
-  font-size: 0.78rem;
-  color: var(--text-secondary);
+  display: none !important;
 }
 
-.sources-expand-pane ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 4px 0 0;
-}
-
-.sources-expand-pane li {
-  padding: 2px 0;
-}
-
-/* Technical Details Toggle */
+/* Technical Details Toggle (Hidden for all retrieval answers to protect sensitive information) */
 .technical-details {
-  display: none;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px dashed var(--glass-border);
+  display: none !important;
 }
 
 body.show-details .technical-details {
-  display: block;
+  display: none !important;
 }
 
 /* ==============================================================================
