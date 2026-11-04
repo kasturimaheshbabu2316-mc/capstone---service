@@ -98,6 +98,7 @@ body {
   font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  white-space: nowrap;
   background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
   -webkit-background-clip: text;
   background-clip: text;
