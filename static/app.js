@@ -136,78 +136,63 @@ function createAgentDogLoadingCard() {
 function createAgentDogSpeakingAvatar() {
   return `
     <div class="agent-dog-speaker-avatar" title="Ola AI & Sparky 🐶">
-      <svg class="agent-speaking-svg" width="95" height="70" viewBox="0 0 150 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="cyanGlowSpeak" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
+      <div class="response-bot-rig pose-talking">
+        <!-- Left Moving Arm -->
+        <div class="bot-arm arm-left">
+          <div class="bot-shoulder"></div>
+          <div class="bot-forearm"></div>
+          <div class="bot-hand"><div class="bot-thumb"></div></div>
+        </div>
 
-        <!-- AGENT SPEAKING OUTPUT (Visual mouth cadence) -->
-        <g class="bot-group">
-          <line x1="46" y1="12" x2="46" y2="18" stroke="#00f2fe" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="46" cy="10" r="3" fill="#00f2fe" filter="url(#cyanGlowSpeak)"/>
+        <!-- Central Humanoid Column -->
+        <div class="bot-torso-column">
+          <div class="bot-head-wrapper">
+            <div class="bot-antenna"><div class="bot-antenna-orb"></div></div>
+            <div class="bot-head">
+              <div class="bot-visor-shine"></div>
+              <div class="bot-face">
+                <div class="bot-eyes-row">
+                  <div class="bot-eye"><div class="bot-pupil"></div></div>
+                  <div class="bot-eye"><div class="bot-pupil"></div></div>
+                </div>
+                <div class="bot-mouth talking"></div>
+                <div class="bot-blush-left"></div>
+                <div class="bot-blush-right"></div>
+              </div>
+            </div>
+          </div>
 
-          <rect x="28" y="18" width="36" height="26" rx="8" fill="#0b1728" stroke="#00f2fe" stroke-width="1.8" filter="url(#cyanGlowSpeak)"/>
-          
-          <!-- Happy Sparkling Eyes -->
-          <rect x="34" y="24" width="6" height="7" rx="3" fill="#00f2fe"/>
-          <rect x="52" y="24" width="6" height="7" rx="3" fill="#00f2fe"/>
-          <circle cx="37" cy="26" r="1.2" fill="#ffffff"/>
-          <circle cx="55" cy="26" r="1.2" fill="#ffffff"/>
-          <ellipse cx="32" cy="33" rx="2.5" ry="1.5" fill="rgba(0, 242, 254, 0.5)"/>
-          <ellipse cx="60" cy="33" rx="2.5" ry="1.5" fill="rgba(0, 242, 254, 0.5)"/>
+          <div class="bot-body">
+            <div class="bot-chest-core">⚡</div>
+            <div class="bot-belt"></div>
+          </div>
 
-          <!-- SPEAKING MOUTH CADENCE (Visual animation) -->
-          <path class="bot-mouth-speaking" d="M41 36 Q46 43 51 36" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="rgba(0, 242, 254, 0.25)"/>
+          <div class="bot-hover-thruster">
+            <div class="bot-thrust-glow"></div>
+          </div>
+        </div>
 
-          <!-- Torso -->
-          <rect x="33" y="45" width="26" height="20" rx="6" fill="#0f2038" stroke="#00f2fe" stroke-width="1.4"/>
-          <circle cx="46" cy="54" r="3.5" fill="#00f2fe" filter="url(#cyanGlowSpeak)"/>
+        <!-- Right Moving Arm -->
+        <div class="bot-arm arm-right">
+          <div class="bot-shoulder"></div>
+          <div class="bot-forearm"></div>
+          <div class="bot-hand"><div class="bot-thumb"></div></div>
+        </div>
 
-          <!-- Gesturing Hands Explaining -->
-          <path class="bot-hand-gesturing-left" d="M33 48 L22 56 L18 52" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <circle cx="18" cy="52" r="2.5" fill="#00f2fe"/>
-
-          <path class="bot-hand-gesturing-right" d="M59 48 L68 54 L72 50" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <circle cx="72" cy="50" r="2.5" fill="#00f2fe"/>
-        </g>
-
-        <!-- PUPPY SITTING HAPPILY BESIDE AGENT 🐶 -->
-        <g class="dog-group" transform="translate(16, 0)">
-          <path class="dog-tail" d="M108 62 Q118 52 116 44" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#cyanGlowSpeak)"/>
-          <circle cx="116" cy="44" r="2" fill="#00f2fe"/>
-
-          <ellipse cx="98" cy="62" rx="14" ry="10" fill="#0c192d" stroke="#00f2fe" stroke-width="1.5"/>
-
-          <rect x="88" y="68" width="5" height="8" rx="2.5" fill="#00f2fe"/>
-          <rect x="100" y="68" width="5" height="8" rx="2.5" fill="#00f2fe"/>
-
-          <path d="M91 50 Q98 55 105 50" stroke="#f59e0b" stroke-width="2" fill="none"/>
-          <circle cx="98" cy="54" r="2" fill="#f59e0b" filter="url(#cyanGlowSpeak)"/>
-
-          <circle cx="98" cy="42" r="11" fill="#0f223d" stroke="#00f2fe" stroke-width="1.6" filter="url(#cyanGlowSpeak)"/>
-
-          <path class="dog-ear-left" d="M90 38 Q82 30 88 26 Q94 30 92 36" fill="#00f2fe" opacity="0.85"/>
-          <path class="dog-ear-right" d="M106 38 Q114 30 108 26 Q102 30 104 36" fill="#00f2fe" opacity="0.85"/>
-
-          <ellipse cx="94" cy="41" rx="2" ry="2.5" fill="#ffffff"/>
-          <circle cx="94" cy="40.5" r="1.2" fill="#00f2fe"/>
-          <circle cx="95" cy="40" r="0.5" fill="#ffffff"/>
-
-          <ellipse cx="102" cy="41" rx="2" ry="2.5" fill="#ffffff"/>
-          <circle cx="102" cy="40.5" r="1.2" fill="#00f2fe"/>
-          <circle cx="103" cy="40" r="0.5" fill="#ffffff"/>
-
-          <ellipse cx="98" cy="46" rx="4" ry="3" fill="#081424"/>
-          <polygon points="97,45 99,45 98,47" fill="#00f2fe"/>
-          <path d="M97 48 Q98 51 99 48" stroke="#ff477e" stroke-width="1.8" fill="#ff477e" stroke-linecap="round"/>
-        </g>
-      </svg>
+        <!-- Cyber Puppy Sitting Beside Robot -->
+        <div class="dog-companion">
+          <div class="dog-head">
+            <div class="dog-ear-l"></div>
+            <div class="dog-ear-r"></div>
+            <div class="dog-eye-l"></div>
+            <div class="dog-eye-r"></div>
+            <div class="dog-nose"></div>
+          </div>
+          <div class="dog-body">
+            <div class="dog-tail"></div>
+          </div>
+        </div>
+      </div>
       <span class="avatar-tag-label">AI &amp; Sparky 🐾</span>
     </div>
   `;

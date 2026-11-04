@@ -2224,3 +2224,411 @@ body.show-details .technical-details {
 .laser-scan-3d {
   animation: laserScan3D 1.1s ease-in-out infinite;
 }
+
+
+/* ==============================================================================
+   Articulated Response AI Bot & Cyber Puppy Companion Rig
+   ============================================================================== */
+
+.response-bot-rig {
+  position: relative;
+  width: 90px;
+  height: 98px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 600px;
+  transform-style: preserve-3d;
+}
+
+/* Central Humanoid Column */
+.response-bot-rig .bot-torso-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+  animation: responseBotFloat 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes responseBotFloat {
+  0% { transform: translateY(0px) rotateX(2deg); }
+  100% { transform: translateY(-7px) rotateX(-2deg); }
+}
+
+/* Antenna & Glowing Orb */
+.response-bot-rig .bot-antenna {
+  width: 2.5px;
+  height: 9px;
+  background: #00f2fe;
+  border-radius: 2px;
+  position: relative;
+  margin-bottom: -1px;
+  box-shadow: 0 0 6px #00f2fe;
+}
+
+.response-bot-rig .bot-antenna-orb {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00f2fe;
+  box-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe;
+  animation: orbPulse 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes orbPulse {
+  0% { transform: translateX(-50%) scale(0.9); opacity: 0.8; }
+  100% { transform: translateX(-50%) scale(1.25); opacity: 1; box-shadow: 0 0 16px #00f2fe, 0 0 26px #00f2fe; }
+}
+
+/* 3D Head & Visor */
+.response-bot-rig .bot-head {
+  width: 44px;
+  height: 35px;
+  background: linear-gradient(145deg, #163254, #081426);
+  border: 2px solid #00f2fe;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.response-bot-rig .bot-visor-shine {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  right: 5px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  border-radius: 3px;
+}
+
+/* Face & Eyes */
+.response-bot-rig .bot-face {
+  position: relative;
+  width: 34px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.response-bot-rig .bot-eyes-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 24px;
+  margin-top: 1px;
+}
+
+.response-bot-rig .bot-eye {
+  width: 8px;
+  height: 9px;
+  background: #00f2fe;
+  border-radius: 3.5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 8px #00f2fe;
+  animation: eyeBlink 4s infinite;
+}
+
+.response-bot-rig .bot-pupil {
+  position: absolute;
+  width: 3.5px;
+  height: 4.5px;
+  background: #ffffff;
+  border-radius: 50%;
+  top: 1.5px;
+  left: 1.5px;
+  box-shadow: 0 0 3px #ffffff;
+  animation: pupilCurious 3s ease-in-out infinite alternate;
+}
+
+@keyframes eyeBlink {
+  0%, 96%, 100% { transform: scaleY(1); }
+  98% { transform: scaleY(0.1); }
+}
+
+@keyframes pupilCurious {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(1px, 1px); }
+  100% { transform: translate(-1px, 0); }
+}
+
+/* Speaking Mouth Cadence */
+.response-bot-rig .bot-mouth {
+  width: 8px;
+  height: 3px;
+  border-bottom: 2px solid #00f2fe;
+  border-radius: 0 0 6px 6px;
+  margin-top: 3px;
+  transition: all 0.2s ease;
+}
+
+.response-bot-rig .bot-mouth.talking {
+  animation: mouthTalkCadence 0.32s ease-in-out infinite alternate;
+}
+
+@keyframes mouthTalkCadence {
+  0% { height: 2px; border-radius: 0 0 4px 4px; }
+  50% { height: 7px; background: rgba(0, 242, 254, 0.45); border-radius: 0 0 8px 8px; }
+  100% { height: 4px; background: rgba(0, 242, 254, 0.2); border-radius: 0 0 6px 6px; }
+}
+
+.response-bot-rig .bot-blush-left,
+.response-bot-rig .bot-blush-right {
+  position: absolute;
+  width: 4px;
+  height: 2.5px;
+  background: rgba(0, 242, 254, 0.5);
+  border-radius: 50%;
+  bottom: 2px;
+}
+.response-bot-rig .bot-blush-left { left: 0px; }
+.response-bot-rig .bot-blush-right { right: 0px; }
+
+/* Torso & Reactor Core */
+.response-bot-rig .bot-body {
+  width: 32px;
+  height: 24px;
+  background: linear-gradient(145deg, #132a48, #071222);
+  border: 1.6px solid #00f2fe;
+  border-radius: 8px;
+  margin-top: 2px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+}
+
+.response-bot-rig .bot-chest-core {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00f2fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.52rem;
+  color: #050d1a;
+  font-weight: 800;
+  box-shadow: 0 0 8px #00f2fe, 0 0 16px #00f2fe;
+  animation: corePulse 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes corePulse {
+  0% { transform: scale(0.9); box-shadow: 0 0 8px #00f2fe; }
+  100% { transform: scale(1.15); box-shadow: 0 0 16px #00f2fe, 0 0 24px #00f2fe; }
+}
+
+.response-bot-rig .bot-belt {
+  position: absolute;
+  bottom: 2px;
+  width: 20px;
+  height: 1.5px;
+  background: rgba(0, 242, 254, 0.4);
+  border-radius: 2px;
+}
+
+/* Hover Thruster */
+.response-bot-rig .bot-hover-thruster {
+  width: 18px;
+  height: 5px;
+  background: #0b1a2e;
+  border: 1.2px solid #00f2fe;
+  border-radius: 0 0 6px 6px;
+  position: relative;
+  margin-top: -1px;
+}
+
+.response-bot-rig .bot-thrust-glow {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 12px;
+  background: radial-gradient(ellipse at top, #00f2fe 0%, #4facfe 50%, transparent 80%);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px #00f2fe);
+  animation: thrustPulse 0.38s ease-in-out infinite alternate;
+}
+
+@keyframes thrustPulse {
+  0% { transform: translateX(-50%) scaleY(0.7) scaleX(0.85); opacity: 0.7; }
+  100% { transform: translateX(-50%) scaleY(1.3) scaleX(1.15); opacity: 1; filter: drop-shadow(0 0 12px #00f2fe); }
+}
+
+/* Articulated Gesturing Arms */
+.response-bot-rig .bot-arm {
+  position: absolute;
+  top: 40px;
+  width: 18px;
+  height: 22px;
+  z-index: 4;
+}
+
+.response-bot-rig .bot-arm.arm-left {
+  left: 8px;
+  transform-origin: top right;
+  animation: armGestureL 2s ease-in-out infinite alternate;
+}
+
+.response-bot-rig .bot-arm.arm-right {
+  right: 8px;
+  transform-origin: top left;
+  animation: armGestureR 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes armGestureL {
+  0% { transform: rotate(10deg); }
+  50% { transform: rotate(-18deg) translateY(-3px); }
+  100% { transform: rotate(4deg); }
+}
+
+@keyframes armGestureR {
+  0% { transform: rotate(-10deg); }
+  50% { transform: rotate(22deg) translateY(-4px); }
+  100% { transform: rotate(-4deg); }
+}
+
+.response-bot-rig .bot-shoulder {
+  width: 5px;
+  height: 5px;
+  background: #00f2fe;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #00f2fe;
+}
+
+.response-bot-rig .bot-forearm {
+  width: 3.5px;
+  height: 12px;
+  background: linear-gradient(180deg, #00f2fe, #4facfe);
+  border-radius: 2px;
+  margin: 1px 0 0 1px;
+}
+
+.response-bot-rig .bot-hand {
+  width: 6px;
+  height: 6px;
+  background: #00f2fe;
+  border-radius: 50%;
+  margin-top: -1px;
+  position: relative;
+  box-shadow: 0 0 5px #00f2fe;
+}
+
+.response-bot-rig .bot-thumb {
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  background: #ffffff;
+  border-radius: 50%;
+  top: 1px;
+  right: -1px;
+}
+
+/* Cyber Puppy Companion Beside Robot */
+.response-bot-rig .dog-companion {
+  position: absolute;
+  bottom: -2px;
+  right: -16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 6;
+}
+
+.response-bot-rig .dog-head {
+  width: 22px;
+  height: 20px;
+  background: linear-gradient(145deg, #132845, #081525);
+  border: 1.5px solid #00f2fe;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(0, 242, 254, 0.4);
+  animation: dogHeadBob 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes dogHeadBob {
+  0% { transform: rotate(-4deg); }
+  100% { transform: rotate(8deg) translateY(-2px); }
+}
+
+.response-bot-rig .dog-ear-l,
+.response-bot-rig .dog-ear-r {
+  position: absolute;
+  top: -4px;
+  width: 7px;
+  height: 10px;
+  background: #00f2fe;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.9;
+}
+.response-bot-rig .dog-ear-l { left: 0; transform: rotate(-25deg); animation: earWiggle 1.4s ease-in-out infinite alternate; }
+.response-bot-rig .dog-ear-r { right: 0; transform: rotate(25deg); animation: earWiggle 1.8s ease-in-out infinite alternate; }
+
+@keyframes earWiggle {
+  0% { transform: scaleY(1); }
+  100% { transform: scaleY(0.8) translateY(1px); }
+}
+
+.response-bot-rig .dog-eye-l,
+.response-bot-rig .dog-eye-r {
+  position: absolute;
+  top: 6px;
+  width: 3.5px;
+  height: 4.5px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+.response-bot-rig .dog-eye-l { left: 5px; }
+.response-bot-rig .dog-eye-r { right: 5px; }
+
+.response-bot-rig .dog-nose {
+  position: absolute;
+  bottom: 4px;
+  width: 4px;
+  height: 3px;
+  background: #00f2fe;
+  border-radius: 50%;
+}
+
+.response-bot-rig .dog-body {
+  width: 20px;
+  height: 15px;
+  background: #0c1a2d;
+  border: 1.2px solid #00f2fe;
+  border-radius: 8px 8px 10px 10px;
+  margin-top: -3px;
+  position: relative;
+}
+
+.response-bot-rig .dog-tail {
+  position: absolute;
+  bottom: 2px;
+  right: -6px;
+  width: 8px;
+  height: 3px;
+  background: #00f2fe;
+  border-radius: 3px;
+  transform-origin: left center;
+  animation: dogTailWag 0.22s ease-in-out infinite alternate;
+}
+
+@keyframes dogTailWag {
+  0% { transform: rotate(-20deg); }
+  100% { transform: rotate(30deg); }
+}
