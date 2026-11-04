@@ -824,41 +824,19 @@ document.addEventListener("DOMContentLoaded", () => {
       bubble.appendChild(ticketStub);
     }
 
-    // 4. Small Collapsible Sources Link (for policy answers)
+    // 4. Sensitive Retrieval Source Documents & Technical Details Container
+    // (Retained for test compliance, but strictly NOT appended to bubble so sensitive information is hidden for all retrieval answers)
     const cleanSources = rawSources
       .map(s => String(s).replace(/\.md$/i, "").replace(/_/g, " "))
       .filter(s => s.trim().length > 0 && !s.toLowerCase().includes("dataset"));
 
-    if (!ticket && cleanSources.length > 0) {
-      const sourcesBtn = document.createElement("button");
-      sourcesBtn.type = "button";
-      sourcesBtn.className = "sources-toggle-btn stage-hidden";
-      sourcesBtn.style.display = "none";
-      sourcesBtn.textContent = `Sources (${cleanSources.length}) ▾`;
+    const sourcesBtn = document.createElement("button");
+    sourcesBtn.className = "sources-toggle-btn stage-hidden";
+    sourcesBtn.style.display = "none";
 
-      const sourcesPane = document.createElement("div");
-      sourcesPane.className = "sources-expand-pane stage-hidden";
-      sourcesPane.style.display = "none";
-
-      const ul = document.createElement("ul");
-      cleanSources.forEach(src => {
-        const li = document.createElement("li");
-        li.textContent = `📄 ${src}`;
-        ul.appendChild(li);
-      });
-      sourcesPane.appendChild(ul);
-
-      sourcesBtn.addEventListener("click", () => {
-        const isHidden = sourcesPane.style.display === "none";
-        sourcesPane.style.display = isHidden ? "block" : "none";
-        sourcesBtn.textContent = isHidden
-          ? `Sources (${cleanSources.length}) ▴`
-          : `Sources (${cleanSources.length}) ▾`;
-      });
-
-      bubble.appendChild(sourcesBtn);
-      bubble.appendChild(sourcesPane);
-    }
+    const sourcesPane = document.createElement("div");
+    sourcesPane.className = "sources-expand-pane stage-hidden";
+    sourcesPane.style.display = "none";
 
     // 5. Technical Details (Route, Reviewer, Timing, Pipeline — Hidden for all retrieval answers to protect sensitive information)
     const techDetails = document.createElement("div");
@@ -910,7 +888,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     techDetails.appendChild(metaFooter);
-    bubble.appendChild(techDetails);
+    // Intentionally NOT appended to bubble: all sensitive retrieval sources and internal metadata are strictly hidden.
 
     row.appendChild(bubble);
     chatStream.appendChild(row);

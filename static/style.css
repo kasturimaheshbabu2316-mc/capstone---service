@@ -1280,21 +1280,24 @@ body {
 }
 
 /* Sources Accordion & Technical Details (Hidden for all retrieval answers to protect sensitive information) */
-.sources-toggle-btn {
+.sources-toggle-btn,
+.sources-expand-pane,
+.technical-details,
+.meta-footer,
+body.show-details .technical-details,
+body.show-details .meta-footer,
+.msg-bubble .meta-footer,
+.msg-bubble .technical-details {
   display: none !important;
-}
-
-.sources-expand-pane {
-  display: none !important;
-}
-
-/* Technical Details Toggle (Hidden for all retrieval answers to protect sensitive information) */
-.technical-details {
-  display: none !important;
-}
-
-body.show-details .technical-details {
-  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
 }
 
 /* ==============================================================================
