@@ -307,9 +307,109 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // AI Animated Companion Bot Interaction & Emoji Greetings
+
+  // ==============================================================================
+  // Web Audio Procedural Synthesizer (Reference Animation Audio Effects)
+  // ==============================================================================
+  let botAudioCtx = null;
+  function getBotAudio() {
+    try {
+      if (!botAudioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) botAudioCtx = new AudioContextClass();
+      }
+      if (botAudioCtx && botAudioCtx.state === "suspended") {
+        botAudioCtx.resume();
+      }
+    } catch (e) {}
+    return botAudioCtx;
+  }
+
+  function playChimeSound() {
+    try {
+      const ctx = getBotAudio();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      [659.25, 830.61, 987.77, 1318.51].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const t = now + idx * 0.06;
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, t);
+        gain.gain.setValueAtTime(0.08, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.19);
+      });
+    } catch (e) {}
+  }
+
+  function playThinkingBlip() {
+    try {
+      const ctx = getBotAudio();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(440, now);
+      osc.frequency.exponentialRampToValueAtTime(660, now + 0.08);
+      gain.gain.setValueAtTime(0.06, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.11);
+    } catch (e) {}
+  }
+
+  function playCelebrationFanfare() {
+    try {
+      const ctx = getBotAudio();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const t = now + idx * 0.07;
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(freq, t);
+        gain.gain.setValueAtTime(0.10, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.17);
+      });
+    } catch (e) {}
+  }
+
+  function playPopTap() {
+    try {
+      const ctx = getBotAudio();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(750, now);
+      osc.frequency.exponentialRampToValueAtTime(320, now + 0.04);
+      gain.gain.setValueAtTime(0.04, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.06);
+    } catch (e) {}
+  }
+
+  // AI Animated Companion Bot Interaction & Emoji Greetings (Reference Model Enhanced)
   const emptyStateBot = document.getElementById("empty-state-bot");
   const botGreetingText = document.getElementById("bot-greeting-text");
+  const botHeadBox = emptyStateBot ? emptyStateBot.querySelector(".bot-head-box") : null;
+  const botEyes = emptyStateBot ? emptyStateBot.querySelectorAll(".bot-eye") : [];
   const GREETINGS = [
     "👋 Hello! Tap me to say hi! ✨",
     "✨ Hi there! Welcome to Ola Support Desk!",
@@ -322,13 +422,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let greetingIdx = 0;
 
   function spawnBotEmojiBurst(x, y) {
-    const emojis = ["✨", "👋", "🚕", "💖", "⭐", "🎉", "⚡", "🤖"];
-    for (let i = 0; i < 4; i++) {
+    const emojis = ["✨", "👋", "🚕", "💖", "⭐", "🎉", "⚡", "🤖", "🚀", "💡"];
+    for (let i = 0; i < 6; i++) {
       const span = document.createElement("span");
       span.className = "floating-emoji";
       span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      const dx = (Math.random() - 0.5) * 80;
-      const dy = -(35 + Math.random() * 45);
+      const dx = (Math.random() - 0.5) * 110;
+      const dy = -(35 + Math.random() * 55);
       span.style.setProperty("--dx", `${dx}px`);
       span.style.setProperty("--dy", `${dy}px`);
       span.style.left = `${x || 30}px`;
@@ -338,9 +438,58 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Reference Model: Mouse Head Tilt & Gaze Tracking
+  window.addEventListener("mousemove", (e) => {
+    if (!emptyStateBot || emptyStateBot.offsetParent === null) return;
+    const rect = emptyStateBot.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const deltaX = e.clientX - centerX;
+    const deltaY = e.clientY - centerY;
+    const dist = Math.hypot(deltaX, deltaY);
+
+    if (botHeadBox) {
+      const tiltY = Math.max(-12, Math.min(12, (deltaX / 300) * 12));
+      const tiltX = Math.max(-8, Math.min(8, -(deltaY / 300) * 8));
+      botHeadBox.style.transform = `rotateY(${tiltY}deg) rotateX(${tiltX}deg)`;
+    }
+
+    // Pupils shift to look toward mouse
+    botEyes.forEach(eye => {
+      const shiftX = Math.max(-2, Math.min(2, (deltaX / 200) * 2));
+      const shiftY = Math.max(-2, Math.min(2, (deltaY / 200) * 2));
+      eye.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+    });
+
+    // Proximity Waving reaction when mouse approaches (<140px)
+    if (dist < 140) {
+      emptyStateBot.classList.add("bot-proximity-wave");
+    } else {
+      emptyStateBot.classList.remove("bot-proximity-wave");
+    }
+  });
+
+  // Reference Model: Typing Reaction when User Interacts with Chat Input
+  if (chatInput) {
+    chatInput.addEventListener("focus", () => {
+      if (emptyStateBot) emptyStateBot.classList.add("bot-listening");
+    });
+    chatInput.addEventListener("input", () => {
+      playPopTap();
+      if (emptyStateBot) {
+        emptyStateBot.classList.add("bot-typing-reaction");
+        setTimeout(() => emptyStateBot.classList.remove("bot-typing-reaction"), 250);
+      }
+    });
+    chatInput.addEventListener("blur", () => {
+      if (emptyStateBot) emptyStateBot.classList.remove("bot-listening");
+    });
+  }
+
   if (emptyStateBot) {
     const triggerBotGreeting = (e) => {
       e.stopPropagation();
+      playChimeSound();
       greetingIdx = (greetingIdx + 1) % GREETINGS.length;
       if (botGreetingText) {
         botGreetingText.textContent = GREETINGS[greetingIdx];
@@ -528,7 +677,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Phase 1: Thinking Suspense 💭 (1.8s)
       if (pText && pIcon) {
         pIcon.textContent = "💭";
-        pText.textContent = "Analyzing your inquiry... 💭";
+        pText.textContent = "Analyzing your inquiry... 💭"; playThinkingBlip();
       }
       await sleep(1800);
 
@@ -552,7 +701,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Phase 3: Happily Found Eureka Celebration 💡🎉 (1.0s)
       if (pText && pIcon) {
         pIcon.textContent = "💡🎉";
-        pText.textContent = "Found the exact policy match! ✨";
+        pText.textContent = "Found the exact policy match! ✨"; playCelebrationFanfare();
       }
       await sleep(1000);
 
