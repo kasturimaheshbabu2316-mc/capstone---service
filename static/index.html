@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ola Support Intelligence — Enterprise Operations Desk</title>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' ws: wss:; script-src 'self' 'unsafe-inline';">
-  <link rel="stylesheet" href="/static/style.css?v=6.0">
+  <link rel="stylesheet" href="/static/style.css?v=7.0">
 </head>
 <body>
 
@@ -48,16 +48,38 @@
 
         <!-- MINIMAL EMPTY STATE (HIDDEN ONCE FIRST MESSAGE IS SENT) -->
         <section class="chat-empty-state" id="chat-empty-state">
-          <div class="empty-bot-wrap" id="empty-state-bot" title="Click me to open AI example scenarios!">
-            <div class="bot-large">
-              <div class="bot-head">
-                <div class="bot-antenna"></div>
-                <span class="bot-eye left"></span>
-                <span class="bot-eye right"></span>
+          <div class="empty-bot-wrap" id="empty-state-bot" title="Click me to say hello &amp; explore scenarios!" role="button" tabindex="0" aria-label="Interactive AI Assistant">
+            <div class="bot-speech-bubble" id="bot-speech-bubble">
+              <span class="bot-greeting-text" id="bot-greeting-text">👋 Hello! Tap me to say hi! ✨</span>
+            </div>
+
+            <div class="bot-full-character">
+              <div class="bot-antenna-group">
+                <div class="bot-antenna-mast"></div>
+                <div class="bot-antenna-beacon"></div>
+              </div>
+              <div class="bot-head-box">
+                <div class="bot-face-screen">
+                  <span class="bot-eye left"></span>
+                  <span class="bot-eye right"></span>
+                  <span class="bot-blush left"></span>
+                  <span class="bot-blush right"></span>
+                  <div class="bot-smile"></div>
+                </div>
+              </div>
+              <div class="bot-torso-row">
+                <div class="bot-arm arm-left">
+                  <div class="bot-hand hand-left"></div>
+                </div>
+                <div class="bot-torso-plate">
+                  <div class="bot-core-light"></div>
+                </div>
+                <div class="bot-arm arm-right arm-waving">
+                  <div class="bot-hand hand-right"></div>
+                </div>
               </div>
             </div>
             <div class="bot-pulse-ring"></div>
-            <span class="bot-bubble-hint">Need ideas? Tap me for examples ⚡</span>
           </div>
           <h1 class="empty-title">How can I help?</h1>
           <p class="empty-subtitle">Ask any official ride policy question or enter a ticket ID to inspect.</p>
@@ -239,15 +261,17 @@
     <div class="examples-popover stage-hidden" id="examples-popover" role="dialog" aria-label="Example Inquiries">
       <div class="examples-header">
         <div class="bot-companion-banner">
-          <div class="bot-large">
-            <div class="bot-head">
-              <div class="bot-antenna"></div>
-              <span class="bot-eye left"></span>
-              <span class="bot-eye right"></span>
+          <div class="bot-avatar-badge">
+            <div class="bot-head-box mini">
+              <div class="bot-face-screen mini">
+                <span class="bot-eye left"></span>
+                <span class="bot-eye right"></span>
+                <div class="bot-smile mini"></div>
+              </div>
             </div>
           </div>
           <div class="bot-companion-speech">
-            <strong>Ola AI Agentic Guide</strong>
+            <strong>Ola AI Welcome Guide 👋</strong>
             <p>Select any scenario below to inject it directly into the dispatch engine.</p>
           </div>
         </div>
@@ -257,9 +281,7 @@
       <!-- Quick category filter tabs -->
       <div class="bot-filter-tabs">
         <button type="button" class="bot-filter-btn active" data-filter="all">All Scenarios (7)</button>
-        <button type="button" class="bot-filter-btn" data-filter="policy">Policy RAG</button>
         <button type="button" class="bot-filter-btn" data-filter="lookup">Ticket Status</button>
-        <button type="button" class="bot-filter-btn" data-filter="guardrail">Guardrails</button>
       </div>
 
       <div class="examples-grid">
@@ -330,7 +352,7 @@
             <span class="bot-eye right"></span>
           </span>
         </span>
-        <span class="ai-bot-label">🤖 AI Bot Examples ▾</span>
+        <span class="ai-bot-label">🤖 WELLCOME ▾</span>
       </button>
       <input
         type="text"
@@ -365,6 +387,6 @@
     </div>
   </div>
 
-  <script src="/static/app.js?v=6.0"></script>
+  <script src="/static/app.js?v=7.0"></script>
 </body>
 </html>

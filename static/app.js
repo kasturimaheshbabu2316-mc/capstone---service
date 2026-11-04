@@ -101,12 +101,60 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // AI Animated Bot Click in Empty State
+  // AI Animated Companion Bot Interaction & Emoji Greetings
   const emptyStateBot = document.getElementById("empty-state-bot");
+  const botGreetingText = document.getElementById("bot-greeting-text");
+  const GREETINGS = [
+    "👋 Hello! Tap me to say hi! ✨",
+    "✨ Hi there! Welcome to Ola Support Desk!",
+    "🚕 Need a policy lookup or ticket check? Ask away!",
+    "🤖 Beep boop! I am your AI guide, happy to help!",
+    "🎉 Awesome to see you! Check out WELCOME below!",
+    "💖 Fast resolution & 24/7 SLA intelligence at your service!",
+    "🌟 Hello friend! Tap any scenario or type your question!"
+  ];
+  let greetingIdx = 0;
+
+  function spawnBotEmojiBurst(x, y) {
+    const emojis = ["✨", "👋", "🚕", "💖", "⭐", "🎉", "⚡", "🤖"];
+    for (let i = 0; i < 4; i++) {
+      const span = document.createElement("span");
+      span.className = "floating-emoji";
+      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      const dx = (Math.random() - 0.5) * 80;
+      const dy = -(35 + Math.random() * 45);
+      span.style.setProperty("--dx", `${dx}px`);
+      span.style.setProperty("--dy", `${dy}px`);
+      span.style.left = `${x || 30}px`;
+      span.style.top = `${y || 10}px`;
+      if (emptyStateBot) emptyStateBot.appendChild(span);
+      setTimeout(() => span.remove(), 1200);
+    }
+  }
+
   if (emptyStateBot) {
-    emptyStateBot.addEventListener("click", (e) => {
+    const triggerBotGreeting = (e) => {
       e.stopPropagation();
+      greetingIdx = (greetingIdx + 1) % GREETINGS.length;
+      if (botGreetingText) {
+        botGreetingText.textContent = GREETINGS[greetingIdx];
+      }
+      emptyStateBot.classList.remove("bot-cheer");
+      void emptyStateBot.offsetWidth;
+      emptyStateBot.classList.add("bot-cheer");
+      setTimeout(() => emptyStateBot.classList.remove("bot-cheer"), 600);
+
+      const rect = emptyStateBot.getBoundingClientRect();
+      spawnBotEmojiBurst(rect.width / 2, 20);
       setExamplesPopoverVisible(true);
+    };
+
+    emptyStateBot.addEventListener("click", triggerBotGreeting);
+    emptyStateBot.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        triggerBotGreeting(e);
+      }
     });
   }
 
