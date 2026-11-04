@@ -1505,6 +1505,7 @@ body.show-details .technical-details {
 
 /* Floating speech bubble greeting with cool emojis */
 .bot-speech-bubble {
+  display: inline-block;
   margin-bottom: 12px;
   background: rgba(8, 20, 36, 0.90);
   border: 1px solid rgba(0, 242, 254, 0.45);
@@ -1577,6 +1578,7 @@ body.show-details .technical-details {
 }
 
 .bot-antenna-mast {
+  display: block;
   width: 3px;
   height: 9px;
   background: var(--accent-cyan);
@@ -1584,6 +1586,7 @@ body.show-details .technical-details {
 }
 
 .bot-antenna-beacon {
+  display: block;
   position: absolute;
   top: -6px;
   width: 8px;
@@ -1700,6 +1703,7 @@ body.show-details .technical-details {
 
 /* Glowing Cyber Heart / Reactor Core */
 .bot-core-light {
+  display: block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -1727,6 +1731,7 @@ body.show-details .technical-details {
 }
 
 .bot-hand.hand-left {
+  display: block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -1749,6 +1754,7 @@ body.show-details .technical-details {
 }
 
 .bot-hand.hand-right {
+  display: block;
   width: 9px;
   height: 9px;
   border-radius: 50%;
@@ -1760,6 +1766,7 @@ body.show-details .technical-details {
 
 /* Radar pulse ring */
 .bot-pulse-ring {
+  display: block;
   position: absolute;
   top: 50px;
   left: 50%;
