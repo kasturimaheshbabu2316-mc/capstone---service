@@ -19,100 +19,115 @@
 
 function createAgentDogLoadingCard() {
   return `
-    <div class="agent-dog-card">
-      <div class="agent-phase-pill" id="agent-phase-pill">
+    <div class="agent-dog-3d-card">
+      <div class="agent-phase-pill-3d" id="agent-phase-pill">
         <span class="phase-icon" id="agent-phase-icon">💭</span>
-        <span class="phase-text" id="agent-phase-text">Thinking about your inquiry...</span>
+        <span class="phase-text" id="agent-phase-text">Analyzing your inquiry... 💭</span>
       </div>
-      <div class="agent-dog-anim-box">
-        <svg class="agent-dog-svg" width="200" height="95" viewBox="0 0 150 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="agent-3d-viewport">
+        <svg class="characters-3d-scene" width="240" height="105" viewBox="0 0 150 85" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <filter id="cyanGlowLoad" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="2" result="blur" />
+            <filter id="hyperGlowLoad" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="2.5" result="blur1" />
+              <feGaussianBlur stdDeviation="6" result="blur2" />
               <feMerge>
-                <feMergeNode in="blur" />
+                <feMergeNode in="blur2" />
+                <feMergeNode in="blur1" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
+            <linearGradient id="body3DLoad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#163254" />
+              <stop offset="100%" stop-color="#081426" />
+            </linearGradient>
           </defs>
 
-          <!-- AGENT GROUP (Reading & Searching in the Books) -->
-          <g class="bot-group">
-            <!-- Antenna with Beacon -->
-            <line x1="46" y1="12" x2="46" y2="18" stroke="#00f2fe" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="46" cy="10" r="3" fill="#00f2fe" filter="url(#cyanGlowLoad)"/>
+          <!-- AGENT GROUP (3D Shaded, Floating in Books) -->
+          <g class="agent-body-group">
+            <!-- Antenna with Glowing Beacon -->
+            <line x1="46" y1="10" x2="46" y2="18" stroke="#00f2fe" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="46" cy="8" r="3.5" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
 
-            <!-- Head -->
-            <rect x="28" y="18" width="36" height="26" rx="8" fill="#0b1728" stroke="#00f2fe" stroke-width="1.8" filter="url(#cyanGlowLoad)"/>
-            
-            <!-- Focused Eyes -->
-            <rect class="agent-eye left" x="34" y="24" width="6" height="7" rx="3" fill="#00f2fe"/>
-            <rect class="agent-eye right" x="52" y="24" width="6" height="7" rx="3" fill="#00f2fe"/>
-            <circle cx="37" cy="27" r="1.2" fill="#ffffff"/>
-            <circle cx="55" cy="27" r="1.2" fill="#ffffff"/>
+            <!-- Head Helmet with 3D Depth Shading -->
+            <rect x="27" y="17" width="38" height="27" rx="9" fill="url(#body3DLoad)" stroke="#00f2fe" stroke-width="2" filter="url(#hyperGlowLoad)"/>
+            <!-- Visor Specular Glass Highlight -->
+            <path d="M29 20 Q46 16 63 20" stroke="#ffffff" stroke-width="1.2" opacity="0.6" stroke-linecap="round"/>
 
-            <!-- Mouth (Smiling / Focused) -->
-            <path class="agent-mouth-searching" d="M42 37 Q46 40 50 37" stroke="#00f2fe" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <!-- Focused 3D Glowing Eyes -->
+            <rect x="33" y="24" width="7" height="8" rx="3.5" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
+            <rect x="52" y="24" width="7" height="8" rx="3.5" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
+            <circle cx="36" cy="27" r="1.5" fill="#ffffff"/>
+            <circle cx="55" cy="27" r="1.5" fill="#ffffff"/>
+            <ellipse cx="32" cy="34" rx="3" ry="1.8" fill="rgba(0, 242, 254, 0.45)"/>
+            <ellipse cx="60" cy="34" rx="3" ry="1.8" fill="rgba(0, 242, 254, 0.45)"/>
 
-            <!-- Torso -->
-            <rect x="33" y="45" width="26" height="20" rx="6" fill="#0f2038" stroke="#00f2fe" stroke-width="1.4"/>
-            <circle cx="46" cy="54" r="3.5" fill="#00f2fe" filter="url(#cyanGlowLoad)"/>
+            <!-- Cute Focused Curved Smile -->
+            <path d="M41 37 Q46 41 51 37" stroke="#00f2fe" stroke-width="2.2" stroke-linecap="round" fill="none"/>
 
-            <!-- Left Arm holding Book -->
-            <path d="M33 48 L22 55 L30 62" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
-            <circle cx="30" cy="62" r="2.5" fill="#00f2fe"/>
+            <!-- Torso with 3D Layering -->
+            <rect x="32" y="45" width="28" height="21" rx="7" fill="url(#body3DLoad)" stroke="#00f2fe" stroke-width="1.6"/>
+            <!-- Pulsing Reactor Heart Core -->
+            <circle cx="46" cy="55" r="4.2" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
+            <circle cx="46" cy="55" r="2" fill="#ffffff"/>
 
-            <!-- Right Arm holding Book -->
-            <path d="M59 48 L70 55 L62 62" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
-            <circle cx="62" cy="62" r="2.5" fill="#00f2fe"/>
+            <!-- Arms Holding the Book -->
+            <path d="M32 49 L20 56 L29 63" stroke="#00f2fe" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+            <circle cx="29" cy="63" r="3" fill="#00f2fe"/>
 
-            <!-- OPEN BOOK 📖 (Searching in the Books) -->
-            <path d="M30 62 Q46 66 62 62 L64 76 Q46 80 28 76 Z" fill="#091322" stroke="#00f2fe" stroke-width="1.4"/>
-            <path d="M46 65 L29 62 L28 75 L46 77 Z" fill="#0e233d" stroke="#00f2fe" stroke-width="1"/>
-            <path d="M46 65 L63 62 L64 75 L46 77 Z" fill="#0e233d" stroke="#00f2fe" stroke-width="1"/>
-            <path class="book-page-flip" d="M46 65 L46 77 L36 74 L36 63 Z" fill="#00f2fe" opacity="0.8"/>
-            <line x1="32" y1="66" x2="42" y2="67" stroke="#4facfe" stroke-width="1" opacity="0.8"/>
-            <line x1="32" y1="70" x2="40" y2="71" stroke="#4facfe" stroke-width="1" opacity="0.8"/>
-            <line x1="50" y1="67" x2="60" y2="66" stroke="#4facfe" stroke-width="1" opacity="0.8"/>
-            <line x1="50" y1="71" x2="58" y2="70" stroke="#4facfe" stroke-width="1" opacity="0.8"/>
-            <line class="scan-laser" x1="28" y1="64" x2="64" y2="64" stroke="#00f2fe" stroke-width="1.5" filter="url(#cyanGlowLoad)"/>
+            <path d="M60 49 L72 56 L63 63" stroke="#00f2fe" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+            <circle cx="63" cy="63" r="3" fill="#00f2fe"/>
+
+            <!-- 3D OPEN HOLOGRAPHIC BOOK 📖 -->
+            <path d="M28 63 Q46 68 64 63 L66 78 Q46 83 26 78 Z" fill="#050e1b" stroke="#00f2fe" stroke-width="1.8" filter="url(#hyperGlowLoad)"/>
+            <path d="M46 66 L27 63 L26 77 L46 79 Z" fill="#0c233e" stroke="#00f2fe" stroke-width="1.2"/>
+            <path d="M46 66 L65 63 L66 77 L46 79 Z" fill="#0c233e" stroke="#00f2fe" stroke-width="1.2"/>
+            <path class="book-page-turning" d="M46 66 L46 79 L35 76 L35 64 Z" fill="#00f2fe" opacity="0.85"/>
+            <line x1="30" y1="68" x2="42" y2="69" stroke="#4facfe" stroke-width="1.2" opacity="0.9"/>
+            <line x1="30" y1="73" x2="40" y2="74" stroke="#4facfe" stroke-width="1.2" opacity="0.9"/>
+            <line x1="50" y1="69" x2="62" y2="68" stroke="#4facfe" stroke-width="1.2" opacity="0.9"/>
+            <line x1="50" y1="74" x2="60" y2="73" stroke="#4facfe" stroke-width="1.2" opacity="0.9"/>
+            <line class="laser-scan-3d" x1="26" y1="65" x2="66" y2="65" stroke="#00f2fe" stroke-width="2" filter="url(#hyperGlowLoad)"/>
           </g>
 
-          <!-- CYBER PUPPY DOG GROUP (Beside Agent) 🐶 -->
-          <g class="dog-group" transform="translate(16, 0)">
-            <path class="dog-tail" d="M108 62 Q118 52 116 44" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#cyanGlowLoad)"/>
-            <circle cx="116" cy="44" r="2" fill="#00f2fe"/>
+          <!-- CYBER PUPPY DOG HOPS OVER / AROUND AGENT 🐶 -->
+          <g class="dog-playful-hopping">
+            <!-- Fast Wagging Tail -->
+            <path class="dog-tail-fast" d="M108 61 Q120 50 117 41" stroke="#00f2fe" stroke-width="3.5" stroke-linecap="round" fill="none" filter="url(#hyperGlowLoad)"/>
+            <circle cx="117" cy="41" r="2.8" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
 
-            <ellipse cx="98" cy="62" rx="14" ry="10" fill="#0c192d" stroke="#00f2fe" stroke-width="1.5"/>
+            <ellipse cx="98" cy="62" rx="15" ry="11" fill="url(#body3DLoad)" stroke="#00f2fe" stroke-width="1.8"/>
 
-            <rect x="88" y="68" width="5" height="8" rx="2.5" fill="#00f2fe"/>
-            <rect x="100" y="68" width="5" height="8" rx="2.5" fill="#00f2fe"/>
+            <rect x="87" y="68" width="6" height="9" rx="3" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
+            <rect x="101" y="68" width="6" height="9" rx="3" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
 
-            <path d="M91 50 Q98 55 105 50" stroke="#f59e0b" stroke-width="2" fill="none"/>
-            <circle cx="98" cy="54" r="2" fill="#f59e0b" filter="url(#cyanGlowLoad)"/>
+            <path d="M90 49 Q98 55 106 49" stroke="#f59e0b" stroke-width="2.4" fill="none"/>
+            <circle cx="98" cy="54" r="2.8" fill="#f59e0b" filter="url(#hyperGlowLoad)"/>
 
-            <circle cx="98" cy="42" r="11" fill="#0f223d" stroke="#00f2fe" stroke-width="1.6" filter="url(#cyanGlowLoad)"/>
+            <circle cx="98" cy="41" r="12" fill="url(#body3DLoad)" stroke="#00f2fe" stroke-width="2" filter="url(#hyperGlowLoad)"/>
 
-            <path class="dog-ear-left" d="M90 38 Q82 30 88 26 Q94 30 92 36" fill="#00f2fe" opacity="0.85"/>
-            <path class="dog-ear-right" d="M106 38 Q114 30 108 26 Q102 30 104 36" fill="#00f2fe" opacity="0.85"/>
+            <path d="M89 36 Q80 26 87 22 Q94 26 92 34" fill="#00f2fe" opacity="0.9" filter="url(#hyperGlowLoad)"/>
+            <path d="M107 36 Q116 26 109 22 Q102 26 104 34" fill="#00f2fe" opacity="0.9" filter="url(#hyperGlowLoad)"/>
 
-            <ellipse cx="94" cy="41" rx="2" ry="2.5" fill="#ffffff"/>
-            <circle cx="94" cy="40.5" r="1.2" fill="#00f2fe"/>
-            <circle cx="95" cy="40" r="0.5" fill="#ffffff"/>
+            <ellipse cx="93.5" cy="40" rx="2.4" ry="3" fill="#ffffff"/>
+            <circle cx="93.5" cy="39.5" r="1.4" fill="#00f2fe"/>
+            <circle cx="94.5" cy="39" r="0.6" fill="#ffffff"/>
 
-            <ellipse cx="102" cy="41" rx="2" ry="2.5" fill="#ffffff"/>
-            <circle cx="102" cy="40.5" r="1.2" fill="#00f2fe"/>
-            <circle cx="103" cy="40" r="0.5" fill="#ffffff"/>
+            <ellipse cx="102.5" cy="40" rx="2.4" ry="3" fill="#ffffff"/>
+            <circle cx="102.5" cy="39.5" r="1.4" fill="#00f2fe"/>
+            <circle cx="103.5" cy="39" r="0.6" fill="#ffffff"/>
 
-            <ellipse cx="98" cy="46" rx="4" ry="3" fill="#081424"/>
-            <polygon points="97,45 99,45 98,47" fill="#00f2fe"/>
-            <path d="M97 48 Q98 51 99 48" stroke="#ff477e" stroke-width="1.8" fill="#ff477e" stroke-linecap="round"/>
+            <ellipse cx="98" cy="46" rx="4.5" ry="3.2" fill="#06101d"/>
+            <polygon points="96.5,45 99.5,45 98,47" fill="#00f2fe"/>
+            <path d="M96.5 48 Q98 52 99.5 48" stroke="#ff477e" stroke-width="2" fill="#ff477e" stroke-linecap="round"/>
 
-            <!-- Magnifying Glass for searching -->
-            <circle cx="84" cy="56" r="5" stroke="#f59e0b" stroke-width="1.5" fill="rgba(245, 158, 11, 0.15)"/>
-            <line x1="87" y1="60" x2="91" y2="64" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Magnifying Glass for Searching Books 🔍 -->
+            <circle cx="83" cy="55" r="6" stroke="#f59e0b" stroke-width="2" fill="rgba(245, 158, 11, 0.2)" filter="url(#hyperGlowLoad)"/>
+            <line x1="87" y1="60" x2="92" y2="65" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round"/>
           </g>
         </svg>
+
+        <!-- Floor Contact Shadow for Realistic 3D Float -->
+        <div class="floor-contact-shadow"></div>
       </div>
     </div>
   `;
@@ -490,33 +505,40 @@ document.addEventListener("DOMContentLoaded", () => {
     userRow.appendChild(userBubble);
     chatStream.appendChild(userRow);
 
-    // Append Animated Agent & Cyber Puppy Retrieval Stage
+    // Append Animated Agent & Cyber Puppy Retrieval Stage (3D Stage)
     const loadingRow = document.createElement("div");
     loadingRow.className = "msg-row assistant agent-loading-stage";
     loadingRow.innerHTML = createAgentDogLoadingCard();
     chatStream.appendChild(loadingRow);
     scrollToBottom();
 
-    // Progression: Phase 1 (Thinking 💭) -> Phase 2 (Searching Books 📚🔍)
-    const phaseTimeout = setTimeout(() => {
-      const pText = loadingRow.querySelector("#agent-phase-text");
-      const pIcon = loadingRow.querySelector("#agent-phase-icon");
-      if (pText && pIcon) {
-        pIcon.textContent = "📚🔍";
-        pText.textContent = "Searching in the policy manuals & records...";
-      }
-    }, 1100);
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    const pText = loadingRow.querySelector("#agent-phase-text");
+    const pIcon = loadingRow.querySelector("#agent-phase-icon");
 
-    const startTime = performance.now();
+    // Initiate API query in background
+    const fetchPromise = fetch("/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question: queryText, query: queryText, session_id: sessionId })
+    });
 
     try {
-      const res = await fetch("/ask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: queryText, query: queryText, session_id: sessionId })
-      });
+      // Phase 1: Thinking Suspense 💭 (1.8s)
+      if (pText && pIcon) {
+        pIcon.textContent = "💭";
+        pText.textContent = "Analyzing your inquiry... 💭";
+      }
+      await sleep(1800);
 
-      clearTimeout(phaseTimeout);
+      // Phase 2: Searching in Books 📚🔍 (2.0s) - Dog hops over agent, book pages flip
+      if (pText && pIcon) {
+        pIcon.textContent = "📚🔍";
+        pText.textContent = "Searching policy manuals & ticket database... 📚🔍";
+      }
+      await sleep(2000);
+
+      const res = await fetchPromise;
       const payload = await res.json();
 
       if (!res.ok) {
@@ -526,17 +548,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Phase 3: Happily Found Eureka Celebration 🎉
-      const pText = loadingRow.querySelector("#agent-phase-text");
-      const pIcon = loadingRow.querySelector("#agent-phase-icon");
+      // Phase 3: Happily Found Eureka Celebration 💡🎉 (1.0s)
       if (pText && pIcon) {
         pIcon.textContent = "💡🎉";
-        pText.textContent = "Found the exact policy answer!";
+        pText.textContent = "Found the exact policy match! ✨";
       }
+      await sleep(1000);
 
-      await new Promise(resolve => setTimeout(resolve, 450));
+      // Deliver output with visual speaking agent and happy puppy
       loadingRow.remove();
-
       appendAssistantResponse(payload, hasPhone);
     } catch (err) {
       clearTimeout(phaseTimeout);
