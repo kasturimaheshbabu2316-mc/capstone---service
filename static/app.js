@@ -22,7 +22,7 @@ function createAgentDogLoadingCard() {
     <div class="agent-dog-3d-card">
       <div class="agent-phase-pill-3d" id="agent-phase-pill">
         <span class="phase-icon" id="agent-phase-icon">💭</span>
-        <span class="phase-text" id="agent-phase-text">Analyzing your inquiry... 💭</span>
+        <span class="phase-text" id="agent-phase-text">Analyzing your inquiry...</span>
       </div>
       <div class="agent-3d-viewport">
         <svg class="characters-3d-scene" width="240" height="105" viewBox="0 0 150 85" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -659,17 +659,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     try {
-      // Phase 1: Thinking Suspense 💭 (1.8s)
+      // Phase 1: Thinking Suspense (1.8s) - Single 💭 icon, clean text
       if (pText && pIcon) {
         pIcon.textContent = "💭";
-        pText.textContent = "Analyzing your inquiry... 💭"; playThinkingBlip();
+        pText.textContent = "Analyzing your inquiry...";
+        playThinkingBlip();
       }
       await sleep(1800);
 
-      // Phase 2: Searching in Books 📚🔍 (2.0s) - Dog hops over agent, book pages flip
+      // Phase 2: Searching in Books (2.0s) - Single 🔍 icon, clean text without duplicate emojis
       if (pText && pIcon) {
-        pIcon.textContent = "📚🔍";
-        pText.textContent = "Searching policy manuals & ticket database... 📚🔍";
+        pIcon.textContent = "🔍";
+        pText.textContent = "Searching policy manuals & ticket database...";
       }
       await sleep(2000);
 
@@ -683,10 +684,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Phase 3: Happily Found Eureka Celebration 💡🎉 (1.0s)
+      // Phase 3: Happily Found Eureka Celebration (1.0s) - Single ✨ icon, clean text
       if (pText && pIcon) {
-        pIcon.textContent = "💡🎉";
-        pText.textContent = "Found the exact policy match! ✨"; playCelebrationFanfare();
+        pIcon.textContent = "✨";
+        pText.textContent = "Found the exact policy match!";
+        playCelebrationFanfare();
       }
       await sleep(1000);
 

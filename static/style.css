@@ -2121,7 +2121,9 @@ body.show-details .meta-footer,
 .agent-phase-pill-3d {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  white-space: nowrap;
   background: transparent !important;
   border: none !important;
   border-radius: var(--radius-pill);
