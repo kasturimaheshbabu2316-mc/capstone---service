@@ -1950,3 +1950,175 @@ body.show-details .technical-details {
   0% { transform: translateY(0); }
   100% { transform: translateY(-4px); }
 }
+
+/* ==============================================================================
+   Animated Agent & Cyber Puppy ("Sparky" 🐶) Live Response Components
+   ============================================================================== */
+
+.agent-loading-stage {
+  animation: fadeIn 0.25s ease-out;
+}
+
+.agent-dog-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(10, 20, 36, 0.88);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  border-radius: 16px;
+  padding: 16px 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 242, 254, 0.15);
+  max-width: 380px;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.agent-phase-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 242, 254, 0.1);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  border-radius: var(--radius-pill);
+  padding: 5px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.agent-dog-anim-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95px;
+}
+
+/* Waving Tail */
+@keyframes tailWag {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(28deg); }
+}
+
+.dog-tail {
+  transform-origin: 108px 62px;
+  animation: tailWag 0.32s ease-in-out infinite alternate;
+}
+
+/* Wiggling Ears */
+@keyframes earWiggleLeft {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-12deg); }
+}
+@keyframes earWiggleRight {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(12deg); }
+}
+
+.dog-ear-left {
+  transform-origin: 90px 36px;
+  animation: earWiggleLeft 1.6s ease-in-out infinite alternate;
+}
+.dog-ear-right {
+  transform-origin: 106px 36px;
+  animation: earWiggleRight 1.9s ease-in-out infinite alternate;
+}
+
+/* Book Page Flipping */
+@keyframes pageTurn {
+  0% { transform: scaleX(1) skewY(0deg); fill: #1e3a5f; }
+  50% { transform: scaleX(0.08) skewY(-10deg); fill: #00f2fe; }
+  100% { transform: scaleX(-1) skewY(0deg); fill: #162a45; }
+}
+
+.book-page-flip {
+  transform-origin: 46px 65px;
+  animation: pageTurn 1.1s ease-in-out infinite alternate;
+}
+
+/* Scanning Laser Beam across book */
+@keyframes scanLaser {
+  0% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(11px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.7; }
+}
+
+.scan-laser {
+  animation: scanLaser 1.2s ease-in-out infinite;
+}
+
+/* Speaking mouth cadence (pure visual speaking animation - not a voice agent) */
+@keyframes mouthSpeakCadence {
+  0%, 100% { transform: scaleY(0.3); opacity: 0.7; }
+  25% { transform: scaleY(1.3) translateY(1px); opacity: 1; }
+  50% { transform: scaleY(0.6); opacity: 0.85; }
+  75% { transform: scaleY(1.1) translateY(1px); opacity: 1; }
+}
+
+.bot-mouth-speaking {
+  transform-origin: 46px 36px;
+  animation: mouthSpeakCadence 0.38s ease-in-out infinite alternate;
+}
+
+/* Gesturing Explaining Hands */
+@keyframes handGestureLeft {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-14deg) translateY(-2px); }
+}
+@keyframes handGestureRight {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(14deg) translateY(-2px); }
+}
+
+.bot-hand-gesturing-left {
+  transform-origin: 33px 48px;
+  animation: handGestureLeft 1.8s ease-in-out infinite alternate;
+}
+.bot-hand-gesturing-right {
+  transform-origin: 59px 48px;
+  animation: handGestureRight 1.5s ease-in-out infinite alternate;
+}
+
+/* Output Message Row Layout with Speaking Avatar */
+.msg-row.assistant.with-avatar {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.assistant-speaker-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+
+.agent-dog-speaker-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-tag-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: rgba(0, 242, 254, 0.1);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  border-radius: var(--radius-pill);
+  padding: 1px 7px;
+  margin-top: 2px;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 600px) {
+  .msg-row.assistant.with-avatar {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .assistant-speaker-col {
+    align-self: flex-start;
+  }
+}

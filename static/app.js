@@ -13,6 +13,196 @@
  * 10. Settings, Telemetry, and Governance Drawer
  */
 
+  // ==============================================================================
+// Interactive Animated AI Agent & Cyber Puppy ("Sparky" 🐶) Components
+// ==============================================================================
+
+function createAgentDogLoadingCard() {
+  return `
+    <div class="agent-dog-card">
+      <div class="agent-phase-pill" id="agent-phase-pill">
+        <span class="phase-icon" id="agent-phase-icon">💭</span>
+        <span class="phase-text" id="agent-phase-text">Thinking about your inquiry...</span>
+      </div>
+      <div class="agent-dog-anim-box">
+        <svg class="agent-dog-svg" width="200" height="95" viewBox="0 0 150 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="cyanGlowLoad" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- AGENT GROUP (Reading & Searching in the Books) -->
+          <g class="bot-group">
+            <!-- Antenna with Beacon -->
+            <line x1="46" y1="12" x2="46" y2="18" stroke="#00f2fe" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="46" cy="10" r="3" fill="#00f2fe" filter="url(#cyanGlowLoad)"/>
+
+            <!-- Head -->
+            <rect x="28" y="18" width="36" height="26" rx="8" fill="#0b1728" stroke="#00f2fe" stroke-width="1.8" filter="url(#cyanGlowLoad)"/>
+            
+            <!-- Focused Eyes -->
+            <rect class="agent-eye left" x="34" y="24" width="6" height="7" rx="3" fill="#00f2fe"/>
+            <rect class="agent-eye right" x="52" y="24" width="6" height="7" rx="3" fill="#00f2fe"/>
+            <circle cx="37" cy="27" r="1.2" fill="#ffffff"/>
+            <circle cx="55" cy="27" r="1.2" fill="#ffffff"/>
+
+            <!-- Mouth (Smiling / Focused) -->
+            <path class="agent-mouth-searching" d="M42 37 Q46 40 50 37" stroke="#00f2fe" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+
+            <!-- Torso -->
+            <rect x="33" y="45" width="26" height="20" rx="6" fill="#0f2038" stroke="#00f2fe" stroke-width="1.4"/>
+            <circle cx="46" cy="54" r="3.5" fill="#00f2fe" filter="url(#cyanGlowLoad)"/>
+
+            <!-- Left Arm holding Book -->
+            <path d="M33 48 L22 55 L30 62" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <circle cx="30" cy="62" r="2.5" fill="#00f2fe"/>
+
+            <!-- Right Arm holding Book -->
+            <path d="M59 48 L70 55 L62 62" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <circle cx="62" cy="62" r="2.5" fill="#00f2fe"/>
+
+            <!-- OPEN BOOK 📖 (Searching in the Books) -->
+            <path d="M30 62 Q46 66 62 62 L64 76 Q46 80 28 76 Z" fill="#091322" stroke="#00f2fe" stroke-width="1.4"/>
+            <path d="M46 65 L29 62 L28 75 L46 77 Z" fill="#0e233d" stroke="#00f2fe" stroke-width="1"/>
+            <path d="M46 65 L63 62 L64 75 L46 77 Z" fill="#0e233d" stroke="#00f2fe" stroke-width="1"/>
+            <path class="book-page-flip" d="M46 65 L46 77 L36 74 L36 63 Z" fill="#00f2fe" opacity="0.8"/>
+            <line x1="32" y1="66" x2="42" y2="67" stroke="#4facfe" stroke-width="1" opacity="0.8"/>
+            <line x1="32" y1="70" x2="40" y2="71" stroke="#4facfe" stroke-width="1" opacity="0.8"/>
+            <line x1="50" y1="67" x2="60" y2="66" stroke="#4facfe" stroke-width="1" opacity="0.8"/>
+            <line x1="50" y1="71" x2="58" y2="70" stroke="#4facfe" stroke-width="1" opacity="0.8"/>
+            <line class="scan-laser" x1="28" y1="64" x2="64" y2="64" stroke="#00f2fe" stroke-width="1.5" filter="url(#cyanGlowLoad)"/>
+          </g>
+
+          <!-- CYBER PUPPY DOG GROUP (Beside Agent) 🐶 -->
+          <g class="dog-group" transform="translate(16, 0)">
+            <path class="dog-tail" d="M108 62 Q118 52 116 44" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#cyanGlowLoad)"/>
+            <circle cx="116" cy="44" r="2" fill="#00f2fe"/>
+
+            <ellipse cx="98" cy="62" rx="14" ry="10" fill="#0c192d" stroke="#00f2fe" stroke-width="1.5"/>
+
+            <rect x="88" y="68" width="5" height="8" rx="2.5" fill="#00f2fe"/>
+            <rect x="100" y="68" width="5" height="8" rx="2.5" fill="#00f2fe"/>
+
+            <path d="M91 50 Q98 55 105 50" stroke="#f59e0b" stroke-width="2" fill="none"/>
+            <circle cx="98" cy="54" r="2" fill="#f59e0b" filter="url(#cyanGlowLoad)"/>
+
+            <circle cx="98" cy="42" r="11" fill="#0f223d" stroke="#00f2fe" stroke-width="1.6" filter="url(#cyanGlowLoad)"/>
+
+            <path class="dog-ear-left" d="M90 38 Q82 30 88 26 Q94 30 92 36" fill="#00f2fe" opacity="0.85"/>
+            <path class="dog-ear-right" d="M106 38 Q114 30 108 26 Q102 30 104 36" fill="#00f2fe" opacity="0.85"/>
+
+            <ellipse cx="94" cy="41" rx="2" ry="2.5" fill="#ffffff"/>
+            <circle cx="94" cy="40.5" r="1.2" fill="#00f2fe"/>
+            <circle cx="95" cy="40" r="0.5" fill="#ffffff"/>
+
+            <ellipse cx="102" cy="41" rx="2" ry="2.5" fill="#ffffff"/>
+            <circle cx="102" cy="40.5" r="1.2" fill="#00f2fe"/>
+            <circle cx="103" cy="40" r="0.5" fill="#ffffff"/>
+
+            <ellipse cx="98" cy="46" rx="4" ry="3" fill="#081424"/>
+            <polygon points="97,45 99,45 98,47" fill="#00f2fe"/>
+            <path d="M97 48 Q98 51 99 48" stroke="#ff477e" stroke-width="1.8" fill="#ff477e" stroke-linecap="round"/>
+
+            <!-- Magnifying Glass for searching -->
+            <circle cx="84" cy="56" r="5" stroke="#f59e0b" stroke-width="1.5" fill="rgba(245, 158, 11, 0.15)"/>
+            <line x1="87" y1="60" x2="91" y2="64" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  `;
+}
+
+function createAgentDogSpeakingAvatar() {
+  return `
+    <div class="agent-dog-speaker-avatar" title="Ola AI & Sparky 🐶">
+      <svg class="agent-speaking-svg" width="95" height="70" viewBox="0 0 150 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="cyanGlowSpeak" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- AGENT SPEAKING OUTPUT (Visual mouth cadence) -->
+        <g class="bot-group">
+          <line x1="46" y1="12" x2="46" y2="18" stroke="#00f2fe" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="46" cy="10" r="3" fill="#00f2fe" filter="url(#cyanGlowSpeak)"/>
+
+          <rect x="28" y="18" width="36" height="26" rx="8" fill="#0b1728" stroke="#00f2fe" stroke-width="1.8" filter="url(#cyanGlowSpeak)"/>
+          
+          <!-- Happy Sparkling Eyes -->
+          <rect x="34" y="24" width="6" height="7" rx="3" fill="#00f2fe"/>
+          <rect x="52" y="24" width="6" height="7" rx="3" fill="#00f2fe"/>
+          <circle cx="37" cy="26" r="1.2" fill="#ffffff"/>
+          <circle cx="55" cy="26" r="1.2" fill="#ffffff"/>
+          <ellipse cx="32" cy="33" rx="2.5" ry="1.5" fill="rgba(0, 242, 254, 0.5)"/>
+          <ellipse cx="60" cy="33" rx="2.5" ry="1.5" fill="rgba(0, 242, 254, 0.5)"/>
+
+          <!-- SPEAKING MOUTH CADENCE (Visual animation) -->
+          <path class="bot-mouth-speaking" d="M41 36 Q46 43 51 36" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="rgba(0, 242, 254, 0.25)"/>
+
+          <!-- Torso -->
+          <rect x="33" y="45" width="26" height="20" rx="6" fill="#0f2038" stroke="#00f2fe" stroke-width="1.4"/>
+          <circle cx="46" cy="54" r="3.5" fill="#00f2fe" filter="url(#cyanGlowSpeak)"/>
+
+          <!-- Gesturing Hands Explaining -->
+          <path class="bot-hand-gesturing-left" d="M33 48 L22 56 L18 52" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="18" cy="52" r="2.5" fill="#00f2fe"/>
+
+          <path class="bot-hand-gesturing-right" d="M59 48 L68 54 L72 50" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="72" cy="50" r="2.5" fill="#00f2fe"/>
+        </g>
+
+        <!-- PUPPY SITTING HAPPILY BESIDE AGENT 🐶 -->
+        <g class="dog-group" transform="translate(16, 0)">
+          <path class="dog-tail" d="M108 62 Q118 52 116 44" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#cyanGlowSpeak)"/>
+          <circle cx="116" cy="44" r="2" fill="#00f2fe"/>
+
+          <ellipse cx="98" cy="62" rx="14" ry="10" fill="#0c192d" stroke="#00f2fe" stroke-width="1.5"/>
+
+          <rect x="88" y="68" width="5" height="8" rx="2.5" fill="#00f2fe"/>
+          <rect x="100" y="68" width="5" height="8" rx="2.5" fill="#00f2fe"/>
+
+          <path d="M91 50 Q98 55 105 50" stroke="#f59e0b" stroke-width="2" fill="none"/>
+          <circle cx="98" cy="54" r="2" fill="#f59e0b" filter="url(#cyanGlowSpeak)"/>
+
+          <circle cx="98" cy="42" r="11" fill="#0f223d" stroke="#00f2fe" stroke-width="1.6" filter="url(#cyanGlowSpeak)"/>
+
+          <path class="dog-ear-left" d="M90 38 Q82 30 88 26 Q94 30 92 36" fill="#00f2fe" opacity="0.85"/>
+          <path class="dog-ear-right" d="M106 38 Q114 30 108 26 Q102 30 104 36" fill="#00f2fe" opacity="0.85"/>
+
+          <ellipse cx="94" cy="41" rx="2" ry="2.5" fill="#ffffff"/>
+          <circle cx="94" cy="40.5" r="1.2" fill="#00f2fe"/>
+          <circle cx="95" cy="40" r="0.5" fill="#ffffff"/>
+
+          <ellipse cx="102" cy="41" rx="2" ry="2.5" fill="#ffffff"/>
+          <circle cx="102" cy="40.5" r="1.2" fill="#00f2fe"/>
+          <circle cx="103" cy="40" r="0.5" fill="#ffffff"/>
+
+          <ellipse cx="98" cy="46" rx="4" ry="3" fill="#081424"/>
+          <polygon points="97,45 99,45 98,47" fill="#00f2fe"/>
+          <path d="M97 48 Q98 51 99 48" stroke="#ff477e" stroke-width="1.8" fill="#ff477e" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <span class="avatar-tag-label">AI &amp; Sparky 🐾</span>
+    </div>
+  `;
+}
+
+window.createAgentDogLoadingCard = createAgentDogLoadingCard;
+window.createAgentDogSpeakingAvatar = createAgentDogSpeakingAvatar;
+window.createAgentDogLoadingCard = createAgentDogLoadingCard;
+window.createAgentDogSpeakingAvatar = createAgentDogSpeakingAvatar;
+
 document.addEventListener("DOMContentLoaded", () => {
   // Core DOM References
   const chatStream = document.getElementById("chat-stream");
@@ -232,19 +422,36 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------------------------------------------------------------------
   // 4. Live Token Budget Estimator
   // --------------------------------------------------------------------------
-  if (chatInput && tokenText && tokenFill) {
+  if (chatInput) {
     chatInput.addEventListener("input", () => {
-      const estTokens = Math.max(1, Math.round(chatInput.value.length / 4));
-      tokenText.textContent = `${estTokens.toLocaleString()} of 2,000 tokens`;
-      const pct = Math.min(100, (estTokens / 2000) * 100);
-      tokenFill.style.width = `${pct}%`;
-      tokenFill.style.backgroundColor = estTokens > 2000 ? "#f43f5e" : "#00f2fe";
+      if (tokenText && tokenFill) {
+        const estTokens = Math.max(1, Math.round(chatInput.value.length / 4));
+        tokenText.textContent = `${estTokens.toLocaleString()} of 2,000 tokens`;
+        const pct = Math.min(100, (estTokens / 2000) * 100);
+        tokenFill.style.width = `${pct}%`;
+        tokenFill.style.backgroundColor = estTokens > 2000 ? "#f43f5e" : "#00f2fe";
+      }
+
+      // Curious & Happy Reception when user types inquiry
+      const val = chatInput.value.trim();
+      if (val.length > 0) {
+        if (botGreetingText) {
+          botGreetingText.textContent = "🤔 Listening attentively... Ready for your inquiry! 🐶✨";
+        }
+      } else {
+        if (botGreetingText) {
+          botGreetingText.textContent = GREETINGS[greetingIdx];
+        }
+      }
     });
   }
 
   // --------------------------------------------------------------------------
   // 5. Query Dispatcher & Chat Stream Management
   // --------------------------------------------------------------------------
+
+
+
   async function dispatchQuery(queryText) {
     if (!queryText || !queryText.trim()) return;
 
@@ -283,19 +490,22 @@ document.addEventListener("DOMContentLoaded", () => {
     userRow.appendChild(userBubble);
     chatStream.appendChild(userRow);
 
-    // Append Clean Loading Row
+    // Append Animated Agent & Cyber Puppy Retrieval Stage
     const loadingRow = document.createElement("div");
-    loadingRow.className = "msg-row assistant";
-    const loadingBubble = document.createElement("div");
-    loadingBubble.className = "msg-bubble";
-    const loadingText = document.createElement("span");
-    loadingText.style.color = "var(--text-muted)";
-    loadingText.style.fontSize = "0.86rem";
-    loadingText.textContent = "Searching policies & resolving...";
-    loadingBubble.appendChild(loadingText);
-    loadingRow.appendChild(loadingBubble);
+    loadingRow.className = "msg-row assistant agent-loading-stage";
+    loadingRow.innerHTML = createAgentDogLoadingCard();
     chatStream.appendChild(loadingRow);
     scrollToBottom();
+
+    // Progression: Phase 1 (Thinking 💭) -> Phase 2 (Searching Books 📚🔍)
+    const phaseTimeout = setTimeout(() => {
+      const pText = loadingRow.querySelector("#agent-phase-text");
+      const pIcon = loadingRow.querySelector("#agent-phase-icon");
+      if (pText && pIcon) {
+        pIcon.textContent = "📚🔍";
+        pText.textContent = "Searching in the policy manuals & records...";
+      }
+    }, 1100);
 
     const startTime = performance.now();
 
@@ -306,18 +516,30 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ question: queryText, query: queryText, session_id: sessionId })
       });
 
-      loadingRow.remove();
-
+      clearTimeout(phaseTimeout);
       const payload = await res.json();
 
       if (!res.ok) {
+        loadingRow.remove();
         const detail = (payload.detail && (payload.detail.message || payload.detail.detail)) || payload.detail || payload.message || `HTTP ${res.status}`;
         appendErrorCard(res.status, detail);
         return;
       }
 
+      // Phase 3: Happily Found Eureka Celebration 🎉
+      const pText = loadingRow.querySelector("#agent-phase-text");
+      const pIcon = loadingRow.querySelector("#agent-phase-icon");
+      if (pText && pIcon) {
+        pIcon.textContent = "💡🎉";
+        pText.textContent = "Found the exact policy answer!";
+      }
+
+      await new Promise(resolve => setTimeout(resolve, 450));
+      loadingRow.remove();
+
       appendAssistantResponse(payload, hasPhone);
     } catch (err) {
+      clearTimeout(phaseTimeout);
       loadingRow.remove();
       appendErrorCard(503, "Service communication interrupted. Verify backend server is running.");
     }
@@ -325,7 +547,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function appendErrorCard(statusCode, detailText) {
     const row = document.createElement("div");
-    row.className = "msg-row assistant";
+    row.className = "msg-row assistant with-avatar";
+
+    // Animated Speaking Agent & Puppy Avatar Column
+    const speakerCol = document.createElement("div");
+    speakerCol.className = "assistant-speaker-col";
+    speakerCol.innerHTML = createAgentDogSpeakingAvatar();
+    row.appendChild(speakerCol);
+
     const bubble = document.createElement("div");
     bubble.className = "msg-bubble";
 
@@ -356,7 +585,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const guardFlags = payload.guardrail_flags || data.guardrail_flags || {};
 
     const row = document.createElement("div");
-    row.className = "msg-row assistant";
+    row.className = "msg-row assistant with-avatar";
+
+    // Animated Speaking Agent & Puppy Avatar Column
+    const speakerCol = document.createElement("div");
+    speakerCol.className = "assistant-speaker-col";
+    speakerCol.innerHTML = createAgentDogSpeakingAvatar();
+    row.appendChild(speakerCol);
+
     const bubble = document.createElement("div");
     bubble.className = "msg-bubble";
 
