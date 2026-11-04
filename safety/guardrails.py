@@ -15,6 +15,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from typing import Any, Optional, Tuple
+from governance.budget import check_budget_limit as _cbl, MAX_REQUEST_TOKENS
 from rag.generate import CALIBRATED_THRESHOLD, FALLBACK_REFUSAL
 
 
@@ -146,8 +147,10 @@ def detect_prompt_injection(text: str) -> InjectionGuardrailResult:
     return InjectionGuardrailResult(fired=False, kind="prompt_injection", detail=None, sanitized_text=text)
 
 
-# Alias for compatibility
 def check_security(text: str) -> Tuple[bool, Optional[str]]:
+    """Inspects text for prompt injection patterns. Returns (is_safe, rejection_reason)."""
+    if not text:
+        return True, None
     res = detect_prompt_injection(text)
     return (not res.fired, res.detail)
 
@@ -341,23 +344,13 @@ def validate_sql(raw_sql: str, default_limit: int = 100) -> SQLValidationResult:
     )
 
 
-def check_security(text: str) -> Tuple[bool, Optional[str]]:
-    """Inspects text for prompt injection patterns. Returns (is_safe, rejection_reason)."""
-    if not text:
-        return True, None
-    is_injection, reason = detect_prompt_injection(text)
-    return (not is_injection), reason
-
-
 def check_payload_budget(text: str, max_tokens: Optional[int] = None) -> Tuple[bool, int, Optional[str]]:
     """Enforces token budget cap using governance.budget logic."""
-    from governance.budget import check_budget_limit as _cbl, MAX_REQUEST_TOKENS
     limit = max_tokens or MAX_REQUEST_TOKENS
     return _cbl(text, max_tokens=limit)
 
 
 def check_budget_limit(text: str, context: str = "", max_tokens: int = 2000) -> Tuple[bool, int, Optional[str]]:
-    from governance.budget import check_budget_limit as _cbl
     return _cbl(text, context=context, max_tokens=max_tokens)
 
 

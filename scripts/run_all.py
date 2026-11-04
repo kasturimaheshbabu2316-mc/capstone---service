@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from scripts import (
     run_task01,
+    run_task02,
     run_task03,
     run_task04,
     run_task05,
@@ -33,6 +34,7 @@ TRANSCRIPTS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "tran
 
 TASKS = [
     ("Task 01: Synthetic Dataset Generator", run_task01.run, ["task01_dataset.txt"]),
+    ("Task 02: Knowledge Base Validation", run_task02.run, ["task02_kb.txt"]),
     ("Task 03: Dual Chunking & Vector Indexing", run_task03.run, ["task03_chunking.txt"]),
     ("Task 04: Cosine Threshold Calibration", run_task04.run, ["task04_threshold.txt"]),
     ("Task 05: Chunking Strategy Evaluation", run_task05.run, ["task05_chunking_comparison.txt"]),

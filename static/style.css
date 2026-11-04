@@ -285,6 +285,7 @@ body {
 }
 
 .starter-card-sub {
+  display: block;
   font-size: 0.8rem;
   color: var(--text-secondary);
   line-height: 1.4;
@@ -1113,9 +1114,6 @@ body {
   display: none !important;
 }
 
-.starter-card-sub {
-  display: block;
-}
 
 .badge-amber {
   color: var(--accent-amber);

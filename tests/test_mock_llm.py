@@ -183,8 +183,8 @@ def test_ticket_query_calls_tool_exactly_once_under_lookup_agent(monkeypatch):
 
 def test_composer_calling_any_tool_raises_permission_error():
     """The Composer role calling any tool raises PermissionError."""
-    from tools.ticket_tool import check_support_ticket_status, check_support_ticket_status_crew_tool
-    from tools.rag_tool import rag_lookup, rag_lookup_crew_tool
+    from tools.ticket_tool import check_support_ticket_status
+    from tools.rag_tool import rag_lookup
     from governance.least_autonomy import CURRENT_CALLER_ROLE
 
     # Test direct function calls with caller_role="Support Response Composer"

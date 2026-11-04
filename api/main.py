@@ -61,7 +61,6 @@ from api.models import (
 )
 from cache import response_cache
 from crew.schemas import CrewResponse
-from safety.guardrails import check_payload_budget
 from rag.chunking import sentence_chunks
 from rag.index import (
     get_chroma_client,
@@ -74,6 +73,8 @@ from safety.guardrails import (
     detect_prompt_injection,
     mask_pii,
 )
+from tools.ticket_tool import get_all_tickets
+from review.autogen_review import review_support_response, _resolve_context_text
 
 logger = logging.getLogger("ola_domain_agent.api")
 
@@ -272,13 +273,11 @@ def check_readiness() -> tuple[bool, bool]:
     db_ready = getattr(app.state, "db_ready", None)
     if kb_ready is None or db_ready is None:
         try:
-            from tools.ticket_tool import get_all_tickets
             t = get_all_tickets()
             db_ready = bool(t and len(t) > 0)
         except Exception:
             db_ready = False
         try:
-            from rag.index import get_or_create_collection
             col = get_or_create_collection("kb_sentence")
             cnt = col.count() if hasattr(col, "count") else 0
             kb_ready = cnt > 0
@@ -547,7 +546,6 @@ def run_unified_pipeline(
 
         # 5. Output Groundedness Check
         if crew_output.route in ("rag", "both"):
-            from review.autogen_review import _resolve_context_text
             context_text = _resolve_context_text(crew_output.sources) or crew_output.answer
             grounded_res = check_groundedness(
                 query=sanitized_question,
@@ -566,7 +564,6 @@ def run_unified_pipeline(
         # run_support_crew already executes review_support_response and sets crew_output.review_status.
         # Avoid running a redundant secondary review team if already approved/reviewed.
         if not crew_output.review_status or crew_output.review_status.get("approved") is None:
-            from review.autogen_review import review_support_response, _resolve_context_text
             review_context = _resolve_context_text(crew_output.sources) or crew_output.answer
             review_verdict = review_support_response(
                 query=sanitized_question,
@@ -904,7 +901,6 @@ async def chat_websocket(websocket: WebSocket) -> None:
 @app.get("/tickets")
 def get_tickets_endpoint() -> list[dict[str, Any]]:
     """Returns directory of support tickets for the dispatch desk."""
-    from tools.ticket_tool import get_all_tickets
     return get_all_tickets()
 
 

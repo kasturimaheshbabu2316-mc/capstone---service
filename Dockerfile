@@ -44,7 +44,7 @@ ENV MOCK_LLM=true \
 COPY . .
 
 # 8. Create writable application runtime directories and ensure full permissions
-RUN mkdir -p /app/chroma_store /app/.chroma_db /app/logs /app/data /app/transcripts && \
+RUN mkdir -p /app/chroma_store /app/logs /app/data /app/transcripts && \
     chmod -R 777 /app
 
 # 9. Expose application port

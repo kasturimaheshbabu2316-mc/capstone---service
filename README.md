@@ -545,7 +545,7 @@ Following the primary CrewAI synthesis stage, candidate responses pass through a
 
 Under the enterprise AI Low / Medium / High governance taxonomy, this system is classified as **MEDIUM Risk (Customer Support Tickets)**. Customer support operations interact directly with end passengers and driver partners, handling sensitive operational inquiries, private ticket identifiers, operational resolution timelines, and policy-governed escalation determinations. While the system does not possess autonomous financial execution authority (refund disbursements require human-in-the-loop sign-off) and tool permissions are strictly read-only, erroneous policy advice or flawed escalation assessments can cause direct customer frustration, financial disputes, and operational SLA breaches. To mitigate these risks, the application enforces least autonomy tool binding (only the Lookup Agent may execute ticket status queries), strict input/output PII phone masking (`[PHONE_MASKED]`), a 2,000-token request budget, deterministic multi-agent secondary consensus review under AutoGen, and cosine similarity-calibrated refusals on out-of-scope prompts.
 
-- Detailed Risk Assessment: [governance/RISK.md](governance/RISK.md) and [doc/RISK.md](doc/RISK.md).
+- Detailed Risk Assessment: [governance/RISK.md](governance/RISK.md).
 
 ### 2. Application Layer: Least Autonomy Tool Permissions Registry
 

@@ -1,16 +1,13 @@
 # Antigravity agent workflows & rules
 .agent/
-.agent
 
 # Virtual environments
-.venv
 .venv/
 .service/
 env/
 venv/
 
 # Python cache & artifacts
-__pycache__
 __pycache__/
 *.py[cod]
 *.pyc
@@ -20,19 +17,15 @@ dist/
 build/
 
 # Database & local vector stores
-chroma_store
 chroma_store/
-chroma_db
 chroma_db/
 .chroma/
 .chroma_db/
-.chroma_db
 *.db
 *.sqlite
 data/*.db
 
 # Logs
-logs
 logs/
 *.log
 

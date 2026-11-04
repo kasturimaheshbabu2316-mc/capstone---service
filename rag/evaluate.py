@@ -31,6 +31,5 @@ __all__ = [
 
 
 if __name__ == "__main__":
-    from rag.evaluate_chunking import compare_chunking_strategies
     compare_chunking_strategies(save_json=True)
 

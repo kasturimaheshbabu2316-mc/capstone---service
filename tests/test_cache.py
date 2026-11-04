@@ -11,6 +11,13 @@ Verifies:
 from pathlib import Path
 import pytest
 from cache import ResponseCache, response_cache
+from crew.memory import (
+    session_memory,
+    get_session_history,
+    MAX_MESSAGES_PER_SESSION,
+    MAX_SESSIONS,
+    SESSION_STORE,
+)
 
 
 def test_cache_set_and_get():
@@ -103,8 +110,6 @@ def test_session_isolation_and_policy_cache_hit():
     produces a cache hit with generation counter unchanged.
     """
     from api.main import run_unified_pipeline
-    from crew.memory import session_memory
-    from cache import response_cache
 
     session_memory.clear()
     response_cache.clear()
@@ -160,7 +165,6 @@ def test_session_isolation_and_policy_cache_hit():
 def test_interaction_recorded_in_history_exactly_once():
     """Interaction recorded in history exactly once (2 messages: Human + AI)."""
     from crew.crew import run_support_crew
-    from crew.memory import session_memory, get_session_history
 
     session_memory.clear("single_record_sess")
     res = run_support_crew("Check status of TKT-0007", session_id="single_record_sess")
@@ -170,8 +174,6 @@ def test_interaction_recorded_in_history_exactly_once():
 
 def test_session_memory_caps_and_lru():
     """Verifies per-session message cap and LRU session eviction."""
-    from crew.memory import session_memory, get_session_history, MAX_MESSAGES_PER_SESSION, MAX_SESSIONS, SESSION_STORE
-
     session_memory.clear()
 
     # Message cap test
