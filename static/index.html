@@ -5,34 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ola Support Intelligence — Enterprise Operations Desk</title>
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' ws: wss:; script-src 'self' 'unsafe-inline';">
-  <link rel="stylesheet" href="/static/style.css?v=30.0">
+  <link rel="stylesheet" href="/static/css/tokens.css?v=31.0">
+  <link rel="stylesheet" href="/static/css/base.css?v=31.0">
+  <link rel="stylesheet" href="/static/css/components.css?v=31.0">
+  <script>
+    (function() {
+      try {
+        const p = new URLSearchParams(window.location.search);
+        const t = p.get('theme') || localStorage.getItem('ola_theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
+
+  <!-- Ambient Floating Glass Orbs & Technical Grid Overlay -->
+  <div class="canvas-ambient-backdrop" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+    <div class="ambient-orb ambient-orb-4"></div>
+  </div>
+  <div class="canvas-grid-overlay" aria-hidden="true"></div>
 
   <!-- 1. TOP GLASS NAVIGATION BAR -->
   <header class="top-nav glass-nav">
     <div class="brand-group">
-      <div class="brand-logo">⚡</div>
+      <div class="brand-logo" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
       <span class="brand-title">Ola Support Intelligence</span>
     </div>
 
     <!-- Segmented Navigation View Switcher -->
     <nav class="nav-switcher" aria-label="Main Navigation">
-      <button type="button" class="switcher-pill active" id="pill-chat" data-target="chat-stage">💬 Chat Desk</button>
-      <button type="button" class="switcher-pill" id="pill-directory" data-target="directory-stage">🎫 Ticket Directory</button>
-      <button type="button" class="switcher-pill" id="pill-policies" data-target="policies-stage">📖 Policy Explorer</button>
+      <button type="button" class="switcher-pill active" id="pill-chat" data-target="chat-stage">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Chat Desk</span>
+      </button>
+      <button type="button" class="switcher-pill" id="pill-directory" data-target="directory-stage">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+        <span>Ticket Directory</span>
+      </button>
+      <button type="button" class="switcher-pill" id="pill-policies" data-target="policies-stage">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>Policy Explorer</span>
+      </button>
     </nav>
 
     <div class="nav-actions">
       <button type="button" class="glass-btn kbd-hint-btn" id="open-palette-btn" title="Open Command Palette (Ctrl+K)">⌘K</button>
-      <button type="button" class="glass-btn" id="details-toggle-btn" title="Toggle technical pipeline details" aria-pressed="false">⚙️ Details: OFF</button>
+      <button type="button" class="glass-btn" id="details-toggle-btn" title="Toggle technical pipeline details" aria-pressed="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Details: OFF</span>
+      </button>
       <div class="status-pill" id="health-pill">
         <span class="status-dot" id="health-dot"></span>
         <span id="health-text">Desk Online</span>
       </div>
-      <button type="button" class="glass-btn" id="clear-chat-btn" title="Reset conversation">↺ Reset Desk</button>
-      <button type="button" class="glass-btn" id="theme-toggle-btn" title="Switch Theme">◐ Theme</button>
-      <button type="button" class="glass-btn" id="settings-toggle-btn">⚙️ Settings &amp; Admin</button>
+      <button type="button" class="glass-btn" id="clear-chat-btn" title="Reset conversation">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        <span>Reset Desk</span>
+      </button>
+      <button type="button" class="glass-btn" id="theme-toggle-btn" title="Switch Theme">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span>Theme</span>
+      </button>
+      <button type="button" class="glass-btn" id="settings-toggle-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+        <span>Settings &amp; Admin</span>
+      </button>
     </div>
   </header>
 
@@ -80,6 +125,36 @@
           </button>
           <h1 class="empty-title">How can I help?</h1>
           <p class="empty-subtitle">Ask any official ride policy question or enter a ticket ID to inspect.</p>
+          <div class="empty-suggestions-grid">
+            <button type="button" class="starter-card" data-category="policy" data-prompt="What is the resolution SLA for a Sev-1 safety incident?">
+              <span class="starter-card-top">
+                <span>⚡ Sev-1 SLA Rules</span>
+                <span class="starter-badge">Policy</span>
+              </span>
+              <span class="starter-card-sub">Response &amp; resolution timelines for critical incidents.</span>
+            </button>
+            <button type="button" class="starter-card" data-category="lookup" data-prompt="What is the status of TKT-0007?">
+              <span class="starter-card-top">
+                <span>🎫 Check Ticket TKT-0007</span>
+                <span class="starter-badge">Lookup</span>
+              </span>
+              <span class="starter-card-sub">Inspect live status, resolution hours, and risk score.</span>
+            </button>
+            <button type="button" class="starter-card" data-category="refund" data-prompt="When does Ola provide monetary refunds for driver cancellations?">
+              <span class="starter-card-top">
+                <span>💸 Cancellation Refunds</span>
+                <span class="starter-badge">Refunds</span>
+              </span>
+              <span class="starter-card-sub">Automatic 100% refund criteria &amp; settlement speed.</span>
+            </button>
+            <button type="button" class="starter-card" data-category="vip" data-prompt="What are the benefits and response times for VIP Ola Select customers?">
+              <span class="starter-card-top">
+                <span>👑 VIP Ola Select</span>
+                <span class="starter-badge">VIP</span>
+              </span>
+              <span class="starter-card-sub">Priority allocation and under-15m executive SLA.</span>
+            </button>
+          </div>
         </section>
 
         <!-- ACTIVE CONVERSATION STREAM -->
@@ -96,7 +171,10 @@
             <h2 class="dash-title">Operational Ticket Directory</h2>
             <p class="dash-subtitle">Real-time telemetry, escalation risk models, and SLA compliance monitoring</p>
           </div>
-          <button type="button" class="glass-btn" id="refresh-directory-btn">🔄 Refresh Data</button>
+          <button type="button" class="glass-btn" id="refresh-directory-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            <span>Refresh Data</span>
+          </button>
         </div>
 
         <!-- 4 KPI Telemetry Cards -->
@@ -188,7 +266,10 @@
             <h2 class="dash-title">Official Policy Knowledge Base</h2>
             <p class="dash-subtitle">12 canonical operational policy documents indexed in ChromaDB vector store</p>
           </div>
-          <button type="button" class="glass-btn" id="open-ingest-btn">➕ Ingest Policy</button>
+          <button type="button" class="glass-btn" id="open-ingest-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Ingest Policy</span>
+          </button>
         </div>
 
         <div class="policies-grid" id="policies-grid">
@@ -348,7 +429,7 @@
             <span class="bot-eye right"></span>
           </span>
         </span>
-        <span class="ai-bot-label">✨ Prompts ▾</span>
+        <span class="ai-bot-label">Prompts ▾</span>
       </button>
       <input
         type="text"

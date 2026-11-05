@@ -1396,7 +1396,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Theme Toggle
   function toggleTheme() {
     const html = document.documentElement;
-    html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
+    const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    html.setAttribute("data-theme", next);
+    try { localStorage.setItem("ola_theme", next); } catch (e) {}
   }
 
   const btnTheme = document.getElementById("theme-toggle-btn");

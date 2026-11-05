@@ -1,92 +1,93 @@
-# Ola Support Intelligence — UI Design Specification: "The Dispatch Desk"
+# Ola Support Intelligence — UI Design Specification: "Frosted Glassmorphism"
 
 **Product**: Ola Support Intelligence  
 **Role**: Customer Operations, Rider/Driver Policy Assistance & Ticket Tracking  
-**Audience**: Stressed riders, drivers on mobile phones, dispatch operations staff  
-**Tone**: Calm, plain, precise. Zero decorative filler. Zero emoji.
+**Audience**: Operations dispatchers, riders, and drivers on desktop and mobile devices  
+**Design Grade**: Linear / Vercel / Apple visionOS glassmorphism interface
 
 ---
 
-## 1. Design Philosophy: "The Dispatch Desk"
+## 1. Design Philosophy: "The Frosted Glass Operations Hub"
 
-The interface is modeled on a physical ride-hailing support desk: road markings, taxi meters, printed dispatch slips, and physical ticket receipts. Every visual and interactive choice reinforces clarity, authority, and rapid resolution in a single exchange.
+The interface is engineered as an executive-tier, spatial frosted-glass dashboard. Surfaces exist in a calibrated three-level optical hierarchy over a deep slate-navy canvas bathed in gentle ambient floating orbs and subtle grid textures.
 
 ### Foundational Principles
-1. **Boldness Spent in One Place**: The **Ticket Stub**. Everything else (top bar, composer, conversation history) is disciplined, quiet, and utilitarian.
-2. **Structure is Information**: Dividers, borders, and perforations exist solely to demarcate discrete semantic units, never as decorative flourishes.
-3. **No Fluff / No Emoji**: Professional operational interface. Statuses are indicated with precise typography, geometric markers, and tabular data.
-4. **Self-Contained & Completely Offline**: Zero external network dependencies, CDNs, analytics, or remote assets. Fully operable in an isolated environment.
+1. **Three-Level Glass Hierarchy**:
+   - **Level 1 (`.glass-1`)**: Interactive cards, telemetry meters, ticket data rows, and policy cards (`blur(16px)`).
+   - **Level 2 (`.glass-2`)**: Floating top navigation bar and floating bottom composer dock (`blur(22px)`).
+   - **Level 3 (`.glass-3`)**: Modal dialogs, system settings drawer, and Command Palette (`blur(28px)`).
+2. **Ambient Canvas Lighting**: The canvas is anchored by a deep slate-navy background (`#070B14`) illuminated by four slowly drifting ambient color orbs (cyan, emerald, warm amber, and signal teal) with a 2% technical grid matrix.
+3. **Hero Contrast for Grounded Evidence**: The **Policy Slip** remains solid, high-contrast paper-white (`#FFFFFF`) framed within frosted glass, ensuring immediate legibility and uncompromised authority.
+4. **Self-Contained & Completely Offline**: Zero external network dependencies, CDNs, analytics, or remote fonts. All icons are rendered via native inline SVG and CSS geometry.
 
 ---
 
 ## 2. Color System & Token Architecture
 
-The palette uses exactly six physical tokens derived from road and vehicle mechanics. Tints are generated programmatically only for low-opacity background fills.
+The palette harmonizes operational clarity with frosted glass physics across both dark and light modes.
 
 ### Color Tokens
 
-| Token Name | Hex Code | Semantic Role | Contrast vs. Chalk / Asphalt |
-|---|---|---|---|
-| **Kerb chalk** | `#ECEEE8` | Page background (light), primary ink (dark) | 12.8:1 against Asphalt |
-| **Asphalt** | `#1B2230` | Primary ink (light), page background (dark), dark surfaces | 12.8:1 against Chalk |
-| **Lane yellow** | `#F4C20D` | Highlighter accent: focus rings, active ticket stage, attention | 3.5:1 against Asphalt (non-text UI / 7.2:1 against dark ink) |
-| **Signal teal** | `#0E7C7B` | Verified policy adherence, grounded citations, success states | 4.8:1 on Chalk, 5.1:1 on dark slip |
-| **Brake red** | `#C5412B` | Intercepted prompt injections, budget exhaustion, error alerts | 5.2:1 on Chalk, 4.9:1 on dark slip |
-| **Verge grey** | `#8A9199` | Secondary metadata, captions, inactive ticket tracks | 4.6:1 on Asphalt, 4.5:1 on Chalk |
+| Token Name | Hex / RGBA Code | Semantic Role |
+|---|---|---|
+| **Canvas Slate** | `#070B14` | Dark mode base canvas |
+| **Canvas Pearl** | `#F4F6F9` | Light mode base canvas |
+| **Signal Cyan** | `#00F2FE` / `#0284C7` | Active highlights, focus rings, user message bubbles |
+| **Emerald Grounded** | `#10B981` / `#059669` | Verified grounded citations, healthy desk status |
+| **Amber Accent** | `#F59E0B` / `#F4C20D` | Send button, attention indicators, escalation warnings |
+| **Coral Alert** | `#F87171` / `#DC2626` | Intercepted security injections, budget exhaustion |
+| **Slate Ink** | `#ECEEE8` (Dark) / `#0F172A` (Light) | High-contrast body typography |
 
-### Theme Remapping Matrix
-
-Theme switching re-maps identical tokens rather than inventing separate color systems:
+### Glass Surface Tokens
 
 ```css
-:root, [data-theme="light"] {
-  --color-page: #ECEEE8;              /* Kerb chalk */
-  --color-surface: #FFFFFF;           /* Paper white for policy slip */
-  --color-surface-sunken: #E2E5DC;    /* Recessed chalk */
-  --color-ink: #1B2230;               /* Asphalt */
-  --color-ink-secondary: #586069;     /* Deep verge */
-  --color-ink-muted: #8A9199;         /* Verge grey */
-  --color-border: #D1D6CC;            /* Solid road boundary */
-  --color-accent: #F4C20D;            /* Lane yellow */
-  --color-verified: #0E7C7B;          /* Signal teal */
-  --color-blocked: #C5412B;           /* Brake red */
-  --color-chip-user: #1B2230;         /* Asphalt */
-  --color-chip-user-ink: #ECEEE8;     /* Kerb chalk */
-  --glass-bg: rgba(236, 238, 232, 0.88);
-  --glass-border: rgba(27, 34, 48, 0.12);
+:root, [data-theme="dark"] {
+  --color-canvas: #070B14;
+  --glass-1-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --glass-1-border: rgba(255, 255, 255, 0.10);
+  --glass-1-blur: blur(16px) saturate(160%);
+  --glass-1-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 8px 32px rgba(0, 0, 0, 0.30);
+
+  --glass-2-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --glass-2-border: rgba(255, 255, 255, 0.12);
+  --glass-2-blur: blur(22px) saturate(170%);
+  --glass-2-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 36px rgba(0, 0, 0, 0.35);
+
+  --glass-3-bg: linear-gradient(135deg, rgba(17, 24, 39, 0.88) 0%, rgba(10, 16, 28, 0.94) 100%);
+  --glass-3-border: rgba(255, 255, 255, 0.14);
+  --glass-3-blur: blur(28px) saturate(180%);
+  --glass-3-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 24px 64px rgba(0, 0, 0, 0.60);
 }
 
-[data-theme="dark"] {
-  --color-page: #121722;              /* Deep asphalt */
-  --color-surface: #1B2230;           /* Asphalt surface */
-  --color-surface-sunken: #151A24;    /* Pit dark */
-  --color-ink: #ECEEE8;               /* Kerb chalk */
-  --color-ink-secondary: #B0B7BF;     /* Light verge */
-  --color-ink-muted: #8A9199;         /* Verge grey */
-  --color-border: #2B3444;            /* Dark divider */
-  --color-accent: #F4C20D;            /* Lane yellow */
-  --color-verified: #18A9A8;          /* Lightened signal teal */
-  --color-blocked: #E0533C;           /* Lightened brake red */
-  --color-chip-user: #242D3D;         /* Elevated asphalt */
-  --color-chip-user-ink: #ECEEE8;     /* Kerb chalk */
-  --glass-bg: rgba(27, 34, 48, 0.88);
-  --glass-border: rgba(236, 238, 232, 0.12);
+[data-theme="light"] {
+  --color-canvas: #F4F6F9;
+  --glass-1-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.58) 100%);
+  --glass-1-border: rgba(15, 23, 42, 0.08);
+  --glass-1-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 8px 30px rgba(15, 23, 42, 0.06);
+
+  --glass-2-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.68) 100%);
+  --glass-2-border: rgba(15, 23, 42, 0.10);
+  --glass-2-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 10px 32px rgba(15, 23, 42, 0.08);
+
+  --glass-3-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 250, 252, 0.92) 100%);
+  --glass-3-border: rgba(15, 23, 42, 0.12);
+  --glass-3-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 20px 50px rgba(15, 23, 42, 0.14);
 }
 ```
-
-### Prohibited Styles
-- NO cream background with terracotta accent
-- NO near-black with acid neon green
-- NO purple/blue gradient washes
-- NO identical rounded cards with soft floating grey box-shadows
-- NO all-caps eyebrow labels over every heading
-- NO spaced em dashes in labels
 
 ---
 
 ## 3. Typography & Typesetting System
 
-Typography relies on two complementary typefaces: **Archivo** (expanded for wordmarks and headings, normal for UI controls) and **Source Serif 4** (for verified policy prose).
+Typography relies on a clean system sans-serif stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif`) with strict numerical alignment via `font-variant-numeric: tabular-nums` for all SLA figures, percentages, token budgets, and ticket identifiers.
+
+### Modular Scale
+- **Display 2XL**: `2.5rem` (40px) — Hero headlines
+- **Title XL**: `1.75rem` (28px) — Stage dashboards
+- **Title LG**: `1.25rem` (20px) — Section headings
+- **Base**: `1.0rem` (16px) — Primary body and answers
+- **Small SM**: `0.875rem` (14px) — Buttons, form controls, tabular data
+- **Micro XS**: `0.75rem` (12px) — Status chips, timestamps, metadata labels
 
 ### Type Families
 1. **Sans / Display**: `Archivo`, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif.
