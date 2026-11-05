@@ -52,7 +52,8 @@ def select_relevant_sentences(
       conflicting tiers (e.g. Sev-2, Sev-3).
     - Natural flow: Selected sentences are assembled in their original document order.
     """
-    clean_q = query.strip()
+    clean_q = re.sub(r"\[[A-Za-z_]+_MASKED\]", "", query).strip()
+    clean_q = clean_q if clean_q else query.strip()
     lower_q = clean_q.lower()
 
     # Determine if question asks for an exhaustive list or comparison

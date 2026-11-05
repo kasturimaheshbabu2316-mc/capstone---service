@@ -104,6 +104,11 @@ def load_kb(kb_dir: str | Path = "kb") -> list[dict[str, str]]:
         ]
     """
     base_path = Path(kb_dir)
+    if not base_path.is_absolute() and not base_path.exists():
+        candidate = Path(__file__).resolve().parent / base_path
+        if candidate.exists():
+            base_path = candidate
+
     if not base_path.exists():
         raise FileNotFoundError(f"Knowledge base directory not found: {base_path}")
 

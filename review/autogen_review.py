@@ -227,7 +227,7 @@ class MockChatCompletionClient(ChatCompletionClient):
                 if was_masked:
                     reason_text = "Policy-Compliance-Reviewer verified facts. Final-Editor masked unredacted customer phone PII."
                     verdict = ReviewVerdict(
-                        approved=False,
+                        approved=True,
                         final_answer=masked_answer,
                         reason=reason_text,
                         feedback=reason_text,
@@ -433,7 +433,8 @@ def _resolve_context_text(sources: list[str] | str | None, context_text: str = "
         kb_map: dict[str, str] = {}
         try:
             from kb_loader import load_kb
-            for doc in load_kb():
+            kb_dir = PROJECT_ROOT / "kb"
+            for doc in load_kb(kb_dir):
                 kb_map[doc["doc_id"].lower()] = doc["text"]
                 kb_map[doc["doc_id"].lower() + ".md"] = doc["text"]
         except (ImportError, OSError, ValueError) as exc:

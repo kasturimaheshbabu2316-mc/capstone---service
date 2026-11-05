@@ -347,13 +347,12 @@ def retrieve(
     client = get_chroma_client()
     model = get_embedding_model()
 
-    # Clean PII placeholder tags from query before embedding so masking does not degrade semantic retrieval
-    clean_query = re.sub(r"\[(PHONE|EMAIL|CARD)_MASKED\]", "", str(query)).strip()
-    if not clean_query:
-        clean_query = str(query)
+    # CRITICAL FIX: Clean privacy placeholder tokens before embedding so retrieval is not penalized
+    clean_query = re.sub(r"\[[A-Z_]+_MASKED\]", "", str(query)).strip()
+    query_to_embed = clean_query if clean_query else str(query)
 
     col = client.get_collection(name=collection_name)
-    emb_res = model.encode([clean_query], show_progress_bar=False, batch_size=1)
+    emb_res = model.encode([query_to_embed], show_progress_bar=False, batch_size=1)
     query_emb = emb_res.tolist() if hasattr(emb_res, "tolist") else list(emb_res)
 
     results = col.query(

@@ -1256,14 +1256,63 @@ body {
   color: var(--accent-cyan);
 }
 
-/* Minimal Empty State */
+/* Minimal Empty State & Enterprise Hero */
 .chat-empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 80px 20px 40px;
+  padding: 48px 20px 32px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.enterprise-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  box-shadow: 0 0 24px rgba(0, 242, 254, 0.2);
+  margin-bottom: 18px;
+}
+
+.enterprise-hero-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00f2fe;
+}
+
+.starter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 380px));
+  gap: 14px;
+  width: 100%;
+  max-width: 780px;
+  margin: 28px auto 0;
+  text-align: left;
+}
+
+@media (max-width: 680px) {
+  .starter-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card-icon-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-icon-title svg {
+  color: var(--accent-cyan);
+  flex-shrink: 0;
 }
 
 .empty-title {

@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initApp() {
-  const composerInput = document.getElementById("composerInput");
-  const composerForm = document.getElementById("composerForm");
-  const btnSend = document.getElementById("btnSend");
-  const welcomeBox = document.getElementById("welcomeBox");
+  const composerInput = document.getElementById("composerInput") || document.getElementById("chat-input");
+  const composerForm = document.getElementById("composerForm") || document.getElementById("chat-form");
+  const btnSend = document.getElementById("btnSend") || document.getElementById("send-btn");
+  const welcomeBox = document.getElementById("welcomeBox") || document.getElementById("chat-empty-state");
 
   // Initialize Settings Drawer
   initSettingsSheet((query) => {
@@ -99,9 +99,9 @@ function initStarterCards() {
  * Top Navbar Segmented Pill Switcher (Chat Desk | Ticket Directory | Policy Explorer)
  */
 function initNavSwitcher() {
-  const pillChat = document.getElementById("pillChatDesk");
-  const pillTickets = document.getElementById("pillTicketDir");
-  const pillPolicy = document.getElementById("pillPolicyExp");
+  const pillChat = document.getElementById("pillChatDesk") || document.getElementById("pill-chat");
+  const pillTickets = document.getElementById("pillTicketDir") || document.getElementById("pill-directory");
+  const pillPolicy = document.getElementById("pillPolicyExp") || document.getElementById("pill-policies");
   const pills = [pillChat, pillTickets, pillPolicy].filter(Boolean);
 
   function setActivePill(activePill) {
@@ -139,7 +139,7 @@ function initNavSwitcher() {
  * Navbar Theme Toggle (Dark Slate-Navy vs Frosted Light)
  */
 function initThemeToggle() {
-  const btnToggle = document.getElementById("btnThemeToggle");
+  const btnToggle = document.getElementById("btnThemeToggle") || document.getElementById("theme-toggle-btn");
   if (!btnToggle) return;
 
   btnToggle.addEventListener("click", () => {
@@ -166,10 +166,10 @@ function autoResizeTextarea(textarea) {
  * Live token meter listener (characters / 4 heuristic)
  */
 function updateTokenBudgetGauge(text) {
-  const gaugeProgress = document.getElementById("tokenGaugeProgress");
-  const gaugeCount = document.getElementById("tokenGaugeCount");
+  const gaugeProgress = document.getElementById("tokenGaugeProgress") || document.getElementById("token-bar-fill");
+  const gaugeCount = document.getElementById("tokenGaugeCount") || document.getElementById("token-counter-text");
   const gaugeWarning = document.getElementById("tokenGaugeWarning");
-  const btnSend = document.getElementById("btnSend");
+  const btnSend = document.getElementById("btnSend") || document.getElementById("send-btn");
 
   const charCount = text ? text.length : 0;
   const estimatedTokens = charCount > 0 ? Math.max(1, Math.round(charCount / 4)) : 0;
@@ -200,9 +200,9 @@ function updateTokenBudgetGauge(text) {
 async function handleUserDispatch(queryText) {
   if (!queryText || state.isProcessing) return;
 
-  const chatContainer = document.getElementById("chatMessages");
-  const welcomeBox = document.getElementById("welcomeBox");
-  const btnSend = document.getElementById("btnSend");
+  const chatContainer = document.getElementById("chatMessages") || document.getElementById("chat-stream");
+  const welcomeBox = document.getElementById("welcomeBox") || document.getElementById("chat-empty-state");
+  const btnSend = document.getElementById("btnSend") || document.getElementById("send-btn");
 
   // Prevent duplicate double submission within same run
   if (state.lastSubmittedQuery === queryText && state.isProcessing) {
@@ -327,8 +327,8 @@ function scrollToBottom() {
  * Polls backend health on page load
  */
 async function pollInitialHealth() {
-  const headerChip = document.getElementById("headerStatusText");
-  const headerDot = document.getElementById("headerStatusDot");
+  const headerChip = document.getElementById("headerStatusText") || document.getElementById("health-text");
+  const headerDot = document.getElementById("headerStatusDot") || document.getElementById("health-dot");
 
   const h = await checkHealth();
   if (headerChip) headerChip.textContent = h.online ? "System Active" : h.status;

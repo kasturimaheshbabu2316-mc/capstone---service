@@ -197,6 +197,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------------------------------------------------------------------
   function setExamplesPopoverVisible(show) {
     if (!examplesPopover) return;
+    if (chatEmptyState && !chatEmptyState.classList.contains("stage-hidden")) {
+      return;
+    }
     const shouldShow = typeof show === "boolean" ? show : examplesPopover.classList.contains("stage-hidden");
     examplesPopover.classList.toggle("stage-hidden", !shouldShow);
     if (examplesToggleBtn) {
@@ -207,7 +210,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (examplesToggleBtn) {
     examplesToggleBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      setExamplesPopoverVisible();
+      if (chatEmptyState && chatEmptyState.classList.contains("stage-hidden")) {
+        chatEmptyState.classList.remove("stage-hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (chatInput) {
+        chatInput.focus();
+      }
     });
   }
 
