@@ -1,0 +1,824 @@
+/**
+ * Ola Support Intelligence — Live 3D AI Mascots (static/css/mascots.css)
+ * Implements:
+ * 1. 3D CSS Scene: perspective, transform-style: preserve-3d, translateZ layering
+ * 2. State Machine Animations: idle, thinking, speaking, success, blocked, wave
+ * 3. Dual-Theme Palette: Cyber Neon (Dark) & Soft Clay 3D (Light)
+ * 4. Micro Circular Glass Avatar Chip for Chat Rows
+ * 5. Hardware-accelerated 60fps performance with reduced-motion overrides
+ */
+
+/* ==============================================================================
+   1. Mascot Stage & 3D Viewport Architecture
+   ============================================================================== */
+.mascot-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 900px;
+  transform-style: preserve-3d;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  cursor: pointer;
+  transition: transform var(--transition-fast, 0.2s ease-out);
+}
+
+.mascot-hero-stage {
+  max-width: 440px;
+  padding: 6px 12px;
+}
+
+.mascot-viewport {
+  position: relative;
+  width: 260px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+.mascot-svg-rig {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
+  transform-style: preserve-3d;
+}
+
+/* Floor Contact Shadow */
+.mascot-floor-shadow {
+  fill: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.3) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 80%);
+  animation: shadowBreathe 3.6s ease-in-out infinite alternate;
+}
+
+@keyframes shadowBreathe {
+  0% { transform: scale(0.95); opacity: 0.65; }
+  100% { transform: scale(1.05); opacity: 0.95; }
+}
+
+[data-theme="light"] .mascot-floor-shadow {
+  fill: radial-gradient(ellipse at center, rgba(2, 132, 199, 0.22) 0%, rgba(15, 23, 42, 0.12) 50%, transparent 80%);
+  opacity: 0.7;
+}
+
+/* Speech Bubble on Hero Mascot */
+.mascot-speech-bubble {
+  position: relative;
+  background: var(--glass-1-bg, rgba(13, 24, 44, 0.85));
+  -webkit-backdrop-filter: var(--glass-1-blur, blur(16px));
+  backdrop-filter: var(--glass-1-blur, blur(16px));
+  border: 1px solid rgba(0, 242, 254, 0.38);
+  border-radius: var(--radius-pill, 9999px);
+  padding: 6px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink, #ffffff);
+  box-shadow: 0 4px 20px rgba(0, 242, 254, 0.2);
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  animation: bubbleFloat 3s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+[data-theme="light"] .mascot-speech-bubble {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(2, 132, 199, 0.35);
+  color: #0f172a;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+}
+
+.bubble-sparkle {
+  color: var(--color-highlight, #00f2fe);
+  animation: sparkleTwinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes sparkleTwinkle {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+.mascot-hero-caption {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--color-highlight, #00f2fe);
+  text-transform: uppercase;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+[data-theme="light"] .mascot-hero-caption {
+  color: #0284c7;
+}
+
+.caption-dot {
+  opacity: 0.5;
+}
+
+/* State Machine Progress Pill (Used during Inquiry Analysis) */
+.mascot-state-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--glass-1-bg, rgba(13, 24, 44, 0.88));
+  -webkit-backdrop-filter: var(--glass-1-blur, blur(16px));
+  backdrop-filter: var(--glass-1-blur, blur(16px));
+  border: 1px solid rgba(0, 242, 254, 0.45);
+  border-radius: var(--radius-pill, 9999px);
+  padding: 6px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--color-highlight, #00f2fe);
+  box-shadow: 0 4px 18px rgba(0, 242, 254, 0.22);
+  margin-bottom: 10px;
+  white-space: nowrap;
+  animation: pillFadeIn 0.3s ease-out;
+}
+
+[data-theme="light"] .mascot-state-pill {
+  background: rgba(255, 255, 255, 0.90);
+  border-color: rgba(2, 132, 199, 0.35);
+  color: #0284c7;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+.pill-beacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00f2fe;
+  box-shadow: 0 0 10px #00f2fe;
+  animation: beaconPulse 1.4s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .pill-beacon {
+  background: #0284c7;
+  box-shadow: 0 0 10px #0284c7;
+}
+
+@keyframes beaconPulse {
+  0% { transform: scale(0.85); opacity: 0.7; }
+  100% { transform: scale(1.25); opacity: 1; }
+}
+
+/* 3-Dot Typing Indicator */
+.typing-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.typing-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  animation: typingDotBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot.dot-1 { animation-delay: 0s; }
+.typing-dot.dot-2 { animation-delay: 0.2s; }
+.typing-dot.dot-3 { animation-delay: 0.4s; }
+
+@keyframes typingDotBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ==============================================================================
+   2. Dark Theme Styling: "Neon Holographic"
+   ============================================================================== */
+.ai-head-helmet,
+.ai-torso-plate {
+  fill: url(#robotBodyDark);
+  stroke: #00f2fe;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.45));
+}
+
+.ai-antenna-mast,
+.ai-arm-limb-l,
+.ai-arm-limb-r {
+  stroke: #00f2fe;
+}
+
+.ai-antenna-beacon,
+.ai-chest-core,
+.ai-hand-dot-l,
+.ai-hand-dot-r {
+  fill: #00f2fe;
+  filter: drop-shadow(0 0 8px #00f2fe);
+}
+
+.ai-visor-screen {
+  fill: #050b14;
+  stroke: rgba(0, 242, 254, 0.4);
+  stroke-width: 1.2;
+}
+
+.ai-eye-left,
+.ai-eye-right {
+  fill: #00f2fe;
+  filter: drop-shadow(0 0 6px #00f2fe);
+}
+
+.ai-blush-left,
+.ai-blush-right {
+  fill: rgba(0, 242, 254, 0.35);
+}
+
+.ai-mouth-curve {
+  stroke: #00f2fe;
+}
+
+.ai-equalizer-bars line {
+  stroke: #00f2fe;
+}
+
+.ai-thruster-glow {
+  fill: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.7) 0%, transparent 70%);
+}
+
+/* Sparky Dark Theme */
+.sparky-body-shape,
+.sparky-head-sphere {
+  fill: url(#sparkyBodyDark);
+  stroke: #38bdf8;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+}
+
+.sparky-tail-path,
+.ear-shape-l,
+.ear-shape-r,
+.sparky-collar {
+  stroke: #38bdf8;
+}
+
+.sparky-tail-pom,
+.sparky-collar-tag,
+.sparky-paws-l,
+.sparky-paws-r {
+  fill: #38bdf8;
+}
+
+.ear-inner-l,
+.ear-inner-r {
+  fill: rgba(56, 189, 248, 0.25);
+}
+
+.sparky-pupil-l,
+.sparky-pupil-r,
+.sparky-nose {
+  fill: #00f2fe;
+}
+
+.sparky-snout {
+  fill: #081525;
+}
+
+.mag-rim,
+.mag-handle {
+  stroke: #f59e0b;
+}
+
+.holo-book-cover {
+  stroke: #00f2fe;
+  fill: rgba(0, 242, 254, 0.12);
+}
+
+.holo-book-pages-l,
+.holo-book-pages-r {
+  fill: rgba(255, 255, 255, 0.15);
+  stroke: #00f2fe;
+  stroke-width: 1;
+}
+
+.holo-scan-laser {
+  stroke: #00f2fe;
+}
+
+.shield-outline {
+  fill: rgba(239, 68, 68, 0.18);
+  stroke: #ef4444;
+}
+
+.sparkle-dot {
+  fill: #10b981;
+  filter: drop-shadow(0 0 6px #10b981);
+}
+
+/* ==============================================================================
+   3. Light Theme Styling: "Soft Clay 3D" (Apple / Pixar Aesthetic)
+   ============================================================================== */
+[data-theme="light"] .ai-head-helmet,
+[data-theme="light"] .ai-torso-plate {
+  fill: url(#robotBodyLight);
+  stroke: #0284c7;
+  stroke-width: 2;
+  filter: drop-shadow(0 6px 14px rgba(2, 132, 199, 0.2));
+}
+
+[data-theme="light"] .ai-antenna-mast,
+[data-theme="light"] .ai-arm-limb-l,
+[data-theme="light"] .ai-arm-limb-r {
+  stroke: #0284c7;
+}
+
+[data-theme="light"] .ai-antenna-beacon,
+[data-theme="light"] .ai-chest-core,
+[data-theme="light"] .ai-hand-dot-l,
+[data-theme="light"] .ai-hand-dot-r {
+  fill: #0284c7;
+  filter: drop-shadow(0 0 6px rgba(2, 132, 199, 0.6));
+}
+
+[data-theme="light"] .ai-visor-screen {
+  fill: #f8fafc;
+  stroke: rgba(2, 132, 199, 0.35);
+  stroke-width: 1.2;
+}
+
+[data-theme="light"] .ai-eye-left,
+[data-theme="light"] .ai-eye-right {
+  fill: #0284c7;
+  filter: drop-shadow(0 0 4px rgba(2, 132, 199, 0.5));
+}
+
+[data-theme="light"] .ai-blush-left,
+[data-theme="light"] .ai-blush-right {
+  fill: rgba(244, 63, 94, 0.45);
+}
+
+[data-theme="light"] .ai-mouth-curve {
+  stroke: #0284c7;
+}
+
+[data-theme="light"] .ai-equalizer-bars line {
+  stroke: #0284c7;
+}
+
+[data-theme="light"] .ai-thruster-glow {
+  fill: radial-gradient(ellipse at center, rgba(2, 132, 199, 0.35) 0%, transparent 70%);
+}
+
+/* Sparky Light Theme (Warm Golden Honey & Orange) */
+[data-theme="light"] .sparky-body-shape,
+[data-theme="light"] .sparky-head-sphere {
+  fill: url(#sparkyBodyLight);
+  stroke: #d97706;
+  stroke-width: 2;
+  filter: drop-shadow(0 6px 14px rgba(217, 119, 6, 0.2));
+}
+
+[data-theme="light"] .sparky-tail-path,
+[data-theme="light"] .ear-shape-l,
+[data-theme="light"] .ear-shape-r,
+[data-theme="light"] .sparky-collar {
+  stroke: #d97706;
+}
+
+[data-theme="light"] .sparky-tail-pom,
+[data-theme="light"] .sparky-paws-l,
+[data-theme="light"] .sparky-paws-r {
+  fill: #d97706;
+}
+
+[data-theme="light"] .sparky-collar-tag {
+  fill: #fbbf24;
+}
+
+[data-theme="light"] .ear-inner-l,
+[data-theme="light"] .ear-inner-r {
+  fill: #fde68a;
+}
+
+[data-theme="light"] .sparky-pupil-l,
+[data-theme="light"] .sparky-pupil-r {
+  fill: #1e293b;
+}
+
+[data-theme="light"] .sparky-snout {
+  fill: #ffffff;
+}
+
+[data-theme="light"] .sparky-nose {
+  fill: #78350f;
+}
+
+[data-theme="light"] .holo-book-cover {
+  stroke: #0284c7;
+  fill: rgba(2, 132, 199, 0.1);
+}
+
+[data-theme="light"] .holo-book-pages-l,
+[data-theme="light"] .holo-book-pages-r {
+  fill: #ffffff;
+  stroke: #0284c7;
+  stroke-width: 1;
+}
+
+[data-theme="light"] .holo-scan-laser {
+  stroke: #0284c7;
+}
+
+/* ==============================================================================
+   4. State Machine Keyframe Animations
+   ============================================================================== */
+
+/* Base Floating Idle Breathing */
+.character-ai-group {
+  transform-origin: 80px 95px;
+  animation: aiFloatBob 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes aiFloatBob {
+  0%   { transform: translateY(0px) rotateZ(0.5deg); }
+  100% { transform: translateY(-5px) rotateZ(-0.5deg); }
+}
+
+.character-sparky-group {
+  transform-origin: 178px 106px;
+  animation: sparkyFloatBob 3.6s ease-in-out infinite alternate 0.4s;
+}
+
+@keyframes sparkyFloatBob {
+  0%   { transform: translateY(0px); }
+  100% { transform: translateY(-4px); }
+}
+
+/* Eyes Blinking */
+.ai-eye-left,
+.ai-eye-right {
+  transform-origin: center;
+  animation: eyeBlinkCadence 4.2s infinite;
+}
+
+@keyframes eyeBlinkCadence {
+  0%, 95%, 100% { transform: scaleY(1); }
+  97.5% { transform: scaleY(0.1); }
+}
+
+/* Eyes Parallax */
+.ai-pupil-left,
+.ai-pupil-right {
+  transform: translate(var(--eye-x, 0px), var(--eye-y, 0px));
+  transition: transform 0.1s linear;
+}
+
+/* Tail Wagging */
+.sparky-tail-rig {
+  transform-origin: 192px 104px;
+  animation: tailWag 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes tailWag {
+  0%   { transform: rotate(-8deg); }
+  100% { transform: rotate(14deg); }
+}
+
+/* Ear Twitch */
+.sparky-ear-r {
+  transform-origin: 189px 76px;
+  animation: earTwitch 3.8s infinite;
+}
+
+@keyframes earTwitch {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  93% { transform: rotate(8deg); }
+  96% { transform: rotate(-4deg); }
+}
+
+/* Hidden by Default State Layers */
+.ai-holo-book,
+.ai-thumbs-up-icon,
+.ai-equalizer-bars,
+.ai-guard-shield,
+.sparky-mag-glass,
+.success-sparkles-group {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+/* --------------------------------------------------------------------------
+   STATE: thinking
+   AI reads open book; scan line sweeps; Sparky holds magnifying glass; dots bounce
+   -------------------------------------------------------------------------- */
+.mascot-stage[data-state="thinking"] .ai-holo-book {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mascot-stage[data-state="thinking"] .holo-scan-laser {
+  animation: laserScanSweep 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes laserScanSweep {
+  0%   { transform: translateY(-4px); opacity: 0.6; }
+  100% { transform: translateY(6px); opacity: 1; }
+}
+
+.mascot-stage[data-state="thinking"] .sparky-mag-glass {
+  opacity: 1;
+  transform-origin: 163px 100px;
+  animation: magGlassSweep 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes magGlassSweep {
+  0%   { transform: rotate(-10deg) translate(-2px, -2px); }
+  100% { transform: rotate(12deg) translate(2px, 2px); }
+}
+
+.mascot-stage[data-state="thinking"] .ai-eye-left,
+.mascot-stage[data-state="thinking"] .ai-eye-right {
+  animation: eyesReadingScan 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes eyesReadingScan {
+  0%   { transform: translateX(-2.5px); }
+  100% { transform: translateX(2.5px); }
+}
+
+/* --------------------------------------------------------------------------
+   STATE: speaking
+   Visor equalizer bars active; AI head nods; Sparky listens
+   -------------------------------------------------------------------------- */
+.mascot-stage[data-state="speaking"] .ai-mouth-curve {
+  opacity: 0;
+}
+
+.mascot-stage[data-state="speaking"] .ai-equalizer-bars {
+  opacity: 1;
+}
+
+.mascot-stage[data-state="speaking"] .eq-bar.bar-1 { animation: eqBounce 0.35s ease-in-out infinite alternate; }
+.mascot-stage[data-state="speaking"] .eq-bar.bar-2 { animation: eqBounce 0.45s ease-in-out infinite alternate 0.1s; }
+.mascot-stage[data-state="speaking"] .eq-bar.bar-3 { animation: eqBounce 0.3s ease-in-out infinite alternate 0.05s; }
+.mascot-stage[data-state="speaking"] .eq-bar.bar-4 { animation: eqBounce 0.4s ease-in-out infinite alternate 0.15s; }
+.mascot-stage[data-state="speaking"] .eq-bar.bar-5 { animation: eqBounce 0.32s ease-in-out infinite alternate 0.08s; }
+
+@keyframes eqBounce {
+  0%   { transform: scaleY(0.4); }
+  100% { transform: scaleY(1.4); }
+}
+
+.mascot-stage[data-state="speaking"] .ai-head-unit {
+  animation: headNod 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes headNod {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(2px) rotateX(4deg); }
+}
+
+/* --------------------------------------------------------------------------
+   STATE: success
+   AI gives thumbs-up; Sparky hops; emerald sparkles burst
+   -------------------------------------------------------------------------- */
+.mascot-stage[data-state="success"] .ai-thumbs-up-icon {
+  opacity: 1;
+}
+
+.mascot-stage[data-state="success"] .ai-arm-right {
+  transform-origin: 98px 86px;
+  animation: armThumbsUp 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+@keyframes armThumbsUp {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(-25deg) translateY(-4px); }
+}
+
+.mascot-stage[data-state="success"] .character-sparky-group {
+  animation: sparkyHop 0.8s ease-in-out 2 alternate;
+}
+
+@keyframes sparkyHop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+
+.mascot-stage[data-state="success"] .success-sparkles-group {
+  opacity: 1;
+}
+
+.mascot-stage[data-state="success"] .sparkle-dot {
+  animation: sparkleBurst 1.2s ease-out infinite;
+}
+
+@keyframes sparkleBurst {
+  0%   { transform: scale(0.4); opacity: 0; }
+  50%  { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(0.6); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   STATE: blocked
+   AI raises shield/stop hand; eyes coral red; Sparky ears flat
+   -------------------------------------------------------------------------- */
+.mascot-stage[data-state="blocked"] .ai-guard-shield {
+  opacity: 1;
+  animation: shieldPulse 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes shieldPulse {
+  0%   { transform: scale(0.96); opacity: 0.8; }
+  100% { transform: scale(1.04); opacity: 1; }
+}
+
+.mascot-stage[data-state="blocked"] .ai-eye-left,
+.mascot-stage[data-state="blocked"] .ai-eye-right {
+  fill: #ef4444 !important;
+  filter: drop-shadow(0 0 8px #ef4444) !important;
+}
+
+.mascot-stage[data-state="blocked"] .sparky-ear-l {
+  transform: rotate(-14deg);
+  transition: transform 0.3s ease;
+}
+
+.mascot-stage[data-state="blocked"] .sparky-ear-r {
+  transform: rotate(14deg);
+  transition: transform 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   STATE: wave
+   AI waves hand back and forth; Sparky peeks playfully
+   -------------------------------------------------------------------------- */
+.mascot-stage[data-state="wave"] .ai-arm-right {
+  transform-origin: 98px 86px;
+  animation: armWaveBackAndForth 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes armWaveBackAndForth {
+  0%   { transform: rotate(-15deg) translateY(-6px); }
+  100% { transform: rotate(15deg) translateY(-2px); }
+}
+
+.mascot-stage[data-state="wave"] .sparky-tail-rig {
+  animation: tailWagFast 0.35s ease-in-out infinite alternate;
+}
+
+@keyframes tailWagFast {
+  0%   { transform: rotate(-18deg); }
+  100% { transform: rotate(24deg); }
+}
+
+/* ==============================================================================
+   5. Circular Glass Avatar Chip for Assistant Chat Rows (48–56px)
+   ============================================================================== */
+.chat-avatar-chip {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--glass-1-bg, rgba(13, 24, 44, 0.82));
+  -webkit-backdrop-filter: var(--glass-1-blur, blur(16px));
+  backdrop-filter: var(--glass-1-blur, blur(16px));
+  border: 1.5px solid rgba(0, 242, 254, 0.40);
+  box-shadow: 0 4px 18px rgba(0, 242, 254, 0.20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  pointer-events: none;
+  animation: chipFloat 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes chipFloat {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-2px); }
+}
+
+[data-theme="light"] .chat-avatar-chip {
+  background: rgba(255, 255, 255, 0.90);
+  border-color: rgba(2, 132, 199, 0.35);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12);
+}
+
+.chip-avatar-svg {
+  width: 38px;
+  height: 38px;
+}
+
+.chip-halo-glow {
+  fill: radial-gradient(circle, rgba(0, 242, 254, 0.25) 0%, transparent 70%);
+}
+
+[data-theme="light"] .chip-halo-glow {
+  fill: radial-gradient(circle, rgba(2, 132, 199, 0.18) 0%, transparent 70%);
+}
+
+.chip-robot-helm {
+  fill: url(#robotBodyDark);
+  stroke: #00f2fe;
+  stroke-width: 1.6;
+}
+
+[data-theme="light"] .chip-robot-helm {
+  fill: url(#robotBodyLight);
+  stroke: #0284c7;
+}
+
+.chip-antenna-stem {
+  stroke: #00f2fe;
+}
+
+[data-theme="light"] .chip-antenna-stem {
+  stroke: #0284c7;
+}
+
+.chip-antenna-orb {
+  fill: #00f2fe;
+}
+
+[data-theme="light"] .chip-antenna-orb {
+  fill: #0284c7;
+}
+
+.chip-visor {
+  fill: #050b14;
+}
+
+[data-theme="light"] .chip-visor {
+  fill: #f8fafc;
+}
+
+.chip-eye {
+  fill: #00f2fe;
+  animation: eyeBlinkCadence 4s infinite;
+}
+
+[data-theme="light"] .chip-eye {
+  fill: #0284c7;
+}
+
+.chip-smile {
+  stroke: #00f2fe;
+}
+
+[data-theme="light"] .chip-smile {
+  stroke: #0284c7;
+}
+
+/* ==============================================================================
+   6. Accessibility & Performance Overrides
+   ============================================================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Paused when Tab is Hidden (Document hidden) */
+body.mascots-paused .mascot-svg-rig *,
+body.mascots-paused .chat-avatar-chip,
+body.mascots-paused .mascot-stage * {
+  animation-play-state: paused !important;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .character-ai-group,
+  .character-sparky-group,
+  .sparky-tail-rig,
+  .sparky-ear-r,
+  .ai-head-unit,
+  .mascot-viewport,
+  .mascot-speech-bubble,
+  .chat-avatar-chip,
+  .holo-scan-laser,
+  .sparky-mag-glass {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .mascot-stage[data-state="thinking"] .pill-beacon {
+    animation: beaconPulse 2s ease-in-out infinite alternate !important;
+  }
+}
