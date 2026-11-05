@@ -11,8 +11,8 @@
   <script>
     (function() {
       try {
-        const p = new URLSearchParams(window.location.search);
-        const t = p.get('theme') || localStorage.getItem('ola_theme');
+        var p = new URLSearchParams(window.location.search);
+        var t = p.get('theme') || localStorage.getItem('ola_theme');
         if (t === 'light' || t === 'dark') {
           document.documentElement.setAttribute('data-theme', t);
         }
@@ -125,36 +125,6 @@
           </button>
           <h1 class="empty-title">How can I help?</h1>
           <p class="empty-subtitle">Ask any official ride policy question or enter a ticket ID to inspect.</p>
-          <div class="empty-suggestions-grid">
-            <button type="button" class="starter-card" data-category="policy" data-prompt="What is the resolution SLA for a Sev-1 safety incident?">
-              <span class="starter-card-top">
-                <span>⚡ Sev-1 SLA Rules</span>
-                <span class="starter-badge">Policy</span>
-              </span>
-              <span class="starter-card-sub">Response &amp; resolution timelines for critical incidents.</span>
-            </button>
-            <button type="button" class="starter-card" data-category="lookup" data-prompt="What is the status of TKT-0007?">
-              <span class="starter-card-top">
-                <span>🎫 Check Ticket TKT-0007</span>
-                <span class="starter-badge">Lookup</span>
-              </span>
-              <span class="starter-card-sub">Inspect live status, resolution hours, and risk score.</span>
-            </button>
-            <button type="button" class="starter-card" data-category="refund" data-prompt="When does Ola provide monetary refunds for driver cancellations?">
-              <span class="starter-card-top">
-                <span>💸 Cancellation Refunds</span>
-                <span class="starter-badge">Refunds</span>
-              </span>
-              <span class="starter-card-sub">Automatic 100% refund criteria &amp; settlement speed.</span>
-            </button>
-            <button type="button" class="starter-card" data-category="vip" data-prompt="What are the benefits and response times for VIP Ola Select customers?">
-              <span class="starter-card-top">
-                <span>👑 VIP Ola Select</span>
-                <span class="starter-badge">VIP</span>
-              </span>
-              <span class="starter-card-sub">Priority allocation and under-15m executive SLA.</span>
-            </button>
-          </div>
         </section>
 
         <!-- ACTIVE CONVERSATION STREAM -->
