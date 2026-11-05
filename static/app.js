@@ -553,6 +553,12 @@ document.addEventListener("DOMContentLoaded", () => {
       stagePolicies.style.display = stageName === "policies-stage" ? "block" : "none";
     }
 
+    // Floating Composer Dock is shown exclusively on Chat Desk so it never blocks Directory or Policy views
+    const composerDock = document.querySelector(".composer-dock");
+    if (composerDock) {
+      composerDock.style.display = stageName === "chat-stage" ? "block" : "none";
+    }
+
     if (stageName === "directory-stage" && !isDirectoryLoaded) {
       loadDirectoryDashboard();
     }
@@ -1201,16 +1207,16 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.innerHTML = policies.map(p => `
       <div class="policy-card">
         <div class="policy-card-top">
-          <strong style="font-size:0.95rem; color:var(--text-primary);">${escapeHtml(p.title)}</strong>
+          <h3 class="policy-card-title">${escapeHtml(p.title)}</h3>
           <span class="policy-badge">${escapeHtml(p.category)}</span>
         </div>
         <p class="policy-desc">${escapeHtml(p.desc)}</p>
         <div class="policy-meta">
-          <span>📚 ${p.chunks} Vector Chunks</span>
-          <span>✓ Grounded in ChromaDB</span>
+          <span class="policy-meta-chunks">📚 ${p.chunks} Chunks</span>
+          <span class="policy-meta-grounded">✓ Grounded in ChromaDB</span>
         </div>
-        <button class="test-policy-btn" data-prompt="${escapeHtml(p.prompt)}">
-          Test in Chat ↵
+        <button type="button" class="test-policy-btn" data-prompt="${escapeHtml(p.prompt)}">
+          <span>Test in Chat</span> <span class="btn-arrow">↵</span>
         </button>
       </div>
     `).join("");

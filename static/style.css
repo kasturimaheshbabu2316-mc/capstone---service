@@ -862,73 +862,162 @@ body {
   color: #060913;
 }
 
-/* 7. POLICY EXPLORER GRID */
+/* 7. POLICY EXPLORER GRID & CARDS */
+.policies-stage {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 24px 140px;
+  scroll-behavior: smooth;
+}
+
 .policies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
 }
 
 .policy-card {
-  background: var(--glass-surface);
+  background: linear-gradient(145deg, rgba(13, 24, 44, 0.82), rgba(8, 16, 32, 0.90));
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: 20px;
-  box-shadow: var(--shadow-glass);
+  border: 1px solid rgba(0, 242, 254, 0.20);
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 14px;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 16px;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
 }
 
-.policy-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--glass-border-highlight);
-  background: var(--glass-card-hover);
+.policy-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
-.policy-card-header {
+.policy-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 242, 254, 0.55);
+  background: linear-gradient(145deg, rgba(16, 32, 58, 0.92), rgba(10, 22, 42, 0.96));
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 242, 254, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.policy-card:hover::before {
+  opacity: 1;
+}
+
+.policy-card-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 8px;
+  gap: 12px;
 }
 
 .policy-card-title {
-  font-size: 0.96rem;
+  font-size: 1.02rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #f8fafc;
+  line-height: 1.35;
+  margin: 0;
+  flex: 1;
+  letter-spacing: -0.01em;
 }
 
 .policy-badge {
+  display: inline-flex;
+  align-items: center;
   font-size: 0.70rem;
   font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
   background: rgba(0, 242, 254, 0.12);
-  color: var(--accent-cyan);
-  border: 1px solid rgba(0, 242, 254, 0.3);
+  color: #00f2fe;
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  flex-shrink: 0;
 }
 
-.policy-card-body {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  line-height: 1.45;
+.policy-desc {
+  font-size: 0.86rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
 }
 
-.policy-card-meta {
+.policy-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.74rem;
-  color: var(--text-muted);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 10px;
+  font-size: 0.75rem;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.policy-meta-chunks {
+  color: #94a3b8;
+}
+
+.policy-meta-grounded {
+  color: #10b981;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.test-policy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #00f2fe;
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  font-family: inherit;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.test-policy-btn:hover {
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.25), rgba(79, 172, 254, 0.3));
+  border-color: #00f2fe;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.35);
+}
+
+.test-policy-btn:active {
+  transform: translateY(0);
+}
+
+.test-policy-btn .btn-arrow {
+  transition: transform 0.2s ease;
+}
+
+.test-policy-btn:hover .btn-arrow {
+  transform: translateX(3px);
 }
 
 /* 8. LIVE MULTI-AGENT REASONING HUD IN CHAT STREAM */
