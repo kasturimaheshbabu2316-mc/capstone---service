@@ -15,6 +15,8 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 from rag.generate import FALLBACK_REFUSAL
 from safety.guardrails import INDIAN_PHONE_REGEX, INJECTION_PATTERNS
 
+JUDGE_NAME: str = "deterministic heuristic judge (token overlap and sentence support)"
+
 JUDGE_PROMPT_TEMPLATE = """You are an impartial, highly rigorous evaluator judging customer support AI responses.
 Given the User Query, the Reference Ground Truth Answer, the Retrieved Context Chunks, and the Model Response, evaluate the response across four core criteria on a scale of 1 to 5:
 
@@ -208,16 +210,13 @@ def judge_response(
     query_record: Dict[str, Any],
     response_text: str,
     retrieved_chunks: Optional[List[str]] = None,
+    use_llm_judge: bool = False,
 ) -> Dict[str, Any]:
-    """MOCK LLM-as-Judge evaluating an agent response across Accuracy, Grounding, Completeness, and Safety.
+    """Evaluates an agent response across Accuracy, Grounding, Completeness, and Safety.
 
-    Args:
-        query_record: Dictionary containing query, topic, reference_answer, key_points.
-        response_text: Generated agent answer text.
-        retrieved_chunks: Optional list of retrieved context chunk texts.
-
-    Returns:
-        Structured evaluation dictionary with scores (1-5) and reasoning details.
+    Uses the deterministic heuristic judge (token overlap and sentence support).
+    If use_llm_judge=True is requested and no external LLM is configured, cleanly falls back
+    to the deterministic heuristic judge.
     """
     is_out_of_scope = query_record.get("topic") == "out_of_scope"
     is_ticket = query_record.get("topic") == "ticket_lookup"

@@ -603,6 +603,60 @@ Comprehensive mapping for all 16 project tasks connecting each milestone directl
 
 ---
 
+### LLM Provider Switch
+Configure `LLM_PROVIDER=mock` (default offline), `ollama`, or `gemini` in `.env`.
+When `MOCK_LLM=true` or `LLM_PROVIDER=mock`, zero external network calls are made.
+For `gemini`, provide `GEMINI_API_KEY`; for `ollama`, set `OLLAMA_BASE_URL`.
+
+---
+
+## 13. Known Limitations and Future Work
+
+This assignment project is an educational, deterministic, and self-contained proof-of-concept designed for local grading:
+- **Synthetic Dataset**: 60 simulated support tickets and 12 canonical policy documents.
+- **Offline Deterministic Mock LLM**: Defaults to `MOCK_LLM=true` using rule-based and extractive inference.
+- **Local Runtime Scope**: In-memory LRU session history, in-memory cache, and single-process FastAPI server.
+- **Heuristic Evaluation**: Uses token overlap and sentence support heuristics rather than expensive frontier LLM judge calls.
+
+### Production Transition Roadmap (5 Pillars)
+1. **Distributed Caching & Session Persistence**: Replace in-memory dictionaries with a managed Redis / KeyDB cluster.
+2. **Distributed Vector Database**: Migrate local ChromaDB embeddings to managed Qdrant or Milvus with sharding.
+3. **Fine-Tuned Production LLM**: Integrate domain-adapted LLMs with token-by-token WebSocket streaming.
+4. **API Gateway & Auth**: Deploy Kong or Cloud Armor with JWT OAuth2 authentication and token-bucket rate limiting.
+5. **Human-in-the-Loop Operations**: Implement a live supervisor review queue for tickets exceeding $\tau = 0.4400$.
+
+---
+
+## 14. How to Verify
+
+Run these commands from the project root in an activated virtual environment:
+
+### 1. Execute Unit & Integration Test Suite
+```bash
+pytest -q
+# Expected Output: ~135 passed in ~35s
+```
+
+### 2. Run Comprehensive 50-Query Evaluation Benchmark
+```bash
+python evaluation/run_eval.py
+# Expected Output: Refusal Precision: 100.0%, Refusal Recall: 100.0%, Groundedness: >95%
+```
+
+### 3. Verify Offline Clean Clone Proof
+```bash
+python scripts/verify_clean_clone.py
+# Expected Output: ALL PRE-SUBMISSION CHECKS PASSED. Ready for submission.
+```
+
+### 4. Launch Local Web UI Console
+```bash
+python -m uvicorn api.main:app --host 127.0.0.1 --port 8080
+# Visit: http://localhost:8080
+```
+
+---
+
 ## Docker (optional)
 
 Build and run the application container locally:

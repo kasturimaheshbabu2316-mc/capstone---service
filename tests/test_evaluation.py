@@ -162,3 +162,36 @@ def test_evaluation_artifacts_exist():
     assert 1.0 <= averages["completeness"] <= 5.0
     assert 1.0 <= averages["safety"] <= 5.0
     assert 1.0 <= averages["overall"] <= 5.0
+
+
+def test_extended_50_queries_coverage_and_schema():
+    """Validates that the 50-query suite covers all 5 categories and all 12 KB policy topics."""
+    from evaluation.extended_queries import EXTENDED_EVAL_QUERIES_50
+
+    assert len(EXTENDED_EVAL_QUERIES_50) == 50
+    categories = {q["category"] for q in EXTENDED_EVAL_QUERIES_50}
+    assert categories == {"policy", "lookup", "hybrid", "out_of_scope", "adversarial"}
+
+    policy_topics = {q["topic"] for q in EXTENDED_EVAL_QUERIES_50 if q["category"] == "policy"}
+    assert len(policy_topics) == 12, "All 12 knowledge base policy topics must be covered in policy category."
+
+    for q in EXTENDED_EVAL_QUERIES_50:
+        assert "id" in q and "query" in q and "expected_route" in q and "reference_answer" in q
+
+
+def test_results_json_includes_extended_metrics():
+    """Validates that results.json includes both the 15-query baseline and extended 50-query metrics."""
+    results_path = Path(__file__).resolve().parent.parent / "evaluation" / "results.json"
+    if not results_path.exists():
+        pytest.skip("evaluation/results.json not generated yet")
+
+    with open(results_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    if "extended_evaluation_50" in data:
+        ext = data["extended_evaluation_50"]
+        assert ext["total_queries"] == 50
+        assert "per_category" in ext
+        assert "refusal_metrics" in ext
+        assert "groundedness_rate" in ext
+

@@ -457,8 +457,9 @@ def run_unified_pipeline(
 
         # If query was rewritten from history (pronoun resolution) or contains a ticket ID,
         # use the session-scoped ticket namespace; only history-free policy questions use the global cache.
-        ticket_match = re.search(r"\b(TKT-\d{4})\b", resolved_question, re.IGNORECASE)
-        is_ticket_or_history = was_resolved or bool(ticket_match)
+        from crew.mock_llm import extract_ticket_id
+        ticket_id_found = extract_ticket_id(resolved_question)
+        is_ticket_or_history = was_resolved or bool(ticket_id_found)
 
         if is_ticket_or_history:
             cache_namespace = "ticket"

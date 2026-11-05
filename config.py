@@ -22,6 +22,13 @@ MOCK_LLM: bool = os.environ.get("MOCK_LLM", "true").lower() == "true"
 CREWAI_DISABLE_TELEMETRY: bool = os.environ.get("CREWAI_DISABLE_TELEMETRY", "true").lower() == "true"
 OTEL_SDK_DISABLED: bool = os.environ.get("OTEL_SDK_DISABLED", "true").lower() == "true"
 
+# LLM Provider Configuration: mock (default) | ollama | gemini
+LLM_PROVIDER: str = os.environ.get("LLM_PROVIDER", "mock").lower()
+OLLAMA_BASE_URL: str = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+OLLAMA_MODEL: str = os.environ.get("OLLAMA_MODEL", "llama3")
+GEMINI_API_KEY: str | None = os.environ.get("GEMINI_API_KEY", None)
+GEMINI_MODEL: str = os.environ.get("GEMINI_MODEL", "gemini-1.5-flash")
+
 # Canonical Decision Thresholds
 RAG_SIMILARITY_THRESHOLD: float = 0.3652   # Cosine similarity cutoff for RAG retrieval groundedness
 ESCALATION_RISK_THRESHOLD: float = 0.4400  # Cutoff score for automated support ticket escalation

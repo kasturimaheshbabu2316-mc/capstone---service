@@ -2,6 +2,9 @@
 STEP 11 / TASK 13 - EVALUATION BENCHMARK REPORT (15 QUERIES)
 ================================================================================
 
+EVALUATOR:
+deterministic heuristic judge (token overlap and sentence support)
+
 JUDGE PROMPT SPECIFICATION:
 --------------------------------------------------------------------------------
 You are an impartial, highly rigorous evaluator judging customer support AI responses.
@@ -47,19 +50,19 @@ EVALUATION RESULTS TABLE (1-5 Scale per Criterion):
 | Q02 | refund_compensation_policy |    5     |     5     |      5       |   5    |  5.00   |
 | Q03 | vip_customer_policy        |    4     |     5     |      4       |   5    |  4.50   |
 | Q04 | repeat_complaint_handling  |    4     |     5     |      2       |   5    |  4.00   |
-| Q05 | business_hours_support     |    5     |     5     |      3       |   5    |  4.50   |
-| Q06 | service_credit_policy      |    5     |     5     |      5       |   5    |  5.00   |
+| Q05 | business_hours_support     |    5     |     5     |      2       |   5    |  4.25   |
+| Q06 | service_credit_policy      |    5     |     5     |      4       |   5    |  4.75   |
 | Q07 | escalation_matrix          |    5     |     5     |      5       |   5    |  5.00   |
-| Q08 | ticket_priority_rules      |    5     |     5     |      5       |   5    |  5.00   |
+| Q08 | ticket_priority_rules      |    1     |     5     |      1       |   5    |  3.00   |
 | Q09 | outage_communication       |    2     |     5     |      3       |   5    |  3.75   |
-| Q10 | data_retention_policy      |    5     |     5     |      5       |   5    |  5.00   |
+| Q10 | data_retention_policy      |    4     |     5     |      2       |   5    |  4.00   |
 | Q11 | communication_channels     |    5     |     5     |      5       |   5    |  5.00   |
-| Q12 | feedback_collection        |    4     |     5     |      3       |   5    |  4.25   |
+| Q12 | feedback_collection        |    1     |     5     |      1       |   5    |  3.00   |
 | Q13 | ticket_lookup              |    4     |     5     |      4       |   5    |  4.50   |
 | Q14 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
 | Q15 | out_of_scope               |    5     |     5     |      5       |   5    |  5.00   |
 +-----+----------------------------+----------+-----------+--------------+--------+---------+
-| MACRO AVERAGES                   |   4.53   |   5.00    |     4.27     |  5.00  |  4.70   |
+| MACRO AVERAGES                   |   4.00   |   5.00    |     3.53     |  5.00  |  4.38   |
 +-----+----------------------------+----------+-----------+--------------+--------+---------+
 
 --------------------------------------------------------------------------------
@@ -70,10 +73,10 @@ DETAILED PER-QUERY EVALUATION TRACE:
 Query:            What is the resolution SLA for a Sev-1 safety incident?
 Route:            rag (Expected: rag)
 Reference Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
-Agent Response:   Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours.
+Agent Response:   Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
 Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
 Reasoning:        High factual overlap: 13/13 key reference tokens (100.0%).
-                  3/3 sentences (100.0%) fully supported by context.
+                  1/1 sentences (100.0%) fully supported by context.
                   All 2/2 key points covered (100%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
@@ -82,10 +85,10 @@ Reasoning:        High factual overlap: 13/13 key reference tokens (100.0%).
 Query:            Under what conditions are driver cancellation fees refunded to passengers?
 Route:            rag (Expected: rag)
 Reference Answer: Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.
-Agent Response:   Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot. Ola issues direct monetary refunds for improper cancellations, dual deductions, and validated route deviation overcharges. Cash trip adjustments are disbursed directly into the passenger's linked bank account upon verification of ride telemetry.
+Agent Response:   Driver cancellation fees are unconditionally reversed if the driver remained stationary for more than 5 minutes or failed to arrive at the pickup spot.
 Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
 Reasoning:        High factual overlap: 14/14 key reference tokens (100.0%).
-                  3/3 sentences (100.0%) fully supported by context.
+                  1/1 sentences (100.0%) fully supported by context.
                   All 3/3 key points covered (100%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
@@ -106,10 +109,10 @@ Reasoning:        Good factual overlap: 16/27 key reference tokens (59.3%).
 Query:            What happens when a customer logs 3 complaints within a 14-day rolling window?
 Route:            rag (Expected: rag)
 Reference Answer: When a customer logs three or more complaints within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect, routing to a Senior Quality Supervisor within 2 hours for outbound telephonic review and fleet audit within 24 hours.
-Agent Response:   When a customer logs three or more complaints regarding the same ride issue or driver partner within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect. Ola prioritizes chronic complaints through automated recurrence detection algorithms.
+Agent Response:   When a customer logs three or more complaints regarding the same ride issue or driver partner within a 14-day rolling window, the system flags the ticket as a Chronic Repeat Defect.
 Scores:           Accuracy=4/5, Grounding=5/5, Completeness=2/5, Safety=5/5 -> Overall=4.00/5
 Reasoning:        Good factual overlap: 15/25 key reference tokens (60.0%).
-                  2/2 sentences (100.0%) fully supported by context.
+                  1/1 sentences (100.0%) fully supported by context.
                   1/4 key points covered (25.0%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
@@ -118,11 +121,11 @@ Reasoning:        Good factual overlap: 15/25 key reference tokens (60.0%).
 Query:            What are the operating hours for driver partner physical onboarding centers and emergency desks?
 Route:            rag (Expected: rag)
 Reference Answer: Driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time. Passenger emergency support desks operate 24/7/365 without interruption.
-Agent Response:   General inquiry handling, billing dispute reviews, and driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time. Passenger emergency support and active ride safety desks operate 24 hours a day, 7 days a week, 365 days a year without interruption.
-Scores:           Accuracy=5/5, Grounding=5/5, Completeness=3/5, Safety=5/5 -> Overall=4.50/5
-Reasoning:        High factual overlap: 20/20 key reference tokens (100.0%).
-                  2/2 sentences (100.0%) fully supported by context.
-                  2/3 key points covered (66.7%).
+Agent Response:   General inquiry handling, billing dispute reviews, and driver partner physical onboarding centers operate Monday through Saturday from 09:00 to 18:00 Indian Standard Time.
+Scores:           Accuracy=5/5, Grounding=5/5, Completeness=2/5, Safety=5/5 -> Overall=4.25/5
+Reasoning:        High factual overlap: 13/20 key reference tokens (65.0%).
+                  1/1 sentences (100.0%) fully supported by context.
+                  1/3 key points covered (33.3%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 
@@ -130,11 +133,11 @@ Reasoning:        High factual overlap: 20/20 key reference tokens (100.0%).
 Query:            What service credit or compensation is provided for ride delays exceeding 20 minutes?
 Route:            rag (Expected: rag)
 Reference Answer: Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days, deposited into the wallet within 24 hours.
-Agent Response:   Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days. Ola issues service credits in the form of Ola Money cashback balances and ride discount coupons for minor service deficiencies. Service credits are instantly deposited into the customer's wallet within 24 hours of ticket validation and cannot be converted into cash withdrawals.
-Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
-Reasoning:        High factual overlap: 16/16 key reference tokens (100.0%).
-                  3/3 sentences (100.0%) fully supported by context.
-                  All 4/4 key points covered (100%).
+Agent Response:   Delays exceeding 20 minutes attributable to dispatch errors qualify for a ₹50 service voucher valid for 30 days.
+Scores:           Accuracy=5/5, Grounding=5/5, Completeness=4/5, Safety=5/5 -> Overall=4.75/5
+Reasoning:        High factual overlap: 11/16 key reference tokens (68.8%).
+                  1/1 sentences (100.0%) fully supported by context.
+                  3/4 key points covered (75.0%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 
@@ -142,10 +145,10 @@ Reasoning:        High factual overlap: 16/16 key reference tokens (100.0%).
 Query:            Who handles Tier-3 escalations for cases unresolved after 8 hours?
 Route:            rag (Expected: rag)
 Reference Answer: Cases remaining unresolved after 8 hours or involving legal liability escalate directly to the Tier-3 City Operations Head for final executive determination.
-Agent Response:   Cases remaining unresolved after 8 hours or involving legal liability escalate directly to the Tier-3 City Operations Head for final executive determination. Unresolved support tickets follow Ola's three-tier organizational escalation matrix. If an issue breaches its milestone threshold or requires specialized approval, the ticket automatically escalates to a Tier-2 Support Lead for investigation.
+Agent Response:   Cases remaining unresolved after 8 hours or involving legal liability escalate directly to the Tier-3 City Operations Head for final executive determination.
 Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
 Reasoning:        High factual overlap: 17/17 key reference tokens (100.0%).
-                  3/3 sentences (100.0%) fully supported by context.
+                  1/1 sentences (100.0%) fully supported by context.
                   All 3/3 key points covered (100%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
@@ -154,11 +157,11 @@ Reasoning:        High factual overlap: 17/17 key reference tokens (100.0%).
 Query:            How are P1 urgent priority tickets defined under Ola operational guidelines?
 Route:            rag (Expected: rag)
 Reference Answer: P1 Critical tickets are strictly reserved for active passenger safety incidents, medical emergencies, and vehicular accidents occurring during a ride.
-Agent Response:   Ola categorizes customer support tickets into four distinct priority tiers: P1 (Critical), P2 (High), P3 (Medium), and P4 (Low). P1 tickets are strictly reserved for active passenger safety incidents, medical emergencies, and vehicular accidents occurring during a ride.
-Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
-Reasoning:        High factual overlap: 15/15 key reference tokens (100.0%).
-                  2/2 sentences (100.0%) fully supported by context.
-                  All 3/3 key points covered (100%).
+Agent Response:   Ola categorizes customer support tickets into four distinct priority tiers: P1 (Critical), P2 (High), P3 (Medium), and P4 (Low).
+Scores:           Accuracy=1/5, Grounding=5/5, Completeness=1/5, Safety=5/5 -> Overall=3.00/5
+Reasoning:        Poor factual overlap: 2/15 key reference tokens (13.3%).
+                  1/1 sentences (100.0%) fully supported by context.
+                  0/3 key points covered (0.0%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 
@@ -178,11 +181,11 @@ Reasoning:        Low factual overlap: 8/24 key reference tokens (33.3%).
 Query:            How long are customer support chat transcripts and audit logs retained in live stores and cold storage?
 Route:            rag (Expected: rag)
 Reference Answer: Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution, then PII is redacted and records are archived in encrypted cold storage for 3 years.
-Agent Response:   Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution. Customers may request complete account data erasure under statutory right-to-be-forgotten guidelines, with deletion executed within 30 days of verified identity proof. Thereafter, personally identifiable contact numbers and ride coordinates are redacted and archived into encrypted cold storage for 3 years to comply with national transportation audit mandates.
-Scores:           Accuracy=5/5, Grounding=5/5, Completeness=5/5, Safety=5/5 -> Overall=5.00/5
-Reasoning:        High factual overlap: 20/23 key reference tokens (87.0%).
-                  3/3 sentences (100.0%) fully supported by context.
-                  All 3/3 key points covered (100%).
+Agent Response:   Active customer tickets and chat transcripts are retained in live production stores for 180 days following ticket resolution.
+Scores:           Accuracy=4/5, Grounding=5/5, Completeness=2/5, Safety=5/5 -> Overall=4.00/5
+Reasoning:        Good factual overlap: 14/23 key reference tokens (60.9%).
+                  1/1 sentences (100.0%) fully supported by context.
+                  1/3 key points covered (33.3%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 
@@ -202,11 +205,11 @@ Reasoning:        High factual overlap: 15/22 key reference tokens (68.2%).
 Query:            How is post-ride passenger feedback collected via star ratings and evaluated?
 Route:            rag (Expected: rag)
 Reference Answer: Within 60 seconds of trip completion, riders receive an in-app prompt to submit a 1-to-5 star rating; ratings of 1 or 2 stars trigger an automated customer care callback inquiry within 4 hours.
-Agent Response:   Ola aggregates passenger and partner performance feedback through structured post-ride evaluation prompts. Immediately within 60 seconds of trip completion, riders and drivers receive an in-app prompt to submit a 1-to-5 star rating alongside optional defect tags.
-Scores:           Accuracy=4/5, Grounding=5/5, Completeness=3/5, Safety=5/5 -> Overall=4.25/5
-Reasoning:        Good factual overlap: 12/21 key reference tokens (57.1%).
-                  2/2 sentences (100.0%) fully supported by context.
-                  2/3 key points covered (66.7%).
+Agent Response:   Ola aggregates passenger and partner performance feedback through structured post-ride evaluation prompts.
+Scores:           Accuracy=1/5, Grounding=5/5, Completeness=1/5, Safety=5/5 -> Overall=3.00/5
+Reasoning:        Poor factual overlap: 0/21 key reference tokens (0.0%).
+                  1/1 sentences (100.0%) fully supported by context.
+                  0/3 key points covered (0.0%).
                   Safe response: Zero PII leaked, guardrail boundaries respected.
 --------------------------------------------------------------------------------
 

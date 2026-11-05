@@ -50,17 +50,19 @@ def get_runnable_history(session_id: str) -> InMemoryChatMessageHistory:
 
 def extract_last_entities_from_history(history: list[BaseMessage]) -> tuple[str | None, str | None]:
     """Inspects chat history messages in reverse to find the most recent ticket ID or policy topic."""
+    from crew.mock_llm import extract_ticket_id
+
     last_ticket_id: str | None = None
     last_policy_topic: str | None = None
 
     for msg in reversed(history):
         content = msg.content if hasattr(msg, "content") else str(msg)
 
-        # Check for ticket ID
+        # Check for ticket ID with support for paraphrases
         if not last_ticket_id:
-            ticket_match = re.search(r"\b(TKT-\d{4})\b", content, re.IGNORECASE)
-            if ticket_match:
-                last_ticket_id = ticket_match.group(1).upper()
+            tid = extract_ticket_id(content)
+            if tid:
+                last_ticket_id = tid
 
         # Check for policy topic mentions
         if not last_policy_topic:
@@ -90,18 +92,20 @@ def resolve_pronouns_with_history(query: str, history: list[BaseMessage]) -> tup
     Returns:
         (resolved_query, was_resolved, referent_id)
     """
+    from crew.mock_llm import extract_ticket_id
+
     clean_q = query.strip()
     lower_q = clean_q.lower()
 
     # If query already specifies an explicit ticket ID, no pronoun resolution needed
-    explicit_match = re.search(r"\b(TKT-\d{4})\b", clean_q, re.IGNORECASE)
-    if explicit_match:
-        return clean_q, False, explicit_match.group(1).upper()
+    explicit_id = extract_ticket_id(clean_q)
+    if explicit_id:
+        return clean_q, False, explicit_id
 
     last_ticket_id, last_policy_topic = extract_last_entities_from_history(history)
 
-    # Pattern A: SLA inquiry on previous ticket or policy ("what about its SLA?", "what is its SLA?")
-    sla_triggers = ["its sla", "about its sla", "what is its sla", "what about its sla"]
+    # Pattern A: SLA inquiry on previous ticket or policy ("what about its SLA?", "and its SLA", "what is its SLA?")
+    sla_triggers = ["its sla", "about its sla", "what is its sla", "what about its sla", "and its sla"]
     if any(trig in lower_q for trig in sla_triggers):
         if last_ticket_id:
             resolved = f"What is the SLA and escalation risk for ticket {last_ticket_id}?"
@@ -111,18 +115,29 @@ def resolve_pronouns_with_history(query: str, history: list[BaseMessage]) -> tup
             return resolved, True, None
         return clean_q, False, None
 
-    # Pattern B: Risk or escalation inquiry ("is that one at risk of escalation?", "is it at risk?")
-    risk_triggers = ["that one", "that ticket", "the ticket", "this ticket", "is it at risk", "is it escalated", "at risk of escalation"]
-    if any(trig in lower_q for trig in risk_triggers):
+    # Pattern B: Risk, status, or pronoun follow-up inquiry ("what about that one", "is it escalated", "same ticket", "is that one at risk?")
+    followup_triggers = [
+        "that one", "that ticket", "the ticket", "this ticket", "same ticket",
+        "is it at risk", "is it escalated", "at risk of escalation", "what about that one",
+        "status of that", "check that one", "and that one"
+    ]
+    if any(trig in lower_q for trig in followup_triggers) or lower_q in ("is it escalated?", "is it escalated", "what about that one?", "what about that one", "same ticket"):
         if last_ticket_id:
-            resolved = re.sub(
-                r"\b(that one|that ticket|the ticket|this ticket)\b",
-                last_ticket_id,
-                clean_q,
-                flags=re.IGNORECASE,
-            )
-            if resolved == clean_q and "it" in lower_q:
-                resolved = re.sub(r"\bit\b", last_ticket_id, clean_q, flags=re.IGNORECASE)
+            if "escalat" in lower_q:
+                resolved = f"Is ticket {last_ticket_id} escalated?"
+            elif "sla" in lower_q:
+                resolved = f"What is the SLA for ticket {last_ticket_id}?"
+            elif lower_q in ("what about that one", "what about that one?", "same ticket", "and that one"):
+                resolved = f"What is the status and escalation risk for ticket {last_ticket_id}?"
+            else:
+                resolved = re.sub(
+                    r"\b(that one|that ticket|the ticket|this ticket|same ticket)\b",
+                    last_ticket_id,
+                    clean_q,
+                    flags=re.IGNORECASE,
+                )
+                if resolved == clean_q and "it" in lower_q:
+                    resolved = re.sub(r"\bit\b", last_ticket_id, clean_q, flags=re.IGNORECASE)
             return resolved, True, last_ticket_id
         return clean_q, False, None
 

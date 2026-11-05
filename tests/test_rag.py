@@ -176,4 +176,44 @@ def test_collections_contain_only_official_12_docs():
         )
 
 
+def test_sentence_level_answer_selection_isolation():
+    """Asserts that a Sev-1 inquiry isolates Sev-1 SLA without leaking Sev-2 or Sev-3 sentences."""
+    res = grounded_answer("What is the resolution SLA for a Sev-1 safety incident?")
+    assert res["grounded"] is True
+    answer = res["answer"]
+    assert "15 minutes" in answer
+    assert "4 hours" in answer
+    assert "Sev-3" not in answer
+    assert "Sev-2" not in answer
+
+
+def test_refund_answer_grounded():
+    """Validates that a refund inquiry returns grounded content from the refund policy."""
+    res = grounded_answer("When does Ola provide monetary refunds for driver cancellations?")
+    assert res["grounded"] is True
+    assert "refund_compensation_policy" in res["sources"]
+    assert "cancellation" in res["answer"].lower() or "refund" in res["answer"].lower()
+
+
+def test_out_of_scope_query_fallback():
+    """Validates that out-of-scope queries cleanly return the calibrated fallback refusal."""
+    res = grounded_answer("What is the average wingspan of an African swallow?")
+    assert res["grounded"] is False
+    assert res["answer"] == FALLBACK_REFUSAL
+
+
+def test_answers_strictly_grounded_in_context():
+    """Validates that all sentences in the returned answer exist in the retrieved context."""
+    res = grounded_answer("What happens when a customer logs 3 complaints within a 14-day rolling window?")
+    assert res["grounded"] is True
+    retrieved_texts = [c["text"] for c in res["retrieved_chunks"]]
+    full_retrieved_context = " ".join(retrieved_texts)
+    # Every sentence in answer must be present in retrieved context
+    import re
+    answer_sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", res["answer"]) if s.strip()]
+    for s in answer_sents:
+        assert s in full_retrieved_context
+
+
+
 

@@ -26,7 +26,7 @@ from crew.agents import (
     create_composer_agent,
     get_mock_llm,
 )
-from crew.mock_llm import parse_ticket_from_text
+from crew.mock_llm import parse_ticket_from_text, extract_ticket_id
 from crew.schemas import CrewResponse, validate_crew_response
 from crew.memory import session_memory, crew_runnable_with_history
 
@@ -207,9 +207,8 @@ def run_support_crew(
     )
     was_resolved = resolved_query.strip().lower() != query.strip().lower()
 
-    # Check if query references an operational ticket
-    ticket_match = re.search(r"\b(TKT-\d{4})\b", resolved_query, re.IGNORECASE)
-    ticket_id = ticket_match.group(1).upper() if ticket_match else None
+    # Check if query references an operational ticket (with paraphrase normalization)
+    ticket_id = extract_ticket_id(resolved_query)
 
     # Check if query references policy guidelines
     has_policy_interest = any(

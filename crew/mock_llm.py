@@ -94,9 +94,30 @@ def check_for_real_observation(messages: Any) -> tuple[bool, str]:
 
 
 def extract_ticket_id(text: str) -> str | None:
-    """Extracts ticket ID matching TKT-XXXX pattern."""
-    match = re.search(r"\b(TKT-\d{4})\b", text, re.IGNORECASE)
-    return match.group(1).upper() if match else None
+    """Extracts and standardizes ticket IDs from natural and paraphrased text to TKT-XXXX.
+
+    Supports:
+    - Standard: TKT-0007, tkt-0007, TKT0007, TKT 0007
+    - Unpadded/paraphrased: tkt 7, ticket 7, ticket no. 0007, ticket #7, ticket id: 7
+    - Natural language: "what's happening with TKT-0007", "status of tkt 7"
+    """
+    if not text:
+        return None
+    pattern = re.compile(
+        r"\b(?:ticket|tkt)[\s\-_]*(?:no\.?|id|#|number|num)?[:\s\-_]*(\d{1,4})\b",
+        re.IGNORECASE,
+    )
+    m = pattern.search(text)
+    if m:
+        num = int(m.group(1))
+        return f"TKT-{num:04d}"
+
+    m2 = re.search(r"\bTKT[\-_]?(\d{1,4})\b", text, re.IGNORECASE)
+    if m2:
+        num = int(m2.group(1))
+        return f"TKT-{num:04d}"
+
+    return None
 
 
 def extract_query_text(text: str) -> str:

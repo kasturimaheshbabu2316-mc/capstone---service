@@ -211,4 +211,6 @@ EVAL_BENCHMARK_QUERIES: List[Dict[str, Any]] = [
     },
 ]
 
-__all__ = ["EVAL_BENCHMARK_QUERIES"]
+from evaluation.extended_queries import EXTENDED_EVAL_QUERIES_50
+
+__all__ = ["EVAL_BENCHMARK_QUERIES", "EXTENDED_EVAL_QUERIES_50"]

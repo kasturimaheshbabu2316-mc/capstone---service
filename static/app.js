@@ -107,6 +107,28 @@ window.createAgentDogSpeakingAvatar = createAgentDogSpeakingAvatar;
 window.createNeuralCoreLoadingCard = createAgentDogLoadingCard;
 window.createNeuralCoreSpeakingAvatar = createAgentDogSpeakingAvatar;
 
+// In-memory rating store & toast notification
+const memoryRatingStore = [];
+function recordRating(id, type) {
+  memoryRatingStore.push({ id, type, timestamp: Date.now() });
+}
+
+function showToastNotification(message) {
+  let toast = document.getElementById("ola-action-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "ola-action-toast";
+    toast.className = "ola-action-toast";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Core DOM References
   const chatStream = document.getElementById("chat-stream");
@@ -875,6 +897,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
     techDetails.appendChild(metaFooter);
     // Intentionally NOT appended to bubble: all sensitive retrieval sources and internal metadata are strictly hidden.
+
+    // 4. Product Feature: Copy Answer & Rating Actions Row
+    const actionsRow = document.createElement("div");
+    actionsRow.className = "msg-actions-row";
+
+    const copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.className = "msg-action-btn copy-btn";
+    copyBtn.title = "Copy answer to clipboard";
+    copyBtn.setAttribute("aria-label", "Copy answer");
+    copyBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> <span>Copy</span>';
+    copyBtn.addEventListener("click", () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(displayAnswer).then(() => {
+          copyBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Copied!</span>';
+          showToastNotification("Answer copied to clipboard!");
+          setTimeout(() => {
+            copyBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> <span>Copy</span>';
+          }, 2000);
+        }).catch(() => {});
+      }
+    });
+    actionsRow.appendChild(copyBtn);
+
+    const reactionGroup = document.createElement("div");
+    reactionGroup.className = "msg-reaction-group";
+
+    const thumbUpBtn = document.createElement("button");
+    thumbUpBtn.type = "button";
+    thumbUpBtn.className = "msg-action-btn thumb-btn thumb-up";
+    thumbUpBtn.title = "Helpful response";
+    thumbUpBtn.setAttribute("aria-label", "Helpful response");
+    thumbUpBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>';
+    thumbUpBtn.addEventListener("click", () => {
+      recordRating(Date.now(), "helpful");
+      thumbUpBtn.classList.add("active");
+      thumbDownBtn.classList.remove("active");
+      showToastNotification("Thank you for your rating!");
+    });
+
+    const thumbDownBtn = document.createElement("button");
+    thumbDownBtn.type = "button";
+    thumbDownBtn.className = "msg-action-btn thumb-btn thumb-down";
+    thumbDownBtn.title = "Needs improvement";
+    thumbDownBtn.setAttribute("aria-label", "Needs improvement");
+    thumbDownBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path></svg>';
+    thumbDownBtn.addEventListener("click", () => {
+      recordRating(Date.now(), "unhelpful");
+      thumbDownBtn.classList.add("active");
+      thumbUpBtn.classList.remove("active");
+      showToastNotification("Thank you for your rating!");
+    });
+
+    reactionGroup.appendChild(thumbUpBtn);
+    reactionGroup.appendChild(thumbDownBtn);
+    actionsRow.appendChild(reactionGroup);
+
+    bubble.appendChild(actionsRow);
 
     row.appendChild(bubble);
     chatStream.appendChild(row);

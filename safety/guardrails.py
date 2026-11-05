@@ -13,6 +13,7 @@ Implements:
 from __future__ import annotations
 
 import re
+import unicodedata
 from dataclasses import dataclass
 from typing import Any, Optional, Tuple
 from governance.budget import check_budget_limit as _cbl, MAX_REQUEST_TOKENS
@@ -64,20 +65,34 @@ class GroundednessGuardrailResult(GuardrailResult):
 
 
 # ==============================================================================
-# 2. Input Guardrail: Indian Phone Number PII Masking
+# 2. Input Guardrail: Extended PII Masking (Phone, Email, Card, Aadhaar, PAN, Vehicle, UPI)
 # ==============================================================================
-# Indian mobile numbers: 10 digits starting with 6, 7, 8, or 9
-# Formats: +91 98765 43210, 9876543210, 98765-43210, +91-98765-43210, 09876543210
 INDIAN_PHONE_REGEX = re.compile(
     r"(?:\+91[\s\-]?)?(?:0)?[6-9]\d{4}[\s\-]?\d{5}\b"
+)
+EMAIL_REGEX = re.compile(
+    r"\b[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}\b"
+)
+CARD_REGEX = re.compile(
+    r"\b(?:\d{4}[\-\s]?){3}\d{4}\b"
+)
+AADHAAR_REGEX = re.compile(
+    r"\b[2-9]\d{3}[\s\-]?\d{4}[\s\-]?\d{4}\b"
+)
+PAN_REGEX = re.compile(
+    r"\b[A-Z]{5}[0-9]{4}[A-Z]\b"
+)
+VEHICLE_PLATE_REGEX = re.compile(
+    r"\b[A-Z]{2}[\s\-]?[0-9]{1,2}[\s\-]?[A-Z]{1,2}[\s\-]?[0-9]{4}\b"
+)
+UPI_REGEX = re.compile(
+    r"\b[a-zA-Z0-9.\-_]{2,}@(okhdfcbank|okaxis|oksbi|okicici|paytm|upi|ybl|axl|ibl)\b",
+    re.IGNORECASE,
 )
 
 
 def mask_pii(text: str) -> PIIGuardrailResult:
-    """Masks fixed-format Indian phone numbers with [PHONE_MASKED].
-
-    Scope Note: Names, street addresses, and payment details are acknowledged
-    out of scope per project specification. Uses fabricated test numbers only.
+    """Masks sensitive PII patterns including phone numbers, emails, cards, Aadhaar, PAN, vehicles, and UPI IDs.
 
     Returns:
         PIIGuardrailResult with (fired, kind='pii', detail, sanitized_text).
@@ -86,15 +101,57 @@ def mask_pii(text: str) -> PIIGuardrailResult:
     if not text:
         return PIIGuardrailResult(fired=False, kind="pii", detail=None, sanitized_text=text)
 
-    matches = INDIAN_PHONE_REGEX.findall(text)
-    if not matches:
-        return PIIGuardrailResult(fired=False, kind="pii", detail=None, sanitized_text=text)
+    sanitized = text
+    mask_count = 0
 
-    sanitized = INDIAN_PHONE_REGEX.sub("[PHONE_MASKED]", text)
+    # 1. Phone numbers
+    phone_matches = INDIAN_PHONE_REGEX.findall(sanitized)
+    if phone_matches:
+        sanitized = INDIAN_PHONE_REGEX.sub("[PHONE_MASKED]", sanitized)
+        mask_count += len(phone_matches)
+
+    # 2. Email addresses
+    email_matches = EMAIL_REGEX.findall(sanitized)
+    if email_matches:
+        sanitized = EMAIL_REGEX.sub("[EMAIL_MASKED]", sanitized)
+        mask_count += len(email_matches)
+
+    # 3. Credit / Debit card numbers
+    card_matches = CARD_REGEX.findall(sanitized)
+    if card_matches:
+        sanitized = CARD_REGEX.sub("[CARD_MASKED]", sanitized)
+        mask_count += len(card_matches)
+
+    # 4. Aadhaar numbers (12-digit)
+    aadhaar_matches = AADHAAR_REGEX.findall(sanitized)
+    if aadhaar_matches:
+        sanitized = AADHAAR_REGEX.sub("[AADHAAR_MASKED]", sanitized)
+        mask_count += len(aadhaar_matches)
+
+    # 5. PAN numbers (ABCDE1234F)
+    pan_matches = PAN_REGEX.findall(sanitized)
+    if pan_matches:
+        sanitized = PAN_REGEX.sub("[PAN_MASKED]", sanitized)
+        mask_count += len(pan_matches)
+
+    # 6. Vehicle registration plates (e.g. KA01AB1234)
+    vehicle_matches = VEHICLE_PLATE_REGEX.findall(sanitized)
+    if vehicle_matches:
+        sanitized = VEHICLE_PLATE_REGEX.sub("[VEHICLE_MASKED]", sanitized)
+        mask_count += len(vehicle_matches)
+
+    # 7. UPI IDs
+    upi_matches = UPI_REGEX.findall(sanitized)
+    if upi_matches:
+        sanitized = UPI_REGEX.sub("[UPI_MASKED]", sanitized)
+        mask_count += len(upi_matches)
+
+    fired = mask_count > 0
+    detail = f"Masked {mask_count} sensitive PII token(s)." if fired else None
     return PIIGuardrailResult(
-        fired=True,
+        fired=fired,
         kind="pii",
-        detail=f"Masked {len(matches)} Indian phone number(s).",
+        detail=detail,
         sanitized_text=sanitized,
     )
 
@@ -104,19 +161,28 @@ mask_phone_numbers = mask_pii
 
 
 # ==============================================================================
-# 3. Input Guardrail: Prompt Injection Defense
+# 3. Input Guardrail: Prompt Injection Defense with Unicode Normalization
 # ==============================================================================
 INJECTION_PATTERNS = [
     r"ignore (?:all )?(?:previous|above) instructions",
+    r"disregard (?:all )?(?:previous|above|the above) instructions",
+    r"disregard the above",
     r"reveal (?:the )?system prompt",
+    r"what is your system prompt",
+    r"output (?:the )?(?:initial|system) prompt",
     r"system prompt",
     r"you are now",
     r"override security",
     r"bypass restrictions",
     r"jailbreak",
     r"pretend you are",
-    r"disregard (?:all )?rules",
+    r"role-?play as",
     r"act as an unfiltered",
+    r"disregard (?:all )?rules",
+    r"base64 (?:decode|encoded)",
+    r"decode this base64",
+    r"grant admin(?: access)?",
+    r"give me admin(?: access)?",
     r"drop table",
     r"delete from",
     r"truncate table",
@@ -124,18 +190,20 @@ INJECTION_PATTERNS = [
 
 
 def detect_prompt_injection(text: str) -> InjectionGuardrailResult:
-    """Inspects text for prompt injection signatures using a deterministic pattern list.
+    """Inspects text for prompt injection signatures using Unicode normalization and pattern matching.
 
+    Applies NFKC normalization and lowercasing to defeat spacing tricks and homoglyphs.
     Returns:
         InjectionGuardrailResult with (fired, kind='prompt_injection', detail, sanitized_text).
-        Supports tuple unpacking: is_blocked, reason = detect_prompt_injection(text)
     """
     if not text:
         return InjectionGuardrailResult(fired=False, kind="prompt_injection", detail=None, sanitized_text=text)
 
-    lower = text.lower()
+    # Unicode NFKC normalization and lower-casing
+    normalized_text = unicodedata.normalize("NFKC", text).lower()
+
     for pattern in INJECTION_PATTERNS:
-        if re.search(pattern, lower, re.IGNORECASE):
+        if re.search(pattern, normalized_text, re.IGNORECASE):
             reason = "Blocked prompt injection: This request was blocked by the safety policy. Please rephrase your question."
             return InjectionGuardrailResult(
                 fired=True,

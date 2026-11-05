@@ -11,6 +11,7 @@ Provides deterministic extractive generation under MOCK_LLM:
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -37,6 +38,109 @@ DEMO_IN_SCOPE_QUERIES: list[str] = [
 
 # Demonstration Out-of-Scope Query
 DEMO_OUT_OF_SCOPE_QUERY: str = "Can you recommend the best authentic Italian pizza recipe in Rome?"
+
+
+def select_relevant_sentences(
+    query: str,
+    valid_chunks: list[dict[str, Any]],
+) -> tuple[str, list[str]]:
+    """Selects top 1-3 (or up to 5 for lists/comparisons) grounded sentences from retrieved chunks.
+
+    Guarantees:
+    - 100% Grounding: Every returned sentence is an exact sentence from the retrieved chunks.
+    - Specificity: If query asks for a specific tier (e.g. Sev-1), prioritizes that tier and excludes
+      conflicting tiers (e.g. Sev-2, Sev-3).
+    - Natural flow: Selected sentences are assembled in their original document order.
+    """
+    clean_q = query.strip()
+    lower_q = clean_q.lower()
+
+    # Determine if question asks for an exhaustive list or comparison
+    is_multi = any(
+        kw in lower_q
+        for kw in ("all", "compare", "difference", "every", "list", "matrix", "severities", "categories")
+    )
+    max_sentences = 5 if is_multi else 3
+
+    # Extract distinct sentences from retrieved chunks preserving document and position order
+    candidate_sentences: list[dict[str, Any]] = []
+    seen_texts: set[str] = set()
+    order_idx = 0
+
+    for chunk in valid_chunks:
+        text = chunk.get("text", "").strip()
+        doc_id = chunk.get("doc_id", "doc")
+        chunk_sim = chunk.get("similarity", 0.5)
+
+        raw_sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
+        for sent in raw_sents:
+            if len(sent) < 10 or sent in seen_texts:
+                continue
+            seen_texts.add(sent)
+            candidate_sentences.append({
+                "sentence": sent,
+                "doc_id": doc_id,
+                "chunk_sim": chunk_sim,
+                "order_idx": order_idx,
+            })
+            order_idx += 1
+
+    if not candidate_sentences:
+        return "", []
+
+    query_tokens = set(re.findall(r"\b[a-z0-9\-]+\b", lower_q))
+    stop_words = {"what", "is", "the", "for", "a", "an", "and", "or", "in", "of", "to", "how", "when", "does", "are", "on"}
+    key_query_tokens = query_tokens - stop_words
+
+    sev_in_query = None
+    sev_match = re.search(r"\b(sev[\-\s]?[123])\b", lower_q)
+    if sev_match:
+        sev_in_query = sev_match.group(1).replace(" ", "-")
+
+    scored_candidates = []
+    for cand in candidate_sentences:
+        sent = cand["sentence"]
+        sent_lower = sent.lower()
+        sent_tokens = set(re.findall(r"\b[a-z0-9\-]+\b", sent_lower))
+
+        overlap = len(key_query_tokens & sent_tokens)
+        overlap_score = overlap / max(len(key_query_tokens), 1)
+        base_score = cand["chunk_sim"]
+        specificity_adj = 0.0
+
+        if sev_in_query:
+            if sev_in_query in sent_lower.replace(" ", "-"):
+                specificity_adj += 0.45
+            other_sevs = {"sev-1", "sev-2", "sev-3"} - {sev_in_query}
+            for other in other_sevs:
+                if other in sent_lower.replace(" ", "-"):
+                    specificity_adj -= 0.60
+
+        for token in key_query_tokens:
+            if re.search(rf"\b{re.escape(token)}\b", sent_lower):
+                specificity_adj += 0.05
+
+        total_score = base_score + (0.5 * overlap_score) + specificity_adj
+        scored_candidates.append({
+            **cand,
+            "score": total_score,
+            "overlap": overlap,
+        })
+
+    scored_candidates.sort(key=lambda x: x["score"], reverse=True)
+    selected = [scored_candidates[0]]
+    top_score = scored_candidates[0]["score"]
+
+    for next_cand in scored_candidates[1:]:
+        if len(selected) >= max_sentences:
+            break
+        if next_cand["score"] >= top_score - 0.20 and next_cand["overlap"] > 0:
+            selected.append(next_cand)
+
+    selected.sort(key=lambda x: x["order_idx"])
+    final_text = " ".join(s["sentence"] for s in selected)
+    sources = list(dict.fromkeys(s["doc_id"] for s in selected))
+    return final_text, sources
 
 
 def grounded_answer(
@@ -84,35 +188,20 @@ def grounded_answer(
             "retrieved_chunks": valid_chunks,
         }
 
-    # Deterministic extractive generation under MOCK_LLM:
-    # Compose answer directly from top retrieved chunks from the primary matching document
-    top_chunk = valid_chunks[0]
-    top_doc_id = top_chunk.get("doc_id")
-    matching_chunks = [
-        c["text"].strip()
-        for c in valid_chunks
-        if c.get("doc_id") == top_doc_id and c["text"].strip()
-    ]
-    extracted_answer = " ".join(matching_chunks) if matching_chunks else top_chunk["text"].strip()
-
+    # Sentence-level answer selection: extract top relevant grounded sentences
+    extracted_answer, sources = select_relevant_sentences(query, valid_chunks)
     if not extracted_answer.strip():
-        return {
-            "query": query,
-            "answer": FALLBACK_REFUSAL,
-            "sources": [],
-            "top_similarity": top_chunk.get("similarity", 0.0),
-            "grounded": False,
-            "threshold": active_threshold,
-            "retrieved_chunks": valid_chunks,
-        }
+        top_chunk = valid_chunks[0]
+        extracted_answer = top_chunk["text"].strip()
+        sources = [top_chunk.get("doc_id", "doc")]
 
-    sources = list(dict.fromkeys(c["doc_id"] for c in valid_chunks if c.get("doc_id")))
+    top_similarity = valid_chunks[0]["similarity"]
 
     return {
         "query": query,
         "answer": extracted_answer,
         "sources": sources,
-        "top_similarity": top_chunk["similarity"],
+        "top_similarity": top_similarity,
         "grounded": True,
         "threshold": active_threshold,
         "retrieved_chunks": valid_chunks,
