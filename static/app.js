@@ -1058,12 +1058,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!bar || !legend) return;
 
     const colors = {
-      Cancellation: "#f43f5e",
-      Billing: "#f59e0b",
-      Safety: "#00f2fe",
-      Driver: "#a855f7",
-      Account: "#3b82f6",
-      General: "#10b981"
+      "Billing": "#f59e0b",
+      "Product Defect": "#f43f5e",
+      "Account Access": "#00f2fe",
+      "General Inquiry": "#10b981",
+      "Technical Issue": "#a855f7",
+      "Cancellation": "#ec4899",
+      "Safety": "#06b6d4",
+      "Driver": "#8b5cf6",
+      "General": "#10b981"
     };
 
     const counts = {};
@@ -1127,19 +1130,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return `
           <tr>
-            <td><strong style="color:var(--accent-cyan); font-family:monospace;">${escapeHtml(t.ticket_id)}</strong></td>
-            <td>${escapeHtml(t.category || "General")}</td>
+            <td><strong style="color:var(--accent-cyan); font-family:monospace; font-size:0.86rem; letter-spacing:0.02em;">${escapeHtml(t.ticket_id)}</strong></td>
+            <td><span style="font-weight:500; color:#cbd5e1;">${escapeHtml(t.category || "General")}</span></td>
             <td>
-              <span class="meta-chip" style="color:${badgeColor}; background:${badgeBg}; border-color:${badgeColor}; font-weight:600;">
+              <span class="meta-chip" style="color:${badgeColor}; background:${badgeBg}; border:1px solid ${badgeColor}; font-weight:700; border-radius:9999px; padding:3px 11px; font-size:0.75rem; display:inline-flex; align-items:center; gap:6px;">
+                <span style="width:6px; height:6px; border-radius:50%; background-color:${badgeColor}; box-shadow:0 0 6px ${badgeColor};"></span>
                 ${escapeHtml(t.status)}
               </span>
             </td>
-            <td>${t.resolution_time_hours ?? 0}h</td>
+            <td><span style="font-weight:600; color:#f1f5f9;">${t.resolution_time_hours ?? 0}h</span></td>
             <td>
-              <div style="display:flex; align-items:center; gap:8px;">
-                <span style="font-family:monospace; font-size:0.78rem; font-weight:700;">${score.toFixed(2)}</span>
-                <div class="risk-bar-track" style="width:70px; margin:0;">
-                  <div class="risk-bar-fill" style="width:${scorePct}%;"></div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-family:monospace; font-size:0.82rem; font-weight:700; color:${isHigh ? '#f43f5e' : '#10b981'}; width:32px;">${score.toFixed(2)}</span>
+                <div class="risk-bar-track" style="width:85px; margin:0; height:6px; background:rgba(255,255,255,0.08); border-radius:9999px; overflow:hidden;">
+                  <div class="risk-bar-fill" style="width:${scorePct}%; height:100%; background:${isHigh ? 'linear-gradient(90deg, #f59e0b, #f43f5e)' : 'linear-gradient(90deg, #00f2fe, #10b981)'};"></div>
                 </div>
               </div>
             </td>
