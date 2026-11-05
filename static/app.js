@@ -993,9 +993,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------------------------------------------------------------------
   // 6. Operational Ticket Directory & Real-Time Telemetry Dashboard
   // --------------------------------------------------------------------------
-  async function loadDirectoryDashboard() {
+  async function loadDirectoryDashboard(isManualRefresh = false) {
+    const refreshBtn = document.getElementById("refresh-directory-btn");
+    if (isManualRefresh && refreshBtn) {
+      refreshBtn.disabled = true;
+      refreshBtn.innerHTML = '<span class="spin-icon">🔄</span> Refreshing...';
+    }
+
     try {
-      const res = await fetch("/tickets");
+      const res = await fetch("/tickets?_t=" + Date.now());
       if (res.ok) {
         cachedTickets = await res.json();
       }
@@ -1011,6 +1017,23 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCategorySpectrum(cachedTickets);
     renderTicketsTable(cachedTickets);
     isDirectoryLoaded = true;
+
+    if (isManualRefresh && refreshBtn) {
+      refreshBtn.innerHTML = '✓ Refreshed (' + cachedTickets.length + ' records)';
+      refreshBtn.classList.add("btn-refreshed");
+
+      const kpiGrid = document.querySelector(".kpi-grid");
+      if (kpiGrid) {
+        kpiGrid.classList.add("pulse-refresh");
+        setTimeout(() => kpiGrid.classList.remove("pulse-refresh"), 800);
+      }
+
+      setTimeout(() => {
+        refreshBtn.disabled = false;
+        refreshBtn.innerHTML = '🔄 Refresh Data';
+        refreshBtn.classList.remove("btn-refreshed");
+      }, 1500);
+    }
   }
 
   function generateMockCorpus() {
@@ -1169,9 +1192,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (statSelect) statSelect.addEventListener("change", filterAndRender);
 
     const refreshBtn = document.getElementById("refresh-directory-btn");
-    if (refreshBtn) {
+    if (refreshBtn && !refreshBtn.dataset.bound) {
+      refreshBtn.dataset.bound = "true";
       refreshBtn.addEventListener("click", () => {
-        loadDirectoryDashboard();
+        loadDirectoryDashboard(true);
       });
     }
   }
