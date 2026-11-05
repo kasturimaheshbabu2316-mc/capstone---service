@@ -2858,3 +2858,23 @@ body.show-details .meta-footer,
   border-radius: 4px;
   font-size: 0.82rem;
 }
+
+.error-badge-tag.note {
+  background: rgba(0, 242, 254, 0.12);
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  color: #00f2fe;
+}
+
+/* Tokens and Sensitive Operational Telemetry: Hidden for Users, Handled by Admin Only */
+.composer-footer {
+  display: none !important;
+}
+
+body.show-details .composer-footer {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}

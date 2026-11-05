@@ -636,17 +636,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const isLongPrompt = sanitizedUserText.length > 150;
     if (isLongPrompt) {
       const previewStr = sanitizedUserText.slice(0, 150).trim();
-      const estTokens = Math.max(1, Math.round(sanitizedUserText.length / 4));
 
       const previewDiv = document.createElement("div");
       previewDiv.className = "user-prompt-preview";
-      previewDiv.textContent = `${previewStr}... (truncated, ${sanitizedUserText.length} characters, about ${estTokens} tokens)`;
+      previewDiv.textContent = `${previewStr}...`;
       userBubble.appendChild(previewDiv);
 
       const expandBtn = document.createElement("button");
       expandBtn.type = "button";
       expandBtn.className = "btn-prompt-expand";
-      expandBtn.textContent = "Show full message ▾";
+      expandBtn.textContent = "Show full inquiry ▾";
 
       const fullBox = document.createElement("div");
       fullBox.className = "user-prompt-full";
@@ -656,7 +655,7 @@ document.addEventListener("DOMContentLoaded", () => {
       expandBtn.addEventListener("click", () => {
         const isHidden = fullBox.style.display === "none";
         fullBox.style.display = isHidden ? "block" : "none";
-        expandBtn.textContent = isHidden ? "Hide full message ▴" : "Show full message ▾";
+        expandBtn.textContent = isHidden ? "Hide full inquiry ▴" : "Show full inquiry ▾";
       });
 
       userBubble.appendChild(expandBtn);
@@ -756,31 +755,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (statusCode === 413) {
       card.innerHTML = `
-        <div class="error-badge-tag warning">⚠️ Payload Budget Exceeded (HTTP 413)</div>
-        <h4 class="error-card-title">Question too long (limit 2,000 tokens)</h4>
+        <div class="error-badge-tag note">💬 Ola Support Assistance</div>
+        <h4 class="error-card-title">Thank you for reaching out to Ola Support</h4>
         <p class="error-card-desc">
-          Your inquiry exceeds the maximum allowed token budget for a single query. The governance guardrail blocked this request to preserve system safety and response accuracy.
+          We would be delighted to assist you with your inquiry! Because your question contains extensive details, could you please share a shorter summary or focus on a specific question? This helps us provide you with the most accurate and personalized guidance right away.
         </p>
         <div class="error-action-hint">
-          💡 <strong>Recommendation:</strong> Please shorten your query or ask about a specific policy rule, SLA category, or ticket ID (e.g. <code>TKT-0007</code>).
+          💡 <strong>Helpful Suggestion:</strong> Feel free to ask about ride cancellation refunds, baggage return procedures, driver conduct policies, or share your booking ticket ID (e.g. <code>TKT-0007</code>). We are always here to assist you!
         </div>
       `;
     } else if (statusCode === 400) {
       card.innerHTML = `
-        <div class="error-badge-tag alert">🛡️ Request Blocked by Safety Policy (HTTP 400)</div>
-        <h4 class="error-card-title">Safety Guardrail Active</h4>
+        <div class="error-badge-tag note">💬 Ola Support Desk</div>
+        <h4 class="error-card-title">How can we assist with your journey?</h4>
         <p class="error-card-desc">
-          This inquiry was blocked by our prompt safety filters. Administrative command overrides, role injections, and unauthorized operational commands are strictly prohibited.
+          We are pleased to assist you with any questions regarding Ola ride bookings, fare estimates, passenger policies, and customer support. Please let us know how we can best support your ride today.
         </p>
         <div class="error-action-hint">
-          💡 <strong>Recommendation:</strong> Please ask standard customer support questions grounded in official Ola ride policies.
+          💡 <strong>Helpful Suggestion:</strong> You can ask about our fare breakdown, cancellation guidelines, lost & found items, or driver conduct standards.
         </div>
       `;
     } else {
       card.innerHTML = `
-        <div class="error-badge-tag warning">⚠️ Service Notice (${statusCode})</div>
-        <h4 class="error-card-title">Inquiry Could Not Be Processed</h4>
-        <p class="error-card-desc">${escapeHtml(detailText || "Service communication interrupted. Please verify backend server status.")}</p>
+        <div class="error-badge-tag note">💬 Ola Support Desk</div>
+        <h4 class="error-card-title">Thank you for your inquiry</h4>
+        <p class="error-card-desc">
+          Our support desk is currently processing incoming customer requests. Please take a moment and re-send your question, or explore our official guidelines in the Policy Explorer tab above.
+        </p>
+        <div class="error-action-hint">
+          💡 <strong>Helpful Suggestion:</strong> If your inquiry is urgent, please feel free to ask about our Sev-1 safety escalation protocols or check your ticket status.
+        </div>
       `;
     }
 
@@ -819,10 +823,18 @@ document.addEventListener("DOMContentLoaded", () => {
       bubble.appendChild(notice);
     }
 
-    // 2. Answer Text (Escaped safely via textContent with paragraph structure)
+    // 2. Answer Text (Escaped safely via textContent with polite formatting)
+    let displayAnswer = answer;
+    const isPolicyRefusal = answer.trim() === "I don't know based on the available policy documents." ||
+      (!grounded && !ticket && answer.toLowerCase().includes("don't know based on"));
+
+    if (isPolicyRefusal && !isDetailsOn) {
+      displayAnswer = "Thank you for contacting Ola Support! While I could not find a specific guideline directly matching this particular inquiry in our official policy manuals, I would be happy to assist you with any questions regarding ride bookings, cancellation refunds, baggage return, or driver conduct standards. Please feel free to ask, or explore our official Policy Explorer tab above.";
+    }
+
     const answerEl = document.createElement("div");
     answerEl.className = "answer-text";
-    const paragraphs = answer.split(/\n+/).filter(p => p.trim().length > 0);
+    const paragraphs = displayAnswer.split(/\n+/).filter(p => p.trim().length > 0);
     if (paragraphs.length > 1) {
       paragraphs.forEach(p => {
         const pEl = document.createElement("p");
@@ -831,7 +843,7 @@ document.addEventListener("DOMContentLoaded", () => {
         answerEl.appendChild(pEl);
       });
     } else {
-      answerEl.textContent = answer;
+      answerEl.textContent = displayAnswer;
     }
     bubble.appendChild(answerEl);
 
