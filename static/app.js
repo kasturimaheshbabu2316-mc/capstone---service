@@ -36,93 +36,112 @@ function createAgentDogLoadingCard() {
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <linearGradient id="body3DLoad" x1="0" y1="0" x2="0" y2="1">
+            <!-- Dark Theme Gradients -->
+            <linearGradient id="body3DDark" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="#163254" />
               <stop offset="100%" stop-color="#081426" />
+            </linearGradient>
+            <linearGradient id="dog3DDark" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#132845" />
+              <stop offset="100%" stop-color="#081525" />
+            </linearGradient>
+
+            <!-- Light Theme Gradients (Pearlescent White Ceramic & Golden Honey Dog) -->
+            <linearGradient id="body3DLight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="100%" stop-color="#e0e7ff" />
+            </linearGradient>
+            <linearGradient id="dog3DLight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fef3c7" />
+              <stop offset="100%" stop-color="#fde68a" />
+            </linearGradient>
+            <linearGradient id="bookCoverLight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f8fafc" />
+              <stop offset="100%" stop-color="#e2e8f0" />
             </linearGradient>
           </defs>
 
           <!-- AGENT GROUP (3D Shaded, Floating in Books) -->
           <g class="agent-body-group">
             <!-- Antenna with Glowing Beacon -->
-            <line x1="46" y1="10" x2="46" y2="18" stroke="#00f2fe" stroke-width="2.2" stroke-linecap="round"/>
-            <circle cx="46" cy="8" r="3.5" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
+            <line class="agent-antenna-stem" x1="46" y1="10" x2="46" y2="18" stroke-width="2.2" stroke-linecap="round"/>
+            <circle class="agent-antenna-orb" cx="46" cy="8" r="3.5" filter="url(#hyperGlowLoad)"/>
 
             <!-- Head Helmet with 3D Depth Shading -->
-            <rect x="27" y="17" width="38" height="27" rx="9" fill="url(#body3DLoad)" stroke="#00f2fe" stroke-width="2" filter="url(#hyperGlowLoad)"/>
+            <rect class="agent-head-helm" x="27" y="17" width="38" height="27" rx="9" stroke-width="2" filter="url(#hyperGlowLoad)"/>
             <!-- Visor Specular Glass Highlight -->
-            <path d="M29 20 Q46 16 63 20" stroke="#ffffff" stroke-width="1.2" opacity="0.6" stroke-linecap="round"/>
+            <path class="agent-visor-shine" d="M29 20 Q46 16 63 20" stroke="#ffffff" stroke-width="1.2" opacity="0.6" stroke-linecap="round"/>
 
             <!-- Focused 3D Glowing Eyes -->
-            <rect x="33" y="24" width="7" height="8" rx="3.5" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
-            <rect x="52" y="24" width="7" height="8" rx="3.5" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
+            <rect class="agent-eye-l" x="33" y="24" width="7" height="8" rx="3.5" filter="url(#hyperGlowLoad)"/>
+            <rect class="agent-eye-r" x="52" y="24" width="7" height="8" rx="3.5" filter="url(#hyperGlowLoad)"/>
             <circle cx="36" cy="27" r="1.5" fill="#ffffff"/>
             <circle cx="55" cy="27" r="1.5" fill="#ffffff"/>
-            <ellipse cx="32" cy="34" rx="3" ry="1.8" fill="rgba(0, 242, 254, 0.45)"/>
-            <ellipse cx="60" cy="34" rx="3" ry="1.8" fill="rgba(0, 242, 254, 0.45)"/>
+            <ellipse class="agent-blush-l" cx="32" cy="34" rx="3" ry="1.8"/>
+            <ellipse class="agent-blush-r" cx="60" cy="34" rx="3" ry="1.8"/>
 
             <!-- Cute Focused Curved Smile -->
-            <path d="M41 37 Q46 41 51 37" stroke="#00f2fe" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path class="agent-smile-lip" d="M41 37 Q46 41 51 37" stroke-width="2.2" stroke-linecap="round" fill="none"/>
 
             <!-- Torso with 3D Layering -->
-            <rect x="32" y="45" width="28" height="21" rx="7" fill="url(#body3DLoad)" stroke="#00f2fe" stroke-width="1.6"/>
+            <rect class="agent-torso-box" x="32" y="45" width="28" height="21" rx="7" stroke-width="1.6"/>
             <!-- Pulsing Reactor Heart Core -->
-            <circle cx="46" cy="55" r="4.2" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
+            <circle class="agent-heart-core" cx="46" cy="55" r="4.2" filter="url(#hyperGlowLoad)"/>
             <circle cx="46" cy="55" r="2" fill="#ffffff"/>
 
             <!-- Arms Holding the Book -->
-            <path d="M32 49 L20 56 L29 63" stroke="#00f2fe" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-            <circle cx="29" cy="63" r="3" fill="#00f2fe"/>
+            <path class="agent-arm-l" d="M32 49 L20 56 L29 63" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+            <circle class="agent-hand-l" cx="29" cy="63" r="3"/>
 
-            <path d="M60 49 L72 56 L63 63" stroke="#00f2fe" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-            <circle cx="63" cy="63" r="3" fill="#00f2fe"/>
+            <path class="agent-arm-r" d="M60 49 L72 56 L63 63" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+            <circle class="agent-hand-r" cx="63" cy="63" r="3"/>
 
             <!-- 3D OPEN HOLOGRAPHIC BOOK 📖 -->
-            <path d="M28 63 Q46 68 64 63 L66 78 Q46 83 26 78 Z" fill="#050e1b" stroke="#00f2fe" stroke-width="1.8" filter="url(#hyperGlowLoad)"/>
-            <path d="M46 66 L27 63 L26 77 L46 79 Z" fill="#0c233e" stroke="#00f2fe" stroke-width="1.2"/>
-            <path d="M46 66 L65 63 L66 77 L46 79 Z" fill="#0c233e" stroke="#00f2fe" stroke-width="1.2"/>
-            <path class="book-page-turning" d="M46 66 L46 79 L35 76 L35 64 Z" fill="#00f2fe" opacity="0.85"/>
-            <line x1="30" y1="68" x2="42" y2="69" stroke="#4facfe" stroke-width="1.2" opacity="0.9"/>
-            <line x1="30" y1="73" x2="40" y2="74" stroke="#4facfe" stroke-width="1.2" opacity="0.9"/>
-            <line x1="50" y1="69" x2="62" y2="68" stroke="#4facfe" stroke-width="1.2" opacity="0.9"/>
-            <line x1="50" y1="74" x2="60" y2="73" stroke="#4facfe" stroke-width="1.2" opacity="0.9"/>
-            <line class="laser-scan-3d" x1="26" y1="65" x2="66" y2="65" stroke="#00f2fe" stroke-width="2" filter="url(#hyperGlowLoad)"/>
+            <path class="book-cover-base" d="M28 63 Q46 68 64 63 L66 78 Q46 83 26 78 Z" stroke-width="1.8" filter="url(#hyperGlowLoad)"/>
+            <path class="book-page-left" d="M46 66 L27 63 L26 77 L46 79 Z" stroke-width="1.2"/>
+            <path class="book-page-right" d="M46 66 L65 63 L66 77 L46 79 Z" stroke-width="1.2"/>
+            <path class="book-page-turning" d="M46 66 L46 79 L35 76 L35 64 Z" opacity="0.85"/>
+            <line class="book-line-l1" x1="30" y1="68" x2="42" y2="69" stroke-width="1.2" opacity="0.9"/>
+            <line class="book-line-l2" x1="30" y1="73" x2="40" y2="74" stroke-width="1.2" opacity="0.9"/>
+            <line class="book-line-r1" x1="50" y1="69" x2="62" y2="68" stroke-width="1.2" opacity="0.9"/>
+            <line class="book-line-r2" x1="50" y1="74" x2="60" y2="73" stroke-width="1.2" opacity="0.9"/>
+            <line class="laser-scan-3d" x1="26" y1="65" x2="66" y2="65" stroke-width="2" filter="url(#hyperGlowLoad)"/>
           </g>
 
           <!-- CYBER PUPPY DOG HOPS OVER / AROUND AGENT 🐶 -->
           <g class="dog-playful-hopping">
             <!-- Fast Wagging Tail -->
-            <path class="dog-tail-fast" d="M108 61 Q120 50 117 41" stroke="#00f2fe" stroke-width="3.5" stroke-linecap="round" fill="none" filter="url(#hyperGlowLoad)"/>
-            <circle cx="117" cy="41" r="2.8" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
+            <path class="dog-tail-fast" d="M108 61 Q120 50 117 41" stroke-width="3.5" stroke-linecap="round" fill="none" filter="url(#hyperGlowLoad)"/>
+            <circle class="dog-tail-tip" cx="117" cy="41" r="2.8" filter="url(#hyperGlowLoad)"/>
 
-            <ellipse cx="98" cy="62" rx="15" ry="11" fill="url(#body3DLoad)" stroke="#00f2fe" stroke-width="1.8"/>
+            <ellipse class="dog-body-shape" cx="98" cy="62" rx="15" ry="11" stroke-width="1.8"/>
 
-            <rect x="87" y="68" width="6" height="9" rx="3" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
-            <rect x="101" y="68" width="6" height="9" rx="3" fill="#00f2fe" filter="url(#hyperGlowLoad)"/>
+            <rect class="dog-leg-l" x="87" y="68" width="6" height="9" rx="3" filter="url(#hyperGlowLoad)"/>
+            <rect class="dog-leg-r" x="101" y="68" width="6" height="9" rx="3" filter="url(#hyperGlowLoad)"/>
 
-            <path d="M90 49 Q98 55 106 49" stroke="#f59e0b" stroke-width="2.4" fill="none"/>
-            <circle cx="98" cy="54" r="2.8" fill="#f59e0b" filter="url(#hyperGlowLoad)"/>
+            <path class="dog-collar-band" d="M90 49 Q98 55 106 49" stroke-width="2.4" fill="none"/>
+            <circle class="dog-collar-charm" cx="98" cy="54" r="2.8" filter="url(#hyperGlowLoad)"/>
 
-            <circle cx="98" cy="41" r="12" fill="url(#body3DLoad)" stroke="#00f2fe" stroke-width="2" filter="url(#hyperGlowLoad)"/>
+            <circle class="dog-head-shape" cx="98" cy="41" r="12" stroke-width="2" filter="url(#hyperGlowLoad)"/>
 
-            <path d="M89 36 Q80 26 87 22 Q94 26 92 34" fill="#00f2fe" opacity="0.9" filter="url(#hyperGlowLoad)"/>
-            <path d="M107 36 Q116 26 109 22 Q102 26 104 34" fill="#00f2fe" opacity="0.9" filter="url(#hyperGlowLoad)"/>
+            <path class="dog-ear-l" d="M89 36 Q80 26 87 22 Q94 26 92 34" opacity="0.9" filter="url(#hyperGlowLoad)"/>
+            <path class="dog-ear-r" d="M107 36 Q116 26 109 22 Q102 26 104 34" opacity="0.9" filter="url(#hyperGlowLoad)"/>
 
-            <ellipse cx="93.5" cy="40" rx="2.4" ry="3" fill="#ffffff"/>
-            <circle cx="93.5" cy="39.5" r="1.4" fill="#00f2fe"/>
+            <ellipse class="dog-eye-white-l" cx="93.5" cy="40" rx="2.4" ry="3" fill="#ffffff"/>
+            <circle class="dog-pupil-l" cx="93.5" cy="39.5" r="1.4"/>
             <circle cx="94.5" cy="39" r="0.6" fill="#ffffff"/>
 
-            <ellipse cx="102.5" cy="40" rx="2.4" ry="3" fill="#ffffff"/>
-            <circle cx="102.5" cy="39.5" r="1.4" fill="#00f2fe"/>
+            <ellipse class="dog-eye-white-r" cx="102.5" cy="40" rx="2.4" ry="3" fill="#ffffff"/>
+            <circle class="dog-pupil-r" cx="102.5" cy="39.5" r="1.4"/>
             <circle cx="103.5" cy="39" r="0.6" fill="#ffffff"/>
 
-            <ellipse cx="98" cy="46" rx="4.5" ry="3.2" fill="#06101d"/>
-            <polygon points="96.5,45 99.5,45 98,47" fill="#00f2fe"/>
+            <ellipse class="dog-snout-base" cx="98" cy="46" rx="4.5" ry="3.2"/>
+            <polygon class="dog-nose-tip" points="96.5,45 99.5,45 98,47"/>
             <path d="M96.5 48 Q98 52 99.5 48" stroke="#ff477e" stroke-width="2" fill="#ff477e" stroke-linecap="round"/>
 
             <!-- Magnifying Glass for Searching Books 🔍 -->
-            <circle cx="83" cy="55" r="6" stroke="#f59e0b" stroke-width="2" fill="rgba(245, 158, 11, 0.2)" filter="url(#hyperGlowLoad)"/>
-            <line x1="87" y1="60" x2="92" y2="65" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round"/>
+            <circle class="glass-lens" cx="83" cy="55" r="6" stroke="#f59e0b" stroke-width="2" fill="rgba(245, 158, 11, 0.2)" filter="url(#hyperGlowLoad)"/>
+            <line class="glass-handle" x1="87" y1="60" x2="92" y2="65" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round"/>
           </g>
         </svg>
 
