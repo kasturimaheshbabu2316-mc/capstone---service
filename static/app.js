@@ -627,15 +627,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const hasPhone = phoneRegex.test(queryText);
     const sanitizedUserText = queryText.replace(/(\+91[\-\s]?|0)?[6-9]\d{4}[\-\s]?\d{5}\b/g, "[PHONE_MASKED]");
 
-    // Append User Message Bubble (escaped via textContent)
+    // Append User Message Bubble with Collapsible Expander for Long Payloads
     const userRow = document.createElement("div");
     userRow.className = "msg-row user";
     const userBubble = document.createElement("div");
     userBubble.className = "msg-bubble";
 
-    const userTextEl = document.createElement("div");
-    userTextEl.textContent = sanitizedUserText;
-    userBubble.appendChild(userTextEl);
+    const isLongPrompt = sanitizedUserText.length > 150;
+    if (isLongPrompt) {
+      const previewStr = sanitizedUserText.slice(0, 150).trim();
+      const estTokens = Math.max(1, Math.round(sanitizedUserText.length / 4));
+
+      const previewDiv = document.createElement("div");
+      previewDiv.className = "user-prompt-preview";
+      previewDiv.textContent = `${previewStr}... (truncated, ${sanitizedUserText.length} characters, about ${estTokens} tokens)`;
+      userBubble.appendChild(previewDiv);
+
+      const expandBtn = document.createElement("button");
+      expandBtn.type = "button";
+      expandBtn.className = "btn-prompt-expand";
+      expandBtn.textContent = "Show full message ▾";
+
+      const fullBox = document.createElement("div");
+      fullBox.className = "user-prompt-full";
+      fullBox.style.display = "none";
+      fullBox.textContent = sanitizedUserText;
+
+      expandBtn.addEventListener("click", () => {
+        const isHidden = fullBox.style.display === "none";
+        fullBox.style.display = isHidden ? "block" : "none";
+        expandBtn.textContent = isHidden ? "Hide full message ▴" : "Show full message ▾";
+      });
+
+      userBubble.appendChild(expandBtn);
+      userBubble.appendChild(fullBox);
+    } else {
+      const userTextEl = document.createElement("div");
+      userTextEl.textContent = sanitizedUserText;
+      userBubble.appendChild(userTextEl);
+    }
 
     if (hasPhone) {
       const phoneNote = document.createElement("div");
@@ -719,20 +749,42 @@ document.addEventListener("DOMContentLoaded", () => {
     row.appendChild(speakerCol);
 
     const bubble = document.createElement("div");
-    bubble.className = "msg-bubble";
+    bubble.className = "msg-bubble error-card";
 
-    const notice = document.createElement("div");
-    notice.className = "guardrail-notice warning";
+    const card = document.createElement("div");
+    card.className = "error-response-card";
 
-    if (statusCode === 400) {
-      notice.textContent = "🛡️ Request blocked by safety check";
-    } else if (statusCode === 413) {
-      notice.textContent = "⚠️ Question too long (limit 2,000 tokens)";
+    if (statusCode === 413) {
+      card.innerHTML = `
+        <div class="error-badge-tag warning">⚠️ Payload Budget Exceeded (HTTP 413)</div>
+        <h4 class="error-card-title">Question too long (limit 2,000 tokens)</h4>
+        <p class="error-card-desc">
+          Your inquiry exceeds the maximum allowed token budget for a single query. The governance guardrail blocked this request to preserve system safety and response accuracy.
+        </p>
+        <div class="error-action-hint">
+          💡 <strong>Recommendation:</strong> Please shorten your query or ask about a specific policy rule, SLA category, or ticket ID (e.g. <code>TKT-0007</code>).
+        </div>
+      `;
+    } else if (statusCode === 400) {
+      card.innerHTML = `
+        <div class="error-badge-tag alert">🛡️ Request Blocked by Safety Policy (HTTP 400)</div>
+        <h4 class="error-card-title">Safety Guardrail Active</h4>
+        <p class="error-card-desc">
+          This inquiry was blocked by our prompt safety filters. Administrative command overrides, role injections, and unauthorized operational commands are strictly prohibited.
+        </p>
+        <div class="error-action-hint">
+          💡 <strong>Recommendation:</strong> Please ask standard customer support questions grounded in official Ola ride policies.
+        </div>
+      `;
     } else {
-      notice.textContent = `⚠️ ${detailText || "Service communication interrupted"}`;
+      card.innerHTML = `
+        <div class="error-badge-tag warning">⚠️ Service Notice (${statusCode})</div>
+        <h4 class="error-card-title">Inquiry Could Not Be Processed</h4>
+        <p class="error-card-desc">${escapeHtml(detailText || "Service communication interrupted. Please verify backend server status.")}</p>
+      `;
     }
 
-    bubble.appendChild(notice);
+    bubble.appendChild(card);
     row.appendChild(bubble);
     chatStream.appendChild(row);
     scrollToBottom();
@@ -767,10 +819,20 @@ document.addEventListener("DOMContentLoaded", () => {
       bubble.appendChild(notice);
     }
 
-    // 2. Answer Text (Escaped safely via textContent)
+    // 2. Answer Text (Escaped safely via textContent with paragraph structure)
     const answerEl = document.createElement("div");
     answerEl.className = "answer-text";
-    answerEl.textContent = answer;
+    const paragraphs = answer.split(/\n+/).filter(p => p.trim().length > 0);
+    if (paragraphs.length > 1) {
+      paragraphs.forEach(p => {
+        const pEl = document.createElement("p");
+        pEl.className = "answer-p";
+        pEl.textContent = p;
+        answerEl.appendChild(pEl);
+      });
+    } else {
+      answerEl.textContent = answer;
+    }
     bubble.appendChild(answerEl);
 
     // 3. Ticket Card (for lookups, using 'Resolution time: Xh')
