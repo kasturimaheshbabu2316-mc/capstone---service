@@ -139,8 +139,8 @@ body {
    ============================================================================== */
 .glass-1 {
   background: var(--glass-1-bg);
-  backdrop-filter: var(--glass-1-blur);
   -webkit-backdrop-filter: var(--glass-1-blur);
+  backdrop-filter: var(--glass-1-blur);
   border: 1px solid var(--glass-1-border);
   box-shadow: var(--glass-1-shadow);
   border-radius: var(--radius-card);
@@ -148,8 +148,8 @@ body {
 
 .glass-2 {
   background: var(--glass-2-bg);
-  backdrop-filter: var(--glass-2-blur);
   -webkit-backdrop-filter: var(--glass-2-blur);
+  backdrop-filter: var(--glass-2-blur);
   border: 1px solid var(--glass-2-border);
   box-shadow: var(--glass-2-shadow);
   border-radius: var(--radius-panel);
@@ -157,8 +157,8 @@ body {
 
 .glass-3 {
   background: var(--glass-3-bg);
-  backdrop-filter: var(--glass-3-blur);
   -webkit-backdrop-filter: var(--glass-3-blur);
+  backdrop-filter: var(--glass-3-blur);
   border: 1px solid var(--glass-3-border);
   box-shadow: var(--glass-3-shadow);
   border-radius: var(--radius-drawer);

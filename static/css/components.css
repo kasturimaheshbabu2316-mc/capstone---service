@@ -17,8 +17,8 @@
   align-items: center;
   justify-content: space-between;
   background: var(--glass-2-bg);
-  backdrop-filter: var(--glass-2-blur);
   -webkit-backdrop-filter: var(--glass-2-blur);
+  backdrop-filter: var(--glass-2-blur);
   border: 1px solid var(--glass-2-border);
   box-shadow: var(--glass-2-shadow);
   border-radius: var(--radius-panel);
@@ -257,8 +257,8 @@
   left: 50%;
   transform: translateX(-50%);
   background: var(--glass-1-bg);
-  backdrop-filter: var(--glass-1-blur);
   -webkit-backdrop-filter: var(--glass-1-blur);
+  backdrop-filter: var(--glass-1-blur);
   border: 1px solid rgba(0, 242, 254, 0.35);
   border-radius: var(--radius-pill);
   padding: 5px 14px;
@@ -411,12 +411,14 @@
   margin-top: 18px;
   background: linear-gradient(135deg, #FFFFFF 30%, #00F2FE 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 [data-theme="light"] .empty-title {
   background: linear-gradient(135deg, #0F172A 30%, #0284C7 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -475,8 +477,8 @@
   max-width: 82%;
   padding: 14px 18px;
   background: var(--color-chip-user);
-  backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
   border: 1px solid var(--color-chip-user-border);
   border-radius: 18px 18px 4px 18px;
   box-shadow: 0 4px 18px rgba(0, 242, 254, 0.12);
@@ -518,8 +520,8 @@
 .msg-row.assistant .msg-bubble {
   max-width: 88%;
   background: var(--glass-1-bg);
-  backdrop-filter: var(--glass-1-blur);
   -webkit-backdrop-filter: var(--glass-1-blur);
+  backdrop-filter: var(--glass-1-blur);
   border: 1px solid var(--glass-1-border);
   box-shadow: var(--glass-1-shadow);
   border-radius: 18px 18px 18px 4px;
@@ -686,8 +688,8 @@
   align-items: center;
   gap: 8px;
   background: var(--glass-2-bg);
-  backdrop-filter: var(--glass-2-blur);
   -webkit-backdrop-filter: var(--glass-2-blur);
+  backdrop-filter: var(--glass-2-blur);
   border: 1px solid var(--glass-2-border);
   box-shadow: var(--glass-2-shadow);
   border-radius: var(--radius-panel);
@@ -761,8 +763,8 @@
 /* Collapsible Examples Popover */
 .examples-popover {
   background: var(--glass-3-bg);
-  backdrop-filter: var(--glass-3-blur);
   -webkit-backdrop-filter: var(--glass-3-blur);
+  backdrop-filter: var(--glass-3-blur);
   border: 1px solid var(--glass-3-border);
   box-shadow: var(--glass-3-shadow);
   border-radius: var(--radius-panel);
@@ -811,8 +813,8 @@
 
 .starter-card {
   background: var(--glass-1-bg);
-  backdrop-filter: var(--glass-1-blur);
   -webkit-backdrop-filter: var(--glass-1-blur);
+  backdrop-filter: var(--glass-1-blur);
   border: 1px solid var(--glass-1-border);
   border-radius: var(--radius-card);
   padding: 12px 14px;
@@ -910,8 +912,8 @@
 
 .kpi-card {
   background: var(--glass-1-bg);
-  backdrop-filter: var(--glass-1-blur);
   -webkit-backdrop-filter: var(--glass-1-blur);
+  backdrop-filter: var(--glass-1-blur);
   border: 1px solid var(--glass-1-border);
   box-shadow: var(--glass-1-shadow);
   border-radius: var(--radius-card);
@@ -971,8 +973,8 @@
 /* Category Spectrum Bar */
 .spectrum-box {
   background: var(--glass-1-bg);
-  backdrop-filter: var(--glass-1-blur);
   -webkit-backdrop-filter: var(--glass-1-blur);
+  backdrop-filter: var(--glass-1-blur);
   border: 1px solid var(--glass-1-border);
   box-shadow: var(--glass-1-shadow);
   border-radius: var(--radius-card);
@@ -1023,8 +1025,8 @@
   justify-content: space-between;
   gap: 14px;
   background: var(--glass-1-bg);
-  backdrop-filter: var(--glass-1-blur);
   -webkit-backdrop-filter: var(--glass-1-blur);
+  backdrop-filter: var(--glass-1-blur);
   border: 1px solid var(--glass-1-border);
   border-radius: var(--radius-card);
   padding: 10px 14px;
@@ -1069,8 +1071,8 @@
 /* Sticky Glass Table */
 .grid-table-wrap {
   background: var(--glass-1-bg);
-  backdrop-filter: var(--glass-1-blur);
   -webkit-backdrop-filter: var(--glass-1-blur);
+  backdrop-filter: var(--glass-1-blur);
   border: 1px solid var(--glass-1-border);
   box-shadow: var(--glass-1-shadow);
   border-radius: var(--radius-card);
@@ -1137,8 +1139,8 @@
 
 .policy-card {
   background: var(--glass-1-bg);
-  backdrop-filter: var(--glass-1-blur);
   -webkit-backdrop-filter: var(--glass-1-blur);
+  backdrop-filter: var(--glass-1-blur);
   border: 1px solid var(--glass-1-border);
   box-shadow: var(--glass-1-shadow);
   border-radius: var(--radius-card);
@@ -1166,8 +1168,8 @@
   height: 100vh;
   height: 100dvh;
   background: var(--glass-3-bg);
-  backdrop-filter: var(--glass-3-blur);
   -webkit-backdrop-filter: var(--glass-3-blur);
+  backdrop-filter: var(--glass-3-blur);
   border-left: 1px solid var(--glass-3-border);
   box-shadow: var(--glass-3-shadow);
   z-index: 60;
@@ -1236,8 +1238,8 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   z-index: 70;
   display: flex;
   align-items: flex-start;
@@ -1249,8 +1251,8 @@
   width: 100%;
   max-width: 560px;
   background: var(--glass-3-bg);
-  backdrop-filter: var(--glass-3-blur);
   -webkit-backdrop-filter: var(--glass-3-blur);
+  backdrop-filter: var(--glass-3-blur);
   border: 1px solid var(--glass-3-border);
   box-shadow: var(--glass-3-shadow);
   border-radius: var(--radius-panel);
@@ -1974,6 +1976,7 @@ body.show-details .composer-footer {
   letter-spacing: -0.02em;
   background: linear-gradient(135deg, #ffffff 40%, #00f2fe 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
 }
@@ -2247,8 +2250,8 @@ body.show-details .composer-footer {
   font-weight: 500;
   cursor: pointer;
   outline: none;
-  appearance: none;
   -webkit-appearance: none;
+  appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2300f2fe' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
