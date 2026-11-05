@@ -356,3 +356,35 @@ Upon user approval of this design specification:
 3. Build `static/index.html` with inline SVGs, semantic landmarks, and strict CSP meta tags.
 4. Mount `StaticFiles` in `api/main.py` ensuring API endpoints take precedence.
 5. Execute end-to-end unit tests, AppTest/Playwright browser checks, and record output to `transcripts/27_web_ui.txt`.
+
+---
+
+## 10. Live 3D-Style AI Mascot System (AI & Sparky)
+
+### Architecture
+- **Dual Character Rig**: "AI" (the operations robot) and "Sparky" (the cyber puppy/sidekick).
+- **Dual-Theme Art Direction**:
+  - **Dark Mode**: "Neon Holographic" with obsidian body plates (`#1E3A5F` to `#0A1526`), emissive cyan/mint rim lighting, and subtle bloom filters.
+  - **Light Mode**: "Soft Clay 3D" with matte ceramic pastel surfaces (sky-blue robot, warm golden honey companion) and soft ambient-occlusion contact shadows.
+- **Finite State Machine (`data-state`)**:
+  - `idle`: Sinusoidal breathing bob, tail wagging, and rhythmic eye blinks.
+  - `thinking`: Reading open holographic book with glowing laser scan beam; Sparky investigating with magnifying glass.
+  - `speaking`: Visor transitions into a 5-bar responsive equalizer waveform.
+  - `success`: Thumbs-up posture and celebratory emerald particle sparkles.
+  - `blocked`: Holographic security stop shield raised with warm amber warning glow.
+  - `wave`: Welcoming arm wave on initial load or empty-state interaction.
+- **Pointer Parallax**: Mouse cursor tracking clamped to ±8° smoothed via 60fps `requestAnimationFrame`.
+- **Chat Avatar Chips**: Circular 52px frosted glass avatar chips for message rows, with `user-select: none` and `pointer-events: none` to prevent accidental selection highlights.
+
+---
+
+## 11. Layout Alignment, Responsive Breakpoints & Viewport Normalization
+
+- **Shared Centered Column**: Both `.chat-stream` and `.composer-dock` share the exact identical `max-width: 48rem; margin-inline: auto; padding-inline: 16px;` geometry to guarantee perfect alignment under the navigation bar.
+- **3-Zone Navigation Header**:
+  - `≥ 1280px`: Full button text labels and expanded telemetry status.
+  - `900px – 1279px`: Action buttons collapse to compact icon-only chips; health pill displays dot with short status.
+  - `< 900px`: Brand collapses to standalone logo mark; segmented tabs adopt compact icon-free styling.
+  - `< 600px`: Ultra-compact padding, stacked dialogs, full-width touch targets.
+- **Viewport Boundary**: `html, body { overflow-x: clip; }` prevents any horizontal scrolling from 320px up.
+

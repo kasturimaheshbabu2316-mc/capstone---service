@@ -780,6 +780,55 @@
   stroke: #0284c7;
 }
 
+/* Sparky Avatar Chip */
+.chip-sparky-head {
+  fill: url(#sparkyBodyDark);
+  stroke: #00f2fe;
+  stroke-width: 1.6;
+}
+
+.chip-sparky-ear {
+  fill: url(#sparkyBodyDark);
+  stroke: #00f2fe;
+  stroke-width: 1.4;
+}
+
+.chip-pupil {
+  fill: #00f2fe;
+}
+
+.chip-snout {
+  fill: #050b14;
+}
+
+.chip-nose {
+  fill: #00f2fe;
+}
+
+[data-theme="light"] .chip-sparky-head {
+  fill: url(#sparkyBodyLight);
+  stroke: #d97706;
+  stroke-width: 1.6;
+}
+
+[data-theme="light"] .chip-sparky-ear {
+  fill: #fef3c7;
+  stroke: #d97706;
+  stroke-width: 1.4;
+}
+
+[data-theme="light"] .chip-pupil {
+  fill: #0f172a;
+}
+
+[data-theme="light"] .chip-snout {
+  fill: #ffffff;
+}
+
+[data-theme="light"] .chip-nose {
+  fill: #d97706;
+}
+
 /* ==============================================================================
    6. Accessibility & Performance Overrides
    ============================================================================== */

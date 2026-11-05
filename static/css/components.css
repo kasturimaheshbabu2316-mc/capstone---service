@@ -10,12 +10,15 @@
 .glass-nav {
   position: sticky;
   top: 14px;
-  margin: 14px 20px 0;
+  max-width: var(--max-stage-width);
+  margin: 14px auto 0;
+  width: calc(100% - 40px);
   height: 64px;
   padding: 0 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
   background: var(--glass-2-bg);
   -webkit-backdrop-filter: var(--glass-2-blur);
   backdrop-filter: var(--glass-2-blur);
@@ -23,13 +26,16 @@
   box-shadow: var(--glass-2-shadow);
   border-radius: var(--radius-panel);
   z-index: 50;
+  box-sizing: border-box;
   transition: all var(--transition-normal);
 }
 
 .brand-group {
+  justify-self: start;
   display: flex;
   align-items: center;
   gap: 12px;
+  white-space: nowrap;
 }
 
 .brand-logo {
@@ -56,6 +62,7 @@
 
 /* Segmented Navigation View Switcher */
 .nav-switcher {
+  justify-self: center;
   display: inline-flex;
   align-items: center;
   background: rgba(0, 0, 0, 0.22);
@@ -64,6 +71,7 @@
   padding: 4px;
   gap: 4px;
   position: relative;
+  white-space: nowrap;
 }
 
 [data-theme="light"] .nav-switcher {
@@ -107,9 +115,11 @@
 }
 
 .nav-actions {
+  justify-self: end;
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
 .glass-btn {
@@ -183,6 +193,92 @@
   100% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 12px var(--color-verified); }
 }
 
+/* Responsive Navigation Breakpoints */
+@media (max-width: 1360px) {
+  #clear-chat-btn span,
+  #theme-toggle-btn span,
+  #settings-toggle-btn span {
+    display: none;
+  }
+  #clear-chat-btn,
+  #theme-toggle-btn,
+  #settings-toggle-btn {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 1099px) {
+  #details-toggle-btn span {
+    display: none;
+  }
+  #details-toggle-btn {
+    padding: 0 10px;
+  }
+  .status-pill {
+    padding: 0 9px;
+  }
+  #health-text {
+    font-size: 0.74rem;
+  }
+}
+
+@media (max-width: 899px) {
+  .top-nav,
+  .glass-nav {
+    height: 56px;
+    padding: 0 12px;
+    margin: 10px auto 0;
+    width: calc(100% - 20px);
+    gap: 8px;
+  }
+  .brand-title {
+    display: none;
+  }
+  .nav-switcher {
+    padding: 3px;
+    gap: 2px;
+  }
+  .switcher-pill {
+    padding: 5px 8px;
+    font-size: 0.76rem;
+    gap: 4px;
+  }
+  .switcher-pill svg {
+    display: none;
+  }
+  .kbd-hint-btn {
+    display: none;
+  }
+  #health-text {
+    display: none;
+  }
+  .status-pill {
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 599px) {
+  .top-nav,
+  .glass-nav {
+    height: 52px;
+    padding: 0 8px;
+    gap: 4px;
+    margin: 8px auto 0;
+    width: calc(100% - 16px);
+  }
+  .switcher-pill {
+    padding: 4px 6px;
+    font-size: 0.72rem;
+  }
+  .nav-actions {
+    gap: 4px;
+  }
+  .nav-actions .glass-btn {
+    padding: 0 6px;
+    height: 32px;
+  }
+}
+
 /* ==============================================================================
    2. Workspace & Multi-Stage Spatial Views
    ============================================================================== */
@@ -216,6 +312,9 @@
 .stage-inner {
   width: 100%;
   max-width: var(--max-col-width);
+  margin-inline: auto;
+  padding-inline: 16px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
@@ -441,7 +540,7 @@
 
 .msg-row {
   width: 100%;
-  display: flex;
+  box-sizing: border-box;
   animation: msgSlideIn 0.25s var(--ease-out);
 }
 
@@ -451,31 +550,45 @@
 }
 
 .msg-row.user {
+  display: flex;
   justify-content: flex-end;
+  width: 100%;
 }
 
 .msg-row.assistant {
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  align-items: start;
+  gap: 12px;
+  width: 100%;
 }
 
-.msg-row.assistant.with-avatar {
-  gap: 14px;
-  align-items: flex-start;
+.msg-row.assistant.agent-loading-stage {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .assistant-speaker-col {
-  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding-top: 4px;
+  justify-content: center;
+  margin-top: 2px;
+  flex-shrink: 0;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  pointer-events: none;
 }
 
 /* User Message Bubble: Tinted Cyan Frosted Glass */
 .msg-bubble.user-bubble,
 .msg-row.user .msg-bubble {
-  max-width: 82%;
-  padding: 14px 18px;
+  max-width: 85%;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
   background: var(--color-chip-user);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   backdrop-filter: blur(14px) saturate(160%);
@@ -483,6 +596,9 @@
   border-radius: 18px 18px 4px 18px;
   box-shadow: 0 4px 18px rgba(0, 242, 254, 0.12);
   color: var(--color-chip-user-ink);
+  word-break: break-word;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 [data-theme="light"] .msg-bubble.user-bubble,
@@ -491,8 +607,8 @@
 }
 
 .user-prompt-preview {
-  font-size: 0.94rem;
-  line-height: 1.55;
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: inherit;
 }
 
@@ -518,15 +634,20 @@
 
 /* Assistant Message Bubble: Frosted Glass Panel */
 .msg-row.assistant .msg-bubble {
-  max-width: 88%;
+  max-width: 100%;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
   background: var(--glass-1-bg);
   -webkit-backdrop-filter: var(--glass-1-blur);
   backdrop-filter: var(--glass-1-blur);
   border: 1px solid var(--glass-1-border);
   box-shadow: var(--glass-1-shadow);
   border-radius: 18px 18px 18px 4px;
-  padding: 16px 20px;
   color: var(--color-ink);
+  word-break: break-word;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 [data-theme="light"] .msg-row.assistant .msg-bubble {
@@ -675,8 +796,10 @@
   bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 40px);
+  width: 100%;
   max-width: var(--max-col-width);
+  padding-inline: 16px;
+  box-sizing: border-box;
   z-index: 45;
   display: flex;
   flex-direction: column;
@@ -1299,15 +1422,8 @@
    9. Mobile Responsiveness (360px+)
    ============================================================================== */
 @media (max-width: 768px) {
-  .top-nav,
-  .glass-nav {
-    margin: 8px 10px 0;
-    padding: 0 12px;
-    height: 56px;
-  }
-  .brand-title { display: none; }
-  .switcher-pill { padding: 5px 10px; font-size: 0.78rem; }
-  .composer-dock { width: calc(100% - 20px); bottom: 10px; }
+  .composer-dock { width: 100%; padding-inline: 10px; bottom: 10px; }
+  .stage-inner { padding-inline: 10px; }
   .workspace { padding: 14px 10px 100px; }
   .settings-drawer { width: 100%; right: -100%; }
 }
