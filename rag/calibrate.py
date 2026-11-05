@@ -107,8 +107,9 @@ def calibrate_threshold(
     return calibrated_threshold, in_scope_results, out_scope_results
 
 
-# Default calibrated threshold constant
-CALIBRATED_THRESHOLD = 0.3652
+# Canonical RAG Groundedness Similarity Threshold
+RAG_SIMILARITY_THRESHOLD: float = 0.3652
+CALIBRATED_THRESHOLD: float = RAG_SIMILARITY_THRESHOLD
 
 
 def load_threshold() -> float:

@@ -52,9 +52,10 @@ def get_escalation_threshold() -> tuple[float, list[float]]:
     return round(p80, 4), all_scores
 
 
-# Freeze empirical 80th percentile threshold
+# Canonical Escalation Risk Threshold (80th percentile cutoff across seed-42 corpus)
+ESCALATION_RISK_THRESHOLD: float = 0.4400
 ESCALATION_THRESHOLD_TAU, _ALL_SCORES = get_escalation_threshold()
-ESCALATION_THRESHOLD: float = ESCALATION_THRESHOLD_TAU
+ESCALATION_THRESHOLD: float = ESCALATION_RISK_THRESHOLD
 
 from governance.least_autonomy import ToolAccessControl, CURRENT_CALLER_ROLE
 

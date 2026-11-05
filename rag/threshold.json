@@ -1,5 +1,6 @@
 {
   "threshold": 0.3652,
+  "rag_similarity_threshold": 0.3652,
   "min_in_scope": 0.5325,
   "max_out_scope": 0.1979,
   "margin": 0.1673,

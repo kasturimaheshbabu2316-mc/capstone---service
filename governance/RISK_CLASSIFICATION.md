@@ -16,7 +16,7 @@ The Ola Domain Support Agent is classified as a **Medium Risk (Tier 2)** AI appl
    The agent interacts directly with external riders, driver-partners, and internal operations staff to provide policy guidance, SLA definitions, monetary refund conditions, and ticket status lookups. While it provides critical operational information, it does not directly control physical vehicle navigation, execute automated payments without human confirmation, or handle dispatch safety commands.
 
 2. **Customer Trust & Financial Rights:**  
-   Inaccurate responses regarding cancellation refunds, service credits, or escalation matrices can impact customer rights, driver earnings, and corporate compliance. Consequently, groundedness verification, dual-index cosine thresholding ($T = 0.3652$), and secondary compliance review are strictly enforced.
+   Inaccurate responses regarding cancellation refunds, service credits, or escalation matrices can impact customer rights, driver earnings, and corporate compliance. Consequently, groundedness verification with calibrated cosine thresholding (`RAG_SIMILARITY_THRESHOLD = 0.3652`), automated ticket escalation scoring (`ESCALATION_RISK_THRESHOLD = 0.4400`), and secondary compliance review are strictly enforced.
 
 3. **PII and Data Exposure:**  
    The system processes customer queries which may inadvertently contain personal identifiers such as Indian mobile phone numbers. The input guardrail enforces automatic regex-based masking (`[PHONE_MASKED]`) before queries reach any agent, model, or persistent audit log.

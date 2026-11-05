@@ -26,7 +26,7 @@ The **Ola Domain Support Agent** is an enterprise customer and operations suppor
 |      GOVERNANCE       |        REPRODUCIBILITY        |    QUALITY GATES      |
 | * Least Autonomy Tool | * Seeded Synthetic Data       | * Calibrated Cosine   |
 |   Binding             | * Offline Embeddings Cache    |   RAG Thresholding    |
-| * Token Budget Caps   | * Rule-Based MockLLM ReAct    |   (tau = 0.4400)      |
+| * Token Budget Caps   | * Rule-Based MockLLM ReAct    |   (tau = 0.3652)      |
 | * Indian PII Masking  | * Zero External Network Calls | * Pydantic Validation |
 | * Masked JSON-L Logs  | * Deterministic Eval Scoring  | * Dual-Agent Autogen  |
 | * Partitioned Cache   | * Chained Sequential Tasks    |   Compliance Review   |
@@ -35,7 +35,9 @@ The **Ola Domain Support Agent** is an enterprise customer and operations suppor
 
 1. **Production Governance & Least Autonomy:** Tools are bound to specific agent roles. The runtime authorization guard (`ToolAccessControl.verify_agent_tool_access`) enforces that only the `Lookup Agent` may execute ticket lookups; any unauthorized role (including the Composer) raises `PermissionError`.
 2. **Deterministic Reproducibility:** Every execution path—synthetic data generation (`seed=42`), embedding indexing, agent routing, tool execution, and benchmark scoring—is deterministic without network or paid API dependencies.
-3. **Calibrated Groundedness:** Fallbacks are governed by an empirically calibrated cosine similarity threshold ($\tau = 0.4400$) derived from in-scope and out-of-scope distributions to prevent hallucination.
+3. **Calibrated Decision Thresholds:**
+   - **RAG Similarity Threshold (`RAG_SIMILARITY_THRESHOLD = 0.3652`)**: Empirically calibrated cosine similarity cutoff separating in-scope policy queries from out-of-scope inquiries. Queries falling below 0.3652 safely trigger deterministic refusal without hallucination.
+   - **Escalation Risk Threshold (`ESCALATION_RISK_THRESHOLD = 0.4400`)**: Empirical 80th-percentile cutoff on composite ticket risk scores ($0.6 \times \text{escalated} + 0.4 \times \text{age\_ratio}$), isolating high-risk cases for proactive supervisor intervention.
 4. **Resilient Multi-Agent Consensus:** Single-agent hallucinations are mitigated through a two-stage pipeline: a CrewAI task execution team for drafting followed by an independent AutoGen review team (`PolicyComplianceReviewer` and `FinalEditor`) enforcing policy alignment before delivery.
 
 ---
@@ -82,7 +84,7 @@ flowchart TD
     subgraph KnowledgeLayer ["RAG Core Subsystem (rag/)"]
         ChromaSentence[("ChromaDB: kb_sentence\n(Winning Collection)")]
         LocalEmbed["SentenceTransformers\nall-MiniLM-L6-v2 (Local Cache)"]
-        CalibratedCutoff{"Cosine Similarity >= 0.4400"}
+        CalibratedCutoff{"Cosine Similarity >=\n0.3652 (RAG_SIMILARITY_THRESHOLD)"}
     end
 
     subgraph DataLayer ["Operational Dataset (dataset.py)"]
@@ -168,8 +170,9 @@ flowchart TD
 
 ### 3.5 Grounded RAG Subsystem (`rag/index.py`, `rag/generate.py`, `rag/calibrate.py`)
 - **Vector Collections**: Pure sentence-based chunking indexed in `kb_sentence` with cosine distance metric.
-- **Empirical Thresholding**: Cutoff calibrated at $\tau = 0.4400$. Queries falling below $\tau$ trigger the exact fallback:
+- **Empirical Groundedness Threshold**: Cutoff calibrated at `RAG_SIMILARITY_THRESHOLD = 0.3652`. Queries falling below this threshold trigger the exact fallback:
   `"I don't know based on the available policy documents."`
+- **Escalation Risk Threshold**: Distinct operational cutoff at `ESCALATION_RISK_THRESHOLD = 0.4400` used in `tools/ticket_tool.py` for supervisor intervention recommendations.
 
 ### 3.6 AutoGen Secondary Review (`review/autogen_review.py`)
 - Two-agent consensus team (`PolicyComplianceReviewer` and `FinalEditor`).

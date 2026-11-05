@@ -14,7 +14,12 @@ import json
 from pathlib import Path
 from typing import Any
 
-from rag.calibrate import CALIBRATED_THRESHOLD, calibrate_threshold, load_threshold
+from rag.calibrate import (
+    CALIBRATED_THRESHOLD,
+    RAG_SIMILARITY_THRESHOLD,
+    calibrate_threshold,
+    load_threshold,
+)
 from rag.index import retrieve
 
 # Exact required fallback refusal string

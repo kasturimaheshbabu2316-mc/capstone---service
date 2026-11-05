@@ -12,8 +12,8 @@ Under the enterprise AI Low / Medium / High governance taxonomy, this system is 
 
 | Operation | Risk Level | Description | Mitigation Strategy |
 | :--- | :---: | :--- | :--- |
-| **Policy FAQ Retrieval** | Low | Reading published customer guidelines and operational SLAs | Cosine similarity thresholding ($\tau = 0.4400$) with calibrated fallback |
-| **Ticket Status Lookup** | Medium | Reading customer ticket status, category, and escalation score | Explicit least-autonomy tool permission, read-only lookup, PII redaction |
+| **Policy FAQ Retrieval** | Low | Reading published customer guidelines and operational SLAs | Cosine similarity thresholding (`RAG_SIMILARITY_THRESHOLD = 0.3652`) with calibrated fallback |
+| **Ticket Status Lookup** | Medium | Reading customer ticket status, category, and escalation score | Explicit least-autonomy tool permission, read-only lookup, PII redaction (`ESCALATION_RISK_THRESHOLD = 0.4400`) |
 | **Database Analytics** | Medium | Aggregating fleet resolution times and ticket volumes | Safety guardrails, read-only validation |
 | **Financial Compensation** | High | Credit voucher issuance and driver fee reversals | Human-in-the-loop escalation recommendation; zero autonomous payout tools |
 

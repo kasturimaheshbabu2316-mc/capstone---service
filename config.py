@@ -22,6 +22,10 @@ MOCK_LLM: bool = os.environ.get("MOCK_LLM", "true").lower() == "true"
 CREWAI_DISABLE_TELEMETRY: bool = os.environ.get("CREWAI_DISABLE_TELEMETRY", "true").lower() == "true"
 OTEL_SDK_DISABLED: bool = os.environ.get("OTEL_SDK_DISABLED", "true").lower() == "true"
 
+# Canonical Decision Thresholds
+RAG_SIMILARITY_THRESHOLD: float = 0.3652   # Cosine similarity cutoff for RAG retrieval groundedness
+ESCALATION_RISK_THRESHOLD: float = 0.4400  # Cutoff score for automated support ticket escalation
+
 # Enforce telemetry suppression and single-thread execution for memory efficiency
 os.environ["CREWAI_DISABLE_TELEMETRY"] = "true" if CREWAI_DISABLE_TELEMETRY else "false"
 os.environ["OTEL_SDK_DISABLED"] = "true" if OTEL_SDK_DISABLED else "false"
