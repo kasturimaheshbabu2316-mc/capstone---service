@@ -18,63 +18,96 @@
 // ==============================================================================
 
 function createAgentDogLoadingCard() {
-  if (typeof OlaMascots !== "undefined" && OlaMascots.createMascotStage) {
-    return `
-      <div class="agent-dog-3d-card">
-        <div class="agent-phase-pill-3d" id="agent-phase-pill">
-          <span class="phase-icon" id="agent-phase-icon" aria-hidden="true">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </span>
-          <span class="phase-text" id="agent-phase-text">Analyzing your inquiry...</span>
-        </div>
-        ${OlaMascots.createMascotStage("thinking", { speechBubble: false })}
-      </div>
-    `;
-  }
   return `
-    <div class="agent-dog-3d-card">
-      <div class="agent-phase-pill-3d" id="agent-phase-pill">
-        <span class="phase-icon" id="agent-phase-icon"></span>
+    <div class="neural-core-stage" id="agent-loading-card">
+      <div class="neural-phase-pill" id="agent-phase-pill">
+        <span class="holo-beacon-dot"></span>
+        <span class="phase-icon" id="agent-phase-icon">⚡</span>
         <span class="phase-text" id="agent-phase-text">Analyzing your inquiry...</span>
+      </div>
+
+      <div class="neural-hologram-viewport">
+        <!-- Concentric Soundwave Resonance Ripples -->
+        <div class="holo-ripple-container">
+          <div class="holo-resonance-ripple ripple-1"></div>
+          <div class="holo-resonance-ripple ripple-2"></div>
+          <div class="holo-resonance-ripple ripple-3"></div>
+        </div>
+
+        <!-- 3D Gyroscopic Floating Neural Rig -->
+        <div class="neural-gyroscopic-rig">
+          <!-- 3-Axis Gyroscopic Gimbal Rings -->
+          <div class="gyro-ring ring-x">
+            <div class="energy-node node-1"></div>
+            <div class="energy-node node-2"></div>
+          </div>
+          <div class="gyro-ring ring-y">
+            <div class="energy-node node-3"></div>
+            <div class="energy-node node-4"></div>
+          </div>
+          <div class="gyro-ring ring-z">
+            <div class="energy-node node-5"></div>
+          </div>
+
+          <!-- Central Fluid Plasma Neural Core -->
+          <div class="neural-plasma-sphere">
+            <div class="plasma-fluid-mesh"></div>
+            <div class="neural-nucleus"></div>
+            <div class="specular-glint"></div>
+            <div class="specular-glint-secondary"></div>
+          </div>
+
+          <!-- Quantum Energy Particle Halo -->
+          <div class="quantum-particle-field">
+            <div class="q-spark s-1"></div>
+            <div class="q-spark s-2"></div>
+            <div class="q-spark s-3"></div>
+            <div class="q-spark s-4"></div>
+            <div class="q-spark s-5"></div>
+            <div class="q-spark s-6"></div>
+          </div>
+        </div>
+
+        <!-- Ambient Occlusion / Floor Energy Cast -->
+        <div class="neural-stage-shadow"></div>
+      </div>
+
+      <div class="neural-telemetry-badge">
+        <span class="telemetry-spark">✦</span>
+        <span>NEURAL COGNITION ACTIVE</span>
       </div>
     </div>
   `;
 }
 
 function createAgentDogSpeakingAvatar() {
-  if (typeof OlaMascots !== "undefined" && OlaMascots.createChatAvatarChip) {
-    return OlaMascots.createChatAvatarChip("ai");
-  }
   return `
-    <div class="chat-avatar-chip" title="Ola Support Assistant (AI &amp; Sparky)" aria-hidden="true">
-      <svg class="chip-avatar-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="22" class="chip-halo-glow"/>
-        <line x1="24" y1="5" x2="24" y2="12" stroke-width="2" stroke-linecap="round" class="chip-antenna-stem"/>
-        <circle cx="24" cy="4" r="3" class="chip-antenna-orb"/>
-        <rect x="11" y="12" width="26" height="22" rx="7" class="chip-robot-helm"/>
-        <rect x="14" y="15" width="20" height="15" rx="4" class="chip-visor"/>
-        <rect x="17" y="19" width="4.5" height="6.5" rx="2.2" class="chip-eye"/>
-        <rect x="26.5" y="19" width="4.5" height="6.5" rx="2.2" class="chip-eye"/>
-      </svg>
+    <div class="neural-speaker-avatar" title="Ola Neural Intelligence">
+      <div class="neural-mini-stage">
+        <!-- Mini 3D Gyroscopic Rings -->
+        <div class="mini-gyro-ring ring-mini-a"></div>
+        <div class="mini-gyro-ring ring-mini-b"></div>
+        <!-- Mini Fluid Plasma Core -->
+        <div class="mini-plasma-sphere">
+          <div class="mini-fluid-mesh"></div>
+          <div class="mini-nucleus"></div>
+          <div class="mini-specular"></div>
+        </div>
+        <!-- Subtle Audio-Resonance Pulse Rings -->
+        <div class="mini-soundwave-ring wave-1"></div>
+        <div class="mini-soundwave-ring wave-2"></div>
+      </div>
+      <span class="avatar-tag-label">Neural Core ✦</span>
     </div>
   `;
 }
 
 window.createAgentDogLoadingCard = createAgentDogLoadingCard;
 window.createAgentDogSpeakingAvatar = createAgentDogSpeakingAvatar;
-window.createAgentDogLoadingCard = createAgentDogLoadingCard;
-window.createAgentDogSpeakingAvatar = createAgentDogSpeakingAvatar;
+window.createNeuralCoreLoadingCard = createAgentDogLoadingCard;
+window.createNeuralCoreSpeakingAvatar = createAgentDogSpeakingAvatar;
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Theme Initialization
-  try {
-    const urlTheme = new URLSearchParams(window.location.search).get("theme");
-    const activeTheme = urlTheme || localStorage.getItem("ola_theme");
-    if (activeTheme === "light" || activeTheme === "dark") {
-      document.documentElement.setAttribute("data-theme", activeTheme);
-    }
-  } catch (e) {}
-
   // Core DOM References
   const chatStream = document.getElementById("chat-stream");
   const chatEmptyState = document.getElementById("chat-empty-state");
@@ -565,28 +598,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     try {
-      // Phase 1: Thinking Suspense (1.8s) - Clean SVG icon, clean text
-      if (pIcon) {
-        pIcon.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`;
-      }
-      if (pText) {
+      // Phase 1: Thinking Suspense (1.8s) - Single 💭 icon, clean text
+      if (pText && pIcon) {
+        pIcon.textContent = "💭";
         pText.textContent = "Analyzing your inquiry...";
+        playThinkingBlip();
       }
-      if (typeof OlaMascots !== "undefined") {
-        OlaMascots.setMascotState(loadingRow.querySelector(".mascot-stage"), "thinking", "Analyzing your inquiry...");
-      }
-      playThinkingBlip();
       await sleep(1800);
 
-      // Phase 2: Searching in Books (2.0s) - Clean SVG icon
-      if (pIcon) {
-        pIcon.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`;
-      }
-      if (pText) {
+      // Phase 2: Searching in Books (2.0s) - Single 🔍 icon, clean text without duplicate emojis
+      if (pText && pIcon) {
+        pIcon.textContent = "🔍";
         pText.textContent = "Searching policy manuals & ticket database...";
-      }
-      if (typeof OlaMascots !== "undefined") {
-        OlaMascots.setMascotState(loadingRow.querySelector(".mascot-stage"), "thinking", "Searching policy manuals & ticket database...");
       }
       await sleep(2000);
 
@@ -594,28 +617,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const payload = await res.json();
 
       if (!res.ok) {
-        if (typeof OlaMascots !== "undefined") {
-          OlaMascots.setMascotState(loadingRow.querySelector(".mascot-stage"), "blocked");
-          await sleep(500);
-        }
         loadingRow.remove();
         const detail = (payload.detail && (payload.detail.message || payload.detail.detail)) || payload.detail || payload.message || `HTTP ${res.status}`;
         appendErrorCard(res.status, detail);
         return;
       }
 
-      // Phase 3: Happily Found Eureka Celebration (0.8s) - Clean SVG icon
-      if (pIcon) {
-        pIcon.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`;
-      }
-      if (pText) {
+      // Phase 3: Happily Found Eureka Celebration (1.0s) - Single ✨ icon, clean text
+      if (pText && pIcon) {
+        pIcon.textContent = "✨";
         pText.textContent = "Found the exact policy match!";
+        playCelebrationFanfare();
       }
-      if (typeof OlaMascots !== "undefined") {
-        OlaMascots.setMascotState(loadingRow.querySelector(".mascot-stage"), "success", "Found the exact policy match!");
-      }
-      playCelebrationFanfare();
-      await sleep(800);
+      await sleep(1000);
 
       // Deliver output with visual speaking agent and happy puppy
       loadingRow.remove();
@@ -1382,9 +1396,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Theme Toggle
   function toggleTheme() {
     const html = document.documentElement;
-    const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    html.setAttribute("data-theme", next);
-    try { localStorage.setItem("ola_theme", next); } catch (e) {}
+    html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
   }
 
   const btnTheme = document.getElementById("theme-toggle-btn");
