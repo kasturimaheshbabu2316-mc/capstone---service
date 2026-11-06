@@ -1263,9 +1263,21 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 48px 20px 32px;
+  padding: 24px 20px 24px;
   max-width: 860px;
   margin: 0 auto;
+}
+
+.hero-neural-core-stage {
+  margin-bottom: 6px;
+  cursor: pointer;
+  user-select: none;
+  transform: scale(0.96);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-neural-core-stage:hover {
+  transform: scale(1.02);
 }
 
 .enterprise-hero-badge {

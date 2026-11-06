@@ -357,8 +357,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // 3D Holographic Neural Core & AI Companion Mouse Tilt
+  const heroNeuralCore = document.getElementById("hero-neural-core");
+  const heroRig = heroNeuralCore ? heroNeuralCore.querySelector(".neural-gyroscopic-rig") : null;
+
+  if (heroNeuralCore) {
+    heroNeuralCore.addEventListener("click", () => {
+      playChimeSound();
+      const ripples = heroNeuralCore.querySelectorAll(".holo-resonance-ripple");
+      ripples.forEach((r) => {
+        r.style.animation = "none";
+        void r.offsetWidth;
+        r.style.animation = "";
+      });
+    });
+  }
+
   // Reference Model: Mouse Head Tilt & Gaze Tracking
   window.addEventListener("mousemove", (e) => {
+    if (heroRig && heroNeuralCore && heroNeuralCore.offsetParent !== null) {
+      const rect = heroNeuralCore.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+      const tiltY = Math.max(-20, Math.min(20, (deltaX / 300) * 20));
+      const tiltX = Math.max(-15, Math.min(15, -(deltaY / 300) * 15));
+      heroRig.style.transform = `rotateY(${tiltY}deg) rotateX(${tiltX}deg)`;
+    }
+
     if (!emptyStateBot || emptyStateBot.offsetParent === null) return;
     const rect = emptyStateBot.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -1484,7 +1511,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Theme Toggle
   function toggleTheme() {
     const html = document.documentElement;
-    html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
+    const nextTheme = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    html.setAttribute("data-theme", nextTheme);
+    try { localStorage.setItem("ola_theme", nextTheme); } catch (e) {}
   }
 
   const btnTheme = document.getElementById("theme-toggle-btn");
