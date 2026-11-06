@@ -8,10 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/css/tokens.css?v=36.0">
-  <link rel="stylesheet" href="/static/css/base.css?v=36.0">
-  <link rel="stylesheet" href="/static/css/components.css?v=36.0">
-  <link rel="stylesheet" href="/static/style.css?v=36.0">
+  <link rel="stylesheet" href="/static/css/tokens.css?v=37.0">
+  <link rel="stylesheet" href="/static/css/base.css?v=37.0">
+  <link rel="stylesheet" href="/static/css/components.css?v=37.0">
+  <link rel="stylesheet" href="/static/style.css?v=37.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     (function() {
@@ -243,44 +243,116 @@
 
     <!-- VIEW B: FULL-STAGE TICKET DIRECTORY & TELEMETRY -->
     <section class="directory-stage stage-hidden" id="directory-stage">
-      <div class="dash-inner">
+      <div class="dash-inner wide-dash-inner">
+        <!-- Stage Header & Telemetry Controls -->
         <div class="dash-header">
-          <div>
-            <h2 class="dash-title">Operational Ticket Directory</h2>
-            <p class="dash-subtitle">Real-time telemetry, escalation risk models, and SLA compliance monitoring</p>
+          <div class="dash-title-group">
+            <div class="triage-status-bar">
+              <span class="triage-node-badge">Triage Node v4.8</span>
+              <span class="triage-dot-sep">•</span>
+              <div class="telemetry-bus-indicator">
+                <span class="pulse-beacon-emerald"></span>
+                <span>Real-time Dossier Bus: 60 Records Active</span>
+              </div>
+            </div>
+            <h2 class="dash-title">Ticket Operations &amp; Incident Directory</h2>
+            <p class="dash-subtitle">Live telematics across 60 active dispute dossiers, automated policy triage &amp; escalation scoring with dynamic toll reconciliation engine.</p>
           </div>
-          <button type="button" class="glass-btn" id="refresh-directory-btn">🔄 Refresh Data</button>
+          <div class="dash-header-actions">
+            <button type="button" class="action-btn-gradient" id="batch-triage-btn" title="Batch Auto-Triage across active dossiers">
+              <span>⚡</span> <span>Batch Auto-Triage</span>
+            </button>
+            <button type="button" class="glass-btn" id="export-csv-btn" title="Export CSV Audit of ticket records">
+              <span>📥</span> <span>Export CSV Audit</span>
+            </button>
+            <button type="button" class="stream-sync-pill" id="sync-stream-btn" title="AP-SOUTH-1 Telemetry Stream Status">
+              <span class="sync-dot-live"></span>
+              <span id="sync-stream-label">Stream Synced (60 OK)</span>
+            </button>
+            <button type="button" class="glass-btn" id="refresh-directory-btn" title="Refresh Ticket Records">🔄 Refresh Data</button>
+          </div>
         </div>
 
         <!-- 4 KPI Telemetry Cards -->
         <div class="kpi-grid">
           <div class="kpi-card">
-            <span class="kpi-label">Total Sample Records</span>
-            <span class="kpi-val" id="kpi-total-tickets">60</span>
-            <span class="kpi-sub">Synthetic Seed 42 Corpus</span>
+            <div class="kpi-card-head">
+              <span class="kpi-label">Total Sample Records</span>
+              <span class="kpi-badge-cyan">+4.2% ingress</span>
+            </div>
+            <div class="kpi-card-body">
+              <span class="kpi-val" id="kpi-total-tickets">60</span>
+              <span class="kpi-unit">Synthetic Seed 42 Corpus</span>
+            </div>
+            <div class="kpi-card-sub">
+              <span class="sub-amber">P0/P1: 12</span> • <span class="sub-emerald">P2: 24</span> • <span class="sub-muted">Resolved: 142</span>
+            </div>
+            <div class="kpi-progress-track">
+              <div class="kpi-progress-bar bg-cyan" style="width: 72%;"></div>
+            </div>
           </div>
+
           <div class="kpi-card">
-            <span class="kpi-label">Escalation Rate</span>
-            <span class="kpi-val kpi-val-amber" id="kpi-escalation-rate">20.0%</span>
-            <span class="kpi-sub">12 of 60 tickets flagged</span>
+            <div class="kpi-card-head">
+              <span class="kpi-label">Escalation Rate</span>
+              <span class="kpi-badge-rose">τ = 0.4400</span>
+            </div>
+            <div class="kpi-card-body">
+              <span class="kpi-val kpi-val-amber" id="kpi-escalation-rate">20.0%</span>
+              <span class="kpi-unit">12 of 60 tickets flagged</span>
+            </div>
+            <div class="kpi-card-sub">
+              <span class="sub-muted">Model: Chroma-X v3.1</span> • <span class="sub-rose">12 / 60 Dossiers</span>
+            </div>
+            <div class="kpi-progress-track">
+              <div class="kpi-progress-bar bg-rose" style="width: 20%;"></div>
+            </div>
           </div>
+
           <div class="kpi-card">
-            <span class="kpi-label">Mean Resolution SLA</span>
-            <span class="kpi-val kpi-val-cyan" id="kpi-mean-resolution">11.5h</span>
-            <span class="kpi-sub">Log-normal μ=2.2, σ=0.8</span>
+            <div class="kpi-card-head">
+              <span class="kpi-label">Mean Resolution SLA</span>
+              <span class="kpi-badge-emerald">✓ 92.4% Met</span>
+            </div>
+            <div class="kpi-card-body">
+              <span class="kpi-val kpi-val-cyan" id="kpi-mean-resolution">11.5h</span>
+              <span class="kpi-unit">Log-normal μ=2.2, σ=0.8</span>
+            </div>
+            <div class="kpi-card-sub">
+              <span class="sub-muted">Speed Index: 1.30x</span> • <span class="sub-emerald">-3.5h vs Policy Max</span>
+            </div>
+            <div class="kpi-progress-track">
+              <div class="kpi-progress-bar bg-emerald" style="width: 76%;"></div>
+            </div>
           </div>
+
           <div class="kpi-card">
-            <span class="kpi-label">Escalation Cutoff (τ=0.4400)</span>
-            <span class="kpi-val kpi-val-emerald" id="kpi-risk-threshold">0.4400</span>
-            <span class="kpi-sub">Empirical P80 Ticket Cutoff</span>
+            <div class="kpi-card-head">
+              <span class="kpi-label">Escalation Cutoff (τ=0.4400)</span>
+              <span class="kpi-badge-cyan">AI Adjudicated</span>
+            </div>
+            <div class="kpi-card-body">
+              <span class="kpi-val kpi-val-emerald" id="kpi-risk-threshold">0.4400</span>
+              <span class="kpi-unit">Empirical P80 Ticket Cutoff</span>
+            </div>
+            <div class="kpi-card-sub">
+              <span class="sub-muted">18 Tolls • 31 Waivers</span> • <span class="sub-emerald">0 Demerits</span>
+            </div>
+            <div class="kpi-progress-track">
+              <div class="kpi-progress-bar bg-cyan" style="width: 88%;"></div>
+            </div>
           </div>
         </div>
 
         <!-- Category Spectrum Bar -->
         <div class="spectrum-box">
           <div class="spectrum-header">
-            <strong class="spectrum-title">Category Workload Distribution</strong>
-            <span class="spectrum-sub" id="spectrum-summary">6 Categories</span>
+            <div class="spectrum-header-title">
+              <span class="spectrum-icon">📊</span>
+              <strong class="spectrum-title">Category Workload Distribution</strong>
+              <span class="spectrum-sub" id="spectrum-summary">6 Categories</span>
+            </div>
+            <span class="spectrum-badge">ChromaDB Sync</span>
           </div>
           <div class="spectrum-bar" id="category-spectrum-bar"></div>
           <div class="spectrum-legend" id="category-spectrum-legend"></div>
@@ -312,24 +384,180 @@
           </div>
         </div>
 
-        <!-- Tickets Table Grid -->
-        <div class="grid-table-wrap">
-          <table class="grid-table">
-            <thead>
-              <tr>
-                <th>Ticket ID</th>
-                <th>Category</th>
-                <th>Status</th>
-                <th>SLA Target</th>
-                <th>Escalation Risk</th>
-                <th>Quick Action</th>
-              </tr>
-            </thead>
-            <tbody id="tickets-grid-body">
-              <!-- Populated dynamically via app.js -->
-            </tbody>
-          </table>
+        <!-- MAIN TWO-COLUMN SPLIT: DATA GRID & PINNED INSPECTOR -->
+        <div class="directory-split-grid">
+          <!-- Left Column: High-Density Dispute Dossiers Data Grid -->
+          <div class="directory-table-col">
+            <div class="directory-table-card">
+              <div class="directory-table-banner">
+                <div class="banner-title-wrap">
+                  <span class="live-dot-cyan"></span>
+                  <strong class="banner-title">Live Dossier Telematics</strong>
+                  <span class="banner-tag">Sorted by SLA Urgency</span>
+                </div>
+                <div class="banner-legend">
+                  <span class="legend-chip"><span class="dot-rose"></span>Sev-1 Critical</span>
+                  <span class="legend-chip"><span class="dot-emerald"></span>Auto-Eligible</span>
+                </div>
+              </div>
+
+              <div class="grid-table-wrap">
+                <table class="grid-table">
+                  <thead>
+                    <tr>
+                      <th>Ticket ID</th>
+                      <th>Category</th>
+                      <th>Status</th>
+                      <th>SLA Target</th>
+                      <th>Escalation Risk</th>
+                      <th>Quick Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tickets-grid-body">
+                    <!-- Populated dynamically via app.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: PINNED DISPUTE INSPECTOR & RECEIPT CONTRAST DOCK -->
+          <div class="pinned-inspector-dock">
+            <div class="pinned-inspector-card" id="ticket-detail-card">
+              <div class="inspector-glow-accent"></div>
+              
+              <!-- Inspector Header -->
+              <div class="inspector-head">
+                <div class="inspector-head-left">
+                  <div class="inspector-title-row">
+                    <span class="priority-pill" id="detail-priority-badge">
+                      <span class="priority-ping"></span>
+                      P0 SEV-1
+                    </span>
+                    <strong class="detail-tid" id="detail-ticket-id">TKT-0007</strong>
+                  </div>
+                  <span class="detail-subtitle" id="detail-ticket-title">Fastag Toll Surcharge Conflict</span>
+                </div>
+                <span class="live-inspector-pill">Live Inspector</span>
+              </div>
+
+              <!-- Spatial Mini Telematics Map Visualization -->
+              <div class="telematics-map-box" id="detail-map-viz">
+                <svg class="telematics-svg" viewBox="0 0 400 180" fill="none">
+                  <!-- Animated Route Path -->
+                  <path class="route-pulse-path" d="M 20 150 Q 120 120, 200 80 T 380 30" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"></path>
+                  <!-- Toll Plaza Marker -->
+                  <circle cx="200" cy="80" r="10" fill="rgba(255, 208, 206, 0.25)" stroke="#ffd0ce" stroke-width="2"></circle>
+                  <circle cx="200" cy="80" r="4" fill="#ffb4ab"></circle>
+                  <!-- Driver Origin -->
+                  <circle cx="20" cy="150" r="5" fill="#4edea3"></circle>
+                  <!-- Airport Destination -->
+                  <circle cx="380" cy="30" r="5" fill="#00f2fe"></circle>
+                </svg>
+                <div class="map-hud-top">
+                  <span class="hud-chip-green">
+                    <span class="dot-emerald"></span>
+                    <span id="detail-gps-time">GPS Ping: Live</span>
+                  </span>
+                  <span class="hud-chip-rose" id="detail-toll-plaza">Toll Plaza: Trumpet KA-02</span>
+                </div>
+                <div class="map-hud-bottom">
+                  <div class="hud-coords-box">
+                    <span id="detail-speed-heading">Speed: 74 km/h • Heading: NNE</span>
+                    <span class="reader-id">Fastag Reader ID: NHAI-BLR-0941</span>
+                  </div>
+                  <span class="hud-lat-lon">LAT 13.1986° N • LON 77.7066° E</span>
+                </div>
+              </div>
+
+              <!-- RECEIPT SLIP CONTRAST PLATE (LEVEL 4 HIGH CONTRAST) -->
+              <div class="receipt-slip-plate" id="detail-receipt-slip">
+                <div class="receipt-header">
+                  <div>
+                    <span class="receipt-audit-label">Audit Receipt Slip</span>
+                    <strong class="receipt-crn-label" id="detail-receipt-crn">Ride CRN-890123 • Airport Exp</strong>
+                  </div>
+                  <span class="receipt-verified-badge">Verified Log</span>
+                </div>
+                <div class="receipt-ledger-items">
+                  <div class="ledger-row">
+                    <span>Base Distance Fare (32.4 km)</span>
+                    <strong class="text-slate">₹780.00</strong>
+                  </div>
+                  <div class="ledger-row">
+                    <span>Airport Toll Charge (Billed)</span>
+                    <strong class="text-amber" id="detail-toll-billed">₹140.00</strong>
+                  </div>
+                  <div class="ledger-row">
+                    <span>NHAI Electronic Tag Debit</span>
+                    <strong class="text-emerald" id="detail-toll-debit">₹140.00 (Cashless)</strong>
+                  </div>
+                  <div class="ledger-row">
+                    <span>Dispute Status</span>
+                    <strong class="text-rose" id="detail-dispute-status">Duplicate Surcharge</strong>
+                  </div>
+                </div>
+                <div class="receipt-dashed-sep"></div>
+                <div class="receipt-delta-row">
+                  <div>
+                    <span class="delta-label">Reconciliation Delta</span>
+                    <span class="delta-amt" id="detail-dispute-amt">₹140.00 Refund</span>
+                  </div>
+                  <div class="delta-driver">
+                    <span class="driver-shield-label">Driver Impact</span>
+                    <strong class="driver-shield-val">₹0.00 Demerit Shield</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Rover AI Adjudication Suggestion -->
+              <div class="rover-adjudication-card" id="detail-rover-ai">
+                <span class="rover-ai-icon">🤖</span>
+                <div class="rover-ai-body">
+                  <div class="rover-ai-head">
+                    <strong class="rover-ai-title">Rover Autonomous Recommendation</strong>
+                    <span class="rover-conf-badge">99.4% Confidence</span>
+                  </div>
+                  <p class="rover-ai-text" id="detail-rover-rec">NHAI Fastag API timestamp matches Toll Plaza beacon KA-02 within ±12 seconds. Dual deduction confirmed. Recommend immediate reversal to Ola Money Wallet under Safe-Harbor clause 14B.</p>
+                </div>
+              </div>
+
+              <!-- Action Triggers in Inspector -->
+              <div class="inspector-actions-grid">
+                <button type="button" class="btn-execute-refund" id="detail-approve-refund-btn">
+                  <span>✓</span> <span>Execute ₹140 Refund</span>
+                </button>
+                <button type="button" class="glass-btn btn-ask-chat" id="detail-ask-chat-btn">
+                  <span>💬</span> <span>Ask in Chat ↗</span>
+                </button>
+              </div>
+
+              <!-- Secondary Diagnostics: Telematics Node Health -->
+              <div class="node-health-card">
+                <div class="node-health-head">
+                  <span class="health-label">Fastag Gateway Telemetry</span>
+                  <span class="health-badge">NHAI Live Bridge</span>
+                </div>
+                <div class="node-health-chips">
+                  <div class="health-chip">
+                    <span class="chip-k">API LATENCY</span>
+                    <strong class="chip-v text-emerald">38 ms</strong>
+                  </div>
+                  <div class="health-chip">
+                    <span class="chip-k">MATCH CONF</span>
+                    <strong class="chip-v text-cyan">99.8%</strong>
+                  </div>
+                  <div class="health-chip">
+                    <span class="chip-k">DISPUTE ERR</span>
+                    <strong class="chip-v text-emerald">0.01%</strong>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -619,6 +847,6 @@
     </div>
   </div>
 
-  <script src="/static/app.js?v=36.0"></script>
+  <script src="/static/app.js?v=37.0"></script>
 </body>
 </html>
