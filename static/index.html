@@ -92,13 +92,13 @@
     </div>
 
     <div class="rail-search-wrap">
-      <div class="rail-search-bar hidden-collapsed" id="rail-search-bar" role="button" tabindex="0" title="Quick Search (⌘K)">
-        <div class="rail-search-left">
+      <button type="button" class="rail-search-bar hidden-collapsed" id="rail-search-bar" title="Quick Search (⌘K)" aria-label="Quick Search (⌘K)">
+        <span class="rail-search-left">
           <span class="rail-search-icon">🔍</span>
           <span class="rail-search-text">Quick Search</span>
-        </div>
+        </span>
         <span class="rail-kbd-badge">⌘K</span>
-      </div>
+      </button>
       <button type="button" class="rail-btn rail-search-mini" id="rail-search-mini" title="Quick Search (⌘K)" aria-label="Quick Search">
         <svg class="rail-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       </button>
@@ -190,7 +190,7 @@
           <div class="hero-threejs-wrap" id="threejs-hero-wrap">
             <div id="threejs-container-ANIMATION_34" class="threejs-container"></div>
             <!-- Fallback CSS 3D rig -->
-            <div class="neural-core-stage hero-neural-core-stage" id="hero-neural-core" style="display:none;" role="img" aria-label="3D Holographic Neural Core">
+            <div class="neural-core-stage hero-neural-core-stage" id="hero-neural-core" role="img" aria-label="3D Holographic Neural Core">
               <div class="neural-hologram-viewport">
                 <div class="holo-ripple-container">
                   <div class="holo-resonance-ripple ripple-1"></div>
@@ -352,7 +352,7 @@
     </section>
 
     <!-- COLLAPSIBLE SETTINGS & Admin DRAWER -->
-    <aside class="settings-drawer" id="settings-drawer">
+    <aside class="settings-drawer" id="settings-drawer" aria-label="System Settings and Governance">
       <div class="drawer-header">
         <span>⚙️ System Settings &amp; Governance</span>
         <button type="button" class="glass-btn btn-compact" id="close-drawer-btn">✕</button>
@@ -405,7 +405,7 @@
   </div>
 
   <!-- 4. FLOATING BOTTOM COMPOSER DOCK WITH COLLAPSIBLE HELP DESK POPOVER (from @ui) -->
-  <footer class="composer-dock" id="composer-dock">
+  <footer class="composer-dock" id="composer-dock" aria-label="Message Composer">
     <div class="composer-dock-border-wrap">
       <div class="composer-dock-inner">
 
