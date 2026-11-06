@@ -59,62 +59,41 @@
 
         <!-- MINIMAL EMPTY STATE (HIDDEN ONCE FIRST MESSAGE IS SENT) -->
         <section class="chat-empty-state" id="chat-empty-state">
-          <!-- Interactive Speech Bubble Greeting (Pic 2 Design) -->
-          <button type="button" class="bot-speech-bubble" id="bot-speech-bubble" title="Tap me to say hello &amp; explore Help Desk!" aria-label="Interactive AI Assistant">
-            <span class="bot-greeting-text" id="bot-greeting-text">👋 Hello! Tap me to say hi! ✨</span>
-          </button>
-
-          <!-- Futuristic 3D Holographic Neural Core Hero Rig -->
-          <div class="neural-core-stage hero-neural-core-stage" id="hero-neural-core" role="img" aria-label="3D Holographic Neural Core">
-            <div class="neural-hologram-viewport">
-              <!-- Concentric Soundwave Resonance Ripples -->
-              <div class="holo-ripple-container">
-                <div class="holo-resonance-ripple ripple-1"></div>
-                <div class="holo-resonance-ripple ripple-2"></div>
-                <div class="holo-resonance-ripple ripple-3"></div>
-              </div>
-
-              <!-- 3D Gyroscopic Floating Neural Rig -->
-              <div class="neural-gyroscopic-rig">
-                <!-- 3-Axis Gyroscopic Gimbal Rings -->
-                <div class="gyro-ring ring-x">
-                  <div class="energy-node node-1"></div>
-                  <div class="energy-node node-2"></div>
-                </div>
-                <div class="gyro-ring ring-y">
-                  <div class="energy-node node-3"></div>
-                  <div class="energy-node node-4"></div>
-                </div>
-                <div class="gyro-ring ring-z">
-                  <div class="energy-node node-5"></div>
-                </div>
-
-                <!-- Central Fluid Plasma Neural Core -->
-                <div class="neural-plasma-sphere">
-                  <div class="plasma-fluid-mesh"></div>
-                  <div class="neural-nucleus"></div>
-                  <div class="specular-glint"></div>
-                  <div class="specular-glint-secondary"></div>
-                </div>
-
-                <!-- Quantum Energy Particle Halo -->
-                <div class="quantum-particle-field">
-                  <div class="q-spark s-1"></div>
-                  <div class="q-spark s-2"></div>
-                  <div class="q-spark s-3"></div>
-                  <div class="q-spark s-4"></div>
-                  <div class="q-spark s-5"></div>
-                  <div class="q-spark s-6"></div>
-                </div>
-              </div>
-
-              <!-- Ambient Occlusion / Floor Energy Cast -->
-              <div class="neural-stage-shadow"></div>
+          <div class="empty-bot-wrap" id="empty-state-bot" title="Click me to say hello &amp; explore Help Desk!" role="button" tabindex="0" aria-label="Interactive AI Assistant">
+            <div class="bot-speech-bubble" id="bot-speech-bubble">
+              <span class="bot-greeting-text" id="bot-greeting-text">👋 Hello! Tap me to say hi! ✨</span>
             </div>
+
+            <div class="bot-full-character">
+              <div class="bot-antenna-group">
+                <div class="bot-antenna-mast"></div>
+                <div class="bot-antenna-beacon"></div>
+              </div>
+              <div class="bot-head-box">
+                <div class="bot-face-screen">
+                  <span class="bot-eye left"></span>
+                  <span class="bot-eye right"></span>
+                  <span class="bot-blush left"></span>
+                  <span class="bot-blush right"></span>
+                  <div class="bot-smile"></div>
+                </div>
+              </div>
+              <div class="bot-torso-row">
+                <div class="bot-arm arm-left">
+                  <div class="bot-hand hand-left"></div>
+                </div>
+                <div class="bot-torso-plate">
+                  <div class="bot-core-light"></div>
+                </div>
+                <div class="bot-arm arm-right arm-waving">
+                  <div class="bot-hand hand-right"></div>
+                </div>
+              </div>
+            </div>
+            <div class="bot-pulse-ring"></div>
           </div>
           <h1 class="empty-title">How can I help?</h1>
           <p class="empty-subtitle">Ask any official ride policy question or enter a ticket ID to inspect.</p>
-
         </section>
 
         <!-- ACTIVE CONVERSATION STREAM -->
