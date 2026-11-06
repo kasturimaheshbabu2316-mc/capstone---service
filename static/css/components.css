@@ -8,8 +8,8 @@
    ------------------------------------------------------------------------------ */
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-card);
   box-shadow: var(--glass-shadow);
@@ -53,8 +53,8 @@
   height: var(--header-height);
   border-bottom: 1px solid var(--glass-border);
   background: var(--glass-nav-bg);
-  backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -383,8 +383,8 @@
   max-width: min(85%, 54ch);
   background: var(--color-chip-user);
   border: 1px solid var(--color-chip-user-border);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   color: var(--color-chip-user-ink);
   padding: 12px 18px;
   border-radius: 16px 16px 4px 16px;
@@ -536,8 +536,8 @@
 
 .ticket-stub {
   background: var(--glass-bg);
-  backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-card) var(--radius-card) 0 0;
   padding: var(--space-lg);
@@ -752,8 +752,8 @@
    ------------------------------------------------------------------------------ */
 .alert-slip {
   background: var(--color-blocked-bg);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border: 1px solid var(--color-blocked-border);
   border-radius: var(--radius-card);
   padding: var(--space-md) var(--space-lg);
@@ -827,8 +827,8 @@
   left: 0;
   right: 0;
   background: var(--glass-composer-bg);
-  backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
   border-top: 1px solid var(--glass-border);
   padding: var(--space-sm) var(--space-md);
   display: flex;
@@ -950,8 +950,8 @@
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   z-index: 50;
   opacity: 0;
   pointer-events: none;
@@ -971,8 +971,8 @@
   width: 100%;
   max-width: 460px;
   background: var(--glass-drawer-bg);
-  backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
   border-left: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow-lg);
   z-index: 60;
@@ -1036,11 +1036,11 @@
   border-bottom: 1px solid var(--glass-border);
   overflow-x: auto;
   white-space: nowrap;
+  -ms-overflow-style: none;
   scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
   background: rgba(255, 255, 255, 0.02);
-  mask-image: linear-gradient(to right, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
   padding: 0 4px;
 }
 
