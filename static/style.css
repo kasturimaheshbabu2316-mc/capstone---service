@@ -448,18 +448,21 @@ body {
 
 .composer-row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
+  width: 100%;
 }
 
 .composer-input {
   flex: 1;
+  width: 100%;
+  min-width: 0;
   background: transparent;
   border: none;
   color: var(--text-primary);
   font-size: 0.95rem;
   outline: none;
-  padding: 6px 4px;
+  padding: 8px 12px;
 }
 
 .composer-input::placeholder {

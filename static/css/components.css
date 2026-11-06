@@ -847,18 +847,10 @@
 
 .composer-row {
   display: flex;
-  align-items: flex-end;
-  gap: var(--space-xs);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-interactive);
-  padding: 6px 8px 6px 14px;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
   transition: all 150ms ease;
-}
-
-.composer-row:focus-within {
-  border-color: var(--color-highlight-border);
-  box-shadow: 0 0 0 2px var(--color-highlight-bg);
 }
 
 .composer-textarea {
