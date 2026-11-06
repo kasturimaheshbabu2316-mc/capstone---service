@@ -66,24 +66,39 @@ function getMascotSvgMarkup() {
         <circle class="ai-chest-core" cx="80" cy="95" r="5.5" filter="url(#neonBloom)"/>
         <circle class="ai-chest-core-inner" cx="80" cy="95" r="2.5" fill="#ffffff"/>
 
-        <!-- Left Arm & Hand -->
+        <!-- Left Arm & Hand (Holding Book / Steady) -->
         <g class="ai-arm-left">
           <path class="ai-arm-limb-l" d="M62 86 L48 96 L58 106" stroke-width="3.2" stroke-linecap="round" fill="none"/>
           <circle class="ai-hand-dot-l" cx="58" cy="106" r="3.5"/>
         </g>
 
-        <!-- Right Arm & Hand -->
+        <!-- Right Arm & Hand (Holding Book - Default/Reading) -->
         <g class="ai-arm-right">
           <path class="ai-arm-limb-r" d="M98 86 L112 96 L104 106" stroke-width="3.2" stroke-linecap="round" fill="none"/>
           <circle class="ai-hand-dot-r" cx="104" cy="106" r="3.5"/>
         </g>
 
-        <!-- Holographic Open Book (Active in thinking state) -->
+        <!-- Right Arm Victory Thumbs-Up (Eureka / Success state) -->
+        <g class="ai-arm-victory">
+          <path class="ai-arm-limb-victory" d="M98 86 L114 74 L118 60" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+          <circle class="ai-hand-victory-dot" cx="118" cy="58" r="4.2" filter="url(#neonBloom)"/>
+          <path class="ai-victory-thumb" d="M118 58 L122 51 L120 46" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+          <circle class="ai-victory-badge" cx="120" cy="46" r="2.5" fill="#10b981" filter="url(#neonBloom)"/>
+        </g>
+
+        <!-- Holographic Open Book (Active in searching state) -->
         <g class="ai-holo-book">
           <path class="holo-book-cover" d="M60 106 Q80 112 100 106 L102 120 Q80 126 58 120 Z" stroke-width="2"/>
           <path class="holo-book-pages-l" d="M80 108 L60 106 L59 119 L80 122 Z"/>
           <path class="holo-book-pages-r" d="M80 108 L100 106 L101 119 L80 122 Z"/>
+          <!-- Faint holographic text lines inside book -->
+          <line class="holo-book-line" x1="64" y1="110" x2="76" y2="111" stroke-width="1.2" opacity="0.6"/>
+          <line class="holo-book-line" x1="64" y1="114" x2="74" y2="115" stroke-width="1.2" opacity="0.6"/>
+          <line class="holo-book-line" x1="84" y1="111" x2="96" y2="110" stroke-width="1.2" opacity="0.6"/>
+          <line class="holo-book-line" x1="84" y1="115" x2="94" y2="114" stroke-width="1.2" opacity="0.6"/>
+          <!-- Scanning Laser and Optical Beam Cone -->
           <line class="holo-scan-laser" x1="58" y1="110" x2="102" y2="110" stroke-width="2.2" filter="url(#neonBloom)"/>
+          <polygon class="holo-scan-cone" points="60,110 100,110 88,86 72,86" fill="rgba(0, 242, 254, 0.12)" opacity="0"/>
         </g>
 
         <!-- Head Unit -->
@@ -91,6 +106,20 @@ function getMascotSvgMarkup() {
           <!-- Antenna with Glowing Beacon -->
           <line class="ai-antenna-mast" x1="80" y1="36" x2="80" y2="47" stroke-width="2.8" stroke-linecap="round"/>
           <circle class="ai-antenna-beacon" cx="80" cy="33" r="4.5" filter="url(#neonBloom)"/>
+
+          <!-- Curious Inquiry Beacon (Phase 1) -->
+          <g class="ai-curious-beacon">
+            <circle cx="94" cy="26" r="6" fill="rgba(0, 242, 254, 0.2)" stroke="#00f2fe" stroke-width="1.5"/>
+            <text x="94" y="29.5" font-size="8" font-weight="900" text-anchor="middle" fill="#00f2fe">?</text>
+          </g>
+
+          <!-- Eureka Radiance Sparkles (Phase 3) -->
+          <g class="ai-eureka-sparkles">
+            <path d="M46 36 L49 42 L55 45 L49 48 L46 54 L43 48 L37 45 L43 42 Z" fill="#fbbf24" filter="url(#neonBloom)" class="sparkle-star s1"/>
+            <path d="M116 32 L118 36 L122 38 L118 40 L116 44 L114 40 L110 38 L114 36 Z" fill="#10b981" filter="url(#neonBloom)" class="sparkle-star s2"/>
+            <circle cx="106" cy="24" r="2" fill="#00f2fe" filter="url(#neonBloom)"/>
+            <circle cx="54" cy="28" r="2.2" fill="#fbbf24" filter="url(#neonBloom)"/>
+          </g>
 
           <!-- Helmet Box -->
           <rect class="ai-head-helmet" x="55" y="46" width="50" height="36" rx="13" stroke-width="2.2"/>
@@ -100,7 +129,10 @@ function getMascotSvgMarkup() {
           <!-- Face Screen & Visor -->
           <rect class="ai-visor-screen" x="61" y="52" width="38" height="24" rx="7"/>
 
-          <!-- Expressive Glowing Eyes -->
+          <!-- Curious Brow (Phase 1) -->
+          <path class="ai-brow-curious" d="M66 55 Q71 51 77 54" stroke="#00f2fe" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+          <!-- Expressive Glowing Eyes (Thinking & Scanning) -->
           <g class="ai-eyes-group">
             <rect class="ai-eye-left" x="67" y="58" width="8.5" height="10" rx="4.2" filter="url(#neonBloom)"/>
             <rect class="ai-eye-right" x="84.5" y="58" width="8.5" height="10" rx="4.2" filter="url(#neonBloom)"/>
@@ -108,12 +140,23 @@ function getMascotSvgMarkup() {
             <circle class="ai-pupil-right" cx="89" cy="62" r="1.8" fill="#ffffff"/>
           </g>
 
+          <!-- Happy Crescent Eyes (Phase 3 Eureka Celebration) -->
+          <g class="ai-eyes-happy">
+            <path class="ai-eye-happy-l" d="M66 65 Q71.2 58 76.5 65" stroke="#00f2fe" stroke-width="2.6" stroke-linecap="round" fill="none" filter="url(#neonBloom)"/>
+            <path class="ai-eye-happy-r" d="M83.5 65 Q88.8 58 94 65" stroke="#00f2fe" stroke-width="2.6" stroke-linecap="round" fill="none" filter="url(#neonBloom)"/>
+          </g>
+
           <!-- Rosy Cheeks -->
           <ellipse class="ai-blush-left" cx="66" cy="71" rx="3" ry="1.6"/>
           <ellipse class="ai-blush-right" cx="94" cy="71" rx="3" ry="1.6"/>
 
-          <!-- Mouth / Smile -->
+          <!-- Mouth Variations -->
+          <!-- Regular Smile -->
           <path class="ai-mouth-curve" d="M75 70 Q80 74 85 70" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+          <!-- Curious Mouth (Phase 1) -->
+          <ellipse class="ai-mouth-curious" cx="80" cy="71" rx="2.5" ry="3.2" stroke-width="2" stroke="#00f2fe" fill="none"/>
+          <!-- Happy Wide Smile (Phase 3) -->
+          <path class="ai-mouth-happy" d="M74 69 Q80 77 86 69 Z" fill="#00f2fe" filter="url(#neonBloom)"/>
         </g>
       </g>
 
@@ -127,8 +170,10 @@ function getMascotSvgMarkup() {
 
         <!-- Body -->
         <ellipse class="sparky-body-shape" cx="178" cy="106" rx="19" ry="15" stroke-width="2.2"/>
-        <rect class="sparky-paws-l" x="166" y="115" width="8" height="12" rx="4"/>
-        <rect class="sparky-paws-r" x="182" y="115" width="8" height="12" rx="4"/>
+        <g class="sparky-paws-group">
+          <rect class="sparky-paws-l" x="166" y="115" width="8" height="12" rx="4"/>
+          <rect class="sparky-paws-r" x="182" y="115" width="8" height="12" rx="4"/>
+        </g>
 
         <!-- Collar & Charm -->
         <path class="sparky-collar" d="M168 90 Q178 96 188 90" stroke-width="2.6" fill="none"/>
@@ -237,7 +282,7 @@ function attachMascotPointerParallax(stageEl) {
 
 function createAgentDogLoadingCard() {
   return `
-    <div class="mascot-stage mascot-loading-card" id="agent-loading-card" data-state="thinking" role="status" aria-live="polite">
+    <div class="mascot-stage mascot-loading-card" id="agent-loading-card" data-state="curious" role="status" aria-live="polite">
       <div class="agent-phase-pill-3d" id="agent-phase-pill">
         <span class="phase-icon" id="agent-phase-icon">💭</span>
         <span class="phase-text" id="agent-phase-text">Analyzing your inquiry...</span>
@@ -252,28 +297,98 @@ function createAgentDogLoadingCard() {
 
 function createAgentDogSpeakingAvatar() {
   return `
-    <div class="chat-avatar-chip" title="Ola Support Assistant (AI &amp; Sparky 🐾)" aria-hidden="true">
-      <svg class="chip-avatar-svg" viewBox="0 0 54 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="20" cy="24" r="18" class="chip-halo-glow"/>
-        <!-- Robot ("Sparks") -->
-        <line x1="20" y1="6" x2="20" y2="12" stroke-width="2" stroke-linecap="round" class="chip-antenna-stem"/>
-        <circle cx="20" cy="5" r="2.8" class="chip-antenna-orb"/>
-        <rect x="9" y="12" width="22" height="18" rx="6" class="chip-robot-helm"/>
-        <rect x="12" y="15" width="16" height="11" rx="3" class="chip-visor"/>
-        <rect x="14" y="17.5" width="3.5" height="5" rx="1.6" class="chip-eye left"/>
-        <rect x="22.5" y="17.5" width="3.5" height="5" rx="1.6" class="chip-eye right"/>
-        <path d="M17 23.5 Q20 25.5 23 23.5" stroke-width="1.6" stroke-linecap="round" fill="none" class="chip-smile"/>
-        <!-- Companion Dog ("Sparky") -->
-        <ellipse cx="40" cy="28" rx="10" ry="8" class="chip-dog-body"/>
-        <circle cx="39" cy="20" r="7" class="chip-dog-head"/>
-        <path d="M34 16 L31 10 L37 13 Z" class="chip-dog-ear left"/>
-        <path d="M42 16 L46 10 L41 13 Z" class="chip-dog-ear right"/>
-        <circle cx="37" cy="19" r="1.2" class="chip-dog-eye"/>
-        <circle cx="41" cy="19" r="1.2" class="chip-dog-eye"/>
-        <circle cx="39" cy="22" r="1" class="chip-dog-nose"/>
-        <path d="M48 27 Q53 23 51 18" stroke-width="2.2" stroke-linecap="round" fill="none" class="chip-dog-tail"/>
+    <div class="chat-avatar-chip duo-speaking-avatar" title="Ola Support Assistant (AI &amp; Sparky 🐾)" aria-hidden="true">
+      <svg class="chip-avatar-svg" viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="chipGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1.8" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- Ground Ambient Shadow -->
+        <ellipse cx="80" cy="94" rx="68" ry="5.5" class="chip-ground-shadow"/>
+
+        <!-- Left Character: AI Robot ("Spark") -->
+        <g class="chip-spark-group">
+          <!-- Thruster Glow -->
+          <ellipse cx="46" cy="85" rx="14" ry="3.5" class="chip-ai-thruster"/>
+          <!-- Torso -->
+          <rect x="32" y="58" width="28" height="24" rx="8" class="chip-ai-torso"/>
+          <circle cx="46" cy="70" r="4.5" class="chip-ai-core" filter="url(#chipGlow)"/>
+          <circle cx="46" cy="70" r="1.8" fill="#ffffff"/>
+          <!-- Left Arm & Hand -->
+          <g class="chip-ai-limb-l">
+            <path d="M32 63 L22 70 L26 77" stroke-width="2.6" stroke-linecap="round" fill="none" class="chip-ai-limb"/>
+            <circle cx="26" cy="77" r="2.8" class="chip-ai-hand"/>
+          </g>
+          <!-- Right Arm: Welcoming Wave -->
+          <g class="chip-ai-wave-arm">
+            <path d="M60 63 L70 55 L68 45" stroke-width="2.6" stroke-linecap="round" fill="none" class="chip-ai-limb"/>
+            <circle cx="68" cy="44" r="3" class="chip-ai-hand" filter="url(#chipGlow)"/>
+          </g>
+          <!-- Head Unit -->
+          <g class="chip-ai-head">
+            <line x1="46" y1="23" x2="46" y2="31" stroke-width="2.2" stroke-linecap="round" class="chip-ai-antenna"/>
+            <circle cx="46" cy="21" r="3.8" class="chip-ai-orb" filter="url(#chipGlow)"/>
+            <!-- Helmet -->
+            <rect x="25" y="30" width="42" height="30" rx="10" stroke-width="1.8" class="chip-ai-helmet"/>
+            <rect x="30" y="35" width="32" height="20" rx="6" class="chip-ai-screen"/>
+            <!-- Expressive Glowing Eyes -->
+            <rect x="35" y="40" width="6.5" height="8" rx="3.2" class="chip-ai-eye left" filter="url(#chipGlow)"/>
+            <rect x="48.5" y="40" width="6.5" height="8" rx="3.2" class="chip-ai-eye right" filter="url(#chipGlow)"/>
+            <circle cx="38" cy="43" r="1.4" fill="#ffffff"/>
+            <circle cx="52" cy="43" r="1.4" fill="#ffffff"/>
+            <!-- Rosy Blushes -->
+            <ellipse cx="34" cy="51" rx="2.5" ry="1.3" class="chip-ai-blush"/>
+            <ellipse cx="58" cy="51" rx="2.5" ry="1.3" class="chip-ai-blush"/>
+            <!-- Happy Smile -->
+            <path d="M42 49 Q46 53 50 49" stroke-width="1.8" stroke-linecap="round" fill="none" class="chip-ai-smile"/>
+          </g>
+        </g>
+
+        <!-- Right Character: Cyber Companion Dog ("Sparky") -->
+        <g class="chip-dog-group">
+          <!-- Bushy Wagging Tail -->
+          <g class="chip-dog-tail-rig">
+            <path d="M129 74 Q146 65 142 53 Q135 44 129 54" stroke-width="3" stroke-linecap="round" fill="none" class="chip-dog-tail" filter="url(#chipGlow)"/>
+            <circle cx="142" cy="53" r="2.8" class="chip-dog-tail-tip" filter="url(#chipGlow)"/>
+          </g>
+          <!-- Body -->
+          <ellipse cx="118" cy="74" rx="16" ry="13" stroke-width="1.8" class="chip-dog-torso"/>
+          <rect x="108" y="82" width="6.5" height="10" rx="3" class="chip-dog-paw"/>
+          <rect x="121" y="82" width="6.5" height="10" rx="3" class="chip-dog-paw"/>
+          <!-- Collar & Tag -->
+          <path d="M109 63 Q118 68 127 63" stroke-width="2.2" fill="none" class="chip-dog-collar"/>
+          <circle cx="118" cy="68" r="2.5" class="chip-dog-tag" filter="url(#chipGlow)"/>
+          <!-- Head Unit -->
+          <g class="chip-dog-head">
+            <!-- Ears -->
+            <path d="M108 51 Q99 38 107 33 Q114 38 112 49" stroke-width="1.6" class="chip-dog-ear left" filter="url(#chipGlow)"/>
+            <path d="M128 51 Q137 38 129 33 Q122 38 124 49" stroke-width="1.6" class="chip-dog-ear right" filter="url(#chipGlow)"/>
+            <!-- Face Sphere -->
+            <circle cx="118" cy="55" r="14" stroke-width="1.8" class="chip-dog-face" filter="url(#chipGlow)"/>
+            <!-- Big Loving Eyes -->
+            <ellipse cx="113" cy="53" rx="3" ry="3.8" fill="#ffffff"/>
+            <circle cx="113.5" cy="52.5" r="1.8" class="chip-dog-pupil"/>
+            <circle cx="115" cy="51" r="0.9" fill="#ffffff"/>
+            <ellipse cx="123" cy="53" rx="3" ry="3.8" fill="#ffffff"/>
+            <circle cx="122.5" cy="52.5" r="1.8" class="chip-dog-pupil"/>
+            <circle cx="124" cy="51" r="0.9" fill="#ffffff"/>
+            <!-- Snout, Nose & Pink Tongue -->
+            <ellipse cx="118" cy="60" rx="4.8" ry="3.2" class="chip-dog-snout"/>
+            <polygon points="116.5,59 119.5,59 118,61.2" class="chip-dog-nose"/>
+            <path d="M116.8 61.5 Q118 65 119.2 61.5" stroke="#ff477e" stroke-width="1.8" fill="#ff477e" stroke-linecap="round"/>
+          </g>
+        </g>
       </svg>
-      <span class="avatar-tag-label">AI &amp; Sparky 🐾</span>
+      <div class="duo-avatar-badge">
+        <span class="duo-badge-dot"></span>
+        <span class="duo-badge-label">AI &amp; Sparky 🐾</span>
+      </div>
     </div>
   `;
 }
@@ -824,6 +939,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       // Phase 1: Thinking Suspense (1.8s) - Single 💭 icon, clean text
+      if (mascotCard) mascotCard.setAttribute("data-state", "curious");
       if (pText && pIcon) {
         pIcon.textContent = "💭";
         pText.textContent = "Analyzing your inquiry...";
@@ -832,6 +948,7 @@ document.addEventListener("DOMContentLoaded", () => {
       await sleep(1800);
 
       // Phase 2: Searching in Books (2.0s) - Single 🔍 icon, clean text without duplicate emojis
+      if (mascotCard) mascotCard.setAttribute("data-state", "searching");
       if (pText && pIcon) {
         pIcon.textContent = "🔍";
         pText.textContent = "Searching policy manuals & ticket database...";
@@ -849,6 +966,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Phase 3: Happily Found Eureka Celebration (1.0s) - Single ✨ icon, clean text
+      if (mascotCard) mascotCard.setAttribute("data-state", "success");
       if (pText && pIcon) {
         pIcon.textContent = "✨";
         pText.textContent = "Found the exact policy match!";

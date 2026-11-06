@@ -2459,6 +2459,271 @@ body.show-details .meta-footer,
 }
 
 /* ==============================================================================
+   Mascot Rig Interactive States: Curious, Searching (Book Scan & Roaming Dog), Success (Eureka Celebration)
+   ============================================================================== */
+
+/* Base visibility defaults for state elements */
+.ai-curious-beacon {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.ai-brow-curious {
+  opacity: 0;
+  transform-origin: 71px 53px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.ai-mouth-curious {
+  opacity: 0;
+  transform-origin: 80px 71px;
+  transition: opacity 0.3s ease;
+}
+
+.ai-eyes-happy {
+  opacity: 0;
+  transform-origin: 80px 65px;
+  transition: opacity 0.3s ease;
+}
+
+.ai-mouth-happy {
+  opacity: 0;
+  transform-origin: 80px 71px;
+  transition: opacity 0.3s ease;
+}
+
+.ai-arm-victory {
+  display: none;
+}
+
+.ai-eureka-sparkles {
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: 80px 45px;
+}
+
+.holo-scan-cone {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 1. STATE: CURIOUS (Phase 1: "Analyzing your inquiry...") */
+[data-state="curious"] .ai-head-unit {
+  transform: rotateZ(-8deg) translateY(-2px);
+  transform-origin: 80px 75px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-state="curious"] .ai-brow-curious {
+  opacity: 1;
+  transform: translateY(-2px) rotate(-4deg);
+}
+
+[data-state="curious"] .ai-mouth-curve {
+  opacity: 0;
+}
+
+[data-state="curious"] .ai-mouth-curious {
+  opacity: 1;
+}
+
+[data-state="curious"] .ai-curious-beacon {
+  opacity: 1;
+  animation: curiousBeaconPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes curiousBeaconPulse {
+  0%   { transform: translateY(0px) scale(0.95); opacity: 0.75; }
+  100% { transform: translateY(-4px) scale(1.12); opacity: 1; }
+}
+
+[data-state="curious"] .character-sparky-group {
+  animation: sparkyCuriousCock 1.8s ease-in-out infinite alternate;
+  transform-origin: 178px 106px;
+}
+
+@keyframes sparkyCuriousCock {
+  0%   { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
+}
+
+/* 2. STATE: SEARCHING (Phase 2: "Searching policy manuals & ticket database...") */
+/* Spark visibly tilts head down into the open book */
+[data-state="searching"] .ai-head-unit {
+  transform: rotateX(15deg) translateY(7px) rotateZ(2deg);
+  transform-origin: 80px 75px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Pupils / glowing eyes look down directly into book pages */
+[data-state="searching"] .ai-eyes-group {
+  transform: translateY(4.5px) scaleY(0.85);
+  transform-origin: 80px 65px;
+  transition: transform 0.3s ease;
+}
+
+[data-state="searching"] .ai-holo-book {
+  filter: drop-shadow(0 0 14px rgba(0, 242, 254, 0.75));
+}
+
+[data-state="searching"] .holo-scan-cone {
+  opacity: 1;
+  animation: holoOpticalCone 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes holoOpticalCone {
+  0%   { opacity: 0.15; }
+  100% { opacity: 0.45; }
+}
+
+[data-state="searching"] .holo-scan-laser {
+  animation: laserScanFast 0.75s ease-in-out infinite alternate;
+}
+
+@keyframes laserScanFast {
+  0%   { transform: translateY(-5px); opacity: 0.7; }
+  100% { transform: translateY(6px); opacity: 1; }
+}
+
+/* Dog Roaming around the AI Mascot in 3D Orbital Patrol */
+[data-state="searching"] .character-sparky-group {
+  animation: dogRoamAroundTheAI 3.6s ease-in-out infinite;
+  transform-origin: 178px 106px;
+}
+
+[data-state="searching"] .sparky-paws-l {
+  animation: dogPawStrideL 0.28s infinite alternate;
+}
+
+[data-state="searching"] .sparky-paws-r {
+  animation: dogPawStrideR 0.28s infinite alternate;
+}
+
+[data-state="searching"] .sparky-mag-glass {
+  animation: magGlassGroundInspect 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes dogRoamAroundTheAI {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 1;
+  }
+  24% {
+    transform: translate(-45px, 14px) scale(1.08);
+    opacity: 1;
+  }
+  48% {
+    transform: translate(-124px, 5px) scaleX(-1) scale(1.02);
+    opacity: 1;
+  }
+  52% {
+    transform: translate(-124px, -4px) scaleX(-1) scale(0.96);
+    opacity: 0.95;
+  }
+  75% {
+    transform: translate(-80px, -16px) scaleX(-1) scale(0.85);
+    opacity: 0.88;
+  }
+  88% {
+    transform: translate(-25px, -10px) scale(0.92);
+    opacity: 0.94;
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dogPawStrideL {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+@keyframes dogPawStrideR {
+  0%   { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes magGlassGroundInspect {
+  0%   { transform: rotate(-20deg) translateY(4px); }
+  100% { transform: rotate(18deg) translateY(6px); }
+}
+
+/* 3. STATE: SUCCESS (Phase 3: "Found the exact policy match!") */
+[data-state="success"] .ai-head-unit {
+  transform: translateY(-5px);
+  animation: eurekaHeadCheer 0.6s ease-in-out infinite alternate;
+  transform-origin: 80px 75px;
+}
+
+@keyframes eurekaHeadCheer {
+  0%   { transform: translateY(-4px) rotate(0deg); }
+  100% { transform: translateY(-8px) rotate(2deg); }
+}
+
+[data-state="success"] .ai-eyes-group {
+  opacity: 0;
+}
+
+[data-state="success"] .ai-eyes-happy {
+  opacity: 1;
+}
+
+[data-state="success"] .ai-mouth-curve {
+  opacity: 0;
+}
+
+[data-state="success"] .ai-mouth-happy {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+[data-state="success"] .ai-arm-right {
+  display: none;
+}
+
+[data-state="success"] .ai-arm-victory {
+  display: block;
+  animation: victoryThumbsUpWave 0.7s ease-in-out infinite alternate;
+  transform-origin: 98px 86px;
+}
+
+@keyframes victoryThumbsUpWave {
+  0%   { transform: rotate(-6deg); }
+  100% { transform: rotate(14deg); }
+}
+
+[data-state="success"] .ai-eureka-sparkles {
+  opacity: 1;
+  animation: eurekaRadianceSparkle 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes eurekaRadianceSparkle {
+  0%   { transform: scale(0.9) rotate(-4deg); opacity: 0.8; }
+  100% { transform: scale(1.18) rotate(8deg); opacity: 1; }
+}
+
+[data-state="success"] .character-sparky-group {
+  animation: dogEurekaJoyHop 0.42s ease-in-out infinite alternate;
+  transform-origin: 178px 106px;
+}
+
+@keyframes dogEurekaJoyHop {
+  0%   { transform: translateY(0) scaleY(1); }
+  100% { transform: translateY(-10px) scaleY(1.06); }
+}
+
+[data-state="success"] .sparky-tail-rig {
+  animation: tailWagExcited 0.22s infinite alternate;
+}
+
+@keyframes tailWagExcited {
+  0%   { transform: rotate(-22deg); }
+  100% { transform: rotate(26deg); }
+}
+
+/* ==============================================================================
    Futuristic 3D Holographic Neural Core & Fluid Synaptic Sphere (Jarvis / Apple Intelligence Style)
    ============================================================================== */
 
