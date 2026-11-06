@@ -1271,6 +1271,7 @@ body {
 .hero-neural-core-stage {
   margin-bottom: 6px;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   transform: scale(0.96);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
