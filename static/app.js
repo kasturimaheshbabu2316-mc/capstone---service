@@ -608,12 +608,11 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) {}
   }
 
-  // AI Animated Companion Bot Interaction & Emoji Greetings (Pic 2 Design)
-  const emptyStateBot = document.getElementById("empty-state-bot");
-  const botGreetingText = document.getElementById("bot-greeting-text");
+  // 3D Holographic Neural Core Hero Rig & Speech Bubble Interaction
+  const heroNeuralCore = document.getElementById("hero-neural-core");
+  const heroRig = heroNeuralCore ? heroNeuralCore.querySelector(".neural-gyroscopic-rig") : null;
   const botSpeechBubble = document.getElementById("bot-speech-bubble");
-  const botHeadBox = emptyStateBot ? emptyStateBot.querySelector(".bot-head-box") : null;
-  const botEyes = emptyStateBot ? emptyStateBot.querySelectorAll(".bot-eye") : [];
+  const botGreetingText = document.getElementById("bot-greeting-text");
   const GREETINGS = [
     "👋 Hello! Tap me to say hi! ✨",
     "✨ Hi there! Welcome to Ola Support Desk!",
@@ -625,24 +624,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   let greetingIdx = 0;
 
-  function spawnBotEmojiBurst(x, y) {
-    if (!emptyStateBot) return;
-    const emojis = ["✨", "👋", "🚕", "💖", "⭐", "🎉", "⚡", "🤖"];
-    for (let i = 0; i < 4; i++) {
-      const span = document.createElement("span");
-      span.className = "floating-emoji";
-      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      const dx = (Math.random() - 0.5) * 80;
-      const dy = -(35 + Math.random() * 45);
-      span.style.setProperty("--dx", `${dx}px`);
-      span.style.setProperty("--dy", `${dy}px`);
-      span.style.left = `${x || 30}px`;
-      span.style.top = `${y || 10}px`;
-      emptyStateBot.appendChild(span);
-      setTimeout(() => span.remove(), 1200);
-    }
-  }
-
   const triggerBotGreeting = (e) => {
     if (e) e.stopPropagation();
     playChimeSound();
@@ -650,13 +631,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (botGreetingText) {
       botGreetingText.textContent = GREETINGS[greetingIdx];
     }
-    if (emptyStateBot) {
-      emptyStateBot.classList.remove("bot-cheer");
-      void emptyStateBot.offsetWidth;
-      emptyStateBot.classList.add("bot-cheer");
-      const rect = emptyStateBot.getBoundingClientRect();
-      spawnBotEmojiBurst(rect.width / 2, 20);
-      setTimeout(() => emptyStateBot.classList.remove("bot-cheer"), 600);
+    if (heroNeuralCore) {
+      heroNeuralCore.classList.remove("neural-core-cheer");
+      void heroNeuralCore.offsetWidth;
+      heroNeuralCore.classList.add("neural-core-cheer");
+      const ripples = heroNeuralCore.querySelectorAll(".holo-resonance-ripple");
+      ripples.forEach((r) => {
+        r.style.animation = "none";
+        void r.offsetWidth;
+        r.style.animation = "";
+      });
+      setTimeout(() => heroNeuralCore.classList.remove("neural-core-cheer"), 600);
     }
   };
 
@@ -670,63 +655,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (emptyStateBot) {
-    emptyStateBot.addEventListener("click", triggerBotGreeting);
-    emptyStateBot.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        triggerBotGreeting(e);
-      }
-    });
+  if (heroNeuralCore) {
+    heroNeuralCore.addEventListener("click", triggerBotGreeting);
   }
 
-  // Mouse head tilt and interactive gaze tracking
+  // Mouse gyroscopic rig 3D tracking
   window.addEventListener("mousemove", (e) => {
-    if (!emptyStateBot || emptyStateBot.offsetParent === null) return;
-    const rect = emptyStateBot.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const deltaX = e.clientX - centerX;
-    const deltaY = e.clientY - centerY;
-    const dist = Math.hypot(deltaX, deltaY);
-
-    if (botHeadBox) {
-      const tiltY = Math.max(-12, Math.min(12, (deltaX / 300) * 12));
-      const tiltX = Math.max(-8, Math.min(8, -(deltaY / 300) * 8));
-      botHeadBox.style.transform = `rotateY(${tiltY}deg) rotateX(${tiltX}deg)`;
-    }
-
-    // Pupils shift to look toward mouse
-    botEyes.forEach(eye => {
-      const shiftX = Math.max(-2, Math.min(2, (deltaX / 200) * 2));
-      const shiftY = Math.max(-2, Math.min(2, (deltaY / 200) * 2));
-      eye.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
-    });
-
-    // Proximity Waving reaction when mouse approaches (<140px)
-    if (dist < 140) {
-      emptyStateBot.classList.add("bot-proximity-wave");
-    } else {
-      emptyStateBot.classList.remove("bot-proximity-wave");
+    if (heroRig && heroNeuralCore && heroNeuralCore.offsetParent !== null) {
+      const rect = heroNeuralCore.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+      const tiltY = Math.max(-20, Math.min(20, (deltaX / 300) * 20));
+      const tiltX = Math.max(-15, Math.min(15, -(deltaY / 300) * 15));
+      heroRig.style.transform = `rotateY(${tiltY}deg) rotateX(${tiltX}deg)`;
     }
   });
-
-  // Reference Model: Typing Reaction when User Interacts with Chat Input
-  if (chatInput) {
-    chatInput.addEventListener("focus", () => {
-      if (emptyStateBot) emptyStateBot.classList.add("bot-listening");
-    });
-    chatInput.addEventListener("input", () => {
-      playPopTap();
-      if (emptyStateBot) {
-        emptyStateBot.classList.add("bot-typing-reaction");
-        setTimeout(() => emptyStateBot.classList.remove("bot-typing-reaction"), 250);
-      }
-    });
-    chatInput.addEventListener("blur", () => {
-      if (emptyStateBot) emptyStateBot.classList.remove("bot-listening");
-    });
-  }
 
   // AI Bot Popover Filter Tabs
   document.querySelectorAll(".bot-filter-btn").forEach(btn => {
@@ -752,7 +697,7 @@ document.addEventListener("DOMContentLoaded", () => {
         !examplesPopover.contains(e.target) &&
         (!examplesToggleBtn || !examplesToggleBtn.contains(e.target)) &&
         (!botSpeechBubble || !botSpeechBubble.contains(e.target)) &&
-        (!emptyStateBot || !emptyStateBot.contains(e.target))
+        (!heroNeuralCore || !heroNeuralCore.contains(e.target))
       ) {
         setExamplesPopoverVisible(false);
       }
