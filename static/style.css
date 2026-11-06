@@ -5032,8 +5032,8 @@ body.show-details .composer-footer {
 }
 
 .stage-inner.chat-active .hero-threejs-wrap {
-  width: 220px;
-  height: 220px;
+  width: 190px;
+  height: 190px;
 }
 
 .stage-inner.chat-active .bot-speech-bubble {
@@ -5043,8 +5043,8 @@ body.show-details .composer-footer {
 
 /* Three.js 3D Holographic Core Hero Display */
 .hero-threejs-wrap {
-  width: 320px;
-  height: 320px;
+  width: 280px;
+  height: 280px;
   margin: 0 auto;
   position: relative;
   z-index: 5;
@@ -5052,6 +5052,7 @@ body.show-details .composer-footer {
   align-items: center;
   justify-content: center;
   transition: width 0.4s ease, height 0.4s ease;
+  overflow: visible;
 }
 
 .threejs-container {

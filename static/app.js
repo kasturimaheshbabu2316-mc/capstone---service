@@ -641,12 +641,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (heroNeuralCore) heroNeuralCore.style.display = "none";
 
-    const width = container.clientWidth || 320;
-    const height = container.clientHeight || 320;
+    const width = container.clientWidth || 280;
+    const height = container.clientHeight || 280;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.z = 6;
+    camera.position.z = 7.0;
 
     let renderer;
     try {
@@ -666,6 +666,8 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(renderer.domElement);
 
     const mainGroup = new THREE.Group();
+    // Scale slightly down to give generous breathing room and avoid touching container edges
+    mainGroup.scale.set(0.82, 0.82, 0.82);
     scene.add(mainGroup);
 
     // Multi-chromatic point lights
@@ -804,7 +806,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < particleCount; i++) {
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-      const r = 1.35 + Math.random() * 1.8;
+      const r = 1.1 + Math.random() * 1.35;
 
       particlePositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       particlePositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
@@ -961,8 +963,8 @@ document.addEventListener("DOMContentLoaded", () => {
       particleMaterial.size = 0.05 + hoverTransition * 0.02 + clickImpulse * 0.035;
 
       // Dynamically maintain aspect ratio and canvas buffer size
-      const cw = container.clientWidth || 320;
-      const ch = container.clientHeight || 320;
+      const cw = container.clientWidth || 280;
+      const ch = container.clientHeight || 280;
       if (cw > 0 && ch > 0) {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         if (renderer.domElement.width !== Math.round(cw * dpr) || renderer.domElement.height !== Math.round(ch * dpr)) {
@@ -978,8 +980,8 @@ document.addEventListener("DOMContentLoaded", () => {
     animate();
 
     const handleResize = () => {
-      const w = container.clientWidth || 320;
-      const h = container.clientHeight || 320;
+      const w = container.clientWidth || 280;
+      const h = container.clientHeight || 280;
       if (w > 0 && h > 0) {
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
