@@ -4642,7 +4642,7 @@ body.show-details .composer-footer {
   position: fixed;
   top: 68px;
   left: 0;
-  bottom: 32px;
+  bottom: 0;
   width: 64px;
   background: rgba(10, 14, 23, 0.95);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -5126,7 +5126,7 @@ body.show-details .composer-footer {
 /* Floating Radiant Composer Dock */
 .composer-dock {
   position: fixed;
-  bottom: 44px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 100px);
@@ -5204,105 +5204,6 @@ body.show-details .composer-footer {
 
 .send-btn:active {
   transform: scale(0.96);
-}
-
-/* Bottom Telemetry Status Bar */
-.app-telemetry-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 32px;
-  background: rgba(10, 14, 23, 0.95);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  z-index: 40;
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.72rem;
-  color: #94a3b8;
-}
-
-.footer-inner {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.footer-left,
-.footer-right {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.telemetry-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.telemetry-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.9);
-  animation: telemetryPulse 2s infinite ease-in-out;
-}
-
-@keyframes telemetryPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
-}
-
-.telemetry-cluster {
-  color: rgba(199, 210, 254, 0.95);
-  font-weight: 600;
-}
-
-.telemetry-latency {
-  color: rgba(244, 114, 182, 0.95);
-}
-
-.telemetry-sync {
-  color: rgba(252, 211, 77, 0.95);
-}
-
-.token-budget-label {
-  background: linear-gradient(90deg, #67e8f9 0%, #f472b6 50%, #fcd34d 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.token-meter-track {
-  width: 68px;
-  height: 5px;
-  background: rgba(38, 42, 52, 0.9);
-  border-radius: 9999px;
-  overflow: hidden;
-  padding: 0.5px;
-  border: 1px solid rgba(0, 242, 254, 0.3);
-}
-
-.token-meter-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #00f2fe 0%, #d946ef 50%, #fbbf24 100%);
-  border-radius: 9999px;
-  box-shadow: 0 0 8px rgba(0, 242, 254, 0.7);
-}
-
-.telemetry-brand {
-  color: #67e8f9;
-  font-weight: 700;
-  text-shadow: 0 0 8px rgba(0, 242, 254, 0.4);
 }
 
 
