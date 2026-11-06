@@ -5157,7 +5157,7 @@ body.show-details .composer-footer {
   line-height: 1.6;
 }
 
-/* Floating Elegant Cyber-Glass Composer Dock */
+/* Floating Radiant Cyber-Glass Composer Dock */
 .composer-dock {
   position: fixed;
   bottom: 24px;
@@ -5180,24 +5180,31 @@ body:has(.nav-sidebar-drawer.expanded) .composer-dock {
 }
 
 .composer-dock-border-wrap {
-  padding: 1px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(0, 242, 254, 0.35) 0%, rgba(255, 255, 255, 0.08) 50%, rgba(0, 242, 254, 0.18) 100%);
-  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.8), 0 0 24px rgba(0, 242, 254, 0.10);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 1.5px;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #00f2fe 0%, #a855f7 35%, #ec4899 70%, #fbbf24 100%);
+  background-size: 200% 200%;
+  animation: borderAuroraGlow 8s ease infinite alternate;
+  box-shadow: 0 8px 36px rgba(0, 0, 0, 0.85), 0 0 28px rgba(0, 242, 254, 0.32), 0 0 42px rgba(236, 72, 153, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
 }
 
+@keyframes borderAuroraGlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
 .composer-dock-border-wrap:focus-within {
-  background: linear-gradient(135deg, rgba(0, 242, 254, 0.65) 0%, rgba(56, 189, 248, 0.35) 60%, rgba(0, 242, 254, 0.25) 100%);
-  box-shadow: 0 16px 48px -4px rgba(0, 0, 0, 0.9), 0 0 32px rgba(0, 242, 254, 0.24);
+  box-shadow: 0 10px 48px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 242, 254, 0.55), 0 0 55px rgba(236, 72, 153, 0.42);
+  transform: translateY(-2px);
 }
 
 .composer-dock-inner {
-  background: rgba(10, 16, 28, 0.94);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-radius: 15px;
+  background: rgba(10, 14, 23, 0.94);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  backdrop-filter: blur(24px) saturate(200%);
+  border-radius: 16.5px;
   padding: 8px 14px;
   width: 100%;
   position: relative;
@@ -5207,24 +5214,25 @@ body:has(.nav-sidebar-drawer.expanded) .composer-dock {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 8px 14px;
-  border-radius: 11px;
-  background: rgba(0, 242, 254, 0.08);
-  border: 1px solid rgba(0, 242, 254, 0.25);
-  color: #38bdf8;
+  padding: 8px 15px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(0, 242, 254, 0.18), rgba(168, 85, 247, 0.22), rgba(236, 72, 153, 0.18));
+  border: 1px solid rgba(0, 242, 254, 0.40);
+  color: #e0fdff;
   font-size: 0.84rem;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.22);
   transition: all 0.2s ease;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .btn-examples-toggle:hover {
-  background: rgba(0, 242, 254, 0.16);
-  border-color: rgba(0, 242, 254, 0.55);
-  color: #e0fdff;
-  box-shadow: 0 0 14px rgba(0, 242, 254, 0.25);
+  background: linear-gradient(90deg, rgba(0, 242, 254, 0.28), rgba(236, 72, 153, 0.28));
+  border-color: rgba(0, 242, 254, 0.7);
+  box-shadow: 0 0 22px rgba(0, 242, 254, 0.45);
+  transform: translateY(-1px);
 }
 
 .composer-input {
@@ -5232,9 +5240,9 @@ body:has(.nav-sidebar-drawer.expanded) .composer-dock {
   background: transparent;
   border: none;
   color: #f1f5f9;
-  font-size: 0.93rem;
+  font-size: 0.94rem;
   outline: none;
-  padding: 8px 12px;
+  padding: 8px 14px;
   font-family: inherit;
   min-width: 0;
 }
@@ -5248,33 +5256,32 @@ body:has(.nav-sidebar-drawer.expanded) .composer-dock {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 9px 20px;
-  border-radius: 11px;
-  background: linear-gradient(135deg, #00f2fe 0%, #0284c7 100%);
-  color: #040d1a;
-  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #22d3ee 0%, #00f2fe 40%, #ec4899 100%);
+  color: #070b14;
+  font-weight: 800;
   font-size: 0.88rem;
-  letter-spacing: 0.2px;
   cursor: pointer;
-  border: none;
-  box-shadow: 0 4px 16px rgba(0, 242, 254, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 22px rgba(0, 242, 254, 0.65), 0 0 32px rgba(236, 72, 153, 0.45);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
 }
 
 .send-btn:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 6px 22px rgba(0, 242, 254, 0.55);
-  transform: translateY(-1px);
+  filter: brightness(1.15);
+  box-shadow: 0 0 32px rgba(0, 242, 254, 0.9), 0 0 45px rgba(236, 72, 153, 0.65);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .send-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 [data-theme="light"] .composer-dock-border-wrap {
-  background: linear-gradient(135deg, rgba(2, 132, 199, 0.35) 0%, rgba(0, 0, 0, 0.06) 50%, rgba(2, 132, 199, 0.2) 100%);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  background: linear-gradient(90deg, #0284c7 0%, #a855f7 35%, #ec4899 70%, #f59e0b 100%);
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.12), 0 0 20px rgba(2, 132, 199, 0.25);
 }
 
 [data-theme="light"] .composer-dock-inner {
@@ -5290,8 +5297,8 @@ body:has(.nav-sidebar-drawer.expanded) .composer-dock {
 }
 
 [data-theme="light"] .btn-examples-toggle {
-  background: rgba(2, 132, 199, 0.08);
-  border-color: rgba(2, 132, 199, 0.25);
+  background: linear-gradient(90deg, rgba(2, 132, 199, 0.12), rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.12));
+  border-color: rgba(2, 132, 199, 0.35);
   color: #0284c7;
 }
 
