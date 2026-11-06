@@ -6,6 +6,18 @@
    ============================================================================== */
 
 :root, [data-theme="dark"] {
+  /* Spatial Intelligence Desk Core Tokens (from @ui DESIGN.md) */
+  --surface-container-lowest: #070B14;
+  --surface-container-low: #171c25;
+  --surface-container: #1b2029;
+  --surface-container-high: #262a34;
+  --surface-container-highest: #31353f;
+  --color-hyper-cyan: #00f2fe;
+  --color-fuchsia-flare: #d946ef;
+  --color-amber-flare: #f59e0b;
+  --color-emerald-verified: #10b981;
+  --color-alert-coral: #f87171;
+
   /* Canvas Background & Ambient Gradients */
   --color-page: #070B14;
   --color-canvas-gradient-1: rgba(0, 242, 254, 0.06);

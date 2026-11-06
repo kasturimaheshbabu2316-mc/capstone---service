@@ -624,6 +624,431 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   let greetingIdx = 0;
 
+  // ==============================================================================
+  // Three.js 3D Holographic Core Animation (from @ui ANIMATION_34)
+  // ==============================================================================
+  let threeJsAnimId = null;
+  let isThreeJsRunning = false;
+
+  function initThreeJsCore() {
+    const container = document.getElementById("threejs-container-ANIMATION_34");
+    if (!container) return;
+
+    if (!window.THREE) {
+      if (heroNeuralCore) heroNeuralCore.style.display = "block";
+      return;
+    }
+
+    if (heroNeuralCore) heroNeuralCore.style.display = "none";
+
+    const width = container.clientWidth || 320;
+    const height = container.clientHeight || 320;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.z = 6;
+
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+    } catch (e) {
+      if (heroNeuralCore) heroNeuralCore.style.display = "block";
+      return;
+    }
+
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    if (THREE.ACESFilmicToneMapping) {
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.3;
+    }
+    container.innerHTML = "";
+    container.appendChild(renderer.domElement);
+
+    const mainGroup = new THREE.Group();
+    scene.add(mainGroup);
+
+    // Multi-chromatic point lights
+    const lightCyan = new THREE.PointLight(0x00f2fe, 3.5, 20);
+    lightCyan.position.set(4, 3, 4);
+    scene.add(lightCyan);
+
+    const lightMagenta = new THREE.PointLight(0xf43f5e, 4.0, 20);
+    lightMagenta.position.set(-4, -3, 3);
+    scene.add(lightMagenta);
+
+    const lightPurple = new THREE.PointLight(0xa855f7, 3.0, 18);
+    lightPurple.position.set(0, 4, -3);
+    scene.add(lightPurple);
+
+    const lightGold = new THREE.PointLight(0xfbbf24, 3.0, 16);
+    lightGold.position.set(0, -4, 4);
+    scene.add(lightGold);
+
+    const ambientLight = new THREE.AmbientLight(0x18182f, 1.8);
+    scene.add(ambientLight);
+
+    // 1. Inner Luminous Core Sphere (Dynamic Color Shift)
+    const coreGeo = new THREE.SphereGeometry(0.75, 64, 64);
+    const coreMat = new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      emissive: 0x00f2fe,
+      emissiveIntensity: 1.1,
+      shininess: 100,
+      specular: 0xffffff,
+      transparent: true,
+      opacity: 0.96
+    });
+    const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+    mainGroup.add(coreMesh);
+
+    // 2. Glassmorphic Outer Energy Sphere with Chromatic Transmission
+    const glassGeo = new THREE.SphereGeometry(1.08, 64, 64);
+    const glassMat = new THREE.MeshPhysicalMaterial({
+      color: 0x8b5cf6,
+      transmission: 0.88,
+      opacity: 1.0,
+      transparent: true,
+      roughness: 0.06,
+      metalness: 0.15,
+      ior: 1.48,
+      reflectivity: 0.95,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.04
+    });
+    const glassMesh = new THREE.Mesh(glassGeo, glassMat);
+    mainGroup.add(glassMesh);
+
+    // 3. Dual Nested Wireframe Geometries
+    const wireGeo1 = new THREE.IcosahedronGeometry(0.92, 2);
+    const wireMat1 = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.45,
+      blending: THREE.AdditiveBlending
+    });
+    const wireMesh1 = new THREE.Mesh(wireGeo1, wireMat1);
+    mainGroup.add(wireMesh1);
+
+    const wireGeo2 = new THREE.DodecahedronGeometry(1.2, 1);
+    const wireMat2 = new THREE.MeshBasicMaterial({
+      color: 0xf43f5e,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.25,
+      blending: THREE.AdditiveBlending
+    });
+    const wireMesh2 = new THREE.Mesh(wireGeo2, wireMat2);
+    mainGroup.add(wireMesh2);
+
+    // 4. Vibrant Multi-Colored Orbital Rings
+    const createOrbitalRing = (radius, tubeRadius, rx, ry, rz, colorHex, emissiveHex, opacity) => {
+      const ringGeo = new THREE.TorusGeometry(radius, tubeRadius, 28, 160);
+      const ringMat = new THREE.MeshStandardMaterial({
+        color: colorHex,
+        emissive: emissiveHex,
+        emissiveIntensity: 0.9,
+        roughness: 0.15,
+        metalness: 0.85,
+        transparent: true,
+        opacity: opacity
+      });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.set(rx, ry, rz);
+      return ring;
+    };
+
+    const ring1 = createOrbitalRing(1.68, 0.024, Math.PI / 2.3, 0.35, 0, 0x00f2fe, 0x00f2fe, 0.9);
+    const ring2 = createOrbitalRing(1.92, 0.020, -Math.PI / 2.7, -0.4, 0.4, 0xf43f5e, 0xf43f5e, 0.85);
+    const ring3 = createOrbitalRing(2.18, 0.016, Math.PI / 1.75, 0.75, -0.3, 0xa855f7, 0xa855f7, 0.8);
+    const ring4 = createOrbitalRing(2.42, 0.014, -Math.PI / 3.4, 0.5, 0.8, 0xfbbf24, 0xf59e0b, 0.75);
+
+    mainGroup.add(ring1);
+    mainGroup.add(ring2);
+    mainGroup.add(ring3);
+    mainGroup.add(ring4);
+
+    // 5. Glowing Satellite Nodes
+    const createNode = (colorHex) => {
+      const nodeGeo = new THREE.SphereGeometry(0.075, 32, 32);
+      const nodeMat = new THREE.MeshBasicMaterial({ color: colorHex });
+      return new THREE.Mesh(nodeGeo, nodeMat);
+    };
+
+    const node1 = createNode(0x38bdf8);
+    const node2 = createNode(0xfb7185);
+    const node3 = createNode(0xc084fc);
+    const node4 = createNode(0xfde047);
+
+    mainGroup.add(node1);
+    mainGroup.add(node2);
+    mainGroup.add(node3);
+    mainGroup.add(node4);
+
+    // 6. Multi-chromatic Ambient Particle Swarm
+    const particleCount = 360;
+    const particleGeometry = new THREE.BufferGeometry();
+    const particlePositions = new Float32Array(particleCount * 3);
+    const particleColors = new Float32Array(particleCount * 3);
+
+    const pColors = [
+      new THREE.Color(0x00f2fe),
+      new THREE.Color(0xf43f5e),
+      new THREE.Color(0xa855f7),
+      new THREE.Color(0xfbbf24),
+      new THREE.Color(0x34d399),
+      new THREE.Color(0xffffff)
+    ];
+
+    for (let i = 0; i < particleCount; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 1.35 + Math.random() * 1.8;
+
+      particlePositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      particlePositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      particlePositions[i * 3 + 2] = r * Math.cos(phi);
+
+      const selectedCol = pColors[Math.floor(Math.random() * pColors.length)];
+      particleColors[i * 3] = selectedCol.r;
+      particleColors[i * 3 + 1] = selectedCol.g;
+      particleColors[i * 3 + 2] = selectedCol.b;
+    }
+
+    particleGeometry.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
+    particleGeometry.setAttribute("color", new THREE.BufferAttribute(particleColors, 3));
+
+    const particleMaterial = new THREE.PointsMaterial({
+      size: 0.05,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(particleGeometry, particleMaterial);
+    mainGroup.add(particles);
+
+    // Interactive Hover and Click
+    let isHovered = false;
+    let hoverTransition = 0;
+    let clickImpulse = 0;
+    let speedMultiplier = 1.0;
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2(-999, -999);
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+    let currentMouseX = 0;
+    let currentMouseY = 0;
+
+    container.style.cursor = "pointer";
+
+    const onPointerMove = (event) => {
+      const rect = container.getBoundingClientRect();
+      const rawX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      const rawY = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
+      mouse.x = rawX;
+      mouse.y = rawY;
+      targetMouseX = rawX * 0.55;
+      targetMouseY = rawY * 0.55;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects([coreMesh, glassMesh, ring1, ring2, ring3, ring4]);
+      isHovered = (intersects.length > 0) || (Math.sqrt(rawX * rawX + rawY * rawY) < 0.65);
+    };
+
+    const onPointerLeave = () => {
+      isHovered = false;
+      mouse.x = -999;
+      mouse.y = -999;
+      targetMouseX = 0;
+      targetMouseY = 0;
+    };
+
+    const onPointerDown = () => {
+      clickImpulse = 1.8;
+      playChimeSound();
+    };
+
+    window.addEventListener("mousemove", onPointerMove);
+    container.addEventListener("pointerdown", onPointerDown);
+    container.addEventListener("pointerleave", onPointerLeave);
+
+    const clock = new THREE.Clock();
+    let accumulatedTime = 0;
+    isThreeJsRunning = true;
+
+    function animate() {
+      if (!isThreeJsRunning) return;
+      threeJsAnimId = requestAnimationFrame(animate);
+      const delta = Math.min(clock.getDelta(), 0.1);
+
+      hoverTransition += ((isHovered ? 1.0 : 0.0) - hoverTransition) * 0.08;
+      clickImpulse = Math.max(0, clickImpulse - delta * 2.2);
+
+      const targetSpeed = 1.0 + (hoverTransition * 1.6) + (clickImpulse * 2.5);
+      speedMultiplier += (targetSpeed - speedMultiplier) * 0.12;
+      accumulatedTime += delta * speedMultiplier;
+
+      const t = accumulatedTime;
+
+      mainGroup.position.y = Math.sin(t * 1.4) * (0.09 + hoverTransition * 0.05);
+
+      currentMouseX += (targetMouseX - currentMouseX) * 0.07;
+      currentMouseY += (targetMouseY - currentMouseY) * 0.07;
+      mainGroup.rotation.y = t * 0.22 + currentMouseX;
+      mainGroup.rotation.x = currentMouseY;
+
+      const pulseFreq = 2.6 + hoverTransition * 3.5 + clickImpulse * 4.5;
+      const pulseAmp = 0.06 + hoverTransition * 0.08 + clickImpulse * 0.12;
+      const pulse = Math.sin(t * pulseFreq) * pulseAmp + (1.0 + hoverTransition * 0.1 + clickImpulse * 0.18);
+
+      coreMesh.scale.set(pulse, pulse, pulse);
+      glassMesh.scale.set(1.0 + (pulse - 1.0) * 0.55, 1.0 + (pulse - 1.0) * 0.55, 1.0 + (pulse - 1.0) * 0.55);
+
+      const baseEmissive = 1.0 + Math.sin(t * pulseFreq) * 0.4;
+      coreMat.emissiveIntensity = baseEmissive + hoverTransition * 0.8 + clickImpulse * 1.5;
+
+      const hue = (t * (0.07 + hoverTransition * 0.1 + clickImpulse * 0.2)) % 1;
+      coreMat.emissive.setHSL(hue, 0.95, 0.55);
+
+      lightCyan.intensity = 3.5 + hoverTransition * 2.0 + clickImpulse * 3.5;
+      lightMagenta.intensity = 4.0 + hoverTransition * 2.2 + clickImpulse * 3.8;
+
+      wireMesh1.rotation.y = -t * 0.55;
+      wireMesh1.rotation.z = t * 0.35;
+      wireMesh2.rotation.x = t * 0.42;
+      wireMesh2.rotation.y = -t * 0.28;
+      glassMesh.rotation.y = t * 0.16;
+
+      ring1.rotation.z = t * 0.65;
+      ring2.rotation.z = -t * 0.55;
+      ring3.rotation.z = t * 0.45;
+      ring4.rotation.z = -t * 0.38;
+
+      const s1 = t * 1.3;
+      node1.position.set(
+        Math.cos(s1) * 1.68,
+        Math.sin(s1) * 1.68 * Math.sin(ring1.rotation.x),
+        Math.sin(s1) * 1.68 * Math.cos(ring1.rotation.x)
+      );
+
+      const s2 = -t * 1.15 + 1.5;
+      node2.position.set(
+        Math.cos(s2) * 1.92,
+        Math.sin(s2) * 1.92 * Math.sin(ring2.rotation.x),
+        Math.sin(s2) * 1.92 * Math.cos(ring2.rotation.x)
+      );
+
+      const s3 = t * 0.95 + 2.8;
+      node3.position.set(
+        Math.cos(s3) * 2.18,
+        Math.sin(s3) * 2.18 * Math.sin(ring3.rotation.x),
+        Math.sin(s3) * 2.18 * Math.cos(ring3.rotation.x)
+      );
+
+      const s4 = -t * 0.8 + 4.2;
+      node4.position.set(
+        Math.cos(s4) * 2.42,
+        Math.sin(s4) * 2.42 * Math.sin(ring4.rotation.x),
+        Math.sin(s4) * 2.42 * Math.cos(ring4.rotation.x)
+      );
+
+      particles.rotation.y = t * 0.12;
+      particles.rotation.x = Math.sin(t * 0.3) * 0.08;
+      particleMaterial.size = 0.05 + hoverTransition * 0.02 + clickImpulse * 0.035;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    const handleResize = () => {
+      const w = container.clientWidth || 320;
+      const h = container.clientHeight || 320;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    };
+
+    window.addEventListener("resize", handleResize);
+  }
+
+  // Initialize Three.js holographic orb immediately
+  initThreeJsCore();
+
+  // Left Navigation Rail Drawer Controls (from @ui)
+  const navSidebarDrawer = document.getElementById("nav-sidebar-drawer");
+  const railToggleBtn = document.getElementById("rail-toggle-btn");
+  const mainWorkspace = document.getElementById("main-content-workspace");
+  const railSearchBar = document.getElementById("rail-search-bar");
+  const railSearchMini = document.getElementById("rail-search-mini");
+  let isNavDrawerOpen = false;
+
+  function setDrawerState(open) {
+    isNavDrawerOpen = open;
+    if (navSidebarDrawer) {
+      navSidebarDrawer.classList.toggle("expanded", isNavDrawerOpen);
+    }
+    if (mainWorkspace) {
+      mainWorkspace.classList.toggle("rail-open", isNavDrawerOpen);
+    }
+  }
+
+  function toggleNavDrawer() {
+    setDrawerState(!isNavDrawerOpen);
+  }
+
+  if (railToggleBtn) {
+    railToggleBtn.addEventListener("click", toggleNavDrawer);
+  }
+
+  if (railSearchBar) {
+    railSearchBar.addEventListener("click", () => {
+      const paletteBtn = document.getElementById("open-palette-btn");
+      if (paletteBtn) paletteBtn.click();
+    });
+  }
+
+  if (railSearchMini) {
+    railSearchMini.addEventListener("click", () => {
+      const paletteBtn = document.getElementById("open-palette-btn");
+      if (paletteBtn) paletteBtn.click();
+    });
+  }
+
+  // Keyboard shortcut (⌘B / Ctrl+B to toggle rail, Escape to close)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isNavDrawerOpen) {
+      setDrawerState(false);
+    }
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
+      e.preventDefault();
+      toggleNavDrawer();
+    }
+  });
+
+  // Rail Nav item bindings
+  const railNavChat = document.getElementById("rail-nav-chat");
+  const railNavDirectory = document.getElementById("rail-nav-directory");
+  const railNavPolicies = document.getElementById("rail-nav-policies");
+  const railNavTelemetry = document.getElementById("rail-nav-telemetry");
+
+  if (railNavChat) railNavChat.addEventListener("click", () => switchStage("chat-stage"));
+  if (railNavDirectory) railNavDirectory.addEventListener("click", () => switchStage("directory-stage"));
+  if (railNavPolicies) railNavPolicies.addEventListener("click", () => switchStage("policies-stage"));
+  if (railNavTelemetry) {
+    railNavTelemetry.addEventListener("click", () => {
+      const settingsToggleBtn = document.getElementById("settings-toggle-btn");
+      if (settingsToggleBtn) settingsToggleBtn.click();
+      const tabConn = document.querySelector('[data-tab="tab-connection"]');
+      if (tabConn) tabConn.click();
+    });
+  }
+
   const triggerBotGreeting = (e) => {
     if (e) e.stopPropagation();
     playChimeSound();
@@ -708,7 +1133,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. Segmented View Switcher
   // --------------------------------------------------------------------------
   function switchStage(stageName) {
-    [pillChat, pillDirectory, pillPolicies].forEach(pill => {
+    [
+      pillChat,
+      pillDirectory,
+      pillPolicies,
+      railNavChat,
+      railNavDirectory,
+      railNavPolicies
+    ].forEach(pill => {
       if (!pill) return;
       const target = pill.getAttribute("data-target");
       if (target === stageName) {
