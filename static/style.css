@@ -3094,124 +3094,291 @@ body.show-details .meta-footer,
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 145px;
+  min-width: 140px;
   flex-shrink: 0;
   padding-top: 4px;
 }
 
 /* ==============================================================================
-   Animated Speaking Avatar: AI Robot & Sparky Dog Duo (Sparks & Dog)
+   Assistant Response Speaking Avatar: High-Fidelity Duo Rig (Spark & Sparky)
+   Generous Dedicated Column (~145px) with Living Live Animations
    ============================================================================== */
-.chat-avatar-chip {
+.chat-avatar-chip,
+.chat-avatar-chip.duo-speaking-avatar {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 58px;
+  width: 145px;
+  min-width: 140px;
   flex-shrink: 0;
   -webkit-user-select: none;
   user-select: none;
-  animation: avatarChipBreath 3.2s ease-in-out infinite alternate;
+  animation: duoAvatarGentleBreath 3.4s ease-in-out infinite alternate;
+}
+
+@keyframes duoAvatarGentleBreath {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
 }
 
 .chip-avatar-svg {
-  width: 52px;
-  height: 46px;
+  width: 138px;
+  height: 86px;
   overflow: visible;
-  filter: drop-shadow(0 4px 12px rgba(0, 242, 254, 0.3));
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
 }
 
-.chip-halo-glow {
-  fill: rgba(0, 242, 254, 0.08);
+/* Floor Ambient Shadow */
+.chip-ground-shadow {
+  fill: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.28) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 80%);
 }
 
-.chip-antenna-stem {
-  stroke: #00f2fe;
+[data-theme="light"] .chip-ground-shadow {
+  fill: radial-gradient(ellipse at center, rgba(2, 132, 199, 0.2) 0%, rgba(15, 23, 42, 0.12) 50%, transparent 80%);
 }
 
-.chip-antenna-orb {
-  fill: #00f2fe;
-  filter: drop-shadow(0 0 6px #00f2fe);
-  animation: beaconPulse 1.6s ease-in-out infinite alternate;
-}
-
-.chip-robot-helm {
-  fill: url(#robotBodyDarkHero);
+/* Spark (Robot) Dark Theme */
+.chip-spark-group .chip-ai-helmet,
+.chip-spark-group .chip-ai-torso {
+  fill: url(#robotBodyDark);
   stroke: #00f2fe;
   stroke-width: 1.8;
+  filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.4));
 }
 
-.chip-visor {
-  fill: #050b14;
-  stroke: rgba(0, 242, 254, 0.45);
+.chip-ai-screen {
+  fill: #06111f;
+  stroke: rgba(0, 242, 254, 0.4);
   stroke-width: 1;
 }
 
-.chip-eye {
+.chip-ai-eye {
   fill: #00f2fe;
+  filter: drop-shadow(0 0 5px #00f2fe);
   animation: eyeBlinkCadence 4.2s infinite;
 }
 
-.chip-smile {
+.chip-ai-blush {
+  fill: rgba(244, 63, 94, 0.45);
+}
+
+.chip-ai-smile {
   stroke: #00f2fe;
 }
 
-.chip-dog-body,
-.chip-dog-head {
-  fill: url(#sparkyBodyDarkHero);
+.chip-ai-limb,
+.chip-ai-antenna {
+  stroke: #00f2fe;
+}
+
+.chip-ai-hand,
+.chip-ai-orb,
+.chip-ai-core {
+  fill: #00f2fe;
+  filter: drop-shadow(0 0 6px #00f2fe);
+}
+
+.chip-ai-thruster {
+  fill: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.6) 0%, transparent 70%);
+}
+
+/* Live Animation for Spark */
+.chip-spark-group {
+  transform-origin: 46px 60px;
+  animation: chipSparkHover 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes chipSparkHover {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+.chip-ai-wave-arm {
+  transform-origin: 60px 63px;
+  animation: chipWaveHello 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes chipWaveHello {
+  0%   { transform: rotate(-4deg); }
+  100% { transform: rotate(14deg); }
+}
+
+/* Sparky (Cyber Dog) Dark Theme */
+.chip-dog-group .chip-dog-face,
+.chip-dog-group .chip-dog-torso {
+  fill: url(#sparkyBodyDark);
   stroke: #38bdf8;
-  stroke-width: 1.6;
+  stroke-width: 1.8;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.35));
 }
 
 .chip-dog-ear {
-  fill: #38bdf8;
+  stroke: #38bdf8;
+  fill: rgba(56, 189, 248, 0.25);
+}
+
+.chip-dog-ear.right {
+  transform-origin: 128px 51px;
   animation: earTwitch 3.8s infinite;
 }
 
-.chip-dog-eye,
+.chip-dog-collar,
+.chip-dog-tail {
+  stroke: #38bdf8;
+}
+
+.chip-dog-tag,
+.chip-dog-tail-tip,
+.chip-dog-paw {
+  fill: #38bdf8;
+  filter: drop-shadow(0 0 4px #38bdf8);
+}
+
+.chip-dog-pupil,
 .chip-dog-nose {
   fill: #00f2fe;
 }
 
-.chip-dog-tail {
-  stroke: #38bdf8;
-  animation: tailWag 1.6s ease-in-out infinite alternate;
+.chip-dog-snout {
+  fill: #081525;
 }
 
-/* Light Theme Avatar Styles */
-[data-theme="light"] .chip-antenna-stem,
-[data-theme="light"] .chip-smile {
+/* Live Animation for Sparky */
+.chip-dog-group {
+  transform-origin: 118px 74px;
+  animation: chipDogIdleBob 3.6s ease-in-out infinite alternate 0.3s;
+}
+
+@keyframes chipDogIdleBob {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+.chip-dog-tail-rig {
+  transform-origin: 129px 74px;
+  animation: chipTailWag 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes chipTailWag {
+  0%   { transform: rotate(-10deg); }
+  100% { transform: rotate(16deg); }
+}
+
+/* Light Theme Styling for Duo Avatar */
+[data-theme="light"] .chip-spark-group .chip-ai-helmet,
+[data-theme="light"] .chip-spark-group .chip-ai-torso {
+  fill: url(#robotBodyLight);
   stroke: #0284c7;
+  stroke-width: 1.8;
+  filter: drop-shadow(0 4px 10px rgba(2, 132, 199, 0.2));
 }
 
-[data-theme="light"] .chip-antenna-orb,
-[data-theme="light"] .chip-eye {
-  fill: #0284c7;
-}
-
-[data-theme="light"] .chip-robot-helm {
-  fill: url(#robotBodyLightHero);
-  stroke: #0284c7;
-}
-
-[data-theme="light"] .chip-visor {
+[data-theme="light"] .chip-ai-screen {
   fill: #f8fafc;
   stroke: rgba(2, 132, 199, 0.35);
 }
 
-[data-theme="light"] .chip-dog-body,
-[data-theme="light"] .chip-dog-head {
-  fill: url(#sparkyBodyLightHero);
-  stroke: #d97706;
+[data-theme="light"] .chip-ai-eye {
+  fill: #0284c7;
+  filter: drop-shadow(0 0 4px rgba(2, 132, 199, 0.5));
 }
 
-[data-theme="light"] .chip-dog-ear,
+[data-theme="light"] .chip-ai-smile,
+[data-theme="light"] .chip-ai-limb,
+[data-theme="light"] .chip-ai-antenna {
+  stroke: #0284c7;
+}
+
+[data-theme="light"] .chip-ai-hand,
+[data-theme="light"] .chip-ai-orb,
+[data-theme="light"] .chip-ai-core {
+  fill: #0284c7;
+  filter: drop-shadow(0 0 4px rgba(2, 132, 199, 0.5));
+}
+
+[data-theme="light"] .chip-ai-thruster {
+  fill: radial-gradient(ellipse at center, rgba(2, 132, 199, 0.35) 0%, transparent 70%);
+}
+
+[data-theme="light"] .chip-dog-group .chip-dog-face,
+[data-theme="light"] .chip-dog-group .chip-dog-torso {
+  fill: url(#sparkyBodyLight);
+  stroke: #d97706;
+  stroke-width: 1.8;
+  filter: drop-shadow(0 4px 10px rgba(217, 119, 6, 0.2));
+}
+
+[data-theme="light"] .chip-dog-ear {
+  stroke: #d97706;
+  fill: #fde68a;
+}
+
+[data-theme="light"] .chip-dog-collar,
 [data-theme="light"] .chip-dog-tail {
   stroke: #d97706;
 }
 
-[data-theme="light"] .chip-dog-eye,
+[data-theme="light"] .chip-dog-tag {
+  fill: #fbbf24;
+}
+
+[data-theme="light"] .chip-dog-tail-tip,
+[data-theme="light"] .chip-dog-paw {
+  fill: #d97706;
+}
+
+[data-theme="light"] .chip-dog-pupil {
+  fill: #1e293b;
+}
+
 [data-theme="light"] .chip-dog-nose {
   fill: #78350f;
+}
+
+[data-theme="light"] .chip-dog-snout {
+  fill: #ffffff;
+}
+
+/* Sleek Cyber Badge Underneath Avatar */
+.duo-avatar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 3px 10px;
+  background: rgba(0, 242, 254, 0.1);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #00f2fe;
+  text-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
+  white-space: nowrap;
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.15);
+}
+
+[data-theme="light"] .duo-avatar-badge {
+  background: rgba(2, 132, 199, 0.1);
+  border-color: rgba(2, 132, 199, 0.35);
+  color: #0284c7;
+  text-shadow: none;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.1);
+}
+
+.duo-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #00f2fe;
+  box-shadow: 0 0 6px #00f2fe;
+  animation: beaconPulse 1.4s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .duo-badge-dot {
+  background-color: #0284c7;
+  box-shadow: 0 0 6px #0284c7;
 }
 
 @keyframes avatarChipBreath {
