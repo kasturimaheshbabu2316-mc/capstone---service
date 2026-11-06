@@ -252,22 +252,28 @@ function createAgentDogLoadingCard() {
 
 function createAgentDogSpeakingAvatar() {
   return `
-    <div class="neural-speaker-avatar" title="Ola Neural Intelligence">
-      <div class="neural-mini-stage">
-        <!-- Mini 3D Gyroscopic Rings -->
-        <div class="mini-gyro-ring ring-mini-a"></div>
-        <div class="mini-gyro-ring ring-mini-b"></div>
-        <!-- Mini Fluid Plasma Core -->
-        <div class="mini-plasma-sphere">
-          <div class="mini-fluid-mesh"></div>
-          <div class="mini-nucleus"></div>
-          <div class="mini-specular"></div>
-        </div>
-        <!-- Subtle Audio-Resonance Pulse Rings -->
-        <div class="mini-soundwave-ring wave-1"></div>
-        <div class="mini-soundwave-ring wave-2"></div>
-      </div>
-      <span class="avatar-tag-label">Neural Core ✦</span>
+    <div class="chat-avatar-chip" title="Ola Support Assistant (AI &amp; Sparky 🐾)" aria-hidden="true">
+      <svg class="chip-avatar-svg" viewBox="0 0 54 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="24" r="18" class="chip-halo-glow"/>
+        <!-- Robot ("Sparks") -->
+        <line x1="20" y1="6" x2="20" y2="12" stroke-width="2" stroke-linecap="round" class="chip-antenna-stem"/>
+        <circle cx="20" cy="5" r="2.8" class="chip-antenna-orb"/>
+        <rect x="9" y="12" width="22" height="18" rx="6" class="chip-robot-helm"/>
+        <rect x="12" y="15" width="16" height="11" rx="3" class="chip-visor"/>
+        <rect x="14" y="17.5" width="3.5" height="5" rx="1.6" class="chip-eye left"/>
+        <rect x="22.5" y="17.5" width="3.5" height="5" rx="1.6" class="chip-eye right"/>
+        <path d="M17 23.5 Q20 25.5 23 23.5" stroke-width="1.6" stroke-linecap="round" fill="none" class="chip-smile"/>
+        <!-- Companion Dog ("Sparky") -->
+        <ellipse cx="40" cy="28" rx="10" ry="8" class="chip-dog-body"/>
+        <circle cx="39" cy="20" r="7" class="chip-dog-head"/>
+        <path d="M34 16 L31 10 L37 13 Z" class="chip-dog-ear left"/>
+        <path d="M42 16 L46 10 L41 13 Z" class="chip-dog-ear right"/>
+        <circle cx="37" cy="19" r="1.2" class="chip-dog-eye"/>
+        <circle cx="41" cy="19" r="1.2" class="chip-dog-eye"/>
+        <circle cx="39" cy="22" r="1" class="chip-dog-nose"/>
+        <path d="M48 27 Q53 23 51 18" stroke-width="2.2" stroke-linecap="round" fill="none" class="chip-dog-tail"/>
+      </svg>
+      <span class="avatar-tag-label">AI &amp; Sparky 🐾</span>
     </div>
   `;
 }
@@ -503,37 +509,13 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   let greetingIdx = 0;
 
-  function spawnBotEmojiBurst(x, y) {
-    const emojis = ["✨", "👋", "🚕", "💖", "⭐", "🎉", "⚡", "🤖", "🚀", "💡"];
-    const container = document.getElementById("chat-empty-state") || document.body;
-    const bubble = document.getElementById("bot-speech-bubble");
-    let baseX = x || 150;
-    let baseY = y || 20;
-    if (bubble && container && !x) {
-      const bubbleRect = bubble.getBoundingClientRect();
-      const contRect = container.getBoundingClientRect();
-      baseX = bubbleRect.left - contRect.left + bubbleRect.width / 2;
-      baseY = bubbleRect.top - contRect.top + bubbleRect.height / 2;
-    }
-    for (let i = 0; i < 7; i++) {
-      const span = document.createElement("span");
-      span.className = "floating-emoji";
-      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      const dx = (Math.random() - 0.5) * 120;
-      const dy = -(40 + Math.random() * 65);
-      span.style.setProperty("--dx", `${dx}px`);
-      span.style.setProperty("--dy", `${dy}px`);
-      span.style.left = `${baseX}px`;
-      span.style.top = `${baseY}px`;
-      container.appendChild(span);
-      setTimeout(() => span.remove(), 1200);
-    }
-  }
-
-  // 3D Holographic Neural Core & AI Companion Mouse Tilt
-  const heroNeuralCore = document.getElementById("hero-neural-core");
-  const heroRig = heroNeuralCore ? heroNeuralCore.querySelector(".neural-gyroscopic-rig") : null;
+  // 3D Animated AI & Sparky Mascot Hero Stage ("Sparks & Dog")
+  const heroMascotStage = document.getElementById("hero-mascot-stage");
   const botSpeechBubble = document.getElementById("bot-speech-bubble");
+
+  if (heroMascotStage) {
+    attachMascotPointerParallax(heroMascotStage);
+  }
 
   const triggerBotGreeting = (e) => {
     if (e) e.stopPropagation();
@@ -542,26 +524,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (botGreetingText) {
       botGreetingText.textContent = GREETINGS[greetingIdx];
     }
-    if (emptyStateBot) {
-      emptyStateBot.classList.remove("bot-cheer");
-      void emptyStateBot.offsetWidth;
-      emptyStateBot.classList.add("bot-cheer");
-      setTimeout(() => emptyStateBot.classList.remove("bot-cheer"), 600);
+    if (heroMascotStage) {
+      heroMascotStage.classList.remove("mascot-cheer");
+      void heroMascotStage.offsetWidth;
+      heroMascotStage.classList.add("mascot-cheer");
+      setTimeout(() => heroMascotStage.classList.remove("mascot-cheer"), 800);
     }
-    if (heroNeuralCore) {
-      heroNeuralCore.classList.remove("neural-core-cheer");
-      void heroNeuralCore.offsetWidth;
-      heroNeuralCore.classList.add("neural-core-cheer");
-      const ripples = heroNeuralCore.querySelectorAll(".holo-resonance-ripple");
-      ripples.forEach((r) => {
-        r.style.animation = "none";
-        void r.offsetWidth;
-        r.style.animation = "";
-      });
-      setTimeout(() => heroNeuralCore.classList.remove("neural-core-cheer"), 600);
-    }
-    spawnBotEmojiBurst();
-    setExamplesPopoverVisible(true);
   };
 
   if (botSpeechBubble) {
@@ -574,8 +542,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (heroNeuralCore) {
-    heroNeuralCore.addEventListener("click", triggerBotGreeting);
+  if (heroMascotStage) {
+    heroMascotStage.addEventListener("click", triggerBotGreeting);
   }
 
   if (emptyStateBot) {
@@ -590,17 +558,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Reference Model: Mouse Head Tilt & Gaze Tracking
   window.addEventListener("mousemove", (e) => {
-    if (heroRig && heroNeuralCore && heroNeuralCore.offsetParent !== null) {
-      const rect = heroNeuralCore.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const deltaX = e.clientX - centerX;
-      const deltaY = e.clientY - centerY;
-      const tiltY = Math.max(-20, Math.min(20, (deltaX / 300) * 20));
-      const tiltX = Math.max(-15, Math.min(15, -(deltaY / 300) * 15));
-      heroRig.style.transform = `rotateY(${tiltY}deg) rotateX(${tiltX}deg)`;
-    }
-
     if (!emptyStateBot || emptyStateBot.offsetParent === null) return;
     const rect = emptyStateBot.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;

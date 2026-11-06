@@ -175,7 +175,7 @@ body {
 }
 
 .stage-inner {
-  max-width: 860px;
+  max-width: 960px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -303,7 +303,7 @@ body {
 .msg-row {
   display: flex;
   width: 100%;
-  max-width: 860px;
+  max-width: 960px;
 }
 
 .msg-row.user {
@@ -315,7 +315,7 @@ body {
 }
 
 .msg-bubble {
-  max-width: 78%;
+  max-width: 85%;
   padding: 18px 22px;
   border-radius: 16px;
   background: var(--glass-surface);
@@ -435,7 +435,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 48px);
-  max-width: 860px;
+  max-width: 960px;
   background: var(--glass-surface-elevated);
   -webkit-backdrop-filter: blur(22px) saturate(190%);
   backdrop-filter: blur(22px) saturate(190%);
@@ -2094,7 +2094,7 @@ body.show-details .meta-footer,
   border: none !important;
   box-shadow: none !important;
   width: 100%;
-  max-width: 860px;
+  max-width: 960px;
   display: flex;
   justify-content: flex-start;
 }
@@ -2818,12 +2818,11 @@ body.show-details .meta-footer,
   align-items: flex-start;
   gap: 14px;
   width: 100%;
-  max-width: 860px;
+  max-width: 960px;
 }
 
 .msg-row.assistant.with-avatar .msg-bubble {
   flex: 1;
-  max-width: calc(100% - 68px);
 }
 
 .assistant-speaker-col {
@@ -2832,6 +2831,162 @@ body.show-details .meta-footer,
   align-items: center;
   flex-shrink: 0;
   padding-top: 4px;
+}
+
+/* ==============================================================================
+   Animated Speaking Avatar: AI Robot & Sparky Dog Duo (Sparks & Dog)
+   ============================================================================== */
+.chat-avatar-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  flex-shrink: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  animation: avatarChipBreath 3.2s ease-in-out infinite alternate;
+}
+
+.chip-avatar-svg {
+  width: 52px;
+  height: 46px;
+  overflow: visible;
+  filter: drop-shadow(0 4px 12px rgba(0, 242, 254, 0.3));
+}
+
+.chip-halo-glow {
+  fill: rgba(0, 242, 254, 0.08);
+}
+
+.chip-antenna-stem {
+  stroke: #00f2fe;
+}
+
+.chip-antenna-orb {
+  fill: #00f2fe;
+  filter: drop-shadow(0 0 6px #00f2fe);
+  animation: beaconPulse 1.6s ease-in-out infinite alternate;
+}
+
+.chip-robot-helm {
+  fill: url(#robotBodyDarkHero);
+  stroke: #00f2fe;
+  stroke-width: 1.8;
+}
+
+.chip-visor {
+  fill: #050b14;
+  stroke: rgba(0, 242, 254, 0.45);
+  stroke-width: 1;
+}
+
+.chip-eye {
+  fill: #00f2fe;
+  animation: eyeBlinkCadence 4.2s infinite;
+}
+
+.chip-smile {
+  stroke: #00f2fe;
+}
+
+.chip-dog-body,
+.chip-dog-head {
+  fill: url(#sparkyBodyDarkHero);
+  stroke: #38bdf8;
+  stroke-width: 1.6;
+}
+
+.chip-dog-ear {
+  fill: #38bdf8;
+  animation: earTwitch 3.8s infinite;
+}
+
+.chip-dog-eye,
+.chip-dog-nose {
+  fill: #00f2fe;
+}
+
+.chip-dog-tail {
+  stroke: #38bdf8;
+  animation: tailWag 1.6s ease-in-out infinite alternate;
+}
+
+/* Light Theme Avatar Styles */
+[data-theme="light"] .chip-antenna-stem,
+[data-theme="light"] .chip-smile {
+  stroke: #0284c7;
+}
+
+[data-theme="light"] .chip-antenna-orb,
+[data-theme="light"] .chip-eye {
+  fill: #0284c7;
+}
+
+[data-theme="light"] .chip-robot-helm {
+  fill: url(#robotBodyLightHero);
+  stroke: #0284c7;
+}
+
+[data-theme="light"] .chip-visor {
+  fill: #f8fafc;
+  stroke: rgba(2, 132, 199, 0.35);
+}
+
+[data-theme="light"] .chip-dog-body,
+[data-theme="light"] .chip-dog-head {
+  fill: url(#sparkyBodyLightHero);
+  stroke: #d97706;
+}
+
+[data-theme="light"] .chip-dog-ear,
+[data-theme="light"] .chip-dog-tail {
+  stroke: #d97706;
+}
+
+[data-theme="light"] .chip-dog-eye,
+[data-theme="light"] .chip-dog-nose {
+  fill: #78350f;
+}
+
+@keyframes avatarChipBreath {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+.ai-arm-waving {
+  transform-origin: 98px 86px;
+  animation: heroWaveArm 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes heroWaveArm {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(14deg); }
+  100% { transform: rotate(-8deg); }
+}
+
+.mascot-hero-stage {
+  max-width: 380px;
+  margin: 0 auto 12px;
+  cursor: pointer;
+}
+
+.mascot-hero-caption {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #00f2fe;
+  text-transform: uppercase;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+}
+
+[data-theme="light"] .mascot-hero-caption {
+  color: #0284c7;
+  text-shadow: none;
 }
 
 .neural-speaker-avatar,
