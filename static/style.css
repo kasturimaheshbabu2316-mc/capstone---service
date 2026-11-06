@@ -5009,6 +5009,33 @@ body.show-details .composer-footer {
   100% { transform: scale(1.04); opacity: 0.9; }
 }
 
+/* Persistent 3D Orbit Stage Header (Always Active) */
+.chat-orbit-header-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  margin: 0 auto;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, width, height;
+}
+
+.stage-inner.chat-active .chat-orbit-header-stage {
+  margin-bottom: 8px;
+}
+
+.stage-inner.chat-active .hero-threejs-wrap {
+  width: 220px;
+  height: 220px;
+}
+
+.stage-inner.chat-active .bot-speech-bubble {
+  margin-bottom: 4px;
+  transform: scale(0.92);
+}
+
 /* Three.js 3D Holographic Core Hero Display */
 .hero-threejs-wrap {
   width: 320px;
@@ -5019,6 +5046,7 @@ body.show-details .composer-footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: width 0.4s ease, height 0.4s ease;
 }
 
 .threejs-container {

@@ -960,6 +960,18 @@ document.addEventListener("DOMContentLoaded", () => {
       particles.rotation.x = Math.sin(t * 0.3) * 0.08;
       particleMaterial.size = 0.05 + hoverTransition * 0.02 + clickImpulse * 0.035;
 
+      // Dynamically maintain aspect ratio and canvas buffer size
+      const cw = container.clientWidth || 320;
+      const ch = container.clientHeight || 320;
+      if (cw > 0 && ch > 0) {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        if (renderer.domElement.width !== Math.round(cw * dpr) || renderer.domElement.height !== Math.round(ch * dpr)) {
+          camera.aspect = cw / ch;
+          camera.updateProjectionMatrix();
+          renderer.setSize(cw, ch, false);
+        }
+      }
+
       renderer.render(scene, camera);
     }
 
@@ -968,10 +980,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const handleResize = () => {
       const w = container.clientWidth || 320;
       const h = container.clientHeight || 320;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      if (w > 0 && h > 0) {
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h, false);
+      }
     };
 
     window.addEventListener("resize", handleResize);
@@ -1229,10 +1242,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Close examples popover
     setExamplesPopoverVisible(false);
 
-    // Hide minimal empty state completely once first message is sent
+    // Hide minimal empty title while keeping the 3D orbit core spinning
+    const stageInner = document.querySelector(".stage-inner");
+    if (stageInner) {
+      stageInner.classList.add("chat-active");
+    }
     if (chatEmptyState) {
       chatEmptyState.classList.add("stage-hidden");
     }
+    window.dispatchEvent(new Event("resize"));
 
     // Detect Indian mobile numbers and mask them without non-capturing groups
     const phoneRegex = /(\+91[\-\s]?|0)?[6-9]\d{4}[\-\s]?\d{5}\b/g;
@@ -2040,10 +2058,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       title: "Reset Chat Desk",
       tag: "Action",
-      action: () => {
-        if (chatStream) chatStream.innerHTML = "";
-        if (chatEmptyState) chatEmptyState.classList.remove("stage-hidden");
-      }
+      action: () => resetChatDesk()
     }
   ];
 
@@ -2156,13 +2171,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Central Desk Reset Function (Preserves 3D Orbit Core)
+  function resetChatDesk() {
+    if (chatStream) chatStream.innerHTML = "";
+    if (chatEmptyState) chatEmptyState.classList.remove("stage-hidden");
+    const stageInner = document.querySelector(".stage-inner");
+    if (stageInner) stageInner.classList.remove("chat-active");
+    if (botGreetingText) botGreetingText.textContent = GREETINGS[0];
+    greetingIdx = 0;
+    window.dispatchEvent(new Event("resize"));
+  }
+
   // Clear Chat Desk
   const btnClear = document.getElementById("clear-chat-btn");
   if (btnClear) {
-    btnClear.addEventListener("click", () => {
-      if (chatStream) chatStream.innerHTML = "";
-      if (chatEmptyState) chatEmptyState.classList.remove("stage-hidden");
-    });
+    btnClear.addEventListener("click", resetChatDesk);
   }
 
   // Theme Toggle
