@@ -67,7 +67,7 @@ flowchart TD
 
 The UI is built with a modern, framework-free vanilla stack designed for maximum execution speed, zero build overhead, and lightweight rendering:
 
-```
+```text
 ├── static/
 │   ├── index.html       # Primary application markup, semantic landmarks, and stage scaffolds
 │   ├── style.css        # Complete design system: Aurora themes, 3D CSS keyframes, glassmorphic UI
