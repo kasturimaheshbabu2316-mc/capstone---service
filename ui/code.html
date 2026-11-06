@@ -1,780 +1,890 @@
-<!DOCTYPE html>
-
-<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Ola Support Intelligence</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container-highest":"#31353f","secondary-fixed-dim":"#4edea3","on-background":"#dfe2f0","surface-dim":"#0f131d","surface-variant":"#31353f","tertiary-container":"#ffd0ce","inverse-on-surface":"#2c303b","surface-container-lowest":"#0a0e17","surface-container-low":"#171c25","on-primary-container":"#006a70","primary":"#e0fdff","on-secondary-fixed-variant":"#005236","on-surface":"#dfe2f0","tertiary-fixed":"#ffdad8","on-error":"#690005","on-error-container":"#ffdad6","primary-fixed-dim":"#00dce6","surface-container-high":"#262a34","background":"#0f131d","on-surface-variant":"#b9cacb","on-tertiary-fixed-variant":"#881d24","secondary-fixed":"#6ffbbe","inverse-surface":"#dfe2f0","secondary-container":"#00a572","error":"#ffb4ab","surface-tint":"#00dce6","on-tertiary-container":"#aa373b","surface-container":"#1b2029","tertiary-fixed-dim":"#ffb3b0","on-secondary-container":"#00311f","on-tertiary":"#670211","error-container":"#93000a","inverse-primary":"#00696f","on-secondary":"#003824","on-primary-fixed":"#002022","primary-container":"#00f2fe","on-primary":"#00373a","on-secondary-fixed":"#002113","outline":"#849495","on-tertiary-fixed":"#410006","surface-bright":"#353944","secondary":"#4edea3","surface":"#0f131d","outline-variant":"#3a494b","on-primary-fixed-variant":"#004f53","primary-fixed":"#6ff6ff","tertiary":"#fff5f4"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"gutter-lg":"1.5rem","margin-md":"1.5rem","space-xl":"2rem","space-lg":"1.25rem",gutter:"1rem","margin-lg":"2rem","space-md":"0.75rem","space-xs":"0.25rem",margin:"1rem","space-sm":"0.5rem"},fontFamily:{"display":["Inter"],"body-md":["Inter"],"body-sm":["Inter"],"body-lg":["Inter"],"headline-lg":["Inter"],"headline-sm":["Inter"],"code-tabular":["Inter"],"label-md":["Inter"],"label-sm":["Inter"],"headline-md":["Inter"],"title-md":["Inter"],"headline-lg-mobile":["Inter"]},fontSize:{"display":["40px",{lineHeight:"48px",letterSpacing:"-0.03em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"20px",letterSpacing:"0em",fontWeight:"400"}],"body-sm":["12px",{lineHeight:"18px",letterSpacing:"0.01em",fontWeight:"400"}],"body-lg":["16px",{lineHeight:"24px",letterSpacing:"-0.005em",fontWeight:"400"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.025em",fontWeight:"600"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"-0.015em",fontWeight:"600"}],"code-tabular":["13px",{lineHeight:"18px",letterSpacing:"0em",fontWeight:"500"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"600"}],"label-sm":["10px",{lineHeight:"14px",letterSpacing:"0.08em",fontWeight:"700"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg-mobile":["26px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"600"}]}}}};</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container relative overflow-x-hidden"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,0,0,0.5)] border-b border-white/5"><div class="h-16 w-full px-gutter-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><div class="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 via-fuchsia-500 to-amber-400 p-[1px] shadow-[0_0_16px_rgba(217,70,239,0.35)]"><div class="w-full h-full bg-surface-container-lowest rounded-[7px] flex items-center justify-center"><span class="material-symbols-outlined text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-fuchsia-400 text-[20px]">bolt</span></div></div><div class="flex items-center gap-space-sm"><span class="font-title-md text-title-md bg-gradient-to-r from-cyan-200 via-purple-200 to-pink-200 bg-clip-text text-transparent font-bold tracking-tight">Ola Support Intelligence</span><span class="px-2 py-0.5 rounded-full bg-gradient-to-r from-cyan-500/10 via-purple-500/15 to-pink-500/10 border border-cyan-400/25 text-cyan-200 font-label-sm text-label-sm tracking-widest uppercase shadow-[0_0_8px_rgba(0,242,254,0.15)]">Operations Desk • v4.8</span></div></div><div class="flex items-center gap-space-md"><button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-cyan-300 hover:bg-surface-container-low transition-colors" title="Toggle Theme" type="button"><span class="material-symbols-outlined text-[18px]">contrast</span></button><button class="relative w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-fuchsia-300 hover:bg-surface-container-low transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-gradient-to-r from-pink-500 to-amber-400 shadow-[0_0_8px_rgba(244,63,94,0.9)] animate-pulse"></span></button><div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-400 via-fuchsia-500 to-amber-400 cursor-pointer shadow-[0_0_12px_rgba(217,70,239,0.4)]" title="User Admin Profile"><div class="w-full h-full rounded-full bg-surface-container-lowest flex items-center justify-center"><span class="material-symbols-outlined text-transparent bg-clip-text bg-gradient-to-br from-cyan-200 to-pink-300 text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface-container-lowest relative overflow-hidden"><aside class="fixed top-16 left-0 bottom-8 z-40 w-16 bg-surface-container-low/95 backdrop-blur-2xl shadow-xl shadow-surface-container-lowest/80 border-r border-outline-variant/30 flex flex-col py-3 px-2 transition-all duration-320 ease-out overflow-hidden group/sidebar select-none" id="nav-sidebar-drawer" style="transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1);"><div class="flex items-center justify-between pb-3 mb-2 border-b border-outline-variant/30 px-1 min-h-[40px]"><button aria-label="Expand or collapse sidebar rail" class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors relative group/btn" id="rail-toggle-btn" onclick="toggleNavDrawer()" title="Toggle Rail (⌘B)" type="button"><span class="material-symbols-outlined text-[20px] transition-transform duration-320" id="rail-toggle-icon">menu</span></button><div class="hidden items-center gap-2 px-2.5 py-1 rounded-full bg-surface-container" id="rail-status-pill"><span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.6)] animate-pulse"></span><span class="font-label-sm text-label-sm text-secondary font-semibold whitespace-nowrap">Desk Online</span></div></div><div class="mb-3"><div class="hidden items-center justify-between px-3 py-2 rounded-lg bg-surface-container-lowest/90 text-on-surface-variant shadow-sm" id="rail-search-bar"><div class="flex items-center gap-2 overflow-hidden"><span class="material-symbols-outlined text-[16px] text-primary-container flex-shrink-0">search</span><span class="font-body-sm text-body-sm truncate">Quick Search</span></div><span class="font-code-tabular text-code-tabular text-primary-fixed-dim px-1.5 py-0.5 rounded bg-surface-container text-label-sm">⌘K</span></div><div class="flex justify-center" id="rail-search-mini"><button aria-label="Quick Search" class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" title="Quick Search (⌘K)" type="button"><span class="material-symbols-outlined text-[18px]">search</span></button></div></div><div class="flex flex-col gap-1 flex-1 overflow-y-auto overflow-x-hidden"><span class="hidden font-label-sm text-label-sm text-on-surface-variant/80 uppercase tracking-wider px-2 py-1" id="rail-section-label">Primary Views</span><nav class="flex flex-col gap-1.5" id="rail-nav-links"><a aria-current="page" class="flex items-center h-10 px-2 rounded-lg bg-gradient-to-r from-cyan-400 via-primary-container to-fuchsia-400 text-on-primary-container font-bold shadow-[0_0_18px_rgba(0,242,254,0.45),0_0_30px_rgba(217,70,239,0.3)] transition-all group/item relative border border-white/20" data-path="chat-desk" href="#" title="Chat Desk"><div class="w-8 h-8 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-[20px] text-gray-900 font-bold">chat</span></div><span class="hidden font-title-md text-title-md whitespace-nowrap ml-2.5 rail-label text-gray-900 font-bold">Chat Desk</span><span class="hidden ml-auto px-1.5 py-0.2 rounded bg-black/30 text-white font-code-tabular text-label-sm rail-label">LIVE</span></a><a class="flex items-center h-10 px-2 rounded-lg text-on-surface-variant hover:text-cyan-200 hover:bg-surface-container transition-all group/item relative" data-path="ticket-directory" href="#" title="Ticket Directory"><div class="w-8 h-8 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-[20px]">confirmation_number</span></div><span class="hidden font-body-md text-body-md font-semibold whitespace-nowrap ml-2.5 rail-label">Ticket Directory</span><span class="hidden ml-auto px-1.5 py-0.2 rounded bg-error-container/40 text-error font-code-tabular text-label-sm rail-label">1 P0</span></a><a class="flex items-center h-10 px-2 rounded-lg text-on-surface-variant hover:text-fuchsia-200 hover:bg-surface-container transition-all group/item relative" data-path="policy-explorer" href="#" title="Policy Explorer"><div class="w-8 h-8 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-[20px]">menu_book</span></div><span class="hidden font-body-md text-body-md font-semibold whitespace-nowrap ml-2.5 rail-label">Policy Explorer</span></a><a class="flex items-center h-10 px-2 rounded-lg text-on-surface-variant hover:text-amber-200 hover:bg-surface-container transition-all group/item relative" data-path="telemetry-stream" href="#" title="Telemetry Ingest"><div class="w-8 h-8 flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-[20px]">satellite_alt</span></div><span class="hidden font-body-md text-body-md font-semibold whitespace-nowrap ml-2.5 rail-label">Telemetry Feed</span></a></nav><div class="hidden mt-4 pt-3 border-t border-outline-variant/30 flex-col gap-2" id="rail-operational-context"><span class="font-label-sm text-label-sm text-on-surface-variant/80 uppercase tracking-wider px-2">Active Docket</span><div class="p-2.5 rounded-lg bg-surface-container-lowest/80 border border-outline-variant/30 flex flex-col gap-1"><div class="flex items-center justify-between"><span class="font-code-tabular text-primary-container text-label-sm font-semibold">#CRN-9842109</span><span class="text-secondary text-label-sm font-bold">99.2%</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">Dynamic Surge Reconciled</span></div></div></div><div class="mt-auto pt-3 border-t border-outline-variant/30 flex items-center justify-between text-on-surface-variant font-code-tabular text-code-tabular text-label-sm px-1"><div class="flex items-center gap-2 overflow-hidden"><span class="w-2 h-2 rounded-full bg-primary-container flex-shrink-0 shadow-[0_0_6px_rgba(0,242,254,0.8)]"></span><span class="hidden whitespace-nowrap rail-label">v4.8 Ops</span></div><span class="hidden text-primary-fixed-dim whitespace-nowrap rail-label">BLR-DC-04</span></div></aside><div class="flex flex-col w-full transition-all duration-320 ease-out will-change-transform pl-16 relative" id="main-content-workspace" style="transition: padding-left 320ms cubic-bezier(0.16, 1, 0.3, 1), transform 320ms cubic-bezier(0.16, 1, 0.3, 1);"><!-- Ambient Multi-color Aurora / Nebula Backdrops --><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[520px] pointer-events-none -z-0 opacity-75 blur-[120px]"><div class="absolute inset-0 bg-gradient-to-tr from-purple-700/35 via-cyan-500/25 to-pink-600/30 rounded-full animate-pulse" style="animation-duration: 8s;"></div><div class="absolute inset-10 bg-gradient-to-bl from-amber-500/20 via-fuchsia-600/30 to-teal-400/20 rounded-full mix-blend-screen"></div><div class="absolute top-1/4 left-1/4 w-[360px] h-[360px] bg-cyan-400/20 rounded-full blur-[80px]"></div></div><div class="relative z-10 flex flex-col items-center justify-between min-h-[calc(100vh-4rem)] w-full px-4 py-8 overflow-y-auto selection:bg-primary-container selection:text-on-primary-container"><div class="flex-1 flex flex-col items-center justify-center text-center my-auto w-full max-w-2xl px-4"><div class="relative mb-2 cursor-pointer group animate-bounce transition-transform hover:scale-105 duration-320"><div class="p-[1.5px] rounded-full bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 shadow-[0_0_24px_rgba(217,70,239,0.45),0_0_40px_rgba(0,242,254,0.3)]"><div class="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-2xl text-primary font-body-sm text-[13px] font-medium"><span class="text-[14px]">👋</span><span class="bg-gradient-to-r from-white via-cyan-100 to-pink-200 bg-clip-text text-transparent font-semibold">Hello! Tap me to say hi!</span><span class="text-amber-300 text-[13px] drop-shadow-[0_0_6px_rgba(252,211,77,0.8)]">✨</span></div></div><div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-fuchsia-600/90 rotate-45 border-r border-b border-pink-400/60 shadow-[0_4px_8px_rgba(217,70,239,0.5)]"></div></div><div class="w-[320px] h-[320px] mx-auto relative z-10"><!-- STITCH_THREEJS_START:ANIMATION_34 class="w-full h-full bg-transparent" -->
-<div class="w-full h-full bg-transparent" style="display:block;">
-<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
-<div id="threejs-container-ANIMATION_34" style="width:100%;height:100%"></div>
-<script>
-(function() {
-  const container = document.getElementById('threejs-container-ANIMATION_34');
-  const devicePixelRatio = window.devicePixelRatio || 1;
-  const width = container.clientWidth || window.innerWidth;
-const height = container.clientHeight || window.innerHeight;
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-camera.position.z = 6;
-
-const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
-renderer.setSize(width, height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.3;
-container.appendChild(renderer.domElement);
-
-const mainGroup = new THREE.Group();
-scene.add(mainGroup);
-
-// Vibrant multi-chromatic light setup
-const lightCyan = new THREE.PointLight(0x00f2fe, 3.5, 20);
-lightCyan.position.set(4, 3, 4);
-scene.add(lightCyan);
-
-const lightMagenta = new THREE.PointLight(0xf43f5e, 4.0, 20);
-lightMagenta.position.set(-4, -3, 3);
-scene.add(lightMagenta);
-
-const lightPurple = new THREE.PointLight(0xa855f7, 3.0, 18);
-lightPurple.position.set(0, 4, -3);
-scene.add(lightPurple);
-
-const lightGold = new THREE.PointLight(0xfbbf24, 3.0, 16);
-lightGold.position.set(0, -4, 4);
-scene.add(lightGold);
-
-const ambientLight = new THREE.AmbientLight(0x18182f, 1.8);
-scene.add(ambientLight);
-
-// 1. Inner Luminous Core Sphere (Dynamic Color Shift)
-const coreGeo = new THREE.SphereGeometry(0.75, 64, 64);
-const coreMat = new THREE.MeshPhongMaterial({
-  color: 0xffffff,
-  emissive: 0x00f2fe,
-  emissiveIntensity: 1.1,
-  shininess: 100,
-  specular: 0xffffff,
-  transparent: true,
-  opacity: 0.96
-});
-const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-mainGroup.add(coreMesh);
-
-// 2. Glassmorphic Outer Energy Sphere with Chromatic Transmission
-const glassGeo = new THREE.SphereGeometry(1.08, 64, 64);
-const glassMat = new THREE.MeshPhysicalMaterial({
-  color: 0x8b5cf6,
-  transmission: 0.88,
-  opacity: 1.0,
-  transparent: true,
-  roughness: 0.06,
-  metalness: 0.15,
-  ior: 1.48,
-  reflectivity: 0.95,
-  clearcoat: 1.0,
-  clearcoatRoughness: 0.04
-});
-const glassMesh = new THREE.Mesh(glassGeo, glassMat);
-mainGroup.add(glassMesh);
-
-// 3. Dual Nested Wireframe Geometries for holographic depth
-const wireGeo1 = new THREE.IcosahedronGeometry(0.92, 2);
-const wireMat1 = new THREE.MeshBasicMaterial({
-  color: 0x38bdf8,
-  wireframe: true,
-  transparent: true,
-  opacity: 0.45,
-  blending: THREE.AdditiveBlending
-});
-const wireMesh1 = new THREE.Mesh(wireGeo1, wireMat1);
-mainGroup.add(wireMesh1);
-
-const wireGeo2 = new THREE.DodecahedronGeometry(1.2, 1);
-const wireMat2 = new THREE.MeshBasicMaterial({
-  color: 0xf43f5e,
-  wireframe: true,
-  transparent: true,
-  opacity: 0.25,
-  blending: THREE.AdditiveBlending
-});
-const wireMesh2 = new THREE.Mesh(wireGeo2, wireMat2);
-mainGroup.add(wireMesh2);
-
-// 4. Vibrant Multi-Colored Orbital Rings
-const createOrbitalRing = (radius, tubeRadius, rx, ry, rz, colorHex, emissiveHex, opacity) => {
-  const ringGeo = new THREE.TorusGeometry(radius, tubeRadius, 28, 160);
-  const ringMat = new THREE.MeshStandardMaterial({
-    color: colorHex,
-    emissive: emissiveHex,
-    emissiveIntensity: 0.9,
-    roughness: 0.15,
-    metalness: 0.85,
-    transparent: true,
-    opacity: opacity
-  });
-  const ring = new THREE.Mesh(ringGeo, ringMat);
-  ring.rotation.set(rx, ry, rz);
-  return ring;
-};
-
-// Ring 1: Neon Cyan
-const ring1 = createOrbitalRing(1.68, 0.024, Math.PI / 2.3, 0.35, 0, 0x00f2fe, 0x00f2fe, 0.9);
-// Ring 2: Vivid Pink / Magenta
-const ring2 = createOrbitalRing(1.92, 0.020, -Math.PI / 2.7, -0.4, 0.4, 0xf43f5e, 0xf43f5e, 0.85);
-// Ring 3: Electric Violet / Purple
-const ring3 = createOrbitalRing(2.18, 0.016, Math.PI / 1.75, 0.75, -0.3, 0xa855f7, 0xa855f7, 0.8);
-// Ring 4: Radiant Golden Amber
-const ring4 = createOrbitalRing(2.42, 0.014, -Math.PI / 3.4, 0.5, 0.8, 0xfbbf24, 0xf59e0b, 0.75);
-
-mainGroup.add(ring1);
-mainGroup.add(ring2);
-mainGroup.add(ring3);
-mainGroup.add(ring4);
-
-// 5. Glowing Satellite Nodes on each ring
-const createNode = (colorHex) => {
-  const nodeGeo = new THREE.SphereGeometry(0.075, 32, 32);
-  const nodeMat = new THREE.MeshBasicMaterial({ color: colorHex });
-  return new THREE.Mesh(nodeGeo, nodeMat);
-};
-
-const node1 = createNode(0x38bdf8); // Cyan
-const node2 = createNode(0xfb7185); // Rose
-const node3 = createNode(0xc084fc); // Purple
-const node4 = createNode(0xfde047); // Gold
-
-mainGroup.add(node1);
-mainGroup.add(node2);
-mainGroup.add(node3);
-mainGroup.add(node4);
-
-// 6. Multi-chromatic Ambient Particle Swarm
-const particleCount = 360;
-const particleGeometry = new THREE.BufferGeometry();
-const particlePositions = new Float32Array(particleCount * 3);
-const particleColors = new Float32Array(particleCount * 3);
-
-const pColors = [
-  new THREE.Color(0x00f2fe), // Cyan
-  new THREE.Color(0xf43f5e), // Pink
-  new THREE.Color(0xa855f7), // Purple
-  new THREE.Color(0xfbbf24), // Amber
-  new THREE.Color(0x34d399), // Emerald
-  new THREE.Color(0xffffff)  // Sparkle White
-];
-
-for (let i = 0; i < particleCount; i++) {
-  const theta = Math.random() * Math.PI * 2;
-  const phi = Math.acos(2 * Math.random() - 1);
-  const r = 1.35 + Math.random() * 1.8;
-
-  particlePositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-  particlePositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-  particlePositions[i * 3 + 2] = r * Math.cos(phi);
-
-  const selectedCol = pColors[Math.floor(Math.random() * pColors.length)];
-  particleColors[i * 3] = selectedCol.r;
-  particleColors[i * 3 + 1] = selectedCol.g;
-  particleColors[i * 3 + 2] = selectedCol.b;
+<!DOCTYPE html><html class="dark" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+.view-pane { transition: opacity 0.25s ease, transform 0.25s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .view-pane { transition: none !important; }
 }
-
-particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
-
-const particleMaterial = new THREE.PointsMaterial({
-  size: 0.05,
-  vertexColors: true,
-  transparent: true,
-  opacity: 0.85,
-  blending: THREE.AdditiveBlending
-});
-
-const particles = new THREE.Points(particleGeometry, particleMaterial);
-mainGroup.add(particles);
-
-// Interactive State variables for Hover & Click reactivity
-let isHovered = false;
-let hoverTransition = 0; // 0 to 1
-let clickImpulse = 0; // decays over time
-let speedMultiplier = 1.0;
-
-// Mouse & Raycasting setup
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2(-999, -999);
-let targetMouseX = 0;
-let targetMouseY = 0;
-let currentMouseX = 0;
-let currentMouseY = 0;
-
-// Container interactive cursor style
-container.style.cursor = 'pointer';
-
-const onPointerMove = (event) => {
-  const rect = container.getBoundingClientRect();
-  const rawX = (event.clientX - rect.left) / rect.width * 2 - 1;
-  const rawY = -((event.clientY - rect.top) / rect.height * 2 - 1);
-  mouse.x = rawX;
-  mouse.y = rawY;
-
-  targetMouseX = rawX * 0.55;
-  targetMouseY = rawY * 0.55;
-
-  // Raycast against core and glass outer orb
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects([coreMesh, glassMesh, ring1, ring2, ring3, ring4]);
-  isHovered = (intersects.length > 0) || (Math.sqrt(rawX * rawX + rawY * rawY) < 0.65);
-};
-
-const onPointerLeave = () => {
-  isHovered = false;
-  mouse.x = -999;
-  mouse.y = -999;
-  targetMouseX = 0;
-  targetMouseY = 0;
-};
-
-const onPointerDown = () => {
-  clickImpulse = 1.8; // Trigger rapid shockwave and supercharged pulse
-};
-
-window.addEventListener('mousemove', onPointerMove);
-container.addEventListener('pointerdown', onPointerDown);
-container.addEventListener('pointerleave', onPointerLeave);
-
-// Animation Loop
-let clock = new THREE.Clock();
-let animId;
-let accumulatedTime = 0;
-
-function animate() {
-  animId = requestAnimationFrame(animate);
-  const delta = Math.min(clock.getDelta(), 0.1);
-
-  // Smoothly blend hover state: 0 (idle) -> 1 (hovered)
-  hoverTransition += ((isHovered ? 1.0 : 0.0) - hoverTransition) * 0.08;
-
-  // Decay click impulse
-  clickImpulse = Math.max(0, clickImpulse - delta * 2.2);
-
-  // Calculate dynamic speed multiplier (idle ~1.0, hover ~2.4, click burst up to ~4.5)
-  const targetSpeed = 1.0 + (hoverTransition * 1.6) + (clickImpulse * 2.5);
-  speedMultiplier += (targetSpeed - speedMultiplier) * 0.12;
-  accumulatedTime += delta * speedMultiplier;
-
-  const t = accumulatedTime;
-
-  // Levitation motion with dynamic frequency
-  mainGroup.position.y = Math.sin(t * 1.4) * (0.09 + hoverTransition * 0.05);
-
-  // Smooth mouse inertia tracking
-  currentMouseX += (targetMouseX - currentMouseX) * 0.07;
-  currentMouseY += (targetMouseY - currentMouseY) * 0.07;
-  mainGroup.rotation.y = t * 0.22 + currentMouseX;
-  mainGroup.rotation.x = currentMouseY;
-
-  // Pulsing frequency increases rapidly on hover & click
-  // Base pulse frequency 2.5, accelerated up to 7.0+ on hover/burst
-  const pulseFreq = 2.6 + hoverTransition * 3.5 + clickImpulse * 4.5;
-  const pulseAmp = 0.06 + hoverTransition * 0.08 + clickImpulse * 0.12;
-  const pulse = Math.sin(t * pulseFreq) * pulseAmp + (1.0 + hoverTransition * 0.1 + clickImpulse * 0.18);
-
-  coreMesh.scale.set(pulse, pulse, pulse);
-  glassMesh.scale.set(1.0 + (pulse - 1.0) * 0.55, 1.0 + (pulse - 1.0) * 0.55, 1.0 + (pulse - 1.0) * 0.55);
-
-  // Core brightness and glow intensity surge on hover/click
-  const baseEmissive = 1.0 + Math.sin(t * pulseFreq) * 0.4;
-  coreMat.emissiveIntensity = baseEmissive + hoverTransition * 0.8 + clickImpulse * 1.5;
-
-  // Dynamic rapid hue shifting faster on hover
-  const hue = (t * (0.07 + hoverTransition * 0.1 + clickImpulse * 0.2)) % 1;
-  coreMat.emissive.setHSL(hue, 0.95, 0.55);
-
-  // Flare point lights on hover/burst
-  lightCyan.intensity = 3.5 + hoverTransition * 2.0 + clickImpulse * 3.5;
-  lightMagenta.intensity = 4.0 + hoverTransition * 2.2 + clickImpulse * 3.8;
-
-  // Counter rotate nested wireframes at accelerated spin
-  wireMesh1.rotation.y = -t * 0.55;
-  wireMesh1.rotation.z = t * 0.35;
-  wireMesh2.rotation.x = t * 0.42;
-  wireMesh2.rotation.y = -t * 0.28;
-  glassMesh.rotation.y = t * 0.16;
-
-  // Multi-axis orbital rings spin dynamically faster
-  ring1.rotation.z = t * 0.65;
-  ring2.rotation.z = -t * 0.55;
-  ring3.rotation.z = t * 0.45;
-  ring4.rotation.z = -t * 0.38;
-
-  // Orbital Satellite nodes
-  const s1 = t * 1.3;
-  node1.position.set(
-    Math.cos(s1) * 1.68,
-    Math.sin(s1) * 1.68 * Math.sin(ring1.rotation.x),
-    Math.sin(s1) * 1.68 * Math.cos(ring1.rotation.x)
-  );
-
-  const s2 = -t * 1.15 + 1.5;
-  node2.position.set(
-    Math.cos(s2) * 1.92,
-    Math.sin(s2) * 1.92 * Math.sin(ring2.rotation.x),
-    Math.sin(s2) * 1.92 * Math.cos(ring2.rotation.x)
-  );
-
-  const s3 = t * 0.95 + 2.8;
-  node3.position.set(
-    Math.cos(s3) * 2.18,
-    Math.sin(s3) * 2.18 * Math.sin(ring3.rotation.x),
-    Math.sin(s3) * 2.18 * Math.cos(ring3.rotation.x)
-  );
-
-  const s4 = -t * 0.8 + 4.2;
-  node4.position.set(
-    Math.cos(s4) * 2.42,
-    Math.sin(s4) * 2.42 * Math.sin(ring4.rotation.x),
-    Math.sin(s4) * 2.42 * Math.cos(ring4.rotation.x)
-  );
-
-  // Particles rotate and scale slightly with energy surge
-  particles.rotation.y = t * 0.12;
-  particles.rotation.x = Math.sin(t * 0.3) * 0.08;
-  particleMaterial.size = 0.05 + hoverTransition * 0.02 + clickImpulse * 0.035;
-
-  renderer.render(scene, camera);
-}
-
-animate();
-
-const handleResize = () => {
-  const w = container.clientWidth || window.innerWidth;
-  const h = container.clientHeight || window.innerHeight;
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-  renderer.setSize(w, h);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-};
-
-window.addEventListener('resize', handleResize);
-
-})();
-</script>
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"error":"#ffb4ab","on-primary":"#00373a","outline":"#849495","on-error-container":"#ffdad6","primary":"#e0fdff","secondary-fixed":"#6ffbbe","surface-container-high":"#262a34","tertiary":"#fff5f4","on-tertiary-container":"#aa373b","on-surface-variant":"#b9cacb","surface-variant":"#31353f","background":"#0f131d","on-tertiary-fixed-variant":"#881d24","on-secondary-container":"#00311f","inverse-primary":"#00696f","inverse-surface":"#dfe2f0","surface-tint":"#00dce6","on-background":"#dfe2f0","secondary":"#4edea3","on-primary-container":"#006a70","on-secondary-fixed":"#002113","surface-bright":"#353944","surface-dim":"#0f131d","on-primary-fixed":"#002022","on-primary-fixed-variant":"#004f53","surface-container-low":"#171c25","tertiary-container":"#ffd0ce","on-surface":"#dfe2f0","outline-variant":"#3a494b","surface-container-highest":"#31353f","secondary-fixed-dim":"#4edea3","primary-container":"#00f2fe","on-tertiary":"#670211","error-container":"#93000a","surface":"#0f131d","primary-fixed-dim":"#00dce6","on-error":"#690005","surface-container-lowest":"#0a0e17","inverse-on-surface":"#2c303b","on-secondary":"#003824","primary-fixed":"#6ff6ff","tertiary-fixed":"#ffdad8","tertiary-fixed-dim":"#ffb3b0","on-tertiary-fixed":"#410006","on-secondary-fixed-variant":"#005236","surface-container":"#1b2029","secondary-container":"#00a572"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xl":"2rem","space-lg":"1.25rem","space-sm":"0.5rem","margin-md":"1.5rem","space-xs":"0.25rem","space-md":"0.75rem","gutter-lg":"1.5rem","gutter":"1rem","margin":"1rem","margin-lg":"2rem"},"fontFamily":{"display":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"],"title-md":["Inter"],"label-md":["Inter"],"headline-lg":["Inter"],"code-tabular":["Inter"],"body-sm":["Inter"],"headline-lg-mobile":["Inter"],"label-sm":["Inter"],"body-md":["Inter"]},"fontSize":{"display":["40px",{"lineHeight":"48px","letterSpacing":"-0.03em","fontWeight":"700"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","letterSpacing":"-0.005em","fontWeight":"400"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.025em","fontWeight":"600"}],"code-tabular":["13px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"400"}],"headline-lg-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.02em","fontWeight":"600"}],"label-sm":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed top-0 left-0 bottom-0 w-16 bg-surface-container-lowest/80 backdrop-blur-2xl border-r border-outline-variant/30 z-50 flex flex-col items-center py-3 justify-between shadow-[4px_0_24px_rgba(0,0,0,0.6)]"><div class="flex flex-col items-center gap-4 w-full"><button class="w-10 h-10 rounded-xl text-primary-container hover:text-primary flex items-center justify-center transition-all duration-200 cursor-pointer relative group active:scale-95" style="background: linear-gradient(145deg, rgb(28, 34, 46), rgb(16, 20, 29)); box-shadow: rgba(0, 0, 0, 0.7) 4px 4px 10px, rgba(255, 255, 255, 0.06) -3px -3px 8px, rgba(255, 255, 255, 0.12) 0px 1px 1px inset; border: 1px solid rgba(255, 255, 255, 0.07);" onmousedown="this.style.boxShadow='inset 3px 3px 6px rgba(0,0,0,0.8), inset -2px -2px 5px rgba(255,255,255,0.05), 0 0 12px rgba(0,242,254,0.3)'; this.style.borderColor='rgba(0,242,254,0.35)';" onmouseup="this.style.boxShadow='4px 4px 10px rgba(0,0,0,0.7), -3px -3px 8px rgba(255,255,255,0.06), inset 0 1px 1px rgba(255,255,255,0.12)'; this.style.borderColor='rgba(255,255,255,0.07)';" onmouseleave="this.style.boxShadow='4px 4px 10px rgba(0,0,0,0.7), -3px -3px 8px rgba(255,255,255,0.06), inset 0 1px 1px rgba(255,255,255,0.12)'; this.style.borderColor='rgba(255,255,255,0.07)';" onmouseenter="this.style.boxShadow='4px 4px 14px rgba(0,0,0,0.8), -3px -3px 10px rgba(255,255,255,0.09), inset 0 1px 1px rgba(255,255,255,0.2), 0 0 14px rgba(0,242,254,0.35)'; this.style.borderColor='rgba(0,242,254,0.4)';" title="Toggle Navigation"><span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:scale-105" style="filter: drop-shadow(0 0 5px rgba(0,242,254,0.6));">menu</span></button><div class="w-8 h-px bg-outline-variant/30 my-1"></div><button class="w-10 h-10 rounded-xl hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors relative" id="quick-search-trigger" title="Search / Command (⌘K)" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><nav class="flex flex-col items-center gap-2 mt-2 w-full px-2"><button aria-label="Chat Desk" class="nav-rail-btn w-11 h-11 rounded-xl hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center relative transition-all group" data-nav="chat" data-path="chat-desk" title="Chat Desk / Neural Chat" type="button"><span class="material-symbols-outlined text-[22px]">forum</span><span class="active-pill absolute left-1 top-2 bottom-2 w-1 bg-primary-container rounded-r-full hidden"></span></button><button aria-label="Active Ticket Master Directory" class="nav-rail-btn w-11 h-11 rounded-xl flex items-center justify-center relative transition-all group bg-primary-container/20 text-primary-container shadow-[0_0_12px_rgba(0,242,254,0.35)]" data-nav="tickets" data-path="ticket-directory" title="Active Ticket Master Directory (Tickets)" type="button"><span class="material-symbols-outlined text-[22px]">confirmation_number</span><span class="active-pill absolute left-1 top-2 bottom-2 w-1 bg-primary-container rounded-r-full"></span></button><button aria-label="Official Policy Knowledge Base" class="nav-rail-btn w-11 h-11 rounded-xl hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center relative transition-all group" data-nav="policy" title="Official Policy Knowledge Base (Policy Explorer)" type="button"><span class="material-symbols-outlined text-[22px]">menu_book</span><span class="active-pill absolute left-1 top-2 bottom-2 w-1 bg-primary-container rounded-r-full hidden"></span></button><button aria-label="Telemetry Radar" class="nav-rail-btn w-11 h-11 rounded-xl hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center relative transition-all group" data-nav="telemetry" title="Telemetry Radar / Clusters" type="button"><span class="material-symbols-outlined text-[22px]">radar</span><span class="active-pill absolute left-1 top-2 bottom-2 w-1 bg-primary-container rounded-r-full hidden"></span></button></nav></div><div class="flex flex-col items-center gap-3"><button class="w-10 h-10 rounded-xl hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="System Settings"><span class="material-symbols-outlined text-[20px]">tune</span></button><div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.8)]"></div></div></aside><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 w-full pl-20 pr-gutter-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md shrink-0"><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center shadow-inner border border-outline-variant/30"><span class="material-symbols-outlined text-[#ff7940] text-[20px]">bolt</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-primary tracking-tight font-bold">Ola Support Intelligence</span><span class="font-code-tabular text-[10px] tracking-wider text-outline uppercase">OPERATIONS DESK • V4.8</span></div></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="flex items-center gap-space-xs px-space-sm h-8 rounded-full bg-secondary-container/20 text-secondary font-label-md text-label-md"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span></span><span class="">🐾 Rover: Online</span></div><button class="w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" onclick="document.documentElement.classList.toggle('dark')" title="Toggle Theme" type="button"><span class="material-symbols-outlined text-[18px]">contrast</span></button><button class="relative w-8 h-8 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[18px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container shadow-[0_0_6px_rgba(0,242,254,0.9)]"></span></button><div class="flex items-center gap-2 pl-2 border-l border-outline-variant/30"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">support_agent</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-on-surface leading-none">Desk Lead</span><span class="font-code-tabular text-[10px] text-outline">BLR-HQ-OP</span></div></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen relative overflow-hidden pl-16"><div class="flex flex-col w-full">
+<!-- Subtle Spatial Ambience Glow (Contained) -->
+<div class="relative w-full overflow-hidden px-margin-lg py-space-lg flex flex-col gap-space-lg">
+<div class="absolute -top-32 -left-20 w-96 h-96 rounded-full bg-primary-container/5 blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-secondary-container/5 blur-3xl pointer-events-none"></div>
+<!-- STAGE HEADER & TELEMETRY CONTROLS -->
+<div class="relative z-10 flex flex-col xl:flex-row xl:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/10 text-primary-container font-label-sm uppercase tracking-wider">Triage Node v4.8</span>
+<span class="text-outline-variant font-code-tabular text-body-sm">•</span>
+<div class="flex items-center gap-1.5 font-code-tabular text-body-sm text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.9)] animate-pulse"></span>
+<span class="">Real-time Dossier Bus: 60 Records Active</span>
 </div>
-<!-- STITCH_THREEJS_END:ANIMATION_34 --></div><h1 class="text-[38px] sm:text-[46px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-fuchsia-400 to-amber-300 tracking-tight leading-tight mb-3 drop-shadow-[0_0_32px_rgba(217,70,239,0.45)]">How can I help?</h1><p class="font-body-md text-on-surface-variant max-w-lg text-[15px] sm:text-[16px] leading-relaxed">Ask any official ride policy question or enter a ticket ID to inspect.</p></div><div class="w-full max-w-2xl px-2 pb-6 pt-2 select-none"><div class="p-[1.5px] rounded-2xl bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 shadow-[0_8px_32px_rgba(0,0,0,0.8),0_0_28px_rgba(0,242,254,0.25),0_0_40px_rgba(217,70,239,0.2)]"><div class="flex items-center gap-2 p-2 rounded-[15px] bg-surface-container-lowest/90 backdrop-blur-2xl"><div class="relative flex-shrink-0"><button class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-cyan-500/15 via-purple-500/20 to-pink-500/15 hover:from-cyan-500/25 hover:to-pink-500/25 text-primary font-label-md text-label-md transition-all border border-cyan-400/30 shadow-[0_0_12px_rgba(0,242,254,0.2)]" type="button"><span class="text-[15px]">🤖</span><span class="text-amber-300 text-[13px] drop-shadow-[0_0_6px_rgba(252,211,77,0.8)]">✨</span><span class="font-semibold whitespace-nowrap bg-gradient-to-r from-cyan-200 to-pink-200 bg-clip-text text-transparent">Help Desk</span><span class="material-symbols-outlined text-[16px] text-fuchsia-300">arrow_drop_down</span></button></div><input class="flex-1 bg-transparent px-2.5 py-2 text-cyan-50 font-body-md text-[14px] focus:outline-none placeholder:text-on-surface-variant/60" placeholder="Enter your inquiry or ticket ID (e.g. TKT-0007)..." type="text"/><button class="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 via-primary-container to-fuchsia-500 text-gray-950 font-label-md text-[13px] font-bold shadow-[0_0_20px_rgba(0,242,254,0.6),0_0_28px_rgba(217,70,239,0.4)] hover:brightness-110 hover:shadow-[0_0_28px_rgba(0,242,254,0.8)] active:scale-95 transition-all flex-shrink-0 border border-white/30" type="button"><span class="font-bold">Send</span><span class="material-symbols-outlined text-[15px] font-extrabold">keyboard_return</span></button></div></div></div></div></div></main><footer class="w-full bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_-1px_10px_rgba(0,0,0,0.5)] z-40 border-t border-white/5"><div class="h-8 w-full px-gutter-lg flex items-center justify-between font-code-tabular text-code-tabular text-on-surface-variant"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.9)] animate-pulse"></span><span class="text-cyan-200/90">CLUSTER-AP-SOUTH-1A</span></div><div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px] text-fuchsia-400">speed</span><span class="text-pink-200/90">24ms RTT</span></div><div class="hidden sm:flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px] text-amber-400">sync</span><span class="text-amber-200/90">Telemetry Ingest: Normal</span></div></div><div class="flex items-center gap-space-lg"><div class="flex items-center gap-1.5"><span class="bg-gradient-to-r from-cyan-300 via-fuchsia-300 to-amber-300 bg-clip-text text-transparent font-semibold">TOKEN BUDGET: 84.2k / 100k</span><div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden p-[0.5px] border border-cyan-400/30"><div class="bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-amber-400 h-full w-[84%] rounded-full shadow-[0_0_8px_rgba(0,242,254,0.7)]"></div></div></div><span class="text-cyan-200 font-semibold drop-shadow-[0_0_8px_rgba(0,242,254,0.4)]">Ola Fleet OPS</span></div></div></footer>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">Ticket Operations &amp; Incident Directory</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+          Live telematics across 60 active dispute dossiers, automated policy triage &amp; escalation scoring with dynamic toll reconciliation engine.
+        </p>
+</div>
+<!-- Action Triggers -->
+<div class="flex flex-wrap items-center gap-2">
+  <button class="h-8 px-3 py-1.5 rounded-lg bg-gradient-to-r from-primary-container via-surface-tint to-secondary text-surface-container-lowest font-label-md text-[12px] font-bold shadow-[0_0_14px_rgba(0,242,254,0.35)] hover:shadow-[0_0_20px_rgba(0,242,254,0.5),0_0_32px_rgba(0,242,254,0.25)] hover:brightness-110 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 flex items-center gap-1.5 cursor-pointer" id="batch-triage-btn" style="box-shadow: rgba(0, 242, 254, 0.35) 0px 0px 14px, rgba(255, 255, 255, 0.4) 0px 1px 0px inset;">
+    <span class="material-symbols-outlined text-[16px]">bolt</span>
+    <span class="">Batch Auto-Triage</span>
+  </button>
+  <button class="h-8 px-3 py-1.5 rounded-lg bg-surface-container-high/60 hover:bg-surface-container-high text-on-surface hover:text-primary border border-outline-variant/30 hover:border-primary-container/40 hover:shadow-[0_0_14px_rgba(0,242,254,0.25)] hover:-translate-y-0.5 active:translate-y-0 font-label-md text-[12px] transition-all duration-200 flex items-center gap-1.5 cursor-pointer shadow-sm group" id="export-csv-btn">
+    <span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary-container transition-colors">download</span>
+    <span class="">Export CSV Audit</span>
+  </button>
+  <button class="h-8 px-2.5 py-1.5 rounded-lg bg-surface-container-lowest/80 hover:bg-surface-container-high/60 border border-secondary/30 hover:border-secondary/50 hover:shadow-[0_0_14px_rgba(78,222,163,0.35)] hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-1.5 text-[11px] font-code-tabular text-secondary shadow-[0_0_10px_rgba(78,222,163,0.15)] transition-all duration-200 cursor-pointer" id="sync-stream-btn" title="AP-SOUTH-1 Live Telemetry Stream">
+    <span class="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.9)] animate-pulse"></span>
+    <span class="material-symbols-outlined text-[14px] text-secondary" id="sync-icon">sync</span>
+    <span id="sync-label" class="">Stream Synced (60 OK)</span>
+  </button>
+</div>
+</div>
+<!-- KPI TELEMETRY GRID (4 DENSE GLASS CARDS) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- KPI 1 -->
+<div class="relative p-space-md rounded-2xl bg-surface-container-lowest/80 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all group overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Active Tickets</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-code-tabular text-label-sm">+4.2% ingress</span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-primary font-code-tabular">60</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Records Live</span>
+</div>
+<div class="mt-space-sm flex items-center gap-space-sm text-body-sm font-code-tabular text-outline">
+<span class="text-tertiary-fixed font-semibold">P0/P1: 12</span>
+<span class="">•</span>
+<span class="text-secondary font-semibold">P2: 24</span>
+<span class="">•</span>
+<span class="text-on-surface-variant">Resolved Today: 142</span>
+</div>
+<div class="mt-space-xs w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 72%;"></div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="relative p-space-md rounded-2xl bg-surface-container-lowest/80 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all group overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Escalation Rate</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/30 text-on-tertiary-container font-code-tabular text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container animate-ping"></span>
+            τ = 0.4400
+          </span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-tertiary-fixed font-code-tabular">20.0%</span>
+<span class="font-body-md text-body-md text-outline">Threshold Bound</span>
+</div>
+<div class="mt-space-sm flex items-center justify-between text-body-sm font-code-tabular">
+<span class="text-on-surface-variant">Model: Chroma-X v3.1</span>
+<span class="text-tertiary-fixed">12 / 60 Dossiers</span>
+</div>
+<div class="mt-space-xs w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-on-tertiary-container rounded-full" style="width: 20%;"></div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="relative p-space-md rounded-2xl bg-surface-container-lowest/80 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all group overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Mean Resolution SLA</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-code-tabular text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+            92.4% Met
+          </span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-secondary font-code-tabular">11.5h</span>
+<span class="font-body-md text-body-md text-outline">Target: 15.0h</span>
+</div>
+<div class="mt-space-sm flex items-center justify-between text-body-sm font-code-tabular text-on-surface-variant">
+<span class="">Speed Index: 1.30x</span>
+<span class="text-secondary">-3.5h vs Policy Max</span>
+</div>
+<div class="mt-space-xs w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 76%;"></div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="relative p-space-md rounded-2xl bg-surface-container-lowest/80 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all group overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Auto-Reconciled</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary-container font-code-tabular text-label-sm font-bold shadow-[0_0_8px_rgba(0,242,254,0.4)]">
+            AI Adjudicated
+          </span>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg font-bold text-primary-container font-code-tabular">₹1,48,220</span>
+<span class="font-body-md text-body-md text-outline">Total Today</span>
+</div>
+<div class="mt-space-sm flex items-center justify-between text-body-sm font-code-tabular text-on-surface-variant">
+<span class="">18 Tolls • 31 Waivers</span>
+<span class="text-secondary">0 Demerits</span>
+</div>
+<div class="mt-space-xs w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 88%;"></div>
+</div>
+</div>
+</div>
+<!-- CATEGORY WORKLOAD SEGMENTED BAR -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest/70 backdrop-blur-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px]">pie_chart</span>
+<span class="font-title-md text-title-md text-primary font-semibold">Incident Category Distribution</span>
+<span class="text-outline font-code-tabular text-body-sm">• Live Queue Breakdown</span>
+</div>
+<span class="font-code-tabular text-body-sm text-outline">100% Normalized</span>
+</div>
+<!-- Multi-Chromatic Track -->
+<div class="w-full h-3 rounded-full bg-surface-container-high overflow-hidden flex items-center gap-0.5 p-0.5">
+<div class="h-full bg-primary-container rounded-l-full transition-all" style="width: 32%;" title="Toll Disputes: 32%"></div>
+<div class="h-full bg-secondary transition-all" style="width: 24%;" title="Driver Cancellations: 24%"></div>
+<div class="h-full bg-tertiary-container transition-all" style="width: 18%;" title="Fare &amp; Dynamic Surge: 18%"></div>
+<div class="h-full bg-on-tertiary-container transition-all" style="width: 10%;" title="Safety Escalation: 10%"></div>
+<div class="h-full bg-surface-tint transition-all" style="width: 10%;" title="Lost Property: 10%"></div>
+<div class="h-full bg-outline rounded-r-full transition-all" style="width: 6%;" title="Account &amp; Wallet: 6%"></div>
+</div>
+<!-- Interactive Legends -->
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high cursor-pointer transition-colors text-body-sm font-code-tabular">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container shadow-[0_0_6px_rgba(0,242,254,0.6)]"></span>
+<span class="text-on-surface font-medium">Toll Disputes</span>
+<span class="text-primary-container font-bold">19 (32%)</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high cursor-pointer transition-colors text-body-sm font-code-tabular">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface font-medium">Driver Cancellations</span>
+<span class="text-secondary font-bold">14 (24%)</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high cursor-pointer transition-colors text-body-sm font-code-tabular">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container"></span>
+<span class="text-on-surface font-medium">Fare &amp; Surge Multiplier</span>
+<span class="text-on-surface-variant font-bold">11 (18%)</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high cursor-pointer transition-colors text-body-sm font-code-tabular">
+<span class="w-2.5 h-2.5 rounded-full bg-on-tertiary-container"></span>
+<span class="text-on-surface font-medium">Safety Escalation (Sev-1)</span>
+<span class="text-tertiary-fixed font-bold">6 (10%)</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high cursor-pointer transition-colors text-body-sm font-code-tabular">
+<span class="w-2.5 h-2.5 rounded-full bg-surface-tint"></span>
+<span class="text-on-surface font-medium">Lost Property</span>
+<span class="text-on-surface-variant font-bold">6 (10%)</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high cursor-pointer transition-colors text-body-sm font-code-tabular">
+<span class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+<span class="text-on-surface font-medium">Account / Ola Money</span>
+<span class="text-outline font-bold">4 (6%)</span>
+</div>
+</div>
+</div>
+<!-- SEARCH, FILTER & TRIAGE CONTROL TOOLBAR -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest/80 backdrop-blur-2xl border border-outline-variant/30 shadow-[0_16px_48px_rgba(0,0,0,0.4)] flex flex-col gap-3 relative overflow-hidden"><!-- Ambient Edge Light Accent -->
+  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-container/40 to-transparent"></div>
+
+  <!-- Unified Streamlined Controls Toolbar -->
+  <div class="flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 w-full relative z-10"><div class="relative flex-1 min-w-[220px] max-w-sm group"><div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary-container group-focus-within:text-primary transition-colors"><span class="material-symbols-outlined text-[18px] drop-shadow-[0_0_8px_rgba(0,242,254,0.6)]">search</span></div><input class="w-full h-8 pl-8 pr-11 py-1 rounded-xl bg-surface-container/60 hover:bg-surface-container/80 focus:bg-surface-container-high/90 border border-outline-variant/30 hover:border-primary-container/40 focus:border-primary-container/40 text-on-surface placeholder:text-outline font-body-sm text-[12px] focus:outline-none focus:shadow-[0_0_16px_rgba(0,242,254,0.2)] transition-all shadow-inner" id="ticket-search-input" placeholder="Search by Ticket ID, Rider, CRN..." type="text"><div class="absolute inset-y-0 right-0 pr-2.5 flex items-center gap-1 pointer-events-none"><kbd class="px-1.5 py-0.5 rounded bg-surface-container-high/80 text-primary-container/80 font-code-tabular text-[10px] border border-outline-variant/30 shadow-sm">⌘/</kbd></div></div><div class="flex flex-wrap items-center gap-2 shrink-0"><div class="relative filter-dropdown-group"><button class="h-8 px-2.5 rounded-xl bg-surface-container-low/70 hover:bg-surface-container-high border border-outline-variant/30 hover:border-primary-container/40 text-on-surface hover:text-primary hover:shadow-[0_0_14px_rgba(0,242,254,0.25)] font-label-md text-body-sm flex items-center gap-1.5 transition-all duration-200 cursor-pointer group shadow-sm text-[12px] whitespace-nowrap" id="category-filter-btn" onclick="window.toggleFilterMenu('category-dropdown-panel')" type="button"><span class="material-symbols-outlined text-[16px] text-primary-container">filter_list</span><span class="text-outline text-[12px]">Category:</span><span class="text-primary font-bold text-[12px]" id="category-filter-label">All (6)</span><span class="material-symbols-outlined text-[14px] text-outline group-hover:text-on-surface transition-colors">expand_more</span></button><div class="filter-menu-panel absolute top-full left-0 mt-1.5 w-56 rounded-xl bg-surface-container-lowest/90 backdrop-blur-2xl border border-outline-variant/40 shadow-2xl p-1.5 z-50 flex flex-col gap-0.5 hidden" id="category-dropdown-panel"><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('category', 'All (6)', 'All Categories', 'category-filter-label', 'category-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>All Categories</span><span class="font-code-tabular text-[10px] text-outline">60</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('category', 'Toll (19)', 'Toll Disputes', 'category-filter-label', 'category-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>Toll Disputes</span><span class="font-code-tabular text-[10px] text-primary-container font-semibold">19</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('category', 'Cancel (14)', 'Driver Cancellations', 'category-filter-label', 'category-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Cancellations</span><span class="font-code-tabular text-[10px] text-secondary font-semibold">14</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('category', 'Surge (11)', 'Fare &amp; Surge Multiplier', 'category-filter-label', 'category-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>Surge Multiplier</span><span class="font-code-tabular text-[10px] text-outline font-semibold">11</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('category', 'Safety (6)', 'Safety Escalations', 'category-filter-label', 'category-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>Safety (Sev-1)</span><span class="font-code-tabular text-[10px] text-tertiary-fixed font-semibold">6</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('category', 'Lost (6)', 'Lost Property', 'category-filter-label', 'category-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-surface-tint"></span>Lost Property</span><span class="font-code-tabular text-[10px] text-outline">6</span></button></div></div><div class="relative filter-dropdown-group"><button class="h-8 px-2.5 rounded-xl bg-surface-container-low/70 hover:bg-surface-container-high border border-outline-variant/30 hover:border-primary-container/40 text-on-surface hover:text-primary hover:shadow-[0_0_14px_rgba(0,242,254,0.25)] font-label-md text-body-sm flex items-center gap-1.5 transition-all duration-200 cursor-pointer group shadow-sm text-[12px] whitespace-nowrap" id="severity-filter-btn" onclick="window.toggleFilterMenu('severity-dropdown-panel')" type="button"><span class="material-symbols-outlined text-[16px] text-tertiary-fixed">warning</span><span class="text-outline text-[12px]">Severity:</span><span class="text-tertiary-fixed font-bold text-[12px]" id="severity-filter-label">All (4)</span><span class="material-symbols-outlined text-[14px] text-outline group-hover:text-on-surface transition-colors">expand_more</span></button><div class="filter-menu-panel absolute top-full left-0 mt-1.5 w-52 rounded-xl bg-surface-container-lowest/90 backdrop-blur-2xl border border-outline-variant/40 shadow-2xl p-1.5 z-50 flex flex-col gap-0.5 hidden" id="severity-dropdown-panel"><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('severity', 'All (4)', 'All Levels', 'severity-filter-label', 'severity-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-outline"></span>All Severities</span><span class="font-code-tabular text-[10px] text-outline">60</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('severity', 'P0/P1 Sev-1', 'P0 Sev-1 Critical', 'severity-filter-label', 'severity-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed animate-ping"></span>Sev-1 Critical</span><span class="font-code-tabular text-[10px] text-tertiary-fixed font-semibold">12</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('severity', 'High', 'High Severity', 'severity-filter-label', 'severity-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>High</span><span class="font-code-tabular text-[10px] text-tertiary-container font-semibold">16</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('severity', 'Medium', 'Medium Severity', 'severity-filter-label', 'severity-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-surface-tint"></span>Medium</span><span class="font-code-tabular text-[10px] text-outline font-semibold">20</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('severity', 'Low', 'Low Severity', 'severity-filter-label', 'severity-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Low</span><span class="font-code-tabular text-[10px] text-outline">12</span></button></div></div><div class="relative filter-dropdown-group"><button class="h-8 px-2.5 rounded-xl bg-surface-container-low/70 hover:bg-surface-container-high border border-outline-variant/30 hover:border-primary-container/40 text-on-surface hover:text-primary hover:shadow-[0_0_14px_rgba(0,242,254,0.25)] font-label-md text-body-sm flex items-center gap-1.5 transition-all duration-200 cursor-pointer group shadow-sm text-[12px] whitespace-nowrap" id="status-filter-btn" onclick="window.toggleFilterMenu('status-dropdown-panel')" type="button"><span class="material-symbols-outlined text-[16px] text-secondary">pending_actions</span><span class="text-outline text-[12px]">Status:</span><span class="text-secondary font-bold text-[12px]" id="status-filter-label">Active (48)</span><span class="material-symbols-outlined text-[14px] text-outline group-hover:text-on-surface transition-colors">expand_more</span></button><div class="filter-menu-panel absolute top-full left-0 mt-1.5 w-52 rounded-xl bg-surface-container-lowest/90 backdrop-blur-2xl border border-outline-variant/40 shadow-2xl p-1.5 z-50 flex flex-col gap-0.5 hidden" id="status-dropdown-panel"><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('status', 'Active (48)', 'Active &amp; Open', 'status-filter-label', 'status-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Active &amp; Open</span><span class="font-code-tabular text-[10px] text-secondary font-semibold">48</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('status', 'Escalated (12)', 'Escalated Sev-1', 'status-filter-label', 'status-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed"></span>Escalated</span><span class="font-code-tabular text-[10px] text-tertiary-fixed font-semibold">12</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('status', 'In Progress (24)', 'In Progress', 'status-filter-label', 'status-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>In Progress</span><span class="font-code-tabular text-[10px] text-primary-container font-semibold">24</span></button><button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg hover:bg-surface-container-high text-left text-[12px] font-body-sm text-on-surface transition-colors" onclick="window.selectFilterOption('status', 'Settled (12)', 'Settled &amp; Audited', 'status-filter-label', 'status-dropdown-panel')" type="button"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-outline"></span>Settled</span><span class="font-code-tabular text-[10px] text-outline font-semibold">12</span></button></div></div></div><div class="flex items-center gap-2.5 shrink-0"><div class="flex items-center gap-2 px-2.5 py-1 rounded-xl bg-surface-container-low/70 border border-secondary/30 shadow-sm backdrop-blur-md hover:border-secondary/50 transition-colors"><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.9)] animate-pulse"></span><span class="font-label-sm text-[10px] text-on-surface uppercase tracking-wider font-bold whitespace-nowrap">Safe-Harbor Escrow</span></div><button aria-pressed="true" class="w-8 h-4 rounded-full bg-secondary-container p-0.5 transition-colors relative cursor-pointer shadow-[0_0_10px_rgba(78,222,163,0.35)] flex items-center" id="safe-harbor-toggle" title="Toggle Safe-Harbor Escrow Protection" type="button"><span class="w-3 h-3 rounded-full bg-surface-container-lowest shadow-md block transform translate-x-4 transition-transform" id="safe-harbor-thumb"></span></button></div><button class="h-8 px-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 hover:border-primary-container/40 text-outline hover:text-on-surface hover:shadow-[0_0_14px_rgba(0,242,254,0.25)] font-label-md text-[12px] flex items-center gap-1 transition-all duration-200 cursor-pointer shadow-sm active:scale-95 whitespace-nowrap" id="reset-filters-btn" onclick="window.resetAllFilterPills()" title="Reset Active Filters" type="button"><span class="material-symbols-outlined text-[14px]">restart_alt</span><span class="text-[12px]">Reset</span></button></div></div></div>
+<!-- MAIN TWO-COLUMN SPLIT: DATA GRID & PINNED INSPECTOR -->
+<div class="grid grid-cols-1 2xl:grid-cols-12 gap-space-lg">
+<!-- High-Density Dispute Dossiers Data Grid (Table Panel) -->
+<div class="2xl:col-span-8 flex flex-col gap-space-sm">
+<div class="rounded-2xl bg-surface-container-lowest/80 backdrop-blur-xl shadow-2xl overflow-hidden">
+<!-- Table Header Banner -->
+<div class="px-space-md py-space-sm bg-surface-container-low/70 flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container shadow-[0_0_8px_rgba(0,242,254,0.8)]"></span>
+<span class="font-title-md text-title-md text-primary font-bold">Live Dossier Telematics</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-outline font-code-tabular text-body-sm">Sorted by SLA Urgency</span>
+</div>
+<div class="flex items-center gap-space-sm text-body-sm font-code-tabular text-outline">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span>Sev-1 Critical</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span>Auto-Eligible</span>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md">
+<thead class="bg-surface-container-low/40 text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+<tr>
+<th class="py-3 pl-4 pr-2">Ticket ID</th>
+<th class="py-3 px-3">Rider &amp; Vehicle</th>
+<th class="py-3 px-3">Category</th>
+<th class="py-3 px-3">Severity &amp; Score</th>
+<th class="py-3 px-3">SLA Countdown</th>
+<th class="py-3 px-3">Status</th>
+<th class="py-3 px-3 text-right">Dispute Amt</th>
+<th class="py-3 pr-4 pl-3 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 space-y-1 p-1">
+<!-- ROW 1: TKT-0007 (CRITICAL & PINNED) -->
+<tr class="ticket-row bg-primary-container/10 hover:bg-primary-container/20 transition-all cursor-pointer relative group rounded-xl" data-id="TKT-0007" onclick="selectTicket('TKT-0007')">
+<td class="py-3.5 pl-4 pr-2">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-8 bg-primary-container rounded-full group-hover:scale-y-110 transition-transform"></span>
+<div class="flex flex-col">
+<span class="font-code-tabular text-body-md font-bold text-primary-container">TKT-0007</span>
+<span class="font-code-tabular text-[11px] text-outline">CRN-890123</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-body-md text-primary font-semibold">Rajesh K.</span>
+<span class="font-code-tabular text-body-sm text-on-surface-variant">Airport Exp • KA-0921</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-body-md text-on-surface">Toll Surcharge</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Devanahalli Trumpet</span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary-fixed font-code-tabular text-[11px] font-bold w-fit flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed animate-ping"></span>
+                        Sev-1 Critical
+                      </span>
+<span class="font-code-tabular text-[10px] text-on-tertiary-container">Risk: 0.8800 (τ &gt; 0.44)</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5 font-code-tabular text-body-md font-bold text-tertiary-fixed">
+<span class="material-symbols-outlined text-[16px] animate-pulse">timer</span>
+<span class="">14m left</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Breach: 14:10 IST</span>
+</td>
+<td class="py-3.5 px-3">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-tertiary-fixed font-label-sm uppercase">Escalated</span>
+</td>
+<td class="py-3.5 px-3 text-right">
+<span class="font-code-tabular text-body-md font-bold text-primary-container">₹140.00</span>
+<div class="font-code-tabular text-[10px] text-secondary">Fastag Discrepancy</div>
+</td>
+<td class="py-3.5 pr-4 pl-3 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-transparent hover:border-primary-container/40 hover:shadow-[0_0_12px_rgba(0,242,254,0.35)] text-primary-container transition-all duration-200" onclick="event.stopPropagation(); selectTicket('TKT-0007')" title="Inspect Telematics">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+<button class="px-2.5 py-1 rounded-lg bg-primary-container text-surface-container-lowest font-label-sm font-bold shadow-[0_0_10px_rgba(0,242,254,0.4)] hover:brightness-110 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200" onclick="event.stopPropagation(); quickResolve('TKT-0007')" style="box-shadow: rgba(0, 242, 254, 0.45) 0px 0px 14px, rgba(255, 255, 255, 0.4) 0px 1px 0px inset;">
+                        ⚡ Refund
+                      </button>
+</div>
+</td>
+</tr>
+<!-- ROW 2: TKT-0014 -->
+<tr class="ticket-row bg-surface-container/30 hover:bg-surface-container-high/60 transition-all cursor-pointer relative group rounded-xl" data-id="TKT-0014" onclick="selectTicket('TKT-0014')">
+<td class="py-3.5 pl-4 pr-2">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-8 bg-secondary rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></span>
+<div class="flex flex-col">
+<span class="font-code-tabular text-body-md font-bold text-on-surface">TKT-0014</span>
+<span class="font-code-tabular text-[11px] text-outline">CRN-774912</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-body-md text-primary font-semibold">Ananya M.</span>
+<span class="font-code-tabular text-body-sm text-on-surface-variant">Prime Sedan • KA-04-E-4421</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-md text-on-surface">Cancellation</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">&gt;3km Telemetry Deviation</span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-tertiary-fixed font-code-tabular text-[11px] font-semibold w-fit">
+                        High
+                      </span>
+<span class="font-code-tabular text-[10px] text-outline">Risk: 0.6200</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5 font-code-tabular text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+<span class="">42m left</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Breach: 14:38 IST</span>
+</td>
+<td class="py-3.5 px-3">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm uppercase">In Progress</span>
+</td>
+<td class="py-3.5 px-3 text-right">
+<span class="font-code-tabular text-body-md font-bold text-on-surface">₹85.00</span>
+<div class="font-code-tabular text-[10px] text-secondary">Auto-Waiver OK</div>
+</td>
+<td class="py-3.5 pr-4 pl-3 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-transparent hover:border-primary-container/40 hover:shadow-[0_0_12px_rgba(0,242,254,0.35)] text-on-surface hover:text-primary-container transition-all duration-200" onclick="event.stopPropagation(); selectTicket('TKT-0014')" title="Inspect">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+<button class="px-2.5 py-1 rounded-lg bg-secondary-container/30 text-secondary hover:bg-secondary-container/50 border border-secondary/30 hover:border-secondary/50 hover:shadow-[0_0_14px_rgba(78,222,163,0.35)] hover:-translate-y-0.5 active:translate-y-0 font-label-sm font-semibold transition-all duration-200" onclick="event.stopPropagation(); quickResolve('TKT-0014')" style="box-shadow: rgba(78, 222, 163, 0.2) 0px 0px 10px, rgba(255, 255, 255, 0.2) 0px 1px 0px inset;">
+                        Waive Fee
+                      </button>
+</div>
+</td>
+</tr>
+<!-- ROW 3: TKT-0022 -->
+<tr class="ticket-row bg-surface-container/30 hover:bg-surface-container-high/60 transition-all cursor-pointer relative group rounded-xl" data-id="TKT-0022" onclick="selectTicket('TKT-0022')">
+<td class="py-3.5 pl-4 pr-2">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-8 bg-tertiary-container rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></span>
+<div class="flex flex-col">
+<span class="font-code-tabular text-body-md font-bold text-on-surface">TKT-0022</span>
+<span class="font-code-tabular text-[11px] text-outline">CRN-553108</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-body-md text-primary font-semibold">Vikram S.</span>
+<span class="font-code-tabular text-body-sm text-on-surface-variant">Ola Auto • KA-03-AA-9102</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span class="font-body-md text-on-surface">Surge Multiplier</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Dynamic Tariff Check</span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-code-tabular text-[11px] w-fit">
+                        Medium
+                      </span>
+<span class="font-code-tabular text-[10px] text-outline">Risk: 0.3100</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5 font-code-tabular text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+<span class="">2.4h left</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Target: 16:30 IST</span>
+</td>
+<td class="py-3.5 px-3">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm uppercase">Under Review</span>
+</td>
+<td class="py-3.5 px-3 text-right">
+<span class="font-code-tabular text-body-md font-bold text-on-surface">₹120.00</span>
+<div class="font-code-tabular text-[10px] text-outline">1.4x Disputed</div>
+</td>
+<td class="py-3.5 pr-4 pl-3 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" onclick="event.stopPropagation(); selectTicket('TKT-0022')" title="Inspect">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4: TKT-0031 -->
+<tr class="ticket-row bg-surface-container/30 hover:bg-surface-container-high/60 transition-all cursor-pointer relative group rounded-xl" data-id="TKT-0031" onclick="selectTicket('TKT-0031')">
+<td class="py-3.5 pl-4 pr-2">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-8 bg-surface-tint rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></span>
+<div class="flex flex-col">
+<span class="font-code-tabular text-body-md font-bold text-on-surface">TKT-0031</span>
+<span class="font-code-tabular text-[11px] text-outline">CRN-491204</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-body-md text-primary font-semibold">Priya Nair</span>
+<span class="font-code-tabular text-body-sm text-on-surface-variant">Ola Electric S1 Air</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-surface-tint"></span>
+<span class="font-body-md text-on-surface">EV Telemetry</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Battery Range Halt</span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-outline font-code-tabular text-[11px] w-fit">
+                        Low
+                      </span>
+<span class="font-code-tabular text-[10px] text-outline">Risk: 0.1200</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5 font-code-tabular text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+<span class="">8.1h left</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Standard SLA</span>
+</td>
+<td class="py-3.5 px-3">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary-container font-label-sm uppercase">Open</span>
+</td>
+<td class="py-3.5 px-3 text-right">
+<span class="font-code-tabular text-body-md font-bold text-outline">₹0.00</span>
+<div class="font-code-tabular text-[10px] text-outline">Inquiry Only</div>
+</td>
+<td class="py-3.5 pr-4 pl-3 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="p-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" onclick="event.stopPropagation(); selectTicket('TKT-0031')" title="Inspect">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 5: TKT-0003 (SETTLED) -->
+<tr class="ticket-row bg-secondary-container/10 hover:bg-secondary-container/20 transition-all cursor-pointer relative group rounded-xl" data-id="TKT-0003" onclick="selectTicket('TKT-0003')">
+<td class="py-3.5 pl-4 pr-2">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-8 bg-secondary rounded-full"></span>
+<div class="flex flex-col">
+<span class="font-code-tabular text-body-md font-bold text-secondary">TKT-0003</span>
+<span class="font-code-tabular text-[11px] text-outline">CRN-984210</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-body-md text-primary font-semibold">Desk Test Docket</span>
+<span class="font-code-tabular text-body-sm text-on-surface-variant">Prime Plus • KA-01-MJ-2039</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-md text-on-surface">Fastag Toll Duplication</span>
+</div>
+<span class="font-code-tabular text-[10px] text-secondary">Auto-Reconciled</span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-code-tabular text-[11px] font-bold w-fit">
+                        Sev-1 Audited
+                      </span>
+<span class="font-code-tabular text-[10px] text-secondary">Risk: 0.9400 (Settled)</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5 font-code-tabular text-body-md font-bold text-secondary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="">Settled (Instant)</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Turnaround: 4.2s</span>
+</td>
+<td class="py-3.5 px-3">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-secondary font-label-sm uppercase font-bold">Settled &amp; Audited</span>
+</td>
+<td class="py-3.5 px-3 text-right">
+<span class="font-code-tabular text-body-md font-bold text-secondary">₹140.00</span>
+<div class="font-code-tabular text-[10px] text-secondary">Wallet Credited</div>
+</td>
+<td class="py-3.5 pr-4 pl-3 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary-container font-label-sm font-semibold flex items-center gap-1" onclick="event.stopPropagation(); viewReceipt('TKT-0003')">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+<span class="">Receipt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 6: TKT-0045 -->
+<tr class="ticket-row bg-surface-container/30 hover:bg-surface-container-high/60 transition-all cursor-pointer relative group rounded-xl" data-id="TKT-0045" onclick="selectTicket('TKT-0045')">
+<td class="py-3.5 pl-4 pr-2">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-8 bg-outline rounded-full opacity-60 group-hover:opacity-100 transition-opacity"></span>
+<div class="flex flex-col">
+<span class="font-code-tabular text-body-md font-bold text-on-surface">TKT-0045</span>
+<span class="font-code-tabular text-[11px] text-outline">CRN-331902</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col">
+<span class="font-body-md text-primary font-semibold">Rohan Verma</span>
+<span class="font-code-tabular text-body-sm text-on-surface-variant">Outstation • BLR-MYS</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="font-body-md text-on-surface">Lost Baggage</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Custody Intercept</span>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex flex-col gap-0.5">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-code-tabular text-[11px] w-fit">
+                        Medium
+                      </span>
+<span class="font-code-tabular text-[10px] text-outline">Risk: 0.3900</span>
+</div>
+</td>
+<td class="py-3.5 px-3">
+<div class="flex items-center gap-1.5 font-code-tabular text-body-md text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+<span class="">3.2h left</span>
+</div>
+<span class="font-code-tabular text-[10px] text-outline">Driver Contacted</span>
+</td>
+<td class="py-3.5 px-3">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-secondary font-label-sm uppercase">Driver Pinned</span>
+</td>
+<td class="py-3.5 px-3 text-right">
+<span class="font-code-tabular text-body-md font-bold text-outline">₹0.00</span>
+<div class="font-code-tabular text-[10px] text-secondary">Drop Safe BLR-Hub</div>
+</td>
+<td class="py-3.5 pr-4 pl-3 text-right">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-secondary font-label-sm font-semibold flex items-center gap-1" onclick="event.stopPropagation(); trackGps('TKT-0045')">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span class="">Track GPS</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- PAGINATION & AUDIT SUMMARY DOCK -->
+<div class="px-space-md py-space-sm bg-surface-container-low/70 flex flex-col sm:flex-row items-center justify-between gap-space-sm font-code-tabular text-body-sm text-outline">
+<div class="flex items-center gap-space-sm">
+<span class="text-on-surface font-semibold">Showing 1 - 6</span>
+<span class="">of 60 records</span>
+<span class="text-outline-variant">•</span>
+<span class="text-primary-container">Page 1 of 10</span>
+<span class="text-outline-variant">•</span>
+<span class="text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                Last synced 2s ago via AP-SOUTH-1
+              </span>
+</div>
+<!-- Page Jumpers -->
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-outline disabled:opacity-40 flex items-center justify-center cursor-pointer" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary-container text-surface-container-lowest font-bold text-body-sm flex items-center justify-center cursor-pointer shadow-sm">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-body-sm flex items-center justify-center cursor-pointer">2</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-body-sm flex items-center justify-center cursor-pointer">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-body-sm flex items-center justify-center cursor-pointer">10</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-outline flex items-center justify-center cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- PINNED DISPUTE INSPECTOR & RECEIPT CONTRAST DOCK -->
+<div class="2xl:col-span-4 flex flex-col gap-space-md">
+<!-- Main Inspector Card -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest/90 backdrop-blur-2xl shadow-2xl flex flex-col gap-space-md relative overflow-hidden" id="ticket-detail-card">
+<!-- Ambient Cyan Glow Marker -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-container via-surface-tint to-secondary"></div>
+<!-- Inspector Header -->
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary-fixed font-code-tabular text-label-sm font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed animate-ping"></span>
+                  P0 SEV-1
+                </span>
+<span class="font-code-tabular text-title-md text-primary font-bold" id="detail-ticket-id">TKT-0007</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant mt-0.5" id="detail-ticket-title">Fastag Toll Surcharge Conflict</span>
+</div>
+<span class="px-2.5 py-1 rounded-xl bg-surface-container-high text-primary-container font-code-tabular text-body-sm font-semibold">
+              Live Inspector
+            </span>
+</div>
+<!-- Spatial Mini Telematics Map Visualization -->
+<div class="relative w-full h-44 rounded-xl bg-surface-container-low overflow-hidden flex flex-col justify-between p-3" data-location="Bengaluru Airport Expressway, Karnataka, India">
+<!-- Simulated Vector Telematics Route Overlay -->
+<svg class="absolute inset-0 w-full h-full opacity-60 pointer-events-none" fill="none" viewBox="0 0 400 180">
+<!-- Route Path -->
+<path class="animate-pulse" d="M 20 150 Q 120 120, 200 80 T 380 30" stroke="#00f2fe" stroke-dasharray="6 4" stroke-linecap="round" stroke-width="3"></path>
+<!-- Toll Plaza Marker -->
+<circle cx="200" cy="80" fill="rgba(255, 208, 206, 0.25)" r="10" stroke="#ffd0ce" stroke-width="2"></circle>
+<circle cx="200" cy="80" fill="#ffb4ab" r="4"></circle>
+<!-- Driver Origin -->
+<circle cx="20" cy="150" fill="#4edea3" r="5"></circle>
+<!-- Airport Destination -->
+<circle cx="380" cy="30" fill="#00f2fe" r="5"></circle>
+</svg>
+<!-- Map HUD Badges -->
+<div class="relative z-10 flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-lg bg-surface-container-lowest/80 backdrop-blur-md text-[11px] font-code-tabular text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                GPS Ping: 14:02:18 (0.3s ago)
+              </span>
+<span class="px-2 py-0.5 rounded-lg bg-tertiary-container/80 text-on-tertiary-container font-code-tabular text-[10px] font-bold">
+                Toll Plaza: Trumpet KA-02
+              </span>
+</div>
+<div class="relative z-10 flex items-end justify-between">
+<div class="flex flex-col bg-surface-container-lowest/90 backdrop-blur-md p-1.5 rounded-lg font-code-tabular text-[10px] text-on-surface-variant">
+<span class="">Speed: 74 km/h • Heading: NNE</span>
+<span class="text-primary-container">Fastag Reader ID: NHAI-BLR-0941</span>
+</div>
+<span class="px-2 py-1 rounded-lg bg-surface-container-high/90 text-primary font-code-tabular text-[11px]">
+                LAT 13.1986° N • LON 77.7066° E
+              </span>
+</div>
+</div>
+<!-- RECEIPT SLIP CONTRAST PLATE (LEVEL 4 HIGH CONTRAST) -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest text-on-surface shadow-inner flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-2">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Audit Receipt Slip</span>
+<span class="font-code-tabular text-body-sm font-semibold text-primary">Ride CRN-890123 • Airport Exp</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-code-tabular text-label-sm font-bold">Verified Log</span>
+</div>
+<!-- Tabular Ledger Items -->
+<div class="flex flex-col gap-1.5 font-code-tabular text-body-sm">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="">Base Distance Fare (32.4 km)</span>
+<span class="text-on-surface">₹780.00</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="">Airport Toll Charge (Billed)</span>
+<span class="text-tertiary-fixed font-bold">₹140.00</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="">NHAI Electronic Tag Debit</span>
+<span class="text-secondary font-bold">₹140.00 (Cashless)</span>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="">Dispute Status</span>
+<span class="text-tertiary-fixed font-semibold">Duplicate Surcharge</span>
+</div>
+</div>
+<!-- Dashed Auditing Separator -->
+<div class="w-full my-1 border-b border-dashed border-outline-variant/40"></div>
+<!-- Adjudication Delta Calculations -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase text-outline">Reconciliation Delta</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary-container font-code-tabular">₹140.00 Refund</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Driver Impact</span>
+<span class="font-code-tabular text-body-sm text-secondary font-bold">₹0.00 Demerit Shield</span>
+</div>
+</div>
+</div>
+<!-- Rover AI Adjudication Suggestion -->
+<div class="p-space-sm rounded-xl bg-primary-container/10 flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-[20px] shrink-0 mt-0.5">smart_toy</span>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="font-title-md text-body-md text-primary font-bold">Rover Autonomous Recommendation</span>
+<span class="px-1.5 py-0.2 rounded bg-primary-container/20 text-primary-container font-code-tabular text-[10px]">99.4% Confidence</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                NHAI Fastag API timestamp matches Toll Plaza beacon KA-02 within ±12 seconds. Dual deduction confirmed. Recommend immediate reversal to Ola Money Wallet under Safe-Harbor clause 14B.
+              </p>
+</div>
+</div>
+<!-- Action Triggers in Inspector -->
+<div class="grid grid-cols-2 gap-space-sm pt-1">
+<button class="h-10 px-space-sm rounded-xl bg-gradient-to-r from-primary-container to-secondary text-surface-container-lowest font-label-md text-label-md font-bold hover:brightness-110 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer" id="detail-approve-refund-btn" style="box-shadow: rgba(0, 242, 254, 0.5) 0px 0px 20px, rgba(0, 242, 254, 0.25) 0px 0px 32px, rgba(255, 255, 255, 0.4) 0px 1px 0px inset;">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">Execute ₹140 Refund</span>
+</button>
+<button class="h-10 px-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 hover:border-primary-container/40 hover:shadow-[0_0_14px_rgba(0,242,254,0.25)] hover:-translate-y-0.5 active:translate-y-0 text-on-surface font-label-md text-label-md transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer" id="detail-escalate-lead-btn">
+<span class="material-symbols-outlined text-[18px] text-outline">support_agent</span>
+<span class="">Escalate to Lead</span>
+</button>
+</div>
+</div>
+<!-- Secondary Diagnostics: Telematics Node Health -->
+<div class="p-space-md rounded-2xl bg-surface-container-lowest/70 backdrop-blur-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Fastag Gateway Telemetry</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-code-tabular text-label-sm">NHAI Live Bridge</span>
+</div>
+<div class="grid grid-cols-3 gap-space-sm pt-1 font-code-tabular text-body-sm">
+<div class="p-2 rounded-xl bg-surface-container flex flex-col">
+<span class="text-outline text-[11px]">API LATENCY</span>
+<span class="text-secondary font-bold mt-0.5">38 ms</span>
+</div>
+<div class="p-2 rounded-xl bg-surface-container flex flex-col">
+<span class="text-outline text-[11px]">MATCH CONF</span>
+<span class="text-primary-container font-bold mt-0.5">99.8%</span>
+</div>
+<div class="p-2 rounded-xl bg-surface-container flex flex-col">
+<span class="text-outline text-[11px]">DISPUTE ERR</span>
+<span class="text-secondary font-bold mt-0.5">0.01%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <script>
-  let isNavDrawerOpen = false;
+  // Interactive Directory Controller
+  (function initTicketDirectory() {
+    // Ticket Selection State
+    window.selectTicket = function(ticketId) {
+      const rows = document.querySelectorAll('.ticket-row');
+      rows.forEach(r => {
+        if (r.getAttribute('data-id') === ticketId) {
+          r.classList.add('bg-primary-container/20');
+        } else {
+          r.classList.remove('bg-primary-container/20');
+        }
+      });
 
-  function setDrawerState(open) {
-    isNavDrawerOpen = open;
-    const drawer = document.getElementById('nav-sidebar-drawer');
-    const workspace = document.getElementById('main-content-workspace');
-    const statusPill = document.getElementById('rail-status-pill');
-    const searchBar = document.getElementById('rail-search-bar');
-    const searchMini = document.getElementById('rail-search-mini');
-    const sectionLabel = document.getElementById('rail-section-label');
-    const operationalContext = document.getElementById('rail-operational-context');
-    const railLabels = document.querySelectorAll('.rail-label');
-
-    if (!drawer || !workspace) return;
-
-    if (isNavDrawerOpen) {
-      drawer.style.width = '240px';
-      workspace.style.paddingLeft = '240px';
-      if (statusPill) statusPill.classList.remove('hidden');
-      if (searchBar) searchBar.classList.remove('hidden');
-      if (searchMini) searchMini.classList.add('hidden');
-      if (sectionLabel) sectionLabel.classList.remove('hidden');
-      if (operationalContext) {
-        operationalContext.classList.remove('hidden');
-        operationalContext.classList.add('flex');
+      const detailId = document.getElementById('detail-ticket-id');
+      const detailTitle = document.getElementById('detail-ticket-title');
+      if (detailId && ticketId === 'TKT-0007') {
+        detailId.textContent = 'TKT-0007';
+        detailTitle.textContent = 'Fastag Toll Surcharge Conflict';
+      } else if (detailId && ticketId === 'TKT-0014') {
+        detailId.textContent = 'TKT-0014';
+        detailTitle.textContent = 'Driver Cancellation Fee Dispute';
+      } else if (detailId && ticketId === 'TKT-0022') {
+        detailId.textContent = 'TKT-0022';
+        detailTitle.textContent = 'Dynamic Surge Multiplier Audit';
       }
-      railLabels.forEach(el => el.classList.remove('hidden'));
-    } else {
-      drawer.style.width = '64px';
-      workspace.style.paddingLeft = '64px';
-      if (statusPill) statusPill.classList.add('hidden');
-      if (searchBar) searchBar.classList.add('hidden');
-      if (searchMini) searchMini.classList.remove('hidden');
-      if (sectionLabel) sectionLabel.classList.add('hidden');
-      if (operationalContext) {
-        operationalContext.classList.add('hidden');
-        operationalContext.classList.remove('flex');
-      }
-      railLabels.forEach(el => el.classList.add('hidden'));
+    };
+
+    // Quick Resolution Trigger
+    window.quickResolve = function(ticketId) {
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span class="material-symbols-outlined text-[14px] animate-spin">refresh</span> Reconciling...';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = '<span class="material-symbols-outlined text-[14px]">check</span> Settled';
+        btn.className = 'px-2.5 py-1 rounded-lg bg-secondary-container text-secondary font-label-sm font-bold';
+      }, 700);
+    };
+
+    // View Receipt Handler
+    window.viewReceipt = function(ticketId) {
+      alert('Generating verified high-contrast NHAI audit slip for docket ' + ticketId);
+    };
+
+    // GPS Tracker Trigger
+    window.trackGps = function(ticketId) {
+      alert('Tracking live driver ping for ' + ticketId + '. Coordinates synced to BLR Operations Hub.');
+    };
+
+    // Safe Harbor Toggle Switch
+    const safeHarborToggle = document.getElementById('safe-harbor-toggle');
+    const safeHarborThumb = document.getElementById('safe-harbor-thumb');
+    let isSafeHarborActive = true;
+
+    if (safeHarborToggle && safeHarborThumb) {
+      safeHarborToggle.addEventListener('click', () => {
+        isSafeHarborActive = !isSafeHarborActive;
+        if (isSafeHarborActive) {
+          safeHarborToggle.className = 'w-11 h-6 rounded-full bg-secondary-container p-0.5 transition-colors relative cursor-pointer';
+          safeHarborThumb.className = 'w-5 h-5 rounded-full bg-surface-container-lowest shadow-md block transform translate-x-5 transition-transform';
+        } else {
+          safeHarborToggle.className = 'w-11 h-6 rounded-full bg-surface-container-high p-0.5 transition-colors relative cursor-pointer';
+          safeHarborThumb.className = 'w-5 h-5 rounded-full bg-outline shadow-md block transform translate-x-0 transition-transform';
+        }
+      });
     }
-  }
 
-  function toggleNavDrawer() {
-    setDrawerState(!isNavDrawerOpen);
-  }
-
-  function closeNavDrawer() {
-    setDrawerState(false);
-  }
-
-  // Keyboard shortcut support (Escape closes drawer)
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isNavDrawerOpen) {
-      closeNavDrawer();
+    // Real-Time Sync Stream Button
+    const syncBtn = document.getElementById('sync-stream-btn');
+    const syncIcon = document.getElementById('sync-icon');
+    const syncLabel = document.getElementById('sync-label');
+    if (syncBtn && syncIcon && syncLabel) {
+      syncBtn.addEventListener('click', () => {
+        syncIcon.classList.add('animate-spin');
+        syncLabel.textContent = 'Syncing AP-SOUTH-1...';
+        setTimeout(() => {
+          syncIcon.classList.remove('animate-spin');
+          syncLabel.textContent = 'Stream Synced (60 OK)';
+        }, 1200);
+      });
     }
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'b') {
-      e.preventDefault();
-      toggleNavDrawer();
-    }
-  });
 
-  // Custom element runner for threejs-scene
-  class ThreejsSceneElement extends HTMLElement {
-    connectedCallback() {
-      const container = this;
-      const width = container.clientWidth || window.innerWidth;
-      const height = container.clientHeight || window.innerHeight;
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-      camera.position.z = 6;
-
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.3;
-      container.appendChild(renderer.domElement);
-
-      const mainGroup = new THREE.Group();
-      scene.add(mainGroup);
-
-      // Vibrant multi-chromatic light setup
-      const lightCyan = new THREE.PointLight(0x00f2fe, 3.5, 20);
-      lightCyan.position.set(4, 3, 4);
-      scene.add(lightCyan);
-
-      const lightMagenta = new THREE.PointLight(0xf43f5e, 4.0, 20);
-      lightMagenta.position.set(-4, -3, 3);
-      scene.add(lightMagenta);
-
-      const lightPurple = new THREE.PointLight(0xa855f7, 3.0, 18);
-      lightPurple.position.set(0, 4, -3);
-      scene.add(lightPurple);
-
-      const lightGold = new THREE.PointLight(0xfbbf24, 3.0, 16);
-      lightGold.position.set(0, -4, 4);
-      scene.add(lightGold);
-
-      const ambientLight = new THREE.AmbientLight(0x18182f, 1.8);
-      scene.add(ambientLight);
-
-      // 1. Inner Luminous Core Sphere (Dynamic Color Shift)
-      const coreGeo = new THREE.SphereGeometry(0.75, 64, 64);
-      const coreMat = new THREE.MeshPhongMaterial({
-        color: 0xffffff,
-        emissive: 0x00f2fe,
-        emissiveIntensity: 1.1,
-        shininess: 100,
-        specular: 0xffffff,
-        transparent: true,
-        opacity: 0.96
-      });
-      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      mainGroup.add(coreMesh);
-
-      // 2. Glassmorphic Outer Energy Sphere with Chromatic Transmission
-      const glassGeo = new THREE.SphereGeometry(1.08, 64, 64);
-      const glassMat = new THREE.MeshPhysicalMaterial({
-        color: 0x8b5cf6,
-        transmission: 0.88,
-        opacity: 1.0,
-        transparent: true,
-        roughness: 0.06,
-        metalness: 0.15,
-        ior: 1.48,
-        reflectivity: 0.95,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.04
-      });
-      const glassMesh = new THREE.Mesh(glassGeo, glassMat);
-      mainGroup.add(glassMesh);
-
-      // 3. Dual Nested Wireframe Geometries for holographic depth
-      const wireGeo1 = new THREE.IcosahedronGeometry(0.92, 2);
-      const wireMat1 = new THREE.MeshBasicMaterial({
-        color: 0x38bdf8,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.45,
-        blending: THREE.AdditiveBlending
-      });
-      const wireMesh1 = new THREE.Mesh(wireGeo1, wireMat1);
-      mainGroup.add(wireMesh1);
-
-      const wireGeo2 = new THREE.DodecahedronGeometry(1.2, 1);
-      const wireMat2 = new THREE.MeshBasicMaterial({
-        color: 0xf43f5e,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.25,
-        blending: THREE.AdditiveBlending
-      });
-      const wireMesh2 = new THREE.Mesh(wireGeo2, wireMat2);
-      mainGroup.add(wireMesh2);
-
-      // 4. Vibrant Multi-Colored Orbital Rings
-      const createOrbitalRing = (radius, tubeRadius, rx, ry, rz, colorHex, emissiveHex, opacity) => {
-        const ringGeo = new THREE.TorusGeometry(radius, tubeRadius, 28, 160);
-        const ringMat = new THREE.MeshStandardMaterial({
-          color: colorHex,
-          emissive: emissiveHex,
-          emissiveIntensity: 0.9,
-          roughness: 0.15,
-          metalness: 0.85,
-          transparent: true,
-          opacity: opacity
+    // Filter Quick Search Interaction
+    const searchInput = document.getElementById('ticket-search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const rows = document.querySelectorAll('.ticket-row');
+        rows.forEach(row => {
+          const text = row.textContent.toLowerCase();
+          row.style.display = text.includes(query) ? '' : 'none';
         });
-        const ring = new THREE.Mesh(ringGeo, ringMat);
-        ring.rotation.set(rx, ry, rz);
-        return ring;
-      };
-
-      // Ring 1: Neon Cyan
-      const ring1 = createOrbitalRing(1.68, 0.024, Math.PI / 2.3, 0.35, 0, 0x00f2fe, 0x00f2fe, 0.9);
-      // Ring 2: Vivid Pink / Magenta
-      const ring2 = createOrbitalRing(1.92, 0.020, -Math.PI / 2.7, -0.4, 0.4, 0xf43f5e, 0xf43f5e, 0.85);
-      // Ring 3: Electric Violet / Purple
-      const ring3 = createOrbitalRing(2.18, 0.016, Math.PI / 1.75, 0.75, -0.3, 0xa855f7, 0xa855f7, 0.8);
-      // Ring 4: Radiant Golden Amber
-      const ring4 = createOrbitalRing(2.42, 0.014, -Math.PI / 3.4, 0.5, 0.8, 0xfbbf24, 0xf59e0b, 0.75);
-
-      mainGroup.add(ring1);
-      mainGroup.add(ring2);
-      mainGroup.add(ring3);
-      mainGroup.add(ring4);
-
-      // 5. Glowing Satellite Nodes on each ring
-      const createNode = (colorHex) => {
-        const nodeGeo = new THREE.SphereGeometry(0.075, 32, 32);
-        const nodeMat = new THREE.MeshBasicMaterial({ color: colorHex });
-        return new THREE.Mesh(nodeGeo, nodeMat);
-      };
-
-      const node1 = createNode(0x38bdf8); // Cyan
-      const node2 = createNode(0xfb7185); // Rose
-      const node3 = createNode(0xc084fc); // Purple
-      const node4 = createNode(0xfde047); // Gold
-
-      mainGroup.add(node1);
-      mainGroup.add(node2);
-      mainGroup.add(node3);
-      mainGroup.add(node4);
-
-      // 6. Multi-chromatic Ambient Particle Swarm
-      const particleCount = 360;
-      const particleGeometry = new THREE.BufferGeometry();
-      const particlePositions = new Float32Array(particleCount * 3);
-      const particleColors = new Float32Array(particleCount * 3);
-
-      const pColors = [
-        new THREE.Color(0x00f2fe), // Cyan
-        new THREE.Color(0xf43f5e), // Pink
-        new THREE.Color(0xa855f7), // Purple
-        new THREE.Color(0xfbbf24), // Amber
-        new THREE.Color(0x34d399), // Emerald
-        new THREE.Color(0xffffff)  // Sparkle White
-      ];
-
-      for (let i = 0; i < particleCount; i++) {
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos(2 * Math.random() - 1);
-        const r = 1.35 + Math.random() * 1.8;
-
-        particlePositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-        particlePositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-        particlePositions[i * 3 + 2] = r * Math.cos(phi);
-
-        const selectedCol = pColors[Math.floor(Math.random() * pColors.length)];
-        particleColors[i * 3] = selectedCol.r;
-        particleColors[i * 3 + 1] = selectedCol.g;
-        particleColors[i * 3 + 2] = selectedCol.b;
-      }
-
-      particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-      particleGeometry.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
-
-      const particleMaterial = new THREE.PointsMaterial({
-        size: 0.05,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.85,
-        blending: THREE.AdditiveBlending
       });
-
-      const particles = new THREE.Points(particleGeometry, particleMaterial);
-      mainGroup.add(particles);
-
-      // Interactive State variables for Hover & Click reactivity
-      let isHovered = false;
-      let hoverTransition = 0; // 0 to 1
-      let clickImpulse = 0; // decays over time
-      let speedMultiplier = 1.0;
-
-      // Mouse & Raycasting setup
-      const raycaster = new THREE.Raycaster();
-      const mouse = new THREE.Vector2(-999, -999);
-      let targetMouseX = 0;
-      let targetMouseY = 0;
-      let currentMouseX = 0;
-      let currentMouseY = 0;
-
-      // Container interactive cursor style
-      container.style.cursor = 'pointer';
-
-      const onPointerMove = (event) => {
-        const rect = container.getBoundingClientRect();
-        const rawX = (event.clientX - rect.left) / rect.width * 2 - 1;
-        const rawY = -((event.clientY - rect.top) / rect.height * 2 - 1);
-        mouse.x = rawX;
-        mouse.y = rawY;
-
-        targetMouseX = rawX * 0.55;
-        targetMouseY = rawY * 0.55;
-
-        // Raycast against core and glass outer orb
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects([coreMesh, glassMesh, ring1, ring2, ring3, ring4]);
-        isHovered = (intersects.length > 0) || (Math.sqrt(rawX * rawX + rawY * rawY) < 0.65);
-      };
-
-      const onPointerLeave = () => {
-        isHovered = false;
-        mouse.x = -999;
-        mouse.y = -999;
-        targetMouseX = 0;
-        targetMouseY = 0;
-      };
-
-      const onPointerDown = () => {
-        clickImpulse = 1.8; // Trigger rapid shockwave and supercharged pulse
-      };
-
-      window.addEventListener('mousemove', onPointerMove);
-      container.addEventListener('pointerdown', onPointerDown);
-      container.addEventListener('pointerleave', onPointerLeave);
-
-      // Animation Loop
-      let clock = new THREE.Clock();
-      let accumulatedTime = 0;
-
-      function animate() {
-        requestAnimationFrame(animate);
-        const delta = Math.min(clock.getDelta(), 0.1);
-
-        // Smoothly blend hover state: 0 (idle) -> 1 (hovered)
-        hoverTransition += ((isHovered ? 1.0 : 0.0) - hoverTransition) * 0.08;
-
-        // Decay click impulse
-        clickImpulse = Math.max(0, clickImpulse - delta * 2.2);
-
-        // Calculate dynamic speed multiplier (idle ~1.0, hover ~2.4, click burst up to ~4.5)
-        const targetSpeed = 1.0 + (hoverTransition * 1.6) + (clickImpulse * 2.5);
-        speedMultiplier += (targetSpeed - speedMultiplier) * 0.12;
-        accumulatedTime += delta * speedMultiplier;
-
-        const t = accumulatedTime;
-
-        // Levitation motion with dynamic frequency
-        mainGroup.position.y = Math.sin(t * 1.4) * (0.09 + hoverTransition * 0.05);
-
-        // Smooth mouse inertia tracking
-        currentMouseX += (targetMouseX - currentMouseX) * 0.07;
-        currentMouseY += (targetMouseY - currentMouseY) * 0.07;
-        mainGroup.rotation.y = t * 0.22 + currentMouseX;
-        mainGroup.rotation.x = currentMouseY;
-
-        // Pulsing frequency increases rapidly on hover & click
-        const pulseFreq = 2.6 + hoverTransition * 3.5 + clickImpulse * 4.5;
-        const pulseAmp = 0.06 + hoverTransition * 0.08 + clickImpulse * 0.12;
-        const pulse = Math.sin(t * pulseFreq) * pulseAmp + (1.0 + hoverTransition * 0.1 + clickImpulse * 0.18);
-
-        coreMesh.scale.set(pulse, pulse, pulse);
-        glassMesh.scale.set(1.0 + (pulse - 1.0) * 0.55, 1.0 + (pulse - 1.0) * 0.55, 1.0 + (pulse - 1.0) * 0.55);
-
-        // Core brightness and glow intensity surge on hover/click
-        const baseEmissive = 1.0 + Math.sin(t * pulseFreq) * 0.4;
-        coreMat.emissiveIntensity = baseEmissive + hoverTransition * 0.8 + clickImpulse * 1.5;
-
-        // Dynamic rapid hue shifting faster on hover
-        const hue = (t * (0.07 + hoverTransition * 0.1 + clickImpulse * 0.2)) % 1;
-        coreMat.emissive.setHSL(hue, 0.95, 0.55);
-
-        // Flare point lights on hover/burst
-        lightCyan.intensity = 3.5 + hoverTransition * 2.0 + clickImpulse * 3.5;
-        lightMagenta.intensity = 4.0 + hoverTransition * 2.2 + clickImpulse * 3.8;
-
-        // Counter rotate nested wireframes at accelerated spin
-        wireMesh1.rotation.y = -t * 0.55;
-        wireMesh1.rotation.z = t * 0.35;
-        wireMesh2.rotation.x = t * 0.42;
-        wireMesh2.rotation.y = -t * 0.28;
-        glassMesh.rotation.y = t * 0.16;
-
-        // Multi-axis orbital rings spin dynamically faster
-        ring1.rotation.z = t * 0.65;
-        ring2.rotation.z = -t * 0.55;
-        ring3.rotation.z = t * 0.45;
-        ring4.rotation.z = -t * 0.38;
-
-        // Orbital Satellite nodes
-        const s1 = t * 1.3;
-        node1.position.set(
-          Math.cos(s1) * 1.68,
-          Math.sin(s1) * 1.68 * Math.sin(ring1.rotation.x),
-          Math.sin(s1) * 1.68 * Math.cos(ring1.rotation.x)
-        );
-
-        const s2 = -t * 1.15 + 1.5;
-        node2.position.set(
-          Math.cos(s2) * 1.92,
-          Math.sin(s2) * 1.92 * Math.sin(ring2.rotation.x),
-          Math.sin(s2) * 1.92 * Math.cos(ring2.rotation.x)
-        );
-
-        const s3 = t * 0.95 + 2.8;
-        node3.position.set(
-          Math.cos(s3) * 2.18,
-          Math.sin(s3) * 2.18 * Math.sin(ring3.rotation.x),
-          Math.sin(s3) * 2.18 * Math.cos(ring3.rotation.x)
-        );
-
-        const s4 = -t * 0.8 + 4.2;
-        node4.position.set(
-          Math.cos(s4) * 2.42,
-          Math.sin(s4) * 2.42 * Math.sin(ring4.rotation.x),
-          Math.sin(s4) * 2.42 * Math.cos(ring4.rotation.x)
-        );
-
-        // Particles rotate and scale slightly with energy surge
-        particles.rotation.y = t * 0.12;
-        particles.rotation.x = Math.sin(t * 0.3) * 0.08;
-        particleMaterial.size = 0.05 + hoverTransition * 0.02 + clickImpulse * 0.035;
-
-        renderer.render(scene, camera);
-      }
-
-      animate();
-
-      const handleResize = () => {
-        const w = container.clientWidth || window.innerWidth;
-        const h = container.clientHeight || window.innerHeight;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      };
-
-      window.addEventListener('resize', handleResize);
     }
+  })();
+</script></main><footer class="w-full bg-surface-container-lowest/90 py-space-md border-t border-outline-variant/20"><div class="w-full pl-20 pr-gutter-lg flex flex-col md:flex-row items-center justify-between gap-space-sm font-code-tabular text-body-sm"><div class="flex flex-wrap items-center gap-space-md text-on-surface-variant"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_6px_rgba(78,222,163,0.8)]"></span><span class="text-on-surface font-semibold">CLUSTER-AP-SOUTH-1A</span></div><span class="text-outline-variant">•</span><span class="text-secondary">24ms RTT</span><span class="text-outline-variant">•</span><span class="text-on-surface">⟲ Telemetry Ingest: Normal</span><span class="text-outline-variant">•</span><span class="text-primary-container font-medium">🐾 Rover Copilot: Active</span></div><div class="flex items-center gap-space-md text-outline"><div class="flex items-center gap-2"><span class="">TOKEN BUDGET:</span><span class="text-primary font-semibold">84.2k / 100k</span><div class="w-16 h-1.5 rounded-full bg-surface-container-high overflow-hidden"><div class="h-full bg-primary-container rounded-full" style="width: 84%;"></div></div></div><span class="text-outline-variant">•</span><span class="text-on-surface-variant font-label-md">Ola Fleet OPS</span></div></div></footer><script id="filter-dropdown-controller" class="">
+window.toggleFilterMenu = function(menuId) {
+  const menu = document.getElementById(menuId);
+  if (!menu) return;
+  const isHidden = menu.classList.contains('hidden');
+  // Close all other dropdown menus
+  document.querySelectorAll('.filter-menu-panel').forEach(m => m.classList.add('hidden'));
+  if (isHidden) {
+    menu.classList.remove('hidden');
   }
+};
 
-  if (!customElements.get('threejs-scene')) {
-    customElements.define('threejs-scene', ThreejsSceneElement);
+window.selectFilterOption = function(type, labelValue, filterName, targetLabelId, menuId) {
+  const labelEl = document.getElementById(targetLabelId);
+  if (labelEl) {
+    labelEl.textContent = labelValue;
   }
-</script>
+  const menu = document.getElementById(menuId);
+  if (menu) {
+    menu.classList.add('hidden');
+  }
+  // Optional: update the active filter pill if applicable
+  const statusChipText = document.querySelector('#active-status-chip-text');
+  if (type === 'status' && statusChipText) {
+    statusChipText.textContent = 'Status: ' + filterName;
+  }
+};
+
+window.resetAllFilterPills = function() {
+  const cat = document.getElementById('category-filter-label');
+  const sev = document.getElementById('severity-filter-label');
+  const stat = document.getElementById('status-filter-label');
+  if (cat) cat.textContent = 'All (6)';
+  if (sev) sev.textContent = 'All (4)';
+  if (stat) stat.textContent = 'Active & Open (48)';
+  document.querySelectorAll('.filter-menu-panel').forEach(m => m.classList.add('hidden'));
+};
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.filter-dropdown-group')) {
+    document.querySelectorAll('.filter-menu-panel').forEach(m => m.classList.add('hidden'));
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.filter-menu-panel').forEach(m => m.classList.add('hidden'));
+  }
+});
+</script><script id="gpu-lifecycle-engine">window.currentGpuStage = 'directory-stage'; window.pauseThreeJsAiCore = function() { const badge = document.getElementById('gpu-loop-badge'); const calls = document.getElementById('gpu-draw-calls'); const fps = document.getElementById('gpu-fps-label'); const util = document.getElementById('gpu-util-label'); const beacon = document.getElementById('gpu-loop-beacon'); const ping = document.getElementById('gpu-loop-beacon-ping'); const stage = document.getElementById('gpu-stage-name'); const log = document.getElementById('gpu-lifecycle-log'); if (badge) { badge.textContent = 'LOOP: PAUSED'; badge.className = 'px-2 py-0.5 rounded text-[11px] font-code-tabular font-bold bg-surface-container-high text-tertiary-fixed'; } if (calls) calls.textContent = '0 draw calls'; if (fps) fps.textContent = '0 FPS (GPU Idle)'; if (util) util.textContent = '0% GPU Compute'; if (beacon) beacon.className = 'relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary-fixed'; if (ping) ping.className = 'absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-0'; if (stage) stage.textContent = 'directory-stage (Ticket Master)'; if (log) { log.innerHTML = '<div class="text-secondary">▸ switchStage("directory-stage") -> window.pauseThreeJsAiCore() called</div><div class="text-primary-container">▸ cancelAnimationFrame(id: 1042) executed</div><div class="text-on-surface-variant">▸ clock delta flushed, zero accumulation</div><div class="text-outline">▸ WebGL context preserved in idle state (VRAM: 7.2MB)</div>'; } }; window.resumeThreeJsAiCore = function() { const badge = document.getElementById('gpu-loop-badge'); const calls = document.getElementById('gpu-draw-calls'); const fps = document.getElementById('gpu-fps-label'); const util = document.getElementById('gpu-util-label'); const beacon = document.getElementById('gpu-loop-beacon'); const ping = document.getElementById('gpu-loop-beacon-ping'); const stage = document.getElementById('gpu-stage-name'); const log = document.getElementById('gpu-lifecycle-log'); if (badge) { badge.textContent = 'LOOP: RUNNING'; badge.className = 'px-2 py-0.5 rounded text-[11px] font-code-tabular font-bold bg-secondary-container/30 text-secondary'; } if (calls) calls.textContent = '368 draw calls'; if (fps) fps.textContent = '60 FPS (Shader Core Active)'; if (util) util.textContent = '28% GPU Compute'; if (beacon) beacon.className = 'relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary'; if (ping) ping.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75'; if (stage) stage.textContent = 'chat-desk-stage (Neural Cognition)'; if (log) { log.innerHTML = '<div class="text-primary-container">▸ switchStage("chat-desk-stage") -> window.resumeThreeJsAiCore() called</div><div class="text-secondary">▸ requestAnimationFrame(id: 2180) initialized</div><div class="text-on-surface">▸ 368 draw calls dispatched to GPU queue</div><div class="text-primary">▸ Uniform buffers updated, Three.js Neural Core live</div>'; } }; window.toggleGpuStage = function() { if (window.currentGpuStage === 'directory-stage') { window.currentGpuStage = 'chat-desk-stage'; if (typeof switchView === 'function') switchView('chat'); window.resumeThreeJsAiCore(); } else { window.currentGpuStage = 'directory-stage'; if (typeof switchView === 'function') switchView('tickets'); window.pauseThreeJsAiCore(); } };</script><script id="morphism-keyboard-bindings">document.addEventListener('keydown', function(e) { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); const search = document.getElementById('ticket-search-input') || document.getElementById('chat-input'); if (search) { search.focus(); search.select?.(); } } if (e.key === 'Escape') { const drawer = document.getElementById('ticket-inspector-drawer'); if (drawer && !drawer.classList.contains('hidden')) { drawer.classList.add('hidden'); } } });</script>
+<div class="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-surface-container-lowest/80 backdrop-blur-md transition-all duration-300 hidden" id="command-palette-modal"><div class="w-full max-w-2xl rounded-2xl bg-surface-container-lowest/90 backdrop-blur-2xl border border-primary-container/40 shadow-[0_16px_48px_rgba(0,0,0,0.8),0_0_35px_rgba(0,242,254,0.18),inset_0_1px_1px_rgba(255,255,255,0.1)] flex flex-col overflow-hidden animate-in"><div class="p-space-md border-b border-outline-variant/30 flex items-center gap-space-sm bg-surface-container-low/70"><span class="material-symbols-outlined text-[22px] text-primary-container">search</span><input autofocus="" class="flex-1 bg-transparent text-on-surface placeholder:text-outline border-none font-body-md text-base focus:outline-none" id="command-palette-input" placeholder="Type a command or search action... (⌘K)" type="text"><div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary text-[10px] font-code-tabular font-bold border border-secondary/30 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>LIVE</span><kbd class="px-2 py-0.5 rounded bg-surface-container-high text-outline text-[11px] font-code-tabular border border-outline-variant/30 cursor-pointer hover:text-on-surface" onclick="document.getElementById('command-palette-modal')?.classList.add('hidden')">ESC to close</kbd></div></div><div class="max-h-[480px] overflow-y-auto p-space-sm flex flex-col gap-space-sm"><div class="flex flex-col gap-1"><div class="px-3 py-1 text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Navigation &amp; Stages</div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-primary-container group-hover:scale-110 transition-transform">forum</span><span class="font-body-md text-sm">Switch to Chat Desk (AI Holographic Orbit)</span></div><kbd class="px-2 py-0.5 rounded bg-surface-container font-code-tabular text-[11px] text-outline-variant group-hover:text-primary-container">1 or G C</kbd></div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-secondary group-hover:scale-110 transition-transform">format_list_bulleted</span><span class="font-body-md text-sm">Switch to Ticket Directory (60 Live Records)</span></div><kbd class="px-2 py-0.5 rounded bg-surface-container font-code-tabular text-[11px] text-outline-variant group-hover:text-secondary">2 or G T</kbd></div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-primary group-hover:scale-110 transition-transform">menu_book</span><span class="font-body-md text-sm">Switch to Policy Explorer (Knowledge Base)</span></div><kbd class="px-2 py-0.5 rounded bg-surface-container font-code-tabular text-[11px] text-outline-variant group-hover:text-primary">3 or G P</kbd></div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-outline group-hover:scale-110 transition-transform">view_sidebar</span><span class="font-body-md text-sm">Toggle Operational Left Rail</span></div><kbd class="px-2 py-0.5 rounded bg-surface-container font-code-tabular text-[11px] text-outline-variant">⌘B / [</kbd></div></div><div class="flex flex-col gap-1 pt-1 border-t border-outline-variant/20"><div class="px-3 py-1 text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">Diagnostic &amp; AI Controls</div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-[#ff7940] group-hover:scale-110 transition-transform">bolt</span><span class="font-body-md text-sm">Toggle GPU Lifecycle &amp; WebGL Render Loop (Pause/Resume)</span></div><span class="text-[11px] font-code-tabular text-secondary">Active Loop</span></div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-tertiary-fixed group-hover:scale-110 transition-transform">restart_alt</span><span class="font-body-md text-sm">Reset Chat Desk Session &amp; Clear Stream</span></div><kbd class="px-2 py-0.5 rounded bg-surface-container font-code-tabular text-[11px] text-outline-variant">⌘R</kbd></div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl bg-primary-container/15 text-primary border border-primary-container/40 shadow-[0_0_12px_rgba(0,242,254,0.2)] transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-primary-container group-hover:scale-110 transition-transform">manage_search</span><span class="font-body-md text-sm font-semibold text-primary">Inspect Ticket TKT-0007 (Fastag Double Charge)</span></div><div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary-fixed font-code-tabular text-[10px] font-bold">Sev-1</span><kbd class="px-2 py-0.5 rounded bg-primary-container/20 font-code-tabular text-[11px] text-primary-container font-semibold">ENTER ↵</kbd></div></div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-secondary group-hover:scale-110 transition-transform">science</span><span class="font-body-md text-sm">Run Sev-1 SLA Escalation Test Simulation</span></div><span class="text-[11px] font-code-tabular text-outline">Dry Run</span></div></div><div class="flex flex-col gap-1 pt-1 border-t border-outline-variant/20"><div class="px-3 py-1 text-[11px] font-label-sm uppercase tracking-wider text-outline font-semibold">System &amp; Preferences</div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-outline group-hover:scale-110 transition-transform">settings</span><span class="font-body-md text-sm">Open Settings &amp; AI Governance Drawer</span></div><kbd class="px-2 py-0.5 rounded bg-surface-container font-code-tabular text-[11px] text-outline-variant">⌘,</kbd></div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-primary group-hover:scale-110 transition-transform">contrast</span><span class="font-body-md text-sm">Toggle Theme (Dark / Light Aurora)</span></div><span class="text-[11px] font-code-tabular text-outline">Theme Mode</span></div><div class="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container-high/80 text-on-surface transition-colors cursor-pointer group"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px] text-secondary group-hover:scale-110 transition-transform">verified_user</span><span class="font-body-md text-sm">View 4-Layer Guardrails &amp; PII Engine Telemetry</span></div><span class="px-1.5 py-0.5 rounded bg-surface-container font-code-tabular text-[10px] text-secondary">Active v3.1</span></div></div></div><div class="p-space-sm bg-surface-container-low/90 border-t border-outline-variant/30 flex items-center justify-between font-code-tabular text-[11px] text-outline"><div class="flex items-center gap-3"><span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">↑</kbd><kbd class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">↓</kbd> to navigate</span><span class="text-outline-variant">•</span><span class="flex items-center gap-1"><kbd class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">↵</kbd> to select</span></div><div class="flex items-center gap-1.5"><kbd class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface font-semibold">ESC</kbd><span class="">to dismiss</span></div></div></div></div>
+
+
+
+
 </body></html>
