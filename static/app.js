@@ -509,13 +509,10 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   let greetingIdx = 0;
 
-  // 3D Animated AI & Sparky Mascot Hero Stage ("Sparks & Dog")
-  const heroMascotStage = document.getElementById("hero-mascot-stage");
+  // 3D Holographic Neural Core Hero Rig & Speech Bubble Interaction
+  const heroNeuralCore = document.getElementById("hero-neural-core");
+  const heroRig = heroNeuralCore ? heroNeuralCore.querySelector(".neural-gyroscopic-rig") : null;
   const botSpeechBubble = document.getElementById("bot-speech-bubble");
-
-  if (heroMascotStage) {
-    attachMascotPointerParallax(heroMascotStage);
-  }
 
   const triggerBotGreeting = (e) => {
     if (e) e.stopPropagation();
@@ -524,11 +521,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (botGreetingText) {
       botGreetingText.textContent = GREETINGS[greetingIdx];
     }
-    if (heroMascotStage) {
-      heroMascotStage.classList.remove("mascot-cheer");
-      void heroMascotStage.offsetWidth;
-      heroMascotStage.classList.add("mascot-cheer");
-      setTimeout(() => heroMascotStage.classList.remove("mascot-cheer"), 800);
+    if (heroNeuralCore) {
+      heroNeuralCore.classList.remove("neural-core-cheer");
+      void heroNeuralCore.offsetWidth;
+      heroNeuralCore.classList.add("neural-core-cheer");
+      const ripples = heroNeuralCore.querySelectorAll(".holo-resonance-ripple");
+      ripples.forEach((r) => {
+        r.style.animation = "none";
+        void r.offsetWidth;
+        r.style.animation = "";
+      });
+      setTimeout(() => heroNeuralCore.classList.remove("neural-core-cheer"), 600);
     }
   };
 
@@ -542,8 +545,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (heroMascotStage) {
-    heroMascotStage.addEventListener("click", triggerBotGreeting);
+  if (heroNeuralCore) {
+    heroNeuralCore.addEventListener("click", triggerBotGreeting);
   }
 
   if (emptyStateBot) {
@@ -556,8 +559,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Reference Model: Mouse Head Tilt & Gaze Tracking
+  // Mouse head tilt and gyroscopic rig tracking
   window.addEventListener("mousemove", (e) => {
+    if (heroRig && heroNeuralCore && heroNeuralCore.offsetParent !== null) {
+      const rect = heroNeuralCore.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = e.clientX - centerX;
+      const deltaY = e.clientY - centerY;
+      const tiltY = Math.max(-20, Math.min(20, (deltaX / 300) * 20));
+      const tiltX = Math.max(-15, Math.min(15, -(deltaY / 300) * 15));
+      heroRig.style.transform = `rotateY(${tiltY}deg) rotateX(${tiltX}deg)`;
+    }
+
     if (!emptyStateBot || emptyStateBot.offsetParent === null) return;
     const rect = emptyStateBot.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
