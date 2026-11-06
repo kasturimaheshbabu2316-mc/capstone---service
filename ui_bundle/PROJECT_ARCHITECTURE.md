@@ -91,6 +91,7 @@ flowchart TD
 ## 2. Comprehensive Subsystem Breakdown
 
 ### 1. Spatial Client & Web UI Layer (`static/` & `ui_bundle/`)
+
 - **Technology Stack:** Pure HTML5 semantic landmarks, vanilla JavaScript state machine, Three.js (r128) WebGL canvas, and responsive CSS3 design system with multi-layer aurora backdrops.
 - **Key Modules:**
   - **3D Holographic Orbit Core (`#threejs-container-ANIMATION_34`):**
@@ -112,6 +113,7 @@ flowchart TD
 ---
 
 ### 2. API Gateway & Hardening Layer (`api/main.py`)
+
 - **Framework:** FastAPI with asynchronous endpoints and Pydantic request/response validation.
 - **Endpoints:**
   - `POST /ask`: Primary conversational route handling multi-agent dispatch, intent routing, and guardrail enforcement.
@@ -130,6 +132,7 @@ flowchart TD
 ---
 
 ### 3. Session State & Partitioned Cache (`crew/memory.py` & `rag/cache.py`)
+
 - **Conversation Session Memory:**
   - Thread-safe in-memory sliding window history capped at 20 turns.
   - Automatic pronoun and entity resolution: automatically binds follow-up queries (e.g., *"What is its resolution SLA?"*) to the previously discussed ticket ID or policy context.
@@ -141,6 +144,7 @@ flowchart TD
 ---
 
 ### 4. Multi-Agent Orchestration Core (`crew/`)
+
 - **Framework:** CrewAI / LangChain sequential pipeline with strict role specialization.
 - **Agents:**
   1. **Intent Router Agent (`crew/router.py`):** Fast heuristic and semantic classifier categorizing queries into `policy`, `ticket_lookup`, `both`, or `unclear`.
@@ -154,6 +158,7 @@ flowchart TD
 ---
 
 ### 5. Vector RAG Subsystem (`rag/` & `kb/`)
+
 - **Vector Database:** Local ChromaDB instance with sentence-level chunking.
 - **Embedding Model:** Local `SentenceTransformers` (`all-MiniLM-L6-v2`) generating 384-dimensional dense vectors.
 - **Calibrated Cosine Similarity Cutoff:**
@@ -168,6 +173,7 @@ flowchart TD
 ---
 
 ### 6. Operational Ticket Telemetry & Predictive Risk Core (`data/`)
+
 - **Corpus:** 60 validated synthetic tickets generated with `seed=42` across 6 categories (Billing, Account Access, General Inquiry, Product Defect, Technical Issue, Safety).
 - **Predictive Escalation Risk Formula:**
   $$\text{Composite Risk} = 0.6 \times \text{escalated\_flag} + 0.4 \times \left(\frac{\text{resolution\_hours}}{\text{sla\_target\_hours}}\right)$$
@@ -178,6 +184,7 @@ flowchart TD
 ---
 
 ### 7. Dual-Agent Compliance Review & Audit Governance (`review/` & `governance/`)
+
 - **Review Team:**
   - **PolicyComplianceReviewer:** Checks proposed answers against retrieved sources to ensure zero hallucination and strict adherence to SLA figures.
   - **FinalEditor:** Enforces tone, concise markdown structure, and verification of PII redaction.
@@ -188,6 +195,7 @@ flowchart TD
 ---
 
 ### 8. Testing & Quality Assurance Suite (`tests/`)
+
 - **Coverage:** 182 comprehensive unit, integration, security, and end-to-end tests across 19 test modules:
   - `test_api.py`: FastAPI routes, validation schemas, token limits.
   - `test_web_ui.py`: Static asset integrity, landmark accessibility, zero leak verification.
@@ -248,14 +256,14 @@ User Input
 ## 4. Key Files & Directory Cross-Reference
 
 | Layer | Primary Files | Description |
-|---|---|---|
+| --- | --- | --- |
 | **Client UI** | `static/index.html`, `static/style.css`, `static/app.js` | 3D Three.js WebGL Orbit Core, Mascot Duo, Spatial Desks |
 | **UI Bundle** | `ui_bundle/standalone.html`, `ui_bundle/ARCHITECTURE.md` | All-in-one runnable bundle and connection specification |
 | **API Gateway** | `api/main.py` | FastAPI application, middleware, endpoints, rate limits |
 | **Agent Crew** | `crew/crew.py`, `crew/router.py`, `crew/memory.py` | Multi-agent coordination, intent routing, sliding window memory |
 | **RAG & KB** | `rag/retriever.py`, `rag/cache.py`, `kb/*.md` | ChromaDB vector search, embeddings, policy documents |
 | **Tools** | `tools/rag_tool.py`, `tools/ticket_tool.py` | Role-bound tools for vector retrieval and database lookups |
-| **Safety & Defense**| `safety/guardrails.py`, `governance/least_autonomy.py` | Prompt injection detection, PII phone masking, least autonomy |
+| **Safety & Defense** | `safety/guardrails.py`, `governance/least_autonomy.py` | Prompt injection detection, PII phone masking, least autonomy |
 | **Review & Audit** | `review/reviewer.py`, `governance/governance.py` | Compliance reviewer agent, thread-safe JSONL audit logger |
 | **Dataset** | `data/` | Synthetic 60-ticket corpus with seed 42 |
 | **Tests** | `tests/*.py` (182 test cases) | Automated pytest suite verifying 100% of functional paths |
