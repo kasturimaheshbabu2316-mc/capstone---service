@@ -611,6 +611,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // AI Animated Companion Bot Interaction & Emoji Greetings (Pic 2 Design)
   const emptyStateBot = document.getElementById("empty-state-bot");
   const botGreetingText = document.getElementById("bot-greeting-text");
+  const botSpeechBubble = document.getElementById("bot-speech-bubble");
   const botHeadBox = emptyStateBot ? emptyStateBot.querySelector(".bot-head-box") : null;
   const botEyes = emptyStateBot ? emptyStateBot.querySelectorAll(".bot-eye") : [];
   const GREETINGS = [
@@ -751,7 +752,7 @@ document.addEventListener("DOMContentLoaded", () => {
         !examplesPopover.contains(e.target) &&
         (!examplesToggleBtn || !examplesToggleBtn.contains(e.target)) &&
         (!botSpeechBubble || !botSpeechBubble.contains(e.target)) &&
-        (!heroNeuralCore || !heroNeuralCore.contains(e.target))
+        (!emptyStateBot || !emptyStateBot.contains(e.target))
       ) {
         setExamplesPopoverVisible(false);
       }
@@ -972,7 +973,6 @@ document.addEventListener("DOMContentLoaded", () => {
       loadingRow.remove();
       appendAssistantResponse(payload, hasPhone);
     } catch (err) {
-      clearTimeout(phaseTimeout);
       loadingRow.remove();
       appendErrorCard(503, "Service communication interrupted. Verify backend server is running.");
     }
