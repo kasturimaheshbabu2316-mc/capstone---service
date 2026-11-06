@@ -60,6 +60,7 @@
       <button type="button" class="switcher-pill active" id="pill-chat" data-target="chat-stage">💬 Chat Desk</button>
       <button type="button" class="switcher-pill" id="pill-directory" data-target="directory-stage">🎫 Ticket Directory</button>
       <button type="button" class="switcher-pill" id="pill-policies" data-target="policies-stage">📖 Policy Explorer</button>
+      <button type="button" class="switcher-pill" id="pill-ratings" data-target="ratings-stage">⭐ Ratings &amp; Reviews</button>
     </nav>
 
     <div class="nav-actions">
@@ -128,6 +129,12 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
           </span>
           <span class="rail-nav-label hidden-collapsed">Policy Explorer</span>
+        </button>
+
+        <button type="button" class="rail-nav-item" id="rail-nav-ratings" data-target="ratings-stage" title="Ratings &amp; Reviews">
+          <span class="rail-nav-icon">⭐</span>
+          <span class="rail-nav-label hidden-collapsed">Ratings &amp; Reviews</span>
+          <span class="rail-badge hidden-collapsed" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4);">5⭐</span>
         </button>
 
         <button type="button" class="rail-nav-item" id="rail-nav-telemetry" data-target="telemetry-view" title="Telemetry Feed">
@@ -347,6 +354,63 @@
 
         <div class="policies-grid" id="policies-grid">
           <!-- Populated dynamically via app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW D: FULL-STAGE RATINGS & REVIEWS (SEPARATE STAGE) -->
+    <section class="ratings-stage stage-hidden" id="ratings-stage">
+      <div class="dash-inner">
+        <div class="dash-header">
+          <div>
+            <h2 class="dash-title">Customer Ratings &amp; Reviews Log</h2>
+            <p class="dash-subtitle">User satisfaction tracking, 5-star ratings, suggestions, and ticket conversation history</p>
+          </div>
+          <button type="button" class="glass-btn" id="refresh-ratings-btn">🔄 Refresh Reviews</button>
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">Average CSAT Score</span>
+            <div class="kpi-value text-amber" id="kpi-avg-rating">5.0 ⭐</div>
+            <span class="kpi-sub">Across verified queries</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Total Ratings Received</span>
+            <div class="kpi-value" id="kpi-total-ratings">3</div>
+            <span class="kpi-sub">Recorded with ticket traces</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">5-Star Delight Rate</span>
+            <div class="kpi-value text-emerald" id="kpi-delight-rate">100%</div>
+            <span class="kpi-sub">Spark &amp; Sparky approved</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Suggestions Captured</span>
+            <div class="kpi-value text-cyan" id="kpi-total-suggestions">3</div>
+            <span class="kpi-sub">"We will look up on it!"</span>
+          </div>
+        </div>
+
+        <!-- Ratings & Reviews Table -->
+        <div class="table-container">
+          <table class="glass-table" id="ratings-table">
+            <thead>
+              <tr>
+                <th>Rating ID</th>
+                <th>Ticket ID</th>
+                <th>Rating</th>
+                <th>User Query</th>
+                <th>Assistant Answer</th>
+                <th>User Suggestion</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="ratings-table-body">
+              <!-- Populated dynamically via app.js -->
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

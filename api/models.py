@@ -99,6 +99,39 @@ class ErrorResponse(BaseModel):
     trace_id: str | None = Field(default=None, description="Request trace ID if applicable.")
 
 
+class FeedbackRequest(BaseModel):
+    """Payload for POST /feedback endpoint."""
+
+    session_id: str | None = Field(default="default_session", description="Conversation session ID.")
+    ticket_id: str | None = Field(default=None, description="Optional associated ticket ID.")
+    question: str | None = Field(default=None, description="User's original query.")
+    answer: str | None = Field(default=None, description="Assistant's response text.")
+    rating: int = Field(..., ge=1, le=5, description="Customer rating from 1 to 5 stars.")
+    suggestion: str | None = Field(default=None, description="Optional feedback suggestion or comment.")
+    timestamp: str | None = Field(default=None, description="ISO timestamp of submission.")
+
+
+class FeedbackRecord(BaseModel):
+    """Structured feedback record stored and retrieved."""
+
+    id: str = Field(..., description="Unique feedback ID.")
+    timestamp: str = Field(..., description="ISO submission timestamp.")
+    rating: int = Field(..., ge=1, le=5, description="Star rating.")
+    ticket_id: str | None = Field(default=None, description="Associated ticket ID if any.")
+    question: str | None = Field(default=None, description="User query.")
+    answer: str | None = Field(default=None, description="AI answer.")
+    suggestion: str | None = Field(default=None, description="User suggestion.")
+
+
+class FeedbackResponse(BaseModel):
+    """Response returned upon feedback submission."""
+
+    status: str = Field(default="recorded", description="Submission status.")
+    message: str = Field(..., description="Polite confirmation message.")
+    feedback_id: str = Field(..., description="Generated feedback ID.")
+    has_suggestion: bool = Field(default=False, description="Flag indicating if suggestion was provided.")
+
+
 __all__ = [
     "AddDocumentRequest",
     "AddDocumentResponse",
@@ -106,6 +139,9 @@ __all__ = [
     "AskResponse",
     "CrewResponse",
     "ErrorResponse",
+    "FeedbackRecord",
+    "FeedbackRequest",
+    "FeedbackResponse",
     "HealthResponse",
     "SupportResponse",
 ]

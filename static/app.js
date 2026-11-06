@@ -441,17 +441,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const stageChat = document.getElementById("chat-stage");
   const stageDirectory = document.getElementById("directory-stage");
   const stagePolicies = document.getElementById("policies-stage");
+  const stageRatings = document.getElementById("ratings-stage");
 
   // Pills
   const pillChat = document.getElementById("pill-chat");
   const pillDirectory = document.getElementById("pill-directory");
   const pillPolicies = document.getElementById("pill-policies");
+  const pillRatings = document.getElementById("pill-ratings");
+  const railNavRatings = document.getElementById("rail-nav-ratings");
+  const refreshRatingsBtn = document.getElementById("refresh-ratings-btn");
 
   // Session state
   const sessionId = "web_" + Math.random().toString(36).substring(2, 10);
   let cachedTickets = [];
   let isDirectoryLoaded = false;
   let isPoliciesLoaded = false;
+  let isRatingsLoaded = false;
+  let lastUserQuery = "";
 
   // --------------------------------------------------------------------------
   // 1. Details Toggle (Default OFF, Persisted in localStorage)
@@ -1152,9 +1158,11 @@ document.addEventListener("DOMContentLoaded", () => {
       pillChat,
       pillDirectory,
       pillPolicies,
+      pillRatings,
       railNavChat,
       railNavDirectory,
-      railNavPolicies
+      railNavPolicies,
+      railNavRatings
     ].forEach(pill => {
       if (!pill) return;
       const target = pill.getAttribute("data-target");
@@ -1179,8 +1187,12 @@ document.addEventListener("DOMContentLoaded", () => {
       stagePolicies.classList.toggle("stage-hidden", stageName !== "policies-stage");
       stagePolicies.style.display = stageName === "policies-stage" ? "block" : "none";
     }
+    if (stageRatings) {
+      stageRatings.classList.toggle("stage-hidden", stageName !== "ratings-stage");
+      stageRatings.style.display = stageName === "ratings-stage" ? "block" : "none";
+    }
 
-    // Floating Composer Dock is shown exclusively on Chat Desk so it never blocks Directory or Policy views
+    // Floating Composer Dock is shown exclusively on Chat Desk so it never blocks Directory, Policy or Ratings views
     const composerDock = document.querySelector(".composer-dock");
     if (composerDock) {
       composerDock.style.display = stageName === "chat-stage" ? "block" : "none";
@@ -1192,6 +1204,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (stageName === "policies-stage" && !isPoliciesLoaded) {
       renderPolicyExplorer();
     }
+    if (stageName === "ratings-stage") {
+      loadRatingsDashboard();
+    }
 
     if (stageName === "chat-stage") {
       scrollToBottom();
@@ -1201,6 +1216,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (pillChat) pillChat.addEventListener("click", () => switchStage("chat-stage"));
   if (pillDirectory) pillDirectory.addEventListener("click", () => switchStage("directory-stage"));
   if (pillPolicies) pillPolicies.addEventListener("click", () => switchStage("policies-stage"));
+  if (pillRatings) pillRatings.addEventListener("click", () => switchStage("ratings-stage"));
+  if (railNavRatings) railNavRatings.addEventListener("click", () => switchStage("ratings-stage"));
+  if (refreshRatingsBtn) refreshRatingsBtn.addEventListener("click", () => loadRatingsDashboard());
 
   // --------------------------------------------------------------------------
   // 4. Live Token Budget Estimator
@@ -1237,6 +1255,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function dispatchQuery(queryText) {
     if (!queryText || !queryText.trim()) return;
+    lastUserQuery = queryText.trim();
 
     // Switch to Chat Desk view
     switchStage("chat-stage");
@@ -1668,6 +1687,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     bubble.appendChild(actionsRow);
 
+    // Requirement 3: Attach 5-star rating prompt and interactive widget to every assistant message
+    const ratingCard = createRatingDockCard({
+      query: (lastUserQuery || "").trim(),
+      answer: answer,
+      ticketId: (ticket && (ticket.ticket_id || ticket.record_id)) || (data && data.ticket_id) || null,
+      rowEl: row,
+    });
+    bubble.appendChild(ratingCard);
+
     row.appendChild(bubble);
     chatStream.appendChild(row);
     scrollToBottom();
@@ -1684,6 +1712,314 @@ document.addEventListener("DOMContentLoaded", () => {
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#39;");
+  }
+
+  // --------------------------------------------------------------------------
+  // Customer Delight & Interactive 5-Star Ratings Engine
+  // --------------------------------------------------------------------------
+  function playPuppyBarkSound() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const now = ctx.currentTime;
+
+      // Happy Bark 1
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.type = "sine";
+      osc1.frequency.setValueAtTime(420, now);
+      osc1.frequency.exponentialRampToValueAtTime(720, now + 0.08);
+      osc1.frequency.exponentialRampToValueAtTime(320, now + 0.16);
+      gain1.gain.setValueAtTime(0.01, now);
+      gain1.gain.linearRampToValueAtTime(0.24, now + 0.03);
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.17);
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.17);
+
+      // Happy Bark 2 (slightly higher pitch, playful sequence)
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      const t2 = now + 0.20;
+      osc2.type = "sine";
+      osc2.frequency.setValueAtTime(460, t2);
+      osc2.frequency.exponentialRampToValueAtTime(780, t2 + 0.08);
+      osc2.frequency.exponentialRampToValueAtTime(350, t2 + 0.16);
+      gain2.gain.setValueAtTime(0.01, t2);
+      gain2.gain.linearRampToValueAtTime(0.26, t2 + 0.03);
+      gain2.gain.exponentialRampToValueAtTime(0.001, t2 + 0.17);
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.start(t2);
+      osc2.stop(t2 + 0.17);
+    } catch (e) {
+      // Audio playback silently skips if blocked by autoplay policy
+    }
+  }
+
+  function triggerDelightAnimations(speakerCol) {
+    if (!speakerCol) return;
+    const duoAvatar = speakerCol.querySelector(".duo-speaking-avatar");
+    if (!duoAvatar) return;
+
+    // 1. Robot ("Spark") Blush Face & Glowing Screen
+    duoAvatar.classList.add("blushing");
+
+    // Spawn blooming glowing holographic rose badge given to the user
+    let roseEl = duoAvatar.querySelector(".chip-rose-bloom");
+    if (!roseEl) {
+      roseEl = document.createElement("div");
+      roseEl.className = "chip-rose-bloom";
+      roseEl.innerHTML = "🌹";
+      roseEl.title = "A glowing rose from Spark to you!";
+      duoAvatar.appendChild(roseEl);
+    }
+
+    // 2. Dog ("Sparky") Furious Fast Tail Shake & Bouncing Ears
+    duoAvatar.classList.add("wagging-tail");
+
+    // 3. Sparky Happy Double Bark Speech Bubbles
+    const bark1 = document.createElement("div");
+    bark1.className = "dog-bark-bubble bark-1";
+    bark1.textContent = "🐾 Woof!";
+    duoAvatar.appendChild(bark1);
+
+    const bark2 = document.createElement("div");
+    bark2.className = "dog-bark-bubble bark-2";
+    bark2.textContent = "🐾 Woof!";
+    duoAvatar.appendChild(bark2);
+
+    // Physical synthesized happy puppy barking chimes
+    playPuppyBarkSound();
+
+    setTimeout(() => {
+      bark1.remove();
+      bark2.remove();
+    }, 2400);
+  }
+
+  function sendThankYouReply(hasSuggestion, speakerCol) {
+    triggerDelightAnimations(speakerCol);
+
+    const thankRow = document.createElement("div");
+    thankRow.className = "msg-row assistant with-avatar";
+
+    const speaker = document.createElement("div");
+    speaker.className = "assistant-speaker-col";
+    speaker.innerHTML = createAgentDogSpeakingAvatar();
+    thankRow.appendChild(speaker);
+
+    const bubble = document.createElement("div");
+    bubble.className = "msg-bubble";
+
+    const content = document.createElement("div");
+    content.className = "msg-content";
+
+    if (hasSuggestion) {
+      content.innerHTML = `
+        <p style="font-weight: 600; color: #38bdf8; margin-bottom: 8px;">
+          🌹 "We will look up on it ! thanks for reaching out"
+        </p>
+        <p style="font-size: 1.05rem; font-weight: 700; color: #fbbf24;">
+          Thank you have a good day! 🌹
+        </p>
+      `;
+    } else {
+      content.innerHTML = `
+        <p style="font-size: 1.05rem; font-weight: 700; color: #fbbf24;">
+          Thank you have a good day! 🌹
+        </p>
+      `;
+    }
+
+    bubble.appendChild(content);
+    thankRow.appendChild(bubble);
+    chatStream.appendChild(thankRow);
+    scrollToBottom();
+
+    setTimeout(() => {
+      triggerDelightAnimations(speaker);
+    }, 200);
+  }
+
+  function createRatingDockCard({ query, answer, ticketId, rowEl }) {
+    const card = document.createElement("div");
+    card.className = "rating-dock-card";
+
+    card.innerHTML = `
+      <div class="rating-dock-prompt">
+        <span class="prompt-icon">⭐</span>
+        <span>How was this response? Please rate our service:</span>
+      </div>
+      <div class="star-rating-row" role="group" aria-label="Rate response from 1 to 5 stars">
+        <button type="button" class="star-btn" data-star="1" title="1 Star - Poor">⭐</button>
+        <button type="button" class="star-btn" data-star="2" title="2 Stars - Fair">⭐</button>
+        <button type="button" class="star-btn" data-star="3" title="3 Stars - Good">⭐</button>
+        <button type="button" class="star-btn" data-star="4" title="4 Stars - Very Good">⭐</button>
+        <button type="button" class="star-btn" data-star="5" title="5 Stars - Outstanding!">⭐</button>
+        <span class="star-rating-label"></span>
+      </div>
+      <div class="suggestion-row">
+        <input type="text" class="suggestion-input" placeholder="Have a suggestion or comment? (optional)" />
+        <button type="button" class="suggestion-submit-btn">Submit Rating ↵</button>
+      </div>
+    `;
+
+    const starBtns = card.querySelectorAll(".star-btn");
+    const starLabel = card.querySelector(".star-rating-label");
+    const suggInput = card.querySelector(".suggestion-input");
+    const submitBtn = card.querySelector(".suggestion-submit-btn");
+
+    const STAR_LABELS = [
+      "",
+      "1⭐ Needs work",
+      "2⭐ Fair",
+      "3⭐ Helpful",
+      "4⭐ Great!",
+      "5⭐ Outstanding! ⭐"
+    ];
+
+    let currentRating = 0;
+
+    starBtns.forEach(btn => {
+      const num = parseInt(btn.getAttribute("data-star"), 10);
+
+      btn.addEventListener("mouseenter", () => {
+        if (currentRating > 0) return;
+        starBtns.forEach((b, i) => {
+          b.classList.toggle("hover-lit", i < num);
+        });
+        if (starLabel) starLabel.textContent = STAR_LABELS[num] || "";
+      });
+
+      btn.addEventListener("click", () => {
+        currentRating = num;
+        starBtns.forEach((b, i) => {
+          b.classList.remove("hover-lit");
+          b.classList.toggle("selected", i < num);
+        });
+        if (starLabel) starLabel.textContent = STAR_LABELS[num] || "";
+        showToastNotification(`${num}⭐ Rating selected!`);
+      });
+    });
+
+    const starRow = card.querySelector(".star-rating-row");
+    if (starRow) {
+      starRow.addEventListener("mouseleave", () => {
+        if (currentRating === 0) {
+          starBtns.forEach(b => b.classList.remove("hover-lit"));
+          if (starLabel) starLabel.textContent = "";
+        }
+      });
+    }
+
+    async function handleSubmission() {
+      const finalRating = currentRating || 5;
+      const suggText = (suggInput.value || "").trim();
+
+      card.classList.add("locked");
+      const starsDisplay = "⭐".repeat(finalRating);
+      card.innerHTML = `
+        <div class="rating-locked-badge">
+          <span>✅ Recorded ${finalRating}/5 Stars</span>
+          <span class="rating-locked-stars">${starsDisplay}</span>
+        </div>
+        ${suggText ? `<p style="font-size: 0.78rem; color: #94a3b8; margin: 4px 0 0 0;">Suggestion noted: "${escapeHtml(suggText)}"</p>` : ""}
+      `;
+
+      try {
+        await fetch("/api/ratings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            session_id: sessionId,
+            ticket_id: ticketId || null,
+            question: query || null,
+            answer: answer || null,
+            rating: finalRating,
+            suggestion: suggText || null,
+          }),
+        });
+      } catch (err) {
+        console.warn("Ratings recorded in local memory.");
+      }
+
+      const speakerCol = rowEl ? rowEl.querySelector(".assistant-speaker-col") : null;
+      sendThankYouReply(Boolean(suggText), speakerCol);
+    }
+
+    submitBtn.addEventListener("click", handleSubmission);
+    suggInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleSubmission();
+      }
+    });
+
+    return card;
+  }
+
+  async function loadRatingsDashboard() {
+    const tableBody = document.getElementById("ratings-table-body");
+    const avgEl = document.getElementById("kpi-avg-rating");
+    const totalEl = document.getElementById("kpi-total-ratings");
+    const delightEl = document.getElementById("kpi-delight-rate");
+    const suggEl = document.getElementById("kpi-total-suggestions");
+
+    try {
+      const res = await fetch("/api/ratings?_t=" + Date.now());
+      if (!res.ok) return;
+      const records = await res.json();
+      if (!Array.isArray(records)) return;
+
+      if (totalEl) totalEl.textContent = records.length;
+
+      if (records.length > 0) {
+        const sum = records.reduce((acc, r) => acc + (r.rating || 5), 0);
+        const avg = (sum / records.length).toFixed(1);
+        if (avgEl) avgEl.textContent = `${avg} ⭐`;
+
+        const fiveStars = records.filter(r => (r.rating || 5) === 5).length;
+        const delight = Math.round((fiveStars / records.length) * 100);
+        if (delightEl) delightEl.textContent = `${delight}%`;
+
+        const suggestions = records.filter(r => r.suggestion && r.suggestion.trim()).length;
+        if (suggEl) suggEl.textContent = suggestions;
+      }
+
+      if (tableBody) {
+        tableBody.innerHTML = "";
+        records.forEach(rec => {
+          const tr = document.createElement("tr");
+          const starsStr = "⭐".repeat(rec.rating || 5);
+          const ticketBadge = rec.ticket_id
+            ? `<span class="ticket-tag-badge">${escapeHtml(rec.ticket_id)}</span>`
+            : `<span class="ticket-tag-badge na">General</span>`;
+
+          const qSnippet = escapeHtml(rec.question || "Operational Inquiry");
+          const aSnippet = escapeHtml(rec.answer ? rec.answer.slice(0, 110) + (rec.answer.length > 110 ? "..." : "") : "Response recorded.");
+          const sSnippet = rec.suggestion
+            ? `<span style="color: #38bdf8; font-style: italic;">"${escapeHtml(rec.suggestion)}"</span>`
+            : `<span style="color: #64748b;">None</span>`;
+          const timeStr = rec.timestamp ? rec.timestamp.replace("T", " ").replace("Z", "") : "Recently";
+
+          tr.innerHTML = `
+            <td><code>${escapeHtml(rec.id || "FBK-000")}</code></td>
+            <td>${ticketBadge}</td>
+            <td class="rating-stars-cell">${starsStr}</td>
+            <td title="${escapeHtml(rec.question || "")}"><strong>${qSnippet}</strong></td>
+            <td title="${escapeHtml(rec.answer || "")}">${aSnippet}</td>
+            <td>${sSnippet}</td>
+            <td style="color: #94a3b8; font-size: 0.76rem;">${timeStr}</td>
+          `;
+          tableBody.appendChild(tr);
+        });
+      }
+    } catch (e) {
+      console.warn("Ratings load failure: ", e);
+    }
   }
 
   // --------------------------------------------------------------------------
@@ -2375,10 +2711,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const viewParam = urlParams.get("view") || window.location.hash.replace("#", "");
     if (viewParam === "directory") switchStage("directory-stage");
     else if (viewParam === "policies") switchStage("policies-stage");
+    else if (viewParam === "ratings") switchStage("ratings-stage");
 
     const queryParam = urlParams.get("query");
     if (queryParam) {
       setTimeout(() => dispatchQuery(queryParam), 150);
     }
   } catch (e) {}
+
+  window.dispatchQuery = dispatchQuery;
+  window.switchStage = switchStage;
 });
