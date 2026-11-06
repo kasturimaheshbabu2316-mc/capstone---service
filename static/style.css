@@ -2166,14 +2166,17 @@ body.show-details .meta-footer,
 
 .ai-antenna-mast,
 .ai-arm-limb-l,
-.ai-arm-limb-r {
+.ai-arm-limb-r,
+.ai-arm-limb-victory,
+.ai-victory-thumb {
   stroke: #00f2fe;
 }
 
 .ai-antenna-beacon,
 .ai-chest-core,
 .ai-hand-dot-l,
-.ai-hand-dot-r {
+.ai-hand-dot-r,
+.ai-hand-victory-dot {
   fill: #00f2fe;
   filter: drop-shadow(0 0 8px #00f2fe);
 }
@@ -2273,14 +2276,17 @@ body.show-details .meta-footer,
 
 [data-theme="light"] .ai-antenna-mast,
 [data-theme="light"] .ai-arm-limb-l,
-[data-theme="light"] .ai-arm-limb-r {
+[data-theme="light"] .ai-arm-limb-r,
+[data-theme="light"] .ai-arm-limb-victory,
+[data-theme="light"] .ai-victory-thumb {
   stroke: #0284c7;
 }
 
 [data-theme="light"] .ai-antenna-beacon,
 [data-theme="light"] .ai-chest-core,
 [data-theme="light"] .ai-hand-dot-l,
-[data-theme="light"] .ai-hand-dot-r {
+[data-theme="light"] .ai-hand-dot-r,
+[data-theme="light"] .ai-hand-victory-dot {
   fill: #0284c7;
   filter: drop-shadow(0 0 6px rgba(2, 132, 199, 0.6));
 }
@@ -2680,11 +2686,11 @@ body.show-details .meta-footer,
 }
 
 [data-state="success"] .ai-arm-right {
-  display: none;
+  display: none !important;
 }
 
 [data-state="success"] .ai-arm-victory {
-  display: block;
+  display: inline !important;
   animation: victoryThumbsUpWave 0.7s ease-in-out infinite alternate;
   transform-origin: 98px 86px;
 }
