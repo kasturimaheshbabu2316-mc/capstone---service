@@ -82,6 +82,7 @@ The UI is built with a modern, framework-free vanilla stack designed for maximum
 ## 3. Component Interconnection Matrix
 
 ### A. View Switcher & Stage Navigation
+
 - **HTML Elements:**
   - `#nav-switcher .nav-tab` (Top Bar)
   - `#rail-nav-links .rail-nav-item` (Left Rail Drawer)
@@ -96,6 +97,7 @@ The UI is built with a modern, framework-free vanilla stack designed for maximum
   4. Dispatches a window `resize` event so Three.js or responsive table layouts immediately recalculate projection matrices.
 
 ### B. The 3D Holographic Orbit Stage (`#chat-orbit-header-stage`)
+
 - **Container:** `#threejs-container-ANIMATION_34` inside `#threejs-hero-wrap`.
 - **Three.js WebGL Architecture:**
   - **Renderer:** `THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" })`
@@ -117,6 +119,7 @@ The UI is built with a modern, framework-free vanilla stack designed for maximum
   - **Reset Resilience:** When "Reset Desk" is clicked, `#chat-stream` is emptied, `.chat-active` is removed, and the orbit core seamlessly scales back to $320\text{px}$ without losing WebGL context.
 
 ### C. Live AI Reasoning & Query Dispatch Pipeline (`/ask`)
+
 ```mermaid
 sequenceDiagram
     autonumber
@@ -149,7 +152,9 @@ sequenceDiagram
 ```
 
 ### D. The Assistant Duo Character System ("Spark" & "Sparky")
+
 Every assistant response is introduced by an SVG duo avatar:
+
 1. **AI Robot ("Spark"):**
    - Glowing cyber helmet and dark metallic chassis.
    - Animated blinking digital eye screens (`eyeBlinkCadence` keyframe: blinks every 4.2 seconds).
@@ -162,6 +167,7 @@ Every assistant response is introduced by an SVG duo avatar:
    - Glowing yellow collar badge and friendly tongue.
 
 ### E. Operational Ticket Directory (`/tickets`)
+
 - **Data Model:** 60 synthetic records with attributes: `ticket_id`, `category`, `status`, `sla_target_hours`, `resolution_hours`, `risk_score`, `escalated`, `customer_name`, `summary`.
 - **Live Computed Telemetry:**
   - **KPIs:** Total Tickets, Escalation Rate ($20\%$), Mean Resolution Hours ($11.5\text{h}$), Empirical P80 Escalation Cutoff ($\tau = 0.4400$).
@@ -174,6 +180,7 @@ Every assistant response is introduced by an SVG duo avatar:
   - **Row Inspector Drawer:** Clicking `Inspect ↗` on any ticket row opens the ticket details in the Settings Drawer with pre-populated telemetry.
 
 ### F. Policy Explorer (`/policies`)
+
 - Fetches official ride policies on demand:
   1. **Sev-1 Incident Escalation Protocol:** 15-minute response SLA, 2-minute safety callbacks.
   2. **Driver Cancellation & Refund Policy:** Full refund for driver cancellations or deviations $> 3\text{km}$.
@@ -182,6 +189,7 @@ Every assistant response is introduced by an SVG duo avatar:
 - Integrated accordion with quick-filter input search.
 
 ### G. System Settings & Administration Drawer (`#settings-drawer`)
+
 - **4 Tabbed Modules:**
   1. **Tickets:** Live summary and deep inspection of selected ticket records.
   2. **Telemetry:** RTT latency tracker, Token Budget monitor ($2,000$ tokens/request), and "Simulate Oversized Payload (HTTP 413)" trigger.
@@ -189,6 +197,7 @@ Every assistant response is introduced by an SVG duo avatar:
   4. **Admin KB Ingestion:** Authentication field (`X-Admin-Key`), document title, content textarea, "Update Knowledge Base" (`/add-document`) and "Clear Semantic Cache" (`/clear-cache`).
 
 ### H. Command Palette (`⌘K`)
+
 - **Global Hotkey:** `⌘K` (Mac) or `Ctrl+K` (Windows/Linux).
 - **Features:**
   - Real-time search filter across all operational tasks.
@@ -200,7 +209,7 @@ Every assistant response is introduced by an SVG duo avatar:
 ## 4. Event & Keyboard Shortcuts Table
 
 | Trigger | Source Component | Action / Handled Event |
-|---|---|---|
+| --- | --- | --- |
 | `Click` | `#rail-toggle-btn` / `#rail-toggle-collapse` | Toggles Left Rail drawer expansion (`.expanded` class) |
 | `⌘B` / `Ctrl+B` | Keyboard Listener | Toggles Left Rail drawer |
 | `⌘K` / `Ctrl+K` | Keyboard Listener | Toggles Command Palette modal |
