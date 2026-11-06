@@ -175,7 +175,8 @@ body {
 }
 
 .stage-inner {
-  max-width: 960px;
+  max-width: 860px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -302,6 +303,7 @@ body {
 .msg-row {
   display: flex;
   width: 100%;
+  max-width: 860px;
 }
 
 .msg-row.user {
@@ -313,7 +315,7 @@ body {
 }
 
 .msg-bubble {
-  max-width: 82%;
+  max-width: 78%;
   padding: 18px 22px;
   border-radius: 16px;
   background: var(--glass-surface);
@@ -2091,6 +2093,369 @@ body.show-details .meta-footer,
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* ==============================================================================
+   3D AI Robot & Sparky Mascot Loading Card Rig (Pic 2 Design)
+   ============================================================================== */
+.mascot-stage.mascot-loading-card {
+  perspective: 900px;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  border: none !important;
+  padding: 8px 14px;
+  max-width: 320px;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.mascot-viewport {
+  position: relative;
+  width: 260px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
+  transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+.mascot-svg-rig {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
+  transform-style: preserve-3d;
+}
+
+/* Floor Contact Shadow */
+.mascot-floor-shadow {
+  fill: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.3) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 80%);
+  animation: shadowBreathe 3.6s ease-in-out infinite alternate;
+}
+
+[data-theme="light"] .mascot-floor-shadow {
+  fill: radial-gradient(ellipse at center, rgba(2, 132, 199, 0.22) 0%, rgba(15, 23, 42, 0.12) 50%, transparent 80%);
+  opacity: 0.7;
+}
+
+@keyframes shadowBreathe {
+  0% { transform: scale(0.95); opacity: 0.65; }
+  100% { transform: scale(1.05); opacity: 0.95; }
+}
+
+/* AI Robot Dark Theme */
+.ai-head-helmet,
+.ai-torso-plate {
+  fill: url(#robotBodyDark);
+  stroke: #00f2fe;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.45));
+}
+
+.ai-antenna-mast,
+.ai-arm-limb-l,
+.ai-arm-limb-r {
+  stroke: #00f2fe;
+}
+
+.ai-antenna-beacon,
+.ai-chest-core,
+.ai-hand-dot-l,
+.ai-hand-dot-r {
+  fill: #00f2fe;
+  filter: drop-shadow(0 0 8px #00f2fe);
+}
+
+.ai-visor-screen {
+  fill: #050b14;
+  stroke: rgba(0, 242, 254, 0.4);
+  stroke-width: 1.2;
+}
+
+.ai-eye-left,
+.ai-eye-right {
+  fill: #00f2fe;
+  filter: drop-shadow(0 0 6px #00f2fe);
+}
+
+.ai-blush-left,
+.ai-blush-right {
+  fill: rgba(0, 242, 254, 0.35);
+}
+
+.ai-mouth-curve {
+  stroke: #00f2fe;
+}
+
+.ai-thruster-glow {
+  fill: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.7) 0%, transparent 70%);
+}
+
+/* Sparky Companion Dark Theme */
+.sparky-body-shape,
+.sparky-head-sphere {
+  fill: url(#sparkyBodyDark);
+  stroke: #38bdf8;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+}
+
+.sparky-tail-path,
+.ear-shape-l,
+.ear-shape-r,
+.sparky-collar {
+  stroke: #38bdf8;
+}
+
+.sparky-tail-pom,
+.sparky-collar-tag,
+.sparky-paws-l,
+.sparky-paws-r {
+  fill: #38bdf8;
+}
+
+.ear-inner-l,
+.ear-inner-r {
+  fill: rgba(56, 189, 248, 0.25);
+}
+
+.sparky-pupil-l,
+.sparky-pupil-r,
+.sparky-nose {
+  fill: #00f2fe;
+}
+
+.sparky-snout {
+  fill: #081525;
+}
+
+.mag-rim,
+.mag-handle {
+  stroke: #f59e0b;
+}
+
+.holo-book-cover {
+  stroke: #00f2fe;
+  fill: rgba(0, 242, 254, 0.12);
+}
+
+.holo-book-pages-l,
+.holo-book-pages-r {
+  fill: rgba(255, 255, 255, 0.15);
+  stroke: #00f2fe;
+  stroke-width: 1;
+}
+
+.holo-scan-laser {
+  stroke: #00f2fe;
+}
+
+/* Light Theme Styling */
+[data-theme="light"] .ai-head-helmet,
+[data-theme="light"] .ai-torso-plate {
+  fill: url(#robotBodyLight);
+  stroke: #0284c7;
+  stroke-width: 2;
+  filter: drop-shadow(0 6px 14px rgba(2, 132, 199, 0.2));
+}
+
+[data-theme="light"] .ai-antenna-mast,
+[data-theme="light"] .ai-arm-limb-l,
+[data-theme="light"] .ai-arm-limb-r {
+  stroke: #0284c7;
+}
+
+[data-theme="light"] .ai-antenna-beacon,
+[data-theme="light"] .ai-chest-core,
+[data-theme="light"] .ai-hand-dot-l,
+[data-theme="light"] .ai-hand-dot-r {
+  fill: #0284c7;
+  filter: drop-shadow(0 0 6px rgba(2, 132, 199, 0.6));
+}
+
+[data-theme="light"] .ai-visor-screen {
+  fill: #f8fafc;
+  stroke: rgba(2, 132, 199, 0.35);
+  stroke-width: 1.2;
+}
+
+[data-theme="light"] .ai-eye-left,
+[data-theme="light"] .ai-eye-right {
+  fill: #0284c7;
+  filter: drop-shadow(0 0 4px rgba(2, 132, 199, 0.5));
+}
+
+[data-theme="light"] .ai-blush-left,
+[data-theme="light"] .ai-blush-right {
+  fill: rgba(244, 63, 94, 0.45);
+}
+
+[data-theme="light"] .ai-mouth-curve {
+  stroke: #0284c7;
+}
+
+[data-theme="light"] .ai-thruster-glow {
+  fill: radial-gradient(ellipse at center, rgba(2, 132, 199, 0.35) 0%, transparent 70%);
+}
+
+[data-theme="light"] .sparky-body-shape,
+[data-theme="light"] .sparky-head-sphere {
+  fill: url(#sparkyBodyLight);
+  stroke: #d97706;
+  stroke-width: 2;
+  filter: drop-shadow(0 6px 14px rgba(217, 119, 6, 0.2));
+}
+
+[data-theme="light"] .sparky-tail-path,
+[data-theme="light"] .ear-shape-l,
+[data-theme="light"] .ear-shape-r,
+[data-theme="light"] .sparky-collar {
+  stroke: #d97706;
+}
+
+[data-theme="light"] .sparky-tail-pom,
+[data-theme="light"] .sparky-paws-l,
+[data-theme="light"] .sparky-paws-r {
+  fill: #d97706;
+}
+
+[data-theme="light"] .sparky-collar-tag {
+  fill: #fbbf24;
+}
+
+[data-theme="light"] .ear-inner-l,
+[data-theme="light"] .ear-inner-r {
+  fill: #fde68a;
+}
+
+[data-theme="light"] .sparky-pupil-l,
+[data-theme="light"] .sparky-pupil-r {
+  fill: #1e293b;
+}
+
+[data-theme="light"] .sparky-snout {
+  fill: #ffffff;
+}
+
+[data-theme="light"] .sparky-nose {
+  fill: #78350f;
+}
+
+[data-theme="light"] .holo-book-cover {
+  stroke: #0284c7;
+  fill: rgba(2, 132, 199, 0.1);
+}
+
+[data-theme="light"] .holo-book-pages-l,
+[data-theme="light"] .holo-book-pages-r {
+  fill: #ffffff;
+  stroke: #0284c7;
+  stroke-width: 1;
+}
+
+[data-theme="light"] .holo-scan-laser {
+  stroke: #0284c7;
+}
+
+/* Animations for Mascot Rig */
+.character-ai-group {
+  transform-origin: 80px 95px;
+  animation: aiFloatBob 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes aiFloatBob {
+  0%   { transform: translateY(0px) rotateZ(0.5deg); }
+  100% { transform: translateY(-5px) rotateZ(-0.5deg); }
+}
+
+.character-sparky-group {
+  transform-origin: 178px 106px;
+  animation: sparkyFloatBob 3.6s ease-in-out infinite alternate 0.4s;
+}
+
+@keyframes sparkyFloatBob {
+  0%   { transform: translateY(0px); }
+  100% { transform: translateY(-4px); }
+}
+
+.ai-eye-left,
+.ai-eye-right {
+  transform-origin: center;
+  animation: eyeBlinkCadence 4.2s infinite, eyesReadingScan 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes eyeBlinkCadence {
+  0%, 95%, 100% { transform: scaleY(1); }
+  97.5% { transform: scaleY(0.1); }
+}
+
+@keyframes eyesReadingScan {
+  0%   { transform: translateX(-2.5px); }
+  100% { transform: translateX(2.5px); }
+}
+
+.ai-pupil-left,
+.ai-pupil-right {
+  transform: translate(var(--eye-x, 0px), var(--eye-y, 0px));
+  transition: transform 0.1s linear;
+}
+
+.sparky-tail-rig {
+  transform-origin: 192px 104px;
+  animation: tailWag 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes tailWag {
+  0%   { transform: rotate(-8deg); }
+  100% { transform: rotate(14deg); }
+}
+
+.sparky-ear-r {
+  transform-origin: 189px 76px;
+  animation: earTwitch 3.8s infinite;
+}
+
+@keyframes earTwitch {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  93% { transform: rotate(8deg); }
+  96% { transform: rotate(-4deg); }
+}
+
+.ai-holo-book {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.holo-scan-laser {
+  animation: laserScanSweep 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes laserScanSweep {
+  0%   { transform: translateY(-4px); opacity: 0.6; }
+  100% { transform: translateY(6px); opacity: 1; }
+}
+
+.sparky-mag-glass {
+  opacity: 1;
+  transform-origin: 163px 100px;
+  animation: magGlassSweep 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes magGlassSweep {
+  0%   { transform: rotate(-10deg) translate(-2px, -2px); }
+  100% { transform: rotate(12deg) translate(2px, 2px); }
 }
 
 /* ==============================================================================
@@ -2452,6 +2817,13 @@ body.show-details .meta-footer,
   display: flex;
   align-items: flex-start;
   gap: 14px;
+  width: 100%;
+  max-width: 860px;
+}
+
+.msg-row.assistant.with-avatar .msg-bubble {
+  flex: 1;
+  max-width: calc(100% - 68px);
 }
 
 .assistant-speaker-col {

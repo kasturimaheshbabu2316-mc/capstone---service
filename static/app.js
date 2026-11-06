@@ -14,67 +14,237 @@
  */
 
   // ==============================================================================
-// Futuristic 3D Holographic Neural Core & Fluid Synaptic Sphere (Jarvis / Apple Intelligence Style)
+// 3D Animated AI & Sparky Mascot Loading Stage (Policy Reader & Magnifying Glass Rig)
 // ==============================================================================
+
+function getMascotSvgMarkup() {
+  return `
+    <svg class="mascot-svg-rig" viewBox="0 0 260 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="neonBloom" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="2" result="blur1"/>
+          <feGaussianBlur stdDeviation="5" result="blur2"/>
+          <feMerge>
+            <feMergeNode in="blur2"/>
+            <feMergeNode in="blur1"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+
+        <!-- Dark Theme: Obsidian Metal & Cyberpunk Neon -->
+        <linearGradient id="robotBodyDark" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e3a5f"/>
+          <stop offset="100%" stop-color="#0a1526"/>
+        </linearGradient>
+        <linearGradient id="sparkyBodyDark" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#162e4a"/>
+          <stop offset="100%" stop-color="#0b1728"/>
+        </linearGradient>
+
+        <!-- Light Theme: Matte Ceramic White & Warm Golden Honey -->
+        <linearGradient id="robotBodyLight" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="100%" stop-color="#e0e7ff"/>
+        </linearGradient>
+        <linearGradient id="sparkyBodyLight" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#fef3c7"/>
+          <stop offset="100%" stop-color="#fde68a"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Floor Occlusion & Contact Shadow -->
+      <ellipse class="mascot-floor-shadow" cx="130" cy="132" rx="75" ry="7"/>
+
+      <!-- ==================== CHARACTER 1: "AI" (ROBOT) ==================== -->
+      <g class="character-ai-group">
+        <!-- Hover Thruster / Lower Body Shadow -->
+        <ellipse class="ai-thruster-glow" cx="80" cy="116" rx="14" ry="4"/>
+
+        <!-- Torso -->
+        <rect class="ai-torso-plate" x="62" y="80" width="36" height="30" rx="9"/>
+        <!-- Pulsing Chest Core Light -->
+        <circle class="ai-chest-core" cx="80" cy="95" r="5.5" filter="url(#neonBloom)"/>
+        <circle class="ai-chest-core-inner" cx="80" cy="95" r="2.5" fill="#ffffff"/>
+
+        <!-- Left Arm & Hand -->
+        <g class="ai-arm-left">
+          <path class="ai-arm-limb-l" d="M62 86 L48 96 L58 106" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+          <circle class="ai-hand-dot-l" cx="58" cy="106" r="3.5"/>
+        </g>
+
+        <!-- Right Arm & Hand -->
+        <g class="ai-arm-right">
+          <path class="ai-arm-limb-r" d="M98 86 L112 96 L104 106" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+          <circle class="ai-hand-dot-r" cx="104" cy="106" r="3.5"/>
+        </g>
+
+        <!-- Holographic Open Book (Active in thinking state) -->
+        <g class="ai-holo-book">
+          <path class="holo-book-cover" d="M60 106 Q80 112 100 106 L102 120 Q80 126 58 120 Z" stroke-width="2"/>
+          <path class="holo-book-pages-l" d="M80 108 L60 106 L59 119 L80 122 Z"/>
+          <path class="holo-book-pages-r" d="M80 108 L100 106 L101 119 L80 122 Z"/>
+          <line class="holo-scan-laser" x1="58" y1="110" x2="102" y2="110" stroke-width="2.2" filter="url(#neonBloom)"/>
+        </g>
+
+        <!-- Head Unit -->
+        <g class="ai-head-unit">
+          <!-- Antenna with Glowing Beacon -->
+          <line class="ai-antenna-mast" x1="80" y1="36" x2="80" y2="47" stroke-width="2.8" stroke-linecap="round"/>
+          <circle class="ai-antenna-beacon" cx="80" cy="33" r="4.5" filter="url(#neonBloom)"/>
+
+          <!-- Helmet Box -->
+          <rect class="ai-head-helmet" x="55" y="46" width="50" height="36" rx="13" stroke-width="2.2"/>
+          <!-- Visor Specular Reflection -->
+          <path class="ai-visor-glint" d="M58 50 Q80 45 102 50" stroke="#ffffff" stroke-width="1.6" opacity="0.7" stroke-linecap="round"/>
+
+          <!-- Face Screen & Visor -->
+          <rect class="ai-visor-screen" x="61" y="52" width="38" height="24" rx="7"/>
+
+          <!-- Expressive Glowing Eyes -->
+          <g class="ai-eyes-group">
+            <rect class="ai-eye-left" x="67" y="58" width="8.5" height="10" rx="4.2" filter="url(#neonBloom)"/>
+            <rect class="ai-eye-right" x="84.5" y="58" width="8.5" height="10" rx="4.2" filter="url(#neonBloom)"/>
+            <circle class="ai-pupil-left" cx="71" cy="62" r="1.8" fill="#ffffff"/>
+            <circle class="ai-pupil-right" cx="89" cy="62" r="1.8" fill="#ffffff"/>
+          </g>
+
+          <!-- Rosy Cheeks -->
+          <ellipse class="ai-blush-left" cx="66" cy="71" rx="3" ry="1.6"/>
+          <ellipse class="ai-blush-right" cx="94" cy="71" rx="3" ry="1.6"/>
+
+          <!-- Mouth / Smile -->
+          <path class="ai-mouth-curve" d="M75 70 Q80 74 85 70" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        </g>
+      </g>
+
+      <!-- ==================== CHARACTER 2: "SPARKY" (COMPANION) ==================== -->
+      <g class="character-sparky-group">
+        <!-- Bushy Wagging Tail -->
+        <g class="sparky-tail-rig">
+          <path class="sparky-tail-path" d="M192 104 Q216 92 210 76 Q200 64 192 78" stroke-width="4" stroke-linecap="round" fill="none" filter="url(#neonBloom)"/>
+          <circle class="sparky-tail-pom" cx="210" cy="76" r="3.5" filter="url(#neonBloom)"/>
+        </g>
+
+        <!-- Body -->
+        <ellipse class="sparky-body-shape" cx="178" cy="106" rx="19" ry="15" stroke-width="2.2"/>
+        <rect class="sparky-paws-l" x="166" y="115" width="8" height="12" rx="4"/>
+        <rect class="sparky-paws-r" x="182" y="115" width="8" height="12" rx="4"/>
+
+        <!-- Collar & Charm -->
+        <path class="sparky-collar" d="M168 90 Q178 96 188 90" stroke-width="2.6" fill="none"/>
+        <circle class="sparky-collar-tag" cx="178" cy="96" r="3" filter="url(#neonBloom)"/>
+
+        <!-- Head Unit -->
+        <g class="sparky-head-unit">
+          <!-- Ears -->
+          <g class="sparky-ear-l">
+            <path class="ear-shape-l" d="M167 76 Q156 62 165 56 Q174 62 171 74" stroke-width="2" filter="url(#neonBloom)"/>
+            <path class="ear-inner-l" d="M167 72 Q161 63 166 60 Q171 63 169 71"/>
+          </g>
+          <g class="sparky-ear-r">
+            <path class="ear-shape-r" d="M189 76 Q200 62 191 56 Q182 62 185 74" stroke-width="2" filter="url(#neonBloom)"/>
+            <path class="ear-inner-r" d="M189 72 Q195 63 190 60 Q185 63 187 71"/>
+          </g>
+
+          <!-- Face Base -->
+          <circle class="sparky-head-sphere" cx="178" cy="80" r="16" stroke-width="2.2" filter="url(#neonBloom)"/>
+
+          <!-- Big Expressive Eyes -->
+          <ellipse class="sparky-eye-white-l" cx="172" cy="78" rx="3.5" ry="4.5" fill="#ffffff"/>
+          <circle class="sparky-pupil-l" cx="172.5" cy="77.5" r="2.2"/>
+          <circle cx="174" cy="76" r="1" fill="#ffffff"/>
+
+          <ellipse class="sparky-eye-white-r" cx="184" cy="78" rx="3.5" ry="4.5" fill="#ffffff"/>
+          <circle class="sparky-pupil-r" cx="183.5" cy="77.5" r="2.2"/>
+          <circle cx="185" cy="76" r="1" fill="#ffffff"/>
+
+          <!-- Snout & Nose -->
+          <ellipse class="sparky-snout" cx="178" cy="86" rx="5.5" ry="3.8"/>
+          <polygon class="sparky-nose" points="176.5,85 179.5,85 178,87.5"/>
+          <path class="sparky-happy-tongue" d="M176.5,88 Q178,92 179.5,88" stroke="#ff477e" stroke-width="2" fill="#ff477e" stroke-linecap="round"/>
+
+          <!-- Whiskers -->
+          <line x1="164" y1="84" x2="157" y2="83" stroke-width="1.2" opacity="0.6"/>
+          <line x1="164" y1="87" x2="158" y2="88" stroke-width="1.2" opacity="0.6"/>
+          <line x1="192" y1="84" x2="199" y2="83" stroke-width="1.2" opacity="0.6"/>
+          <line x1="192" y1="87" x2="198" y2="88" stroke-width="1.2" opacity="0.6"/>
+        </g>
+
+        <!-- Magnifying Glass for Investigating -->
+        <g class="sparky-mag-glass">
+          <line class="mag-handle" x1="160" y1="104" x2="152" y2="114" stroke-width="2.8" stroke-linecap="round"/>
+          <circle class="mag-rim" cx="163" cy="100" r="8" stroke-width="2.4" filter="url(#neonBloom)"/>
+          <circle class="mag-lens" cx="163" cy="100" r="6.8" fill="rgba(0, 242, 254, 0.22)"/>
+        </g>
+      </g>
+    </svg>
+  `;
+}
+
+function attachMascotPointerParallax(stageEl) {
+  if (!stageEl) return;
+  let rafId = null;
+  let targetRx = 0;
+  let targetRy = 0;
+  let currentRx = 0;
+  let currentRy = 0;
+
+  function onPointerMove(e) {
+    const rect = stageEl.getBoundingClientRect();
+    const clientX = e.clientX ?? (e.touches && e.touches[0] ? e.touches[0].clientX : rect.left + rect.width / 2);
+    const clientY = e.clientY ?? (e.touches && e.touches[0] ? e.touches[0].clientY : rect.top + rect.height / 2);
+
+    const dx = (clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+    const dy = (clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+
+    targetRx = Math.max(-1, Math.min(1, dx)) * 8;
+    targetRy = Math.max(-1, Math.min(1, dy)) * -6;
+
+    if (!rafId) {
+      rafId = requestAnimationFrame(updateFrame);
+    }
+  }
+
+  function onPointerLeave() {
+    targetRx = 0;
+    targetRy = 0;
+    if (!rafId) {
+      rafId = requestAnimationFrame(updateFrame);
+    }
+  }
+
+  function updateFrame() {
+    currentRx += (targetRx - currentRx) * 0.15;
+    currentRy += (targetRy - currentRy) * 0.15;
+
+    stageEl.style.setProperty("--rx", `${currentRx.toFixed(2)}deg`);
+    stageEl.style.setProperty("--ry", `${currentRy.toFixed(2)}deg`);
+    stageEl.style.setProperty("--eye-x", `${(currentRx * 0.4).toFixed(2)}px`);
+    stageEl.style.setProperty("--eye-y", `${(currentRy * -0.4).toFixed(2)}px`);
+
+    if (Math.abs(targetRx - currentRx) > 0.05 || Math.abs(targetRy - currentRy) > 0.05) {
+      rafId = requestAnimationFrame(updateFrame);
+    } else {
+      rafId = null;
+    }
+  }
+
+  stageEl.addEventListener("mousemove", onPointerMove, { passive: true });
+  stageEl.addEventListener("mouseleave", onPointerLeave, { passive: true });
+  stageEl.addEventListener("touchmove", onPointerMove, { passive: true });
+  stageEl.addEventListener("touchend", onPointerLeave, { passive: true });
+}
 
 function createAgentDogLoadingCard() {
   return `
-    <div class="neural-core-stage" id="agent-loading-card">
-      <div class="neural-phase-pill" id="agent-phase-pill">
-        <span class="holo-beacon-dot"></span>
-        <span class="phase-icon" id="agent-phase-icon">⚡</span>
+    <div class="mascot-stage mascot-loading-card" id="agent-loading-card" data-state="thinking" role="status" aria-live="polite">
+      <div class="agent-phase-pill-3d" id="agent-phase-pill">
+        <span class="phase-icon" id="agent-phase-icon">💭</span>
         <span class="phase-text" id="agent-phase-text">Analyzing your inquiry...</span>
       </div>
 
-      <div class="neural-hologram-viewport">
-        <!-- Concentric Soundwave Resonance Ripples -->
-        <div class="holo-ripple-container">
-          <div class="holo-resonance-ripple ripple-1"></div>
-          <div class="holo-resonance-ripple ripple-2"></div>
-          <div class="holo-resonance-ripple ripple-3"></div>
-        </div>
-
-        <!-- 3D Gyroscopic Floating Neural Rig -->
-        <div class="neural-gyroscopic-rig">
-          <!-- 3-Axis Gyroscopic Gimbal Rings -->
-          <div class="gyro-ring ring-x">
-            <div class="energy-node node-1"></div>
-            <div class="energy-node node-2"></div>
-          </div>
-          <div class="gyro-ring ring-y">
-            <div class="energy-node node-3"></div>
-            <div class="energy-node node-4"></div>
-          </div>
-          <div class="gyro-ring ring-z">
-            <div class="energy-node node-5"></div>
-          </div>
-
-          <!-- Central Fluid Plasma Neural Core -->
-          <div class="neural-plasma-sphere">
-            <div class="plasma-fluid-mesh"></div>
-            <div class="neural-nucleus"></div>
-            <div class="specular-glint"></div>
-            <div class="specular-glint-secondary"></div>
-          </div>
-
-          <!-- Quantum Energy Particle Halo -->
-          <div class="quantum-particle-field">
-            <div class="q-spark s-1"></div>
-            <div class="q-spark s-2"></div>
-            <div class="q-spark s-3"></div>
-            <div class="q-spark s-4"></div>
-            <div class="q-spark s-5"></div>
-            <div class="q-spark s-6"></div>
-          </div>
-        </div>
-
-        <!-- Ambient Occlusion / Floor Energy Cast -->
-        <div class="neural-stage-shadow"></div>
-      </div>
-
-      <div class="neural-telemetry-badge">
-        <span class="telemetry-spark">✦</span>
-        <span>NEURAL COGNITION ACTIVE</span>
+      <div class="mascot-viewport">
+        ${getMascotSvgMarkup()}
       </div>
     </div>
   `;
@@ -664,6 +834,10 @@ document.addEventListener("DOMContentLoaded", () => {
     loadingRow.className = "msg-row assistant agent-loading-stage";
     loadingRow.innerHTML = createAgentDogLoadingCard();
     chatStream.appendChild(loadingRow);
+    const mascotCard = loadingRow.querySelector("#agent-loading-card");
+    if (mascotCard) {
+      attachMascotPointerParallax(mascotCard);
+    }
     scrollToBottom();
 
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
