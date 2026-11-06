@@ -1037,11 +1037,16 @@
   overflow-x: auto;
   white-space: nowrap;
   -ms-overflow-style: none;
-  scrollbar-width: none;
   background: rgba(255, 255, 255, 0.02);
   -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
   mask-image: linear-gradient(to right, black 85%, transparent 100%);
   padding: 0 4px;
+}
+
+@supports (scrollbar-width: none) {
+  .sheet-tabs {
+    scrollbar-width: none;
+  }
 }
 
 .sheet-tabs::-webkit-scrollbar {
