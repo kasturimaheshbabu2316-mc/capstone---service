@@ -393,10 +393,19 @@ def _record_feedback_internal(payload: FeedbackRequest) -> FeedbackResponse:
         except Exception as exc:
             logger.error("Failed to append feedback record: %s", exc)
 
-        if has_sugg:
-            message = "We will look up on it ! thanks for reaching out 🌹\n\nThank you have a good day! 🌹"
+        # Tiered customer reaction messages based on star rating
+        rating = payload.rating
+        if rating == 1:
+            base_msg = "thanks! we will figure out soon."
+        elif rating in (2, 3):
+            base_msg = "thanks! for your rating we will do it better"
         else:
-            message = "Thank you have a good day! 🌹"
+            base_msg = "thank you so much ! have a great day 🌹"
+
+        if has_sugg:
+            message = f"We will look up on it ! thanks for reaching out\n\n{base_msg}"
+        else:
+            message = base_msg
 
         return FeedbackResponse(
             status="recorded",

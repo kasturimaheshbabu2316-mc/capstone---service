@@ -5451,36 +5451,145 @@ body:has(.nav-sidebar-drawer.expanded) .composer-dock {
   text-shadow: 0 0 8px rgba(251, 191, 36, 0.7);
 }
 
-/* AI Robot Blush & Screen Glow */
+/* ==============================================================================
+   AVATAR EXPRESSION TIERS:
+   - 1 Star: Lovely Caring / Empathetic face (Soft lavender blush, gentle wag, NO rose)
+   - 2-3 Stars: Lovely Encouraging face (Cyan/pink glow, friendly wag, NO rose)
+   - 4-5 Stars: Joyful Celebration (Radiant pink blush, fast tail shake, blooming rose 🌹)
+   ============================================================================== */
+
+/* TIER 1 (1 Star): Lovely Caring Face (NO rose) */
+.duo-speaking-avatar.lovely-caring .chip-ai-blush {
+  fill: #c084fc !important;
+  opacity: 0.85 !important;
+  transform: scale(1.4);
+  transform-origin: center;
+  animation: lovelySoftPulse 2s ease-in-out infinite alternate !important;
+}
+
+.duo-speaking-avatar.lovely-caring .chip-ai-screen {
+  stroke: #a855f7 !important;
+  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.8)) !important;
+}
+
+.duo-speaking-avatar.lovely-caring .chip-ai-smile {
+  stroke: #c084fc !important;
+}
+
+.duo-speaking-avatar.lovely-caring .chip-dog-tail-rig {
+  animation: sparkyTailSlowWag 0.5s ease-in-out infinite alternate !important;
+  transform-origin: 129px 74px !important;
+}
+
+/* TIER 2 (2 to 3 Stars): Lovely Encouraging Face (NO rose) */
+.duo-speaking-avatar.lovely-encouraging .chip-ai-blush {
+  fill: #f472b6 !important;
+  opacity: 0.9 !important;
+  transform: scale(1.45);
+  transform-origin: center;
+  animation: lovelySoftPulse 1.6s ease-in-out infinite alternate !important;
+}
+
+.duo-speaking-avatar.lovely-encouraging .chip-ai-screen {
+  stroke: #00f2fe !important;
+  filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.85)) !important;
+}
+
+.duo-speaking-avatar.lovely-encouraging .chip-ai-smile {
+  stroke: #00f2fe !important;
+}
+
+.duo-speaking-avatar.lovely-encouraging .chip-dog-tail-rig {
+  animation: sparkyTailMedWag 0.25s ease-in-out infinite alternate !important;
+  transform-origin: 129px 74px !important;
+}
+
+.duo-speaking-avatar.lovely-encouraging .chip-dog-ear {
+  animation: sparkyEarPerk 0.4s ease-in-out infinite alternate !important;
+}
+
+/* TIER 3 (4 to 5 Stars): Joyful Celebration & Radiant Blush WITH Rose 🌹 */
+.duo-speaking-avatar.joyful-celebration .chip-ai-blush,
 .duo-speaking-avatar.blushing .chip-ai-blush {
   fill: #ff477e !important;
   opacity: 1 !important;
-  transform: scale(1.75);
+  transform: scale(1.8);
   transform-origin: center;
-  animation: blushPulse 1.2s ease-in-out infinite alternate !important;
+  animation: blushPulse 1.1s ease-in-out infinite alternate !important;
 }
 
+.duo-speaking-avatar.joyful-celebration .chip-ai-screen,
 .duo-speaking-avatar.blushing .chip-ai-screen {
   stroke: #ff477e !important;
-  filter: drop-shadow(0 0 10px rgba(255, 71, 126, 0.9)) !important;
+  filter: drop-shadow(0 0 12px rgba(255, 71, 126, 0.95)) !important;
 }
 
+.duo-speaking-avatar.joyful-celebration .chip-ai-smile,
 .duo-speaking-avatar.blushing .chip-ai-smile {
   stroke: #ff477e !important;
+}
+
+.duo-speaking-avatar.joyful-celebration .chip-dog-tail-rig,
+.duo-speaking-avatar.wagging-tail .chip-dog-tail-rig {
+  animation: sparkyTailShake 0.12s ease-in-out infinite alternate !important;
+  transform-origin: 129px 74px !important;
+}
+
+.duo-speaking-avatar.joyful-celebration .chip-dog-ear,
+.duo-speaking-avatar.wagging-tail .chip-dog-ear {
+  animation: sparkyEarBounce 0.22s ease-in-out infinite alternate !important;
+}
+
+@keyframes lovelySoftPulse {
+  0% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0.95;
+  }
+}
+
+@keyframes sparkyTailSlowWag {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes sparkyTailMedWag {
+  0% {
+    transform: rotate(-18deg);
+  }
+  100% {
+    transform: rotate(18deg);
+  }
+}
+
+@keyframes sparkyEarPerk {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-3px) rotate(4deg);
+  }
 }
 
 @keyframes blushPulse {
   0% {
     fill: #f43f5e;
-    filter: drop-shadow(0 0 3px rgba(244, 63, 94, 0.7));
+    filter: drop-shadow(0 0 4px rgba(244, 63, 94, 0.7));
   }
   100% {
     fill: #ff70a6;
-    filter: drop-shadow(0 0 12px rgba(255, 112, 166, 0.95));
+    filter: drop-shadow(0 0 14px rgba(255, 112, 166, 0.95));
   }
 }
 
-/* Blooming Rose Giveaway Animation */
+/* Blooming Rose Giveaway Animation (Exclusively for 4-5 ⭐ ratings) */
 .duo-speaking-avatar {
   position: relative;
 }
@@ -5518,35 +5627,6 @@ body:has(.nav-sidebar-drawer.expanded) .composer-dock {
   100% {
     transform: scale(1) rotate(0deg);
     opacity: 1;
-  }
-}
-
-/* Sparky Dog Fast Tail Wag Animation */
-.duo-speaking-avatar.wagging-tail .chip-dog-tail-rig {
-  animation: sparkyTailShake 0.12s ease-in-out infinite alternate !important;
-  transform-origin: 129px 74px !important;
-}
-
-@keyframes sparkyTailShake {
-  0% {
-    transform: rotate(-26deg);
-  }
-  100% {
-    transform: rotate(26deg);
-  }
-}
-
-/* Sparky Dog Bouncing Happy Ears */
-.duo-speaking-avatar.wagging-tail .chip-dog-ear {
-  animation: sparkyEarBounce 0.24s ease-in-out infinite alternate !important;
-}
-
-@keyframes sparkyEarBounce {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-4px) rotate(8deg);
   }
 }
 

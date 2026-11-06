@@ -1717,7 +1717,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------------------------------------------------------------------
   // Customer Delight & Interactive 5-Star Ratings Engine
   // --------------------------------------------------------------------------
-  function playPuppyBarkSound() {
+  function playPuppyBarkSound(singleBark = false) {
     try {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (!AudioCtx) return;
@@ -1739,69 +1739,99 @@ document.addEventListener("DOMContentLoaded", () => {
       osc1.start(now);
       osc1.stop(now + 0.17);
 
-      // Happy Bark 2 (slightly higher pitch, playful sequence)
-      const osc2 = ctx.createOscillator();
-      const gain2 = ctx.createGain();
-      const t2 = now + 0.20;
-      osc2.type = "sine";
-      osc2.frequency.setValueAtTime(460, t2);
-      osc2.frequency.exponentialRampToValueAtTime(780, t2 + 0.08);
-      osc2.frequency.exponentialRampToValueAtTime(350, t2 + 0.16);
-      gain2.gain.setValueAtTime(0.01, t2);
-      gain2.gain.linearRampToValueAtTime(0.26, t2 + 0.03);
-      gain2.gain.exponentialRampToValueAtTime(0.001, t2 + 0.17);
-      osc2.connect(gain2);
-      gain2.connect(ctx.destination);
-      osc2.start(t2);
-      osc2.stop(t2 + 0.17);
+      if (!singleBark) {
+        // Happy Bark 2 (slightly higher pitch, playful sequence)
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        const t2 = now + 0.20;
+        osc2.type = "sine";
+        osc2.frequency.setValueAtTime(460, t2);
+        osc2.frequency.exponentialRampToValueAtTime(780, t2 + 0.08);
+        osc2.frequency.exponentialRampToValueAtTime(350, t2 + 0.16);
+        gain2.gain.setValueAtTime(0.01, t2);
+        gain2.gain.linearRampToValueAtTime(0.26, t2 + 0.03);
+        gain2.gain.exponentialRampToValueAtTime(0.001, t2 + 0.17);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.start(t2);
+        osc2.stop(t2 + 0.17);
+      }
     } catch (e) {
       // Audio playback silently skips if blocked by autoplay policy
     }
   }
 
-  function triggerDelightAnimations(speakerCol) {
+  function triggerTieredAnimations(speakerCol, rating) {
     if (!speakerCol) return;
     const duoAvatar = speakerCol.querySelector(".duo-speaking-avatar");
     if (!duoAvatar) return;
 
-    // 1. Robot ("Spark") Blush Face & Glowing Screen
-    duoAvatar.classList.add("blushing");
+    // Reset previous animation classes
+    duoAvatar.classList.remove("lovely-caring", "lovely-encouraging", "joyful-celebration", "blushing", "wagging-tail");
+    const existingRose = duoAvatar.querySelector(".chip-rose-bloom");
+    if (existingRose) existingRose.remove();
 
-    // Spawn blooming glowing holographic rose badge given to the user
-    let roseEl = duoAvatar.querySelector(".chip-rose-bloom");
-    if (!roseEl) {
-      roseEl = document.createElement("div");
+    if (rating === 1) {
+      // TIER 1 (1 Star - Bad / Unsatisfied): Lovely caring empathetic face (NO ROSE FLOWER)
+      duoAvatar.classList.add("lovely-caring");
+
+      const bubble1 = document.createElement("div");
+      bubble1.className = "dog-bark-bubble bark-1";
+      bubble1.style.background = "rgba(168, 85, 247, 0.95)";
+      bubble1.textContent = "🐾 Here for you!";
+      duoAvatar.appendChild(bubble1);
+
+      setTimeout(() => bubble1.remove(), 2400);
+
+    } else if (rating === 2 || rating === 3) {
+      // TIER 2 (2 to 3 Stars - Moderate): Lovely encouraging attentive face (NO ROSE FLOWER)
+      duoAvatar.classList.add("lovely-encouraging");
+
+      const bark1 = document.createElement("div");
+      bark1.className = "dog-bark-bubble bark-1";
+      bark1.textContent = "🐾 Woof!";
+      duoAvatar.appendChild(bark1);
+
+      playPuppyBarkSound(true); // Single friendly bark
+
+      setTimeout(() => bark1.remove(), 2400);
+
+    } else {
+      // TIER 3 (4 to 5 Stars - Good or Excellent): Joyful celebration + ROSE FLOWER 🌹
+      duoAvatar.classList.add("joyful-celebration", "blushing", "wagging-tail");
+
+      // Spawn blooming glowing rose flower given to customer
+      const roseEl = document.createElement("div");
       roseEl.className = "chip-rose-bloom";
       roseEl.innerHTML = "🌹";
-      roseEl.title = "A glowing rose from Spark to you!";
+      roseEl.title = "A blooming glowing rose from Spark to you!";
       duoAvatar.appendChild(roseEl);
+
+      // Sparky Double Woof bubbles
+      const bark1 = document.createElement("div");
+      bark1.className = "dog-bark-bubble bark-1";
+      bark1.textContent = "🐾 Woof!";
+      duoAvatar.appendChild(bark1);
+
+      const bark2 = document.createElement("div");
+      bark2.className = "dog-bark-bubble bark-2";
+      bark2.textContent = "🐾 Woof!";
+      duoAvatar.appendChild(bark2);
+
+      playPuppyBarkSound(false); // Double happy bark
+
+      setTimeout(() => {
+        bark1.remove();
+        bark2.remove();
+      }, 2400);
     }
-
-    // 2. Dog ("Sparky") Furious Fast Tail Shake & Bouncing Ears
-    duoAvatar.classList.add("wagging-tail");
-
-    // 3. Sparky Happy Double Bark Speech Bubbles
-    const bark1 = document.createElement("div");
-    bark1.className = "dog-bark-bubble bark-1";
-    bark1.textContent = "🐾 Woof!";
-    duoAvatar.appendChild(bark1);
-
-    const bark2 = document.createElement("div");
-    bark2.className = "dog-bark-bubble bark-2";
-    bark2.textContent = "🐾 Woof!";
-    duoAvatar.appendChild(bark2);
-
-    // Physical synthesized happy puppy barking chimes
-    playPuppyBarkSound();
-
-    setTimeout(() => {
-      bark1.remove();
-      bark2.remove();
-    }, 2400);
   }
 
-  function sendThankYouReply(hasSuggestion, speakerCol) {
-    triggerDelightAnimations(speakerCol);
+  function sendThankYouReply(rating, hasSuggestion, speakerCol) {
+    const starCount = Number(rating) || 5;
+
+    // Trigger tiered avatar expressions
+    triggerTieredAnimations(speakerCol, starCount);
 
     const thankRow = document.createElement("div");
     thankRow.className = "msg-row assistant with-avatar";
@@ -1817,19 +1847,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const content = document.createElement("div");
     content.className = "msg-content";
 
+    // User exact requested text per rating tier:
+    let baseText = "";
+    if (starCount === 1) {
+      baseText = "thanks! we will figure out soon.";
+    } else if (starCount === 2 || starCount === 3) {
+      baseText = "thanks! for your rating we will do it better";
+    } else {
+      baseText = "thank you so much ! have a great day";
+    }
+
     if (hasSuggestion) {
       content.innerHTML = `
         <p style="font-weight: 600; color: #38bdf8; margin-bottom: 8px;">
-          🌹 "We will look up on it ! thanks for reaching out"
+          "we will look up on it ! thanks for reaching out"
         </p>
         <p style="font-size: 1.05rem; font-weight: 700; color: #fbbf24;">
-          Thank you have a good day! 🌹
+          ${escapeHtml(baseText)}
         </p>
       `;
     } else {
       content.innerHTML = `
         <p style="font-size: 1.05rem; font-weight: 700; color: #fbbf24;">
-          Thank you have a good day! 🌹
+          ${escapeHtml(baseText)}
         </p>
       `;
     }
@@ -1840,7 +1880,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollToBottom();
 
     setTimeout(() => {
-      triggerDelightAnimations(speaker);
+      triggerTieredAnimations(speaker, starCount);
     }, 200);
   }
 
@@ -1947,7 +1987,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const speakerCol = rowEl ? rowEl.querySelector(".assistant-speaker-col") : null;
-      sendThankYouReply(Boolean(suggText), speakerCol);
+      sendThankYouReply(finalRating, Boolean(suggText), speakerCol);
     }
 
     submitBtn.addEventListener("click", handleSubmission);
