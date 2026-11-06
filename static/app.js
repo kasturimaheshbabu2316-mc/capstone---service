@@ -197,9 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------------------------------------------------------------------
   function setExamplesPopoverVisible(show) {
     if (!examplesPopover) return;
-    if (chatEmptyState && !chatEmptyState.classList.contains("stage-hidden")) {
-      return;
-    }
     const shouldShow = typeof show === "boolean" ? show : examplesPopover.classList.contains("stage-hidden");
     examplesPopover.classList.toggle("stage-hidden", !shouldShow);
     if (examplesToggleBtn) {
@@ -210,12 +207,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (examplesToggleBtn) {
     examplesToggleBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      if (chatEmptyState && chatEmptyState.classList.contains("stage-hidden")) {
-        chatEmptyState.classList.remove("stage-hidden");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (chatInput) {
-        chatInput.focus();
-      }
+      playPopTap();
+      setExamplesPopoverVisible();
     });
   }
 
@@ -334,25 +327,35 @@ document.addEventListener("DOMContentLoaded", () => {
     "✨ Hi there! Welcome to Ola Support Desk!",
     "🚕 Need a policy lookup or ticket check? Ask away!",
     "🤖 Beep boop! I am your AI guide, happy to help!",
-    "🎉 Awesome to see you! Check out Prompts below!",
+    "🎉 Awesome to see you! Check out Help Desk below!",
     "💖 Fast resolution & 24/7 SLA intelligence at your service!",
-    "🌟 Hello friend! Tap any scenario or type your question!"
+    "🌟 Hello friend! Tap Help Desk or type your question!"
   ];
   let greetingIdx = 0;
 
   function spawnBotEmojiBurst(x, y) {
     const emojis = ["✨", "👋", "🚕", "💖", "⭐", "🎉", "⚡", "🤖", "🚀", "💡"];
-    for (let i = 0; i < 6; i++) {
+    const container = document.getElementById("chat-empty-state") || document.body;
+    const bubble = document.getElementById("bot-speech-bubble");
+    let baseX = x || 150;
+    let baseY = y || 20;
+    if (bubble && container && !x) {
+      const bubbleRect = bubble.getBoundingClientRect();
+      const contRect = container.getBoundingClientRect();
+      baseX = bubbleRect.left - contRect.left + bubbleRect.width / 2;
+      baseY = bubbleRect.top - contRect.top + bubbleRect.height / 2;
+    }
+    for (let i = 0; i < 7; i++) {
       const span = document.createElement("span");
       span.className = "floating-emoji";
       span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      const dx = (Math.random() - 0.5) * 110;
-      const dy = -(35 + Math.random() * 55);
+      const dx = (Math.random() - 0.5) * 120;
+      const dy = -(40 + Math.random() * 65);
       span.style.setProperty("--dx", `${dx}px`);
       span.style.setProperty("--dy", `${dy}px`);
-      span.style.left = `${x || 30}px`;
-      span.style.top = `${y || 10}px`;
-      if (emptyStateBot) emptyStateBot.appendChild(span);
+      span.style.left = `${baseX}px`;
+      span.style.top = `${baseY}px`;
+      container.appendChild(span);
       setTimeout(() => span.remove(), 1200);
     }
   }
@@ -360,16 +363,58 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3D Holographic Neural Core & AI Companion Mouse Tilt
   const heroNeuralCore = document.getElementById("hero-neural-core");
   const heroRig = heroNeuralCore ? heroNeuralCore.querySelector(".neural-gyroscopic-rig") : null;
+  const botSpeechBubble = document.getElementById("bot-speech-bubble");
 
-  if (heroNeuralCore) {
-    heroNeuralCore.addEventListener("click", () => {
-      playChimeSound();
+  const triggerBotGreeting = (e) => {
+    if (e) e.stopPropagation();
+    playChimeSound();
+    greetingIdx = (greetingIdx + 1) % GREETINGS.length;
+    if (botGreetingText) {
+      botGreetingText.textContent = GREETINGS[greetingIdx];
+    }
+    if (emptyStateBot) {
+      emptyStateBot.classList.remove("bot-cheer");
+      void emptyStateBot.offsetWidth;
+      emptyStateBot.classList.add("bot-cheer");
+      setTimeout(() => emptyStateBot.classList.remove("bot-cheer"), 600);
+    }
+    if (heroNeuralCore) {
+      heroNeuralCore.classList.remove("neural-core-cheer");
+      void heroNeuralCore.offsetWidth;
+      heroNeuralCore.classList.add("neural-core-cheer");
       const ripples = heroNeuralCore.querySelectorAll(".holo-resonance-ripple");
       ripples.forEach((r) => {
         r.style.animation = "none";
         void r.offsetWidth;
         r.style.animation = "";
       });
+      setTimeout(() => heroNeuralCore.classList.remove("neural-core-cheer"), 600);
+    }
+    spawnBotEmojiBurst();
+    setExamplesPopoverVisible(true);
+  };
+
+  if (botSpeechBubble) {
+    botSpeechBubble.addEventListener("click", triggerBotGreeting);
+    botSpeechBubble.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        triggerBotGreeting(e);
+      }
+    });
+  }
+
+  if (heroNeuralCore) {
+    heroNeuralCore.addEventListener("click", triggerBotGreeting);
+  }
+
+  if (emptyStateBot) {
+    emptyStateBot.addEventListener("click", triggerBotGreeting);
+    emptyStateBot.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        triggerBotGreeting(e);
+      }
     });
   }
 
@@ -432,33 +477,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (emptyStateBot) {
-    const triggerBotGreeting = (e) => {
-      e.stopPropagation();
-      playChimeSound();
-      greetingIdx = (greetingIdx + 1) % GREETINGS.length;
-      if (botGreetingText) {
-        botGreetingText.textContent = GREETINGS[greetingIdx];
-      }
-      emptyStateBot.classList.remove("bot-cheer");
-      void emptyStateBot.offsetWidth;
-      emptyStateBot.classList.add("bot-cheer");
-      setTimeout(() => emptyStateBot.classList.remove("bot-cheer"), 600);
-
-      const rect = emptyStateBot.getBoundingClientRect();
-      spawnBotEmojiBurst(rect.width / 2, 20);
-      setExamplesPopoverVisible(true);
-    };
-
-    emptyStateBot.addEventListener("click", triggerBotGreeting);
-    emptyStateBot.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        triggerBotGreeting(e);
-      }
-    });
-  }
-
   // AI Bot Popover Filter Tabs
   document.querySelectorAll(".bot-filter-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
@@ -479,7 +497,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (e) => {
     if (examplesPopover && !examplesPopover.classList.contains("stage-hidden")) {
-      if (!examplesPopover.contains(e.target) && e.target !== examplesToggleBtn) {
+      if (
+        !examplesPopover.contains(e.target) &&
+        (!examplesToggleBtn || !examplesToggleBtn.contains(e.target)) &&
+        (!botSpeechBubble || !botSpeechBubble.contains(e.target)) &&
+        (!heroNeuralCore || !heroNeuralCore.contains(e.target))
+      ) {
         setExamplesPopoverVisible(false);
       }
     }
