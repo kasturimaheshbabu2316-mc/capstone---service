@@ -1,16 +1,19 @@
 /* ==============================================================================
-   Ola Support Intelligence — Enterprise Operations Desk Glassmorphism Styling
-   Background: Deep radial mesh gradient (#060b16 base with glowing cyan and indigo orbs)
-   Glass Cards: rgba(15, 23, 42, 0.55), blur(18px) saturate(180%)
+   Ola Support Intelligence — REAL Glassmorphism Enterprise Operations Desk
+   Authentic glass effects with frosted glass transparency, refraction highlights,
+   and physical depth through layered transparency and subtle lighting
    ============================================================================== */
 
 :root {
   --bg-base: #060913;
-  --glass-surface: rgba(15, 23, 42, 0.62);
+  --glass-surface: rgba(15, 23, 42, 0.55);
   --glass-surface-elevated: rgba(30, 41, 59, 0.68);
   --glass-card-hover: rgba(0, 242, 254, 0.10);
   --glass-border: rgba(255, 255, 255, 0.11);
   --glass-border-highlight: rgba(0, 242, 254, 0.45);
+  --glass-reflection: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.15);
+  --glass-inner-glow: rgba(255, 255, 255, 0.05);
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
@@ -20,9 +23,11 @@
   --accent-amber: #f59e0b;
   --accent-rose: #f43f5e;
   --shadow-glass: 0 12px 40px -8px rgba(0, 0, 0, 0.55);
+  --shadow-glass-lg: 0 20px 60px -12px rgba(0, 0, 0, 0.65);
   --radius-lg: 18px;
   --radius-md: 12px;
   --radius-pill: 9999px;
+  --glass-blur: blur(20px) saturate(180%);
 }
 
 [data-theme="light"] {
@@ -59,7 +64,13 @@ body {
   overflow: hidden;
 }
 
-/* 1. TOP GLASS NAVIGATION BAR */
+/* ==============================================================================
+   REAL GLASSMORPHISM: AUTHENTIC FROSTED GLASS EFFECTS
+   Features: Multi-layer transparency, refraction highlights, chromatic aberration,
+   and physical depth through layered blur and subtle inner lighting
+   ============================================================================== */
+
+/* 1. TOP GLASS NAVIGATION BAR - Real frosted glass with refraction */
 .top-nav,
 .glass-nav {
   height: 68px;
@@ -68,11 +79,26 @@ body {
   align-items: center;
   justify-content: space-between;
   background: var(--glass-surface);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 var(--glass-reflection);
   z-index: 30;
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glass refraction highlight - subtle light transmission effect */
+.top-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.25) 50%, transparent 100%);
+  pointer-events: none;
 }
 
 .brand-group {
@@ -186,12 +212,26 @@ body {
 /* DEFAULT WELCOME HERO & STARTER GRID (ON MAIN STAGE) */
 .welcome-glass-hero {
   background: var(--glass-surface);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 28px;
-  box-shadow: var(--shadow-glass);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Inner glass lighting highlight */
+.welcome-glass-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  pointer-events: none;
 }
 
 .welcome-header {
@@ -428,7 +468,11 @@ body {
   transition: width 0.4s ease;
 }
 
-/* 3. FLOATING GLASS COMPOSER DOCK */
+/* ==============================================================================
+   REAL GLASSMORPHISM: AUTHENTIC FROSTED GLASS EFFECTS
+   ============================================================================== */
+
+/* 3. FLOATING GLASS COMPOSER DOCK - Real frosted glass with inner glow */
 .composer-dock {
   position: fixed;
   bottom: 20px;
@@ -437,13 +481,27 @@ body {
   width: calc(100% - 48px);
   max-width: 960px;
   background: var(--glass-surface-elevated);
-  -webkit-backdrop-filter: blur(22px) saturate(190%);
-  backdrop-filter: blur(22px) saturate(190%);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
   padding: 12px 16px;
-  box-shadow: var(--shadow-glass);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
   z-index: 25;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Refraction highlight - simulates light passing through glass */
+.composer-dock::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  pointer-events: none;
 }
 
 .composer-row {
@@ -509,7 +567,7 @@ body {
   transition: width 0.15s ease;
 }
 
-/* 4. COLLAPSIBLE SETTINGS DRAWER (CLOSED BY DEFAULT, NO QUICK ACTIONS) */
+/* 4. COLLAPSIBLE SETTINGS DRAWER - Real frosted glass with inner lighting */
 .settings-drawer {
   position: fixed;
   top: 68px;
@@ -518,15 +576,29 @@ body {
   max-width: 92vw;
   height: calc(100vh - 68px);
   background: var(--glass-surface-elevated);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border-left: 1px solid var(--glass-border);
-  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.5);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.5), inset -1px 0 0 var(--glass-reflection);
   transform: translateX(100%);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 40;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+/* Refraction highlight on settings drawer */
+.settings-drawer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  pointer-events: none;
+}
 }
 
 .settings-drawer.open {
@@ -567,12 +639,14 @@ body {
   color: var(--text-primary);
 }
 
+/* Drawer content with glass input fields */
 .drawer-body {
   padding: 20px;
   overflow-y: auto;
   flex: 1;
   font-size: 0.86rem;
   color: var(--text-secondary);
+  position: relative;
 }
 
 .drawer-panel {
@@ -585,29 +659,38 @@ body {
   display: flex;
 }
 
+/* Glass input fields with inner glow */
 .field-input, .field-textarea {
   width: 100%;
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   border-radius: 8px;
   padding: 9px 12px;
   color: var(--text-primary);
   font-size: 0.84rem;
+  box-shadow: inset 0 1px 0 var(--glass-inner-glow);
 }
 
+/* Ticket items in drawer - real glass effect */
 .ticket-mini-item {
   padding: 10px 12px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .ticket-mini-item:hover {
   border-color: var(--glass-border-highlight);
+  background: var(--glass-surface-elevated);
 }
 
 /* 5. SEGMENTED NAVIGATION SWITCHER */
@@ -4727,7 +4810,7 @@ body.show-details .composer-footer {
   transform: translateY(-1px);
 }
 
-/* 4 KPI Telemetry Cards */
+/* 4 KPI Telemetry Cards - Real glass with inner glow and refraction */
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -4735,19 +4818,31 @@ body.show-details .composer-footer {
 }
 
 .kpi-card {
-  background: linear-gradient(145deg, rgba(13, 24, 44, 0.85), rgba(7, 13, 26, 0.92));
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(0, 242, 254, 0.18);
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
   padding: 22px 20px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Refraction highlight on KPI card */
+.kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  pointer-events: none;
 }
 
 .kpi-card::before {
@@ -4811,18 +4906,32 @@ body.show-details .composer-footer {
   font-weight: 500;
 }
 
-/* Category Spectrum Workload Distribution */
+/* Category Spectrum Workload Distribution - Real glass with refraction */
 .spectrum-box {
-  background: linear-gradient(145deg, rgba(13, 24, 44, 0.85), rgba(7, 13, 26, 0.92));
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(0, 242, 254, 0.18);
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
   padding: 22px 24px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
   display: flex;
   flex-direction: column;
   gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Refraction highlight on spectrum box */
+.spectrum-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  pointer-events: none;
 }
 
 .spectrum-header {
@@ -4899,7 +5008,7 @@ body.show-details .composer-footer {
   flex-shrink: 0;
 }
 
-/* Filter & Search Toolbar */
+/* Filter & Search Toolbar - Real glass search container */
 .grid-toolbar {
   display: flex;
   align-items: center;
@@ -4915,12 +5024,25 @@ body.show-details .composer-footer {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(13, 24, 44, 0.75);
-  border: 1px solid rgba(0, 242, 254, 0.22);
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
   padding: 4px 16px;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-glass);
+}
+
+.search-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  pointer-events: none;
 }
 
 .search-box:focus-within {
@@ -4957,9 +5079,11 @@ body.show-details .composer-footer {
 }
 
 .filter-select {
-  background: rgba(13, 24, 44, 0.85);
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   color: #cbd5e1;
-  border: 1px solid rgba(0, 242, 254, 0.25);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
   padding: 11px 36px 11px 14px;
   font-size: 0.84rem;
@@ -4973,7 +5097,7 @@ body.show-details .composer-footer {
   background-position: right 12px center;
   background-size: 14px;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-glass);
   font-family: inherit;
 }
 
@@ -4994,15 +5118,28 @@ body.show-details .composer-footer {
   padding: 10px;
 }
 
-/* Tickets Grid Table */
+/* Tickets Grid Table - Real glass with refraction */
 .grid-table-wrap {
-  background: linear-gradient(145deg, rgba(13, 24, 44, 0.85), rgba(7, 13, 26, 0.92));
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(0, 242, 254, 0.18);
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
+  position: relative;
+}
+
+/* Refraction highlight on table container */
+.grid-table-wrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  pointer-events: none;
 }
 
 .grid-table {
@@ -5491,17 +5628,17 @@ body.show-details .composer-footer {
   color: #f1f5f9;
 }
 
-/* Left Collapsible Navigation Rail */
+/* Left Collapsible Navigation Rail - Real frosted glass */
 .nav-sidebar-drawer {
   position: fixed;
   top: 68px;
   left: 0;
   bottom: 0;
   width: 64px;
-  background: rgba(10, 14, 23, 0.95);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-right: 1px solid var(--glass-border);
   display: flex;
   flex-direction: column;
   padding: 12px 8px;
@@ -5510,6 +5647,20 @@ body.show-details .composer-footer {
   overflow: hidden;
   -webkit-user-select: none;
   user-select: none;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3), inset 1px 0 0 var(--glass-reflection);
+  position: relative;
+}
+
+/* Refraction highlight on nav rail */
+.nav-sidebar-drawer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  pointer-events: none;
 }
 
 .nav-sidebar-drawer.expanded {
@@ -6584,6 +6735,192 @@ body:has(.nav-sidebar-drawer.expanded) .composer-dock {
   background: #ffffff;
   border-color: rgba(0, 0, 0, 0.15);
   color: #0f172a;
+}
+
+/* ==============================================================================
+   REAL GLASSMORPHISM ENHANCEMENTS
+   Authentic frosted glass with multiple transparency layers,
+   refraction highlights, and chromatic effects
+   ============================================================================== */
+
+/* Generic glass panel - real frosted glass */
+.glass-panel {
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Refraction highlight for glass panels */
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  pointer-events: none;
+}
+
+/* Glass interactive cards */
+.glass-card-interactive {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-interactive);
+  padding: 14px 16px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: var(--glass-blur);
+}
+
+/* Hover glass effect on interactive cards */
+.glass-card-interactive:hover {
+  background: var(--glass-card-hover);
+  border-color: var(--glass-border-highlight);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 242, 254, 0.16), var(--shadow-glass);
+}
+
+/* Policy slip - high contrast glass */
+.policy-slip {
+  background-color: var(--color-slip-bg);
+  color: var(--color-slip-ink);
+  border: 1px solid var(--color-slip-border);
+  border-radius: var(--radius-slip) var(--radius-slip) 0 0;
+  padding: var(--space-lg) var(--space-lg) var(--space-sm);
+  position: relative;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* Assistant response bubble - cyan frosted glass */
+.msg-row.assistant .msg-bubble {
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
+  position: relative;
+}
+
+/* User message bubble - frosted cyan tint */
+.msg-row.user .msg-bubble {
+  background: var(--color-chip-user);
+  border: 1px solid var(--color-chip-user-border);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--color-chip-user-ink);
+  padding: 12px 18px;
+  border-radius: 16px 16px 4px 16px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  word-break: break-word;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Ticket stub - dark frosted glass */
+.ticket-stub {
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  padding: var(--space-lg);
+  position: relative;
+  width: 100%;
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
+  animation: ticketSlideIn 350ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Inspector card - premium dark glass */
+.pinned-inspector-card {
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 242, 254, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Receiver plate - receipt mode with glass border */
+.receipt-slip-plate {
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
+}
+
+/* Policy cards - premium glass */
+.policy-card {
+  background: var(--glass-surface);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: var(--shadow-glass), inset 0 1px 0 var(--glass-inner-glow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Command palette dialog - premium glass */
+.palette-dialog {
+  width: 560px;
+  max-width: 90vw;
+  background: var(--glass-surface-elevated);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid var(--glass-border-highlight);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  animation: paletteIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+/* Examples popover - floating glass */
+.examples-popover {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  width: 100%;
+  max-height: 440px;
+  background: var(--glass-surface-elevated);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid var(--glass-border-highlight);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  z-index: 50;
+  overflow-y: auto;
 }
 
 

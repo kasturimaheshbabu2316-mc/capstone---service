@@ -88,6 +88,11 @@
   --radius-drawer: 20px;
   --radius-pill: 9999px;
 
+  /* Glassmorphism Enhancements */
+  --glass-inner-glow: rgba(255, 255, 255, 0.08);
+  --glass-reflection: rgba(255, 255, 255, 0.15);
+  --glass-highlight: rgba(255, 255, 255, 0.12);
+
   /* Spacing Scale */
   --space-xxs: 4px;
   --space-xs: 8px;
