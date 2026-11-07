@@ -33,12 +33,28 @@ function getMascotSvgMarkup() {
 
         <!-- Dark Theme: Obsidian Metal & Cyberpunk Neon -->
         <linearGradient id="robotBodyDark" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#1e3a5f"/>
+          <stop offset="0%" stop-color="#00f2fe"/>
+          <stop offset="50%" stop-color="#1e3a5f"/>
           <stop offset="100%" stop-color="#0a1526"/>
         </linearGradient>
         <linearGradient id="sparkyBodyDark" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#162e4a"/>
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="50%" stop-color="#162e4a"/>
           <stop offset="100%" stop-color="#0b1728"/>
+        </linearGradient>
+        <linearGradient id="earGradientDark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#ec4899"/>
+        </linearGradient>
+        <linearGradient id="collarGradientDark" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#00f2fe"/>
+          <stop offset="33%" stop-color="#d946ef"/>
+          <stop offset="66%" stop-color="#fbbf24"/>
+          <stop offset="100%" stop-color="#10b981"/>
+        </linearGradient>
+        <linearGradient id="tagGradientDark" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#fbbf24"/>
+          <stop offset="100%" stop-color="#ec4899"/>
         </linearGradient>
 
         <!-- Light Theme: Matte Ceramic White & Warm Golden Honey -->

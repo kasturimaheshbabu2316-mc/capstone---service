@@ -4212,13 +4212,71 @@ body.show-details .meta-footer,
   fill: radial-gradient(ellipse at center, rgba(2, 132, 199, 0.2) 0%, rgba(15, 23, 42, 0.12) 50%, transparent 80%);
 }
 
-/* Spark (Robot) Dark Theme */
+/* ==============================================================================
+   ENHANCED 3D AI & DOG MODELS - COLORFUL & REALISTIC DESIGN
+   ============================================================================== */
+
+/* ==================== SPARK (HUMANOID AI) - DARK THEME ==================== */
 .chip-spark-group .chip-ai-helmet,
 .chip-spark-group .chip-ai-torso {
   fill: url(#robotBodyDark);
   stroke: #00f2fe;
   stroke-width: 1.8;
-  filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.4));
+  filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.6)) drop-shadow(0 0 16px rgba(79, 172, 254, 0.3));
+}
+
+/* Enhanced Spark screen - holographic display */
+.chip-ai-screen {
+  fill: #0a0e17;
+  stroke: rgba(0, 242, 254, 0.5);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.4));
+}
+
+/* Glowing AI eyes with multi-layer effect */
+.chip-ai-eye {
+  fill: #00f2fe;
+  filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.8)) drop-shadow(0 0 12px rgba(0, 242, 254, 0.4));
+  animation: eyePulse 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes eyePulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.8)) drop-shadow(0 0 12px rgba(0, 242, 254, 0.4)); }
+  50% { filter: drop-shadow(0 0 12px rgba(0, 242, 254, 1)) drop-shadow(0 0 24px rgba(0, 242, 254, 0.6)); }
+}
+
+/* Cheek blush - warm cyan for friendliness */
+.chip-ai-blush {
+  fill: rgba(0, 242, 254, 0.5);
+  filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.6));
+}
+
+/* Smiling mouth with gradient */
+.chip-ai-smile {
+  stroke: #00f2fe;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.5));
+}
+
+/* Mechanical limbs with brushed metal texture effect */
+.chip-ai-limb,
+.chip-ai-antenna {
+  stroke: #00f2fe;
+  stroke-width: 1.6;
+  filter: drop-shadow(0 0 4px rgba(0, 242, 254, 0.5));
+}
+
+/* Hand orbs with inner glow */
+.chip-ai-hand,
+.chip-ai-orb,
+.chip-ai-core {
+  fill: #00f2fe;
+  filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.8)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+}
+
+/* Thrust particles with vibrant gradient */
+.chip-ai-thruster {
+  fill: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.8) 0%, rgba(79, 172, 254, 0.4) 50%, transparent 70%);
 }
 
 .chip-ai-screen {
@@ -4281,13 +4339,54 @@ body.show-details .meta-footer,
   100% { transform: rotate(20deg) scale(1.05); }
 }
 
-/* Sparky (Cyber Dog) Dark Theme */
+/* ==================== SPARKY (CYBER DOG) - DARK THEME ==================== */
+
+/* Vibrant Sparky body - gradient cyber-blue to electric cyan */
 .chip-dog-group .chip-dog-face,
 .chip-dog-group .chip-dog-torso {
   fill: url(#sparkyBodyDark);
   stroke: #38bdf8;
   stroke-width: 1.8;
-  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.35));
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5)) drop-shadow(0 0 20px rgba(0, 242, 254, 0.2));
+}
+
+/* Vibrant dog ears with gradient */
+.chip-dog-ear {
+  stroke: #38bdf8;
+  fill: url(#earGradientDark);
+}
+
+/* Vibrant collar with rainbow gradient */
+.chip-dog-collar,
+.chip-dog-tail {
+  stroke: url(#collarGradientDark);
+}
+
+/* Colorful collar tag */
+.chip-dog-tag,
+.chip-dog-tail-tip,
+.chip-dog-paw {
+  fill: url(#tagGradientDark);
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.5)) drop-shadow(0 0 12px rgba(255, 100, 200, 0.3));
+}
+
+/* Bright reflective eyes */
+.chip-dog-pupil,
+.chip-dog-nose {
+  fill: #ffffff;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+
+/* Warm dog nose */
+.chip-dog-snout {
+  fill: #e11d48;
+  filter: drop-shadow(0 0 6px rgba(225, 29, 72, 0.5));
+}
+
+/* Dog tongue - vibrant pink */
+.chip-dog-tongue {
+  fill: #ec4899;
+  stroke: #ec4899;
 }
 
 .chip-dog-ear {
