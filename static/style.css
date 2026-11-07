@@ -1283,18 +1283,93 @@ body {
 }
 
 /* Spatial Telematics Map Visualization */
-.telematics-map-box {
+.telematics-map-box,
+.telematics-log-box,
+.telematics-auth-box,
+.telematics-fleet-box {
   width: 100%;
   height: 170px;
   border-radius: 14px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 14, 23, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10px 12px;
+  padding: 10px 14px;
+}
+
+.log-hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hud-chip-cyan {
+  font-size: 0.7rem;
+  font-family: monospace;
+  font-weight: 700;
+  color: #00f2fe;
+  background: rgba(0, 242, 254, 0.14);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 242, 254, 0.25);
+}
+
+.hud-chip-amber {
+  font-size: 0.7rem;
+  font-family: monospace;
+  font-weight: 700;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.15);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot-amber {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #fbbf24;
+}
+
+.terminal-log-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: monospace;
+  font-size: 0.73rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.log-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.log-key {
+  color: #849495;
+  font-weight: 700;
+  font-size: 0.68rem;
+  min-width: 90px;
+}
+
+.log-val {
+  color: #e0fdff;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .telematics-svg {

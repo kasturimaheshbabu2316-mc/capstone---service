@@ -8,10 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/css/tokens.css?v=37.0">
-  <link rel="stylesheet" href="/static/css/base.css?v=37.0">
-  <link rel="stylesheet" href="/static/css/components.css?v=37.0">
-  <link rel="stylesheet" href="/static/style.css?v=37.0">
+  <link rel="stylesheet" href="/static/css/tokens.css?v=38.0">
+  <link rel="stylesheet" href="/static/css/base.css?v=38.0">
+  <link rel="stylesheet" href="/static/css/components.css?v=38.0">
+  <link rel="stylesheet" href="/static/style.css?v=38.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
     (function() {
@@ -535,10 +535,10 @@
               <!-- Secondary Diagnostics: Telematics Node Health -->
               <div class="node-health-card">
                 <div class="node-health-head">
-                  <span class="health-label">Fastag Gateway Telemetry</span>
-                  <span class="health-badge">NHAI Live Bridge</span>
+                  <span class="health-label" id="detail-health-label">Fastag Gateway Telemetry</span>
+                  <span class="health-badge" id="detail-health-badge">NHAI Live Bridge</span>
                 </div>
-                <div class="node-health-chips">
+                <div class="node-health-chips" id="detail-health-chips">
                   <div class="health-chip">
                     <span class="chip-k">API LATENCY</span>
                     <strong class="chip-v text-emerald">38 ms</strong>
@@ -847,6 +847,6 @@
     </div>
   </div>
 
-  <script src="/static/app.js?v=37.0"></script>
+  <script src="/static/app.js?v=38.0"></script>
 </body>
 </html>

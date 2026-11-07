@@ -2206,13 +2206,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const tidEl = document.getElementById("detail-ticket-id");
     const titleEl = document.getElementById("detail-ticket-title");
     const priorityEl = document.getElementById("detail-priority-badge");
-    const receiptCrnEl = document.getElementById("detail-receipt-crn");
-    const tollBilledEl = document.getElementById("detail-toll-billed");
-    const tollDebitEl = document.getElementById("detail-toll-debit");
-    const disputeStatusEl = document.getElementById("detail-dispute-status");
-    const disputeAmtEl = document.getElementById("detail-dispute-amt");
+    const mapVizEl = document.getElementById("detail-map-viz");
+    const receiptSlipEl = document.getElementById("detail-receipt-slip");
     const roverRecEl = document.getElementById("detail-rover-rec");
     const refundBtn = document.getElementById("detail-approve-refund-btn");
+    const healthLabel = document.getElementById("detail-health-label");
+    const healthBadge = document.getElementById("detail-health-badge");
+    const healthChips = document.getElementById("detail-health-chips");
 
     const score = Number(ticket.escalation_score || 0);
     const isP0 = score >= 0.44 || String(ticket.status).toLowerCase() === "escalated";
@@ -2222,10 +2222,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (titleEl) {
       const titles = {
         "Billing": "Fastag Toll Surcharge Conflict",
-        "Technical Issue": "App Session Latency & Fare Lock",
+        "Technical Issue": "In-App Session Latency & Fare Lock",
         "Account Access": "Multi-Factor Authentication Lockout",
-        "Product Defect": "In-App Telematics Route Divergence",
-        "General Inquiry": "VIP Ola Select Surcharge Waiver"
+        "Product Defect": "Telematics Route Divergence & Crash",
+        "General Inquiry": "VIP Select Driver & Service Protocol"
       };
       titleEl.textContent = titles[ticket.category] || `${ticket.category || "General"} Operations Dispute`;
     }
@@ -2233,6 +2233,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (priorityEl) {
       if (isP0) {
         priorityEl.className = "priority-pill";
+        priorityEl.style.borderColor = "rgba(255, 180, 171, 0.4)";
+        priorityEl.style.color = "#ffdad8";
         priorityEl.innerHTML = '<span class="priority-ping"></span> P0 SEV-1';
       } else if (isP1) {
         priorityEl.className = "priority-pill";
@@ -2248,39 +2250,291 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const crnNum = 890000 + (parseInt(String(ticket.ticket_id).replace(/\D/g, ""), 10) || 7);
-    if (receiptCrnEl) receiptCrnEl.textContent = `Ride CRN-${crnNum} • Airport Exp`;
 
+    // 1. BILLING / TOLL DISPUTES
     if (ticket.category === "Billing") {
-      if (tollBilledEl) tollBilledEl.textContent = "₹140.00";
-      if (tollDebitEl) tollDebitEl.textContent = "₹140.00 (Cashless)";
-      if (disputeStatusEl) disputeStatusEl.textContent = "Duplicate Surcharge";
-      if (disputeAmtEl) disputeAmtEl.textContent = "₹140.00 Refund";
-      if (refundBtn) refundBtn.innerHTML = '<span>✓</span> <span>Execute ₹140 Refund</span>';
+      if (mapVizEl) {
+        mapVizEl.className = "telematics-map-box";
+        mapVizEl.innerHTML = `
+          <svg class="telematics-svg" viewBox="0 0 400 180" fill="none">
+            <path class="route-pulse-path" d="M 20 150 Q 120 120, 200 80 T 380 30" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"></path>
+            <circle cx="200" cy="80" r="10" fill="rgba(255, 208, 206, 0.25)" stroke="#ffd0ce" stroke-width="2"></circle>
+            <circle cx="200" cy="80" r="4" fill="#ffb4ab"></circle>
+            <circle cx="20" cy="150" r="5" fill="#4edea3"></circle>
+            <circle cx="380" cy="30" r="5" fill="#00f2fe"></circle>
+          </svg>
+          <div class="map-hud-top">
+            <span class="hud-chip-green"><span class="dot-emerald"></span><span>GPS Ping: Live</span></span>
+            <span class="hud-chip-rose">Toll Plaza: Trumpet KA-02</span>
+          </div>
+          <div class="map-hud-bottom">
+            <div class="hud-coords-box">
+              <span>Speed: 74 km/h • Heading: NNE</span>
+              <span class="reader-id">Fastag Reader ID: NHAI-BLR-0941</span>
+            </div>
+            <span class="hud-lat-lon">LAT 13.1986° N • LON 77.7066° E</span>
+          </div>
+        `;
+      }
+
+      if (receiptSlipEl) {
+        receiptSlipEl.innerHTML = `
+          <div class="receipt-header">
+            <div>
+              <span class="receipt-audit-label">Audit Receipt Slip</span>
+              <strong class="receipt-crn-label" id="detail-receipt-crn">Ride CRN-${crnNum} • Airport Exp</strong>
+            </div>
+            <span class="receipt-verified-badge">Verified Log</span>
+          </div>
+          <div class="receipt-ledger-items">
+            <div class="ledger-row"><span>Base Distance Fare (32.4 km)</span><strong class="text-slate">₹780.00</strong></div>
+            <div class="ledger-row"><span>Airport Toll Charge (Billed)</span><strong class="text-amber">₹140.00</strong></div>
+            <div class="ledger-row"><span>NHAI Electronic Tag Debit</span><strong class="text-emerald">₹140.00 (Cashless)</strong></div>
+            <div class="ledger-row"><span>Dispute Status</span><strong class="text-rose">Duplicate Surcharge</strong></div>
+          </div>
+          <div class="receipt-dashed-sep"></div>
+          <div class="receipt-delta-row">
+            <div>
+              <span class="delta-label">Reconciliation Delta</span>
+              <span class="delta-amt">₹140.00 Refund</span>
+            </div>
+            <div class="delta-driver">
+              <span class="driver-shield-label">Driver Impact</span>
+              <strong class="driver-shield-val">₹0.00 Demerit Shield</strong>
+            </div>
+          </div>
+        `;
+      }
+
       if (roverRecEl) {
         roverRecEl.textContent = "NHAI Fastag API timestamp matches Toll Plaza beacon KA-02 within ±12 seconds. Dual deduction confirmed. Recommend immediate reversal to Ola Money Wallet under Safe-Harbor clause 14B.";
       }
-    } else if (ticket.category === "Technical Issue") {
-      if (tollBilledEl) tollBilledEl.textContent = "₹0.00 (Latency)";
-      if (tollDebitEl) tollDebitEl.textContent = "Session Terminated";
-      if (disputeStatusEl) disputeStatusEl.textContent = "Client App Crash";
-      if (disputeAmtEl) disputeAmtEl.textContent = "₹50.00 Credit";
-      if (refundBtn) refundBtn.innerHTML = '<span>✓</span> <span>Credit Courtesy Voucher</span>';
-      if (roverRecEl) {
-        roverRecEl.textContent = "Client crash telemetry detected mid-trip at highway node. Telematics confirms ride completion. Recommend issuing ₹50 Ola courtesy credit.";
+
+      if (refundBtn) refundBtn.innerHTML = '<span>✓</span> <span>Execute ₹140 Refund</span>';
+
+      if (healthLabel) healthLabel.textContent = "Fastag Gateway Telemetry";
+      if (healthBadge) healthBadge.textContent = "NHAI Live Bridge";
+      if (healthChips) {
+        healthChips.innerHTML = `
+          <div class="health-chip"><span class="chip-k">API LATENCY</span><strong class="chip-v text-emerald">38 ms</strong></div>
+          <div class="health-chip"><span class="chip-k">MATCH CONF</span><strong class="chip-v text-cyan">99.8%</strong></div>
+          <div class="health-chip"><span class="chip-k">DISPUTE ERR</span><strong class="chip-v text-emerald">0.01%</strong></div>
+        `;
       }
-    } else {
-      if (tollBilledEl) tollBilledEl.textContent = "Standard Rate";
-      if (tollDebitEl) tollDebitEl.textContent = "Reconciled OK";
-      if (disputeStatusEl) disputeStatusEl.textContent = escapeHtml(ticket.status || "Pending");
-      if (disputeAmtEl) disputeAmtEl.textContent = "No Fare Dispute";
-      if (refundBtn) refundBtn.innerHTML = '<span>✓</span> <span>Mark Resolved</span>';
+
+    // 2. TECHNICAL ISSUE / PRODUCT DEFECT
+    } else if (ticket.category === "Technical Issue" || ticket.category === "Product Defect") {
+      if (mapVizEl) {
+        mapVizEl.className = "telematics-log-box";
+        mapVizEl.innerHTML = `
+          <div class="log-hud-top">
+            <span class="hud-chip-rose"><span class="dot-rose"></span><span>Crash Signal: SIGSEGV-MEM01</span></span>
+            <span class="hud-chip-cyan">Device Telemetry: Dumped</span>
+          </div>
+          <div class="terminal-log-rows">
+            <div class="log-line"><span class="log-key">DEVICE:</span> <span class="log-val">Samsung Galaxy S23 • Android 14</span></div>
+            <div class="log-line"><span class="log-key">APP VER:</span> <span class="log-val">Ola Rider v4.8.2 (Build 4190) • 5G NSA</span></div>
+            <div class="log-line"><span class="log-key">EXCEPTION:</span> <span class="log-val text-amber">NetworkSocketTimeout in FareLockEngine</span></div>
+            <div class="log-line"><span class="log-key">RAM HEAP:</span> <span class="log-val">78% Utilized • 184MB (State Preserved)</span></div>
+          </div>
+          <div class="map-hud-bottom">
+            <div class="hud-coords-box">
+              <span>Trace ID: DUMP-BLR-0842-ERR</span>
+              <span class="reader-id">Crash Node: Highway Cell Tower KA-09</span>
+            </div>
+            <span class="hud-lat-lon">NODE: AP-SOUTH-1A</span>
+          </div>
+        `;
+      }
+
+      if (receiptSlipEl) {
+        receiptSlipEl.innerHTML = `
+          <div class="receipt-header">
+            <div>
+              <span class="receipt-audit-label">Session Telemetry Audit</span>
+              <strong class="receipt-crn-label" id="detail-receipt-crn">Session SESS-${crnNum} • App Log</strong>
+            </div>
+            <span class="receipt-verified-badge" style="color:#00f2fe; background:rgba(0,242,254,0.15);">Trace Verified</span>
+          </div>
+          <div class="receipt-ledger-items">
+            <div class="ledger-row"><span>App Session Runtime</span><strong class="text-slate">24m 18s (Interrupted)</strong></div>
+            <div class="ledger-row"><span>Fare Lock Status</span><strong class="text-amber">Unacknowledged Socket</strong></div>
+            <div class="ledger-row"><span>Ride State at Crash</span><strong class="text-emerald">Completed at Drop-off</strong></div>
+            <div class="ledger-row"><span>Friction Impact</span><strong class="text-rose">Client Screen Freeze</strong></div>
+          </div>
+          <div class="receipt-dashed-sep"></div>
+          <div class="receipt-delta-row">
+            <div>
+              <span class="delta-label">Reconciliation Delta</span>
+              <span class="delta-amt">₹50.00 Credit</span>
+            </div>
+            <div class="delta-driver">
+              <span class="driver-shield-label">Ride Status</span>
+              <strong class="driver-shield-val">Driver Zero Fault</strong>
+            </div>
+          </div>
+        `;
+      }
+
       if (roverRecEl) {
-        roverRecEl.textContent = `Automated triage verified ticket ${escapeHtml(ticket.ticket_id)} against standard operating policies. Escalation score: ${score.toFixed(2)}.`;
+        roverRecEl.textContent = "Client crash telemetry confirms socket timeout during fare lock sync. Passenger trip completed successfully without meter overrun. Recommend issuing ₹50 Ola courtesy voucher for app friction.";
+      }
+
+      if (refundBtn) refundBtn.innerHTML = '<span>✓</span> <span>Issue ₹50 Courtesy Credit</span>';
+
+      if (healthLabel) healthLabel.textContent = "Client Diagnostics Engine";
+      if (healthBadge) healthBadge.textContent = "Sentry Crash Bridge";
+      if (healthChips) {
+        healthChips.innerHTML = `
+          <div class="health-chip"><span class="chip-k">CRASH DUMP</span><strong class="chip-v text-emerald">Captured</strong></div>
+          <div class="health-chip"><span class="chip-k">SOCKET DROP</span><strong class="chip-v text-rose">140 ms</strong></div>
+          <div class="health-chip"><span class="chip-k">STACK PARSE</span><strong class="chip-v text-cyan">100% OK</strong></div>
+        `;
+      }
+
+    // 3. ACCOUNT ACCESS / IDENTITY / SECURITY
+    } else if (ticket.category === "Account Access") {
+      if (mapVizEl) {
+        mapVizEl.className = "telematics-auth-box";
+        mapVizEl.innerHTML = `
+          <div class="log-hud-top">
+            <span class="hud-chip-amber"><span class="dot-amber"></span><span>Auth Challenge: OTP Lockout</span></span>
+            <span class="hud-chip-green">Identity Shield Active</span>
+          </div>
+          <div class="terminal-log-rows">
+            <div class="log-line"><span class="log-key">IDENTITY:</span> <span class="log-val">Registered Mobile +91 98765 [MASKED]</span></div>
+            <div class="log-line"><span class="log-key">ORIGIN IP:</span> <span class="log-val">Bengaluru, KA (49.207.182.14 • AS55836)</span></div>
+            <div class="log-line"><span class="log-key">FAILURES:</span> <span class="log-val text-rose">3 Consecutive OTP Mismatches (90s window)</span></div>
+            <div class="log-line"><span class="log-key">DEVICE ID:</span> <span class="log-val">SM-G998B (Chrome 122) • Historical Match</span></div>
+          </div>
+          <div class="map-hud-bottom">
+            <div class="hud-coords-box">
+              <span>Lockout: 24h Automated Safety Hold</span>
+              <span class="reader-id">Auth Node: AUTH-BLR-CLUSTER-2</span>
+            </div>
+            <span class="hud-lat-lon">RISK: Normal (Match)</span>
+          </div>
+        `;
+      }
+
+      if (receiptSlipEl) {
+        receiptSlipEl.innerHTML = `
+          <div class="receipt-header">
+            <div>
+              <span class="receipt-audit-label">Security Identity Audit</span>
+              <strong class="receipt-crn-label" id="detail-receipt-crn">User OLA-UID-${crnNum} • Verified</strong>
+            </div>
+            <span class="receipt-verified-badge" style="color:#fbbf24; background:rgba(251,191,36,0.15);">Lockout Active</span>
+          </div>
+          <div class="receipt-ledger-items">
+            <div class="ledger-row"><span>Account Status</span><strong class="text-rose">Temporarily Frozen</strong></div>
+            <div class="ledger-row"><span>Device Trust Score</span><strong class="text-emerald">94% (Recognized Hardware)</strong></div>
+            <div class="ledger-row"><span>Geo-IP Velocity</span><strong class="text-slate">Normal (0 km/h Delta)</strong></div>
+            <div class="ledger-row"><span>SIM Swap Flag</span><strong class="text-emerald">Negative (Clear)</strong></div>
+          </div>
+          <div class="receipt-dashed-sep"></div>
+          <div class="receipt-delta-row">
+            <div>
+              <span class="delta-label">Access Resolution</span>
+              <span class="delta-amt" style="font-size:0.95rem;">Biometric Link Dispatch</span>
+            </div>
+            <div class="delta-driver">
+              <span class="driver-shield-label">Account Risk</span>
+              <strong class="driver-shield-val" style="color:#34d399;">Safe for Bypass</strong>
+            </div>
+          </div>
+        `;
+      }
+
+      if (roverRecEl) {
+        roverRecEl.textContent = "Consecutive OTP failures detected from recognized primary device with zero geo-velocity jump. Device fingerprint matches 18 months history. Safe to trigger instant biometric one-time login link.";
+      }
+
+      if (refundBtn) refundBtn.innerHTML = '<span>✓</span> <span>Dispatch Biometric Login Link</span>';
+
+      if (healthLabel) healthLabel.textContent = "Security Auth Shield";
+      if (healthBadge) healthBadge.textContent = "ID-Guard v2.4";
+      if (healthChips) {
+        healthChips.innerHTML = `
+          <div class="health-chip"><span class="chip-k">IP REPUTATION</span><strong class="chip-v text-emerald">Clean</strong></div>
+          <div class="health-chip"><span class="chip-k">SIM SWAP</span><strong class="chip-v text-emerald">Clear (0%)</strong></div>
+          <div class="health-chip"><span class="chip-k">TRUST SCORE</span><strong class="chip-v text-cyan">94 / 100</strong></div>
+        `;
+      }
+
+    // 4. GENERAL INQUIRY / DRIVER CONDUCT / OLA SELECT
+    } else {
+      if (mapVizEl) {
+        mapVizEl.className = "telematics-fleet-box";
+        mapVizEl.innerHTML = `
+          <div class="log-hud-top">
+            <span class="hud-chip-green"><span class="dot-emerald"></span><span>Trip Telemetry: 100% Reconciled</span></span>
+            <span class="hud-chip-cyan">Ola Prime Partner Fleet</span>
+          </div>
+          <div class="terminal-log-rows">
+            <div class="log-line"><span class="log-key">ASSIGNED DRIVER:</span> <span class="log-val">Ramesh N. (4.88 ⭐ • 1,420 Completed Trips)</span></div>
+            <div class="log-line"><span class="log-key">VEHICLE VERIFIED:</span> <span class="log-val">Maruti Swift Dzire (KA-04-E-1234) • CNG</span></div>
+            <div class="log-line"><span class="log-key">ROUTE ADHERENCE:</span> <span class="log-val text-emerald">99.4% Match to GPS Plan • Zero Harsh Brakes</span></div>
+            <div class="log-line"><span class="log-key">DROP CONFIRMED:</span> <span class="log-val">Luggage Boot Sensor Logged at 14:38 IST</span></div>
+          </div>
+          <div class="map-hud-bottom">
+            <div class="hud-coords-box">
+              <span>Fleet Audit ID: FLEET-BLR-9481</span>
+              <span class="reader-id">Vehicle Telemetry: Active</span>
+            </div>
+            <span class="hud-lat-lon">SAFETY: Level 1 (Optimal)</span>
+          </div>
+        `;
+      }
+
+      if (receiptSlipEl) {
+        receiptSlipEl.innerHTML = `
+          <div class="receipt-header">
+            <div>
+              <span class="receipt-audit-label">Trip Operations Audit</span>
+              <strong class="receipt-crn-label" id="detail-receipt-crn">Booking CRN-${crnNum} • Settled</strong>
+            </div>
+            <span class="receipt-verified-badge">100% Verified</span>
+          </div>
+          <div class="receipt-ledger-items">
+            <div class="ledger-row"><span>Booking Type</span><strong class="text-slate">Ola Prime Sedan</strong></div>
+            <div class="ledger-row"><span>Driver Payout</span><strong class="text-emerald">Settled via Escrow</strong></div>
+            <div class="ledger-row"><span>Safety Sensor Stream</span><strong class="text-emerald">Zero Incident Flags</strong></div>
+            <div class="ledger-row"><span>Inquiry Classification</span><strong class="text-cyan">Standard Operating Protocol</strong></div>
+          </div>
+          <div class="receipt-dashed-sep"></div>
+          <div class="receipt-delta-row">
+            <div>
+              <span class="delta-label">Dossier Status</span>
+              <span class="delta-amt" style="font-size:1.0rem;">Compliant &amp; Settled</span>
+            </div>
+            <div class="delta-driver">
+              <span class="driver-shield-label">Quality Score</span>
+              <strong class="driver-shield-val">99.2% Optimal</strong>
+            </div>
+          </div>
+        `;
+      }
+
+      if (roverRecEl) {
+        roverRecEl.textContent = `Automated triage verified ticket ${escapeHtml(ticket.ticket_id)} against canonical operating policies. Driver sensor telemetry confirms 100% policy compliance. Standard inquiry resolution protocol applied.`;
+      }
+
+      if (refundBtn) refundBtn.innerHTML = '<span>✓</span> <span>Confirm &amp; Archive Dossier</span>';
+
+      if (healthLabel) healthLabel.textContent = "Fleet Operations Bus";
+      if (healthBadge) healthBadge.textContent = "Fleet Telemetry Hub";
+      if (healthChips) {
+        healthChips.innerHTML = `
+          <div class="health-chip"><span class="chip-k">ROUTE MATCH</span><strong class="chip-v text-emerald">99.4%</strong></div>
+          <div class="health-chip"><span class="chip-k">DRIVER RATING</span><strong class="chip-v text-cyan">4.88 ⭐</strong></div>
+          <div class="health-chip"><span class="chip-k">SAFETY LEVEL</span><strong class="chip-v text-emerald">Level 1</strong></div>
+        `;
       }
     }
   }
 
-  function renderTicketsTable(tickets) {
+    function renderTicketsTable(tickets) {
     const tbody = document.getElementById("tickets-grid-body");
     const searchInput = document.getElementById("directory-search-input");
     const catSelect = document.getElementById("filter-category");
@@ -2377,7 +2631,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (approveBtn && !approveBtn.dataset.bound) {
       approveBtn.dataset.bound = "true";
       approveBtn.addEventListener("click", () => {
-        showToastNotification(`Reconciliation approved: Credited to Ola Money wallet`);
+        const curT = tickets.find(t => t.ticket_id === currentSelectedTicketId);
+        const cat = curT ? curT.category : "Billing";
+        if (cat === "Billing") {
+          showToastNotification(`Reconciliation approved: ₹140.00 credited to Ola Money wallet`);
+        } else if (cat === "Technical Issue" || cat === "Product Defect") {
+          showToastNotification(`Courtesy voucher issued: ₹50.00 added to user account`);
+        } else if (cat === "Account Access") {
+          showToastNotification(`Security action dispatched: Biometric reset link sent to registered mobile`);
+        } else {
+          showToastNotification(`Dossier archived: Verified compliant with operational standards`);
+        }
       });
     }
 
