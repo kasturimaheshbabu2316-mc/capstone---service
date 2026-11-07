@@ -56,18 +56,25 @@
     </div>
 
     <div class="nav-actions">
+      <div class="status-pill" id="health-pill" title="System Operational Status">
+        <span class="status-dot" id="health-dot"></span>
+        <span id="health-text">🐾 Rover: Online</span>
+      </div>
       <button type="button" class="glass-btn kbd-hint-btn" id="open-palette-btn" title="Open Command Palette (Ctrl+K)">⌘K</button>
       <button type="button" class="glass-btn" id="details-toggle-btn" title="Toggle technical pipeline details" aria-pressed="false">⚙️ Details: OFF</button>
-      <div class="status-pill" id="health-pill">
-        <span class="status-dot" id="health-dot"></span>
-        <span id="health-text">Desk Online</span>
-      </div>
-      <button type="button" class="glass-btn" id="clear-chat-btn" title="Reset conversation">↺ Reset Desk</button>
-      <button type="button" class="glass-btn" id="theme-toggle-btn" title="Switch Theme">◐ Theme</button>
-      <button type="button" class="glass-btn user-admin-btn" id="settings-toggle-btn" title="Settings &amp; Admin">
-        <span class="user-avatar-gradient">
-          <span class="user-avatar-inner">⚙️ Admin</span>
-        </span>
+      <button type="button" class="glass-btn" id="clear-chat-btn" title="Reset conversation">↺ Reset</button>
+      <button type="button" class="glass-icon-btn" id="theme-toggle-btn" title="Switch Theme (Dark / Light)" aria-label="Toggle Theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z" fill="currentColor"/></svg>
+      </button>
+      <div class="nav-divider"></div>
+      <button type="button" class="nav-lead-profile" id="settings-toggle-btn" title="Settings &amp; Admin (Desk Lead BLR-HQ-OP)">
+        <div class="user-avatar-glow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="lead-info">
+          <span class="lead-role">Desk Lead</span>
+          <span class="lead-loc">BLR-HQ-OP</span>
+        </div>
       </button>
     </div>
   </header>
@@ -124,9 +131,11 @@
         </button>
 
         <button type="button" class="rail-nav-item" id="rail-nav-ratings" data-target="ratings-stage" title="Ratings &amp; Reviews">
-          <span class="rail-nav-icon">⭐</span>
+          <span class="rail-nav-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </span>
           <span class="rail-nav-label hidden-collapsed">Ratings &amp; Reviews</span>
-          <span class="rail-badge star5-badge hidden-collapsed">5⭐</span>
+          <span class="rail-badge star5-badge hidden-collapsed">5★</span>
         </button>
 
         <button type="button" class="rail-nav-item" id="rail-nav-telemetry" data-target="telemetry-view" title="Telemetry Feed">
@@ -829,6 +838,27 @@
             <div class="token-bar-fill" id="token-bar-fill"></div>
           </div>
         </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 4B. PERSISTENT TELEMATICS STATUS BAR (from @ui) -->
+  <footer class="bottom-telemetry-bar" id="bottom-telemetry-bar" aria-label="System Telemetry Status">
+    <div class="telemetry-bar-inner">
+      <div class="telemetry-left">
+        <span class="telemetry-beacon"></span>
+        <span class="telemetry-cluster">CLUSTER-AP-SOUTH-1A</span>
+        <span class="telemetry-sep">•</span>
+        <span class="telemetry-rtt">⚡ 24ms RTT</span>
+        <span class="telemetry-sep">•</span>
+        <span class="telemetry-ingest">🔄 Telemetry Ingest: Normal</span>
+      </div>
+      <div class="telemetry-right">
+        <span class="telemetry-budget">TOKEN BUDGET: 84.2k / 100k</span>
+        <div class="telemetry-budget-track">
+          <div class="telemetry-budget-bar" style="width: 84%;"></div>
+        </div>
+        <span class="telemetry-ops">Ola Fleet OPS</span>
       </div>
     </div>
   </footer>
