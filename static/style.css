@@ -6341,7 +6341,7 @@ body.show-details .composer-footer {
 /* Floating Radiant Cyber-Glass Composer Dock */
 .composer-dock {
   position: fixed;
-  bottom: 44px;
+  bottom: 24px;
   left: calc(50% + 32px);
   transform: translateX(-50%);
   width: calc(100% - 100px);
@@ -6481,106 +6481,6 @@ body:has(.nav-sidebar-drawer.expanded) .composer-dock {
   background: linear-gradient(90deg, rgba(2, 132, 199, 0.12), rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.12));
   border-color: rgba(2, 132, 199, 0.35);
   color: #0284c7;
-}
-
-/* Persistent Bottom Telemetry Status Bar */
-.bottom-telemetry-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 32px;
-  background: rgba(10, 14, 23, 0.95);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  z-index: 30;
-  display: flex;
-  align-items: center;
-  padding: 0 24px 0 88px;
-  transition: padding-left 320ms cubic-bezier(0.16, 1, 0.3, 1);
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-.workspace.rail-open ~ .bottom-telemetry-bar,
-body:has(.nav-sidebar-drawer.expanded) .bottom-telemetry-bar {
-  padding-left: 264px;
-}
-
-.telemetry-bar-inner {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: Inter, monospace, -apple-system, sans-serif;
-  font-size: 0.72rem;
-  color: #94a3b8;
-}
-
-.telemetry-left,
-.telemetry-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.telemetry-beacon {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 8px #10b981;
-  animation: pulseBeacon 2s infinite ease-in-out;
-}
-
-.telemetry-cluster {
-  color: #a5f3fc;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-}
-
-.telemetry-sep {
-  color: rgba(255, 255, 255, 0.2);
-}
-
-.telemetry-rtt {
-  color: #f472b6;
-}
-
-.telemetry-ingest {
-  color: #fde047;
-}
-
-.telemetry-budget {
-  background: linear-gradient(90deg, #67e8f9 0%, #f472b6 50%, #fde047 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 600;
-}
-
-.telemetry-budget-track {
-  width: 64px;
-  height: 5px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  border: 1px solid rgba(0, 242, 254, 0.25);
-}
-
-.telemetry-budget-bar {
-  height: 100%;
-  border-radius: 9999px;
-  background: linear-gradient(90deg, #00f2fe, #d946ef, #fbbf24);
-  box-shadow: 0 0 6px rgba(0, 242, 254, 0.8);
-}
-
-.telemetry-ops {
-  color: #00f2fe;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
 }
 
 /* ==============================================================================
