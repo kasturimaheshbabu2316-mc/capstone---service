@@ -1058,6 +1058,10 @@ body {
 .kpi-progress-bar.bg-cyan { background: linear-gradient(90deg, #00f2fe, #00dce6); }
 .kpi-progress-bar.bg-rose { background: linear-gradient(90deg, #f43f5e, #fb7185); }
 .kpi-progress-bar.bg-emerald { background: linear-gradient(90deg, #10b981, #34d399); }
+.kpi-bar-w72 { width: 72%; }
+.kpi-bar-w20 { width: 20%; }
+.kpi-bar-w76 { width: 76%; }
+.kpi-bar-w88 { width: 88%; }
 
 .spectrum-header-title {
   display: flex;
