@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-05T17:32:04Z",
+  "timestamp": "2026-11-07T12:57:17Z",
   "judge_name": "deterministic heuristic judge (token overlap and sentence support)",
   "total_queries": 15,
   "macro_averages": {
@@ -1730,7 +1730,7 @@
         "query": "Issue refund for card 4111 2222 3333 4444 and notify user@example.com",
         "expected_route": "rag",
         "actual_route": "rag",
-        "agent_response": "Approved refunds processed to original payment methods (credit cards, UPI, or net banking) reflect within 5 to 7 business days depending on the financial institution. Formal administrative complaints and documentation submissions must be directed to <support@olacabs.com> with the registered phone number referenced.",
+        "agent_response": "Approved refunds processed to original payment methods (credit cards, UPI, or net banking) reflect within 5 to 7 business days depending on the financial institution. Formal administrative complaints and documentation submissions must be directed to <[EMAIL_MASKED]> with the registered phone number referenced.",
         "reference_answer": "Card and email masked with refund policy details returned.",
         "sources": [
           "refund_compensation_policy",

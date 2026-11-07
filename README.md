@@ -298,6 +298,7 @@ curl -s http://localhost:8000/health
 ```
 
 *Response:*
+
 ```json
 {"status":"ok","mock_llm":true,"kb_ready":true,"db_ready":true,"service":"ola-support-agent"}
 ```
@@ -311,6 +312,7 @@ curl -s -X POST http://localhost:8000/ask \
 ```
 
 *Response:*
+
 ```json
 {
   "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and resolution within 4 hours.",
@@ -329,6 +331,7 @@ curl -s "http://localhost:8000/tickets?limit=3"
 ```
 
 *Response:*
+
 ```json
 [
   {"ticket_id":"TKT-0001","customer_id":"CUST-0001","category":"Billing","status":"In Progress","escalated":false,"resolution_time_hours":12.4,"risk_level":"Low Risk"},
@@ -348,6 +351,7 @@ curl -s -X POST http://localhost:8000/add-document \
 ```
 
 *Response:*
+
 ```json
 {
   "status": "indexed",
@@ -371,6 +375,7 @@ curl -s -X POST http://localhost:8000/clear-cache \
 ```
 
 *Response:*
+
 ```json
 {
   "status": "cleared",
@@ -458,6 +463,7 @@ A fallback operator console is maintained in [streamlit_app.py](streamlit_app.py
 - System controls, telemetry, ticket directory, and cache invalidation cleanly isolated in `st.sidebar`.
 - Zero internal regex leakage, collapsed payload previews, and clean context isolation.
 - Launch with:
+
   ```powershell
   $env:BACKEND_URL="http://127.0.0.1:8000"; streamlit run streamlit_app.py
   ```
@@ -604,6 +610,7 @@ Comprehensive mapping for all 16 project tasks connecting each milestone directl
 ---
 
 ### LLM Provider Switch
+
 Configure `LLM_PROVIDER=mock` (default offline), `ollama`, or `gemini` in `.env`.
 When `MOCK_LLM=true` or `LLM_PROVIDER=mock`, zero external network calls are made.
 For `gemini`, provide `GEMINI_API_KEY`; for `ollama`, set `OLLAMA_BASE_URL`.
@@ -613,12 +620,14 @@ For `gemini`, provide `GEMINI_API_KEY`; for `ollama`, set `OLLAMA_BASE_URL`.
 ## 13. Known Limitations and Future Work
 
 This assignment project is an educational, deterministic, and self-contained proof-of-concept designed for local grading:
+
 - **Synthetic Dataset**: 60 simulated support tickets and 12 canonical policy documents.
 - **Offline Deterministic Mock LLM**: Defaults to `MOCK_LLM=true` using rule-based and extractive inference.
 - **Local Runtime Scope**: In-memory LRU session history, in-memory cache, and single-process FastAPI server.
 - **Heuristic Evaluation**: Uses token overlap and sentence support heuristics rather than expensive frontier LLM judge calls.
 
 ### Production Transition Roadmap (5 Pillars)
+
 1. **Distributed Caching & Session Persistence**: Replace in-memory dictionaries with a managed Redis / KeyDB cluster.
 2. **Distributed Vector Database**: Migrate local ChromaDB embeddings to managed Qdrant or Milvus with sharding.
 3. **Fine-Tuned Production LLM**: Integrate domain-adapted LLMs with token-by-token WebSocket streaming.
@@ -632,24 +641,28 @@ This assignment project is an educational, deterministic, and self-contained pro
 Run these commands from the project root in an activated virtual environment:
 
 ### 1. Execute Unit & Integration Test Suite
+
 ```bash
 pytest -q
 # Expected Output: ~135 passed in ~35s
 ```
 
 ### 2. Run Comprehensive 50-Query Evaluation Benchmark
+
 ```bash
 python evaluation/run_eval.py
 # Expected Output: Refusal Precision: 100.0%, Refusal Recall: 100.0%, Groundedness: >95%
 ```
 
 ### 3. Verify Offline Clean Clone Proof
+
 ```bash
 python scripts/verify_clean_clone.py
 # Expected Output: ALL PRE-SUBMISSION CHECKS PASSED. Ready for submission.
 ```
 
 ### 4. Launch Local Web UI Console
+
 ```bash
 python -m uvicorn api.main:app --host 127.0.0.1 --port 8080
 # Visit: http://localhost:8080
