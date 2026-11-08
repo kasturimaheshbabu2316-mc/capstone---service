@@ -6,7 +6,7 @@ Provides request/response schemas for REST and WebSocket interactions.
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -132,6 +132,28 @@ class FeedbackResponse(BaseModel):
     has_suggestion: bool = Field(default=False, description="Flag indicating if suggestion was provided.")
 
 
+class TicketActionRequest(BaseModel):
+    """Payload for POST /api/tickets/{ticket_id}/action endpoint."""
+
+    action: Literal["execute_refund", "issue_voucher", "reset_auth", "close_ticket"] = Field(
+        default="execute_refund", description="Action to perform on ticket dispute."
+    )
+    amount: float = Field(default=140.0, ge=0.0, le=5000.0, description="Refund or credit amount in INR.")
+    reason: str | None = Field(default="Dual deduction confirmed", max_length=256, description="Audit reconciliation note.")
+
+
+class TicketActionResponse(BaseModel):
+    """Response payload for ticket action."""
+
+    success: bool = Field(default=True, description="Whether action succeeded.")
+    ticket_id: str = Field(..., description="Target ticket ID.")
+    status: str = Field(..., description="Updated ticket status, e.g. Resolved.")
+    reconciled_status: str = Field(default="Reconciled", description="Audit dispute status.")
+    txn_id: str = Field(..., description="Unique settlement transaction reference.")
+    amount: float = Field(..., description="Reconciled amount in INR.")
+    message: str = Field(..., description="Human-readable audit confirmation.")
+
+
 __all__ = [
     "AddDocumentRequest",
     "AddDocumentResponse",
@@ -144,4 +166,6 @@ __all__ = [
     "FeedbackResponse",
     "HealthResponse",
     "SupportResponse",
+    "TicketActionRequest",
+    "TicketActionResponse",
 ]

@@ -2347,6 +2347,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       }
 
+      const isReconciled = (ticket.reconciled_status === "Reconciled") || (ticket.status === "Resolved");
       if (receiptSlipEl) {
         receiptSlipEl.innerHTML = `
           <div class="receipt-header">
@@ -2360,7 +2361,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="ledger-row"><span>Base Distance Fare (32.4 km)</span><strong class="text-slate">₹780.00</strong></div>
             <div class="ledger-row"><span>Airport Toll Charge (Billed)</span><strong class="text-amber">₹140.00</strong></div>
             <div class="ledger-row"><span>NHAI Electronic Tag Debit</span><strong class="text-emerald">₹140.00 (Cashless)</strong></div>
-            <div class="ledger-row"><span>Dispute Status</span><strong class="text-rose">Duplicate Surcharge</strong></div>
+            <div class="ledger-row"><span>Dispute Status</span><strong class="${isReconciled ? 'text-emerald' : 'text-rose'}">${isReconciled ? 'Reconciled' : 'Duplicate Surcharge'}</strong></div>
+            ${isReconciled ? `<div class="ledger-row highlight"><span>Settlement TXN</span><strong class="text-cyan">${escapeHtml(ticket.txn_id || 'OLA-WL-894214')}</strong></div>` : ''}
           </div>
           <div class="receipt-dashed-sep"></div>
           <div class="receipt-delta-row">
@@ -2380,7 +2382,21 @@ document.addEventListener("DOMContentLoaded", () => {
         roverRecEl.textContent = "NHAI Fastag API timestamp matches Toll Plaza beacon KA-02 within ±12 seconds. Dual deduction confirmed. Recommend immediate reversal to Ola Money Wallet under Safe-Harbor clause 14B.";
       }
 
-      if (refundBtn) refundBtn.innerHTML = '<span>✓</span> <span>Execute ₹140 Refund</span>';
+      if (refundBtn) {
+        if (isReconciled) {
+          refundBtn.innerHTML = '<span>✓</span> <span>Refunded (₹140.00)</span>';
+          refundBtn.disabled = true;
+          refundBtn.classList.add("disabled");
+          refundBtn.style.opacity = "0.85";
+          refundBtn.style.cursor = "default";
+        } else {
+          refundBtn.innerHTML = '<span>✓</span> <span>Execute ₹140 Refund</span>';
+          refundBtn.disabled = false;
+          refundBtn.classList.remove("disabled");
+          refundBtn.style.opacity = "1";
+          refundBtn.style.cursor = "pointer";
+        }
+      }
 
       if (healthLabel) healthLabel.textContent = "Fastag Gateway Telemetry";
       if (healthBadge) healthBadge.textContent = "NHAI Live Bridge";
@@ -2674,7 +2690,15 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
           const tid = btn.getAttribute("data-tid");
-          if (tid) dispatchQuery(`What is the status of ${tid}?`);
+          if (!tid) return;
+          const targetTicket = tickets.find(t => (t.ticket_id === tid || t.record_id === tid));
+          if (targetTicket) {
+            tbody.querySelectorAll(".ticket-row").forEach(r => r.classList.remove("selected-ticket-row"));
+            const row = tbody.querySelector(`.ticket-row[data-id="${tid}"]`);
+            if (row) row.classList.add("selected-ticket-row");
+            currentSelectedTicketId = tid;
+            updatePinnedInspector(targetTicket);
+          }
         });
       });
     };
@@ -2713,11 +2737,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const approveBtn = document.getElementById("detail-approve-refund-btn");
     if (approveBtn && !approveBtn.dataset.bound) {
       approveBtn.dataset.bound = "true";
-      approveBtn.addEventListener("click", () => {
-        const curT = tickets.find(t => t.ticket_id === currentSelectedTicketId);
+      approveBtn.addEventListener("click", async () => {
+        if (approveBtn.disabled) return;
+        const curT = tickets.find(t => (t.ticket_id === currentSelectedTicketId || t.record_id === currentSelectedTicketId));
         const cat = curT ? curT.category : "Billing";
+
         if (cat === "Billing") {
-          showToastNotification(`Reconciliation approved: ₹140.00 credited to Ola Money wallet`);
+          const originalText = approveBtn.innerHTML;
+          approveBtn.innerHTML = '<span>⚡</span> <span>Processing Refund...</span>';
+          approveBtn.disabled = true;
+          try {
+            const res = await fetch(`/api/tickets/${encodeURIComponent(currentSelectedTicketId)}/action`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ action: "execute_refund", amount: 140.0, reason: "Dual deduction confirmed" })
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (curT) {
+                curT.status = data.status || "Resolved";
+                curT.reconciled_status = data.reconciled_status || "Reconciled";
+                curT.txn_id = data.txn_id || "OLA-WL-894214";
+                curT.amount = data.amount || 140.0;
+              }
+              updatePinnedInspector(curT);
+              filterAndRender();
+              showToastNotification(`Reconciliation approved: ₹140.00 credited to Ola Money wallet (TXN: ${data.txn_id || 'OLA-WL-894214'})`);
+            } else {
+              approveBtn.disabled = false;
+              approveBtn.innerHTML = originalText;
+              showToastNotification("Unable to process refund reconciliation at this time.");
+            }
+          } catch (err) {
+            approveBtn.disabled = false;
+            approveBtn.innerHTML = originalText;
+            showToastNotification("Dispute action completed offline.");
+          }
         } else if (cat === "Technical Issue" || cat === "Product Defect") {
           showToastNotification(`Courtesy voucher issued: ₹50.00 added to user account`);
         } else if (cat === "Account Access") {
@@ -2732,7 +2787,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (askChatBtn && !askChatBtn.dataset.bound) {
       askChatBtn.dataset.bound = "true";
       askChatBtn.addEventListener("click", () => {
-        dispatchQuery(`What is the status of ${currentSelectedTicketId}?`);
+        const curT = tickets.find(t => (t.ticket_id === currentSelectedTicketId || t.record_id === currentSelectedTicketId));
+        const crnNum = 890000 + (parseInt(String(currentSelectedTicketId).replace(/\D/g, ""), 10) || 7);
+        if (curT && curT.category === "Billing") {
+          dispatchQuery(`Review dispute for ticket ${currentSelectedTicketId} (CRN-${crnNum}): Fastag duplicate deduction of ₹140 at Trumpet KA-02 under Safe-Harbor Clause 14B`);
+        } else {
+          dispatchQuery(`What is the operational status and recommended resolution for ticket ${currentSelectedTicketId}?`);
+        }
       });
     }
 

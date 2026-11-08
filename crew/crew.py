@@ -213,7 +213,10 @@ def run_support_crew(
     # Check if query references policy guidelines
     has_policy_interest = any(
         kw in resolved_query.lower()
-        for kw in ("sla", "policy", "refund", "hour", "time", "rule", "sev-", "guideline", "credit", "vip")
+        for kw in (
+            "sla", "policy", "refund", "hour", "time", "rule", "sev-",
+            "guideline", "credit", "vip", "clause", "safe-harbor", "harbor", "fastag", "toll"
+        )
     )
 
     if ticket_id and has_policy_interest:
