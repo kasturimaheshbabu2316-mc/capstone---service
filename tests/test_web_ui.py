@@ -465,6 +465,65 @@ def test_inactivity_rating_timer_and_closure_prompt():
     assert "clearIdleRatingTimer()" in reset_body
 
 
+def test_typography_theme_contrast_rules():
+    """Validates crisp, high-contrast typography and bubbles for both dark and light themes."""
+    css = (STATIC_DIR / "style.css").read_text(encoding="utf-8")
+
+    # 1. User message bubble uses solid high-contrast corporate blue gradient with crisp white text
+    assert ".msg-row.user .msg-bubble" in css
+    assert "linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;" in css
+    assert "color: #ffffff !important;" in css
+
+    # 2. Assistant bubble in dark theme has high-opacity dark slate background to prevent wallpaper bleed
+    assert "rgba(13, 20, 36, 0.94)" in css
+
+    # 3. Assistant bubble in light theme has pure solid white background and deep ink text
+    assert '[data-theme="light"] .msg-row.assistant .msg-bubble' in css
+    assert "color: #0f172a !important;" in css
+
+    # 4. Error card and Ola Assistance card light theme high-contrast typography overrides
+    assert '[data-theme="light"] .error-card-title' in css
+    assert '[data-theme="light"] .error-card-desc' in css
+    assert '[data-theme="light"] .error-action-hint' in css
+
+    # 5. Message action buttons (copy, rating thumbs) in light theme have crisp contrast
+    assert '[data-theme="light"] .msg-action-btn' in css
+
+
+def test_chatbar_neumorphic_styling():
+    """Validates authentic Neumorphism (Soft UI) styling for the chat composer bar in both themes."""
+    css = (STATIC_DIR / "style.css").read_text(encoding="utf-8")
+
+    # 1. Dock wrapper has dual-shadow extrusion in dark mode
+    assert ".composer-dock-border-wrap" in css
+    assert "-6px -6px 18px rgba(255, 255, 255, 0.04)" in css
+    assert "8px 8px 24px rgba(0, 0, 0, 0.85)" in css
+
+    # 2. Dock wrapper has dual-shadow extrusion in light mode
+    assert '[data-theme="light"] .composer-dock-border-wrap' in css
+    assert "-6px -6px 18px #ffffff" in css
+    assert "7px 7px 20px rgba(160, 175, 196, 0.55)" in css
+
+    # 3. Concave debossed input track in dark and light mode
+    assert ".composer-input" in css
+    assert "inset 3px 3px 7px rgba(0, 0, 0, 0.75)" in css
+    assert '[data-theme="light"] .composer-input' in css
+    assert "inset 3px 3px 6px rgba(160, 175, 196, 0.55)" in css
+
+    # 4. Sculpted convex Help Desk pill button with debossed press states
+    assert ".btn-examples-toggle" in css
+    assert ".btn-examples-toggle:active" in css
+    assert "inset 2px 2px 5px rgba(0, 0, 0, 0.8)" in css
+    assert '[data-theme="light"] .btn-examples-toggle:active' in css
+
+    # 5. Send button elevated tactile action pill
+    assert ".send-btn" in css
+    assert ".send-btn:active" in css
+    assert '[data-theme="light"] .send-btn' in css
+
+
+
+
 
 
 
