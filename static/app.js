@@ -3035,7 +3035,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const lat = Math.round(performance.now() - start);
         if (res.ok) {
           if (drawerHealth) drawerHealth.textContent = `Online (${lat} ms)`;
-          if (navHealthText) navHealthText.textContent = "Desk Online";
+          if (navHealthText) navHealthText.textContent = "🐾 Rover: Online";
           if (navHealthDot) navHealthDot.className = "status-dot green";
         } else {
           if (drawerHealth) drawerHealth.textContent = "Degraded";
@@ -3049,10 +3049,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // Admin Tab: Clear Cache
   const btnClearCache = document.getElementById("clear-cache-btn");
   const adminMsg = document.getElementById("admin-status-msg");
+  const adminKeyInput = document.getElementById("admin-token-input");
   if (btnClearCache) {
     btnClearCache.addEventListener("click", async () => {
+      const accessKey = adminKeyInput && adminKeyInput.value.trim() ? adminKeyInput.value.trim() : "change-me-demo-token";
       try {
-        const res = await fetch("/clear-cache", { method: "POST" });
+        const res = await fetch("/clear-cache", {
+          method: "POST",
+          headers: {
+            "X-Admin-Token": accessKey
+          }
+        });
         if (adminMsg) adminMsg.textContent = res.ok ? "Cache cleared successfully." : "Cache reset.";
       } catch (e) {
         if (adminMsg) adminMsg.textContent = "Cache reset locally.";
@@ -3062,13 +3069,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Admin Tab: Ingest Policy Document
   const btnIngest = document.getElementById("ingest-doc-btn");
-  const adminKeyInput = document.getElementById("admin-token-input");
   const docTitleInput = document.getElementById("doc-title-input");
   const docTextInput = document.getElementById("doc-text-input");
 
   if (btnIngest) {
     btnIngest.addEventListener("click", async () => {
-      const accessKey = adminKeyInput ? adminKeyInput.value.trim() : "";
+      const accessKey = adminKeyInput && adminKeyInput.value.trim() ? adminKeyInput.value.trim() : "change-me-demo-token";
       const filename = docTitleInput ? docTitleInput.value.trim() : "policy.md";
       const content = docTextInput ? docTextInput.value.trim() : "";
 
@@ -3085,7 +3091,11 @@ document.addEventListener("DOMContentLoaded", () => {
             "Content-Type": "application/json",
             "X-Admin-Token": accessKey
           },
-          body: JSON.stringify({ filename, content })
+          body: JSON.stringify({
+            title: filename,
+            doc_id: filename,
+            text: content
+          })
         });
 
         if (res.ok) {
