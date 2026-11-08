@@ -6015,6 +6015,44 @@ body.show-details .composer-footer {
   gap: 6px;
 }
 
+.rail-controls-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rail-controls-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rail-control-item {
+  position: relative;
+}
+
+.rail-control-item:hover {
+  background: rgba(30, 41, 59, 0.65);
+  color: #00f2fe;
+}
+
+.rail-control-item:hover svg {
+  stroke: #00f2fe;
+}
+
+.rail-control-item[aria-pressed="true"] {
+  background: rgba(0, 242, 254, 0.12);
+  border-color: rgba(0, 242, 254, 0.35);
+  color: #00f2fe;
+}
+
+.rail-control-item[aria-pressed="true"] svg {
+  stroke: #00f2fe;
+}
+
 .context-label {
   font-size: 0.65rem;
   font-weight: 700;
@@ -6087,6 +6125,11 @@ body.show-details .composer-footer {
   background: #00f2fe;
   box-shadow: 0 0 6px rgba(0, 242, 254, 0.8);
   flex-shrink: 0;
+}
+
+.footer-dot.green {
+  background: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
 }
 
 .footer-region {

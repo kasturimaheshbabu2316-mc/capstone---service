@@ -489,8 +489,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateDetailsUI() {
     document.body.classList.toggle("show-details", isDetailsOn);
     if (detailsToggleBtn) {
-      detailsToggleBtn.textContent = isDetailsOn ? "⚙️ Details: ON" : "⚙️ Details: OFF";
       detailsToggleBtn.setAttribute("aria-pressed", isDetailsOn ? "true" : "false");
+      detailsToggleBtn.title = isDetailsOn ? "Toggle Pipeline Details (Details: ON)" : "Toggle Pipeline Details (Details: OFF)";
+      const statusSpan = document.getElementById("rail-details-status");
+      if (statusSpan) {
+        statusSpan.textContent = isDetailsOn ? "ON" : "OFF";
+      } else {
+        detailsToggleBtn.textContent = isDetailsOn ? "⚙️ Details: ON" : "⚙️ Details: OFF";
+      }
     }
   }
   updateDetailsUI();
