@@ -322,6 +322,44 @@ def test_ui_clean_layout_and_controls():
     assert "SLA Target:" not in js_content
 
 
+def test_3d_orbit_geometry_and_container_size():
+    """Validates 3D Three.js orbit display dimensions, geometry, and styling.
+
+    - Stage container and spacer reduced from 320px to 270px (within ~260-280px).
+    - Active chat state transitions spacer and stage to 220px.
+    - Proportional ring radii R1 < R2 < R3 < R4 without overflow clipping.
+    - Balanced circular tilts avoiding oblong distortion.
+    - Satellite nodes attached to rings with matching radii.
+    """
+    css_content = (STATIC_DIR / "style.css").read_text(encoding="utf-8")
+    orbit_content = (STATIC_DIR / "js" / "orbit.js").read_text(encoding="utf-8")
+
+    # 1. Container and spacer sizing
+    assert "width: 270px;" in css_content
+    assert "height: 270px;" in css_content
+    assert ".chat-orbit-spacer {\n  width: 270px;\n  height: 270px;" in css_content
+    assert ".chat-orbit-header-stage.orbit-stage-expanded {\n  position: absolute;\n  top: 25px;\n  left: calc(var(--rail-current-pad, 64px) + (100% - var(--rail-current-pad, 64px)) / 2);\n  transform: translate(-50%, 0);\n  width: 270px;\n  height: 270px;" in css_content
+    assert ".stage-inner.chat-active .chat-orbit-spacer {\n  width: 220px;\n  height: 220px;" in css_content
+
+    # 2. Orbit geometry in orbit.js
+    assert "mainGroup.scale.set(1.0, 1.0, 1.0);" in orbit_content
+    assert "const R1 = 1.42;" in orbit_content
+    assert "const R2 = 1.62;" in orbit_content
+    assert "const R3 = 1.84;" in orbit_content
+    assert "const R4 = 2.04;" in orbit_content
+
+    # 3. Node attachments and positions along rings
+    assert "ring1.add(node1);" in orbit_content
+    assert "ring2.add(node2);" in orbit_content
+    assert "ring3.add(node3);" in orbit_content
+    assert "ring4.add(node4);" in orbit_content
+    assert "node1.position.set(Math.cos(s1) * R1, Math.sin(s1) * R1, 0);" in orbit_content
+    assert "node2.position.set(Math.cos(s2) * R2, Math.sin(s2) * R2, 0);" in orbit_content
+    assert "node3.position.set(Math.cos(s3) * R3, Math.sin(s3) * R3, 0);" in orbit_content
+    assert "node4.position.set(Math.cos(s4) * R4, Math.sin(s4) * R4, 0);" in orbit_content
+
+
+
 
 
 

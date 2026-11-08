@@ -181,11 +181,15 @@ function initChatControls() {
 
   if (btnNewChat) {
     btnNewChat.addEventListener("click", () => {
-      state.resetConversation();
-      const messagesContainer = document.getElementById("chatMessages");
-      if (messagesContainer) messagesContainer.innerHTML = "";
-      const welcomeBox = document.getElementById("welcomeBox");
-      if (welcomeBox) welcomeBox.style.display = "flex";
+      if (typeof window.resetChatDesk === "function") {
+        window.resetChatDesk();
+      } else {
+        state.resetConversation();
+        const messagesContainer = document.getElementById("chatMessages") || document.getElementById("chat-stream");
+        if (messagesContainer) messagesContainer.innerHTML = "";
+        const welcomeBox = document.getElementById("welcomeBox") || document.getElementById("chat-empty-state");
+        if (welcomeBox) welcomeBox.style.display = "";
+      }
       closeSettingsSheet();
     });
   }

@@ -981,12 +981,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------------------------------------------------------------------
   // 5. Query Dispatcher & Chat Stream Management
   // --------------------------------------------------------------------------
-
-
+  let currentQueryAbortController = null;
+  let activeRequestId = 0;
 
   async function dispatchQuery(queryText) {
     if (!queryText || !queryText.trim()) return;
     lastUserQuery = queryText.trim();
+
+    if (currentQueryAbortController) {
+      currentQueryAbortController.abort();
+    }
+    currentQueryAbortController = new AbortController();
+    activeRequestId++;
+    const thisRequestId = activeRequestId;
+    const abortSignal = currentQueryAbortController.signal;
 
     // Switch to Chat Desk view
     switchStage("chat-stage");
@@ -1077,15 +1085,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     scrollToBottom();
 
-    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    const sleep = (ms) => new Promise((resolve, reject) => {
+      if (abortSignal.aborted) {
+        return reject(new DOMException("Aborted", "AbortError"));
+      }
+      const timer = setTimeout(resolve, ms);
+      abortSignal.addEventListener("abort", () => {
+        clearTimeout(timer);
+        reject(new DOMException("Aborted", "AbortError"));
+      }, { once: true });
+    });
     const pText = loadingRow.querySelector("#agent-phase-text");
     const pIcon = loadingRow.querySelector("#agent-phase-icon");
 
-    // Initiate API query in background
+    // Initiate API query in background with abort signal
     const fetchPromise = fetch("/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question: queryText, query: queryText, session_id: sessionId })
+      body: JSON.stringify({ question: queryText, query: queryText, session_id: sessionId }),
+      signal: abortSignal
     });
 
     try {
@@ -1109,6 +1127,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetchPromise;
       const payload = await res.json();
 
+      if (thisRequestId !== activeRequestId || abortSignal.aborted) {
+        loadingRow.remove();
+        return;
+      }
+
       if (!res.ok) {
         loadingRow.remove();
         const detail = (payload.detail && (payload.detail.message || payload.detail.detail)) || payload.detail || payload.message || `HTTP ${res.status}`;
@@ -1125,15 +1148,25 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       await sleep(1000);
 
+      if (thisRequestId !== activeRequestId || abortSignal.aborted) {
+        loadingRow.remove();
+        return;
+      }
+
       // Deliver output with visual speaking agent and happy puppy
       loadingRow.remove();
       appendAssistantResponse(payload, hasPhone);
     } catch (err) {
       loadingRow.remove();
+      if (err.name === "AbortError" || thisRequestId !== activeRequestId) {
+        return;
+      }
       appendErrorCard(503, "Service communication interrupted. Verify backend server is running.");
     } finally {
-      if (window.Orbit && window.Orbit.currentMode === "thinking") {
-        window.Orbit.setMode("idle");
+      if (thisRequestId === activeRequestId) {
+        if (window.Orbit && window.Orbit.currentMode === "thinking") {
+          window.Orbit.setMode("idle");
+        }
       }
     }
   }
@@ -1815,6 +1848,28 @@ document.addEventListener("DOMContentLoaded", () => {
           `;
           tableBody.appendChild(tr);
         });
+
+        // Neo-Brutalist Ratings Filter Pills
+        const ratingsPills = document.querySelectorAll("#ratings-filter-pills .neo-toggle-pill");
+        ratingsPills.forEach(pill => {
+          pill.addEventListener("click", () => {
+            ratingsPills.forEach(p => p.classList.remove("active"));
+            pill.classList.add("active");
+            const mode = pill.getAttribute("data-filter") || "all";
+            const rows = tableBody.querySelectorAll("tr");
+            rows.forEach((row, idx) => {
+              const rec = records[idx];
+              if (!rec) return;
+              if (mode === "5star") {
+                row.style.display = (rec.rating || 5) === 5 ? "" : "none";
+              } else if (mode === "suggestions") {
+                row.style.display = (rec.suggestion && rec.suggestion.trim()) ? "" : "none";
+              } else {
+                row.style.display = "";
+              }
+            });
+          });
+        });
       }
     } catch (e) {
       console.warn("Ratings load failure: ", e);
@@ -2377,6 +2432,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (catSelect) catSelect.addEventListener("change", filterAndRender);
     if (statSelect) statSelect.addEventListener("change", filterAndRender);
 
+    // Neo-Brutalist Status Filter Pills
+    const statusPills = document.querySelectorAll("#directory-status-pills .neo-toggle-pill");
+    statusPills.forEach(pill => {
+      pill.addEventListener("click", () => {
+        statusPills.forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        if (statSelect) {
+          statSelect.value = pill.getAttribute("data-status") || "";
+        }
+        filterAndRender();
+      });
+    });
+
     const refreshBtn = document.getElementById("refresh-directory-btn");
     if (refreshBtn && !refreshBtn.dataset.bound) {
       refreshBtn.dataset.bound = "true";
@@ -2584,6 +2652,25 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    // Neo-Brutalist Policy Category Filter Pills
+    const policyPills = document.querySelectorAll("#policy-category-pills .neo-toggle-pill");
+    policyPills.forEach(pill => {
+      pill.addEventListener("click", () => {
+        policyPills.forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        const selCat = pill.getAttribute("data-cat") || "";
+        const cards = grid.querySelectorAll(".policy-card");
+        cards.forEach((card, idx) => {
+          const p = policies[idx];
+          if (!selCat || (p && p.category === selCat)) {
+            card.style.display = "flex";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+
     const openIngestBtn = document.getElementById("open-ingest-btn");
     if (openIngestBtn && settingsDrawer) {
       openIngestBtn.addEventListener("click", () => {
@@ -2733,19 +2820,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Central Desk Reset Function (Preserves 3D Orbit Core)
   function resetChatDesk() {
+    if (currentQueryAbortController) {
+      currentQueryAbortController.abort();
+      currentQueryAbortController = null;
+    }
+    activeRequestId++;
+
     if (chatStream) chatStream.innerHTML = "";
-    if (chatEmptyState) chatEmptyState.classList.remove("stage-hidden");
+    if (chatEmptyState) {
+      chatEmptyState.classList.remove("stage-hidden");
+      chatEmptyState.style.display = "";
+    }
     const stageInner = document.querySelector(".stage-inner");
     if (stageInner) stageInner.classList.remove("chat-active");
     const orbitStage = document.getElementById("chat-orbit-header-stage");
     if (orbitStage) orbitStage.classList.remove("chat-active");
     if (stageChat) stageChat.scrollTop = 0;
+
+    if (window.state && typeof window.state.resetConversation === "function") {
+      window.state.resetConversation();
+    }
+
     if (window.Orbit) {
       window.Orbit.setMode("idle");
       window.Orbit.expand();
+      window.Orbit.resume();
     }
+
+    const onSettled = () => {
+      if (orbitStage) orbitStage.removeEventListener("transitionend", onSettled);
+      requestAnimationFrame(() => {
+        if (window.Orbit) {
+          window.Orbit.forceResize();
+          window.Orbit.resume();
+          if (typeof window.Orbit.assertIntegrity === "function") {
+            window.Orbit.assertIntegrity();
+          }
+        }
+      });
+    };
+    if (orbitStage) {
+      orbitStage.addEventListener("transitionend", onSettled, { once: true });
+    }
+    setTimeout(onSettled, 450);
     window.dispatchEvent(new Event("resize"));
   }
+
+  window.resetChatDesk = resetChatDesk;
 
   // Clear Chat Desk
   const btnClear = document.getElementById("clear-chat-btn");

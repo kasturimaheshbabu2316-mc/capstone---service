@@ -23,6 +23,10 @@ export const Orbit = (() => {
   let wireMesh2, wireMat2;
   let ring1, ring2, ring3, ring4;
   let node1, node2, node3, node4;
+  const R1 = 1.42;
+  const R2 = 1.62;
+  const R3 = 1.84;
+  const R4 = 2.04;
   let particles, particleMaterial;
 
   // Animation & Timing
@@ -74,12 +78,12 @@ export const Orbit = (() => {
     clock = new THREE.Clock();
 
     const rect = container.getBoundingClientRect();
-    const initialW = rect.width > 0 ? rect.width : 280;
-    const initialH = rect.height > 0 ? rect.height : 280;
+    const initialW = rect.width > 0 ? rect.width : 270;
+    const initialH = rect.height > 0 ? rect.height : 270;
 
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(45, initialW / initialH, 0.1, 1000);
-    camera.position.z = 5.5;
+    camera.position.z = 5.6;
 
     try {
       renderer = new THREE.WebGLRenderer({
@@ -113,7 +117,7 @@ export const Orbit = (() => {
 
     // Setup Scene Graph
     mainGroup = new THREE.Group();
-    mainGroup.scale.set(1.10, 1.10, 1.10);
+    mainGroup.scale.set(1.0, 1.0, 1.0);
     scene.add(mainGroup);
 
     // Multi-chromatic light rig
@@ -137,7 +141,7 @@ export const Orbit = (() => {
     scene.add(ambientLight);
 
     // 1. Inner Luminous Core Sphere
-    const coreGeo = new THREE.SphereGeometry(0.75, 64, 64);
+    const coreGeo = new THREE.SphereGeometry(0.72, 64, 64);
     coreMat = new THREE.MeshPhongMaterial({
       color: 0xffffff,
       emissive: 0x00f2fe,
@@ -151,7 +155,7 @@ export const Orbit = (() => {
     mainGroup.add(coreMesh);
 
     // 2. Glassmorphic Outer Energy Sphere with Transmission
-    const glassGeo = new THREE.SphereGeometry(1.08, 64, 64);
+    const glassGeo = new THREE.SphereGeometry(1.02, 64, 64);
     glassMat = new THREE.MeshPhysicalMaterial({
       color: 0x8b5cf6,
       transmission: 0.88,
@@ -168,7 +172,7 @@ export const Orbit = (() => {
     mainGroup.add(glassMesh);
 
     // 3. Dual Nested Holographic Wireframe Geometries
-    const wireGeo1 = new THREE.IcosahedronGeometry(0.92, 2);
+    const wireGeo1 = new THREE.IcosahedronGeometry(0.88, 2);
     wireMat1 = new THREE.MeshBasicMaterial({
       color: 0x38bdf8,
       wireframe: true,
@@ -179,7 +183,7 @@ export const Orbit = (() => {
     wireMesh1 = new THREE.Mesh(wireGeo1, wireMat1);
     mainGroup.add(wireMesh1);
 
-    const wireGeo2 = new THREE.DodecahedronGeometry(1.2, 1);
+    const wireGeo2 = new THREE.DodecahedronGeometry(1.14, 1);
     wireMat2 = new THREE.MeshBasicMaterial({
       color: 0xf43f5e,
       wireframe: true,
@@ -207,10 +211,10 @@ export const Orbit = (() => {
       return ring;
     };
 
-    ring1 = createOrbitalRing(1.68, 0.024, Math.PI / 2.3, 0.35, 0, 0x00f2fe, 0x00f2fe, 0.9);
-    ring2 = createOrbitalRing(1.92, 0.020, -Math.PI / 2.7, -0.4, 0.4, 0xf43f5e, 0xf43f5e, 0.85);
-    ring3 = createOrbitalRing(2.18, 0.016, Math.PI / 1.75, 0.75, -0.3, 0xa855f7, 0xa855f7, 0.8);
-    ring4 = createOrbitalRing(2.42, 0.014, -Math.PI / 3.4, 0.5, 0.8, 0xfbbf24, 0xf59e0b, 0.75);
+    ring1 = createOrbitalRing(R1, 0.020, Math.PI / 5.5, 0.25, 0, 0x00f2fe, 0x00f2fe, 0.9);
+    ring2 = createOrbitalRing(R2, 0.017, -Math.PI / 5.5, -0.25, 0.35, 0xf43f5e, 0xf43f5e, 0.85);
+    ring3 = createOrbitalRing(R3, 0.014, Math.PI / 5.0, -0.35, -0.25, 0xa855f7, 0xa855f7, 0.8);
+    ring4 = createOrbitalRing(R4, 0.012, -Math.PI / 5.0, 0.35, 0.45, 0xfbbf24, 0xf59e0b, 0.75);
 
     mainGroup.add(ring1);
     mainGroup.add(ring2);
@@ -219,7 +223,7 @@ export const Orbit = (() => {
 
     // 5. Glowing Satellite Nodes
     const createNode = (colorHex) => {
-      const nodeGeo = new THREE.SphereGeometry(0.075, 32, 32);
+      const nodeGeo = new THREE.SphereGeometry(0.065, 32, 32);
       const nodeMat = new THREE.MeshBasicMaterial({ color: colorHex });
       return new THREE.Mesh(nodeGeo, nodeMat);
     };
@@ -229,10 +233,10 @@ export const Orbit = (() => {
     node3 = createNode(0xc084fc);
     node4 = createNode(0xfde047);
 
-    mainGroup.add(node1);
-    mainGroup.add(node2);
-    mainGroup.add(node3);
-    mainGroup.add(node4);
+    ring1.add(node1);
+    ring2.add(node2);
+    ring3.add(node3);
+    ring4.add(node4);
 
     // 6. Multi-chromatic Ambient Particle Swarm
     const particleCount = 360;
@@ -252,7 +256,7 @@ export const Orbit = (() => {
     for (let i = 0; i < particleCount; i++) {
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-      const r = 1.1 + Math.random() * 1.35;
+      const r = 0.95 + Math.random() * 1.10;
 
       particlePositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       particlePositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
@@ -268,7 +272,7 @@ export const Orbit = (() => {
     particleGeometry.setAttribute("color", new THREE.BufferAttribute(particleColors, 3));
 
     particleMaterial = new THREE.PointsMaterial({
-      size: 0.05,
+      size: 0.045,
       vertexColors: true,
       transparent: true,
       opacity: 0.85,
@@ -295,7 +299,7 @@ export const Orbit = (() => {
       targetMouseY = rawY * 0.55;
 
       raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects([coreMesh, glassMesh, ring1, ring2, ring3, ring4]);
+      const intersects = raycaster.intersectObjects([coreMesh, glassMesh, ring1, ring2, ring3, ring4, node1, node2, node3, node4], true);
       isHovered = (intersects.length > 0) || (Math.sqrt(rawX * rawX + rawY * rawY) < 0.65);
     };
 
@@ -390,6 +394,7 @@ export const Orbit = (() => {
       destroy,
       setTheme,
       forceResize,
+      assertIntegrity,
       handleResize: forceResize,
       pulse: (val) => burst(val || 2.0),
       triggerReasoning: (active) => setMode(active ? "thinking" : "idle"),
@@ -444,6 +449,7 @@ export const Orbit = (() => {
 
   function resume() {
     if (isContextLost) return;
+    if (isRunning && animId) return; // Guard against duplicate animation loops
     if (animId) {
       cancelAnimationFrame(animId);
       animId = null;
@@ -454,6 +460,23 @@ export const Orbit = (() => {
       renderer.render(scene, camera);
     }
     animate();
+  }
+
+  function assertIntegrity() {
+    if (!container || !renderer || !renderer.domElement) return;
+    if (!renderer.domElement.isConnected) {
+      console.warn("[Orbit Guard] WebGL canvas was disconnected from DOM. Re-attaching...");
+      container.innerHTML = "";
+      container.appendChild(renderer.domElement);
+    }
+    const rect = container.getBoundingClientRect();
+    if (rect.width > 0 && rect.height > 0) {
+      const curW = renderer.domElement.clientWidth;
+      const curH = renderer.domElement.clientHeight;
+      if (curW !== Math.round(rect.width) || curH !== Math.round(rect.height)) {
+        forceResize();
+      }
+    }
   }
 
   function burst(intensity = 2.2) {
@@ -515,10 +538,13 @@ export const Orbit = (() => {
       stage.classList.add("orbit-stage-expanded");
     }
     setMode("idle");
+    resume();
     if (transitionTimer) clearTimeout(transitionTimer);
     transitionTimer = setTimeout(() => {
       forceResize();
-    }, 380);
+      resume();
+      assertIntegrity();
+    }, 450);
   }
 
   function setTheme(theme) {
@@ -527,7 +553,7 @@ export const Orbit = (() => {
     if (isLight) {
       particleMaterial.blending = THREE.NormalBlending;
       particleMaterial.opacity = 0.95;
-      particleMaterial.size = 0.055;
+      particleMaterial.size = 0.050;
       particleMaterial.needsUpdate = true;
 
       wireMat1.blending = THREE.NormalBlending;
@@ -559,7 +585,7 @@ export const Orbit = (() => {
     } else {
       particleMaterial.blending = THREE.AdditiveBlending;
       particleMaterial.opacity = 0.85;
-      particleMaterial.size = 0.05;
+      particleMaterial.size = 0.045;
       particleMaterial.needsUpdate = true;
 
       wireMat1.blending = THREE.AdditiveBlending;
@@ -655,39 +681,23 @@ export const Orbit = (() => {
     ring3.rotation.z = t * 0.45;
     ring4.rotation.z = -t * 0.38;
 
-    // Satellite nodes
+    // Satellite nodes glide smoothly along ring circumferences
     const s1 = t * 1.3;
-    node1.position.set(
-      Math.cos(s1) * 1.68,
-      Math.sin(s1) * 1.68 * Math.sin(ring1.rotation.x),
-      Math.sin(s1) * 1.68 * Math.cos(ring1.rotation.x)
-    );
+    node1.position.set(Math.cos(s1) * R1, Math.sin(s1) * R1, 0);
 
     const s2 = -t * 1.15 + 1.5;
-    node2.position.set(
-      Math.cos(s2) * 1.92,
-      Math.sin(s2) * 1.92 * Math.sin(ring2.rotation.x),
-      Math.sin(s2) * 1.92 * Math.cos(ring2.rotation.x)
-    );
+    node2.position.set(Math.cos(s2) * R2, Math.sin(s2) * R2, 0);
 
     const s3 = t * 0.95 + 2.8;
-    node3.position.set(
-      Math.cos(s3) * 2.18,
-      Math.sin(s3) * 2.18 * Math.sin(ring3.rotation.x),
-      Math.sin(s3) * 2.18 * Math.cos(ring3.rotation.x)
-    );
+    node3.position.set(Math.cos(s3) * R3, Math.sin(s3) * R3, 0);
 
     const s4 = -t * 0.8 + 4.2;
-    node4.position.set(
-      Math.cos(s4) * 2.42,
-      Math.sin(s4) * 2.42 * Math.sin(ring4.rotation.x),
-      Math.sin(s4) * 2.42 * Math.cos(ring4.rotation.x)
-    );
+    node4.position.set(Math.cos(s4) * R4, Math.sin(s4) * R4, 0);
 
     // Particles rotate
     particles.rotation.y = t * 0.12;
     particles.rotation.x = Math.sin(t * 0.3) * 0.08;
-    particleMaterial.size = 0.05 + hoverTransition * 0.02 + clickImpulse * 0.035;
+    particleMaterial.size = 0.045 + hoverTransition * 0.02 + clickImpulse * 0.035;
 
     renderer.render(scene, camera);
   }
@@ -720,6 +730,7 @@ export const Orbit = (() => {
     destroy,
     setTheme,
     forceResize,
+    assertIntegrity,
     handleResize: forceResize,
     pulse: (val) => burst(val || 2.0),
     triggerReasoning: (active) => setMode(active ? "thinking" : "idle"),

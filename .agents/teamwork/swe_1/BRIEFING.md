@@ -67,7 +67,7 @@ Adjust the 3D Three.js orbit display to be slightly smaller (~260-280px) and wel
 
 ## Active Timers
 - Heartbeat cron: task-12
-- Safety timer: task-14
+- Safety timer: task-50
 
 ## Artifact Index
 - c:\Users\kastu\Desktop\capstone - service\.agents\teamwork\swe_1\DISPATCH.md — Dispatch instructions

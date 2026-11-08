@@ -536,6 +536,12 @@
             <span class="search-icon">🔍</span>
             <input type="text" id="directory-search-input" class="search-input" placeholder="Search by Ticket ID (e.g., TKT-0007), rider name, or issue keywords..." aria-label="Search operational tickets" title="Search Tickets">
           </div>
+          <div class="neo-filter-pills" id="directory-status-pills" role="tablist" aria-label="Quick Status Toggles">
+            <button type="button" class="neo-toggle-pill active" data-status="">All Tickets</button>
+            <button type="button" class="neo-toggle-pill" data-status="Open">Open</button>
+            <button type="button" class="neo-toggle-pill" data-status="Escalated">⚡ Escalated</button>
+            <button type="button" class="neo-toggle-pill" data-status="Resolved">✓ Resolved</button>
+          </div>
           <div class="filter-group">
             <select id="filter-category" class="filter-select" aria-label="Filter by Category" title="Filter by Category">
               <option value="">All Categories</option>
@@ -744,6 +750,14 @@
           <button type="button" class="glass-btn" id="open-ingest-btn">➕ Ingest Policy</button>
         </div>
 
+        <div class="neo-filter-pills" id="policy-category-pills" role="tablist" aria-label="Policy Categories">
+          <button type="button" class="neo-toggle-pill active" data-cat="">All Policies</button>
+          <button type="button" class="neo-toggle-pill" data-cat="Safety & Incident SLA">Safety &amp; SLA</button>
+          <button type="button" class="neo-toggle-pill" data-cat="Refunds & Cancellations">Refunds</button>
+          <button type="button" class="neo-toggle-pill" data-cat="Billing & Transactions">Billing &amp; Tolls</button>
+          <button type="button" class="neo-toggle-pill" data-cat="Premium Services">VIP Select</button>
+        </div>
+
         <div class="policies-grid" id="policies-grid">
           <!-- Populated dynamically via app.js -->
         </div>
@@ -759,6 +773,12 @@
             <p class="dash-subtitle">User satisfaction tracking, 5-star ratings, suggestions, and ticket conversation history</p>
           </div>
           <button type="button" class="glass-btn" id="refresh-ratings-btn">🔄 Refresh Reviews</button>
+        </div>
+
+        <div class="neo-filter-pills" id="ratings-filter-pills" role="tablist" aria-label="Review Filters">
+          <button type="button" class="neo-toggle-pill active" data-filter="all">All Reviews (3)</button>
+          <button type="button" class="neo-toggle-pill" data-filter="5star">5 ★ Rating Only</button>
+          <button type="button" class="neo-toggle-pill" data-filter="suggestions">💡 With Suggestions</button>
         </div>
 
         <!-- Metric KPI Cards -->
@@ -937,6 +957,28 @@
           <p>• <strong>Risk Tier:</strong> Medium Risk (Customer Operations)</p>
           <p>• <strong>Least Autonomy:</strong> Tool bindings strictly isolated between Retrieval &amp; Lookup agents.</p>
           <p>• <strong>Zero-PII Audit Logs:</strong> Phone numbers masked with <code>[PHONE_MASKED]</code> prior to JSONL persistence.</p>
+          <div class="neo-toggle-group">
+            <label class="neo-switch-row">
+              <span class="neo-switch-label">Zero-PII Automatic Masking</span>
+              <input type="checkbox" class="neo-switch-input" checked id="prefMaskPII" aria-label="Toggle PII Masking">
+              <span class="neo-switch-track"><span class="neo-switch-knob"></span></span>
+            </label>
+            <label class="neo-switch-row">
+              <span class="neo-switch-label">Dual-Agent Escalation Gating</span>
+              <input type="checkbox" class="neo-switch-input" checked id="prefDualAgent" aria-label="Toggle Dual-Agent Escalation">
+              <span class="neo-switch-track"><span class="neo-switch-knob"></span></span>
+            </label>
+            <label class="neo-switch-row">
+              <span class="neo-switch-label">Real-time Telemetry Ingress</span>
+              <input type="checkbox" class="neo-switch-input" checked id="prefTelemetrySync" aria-label="Toggle Telemetry Stream">
+              <span class="neo-switch-track"><span class="neo-switch-knob"></span></span>
+            </label>
+            <label class="neo-switch-row">
+              <span class="neo-switch-label">ChromaDB Semantic Cache Layer</span>
+              <input type="checkbox" class="neo-switch-input" checked id="prefSemanticCache" aria-label="Toggle Semantic Cache">
+              <span class="neo-switch-track"><span class="neo-switch-knob"></span></span>
+            </label>
+          </div>
         </div>
 
         <!-- Tab 4: Admin KB Ingestion -->
