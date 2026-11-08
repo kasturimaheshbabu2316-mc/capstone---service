@@ -1,9 +1,12 @@
 {
+  "venvPath": ".",
+  "venv": ".venv",
   "include": [
     "api",
     "crew",
     "eval",
-    "tests"
+    "tests",
+    "streamlit_app.py"
   ],
   "exclude": [
     "scratch",

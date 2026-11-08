@@ -1,3 +1,5 @@
+# pyright: reportUnknownMemberType=false, reportUnknownVariableType=false, reportUnknownArgumentType=false, reportMissingTypeStubs=false
+# basedpyright: reportAny=false, reportUnusedCallResult=false
 """Streamlit Interactive Application for Ola Support Intelligence.
 
 Production-grade Enterprise Glassmorphism UI:
@@ -6,13 +8,13 @@ Production-grade Enterprise Glassmorphism UI:
 3. System Configuration, Telemetry, Routing Protocols, Ticket Directory, and Admin Tools strictly inside st.sidebar.
 """
 
-import hmac
+from __future__ import annotations
+
 import os
 import sys
 import time
 import uuid
 import warnings
-from typing import Any, Optional
 
 import requests
 import streamlit as st
@@ -25,27 +27,13 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-# Optional direct pipeline imports (gracefully omitted in Streamlit Cloud client mode)
-try:
-    from governance.budget import check_budget_limit, MAX_TOKEN_BUDGET
-    from safety.guardrails import detect_prompt_injection, mask_phone_numbers, verify_groundedness
-    from cache import response_cache
-    from crew.crew import run_support_crew
-    from review.autogen_review import review_support_response
-    from tools.ticket_tool import get_all_tickets
-    DIRECT_CORE_AVAILABLE = True
-except ImportError:
-    DIRECT_CORE_AVAILABLE = False
-    MAX_TOKEN_BUDGET = 2000
-    get_all_tickets = None
-
 
 # -----------------------------------------------------------------------------
 # Configuration & Backend Helpers
 # -----------------------------------------------------------------------------
 def get_backend_url() -> str:
     """Resolves backend URL: st.secrets -> env var -> http://127.0.0.1:8000."""
-    url = None
+    url: str | None = None
     try:
         if hasattr(st, "secrets") and "BACKEND_URL" in st.secrets:
             url = str(st.secrets["BACKEND_URL"]).strip()
@@ -59,9 +47,9 @@ def get_backend_url() -> str:
 BACKEND_URL = get_backend_url()
 
 
-def get_admin_token() -> Optional[str]:
+def get_admin_token() -> str | None:
     """Reads ADMIN_TOKEN from st.secrets or os.environ."""
-    token = None
+    token: str | None = None
     try:
         if hasattr(st, "secrets") and "ADMIN_TOKEN" in st.secrets:
             token = str(st.secrets["ADMIN_TOKEN"]).strip()
@@ -72,7 +60,7 @@ def get_admin_token() -> Optional[str]:
     return token
 
 
-def check_backend_health(base_url: str = None) -> tuple[bool, str, float]:
+def check_backend_health(base_url: str | None = None) -> tuple[bool, str, float]:
     """Queries GET /health on the FastAPI backend with latency measurement."""
     url = (base_url or get_backend_url()).rstrip("/")
     start = time.perf_counter()
