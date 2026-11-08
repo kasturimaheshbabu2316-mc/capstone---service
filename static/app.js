@@ -652,7 +652,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let threeJsAnimId = null;
   let isThreeJsRunning = false;
 
-  function initThreeJsCore() {
+  function initThreeJsCore(forceRecreate = false) {
     const container = document.getElementById("threejs-container-ANIMATION_34");
     if (!container) return;
 
@@ -675,8 +675,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // If canvas already exists in container and running, do not re-create
-    if (container.querySelector("canvas") && isThreeJsRunning) {
+    // If canvas already exists in container and running, do not re-create unless forced
+    if (!forceRecreate && container.querySelector("canvas") && isThreeJsRunning) {
       if (heroNeuralCore) heroNeuralCore.style.display = "none";
       if (window.__threeCore && window.__threeCore.handleResize) {
         window.__threeCore.handleResize();
@@ -697,7 +697,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let renderer;
     try {
-      renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        preserveDrawingBuffer: true,
+        powerPreference: "high-performance"
+      });
     } catch (e) {
       if (heroNeuralCore) heroNeuralCore.style.display = "block";
       return;
@@ -714,13 +719,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderer.domElement.addEventListener("webglcontextlost", (event) => {
       event.preventDefault();
-      console.warn("[Three.js] WebGL context lost; preserving state.");
+      console.warn("[Three.js] WebGL context lost; displaying CSS fallback.");
+      if (heroNeuralCore) heroNeuralCore.style.display = "block";
     }, false);
     renderer.domElement.addEventListener("webglcontextrestored", () => {
-      console.info("[Three.js] WebGL context restored.");
-      if (window.__threeCore && window.__threeCore.handleResize) {
-        window.__threeCore.handleResize();
-      }
+      console.info("[Three.js] WebGL context restored; re-initializing.");
+      initThreeJsCore(true);
     }, false);
 
     const mainGroup = new THREE.Group();
@@ -1150,6 +1154,9 @@ document.addEventListener("DOMContentLoaded", () => {
       isThreeJsRunning = true;
       clock.start();
       handleResize();
+      if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+      }
       animate();
     }
 
@@ -1158,6 +1165,8 @@ document.addEventListener("DOMContentLoaded", () => {
         cancelAnimationFrame(threeJsAnimId);
         threeJsAnimId = null;
       }
+      isThreeJsRunning = false;
+      clock.stop();
     }
 
     window.__threeCore = {
@@ -1432,8 +1441,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (stageName === "chat-stage") {
       if (stageChat) stageChat.scrollTop = 0;
       const threeContainer = document.getElementById("threejs-container-ANIMATION_34");
-      if (!window.__threeCore || !threeContainer || !threeContainer.querySelector("canvas")) {
-        initThreeJsCore();
+      const isContextDead = window.__threeCore && window.__threeCore.renderer && window.__threeCore.renderer.getContext() && window.__threeCore.renderer.getContext().isContextLost();
+      if (!window.__threeCore || !threeContainer || !threeContainer.querySelector("canvas") || isContextDead) {
+        initThreeJsCore(true);
       } else if (window.__threeCore.resume) {
         window.__threeCore.resume();
       }

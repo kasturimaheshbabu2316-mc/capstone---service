@@ -196,6 +196,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.middleware("http")
+async def add_no_cache_headers(request: Request, call_next):
+    response = await call_next(request)
+    path = request.url.path
+    if path.startswith("/static") or path == "/" or path.endswith((".html", ".js", ".css")):
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
+
 # Mount static files directory if present
 static_dir = PROJECT_ROOT / "static"
 if static_dir.exists():
