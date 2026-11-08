@@ -27,7 +27,7 @@ import time
 import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import anyio
 import anyio.to_thread
@@ -388,6 +388,7 @@ def _record_feedback_internal(payload: FeedbackRequest) -> FeedbackResponse:
         fb_id = f"FBK-{uuid.uuid4().hex[:6].upper()}"
         ts = payload.timestamp or time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
         has_sugg = bool(payload.suggestion and payload.suggestion.strip())
+        sugg_val = payload.suggestion.strip() if isinstance(payload.suggestion, str) and has_sugg else None
         record = {
             "id": fb_id,
             "timestamp": ts,
@@ -395,7 +396,7 @@ def _record_feedback_internal(payload: FeedbackRequest) -> FeedbackResponse:
             "ticket_id": payload.ticket_id,
             "question": payload.question,
             "answer": payload.answer,
-            "suggestion": payload.suggestion.strip() if has_sugg else None,
+            "suggestion": sugg_val,
         }
         _feedback_memory.insert(0, record)
         try:
@@ -676,7 +677,8 @@ def run_unified_pipeline(
         )
         if cached_result is not None:
             latency_ms = (time.perf_counter() - start_time) * 1000.0
-            route_name = getattr(cached_result, "route", "cached")
+            cached_route = getattr(cached_result, "route", "rag")
+            route_name: Literal["rag", "lookup", "both"] = cached_route if cached_route in ("rag", "lookup", "both") else "rag"
             audit_logger.log_request(
                 endpoint=endpoint,
                 question=raw_question,
@@ -697,11 +699,12 @@ def run_unified_pipeline(
             source_titles = _resolve_source_titles(cached_result.sources)
 
             raw_review = getattr(cached_result, "review_status", None) or {}
+            final_ans = raw_review.get("final_answer")
             is_revised = bool(
                 raw_review.get("redactions_made", False)
                 or (
-                    raw_review.get("final_answer")
-                    and raw_review.get("final_answer").strip() != cached_result.answer.strip()
+                    isinstance(final_ans, str)
+                    and final_ans.strip() != cached_result.answer.strip()
                 )
             )
             if is_admin:
@@ -831,11 +834,12 @@ def run_unified_pipeline(
         source_titles = _resolve_source_titles(validated_crew.sources)
 
         raw_review = validated_crew.review_status or {}
+        final_ans = raw_review.get("final_answer")
         is_revised = bool(
             raw_review.get("redactions_made", False)
             or (
-                raw_review.get("final_answer")
-                and raw_review.get("final_answer").strip() != validated_crew.answer.strip()
+                isinstance(final_ans, str)
+                and final_ans.strip() != validated_crew.answer.strip()
             )
         )
         if is_admin:
