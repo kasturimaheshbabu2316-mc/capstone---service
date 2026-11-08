@@ -1021,10 +1021,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mainWorkspace) {
       mainWorkspace.classList.toggle("rail-open", isNavDrawerOpen);
     }
+    if (headerRailToggleBtn) {
+      headerRailToggleBtn.classList.toggle("active", isNavDrawerOpen);
+      headerRailToggleBtn.setAttribute("aria-expanded", isNavDrawerOpen ? "true" : "false");
+    }
+    if (railToggleBtn) {
+      railToggleBtn.classList.toggle("active", isNavDrawerOpen);
+      railToggleBtn.setAttribute("aria-expanded", isNavDrawerOpen ? "true" : "false");
+    }
   }
 
   function toggleNavDrawer() {
     setDrawerState(!isNavDrawerOpen);
+  }
+
+  const headerRailToggleBtn = document.getElementById("header-rail-toggle-btn");
+  if (headerRailToggleBtn) {
+    headerRailToggleBtn.addEventListener("click", toggleNavDrawer);
   }
 
   if (railToggleBtn) {

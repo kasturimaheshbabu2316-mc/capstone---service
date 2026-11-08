@@ -209,6 +209,18 @@ body {
   box-shadow: 0 4px 16px rgba(0, 242, 254, 0.25);
 }
 
+.header-burger-btn {
+  color: var(--accent-cyan, #00f2fe);
+}
+
+.header-burger-btn.active,
+.header-burger-btn:hover {
+  background: rgba(0, 242, 254, 0.15);
+  border-color: var(--accent-cyan);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.35);
+}
+
 .nav-divider {
   width: 1px;
   height: 24px;
