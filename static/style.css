@@ -418,48 +418,85 @@ body {
 }
 
 .starter-card {
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
+  background: linear-gradient(145deg, #182231, #101622);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
   padding: 14px 16px;
   text-align: left;
-  color: var(--text-primary);
+  color: #f8fafc;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  box-shadow:
+    -3px -3px 8px rgba(255, 255, 255, 0.04),
+    4px 4px 12px rgba(0, 0, 0, 0.65);
 }
 
 .starter-card:hover {
-  background: var(--glass-card-hover);
-  border-color: var(--glass-border-highlight);
+  background: linear-gradient(145deg, #1d293b, #121a28);
+  border-color: rgba(56, 189, 248, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 242, 254, 0.12);
+  box-shadow:
+    -4px -4px 12px rgba(255, 255, 255, 0.06),
+    6px 6px 16px rgba(0, 0, 0, 0.8),
+    0 0 16px rgba(56, 189, 248, 0.15);
+}
+
+.starter-card:active {
+  transform: translateY(1px) scale(0.985);
+  background: #0e141f;
+  box-shadow:
+    inset 2px 2px 6px rgba(0, 0, 0, 0.8),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.04);
 }
 
 .starter-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-weight: 600;
-  font-size: 0.9rem;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #f8fafc;
+}
+
+.card-icon-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #f8fafc;
+}
+
+.card-icon-title svg {
+  color: #38bdf8;
+  flex-shrink: 0;
 }
 
 .starter-badge {
-  font-size: 0.7rem;
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-  background: rgba(0, 242, 254, 0.12);
-  color: var(--accent-cyan);
-  border: 1px solid rgba(0, 242, 254, 0.3);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.starter-badge.badge-amber {
+  background: rgba(245, 158, 11, 0.14);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.4);
 }
 
 .starter-card-sub {
   display: block;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  line-height: 1.4;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  line-height: 1.45;
 }
 
 /* CHAT STREAM MESSAGES */
@@ -2426,23 +2463,28 @@ body {
   line-height: 1.5;
 }
 
-/* Collapsible Examples Popover */
+/* Collapsible Examples Popover - Dark Neumorphism */
 .examples-popover {
   position: absolute;
   bottom: calc(100% + 14px);
   left: 0;
   width: 100%;
   max-height: min(480px, 72vh);
-  background: rgba(10, 14, 23, 0.96);
+  background: linear-gradient(145deg, #151e2b, #0e1420);
   -webkit-backdrop-filter: blur(28px) saturate(200%);
   backdrop-filter: blur(28px) saturate(200%);
-  border: 1px solid rgba(0, 242, 254, 0.4);
-  border-radius: var(--radius-lg, 16px);
-  padding: 18px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85), 0 0 24px rgba(0, 242, 254, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow:
+    -8px -8px 24px rgba(255, 255, 255, 0.04),
+    -2px -2px 8px rgba(56, 189, 248, 0.06),
+    12px 12px 36px rgba(0, 0, 0, 0.88),
+    4px 4px 12px rgba(0, 0, 0, 0.65);
   z-index: 100;
   overflow-y: auto;
   pointer-events: auto;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .examples-header {
