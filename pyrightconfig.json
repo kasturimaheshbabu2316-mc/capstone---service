@@ -1,0 +1,16 @@
+{
+  "include": [
+    "api",
+    "crew",
+    "eval",
+    "tests"
+  ],
+  "exclude": [
+    "scratch",
+    "static",
+    ".venv"
+  ],
+  "ignore": [
+    "scratch/**"
+  ]
+}
