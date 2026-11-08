@@ -1198,7 +1198,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (stageName === "chat-stage") {
-      scrollToBottom();
+      if (chatStream && chatStream.children.length > 0) {
+        scrollToBottom();
+      } else {
+        if (stageChat) stageChat.scrollTop = 0;
+      }
+      window.dispatchEvent(new Event("resize"));
     }
   }
 
@@ -2955,6 +2960,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (chatEmptyState) chatEmptyState.classList.remove("stage-hidden");
     const stageInner = document.querySelector(".stage-inner");
     if (stageInner) stageInner.classList.remove("chat-active");
+    if (stageChat) stageChat.scrollTop = 0;
     window.dispatchEvent(new Event("resize"));
   }
 
