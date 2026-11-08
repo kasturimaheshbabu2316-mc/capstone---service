@@ -630,21 +630,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (e) {}
   }
 
-  // 3D Holographic Neural Core Hero Rig & Speech Bubble Interaction
+  // 3D Holographic Neural Core Hero Rig
   const heroNeuralCore = document.getElementById("hero-neural-core");
   const heroRig = heroNeuralCore ? heroNeuralCore.querySelector(".neural-gyroscopic-rig") : null;
-  const botSpeechBubble = document.getElementById("bot-speech-bubble");
-  const botGreetingText = document.getElementById("bot-greeting-text");
-  const GREETINGS = [
-    "👋 Hello! Tap me to say hi! ✨",
-    "✨ Hi there! Welcome to Ola Support Desk!",
-    "🚕 Need a policy lookup or ticket check? Ask away!",
-    "🤖 Beep boop! I am your AI guide, happy to help!",
-    "🎉 Awesome to see you! Check out Help Desk below!",
-    "💖 Fast resolution & 24/7 SLA intelligence at your service!",
-    "🌟 Hello friend! Tap Help Desk or type your question!"
-  ];
-  let greetingIdx = 0;
 
   // ==============================================================================
   // Three.js 3D Holographic Core Animation (from @ui ANIMATION_34)
@@ -1086,13 +1074,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const triggerBotGreeting = (e) => {
+  const triggerCorePulse = (e) => {
     if (e) e.stopPropagation();
     playChimeSound();
-    greetingIdx = (greetingIdx + 1) % GREETINGS.length;
-    if (botGreetingText) {
-      botGreetingText.textContent = GREETINGS[greetingIdx];
-    }
     if (heroNeuralCore) {
       heroNeuralCore.classList.remove("neural-core-cheer");
       void heroNeuralCore.offsetWidth;
@@ -1107,18 +1091,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  if (botSpeechBubble) {
-    botSpeechBubble.addEventListener("click", triggerBotGreeting);
-    botSpeechBubble.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        triggerBotGreeting(e);
-      }
-    });
-  }
-
   if (heroNeuralCore) {
-    heroNeuralCore.addEventListener("click", triggerBotGreeting);
+    heroNeuralCore.addEventListener("click", triggerCorePulse);
   }
 
   // Mouse gyroscopic rig 3D tracking
@@ -1158,7 +1132,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (
         !examplesPopover.contains(e.target) &&
         (!examplesToggleBtn || !examplesToggleBtn.contains(e.target)) &&
-        (!botSpeechBubble || !botSpeechBubble.contains(e.target)) &&
         (!heroNeuralCore || !heroNeuralCore.contains(e.target))
       ) {
         setExamplesPopoverVisible(false);
@@ -1247,18 +1220,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const pct = Math.min(100, (estTokens / 2000) * 100);
         tokenFill.style.width = `${pct}%`;
         tokenFill.style.backgroundColor = estTokens > 2000 ? "#f43f5e" : "#00f2fe";
-      }
-
-      // Curious & Happy Reception when user types inquiry
-      const val = chatInput.value.trim();
-      if (val.length > 0) {
-        if (botGreetingText) {
-          botGreetingText.textContent = "🤔 Listening attentively... Ready for your inquiry! 🐶✨";
-        }
-      } else {
-        if (botGreetingText) {
-          botGreetingText.textContent = GREETINGS[greetingIdx];
-        }
       }
     });
   }
@@ -2994,8 +2955,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (chatEmptyState) chatEmptyState.classList.remove("stage-hidden");
     const stageInner = document.querySelector(".stage-inner");
     if (stageInner) stageInner.classList.remove("chat-active");
-    if (botGreetingText) botGreetingText.textContent = GREETINGS[0];
-    greetingIdx = 0;
     window.dispatchEvent(new Event("resize"));
   }
 

@@ -2655,52 +2655,6 @@ body.show-details .meta-footer,
   color: inherit;
 }
 
-/* Floating speech bubble greeting with cool emojis */
-.bot-speech-bubble {
-  display: inline-block;
-  margin-bottom: 12px;
-  background: rgba(8, 20, 36, 0.90);
-  border: 1px solid rgba(0, 242, 254, 0.45);
-  border-radius: 20px;
-  padding: 6px 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(0, 242, 254, 0.25);
-  position: relative;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  animation: bubble-float 3s ease-in-out infinite alternate;
-}
-
-.bot-speech-bubble::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid rgba(0, 242, 254, 0.45);
-}
-
-.empty-bot-wrap:hover .bot-speech-bubble {
-  transform: translateY(-3px) scale(1.05);
-  border-color: var(--accent-cyan);
-  background: rgba(12, 28, 50, 0.96);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 242, 254, 0.4);
-}
-
-.bot-greeting-text {
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: var(--accent-cyan);
-  letter-spacing: 0.2px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
 
 /* Full Character Structure: Antenna + Head (Smiling) + Body (Core) + Hands (Waving) */
 .bot-full-character {
@@ -5608,19 +5562,6 @@ body.show-details .composer-footer {
   border-color: rgba(2, 132, 199, 0.3);
 }
 
-[data-theme="light"] .bot-speech-bubble {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(2, 132, 199, 0.45);
-  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.15), 0 0 16px rgba(56, 189, 248, 0.2);
-}
-
-[data-theme="light"] .bot-speech-bubble::after {
-  border-top-color: rgba(2, 132, 199, 0.45);
-}
-
-[data-theme="light"] .bot-greeting-text {
-  color: #0284c7;
-}
 
 [data-theme="light"] .msg-row.assistant .msg-bubble {
   background: #ffffff !important;
@@ -6217,11 +6158,6 @@ body.show-details .composer-footer {
   height: 190px;
 }
 
-.stage-inner.chat-active .bot-speech-bubble {
-  margin-bottom: 4px;
-  transform: scale(0.92);
-}
-
 /* Three.js 3D Holographic Core Hero Display */
 .hero-threejs-wrap {
   width: 280px;
@@ -6248,74 +6184,7 @@ body.show-details .composer-footer {
   display: block;
 }
 
-/* Interactive Greeting Speech Bubble */
-.bot-speech-bubble {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  margin: 0 auto 12px;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  animation: bubbleBounce 2.5s ease-in-out infinite;
-  transition: transform 0.25s ease;
-  z-index: 10;
-  position: relative;
-}
 
-.bot-speech-bubble:hover {
-  transform: scale(1.05);
-}
-
-.bot-greeting-pill {
-  padding: 6px 16px;
-  border-radius: 9999px;
-  background: rgba(10, 14, 23, 0.94);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border: 1.5px solid transparent;
-  background-clip: padding-box;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 0 24px rgba(217, 70, 239, 0.45), 0 0 40px rgba(0, 242, 254, 0.3);
-  position: relative;
-}
-
-.bot-greeting-pill::before {
-  content: "";
-  position: absolute;
-  inset: -1.5px;
-  border-radius: 9999px;
-  background: linear-gradient(90deg, #00f2fe 0%, #d946ef 50%, #fbbf24 100%);
-  z-index: -1;
-}
-
-.bot-greeting-text {
-  background: linear-gradient(90deg, #ffffff 0%, #cffafe 50%, #fbcfe8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 0.88rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.speech-tail {
-  width: 10px;
-  height: 10px;
-  background: rgba(217, 70, 239, 0.9);
-  transform: rotate(45deg);
-  margin-top: -5px;
-  box-shadow: 0 4px 8px rgba(217, 70, 239, 0.5);
-  border-right: 1px solid rgba(244, 114, 182, 0.6);
-  border-bottom: 1px solid rgba(244, 114, 182, 0.6);
-}
-
-@keyframes bubbleBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
 
 /* Empty State Typography */
 .empty-title {
