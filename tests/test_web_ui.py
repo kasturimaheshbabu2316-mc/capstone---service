@@ -402,11 +402,14 @@ def test_dual_theme_wallpapers():
     dark_wp = wallpapers_dir / "wallpaper_dark.jpg"
     light_wp = wallpapers_dir / "wallpaper_light.jpg"
 
-    # 1. Local image assets exist and are non-empty
+    # 1. Local image assets exist, are high resolution (2560x1440), and non-empty
     assert dark_wp.exists(), "Dark wallpaper must exist locally"
     assert light_wp.exists(), "Light wallpaper must exist locally"
-    assert dark_wp.stat().st_size > 10000, "Dark wallpaper must be a valid image file"
-    assert light_wp.stat().st_size > 10000, "Light wallpaper must be a valid image file"
+    assert dark_wp.stat().st_size > 100000, "Dark wallpaper must be high-res (>100KB)"
+    assert light_wp.stat().st_size > 100000, "Light wallpaper must be high-res (>100KB)"
+    from PIL import Image
+    assert Image.open(dark_wp).size == (2560, 1440)
+    assert Image.open(light_wp).size == (2560, 1440)
 
     # 2. Backdrop DOM element exists in index.html
     index_html = (STATIC_DIR / "index.html").read_text(encoding="utf-8")
@@ -420,7 +423,11 @@ def test_dual_theme_wallpapers():
     assert ".project-wallpaper-backdrop" in css
     assert "background-image: linear-gradient(var(--wallpaper-overlay), var(--wallpaper-overlay)), var(--project-wallpaper);" in css
 
-    # 4. Strict constraint: no external wallpaper URLs
+    # 4. Chat terminal box has transparent frameless background so wallpaper is unobstructed
+    assert ".stage-inner.chat-terminal-box" in css
+    assert "background: transparent !important;" in css
+
+    # 5. Strict constraint: no external wallpaper URLs
     assert "https://" not in css.split(".project-wallpaper-backdrop")[0].split("--project-wallpaper")[1]
 
 
