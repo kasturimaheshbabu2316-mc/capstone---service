@@ -6454,12 +6454,14 @@ body.show-details .composer-footer {
 
 /* Dynamic Workspace Padding with Left Rail */
 .workspace {
-  padding-left: 64px;
+  --rail-current-pad: 64px;
+  padding-left: var(--rail-current-pad);
   transition: padding-left 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .workspace.rail-open {
-  padding-left: 240px;
+  --rail-current-pad: 240px;
+  padding-left: var(--rail-current-pad);
 }
 
 /* Ambient Multi-Color Aurora Backdrop */
@@ -6618,51 +6620,111 @@ body.show-details .composer-footer {
   z-index: 20;
 }
 
-/* Persistent 3D Orbit Stage Header (Static, Sticky & Always Active) */
+/* Persistent 3D Orbit Spacer inside Chat Box Top (Guarantees Stable Chat Stream Layout) */
+.chat-orbit-spacer {
+  width: 320px;
+  height: 320px;
+  min-width: 320px;
+  min-height: 320px;
+  flex-shrink: 0;
+  pointer-events: none;
+  background: transparent;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              min-width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              min-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stage-inner.chat-active .chat-orbit-spacer {
+  width: 220px;
+  height: 220px;
+  min-width: 220px;
+  min-height: 220px;
+}
+
+/* Persistent 3D Orbit Stage (Singleton UI Center of Attraction) */
 .chat-orbit-header-stage {
   display: flex !important;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  padding: 2px 0 4px;
-  pointer-events: none;
+  box-sizing: border-box;
   background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, width, height;
+  border: none;
+  box-shadow: none;
+  transition: top 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              left 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s ease;
+  will-change: transform, top, left, width, height;
 }
 
-.stage-inner.chat-active .chat-orbit-header-stage {
-  margin-bottom: 4px;
-  padding-top: 0;
-  padding-bottom: 2px;
-}
-
-.stage-inner.chat-active .hero-threejs-wrap {
-  width: 185px;
-  height: 185px;
-  min-width: 185px;
-  min-height: 185px;
-  flex-shrink: 0;
+/* Mode 1: Expanded (Chat Desk Active) */
+.chat-orbit-header-stage.orbit-stage-expanded {
+  position: absolute;
+  top: 25px;
+  left: calc(var(--rail-current-pad, 64px) + (100% - var(--rail-current-pad, 64px)) / 2);
+  transform: translate(-50%, 0);
+  width: 320px;
+  height: 320px;
+  z-index: 25;
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  border-radius: 0;
   background: transparent !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
 }
 
-[data-theme="light"] .stage-inner.chat-active .hero-threejs-wrap {
-  background: transparent !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+.chat-orbit-header-stage.orbit-stage-expanded.chat-active {
+  top: 25px;
+  width: 220px;
+  height: 220px;
 }
 
-/* Three.js 3D Holographic Core Hero Display (Zoomed with Pure Alpha Transparency - No Black Shaded Circle) */
+/* Mode 2: Docked Badge (Secondary Windows Active: Tickets, Policies, Ratings, Telemetry) */
+.chat-orbit-header-stage.orbit-stage-docked {
+  position: fixed;
+  top: 6px;
+  left: 320px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  z-index: 9999;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0.96;
+  visibility: visible;
+  transform: translate(0, 0);
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.22) 0%, rgba(13, 20, 36, 0.85) 75%) !important;
+  border: 1.5px solid rgba(0, 242, 254, 0.5) !important;
+  box-shadow: 0 0 18px rgba(0, 242, 254, 0.4), inset 0 0 10px rgba(217, 70, 239, 0.35) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+
+.chat-orbit-header-stage.orbit-stage-docked:hover {
+  transform: scale(1.1);
+  border-color: rgba(0, 242, 254, 0.85) !important;
+  box-shadow: 0 0 24px rgba(0, 242, 254, 0.65), inset 0 0 12px rgba(217, 70, 239, 0.5) !important;
+}
+
+[data-theme="light"] .chat-orbit-header-stage.orbit-stage-docked {
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.18) 0%, rgba(255, 255, 255, 0.95) 75%) !important;
+  border: 1.5px solid rgba(2, 132, 199, 0.55) !important;
+  box-shadow: 0 0 18px rgba(2, 132, 199, 0.35), inset 0 0 10px rgba(217, 70, 239, 0.25) !important;
+}
+
+/* Three.js 3D Holographic Core Hero Display */
 .hero-threejs-wrap {
-  width: 280px;
-  height: 280px;
-  min-width: 280px;
-  min-height: 280px;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
   flex-shrink: 0;
   margin: 0 auto;
   position: relative;
@@ -6670,7 +6732,6 @@ body.show-details .composer-footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: visible;
   pointer-events: auto;
   background: transparent !important;

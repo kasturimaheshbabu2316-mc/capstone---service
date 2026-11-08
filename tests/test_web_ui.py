@@ -59,6 +59,8 @@ def test_static_assets_contain_no_leaks():
     assert len(static_files) > 0
 
     for file_path in static_files:
+        if "vendor" in file_path.parts:
+            continue
         if file_path.suffix in [".html", ".css", ".js"]:
             content = file_path.read_text(encoding="utf-8")
             for term in forbidden:

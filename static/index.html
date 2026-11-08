@@ -4,15 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ola Support Intelligence — Operations Desk • v4.8</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' ws: wss:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://ajax.googleapis.com;">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/css/tokens.css?v=45.0">
-  <link rel="stylesheet" href="/static/css/base.css?v=45.0">
-  <link rel="stylesheet" href="/static/css/components.css?v=45.0">
-  <link rel="stylesheet" href="/static/style.css?v=45.0">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' ws: wss:; script-src 'self' 'unsafe-inline';">
+  <link rel="stylesheet" href="/static/css/tokens.css?v=46.0">
+  <link rel="stylesheet" href="/static/css/base.css?v=46.0">
+  <link rel="stylesheet" href="/static/css/components.css?v=46.0">
+  <link rel="stylesheet" href="/static/style.css?v=46.0">
+  <script src="/static/vendor/three.min.js?v=46.0"></script>
+  <script type="module" src="/static/js/orbit.js?v=46.0"></script>
   <script>
     (function() {
       try {
@@ -193,6 +191,52 @@
   <!-- 3. MAIN WORKSPACE CONTAINER -->
   <div class="workspace" id="main-content-workspace">
 
+    <!-- PERSISTENT 3D HOLOGRAPHIC ORBIT STAGE (SINGLETON, PERSISTENT ACROSS ALL VIEWS) -->
+    <div class="chat-orbit-header-stage orbit-stage-expanded" id="chat-orbit-header-stage">
+      <!-- 3D Holographic Core Hero Rig (Three.js WebGL & CSS fallback from @ui) -->
+      <div class="hero-threejs-wrap" id="threejs-hero-wrap">
+        <div id="threejs-container-ANIMATION_34" class="threejs-container"></div>
+        <!-- Fallback CSS 3D rig -->
+        <div class="neural-core-stage hero-neural-core-stage" id="hero-neural-core" role="img" aria-label="3D Holographic Neural Core">
+          <div class="neural-hologram-viewport">
+            <div class="holo-ripple-container">
+              <div class="holo-resonance-ripple ripple-1"></div>
+              <div class="holo-resonance-ripple ripple-2"></div>
+              <div class="holo-resonance-ripple ripple-3"></div>
+            </div>
+            <div class="neural-gyroscopic-rig">
+              <div class="gyro-ring ring-x">
+                <div class="energy-node node-1"></div>
+                <div class="energy-node node-2"></div>
+              </div>
+              <div class="gyro-ring ring-y">
+                <div class="energy-node node-3"></div>
+                <div class="energy-node node-4"></div>
+              </div>
+              <div class="gyro-ring ring-z">
+                <div class="energy-node node-5"></div>
+              </div>
+              <div class="neural-plasma-sphere">
+                <div class="plasma-fluid-mesh"></div>
+                <div class="neural-nucleus"></div>
+                <div class="specular-glint"></div>
+                <div class="specular-glint-secondary"></div>
+              </div>
+              <div class="quantum-particle-field">
+                <div class="q-spark s-1"></div>
+                <div class="q-spark s-2"></div>
+                <div class="q-spark s-3"></div>
+                <div class="q-spark s-4"></div>
+                <div class="q-spark s-5"></div>
+                <div class="q-spark s-6"></div>
+              </div>
+            </div>
+            <div class="neural-stage-shadow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- VIEW A: LIVE CHAT OPERATIONS DESK (Unified Square Box Container) -->
     <main class="chat-stage" id="chat-stage">
       <div class="stage-inner chat-terminal-box" id="chat-terminal-box">
@@ -206,51 +250,8 @@
 
         <!-- Chat Box Top Header: 3D Holographic Orbit Stage -->
         <div class="chat-box-top" id="chat-box-top">
-          <!-- PERSISTENT 3D HOLOGRAPHIC ORBIT STAGE (ALWAYS ACTIVE) -->
-          <div class="chat-orbit-header-stage" id="chat-orbit-header-stage">
-            <!-- 3D Holographic Core Hero Rig (Three.js WebGL & CSS fallback from @ui) -->
-            <div class="hero-threejs-wrap" id="threejs-hero-wrap">
-              <div id="threejs-container-ANIMATION_34" class="threejs-container"></div>
-              <!-- Fallback CSS 3D rig -->
-              <div class="neural-core-stage hero-neural-core-stage" id="hero-neural-core" role="img" aria-label="3D Holographic Neural Core">
-                <div class="neural-hologram-viewport">
-                  <div class="holo-ripple-container">
-                    <div class="holo-resonance-ripple ripple-1"></div>
-                    <div class="holo-resonance-ripple ripple-2"></div>
-                    <div class="holo-resonance-ripple ripple-3"></div>
-                  </div>
-                  <div class="neural-gyroscopic-rig">
-                    <div class="gyro-ring ring-x">
-                      <div class="energy-node node-1"></div>
-                      <div class="energy-node node-2"></div>
-                    </div>
-                    <div class="gyro-ring ring-y">
-                      <div class="energy-node node-3"></div>
-                      <div class="energy-node node-4"></div>
-                    </div>
-                    <div class="gyro-ring ring-z">
-                      <div class="energy-node node-5"></div>
-                    </div>
-                    <div class="neural-plasma-sphere">
-                      <div class="plasma-fluid-mesh"></div>
-                      <div class="neural-nucleus"></div>
-                      <div class="specular-glint"></div>
-                      <div class="specular-glint-secondary"></div>
-                    </div>
-                    <div class="quantum-particle-field">
-                      <div class="q-spark s-1"></div>
-                      <div class="q-spark s-2"></div>
-                      <div class="q-spark s-3"></div>
-                      <div class="q-spark s-4"></div>
-                      <div class="q-spark s-5"></div>
-                      <div class="q-spark s-6"></div>
-                    </div>
-                  </div>
-                  <div class="neural-stage-shadow"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- SPACER FOR PERSISTENT ORBIT (Keeps chat stream perfectly stable) -->
+          <div class="chat-orbit-spacer" id="chat-orbit-spacer" aria-hidden="true"></div>
 
           <!-- MINIMAL EMPTY STATE TITLE & SUBTITLE (Hidden once message is sent) -->
           <section class="chat-empty-state" id="chat-empty-state">
@@ -967,6 +968,6 @@
     </div>
   </div>
 
-  <script src="/static/app.js?v=45.0"></script>
+  <script src="/static/app.js?v=46.0"></script>
 </body>
 </html>
