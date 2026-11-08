@@ -1142,12 +1142,32 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
+    function resume() {
+      if (threeJsAnimId) {
+        cancelAnimationFrame(threeJsAnimId);
+        threeJsAnimId = null;
+      }
+      isThreeJsRunning = true;
+      clock.start();
+      handleResize();
+      animate();
+    }
+
+    function pause() {
+      if (threeJsAnimId) {
+        cancelAnimationFrame(threeJsAnimId);
+        threeJsAnimId = null;
+      }
+    }
+
     window.__threeCore = {
       scene,
       camera,
       renderer,
       container,
       handleResize,
+      resume,
+      pause,
       setTheme: updateThemeMaterials,
       triggerReasoning,
       pulse: () => { clickImpulse = 2.0; }
@@ -1410,20 +1430,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (stageName === "chat-stage") {
+      if (stageChat) stageChat.scrollTop = 0;
       const threeContainer = document.getElementById("threejs-container-ANIMATION_34");
-      if (!isThreeJsRunning || (threeContainer && !threeContainer.querySelector("canvas"))) {
+      if (!window.__threeCore || !threeContainer || !threeContainer.querySelector("canvas")) {
         initThreeJsCore();
+      } else if (window.__threeCore.resume) {
+        window.__threeCore.resume();
       }
       isThreeJsRunning = true;
       if (window.__threeCore) {
         if (window.__threeCore.setTheme) {
           window.__threeCore.setTheme(document.documentElement.getAttribute("data-theme") || "dark");
         }
-        if (window.__threeCore.handleResize) {
-          requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (window.__threeCore && window.__threeCore.handleResize) {
             window.__threeCore.handleResize();
-          });
-        }
+          }
+          if (stageChat) stageChat.scrollTop = 0;
+        });
+        setTimeout(() => {
+          if (window.__threeCore && window.__threeCore.handleResize) {
+            window.__threeCore.handleResize();
+          }
+          if (stageChat) stageChat.scrollTop = 0;
+        }, 80);
       }
       if (chatStream && chatStream.children.length > 0) {
         scrollToBottom();
@@ -1431,6 +1461,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (stageChat) stageChat.scrollTop = 0;
       }
       window.dispatchEvent(new Event("resize"));
+    } else {
+      if (window.__threeCore && window.__threeCore.pause) {
+        window.__threeCore.pause();
+      }
     }
   }
 
@@ -1921,7 +1955,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function scrollToBottom() {
-    if (stageChat) stageChat.scrollTop = stageChat.scrollHeight;
+    const chatBody = document.getElementById("chat-box-body");
+    if (chatBody) {
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    if (stageChat) {
+      stageChat.scrollTop = 0;
+    }
   }
 
   function escapeHtml(str) {

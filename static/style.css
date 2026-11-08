@@ -6524,11 +6524,6 @@ body.show-details .composer-footer {
   visibility: hidden !important;
   pointer-events: none !important;
   position: absolute !important;
-  width: 0 !important;
-  height: 0 !important;
-  max-width: 0 !important;
-  max-height: 0 !important;
-  overflow: hidden !important;
   opacity: 0 !important;
   flex: 0 0 0% !important;
   margin: 0 !important;
@@ -6567,10 +6562,18 @@ body.show-details .composer-footer {
   max-height: calc(100vh - 64px) !important;
   padding: 14px 20px 18px !important;
   overflow: hidden !important;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
   scroll-behavior: smooth;
   box-sizing: border-box;
   width: 100% !important;
   flex: 1 1 100% !important;
+}
+
+#chat-stage {
+  overflow: hidden !important;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
 }
 
 .stage-inner.chat-terminal-box {
@@ -6640,6 +6643,9 @@ body.show-details .composer-footer {
 .stage-inner.chat-active .hero-threejs-wrap {
   width: 185px;
   height: 185px;
+  min-width: 185px;
+  min-height: 185px;
+  flex-shrink: 0;
   background: transparent !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -6655,6 +6661,9 @@ body.show-details .composer-footer {
 .hero-threejs-wrap {
   width: 280px;
   height: 280px;
+  min-width: 280px;
+  min-height: 280px;
+  flex-shrink: 0;
   margin: 0 auto;
   position: relative;
   z-index: 5;
