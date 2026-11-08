@@ -5817,24 +5817,103 @@ body.show-details .composer-footer {
   min-height: 40px;
 }
 
+/* CLAYMORPHISM: Burger Menu Toggle Button (#rail-toggle-btn) & Rail Interactive Controls */
 .rail-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   color: #94a3b8;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
+  position: relative;
 }
 
 .rail-btn:hover {
   color: #00f2fe;
   background: rgba(30, 41, 59, 0.6);
+}
+
+#rail-toggle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #38bdf8;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 
+    4px 4px 12px rgba(0, 0, 0, 0.5),
+    -2px -2px 6px rgba(255, 255, 255, 0.08),
+    inset 2px 2px 3px rgba(255, 255, 255, 0.25),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.45);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: visible;
+}
+
+#rail-toggle-btn:hover {
+  color: #00f2fe;
+  background: linear-gradient(145deg, #25334a, #111a2d);
+  transform: translateY(-1.5px);
+  border-color: rgba(0, 242, 254, 0.4);
+  box-shadow: 
+    5px 6px 16px rgba(0, 0, 0, 0.6),
+    -2px -2px 8px rgba(0, 242, 254, 0.2),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.32),
+    inset -2px -2px 5px rgba(0, 0, 0, 0.5);
+}
+
+#rail-toggle-btn:active,
+#rail-toggle-btn.active {
+  transform: scale(0.95) translateY(1px);
+  color: #00f2fe;
+  background: linear-gradient(145deg, #0f172a, #1e293b);
+  border-color: rgba(0, 242, 254, 0.5);
+  box-shadow: 
+    2px 2px 6px rgba(0, 0, 0, 0.45),
+    inset 3px 3px 6px rgba(0, 0, 0, 0.65),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.15);
+}
+
+/* Light Mode Claymorphism for Burger Menu Button */
+[data-theme="light"] #rail-toggle-btn {
+  background: linear-gradient(145deg, #ffffff, #e2e8f0);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  color: #0284c7;
+  box-shadow: 
+    4px 4px 12px rgba(148, 163, 184, 0.4),
+    -3px -3px 8px rgba(255, 255, 255, 1.0),
+    inset 2px 2px 4px rgba(255, 255, 255, 1.0),
+    inset -2px -2px 4px rgba(148, 163, 184, 0.38);
+}
+
+[data-theme="light"] #rail-toggle-btn:hover {
+  background: linear-gradient(145deg, #ffffff, #f1f5f9);
+  color: #0369a1;
+  border-color: #38bdf8;
+  box-shadow: 
+    5px 7px 16px rgba(148, 163, 184, 0.5),
+    -3px -3px 10px rgba(255, 255, 255, 1.0),
+    inset 2px 2px 4px rgba(255, 255, 255, 1.0),
+    inset -2px -2px 4px rgba(148, 163, 184, 0.45);
+}
+
+[data-theme="light"] #rail-toggle-btn:active,
+[data-theme="light"] #rail-toggle-btn.active {
+  box-shadow: 
+    2px 2px 6px rgba(148, 163, 184, 0.35),
+    inset 3px 3px 7px rgba(148, 163, 184, 0.55),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.85);
 }
 
 .rail-status-pill {
@@ -6201,48 +6280,115 @@ body.show-details .composer-footer {
   100% { transform: scale(1.04); opacity: 0.9; }
 }
 
+/* ==============================================================================
+   UNIFIED SQUARE CHAT TERMINAL BOX
+   Houses 3D Orbit Core (top), Conversation Stream (AI + Dog + User, middle), 
+   and Integrated Composer Dock (bottom) inside a cohesive terminal card.
+   ============================================================================== */
+.chat-stage {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  height: calc(100vh - 64px) !important;
+  max-height: calc(100vh - 64px) !important;
+  padding: 14px 20px 18px !important;
+  overflow: hidden !important;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+.stage-inner.chat-terminal-box {
+  width: 100%;
+  max-width: 960px;
+  height: 100%;
+  max-height: calc(100vh - 96px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 22px;
+  background: rgba(13, 20, 36, 0.76);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 16px 48px -12px rgba(0, 0, 0, 0.75), 
+    0 0 28px rgba(0, 242, 254, 0.08), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  overflow: visible;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .stage-inner.chat-terminal-box {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  box-shadow: 
+    0 16px 48px -12px rgba(15, 23, 42, 0.12), 
+    0 0 24px rgba(2, 132, 199, 0.08), 
+    inset 0 1px 2px rgba(255, 255, 255, 0.95);
+}
+
+/* Chat Box Top: Orbit Core & Empty State */
+.chat-box-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px 2px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+}
+
 /* Persistent 3D Orbit Stage Header (Static, Sticky & Always Active) */
 .chat-orbit-header-stage {
   display: flex !important;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: sticky;
-  top: 0;
-  z-index: 30;
   margin: 0 auto;
-  padding: 4px 0 8px;
+  padding: 2px 0 4px;
   pointer-events: none;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, width, height;
 }
 
 .stage-inner.chat-active .chat-orbit-header-stage {
-  margin-bottom: 6px;
-  padding-top: 2px;
-  padding-bottom: 6px;
+  margin-bottom: 4px;
+  padding-top: 0;
+  padding-bottom: 2px;
 }
 
 .stage-inner.chat-active .hero-threejs-wrap {
-  width: 180px;
-  height: 180px;
-  background: radial-gradient(circle at center, rgba(10, 15, 29, 0.88) 0%, rgba(10, 15, 29, 0.5) 60%, transparent 74%);
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle at center, rgba(10, 15, 29, 0.82) 0%, rgba(10, 15, 29, 0.4) 60%, transparent 75%);
   border-radius: 50%;
+}
+
+[data-theme="light"] .stage-inner.chat-active .hero-threejs-wrap {
+  background: radial-gradient(circle at center, rgba(224, 242, 254, 0.75) 0%, rgba(241, 245, 249, 0.3) 60%, transparent 75%);
 }
 
 /* Three.js 3D Holographic Core Hero Display */
 .hero-threejs-wrap {
-  width: 280px;
-  height: 280px;
+  width: 240px;
+  height: 240px;
   margin: 0 auto;
   position: relative;
   z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: width 0.4s ease, height 0.4s ease;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: visible;
   pointer-events: auto;
+  background: radial-gradient(circle at center, rgba(10, 15, 29, 0.65) 0%, rgba(10, 15, 29, 0.25) 60%, transparent 75%);
+  border-radius: 50%;
+}
+
+[data-theme="light"] .hero-threejs-wrap {
+  background: radial-gradient(circle at center, rgba(224, 242, 254, 0.65) 0%, rgba(241, 245, 249, 0.25) 60%, transparent 75%);
 }
 
 .threejs-container {
@@ -6257,50 +6403,89 @@ body.show-details .composer-footer {
   display: block;
 }
 
-
-
 /* Empty State Typography */
 .empty-title {
-  font-size: 2.65rem;
+  font-size: 2.35rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   background: linear-gradient(90deg, #67e8f9 0%, #f472b6 50%, #fcd34d 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   text-shadow: 0 0 32px rgba(217, 70, 239, 0.45);
 }
 
+[data-theme="light"] .empty-title {
+  background: linear-gradient(90deg, #0284c7 0%, #d946ef 50%, #eab308 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
 .empty-subtitle {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #94a3b8;
   max-width: 520px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
-/* Floating Radiant Cyber-Glass Composer Dock */
-.composer-dock {
-  position: fixed;
-  bottom: 24px;
-  left: calc(50% + 32px);
-  transform: translateX(-50%);
-  width: calc(100% - 100px);
-  max-width: 920px;
-  z-index: 60;
-  background: transparent;
-  border: none;
-  padding: 0;
-  box-shadow: none;
-  overflow: visible;
-  transition: left 320ms cubic-bezier(0.16, 1, 0.3, 1), width 320ms cubic-bezier(0.16, 1, 0.3, 1);
+[data-theme="light"] .empty-subtitle {
+  color: #64748b;
 }
 
-.workspace.rail-open ~ .composer-dock,
-body:has(.nav-sidebar-drawer.expanded) .composer-dock {
-  left: calc(50% + 120px);
-  width: calc(100% - 280px);
+/* Chat Box Scrollable Body: Houses Conversation Stream with AI, Dog & User queries */
+.chat-box-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6px 22px 14px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  scroll-behavior: smooth;
+}
+
+.chat-box-body .chat-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Integrated Composer Dock Inside the Square Chat Box */
+.chat-box-dock.composer-dock,
+.chat-terminal-box .composer-dock {
+  position: relative !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  z-index: 40 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 8px 16px 14px !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  margin-top: auto !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Position Help Desk popover neatly inside the chat box above the composer */
+.chat-terminal-box .examples-popover {
+  bottom: calc(100% + 10px) !important;
+  left: 14px !important;
+  right: 14px !important;
+  width: calc(100% - 28px) !important;
+  max-height: min(440px, 60vh) !important;
+  z-index: 1000 !important;
 }
 
 .composer-dock-border-wrap {

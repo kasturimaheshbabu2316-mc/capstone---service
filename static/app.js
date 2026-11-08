@@ -921,9 +921,84 @@ document.addEventListener("DOMContentLoaded", () => {
       targetMouseY = 0;
     };
 
+    let isReasoningActive = false;
+    const triggerReasoning = (active) => {
+      isReasoningActive = !!active;
+      if (isReasoningActive) {
+        speedMultiplier = 2.6;
+        clickImpulse = 1.4;
+      }
+    };
+
+    const updateThemeMaterials = (theme) => {
+      const isLight = theme === "light";
+      if (isLight) {
+        particleMaterial.blending = THREE.NormalBlending;
+        particleMaterial.opacity = 0.95;
+        particleMaterial.size = 0.055;
+        particleMaterial.needsUpdate = true;
+
+        wireMat1.blending = THREE.NormalBlending;
+        wireMat1.color.setHex(0x0284c7);
+        wireMat1.opacity = 0.75;
+        wireMat1.needsUpdate = true;
+
+        wireMat2.blending = THREE.NormalBlending;
+        wireMat2.color.setHex(0xe11d48);
+        wireMat2.opacity = 0.65;
+        wireMat2.needsUpdate = true;
+
+        coreMat.emissive.setHex(0x0284c7);
+        coreMat.emissiveIntensity = 0.8;
+        coreMat.color.setHex(0xf0f9ff);
+        coreMat.needsUpdate = true;
+
+        ambientLight.color.setHex(0x94a3b8);
+        ambientLight.intensity = 2.4;
+
+        lightCyan.intensity = 4.0;
+        lightCyan.color.setHex(0x0284c7);
+        lightMagenta.intensity = 4.2;
+        lightMagenta.color.setHex(0xe11d48);
+      } else {
+        particleMaterial.blending = THREE.AdditiveBlending;
+        particleMaterial.opacity = 0.85;
+        particleMaterial.size = 0.05;
+        particleMaterial.needsUpdate = true;
+
+        wireMat1.blending = THREE.AdditiveBlending;
+        wireMat1.color.setHex(0x38bdf8);
+        wireMat1.opacity = 0.45;
+        wireMat1.needsUpdate = true;
+
+        wireMat2.blending = THREE.AdditiveBlending;
+        wireMat2.color.setHex(0xf43f5e);
+        wireMat2.opacity = 0.25;
+        wireMat2.needsUpdate = true;
+
+        coreMat.emissiveIntensity = 1.1;
+        coreMat.color.setHex(0xffffff);
+        coreMat.needsUpdate = true;
+
+        ambientLight.color.setHex(0x18182f);
+        ambientLight.intensity = 1.8;
+
+        lightCyan.intensity = 3.5;
+        lightCyan.color.setHex(0x00f2fe);
+        lightMagenta.intensity = 4.0;
+        lightMagenta.color.setHex(0xf43f5e);
+      }
+    };
+
     const onPointerDown = () => {
-      clickImpulse = 1.8;
+      clickImpulse = 2.2;
       playChimeSound();
+      if (chatInput) {
+        chatInput.focus();
+      }
+      if (typeof triggerCompanionState === "function") {
+        triggerCompanionState("wave");
+      }
     };
 
     window.addEventListener("mousemove", onPointerMove);
@@ -933,6 +1008,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const clock = new THREE.Clock();
     let accumulatedTime = 0;
     isThreeJsRunning = true;
+
+    // Apply current theme palette to 3D orbit
+    const initialTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    updateThemeMaterials(initialTheme);
 
     function animate() {
       if (!isThreeJsRunning) return;
@@ -948,7 +1027,12 @@ document.addEventListener("DOMContentLoaded", () => {
       hoverTransition += ((isHovered ? 1.0 : 0.0) - hoverTransition) * 0.08;
       clickImpulse = Math.max(0, clickImpulse - delta * 2.2);
 
-      const targetSpeed = 1.0 + (hoverTransition * 1.6) + (clickImpulse * 2.5);
+      let targetSpeed;
+      if (isReasoningActive) {
+        targetSpeed = 2.8;
+      } else {
+        targetSpeed = 1.0 + (hoverTransition * 1.6) + (clickImpulse * 2.5);
+      }
       speedMultiplier += (targetSpeed - speedMultiplier) * 0.12;
       accumulatedTime += delta * speedMultiplier;
 
@@ -1057,7 +1141,10 @@ document.addEventListener("DOMContentLoaded", () => {
       camera,
       renderer,
       container,
-      handleResize
+      handleResize,
+      setTheme: updateThemeMaterials,
+      triggerReasoning,
+      pulse: () => { clickImpulse = 2.0; }
     };
 
     window.addEventListener("resize", handleResize);
@@ -1329,6 +1416,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     window.dispatchEvent(new Event("resize"));
 
+    // Accelerate 3D Holographic Orbit during active reasoning
+    if (window.__threeCore && window.__threeCore.triggerReasoning) {
+      window.__threeCore.triggerReasoning(true);
+    }
+
     // Detect Indian mobile numbers and mask them without non-capturing groups
     const phoneRegex = /(\+91[\-\s]?|0)?[6-9]\d{4}[\-\s]?\d{5}\b/g;
     const hasPhone = phoneRegex.test(queryText);
@@ -1447,6 +1539,10 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       loadingRow.remove();
       appendErrorCard(503, "Service communication interrupted. Verify backend server is running.");
+    } finally {
+      if (window.__threeCore && window.__threeCore.triggerReasoning) {
+        window.__threeCore.triggerReasoning(false);
+      }
     }
   }
 
@@ -3053,6 +3149,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextTheme = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
     html.setAttribute("data-theme", nextTheme);
     try { localStorage.setItem("ola_theme", nextTheme); } catch (e) {}
+    if (window.__threeCore && window.__threeCore.setTheme) {
+      window.__threeCore.setTheme(nextTheme);
+    }
   }
 
   const btnTheme = document.getElementById("theme-toggle-btn");
