@@ -1008,6 +1008,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Left Navigation Rail Drawer Controls (from @ui)
   const navSidebarDrawer = document.getElementById("nav-sidebar-drawer");
   const railToggleBtn = document.getElementById("rail-toggle-btn");
+  const headerRailToggleBtn = document.getElementById("header-rail-toggle-btn");
   const mainWorkspace = document.getElementById("main-content-workspace");
   const railSearchBar = document.getElementById("rail-search-bar");
   const railSearchMini = document.getElementById("rail-search-mini");
@@ -1035,7 +1036,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setDrawerState(!isNavDrawerOpen);
   }
 
-  const headerRailToggleBtn = document.getElementById("header-rail-toggle-btn");
   if (headerRailToggleBtn) {
     headerRailToggleBtn.addEventListener("click", toggleNavDrawer);
   }
