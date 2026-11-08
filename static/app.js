@@ -1365,31 +1365,35 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    if (stageChat) {
-      stageChat.classList.toggle("stage-hidden", stageName !== "chat-stage");
-      stageChat.style.display = stageName === "chat-stage" ? "flex" : "none";
-    }
-    if (stageDirectory) {
-      stageDirectory.classList.toggle("stage-hidden", stageName !== "directory-stage");
-      stageDirectory.style.display = stageName === "directory-stage" ? "block" : "none";
-    }
-    if (stagePolicies) {
-      stagePolicies.classList.toggle("stage-hidden", stageName !== "policies-stage");
-      stagePolicies.style.display = stageName === "policies-stage" ? "block" : "none";
-    }
-    if (stageRatings) {
-      stageRatings.classList.toggle("stage-hidden", stageName !== "ratings-stage");
-      stageRatings.style.display = stageName === "ratings-stage" ? "block" : "none";
-    }
-    if (stageTelemetry) {
-      stageTelemetry.classList.toggle("stage-hidden", stageName !== "telemetry-stage");
-      stageTelemetry.style.display = stageName === "telemetry-stage" ? "block" : "none";
-    }
+    const stagesList = [
+      { id: "chat-stage", el: stageChat, displayType: "flex" },
+      { id: "directory-stage", el: stageDirectory, displayType: "block" },
+      { id: "policies-stage", el: stagePolicies, displayType: "block" },
+      { id: "ratings-stage", el: stageRatings, displayType: "block" },
+      { id: "telemetry-stage", el: stageTelemetry, displayType: "block" }
+    ];
+
+    stagesList.forEach(s => {
+      if (!s.el) return;
+      const isTarget = s.id === stageName;
+      s.el.classList.toggle("stage-hidden", !isTarget);
+      if (isTarget) {
+        s.el.style.setProperty("display", s.displayType, "important");
+      } else {
+        s.el.style.setProperty("display", "none", "important");
+      }
+    });
 
     // Composer Dock is shown exclusively on Chat Desk so it never blocks Directory, Policy, Ratings or Telemetry
     const composerDock = document.querySelector(".composer-dock");
     if (composerDock) {
-      composerDock.style.display = stageName === "chat-stage" ? "block" : "none";
+      if (stageName === "chat-stage") {
+        composerDock.classList.remove("stage-hidden");
+        composerDock.style.setProperty("display", "block", "important");
+      } else {
+        composerDock.classList.add("stage-hidden");
+        composerDock.style.setProperty("display", "none", "important");
+      }
     }
 
     if (stageName === "directory-stage" && !isDirectoryLoaded) {

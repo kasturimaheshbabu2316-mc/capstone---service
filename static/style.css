@@ -6508,11 +6508,57 @@ body.show-details .composer-footer {
 }
 
 /* ==============================================================================
+   MUTUALLY EXCLUSIVE FULL-PAGE WINDOW ISOLATION
+   Ensures that every view (Chat Desk, Ticket Directory, Policy Explorer, 
+   Ratings & Reviews, Telemetry Feed) is strictly independent and full-page.
+   Prevents any secondary window from ever attaching side-by-side with chat.
+   ============================================================================== */
+.workspace > .stage-hidden,
+.chat-stage.stage-hidden,
+.directory-stage.stage-hidden,
+.policies-stage.stage-hidden,
+.ratings-stage.stage-hidden,
+.telemetry-stage.stage-hidden,
+.stage-hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  flex: 0 0 0% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Active Window: Stretches to 100% full workspace width and height */
+.workspace > main:not(.stage-hidden),
+.workspace > section:not(.stage-hidden) {
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  position: relative !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.directory-stage:not(.stage-hidden),
+.policies-stage:not(.stage-hidden),
+.ratings-stage:not(.stage-hidden),
+.telemetry-stage:not(.stage-hidden) {
+  display: block !important;
+}
+
+/* ==============================================================================
    UNIFIED SQUARE CHAT TERMINAL BOX
    Houses 3D Orbit Core (top), Conversation Stream (AI + Dog + User, middle), 
    and Integrated Composer Dock (bottom) inside a cohesive terminal card.
    ============================================================================== */
-.chat-stage {
+.chat-stage:not(.stage-hidden) {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -6523,6 +6569,8 @@ body.show-details .composer-footer {
   overflow: hidden !important;
   scroll-behavior: smooth;
   box-sizing: border-box;
+  width: 100% !important;
+  flex: 1 1 100% !important;
 }
 
 .stage-inner.chat-terminal-box {
