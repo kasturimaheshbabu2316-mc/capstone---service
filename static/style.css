@@ -6144,37 +6144,19 @@ body.show-details .composer-footer {
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: 15;
+  z-index: 10;
   margin: 0 auto;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, width, height;
-  flex-shrink: 0;
-  width: fit-content;
 }
 
 .stage-inner.chat-active .chat-orbit-header-stage {
-  position: sticky;
-  top: -28px;
-  z-index: 20;
-  padding: 4px 18px 8px;
-  margin-bottom: 4px;
-  background: radial-gradient(circle at center, rgba(10, 16, 30, 0.9) 0%, rgba(7, 11, 20, 0.6) 65%, transparent 100%);
-  border-radius: 999px;
-  border-bottom: none;
-  pointer-events: none;
-}
-
-.stage-inner.chat-active .chat-orbit-header-stage .hero-threejs-wrap {
-  pointer-events: auto;
+  margin-bottom: 8px;
 }
 
 .stage-inner.chat-active .hero-threejs-wrap {
-  width: 120px;
-  height: 120px;
-}
-
-.stage-inner.chat-active .chat-stream {
-  margin-top: 10px;
+  width: 190px;
+  height: 190px;
 }
 
 /* Three.js 3D Holographic Core Hero Display */
