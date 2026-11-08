@@ -30,6 +30,9 @@
 </head>
 <body class="desk-body selection-accent">
 
+  <!-- DUAL-THEME HARDWARE-ACCELERATED PROJECT WALLPAPER BACKDROP -->
+  <div class="project-wallpaper-backdrop" id="project-wallpaper-backdrop" aria-hidden="true"></div>
+
   <!-- 1. TOP GLASS NAVIGATION BAR (from @ui) -->
   <header class="top-nav glass-nav" id="top-nav">
     <div class="nav-left-cluster">
@@ -536,7 +539,7 @@
             <span class="search-icon">🔍</span>
             <input type="text" id="directory-search-input" class="search-input" placeholder="Search by Ticket ID (e.g., TKT-0007), rider name, or issue keywords..." aria-label="Search operational tickets" title="Search Tickets">
           </div>
-          <div class="neo-filter-pills" id="directory-status-pills" role="tablist" aria-label="Quick Status Toggles">
+          <div class="neo-filter-pills" id="directory-status-pills" role="group" aria-label="Quick Status Toggles">
             <button type="button" class="neo-toggle-pill active" data-status="">All Tickets</button>
             <button type="button" class="neo-toggle-pill" data-status="Open">Open</button>
             <button type="button" class="neo-toggle-pill" data-status="Escalated">⚡ Escalated</button>
@@ -750,7 +753,7 @@
           <button type="button" class="glass-btn" id="open-ingest-btn">➕ Ingest Policy</button>
         </div>
 
-        <div class="neo-filter-pills" id="policy-category-pills" role="tablist" aria-label="Policy Categories">
+        <div class="neo-filter-pills" id="policy-category-pills" role="group" aria-label="Policy Categories">
           <button type="button" class="neo-toggle-pill active" data-cat="">All Policies</button>
           <button type="button" class="neo-toggle-pill" data-cat="Safety & Incident SLA">Safety &amp; SLA</button>
           <button type="button" class="neo-toggle-pill" data-cat="Refunds & Cancellations">Refunds</button>
@@ -775,7 +778,7 @@
           <button type="button" class="glass-btn" id="refresh-ratings-btn">🔄 Refresh Reviews</button>
         </div>
 
-        <div class="neo-filter-pills" id="ratings-filter-pills" role="tablist" aria-label="Review Filters">
+        <div class="neo-filter-pills" id="ratings-filter-pills" role="group" aria-label="Review Filters">
           <button type="button" class="neo-toggle-pill active" data-filter="all">All Reviews (3)</button>
           <button type="button" class="neo-toggle-pill" data-filter="5star">5 ★ Rating Only</button>
           <button type="button" class="neo-toggle-pill" data-filter="suggestions">💡 With Suggestions</button>

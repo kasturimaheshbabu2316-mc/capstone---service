@@ -661,6 +661,9 @@ document.addEventListener("DOMContentLoaded", () => {
         window.__threeCore = window.Orbit;
         isThreeJsRunning = true;
         if (heroNeuralCore) heroNeuralCore.style.display = "none";
+        if (typeof syncOrbit === "function") {
+          syncOrbit();
+        }
       }
     };
 
@@ -867,7 +870,108 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function switchStage(stageName) {
+  // ==============================================================================
+  // Central Single Source of Truth for Active View & Orbit Mode Synchronization
+  // ==============================================================================
+  window.appState = window.appState || {};
+  window.appState.activeView = "chat";
+
+  function normalizeViewName(name) {
+    if (!name) return "chat";
+    const clean = String(name).toLowerCase().trim().replace(/-stage$/, "");
+    if (clean === "directory" || clean === "tickets" || clean === "ticket") return "directory";
+    if (clean === "policies" || clean === "policy") return "policies";
+    if (clean === "ratings" || clean === "rating") return "ratings";
+    if (clean === "telemetry") return "telemetry";
+    return "chat";
+  }
+
+  function getStageIdForView(viewName) {
+    return `${viewName}-stage`;
+  }
+
+  function syncOrbit() {
+    if (!window.Orbit) return;
+    const activeView = (window.appState && window.appState.activeView) || "chat";
+    const orbitStage = document.getElementById("chat-orbit-header-stage");
+    const stageInner = document.querySelector(".stage-inner");
+
+    if (activeView === "chat") {
+      window.Orbit.expand();
+      const hasMessages = (chatStream && chatStream.children.length > 0) || (stageInner && stageInner.classList.contains("chat-active"));
+      if (hasMessages) {
+        if (stageInner) stageInner.classList.add("chat-active");
+        if (orbitStage) orbitStage.classList.add("chat-active");
+      } else {
+        if (stageInner) stageInner.classList.remove("chat-active");
+        if (orbitStage) orbitStage.classList.remove("chat-active");
+      }
+      window.Orbit.resume();
+      window.Orbit.setTheme(document.documentElement.getAttribute("data-theme") || "dark");
+    } else {
+      window.Orbit.dock();
+    }
+
+    const onSettled = () => {
+      if (orbitStage) orbitStage.removeEventListener("transitionend", onSettled);
+      requestAnimationFrame(() => {
+        if (window.Orbit) {
+          window.Orbit.forceResize();
+          window.Orbit.resume();
+        }
+      });
+    };
+
+    if (orbitStage) {
+      orbitStage.addEventListener("transitionend", onSettled, { once: true });
+    }
+    setTimeout(onSettled, 600);
+  }
+  window.syncOrbit = syncOrbit;
+
+  function showView(name) {
+    const canonical = normalizeViewName(name);
+    const stageId = getStageIdForView(canonical);
+
+    // 1. Update single source of truth
+    window.appState.activeView = canonical;
+    document.body.setAttribute("data-active-view", canonical);
+    const workspace = document.getElementById("main-content-workspace");
+    if (workspace) workspace.setAttribute("data-active-view", canonical);
+
+    // 2. Show target view and hide the others
+    const stagesList = [
+      { id: "chat-stage", el: stageChat, displayType: "flex" },
+      { id: "directory-stage", el: stageDirectory, displayType: "block" },
+      { id: "policies-stage", el: stagePolicies, displayType: "block" },
+      { id: "ratings-stage", el: stageRatings, displayType: "block" },
+      { id: "telemetry-stage", el: stageTelemetry, displayType: "block" }
+    ];
+
+    stagesList.forEach(s => {
+      if (!s.el) return;
+      const isTarget = s.id === stageId;
+      s.el.classList.toggle("stage-hidden", !isTarget);
+      if (isTarget) {
+        s.el.style.setProperty("display", s.displayType, "important");
+      } else {
+        s.el.style.setProperty("display", "none", "important");
+      }
+    });
+
+    // Composer Dock is shown exclusively on Chat Desk so it never blocks Directory, Policy, Ratings or Telemetry
+    const composerDock = document.querySelector(".composer-dock");
+    if (composerDock) {
+      if (canonical === "chat") {
+        composerDock.classList.remove("stage-hidden");
+        composerDock.style.setProperty("display", "block", "important");
+      } else {
+        composerDock.classList.add("stage-hidden");
+        composerDock.style.setProperty("display", "none", "important");
+      }
+    }
+
+    // 3. Update the active class on BOTH the top-nav tab and the left-rail item
     [
       pillChat,
       pillDirectory,
@@ -881,7 +985,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ].forEach(pill => {
       if (!pill) return;
       const target = pill.getAttribute("data-target");
-      if (target === stageName) {
+      const isMatch = target === stageId || normalizeViewName(target) === canonical;
+      if (isMatch) {
         pill.classList.add("active");
         pill.setAttribute("aria-selected", "true");
       } else {
@@ -890,57 +995,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    const stagesList = [
-      { id: "chat-stage", el: stageChat, displayType: "flex" },
-      { id: "directory-stage", el: stageDirectory, displayType: "block" },
-      { id: "policies-stage", el: stagePolicies, displayType: "block" },
-      { id: "ratings-stage", el: stageRatings, displayType: "block" },
-      { id: "telemetry-stage", el: stageTelemetry, displayType: "block" }
-    ];
-
-    stagesList.forEach(s => {
-      if (!s.el) return;
-      const isTarget = s.id === stageName;
-      s.el.classList.toggle("stage-hidden", !isTarget);
-      if (isTarget) {
-        s.el.style.setProperty("display", s.displayType, "important");
-      } else {
-        s.el.style.setProperty("display", "none", "important");
-      }
-    });
-
-    // Composer Dock is shown exclusively on Chat Desk so it never blocks Directory, Policy, Ratings or Telemetry
-    const composerDock = document.querySelector(".composer-dock");
-    if (composerDock) {
-      if (stageName === "chat-stage") {
-        composerDock.classList.remove("stage-hidden");
-        composerDock.style.setProperty("display", "block", "important");
-      } else {
-        composerDock.classList.add("stage-hidden");
-        composerDock.style.setProperty("display", "none", "important");
-      }
-    }
-
-    if (stageName === "directory-stage" && !isDirectoryLoaded) {
+    // 4. Deferred content loaders
+    if (canonical === "directory" && !isDirectoryLoaded) {
       loadDirectoryDashboard();
     }
-    if (stageName === "policies-stage" && !isPoliciesLoaded) {
+    if (canonical === "policies" && !isPoliciesLoaded) {
       renderPolicyExplorer();
     }
-    if (stageName === "ratings-stage") {
+    if (canonical === "ratings") {
       loadRatingsDashboard();
     }
-    if (stageName === "telemetry-stage") {
+    if (canonical === "telemetry") {
       loadTelemetryDashboard();
     }
 
-    if (stageName === "chat-stage") {
+    if (canonical === "chat") {
       if (stageChat) stageChat.scrollTop = 0;
-      if (window.Orbit) {
-        window.Orbit.expand();
-        window.Orbit.resume();
-        window.Orbit.setTheme(document.documentElement.getAttribute("data-theme") || "dark");
-      }
       isThreeJsRunning = true;
       if (chatStream && chatStream.children.length > 0) {
         scrollToBottom();
@@ -948,18 +1018,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (stageChat) stageChat.scrollTop = 0;
       }
       window.dispatchEvent(new Event("resize"));
-    } else {
-      if (window.Orbit) {
-        window.Orbit.dock();
-      }
     }
+
+    // 5. Synchronize 3D Orbit singleton
+    syncOrbit();
   }
 
-  if (pillChat) pillChat.addEventListener("click", () => switchStage("chat-stage"));
-  if (pillDirectory) pillDirectory.addEventListener("click", () => switchStage("directory-stage"));
-  if (pillPolicies) pillPolicies.addEventListener("click", () => switchStage("policies-stage"));
-  if (pillRatings) pillRatings.addEventListener("click", () => switchStage("ratings-stage"));
-  if (railNavRatings) railNavRatings.addEventListener("click", () => switchStage("ratings-stage"));
+  const switchStage = showView;
+  window.showView = showView;
+  window.switchStage = showView;
+
+  if (pillChat) pillChat.addEventListener("click", () => showView("chat"));
+  if (pillDirectory) pillDirectory.addEventListener("click", () => showView("directory"));
+  if (pillPolicies) pillPolicies.addEventListener("click", () => showView("policies"));
+  if (pillRatings) pillRatings.addEventListener("click", () => showView("ratings"));
+  if (railNavRatings) railNavRatings.addEventListener("click", () => showView("ratings"));
   if (refreshRatingsBtn) refreshRatingsBtn.addEventListener("click", () => loadRatingsDashboard());
   if (refreshTelemetryBtn) refreshTelemetryBtn.addEventListener("click", () => loadTelemetryDashboard());
 
@@ -1014,6 +1087,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (chatEmptyState) {
       chatEmptyState.classList.add("stage-hidden");
     }
+    syncOrbit();
     window.dispatchEvent(new Event("resize"));
 
     // Accelerate 3D Holographic Orbit during active reasoning
@@ -2820,12 +2894,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Central Desk Reset Function (Preserves 3D Orbit Core)
   function resetChatDesk() {
+    // 1. showView("chat") (switches active view, updates rail and top-nav, and syncs orbit)
+    showView("chat");
+
+    // 2. Abort any pending /ask request (AbortController) and ignore late responses using request id
     if (currentQueryAbortController) {
       currentQueryAbortController.abort();
       currentQueryAbortController = null;
     }
     activeRequestId++;
 
+    // 3. Clear only the message list, restore empty state ("How can I help?"), remove .chat-active, state.resetConversation()
     if (chatStream) chatStream.innerHTML = "";
     if (chatEmptyState) {
       chatEmptyState.classList.remove("stage-hidden");
@@ -2841,12 +2920,12 @@ document.addEventListener("DOMContentLoaded", () => {
       window.state.resetConversation();
     }
 
+    // 4. orbit.setMode("idle")
     if (window.Orbit) {
       window.Orbit.setMode("idle");
-      window.Orbit.expand();
-      window.Orbit.resume();
     }
 
+    // 5. Wait for transition end (fallback 600ms), then forceResize() and resume()
     const onSettled = () => {
       if (orbitStage) orbitStage.removeEventListener("transitionend", onSettled);
       requestAnimationFrame(() => {
@@ -2862,7 +2941,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (orbitStage) {
       orbitStage.addEventListener("transitionend", onSettled, { once: true });
     }
-    setTimeout(onSettled, 450);
+    setTimeout(onSettled, 600);
     window.dispatchEvent(new Event("resize"));
   }
 
@@ -3072,9 +3151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   try {
     const urlParams = new URLSearchParams(window.location.search);
     const viewParam = urlParams.get("view") || window.location.hash.replace("#", "");
-    if (viewParam === "directory") switchStage("directory-stage");
-    else if (viewParam === "policies") switchStage("policies-stage");
-    else if (viewParam === "ratings") switchStage("ratings-stage");
+    showView(viewParam || "chat");
 
     const queryParam = urlParams.get("query");
     if (queryParam) {
@@ -3082,6 +3159,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   } catch (e) {}
 
+  window.addEventListener("pageshow", () => {
+    syncOrbit();
+  });
+  window.addEventListener("popstate", () => {
+    const p = new URLSearchParams(window.location.search).get("view") || window.location.hash.replace("#", "");
+    showView(p || "chat");
+  });
+
   window.dispatchQuery = dispatchQuery;
-  window.switchStage = switchStage;
+  window.switchStage = showView;
+  window.showView = showView;
 });

@@ -314,9 +314,16 @@ export const Orbit = (() => {
     const onPointerDown = () => {
       burst(2.2);
       if (isDockedState) {
-        expand();
-        const chatPill = document.getElementById("pill-chat") || document.getElementById("rail-nav-chat");
-        if (chatPill) chatPill.click();
+        if (typeof window.showView === "function") {
+          window.showView("chat");
+        } else {
+          const chatPill = document.getElementById("pill-chat") || document.getElementById("rail-nav-chat");
+          if (chatPill) {
+            chatPill.click();
+          } else {
+            expand();
+          }
+        }
       } else {
         const chatInput = document.getElementById("chat-input");
         if (chatInput) chatInput.focus();
@@ -531,6 +538,10 @@ export const Orbit = (() => {
   }
 
   function expand() {
+    if (window.appState && window.appState.activeView && window.appState.activeView !== "chat") {
+      console.debug("[Orbit] expand() ignored: activeView is", window.appState.activeView);
+      return;
+    }
     isDockedState = false;
     const stage = document.getElementById("chat-orbit-header-stage");
     if (stage) {

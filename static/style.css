@@ -6,6 +6,8 @@
 
 :root {
   --bg-base: #060913;
+  --project-wallpaper: url('/static/wallpapers/wallpaper_dark.jpg');
+  --wallpaper-overlay: rgba(6, 9, 19, 0.45);
   --glass-surface: rgba(15, 23, 42, 0.55);
   --glass-surface-elevated: rgba(30, 41, 59, 0.68);
   --glass-card-hover: rgba(0, 242, 254, 0.10);
@@ -30,8 +32,15 @@
   --glass-blur: blur(20px) saturate(180%);
 }
 
+[data-theme="dark"] {
+  --project-wallpaper: url('/static/wallpapers/wallpaper_dark.jpg');
+  --wallpaper-overlay: rgba(6, 9, 19, 0.45);
+}
+
 [data-theme="light"] {
   --bg-base: #eef2f9;
+  --project-wallpaper: url('/static/wallpapers/wallpaper_light.jpg');
+  --wallpaper-overlay: rgba(238, 242, 249, 0.35);
   --glass-surface: rgba(255, 255, 255, 0.72);
   --glass-surface-elevated: rgba(255, 255, 255, 0.88);
   --glass-card-hover: rgba(14, 165, 233, 0.10);
@@ -62,6 +71,23 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+/* DUAL-THEME HARDWARE-ACCELERATED PROJECT WALLPAPER BACKDROP */
+.project-wallpaper-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(var(--wallpaper-overlay), var(--wallpaper-overlay)), var(--project-wallpaper);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: background-image 0.4s ease, opacity 0.4s ease;
+  will-change: transform;
 }
 
 /* ==============================================================================
@@ -293,6 +319,7 @@ body {
   display: flex;
   overflow: hidden;
   position: relative;
+  z-index: 1;
 }
 
 .chat-stage {
@@ -6685,6 +6712,12 @@ body.show-details .composer-footer {
   height: 220px;
 }
 
+/* Defensive Guard: Expanded orbit MUST NEVER be displayed if active view is not chat */
+.workspace:not([data-active-view="chat"]) .chat-orbit-header-stage.orbit-stage-expanded,
+body:not([data-active-view="chat"]) .chat-orbit-header-stage.orbit-stage-expanded {
+  display: none !important;
+}
+
 /* Mode 2: Docked Badge (Secondary Windows Active: Tickets, Policies, Ratings, Telemetry) */
 .chat-orbit-header-stage.orbit-stage-docked {
   position: fixed;
@@ -7747,6 +7780,7 @@ body.show-details .composer-footer {
   letter-spacing: 0.01em;
   border-radius: 6px;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   border: 2px solid #0f172a;
   background: #ffffff;
@@ -8073,6 +8107,7 @@ body.show-details .composer-footer {
   background: #ffffff;
   box-shadow: 2.5px 2.5px 0px #0f172a;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
@@ -8174,6 +8209,461 @@ body.show-details .composer-footer {
   transform: translateX(20px);
   background: #050b14;
   border-color: #000000;
+}
+
+/* ============================================================================== */
+/* 11. COMPREHENSIVE PAPERMORPHISM & NEO-BRUTALIST SECONDARY WINDOWS SYSTEM       */
+/* Applied strictly to:                                                           */
+/*   - .directory-stage (Ticket Operations & Incident Directory)                  */
+/*   - .policies-stage  (Official Policy Knowledge Base)                          */
+/*   - .ratings-stage   (Customer Ratings & Reviews Log)                          */
+/*   - .telemetry-stage (System Telemetry & Live Feed)                            */
+/*   - .command-palette-backdrop (Command Palette Modal)                          */
+/* NOTE: The Chat UI (#chat-stage) and 3D Orbit are 100% EXCLUDED and preserved.  */
+/* ============================================================================== */
+
+/* 11.1 KPI Metric Cards (Directory, Ratings, Telemetry) */
+.directory-stage .kpi-card,
+.ratings-stage .kpi-card,
+.telemetry-stage .kpi-card {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 2.5px solid #0f172a !important;
+  border-radius: 8px !important;
+  box-shadow: 4px 4px 0px #0f172a !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.directory-stage .kpi-card:hover,
+.ratings-stage .kpi-card:hover,
+.telemetry-stage .kpi-card:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px #0f172a !important;
+}
+
+[data-theme="dark"] .directory-stage .kpi-card,
+[data-theme="dark"] .ratings-stage .kpi-card,
+[data-theme="dark"] .telemetry-stage .kpi-card {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border: 2.5px solid #334155 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+[data-theme="dark"] .directory-stage .kpi-card:hover,
+[data-theme="dark"] .ratings-stage .kpi-card:hover,
+[data-theme="dark"] .telemetry-stage .kpi-card:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px #000000, 0 0 12px rgba(0, 242, 254, 0.25) !important;
+  border-color: #38bdf8 !important;
+}
+
+/* KPI Labels & Values */
+.directory-stage .kpi-label,
+.ratings-stage .kpi-label,
+.telemetry-stage .kpi-label {
+  font-weight: 800 !important;
+  letter-spacing: 0.05em !important;
+  color: #64748b !important;
+}
+
+[data-theme="dark"] .directory-stage .kpi-label,
+[data-theme="dark"] .ratings-stage .kpi-label,
+[data-theme="dark"] .telemetry-stage .kpi-label {
+  color: #94a3b8 !important;
+}
+
+.directory-stage .kpi-val,
+.ratings-stage .kpi-val,
+.telemetry-stage .kpi-val {
+  font-weight: 900 !important;
+  font-family: inherit !important;
+}
+
+/* 11.2 Category Spectrum & Workload Box (Directory) */
+.directory-stage .spectrum-box {
+  background: #ffffff !important;
+  border: 2.5px solid #0f172a !important;
+  border-radius: 8px !important;
+  box-shadow: 4px 4px 0px #0f172a !important;
+  padding: 16px 20px !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+[data-theme="dark"] .directory-stage .spectrum-box {
+  background: #0f172a !important;
+  border: 2.5px solid #334155 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+.directory-stage .spectrum-badge {
+  border: 1.5px solid #0f172a !important;
+  border-radius: 4px !important;
+  padding: 2px 8px !important;
+  font-weight: 700 !important;
+  background: #fde047 !important;
+  color: #000000 !important;
+  box-shadow: 1.5px 1.5px 0px #0f172a !important;
+}
+
+[data-theme="dark"] .directory-stage .spectrum-badge {
+  border-color: #000000 !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+}
+
+/* 11.3 Directory Data Grid & Pinned Inspector Split */
+.directory-stage .directory-table-card {
+  background: #ffffff !important;
+  border: 2.5px solid #0f172a !important;
+  border-radius: 8px !important;
+  box-shadow: 4px 4px 0px #0f172a !important;
+  overflow: hidden !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+[data-theme="dark"] .directory-stage .directory-table-card {
+  background: #0f172a !important;
+  border: 2.5px solid #334155 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+.directory-stage .directory-table-banner {
+  border-bottom: 2px solid #0f172a !important;
+  background: #f8fafc !important;
+  padding: 12px 18px !important;
+}
+
+[data-theme="dark"] .directory-stage .directory-table-banner {
+  border-bottom: 2px solid #334155 !important;
+  background: #131d33 !important;
+}
+
+.directory-stage .grid-table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  width: 100% !important;
+}
+
+.directory-stage .grid-table th {
+  border-bottom: 2px solid #0f172a !important;
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  padding: 12px 14px !important;
+}
+
+[data-theme="dark"] .directory-stage .grid-table th {
+  border-bottom: 2px solid #334155 !important;
+  background: #18223c !important;
+  color: #cbd5e1 !important;
+}
+
+.directory-stage .grid-table td {
+  border-bottom: 1.5px solid #e2e8f0 !important;
+  padding: 10px 14px !important;
+}
+
+[data-theme="dark"] .directory-stage .grid-table td {
+  border-bottom: 1.5px solid #1e293b !important;
+}
+
+.directory-stage .grid-table tr:hover td {
+  background: #fef9c3 !important;
+}
+
+[data-theme="dark"] .directory-stage .grid-table tr:hover td {
+  background: #1e293b !important;
+}
+
+/* Pinned Inspector Card */
+.directory-stage .pinned-inspector-card {
+  background: #ffffff !important;
+  border: 2.5px solid #0f172a !important;
+  border-radius: 8px !important;
+  box-shadow: 4px 4px 0px #0f172a !important;
+  overflow: hidden !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+[data-theme="dark"] .directory-stage .pinned-inspector-card {
+  background: #0f172a !important;
+  border: 2.5px solid #334155 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+.directory-stage .telematics-map-box {
+  border: 2px solid #0f172a !important;
+  border-radius: 6px !important;
+  margin: 12px 16px !important;
+  background: #050b14 !important;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .directory-stage .telematics-map-box {
+  border: 2px solid #334155 !important;
+}
+
+.directory-stage .receipt-slip-plate {
+  border: 2px dashed #0f172a !important;
+  border-radius: 6px !important;
+  margin: 12px 16px 16px !important;
+  background: #f8fafc !important;
+  padding: 14px !important;
+  box-shadow: 2px 2px 0px rgba(15, 23, 42, 0.15) !important;
+}
+
+[data-theme="dark"] .directory-stage .receipt-slip-plate {
+  border: 2px dashed #475569 !important;
+  background: #0b1322 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+/* 11.4 Policy Cards Grid (Policies Stage) */
+.policies-stage .policy-card {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 2.5px solid #0f172a !important;
+  border-radius: 8px !important;
+  box-shadow: 4px 4px 0px #0f172a !important;
+  padding: 20px !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.policies-stage .policy-card:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px #0f172a !important;
+}
+
+[data-theme="dark"] .policies-stage .policy-card {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border: 2.5px solid #334155 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+[data-theme="dark"] .policies-stage .policy-card:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px #000000, 0 0 16px rgba(0, 242, 254, 0.25) !important;
+  border-color: #38bdf8 !important;
+}
+
+.policies-stage .policy-card::before {
+  display: none !important;
+}
+
+.policies-stage .policy-card-top span[class*="tag"],
+.policies-stage .policy-card-top span[class*="pill"],
+.policies-stage .badge-topic,
+.policies-stage .policy-cat-tag {
+  border: 1.5px solid #0f172a !important;
+  border-radius: 4px !important;
+  padding: 3px 8px !important;
+  font-weight: 800 !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.04em !important;
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  box-shadow: 1.5px 1.5px 0px #0f172a !important;
+}
+
+[data-theme="dark"] .policies-stage .policy-card-top span[class*="tag"],
+[data-theme="dark"] .policies-stage .policy-card-top span[class*="pill"],
+[data-theme="dark"] .policies-stage .badge-topic,
+[data-theme="dark"] .policies-stage .policy-cat-tag {
+  background: #0369a1 !important;
+  color: #f0f9ff !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+}
+
+/* 11.5 Customer Ratings & Reviews Log (Ratings Stage) */
+.ratings-stage .glass-table,
+.ratings-stage .ratings-table {
+  background: #ffffff !important;
+  border: 2.5px solid #0f172a !important;
+  border-radius: 8px !important;
+  box-shadow: 4px 4px 0px #0f172a !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+[data-theme="dark"] .ratings-stage .glass-table,
+[data-theme="dark"] .ratings-stage .ratings-table {
+  background: #0f172a !important;
+  border: 2.5px solid #334155 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+.ratings-stage .glass-table th,
+.ratings-stage .ratings-table th {
+  border-bottom: 2px solid #0f172a !important;
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  padding: 12px 14px !important;
+}
+
+[data-theme="dark"] .ratings-stage .glass-table th,
+[data-theme="dark"] .ratings-stage .ratings-table th {
+  border-bottom: 2px solid #334155 !important;
+  background: #18223c !important;
+  color: #cbd5e1 !important;
+}
+
+.ratings-stage .glass-table td,
+.ratings-stage .ratings-table td {
+  border-bottom: 1.5px solid #e2e8f0 !important;
+  padding: 10px 14px !important;
+}
+
+[data-theme="dark"] .ratings-stage .glass-table td,
+[data-theme="dark"] .ratings-stage .ratings-table td {
+  border-bottom: 1.5px solid #1e293b !important;
+}
+
+/* Sticky-Note User Suggestions */
+.ratings-stage .suggestion-quote,
+.ratings-stage td span.text-amber,
+.ratings-stage td em {
+  display: inline-block !important;
+  background: #fef08a !important;
+  color: #0f172a !important;
+  border: 1.5px solid #0f172a !important;
+  box-shadow: 2px 2px 0px #0f172a !important;
+  border-radius: 4px !important;
+  padding: 3px 8px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="dark"] .ratings-stage .suggestion-quote,
+[data-theme="dark"] .ratings-stage td span.text-amber,
+[data-theme="dark"] .ratings-stage td em {
+  background: #fde047 !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+/* 11.6 Telemetry Cards (Telemetry Stage) */
+.telemetry-stage .telemetry-card {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 2.5px solid #0f172a !important;
+  border-radius: 8px !important;
+  box-shadow: 4px 4px 0px #0f172a !important;
+  padding: 18px 20px !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
+}
+
+.telemetry-stage .telemetry-card:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px #0f172a !important;
+}
+
+[data-theme="dark"] .telemetry-stage .telemetry-card {
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border: 2.5px solid #334155 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+[data-theme="dark"] .telemetry-stage .telemetry-card:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px #000000, 0 0 16px rgba(0, 242, 254, 0.25) !important;
+  border-color: #38bdf8 !important;
+}
+
+.telemetry-stage .telemetry-card-header {
+  border-bottom: 2px solid #0f172a !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 12px !important;
+}
+
+[data-theme="dark"] .telemetry-stage .telemetry-card-header {
+  border-bottom: 2px solid #334155 !important;
+}
+
+/* 11.7 Command Palette Modal (Screen 5) */
+.command-palette-backdrop .palette-dialog {
+  background: #ffffff !important;
+  border: 3px solid #0f172a !important;
+  border-radius: 8px !important;
+  box-shadow: 8px 8px 0px #0f172a !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  overflow: hidden !important;
+}
+
+[data-theme="dark"] .command-palette-backdrop .palette-dialog {
+  background: #0f172a !important;
+  border: 3px solid #38bdf8 !important;
+  box-shadow: 8px 8px 0px #000000, 0 0 28px rgba(0, 242, 254, 0.3) !important;
+}
+
+.command-palette-backdrop .palette-search-box {
+  border-bottom: 2.5px solid #0f172a !important;
+  background: #f8fafc !important;
+  padding: 14px 18px !important;
+}
+
+[data-theme="dark"] .command-palette-backdrop .palette-search-box {
+  border-bottom: 2.5px solid #334155 !important;
+  background: #131d33 !important;
+}
+
+.command-palette-backdrop .palette-tag {
+  border: 1.5px solid #0f172a !important;
+  border-radius: 4px !important;
+  padding: 2px 8px !important;
+  font-weight: 800 !important;
+  font-size: 0.75rem !important;
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 1.5px 1.5px 0px #0f172a !important;
+}
+
+[data-theme="dark"] .command-palette-backdrop .palette-tag {
+  border-color: #38bdf8 !important;
+  background: #1e293b !important;
+  color: #38bdf8 !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+}
+
+.command-palette-backdrop .palette-item {
+  border: 1.5px solid transparent !important;
+  border-radius: 6px !important;
+  padding: 10px 14px !important;
+  margin: 3px 0 !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.12s ease !important;
+}
+
+.command-palette-backdrop .palette-item:hover,
+.command-palette-backdrop .palette-item.active {
+  transform: translate(-1.5px, -1.5px) !important;
+  background: #fde047 !important;
+  color: #000000 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+.command-palette-backdrop .palette-item:hover .palette-item-tag,
+.command-palette-backdrop .palette-item.active .palette-item-tag {
+  background: #000000 !important;
+  color: #fde047 !important;
+  border-color: #000000 !important;
 }
 
 

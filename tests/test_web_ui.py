@@ -359,6 +359,72 @@ def test_3d_orbit_geometry_and_container_size():
     assert "node4.position.set(Math.cos(s4) * R4, Math.sin(s4) * R4, 0);" in orbit_content
 
 
+def test_orbit_reset_and_active_view_synchronization():
+    """Validates single source of truth for active view, safe orbit docking/expanding, and reset order."""
+    app_js = (STATIC_DIR / "app.js").read_text(encoding="utf-8")
+    orbit_js = (STATIC_DIR / "js" / "orbit.js").read_text(encoding="utf-8")
+    settings_js = (STATIC_DIR / "js" / "settings.js").read_text(encoding="utf-8")
+    css = (STATIC_DIR / "style.css").read_text(encoding="utf-8")
+    index_html = (STATIC_DIR / "index.html").read_text(encoding="utf-8")
+
+    # 1. Single source of truth: appState.activeView, showView, and syncOrbit
+    assert "window.appState.activeView" in app_js
+    assert "function showView(name)" in app_js
+    assert "function syncOrbit()" in app_js
+    assert "window.showView = showView;" in app_js
+
+    # 2. Reset flow order: showView("chat") must be invoked first
+    reset_fn_idx = app_js.find("function resetChatDesk()")
+    assert reset_fn_idx != -1
+    reset_body = app_js[reset_fn_idx:reset_fn_idx + 800]
+    show_view_idx = reset_body.find('showView("chat")')
+    abort_idx = reset_body.find("currentQueryAbortController.abort()")
+    assert show_view_idx != -1, "showView('chat') must be called in resetChatDesk"
+    assert abort_idx != -1, "AbortController must be called in resetChatDesk"
+    assert show_view_idx < abort_idx, "showView('chat') must precede query abort and state reset"
+
+    # 3. All reset triggers call resetChatDesk
+    assert "id=\"clear-chat-btn\"" in index_html
+    assert 'btnClear.addEventListener("click", resetChatDesk)' in app_js
+    assert "window.resetChatDesk()" in settings_js
+
+    # 4. Safe expand guard in orbit.js
+    assert 'window.appState.activeView !== "chat"' in orbit_js
+    assert '[Orbit] expand() ignored: activeView is' in orbit_js
+
+    # 5. CSS overlay defense guard
+    assert '.workspace:not([data-active-view="chat"]) .chat-orbit-header-stage.orbit-stage-expanded' in css
+
+
+def test_dual_theme_wallpapers():
+    """Validates local wallpaper assets, backdrop element, and dual-theme CSS rules."""
+    wallpapers_dir = STATIC_DIR / "wallpapers"
+    dark_wp = wallpapers_dir / "wallpaper_dark.jpg"
+    light_wp = wallpapers_dir / "wallpaper_light.jpg"
+
+    # 1. Local image assets exist and are non-empty
+    assert dark_wp.exists(), "Dark wallpaper must exist locally"
+    assert light_wp.exists(), "Light wallpaper must exist locally"
+    assert dark_wp.stat().st_size > 10000, "Dark wallpaper must be a valid image file"
+    assert light_wp.stat().st_size > 10000, "Light wallpaper must be a valid image file"
+
+    # 2. Backdrop DOM element exists in index.html
+    index_html = (STATIC_DIR / "index.html").read_text(encoding="utf-8")
+    assert 'class="project-wallpaper-backdrop"' in index_html
+    assert 'id="project-wallpaper-backdrop"' in index_html
+
+    # 3. CSS variables and rules configure dark and light themes locally
+    css = (STATIC_DIR / "style.css").read_text(encoding="utf-8")
+    assert "--project-wallpaper: url('/static/wallpapers/wallpaper_dark.jpg');" in css
+    assert "--project-wallpaper: url('/static/wallpapers/wallpaper_light.jpg');" in css
+    assert ".project-wallpaper-backdrop" in css
+    assert "background-image: linear-gradient(var(--wallpaper-overlay), var(--wallpaper-overlay)), var(--project-wallpaper);" in css
+
+    # 4. Strict constraint: no external wallpaper URLs
+    assert "https://" not in css.split(".project-wallpaper-backdrop")[0].split("--project-wallpaper")[1]
+
+
+
 
 
 
