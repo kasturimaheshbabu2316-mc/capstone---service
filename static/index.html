@@ -172,10 +172,10 @@
       <div class="rail-operational-context hidden-collapsed" id="rail-operational-context">
         <span class="context-label">Active Docket</span>
         <button type="button" class="context-card rail-docket-btn" id="rail-active-docket" title="Inspect Active Docket #CRN-9842109">
-          <div class="context-row">
+          <span class="context-row">
             <span class="docket-id">#CRN-9842109</span>
             <span class="docket-status">99.2%</span>
-          </div>
+          </span>
           <span class="docket-desc">Dynamic Surge Reconciled</span>
         </button>
       </div>
@@ -265,7 +265,7 @@
         </div>
 
         <!-- Chat Box Integrated Bottom Dock: Composer Inside the Box UI Design -->
-        <div class="chat-box-dock composer-dock" id="composer-dock" aria-label="Message Composer">
+        <div class="chat-box-dock composer-dock" id="composer-dock">
           <div class="composer-dock-border-wrap">
             <div class="composer-dock-inner">
 
@@ -378,7 +378,7 @@
                 </div>
               </div>
 
-              <form id="chat-form" class="composer-row">
+              <form id="chat-form" class="composer-row" aria-label="Message Composer">
                 <button type="button" class="glass-btn btn-examples-toggle" id="examples-toggle-btn" title="View Help Desk options" aria-haspopup="dialog" aria-expanded="false">
                   <span class="ai-bot-avatar">🤖</span>
                   <span class="ai-bot-sparkle">✨</span>
