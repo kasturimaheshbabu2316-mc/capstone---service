@@ -646,13 +646,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!window.THREE) {
       if (heroNeuralCore) heroNeuralCore.style.display = "block";
+      if (!window.__threeLoadPoll) {
+        let attempts = 0;
+        window.__threeLoadPoll = setInterval(() => {
+          attempts++;
+          if (window.THREE) {
+            clearInterval(window.__threeLoadPoll);
+            window.__threeLoadPoll = null;
+            initThreeJsCore();
+          } else if (attempts > 80) {
+            clearInterval(window.__threeLoadPoll);
+            window.__threeLoadPoll = null;
+          }
+        }, 50);
+      }
+      return;
+    }
+
+    // If canvas already exists in container and running, do not re-create
+    if (container.querySelector("canvas") && isThreeJsRunning) {
+      if (heroNeuralCore) heroNeuralCore.style.display = "none";
+      if (window.__threeCore && window.__threeCore.handleResize) {
+        window.__threeCore.handleResize();
+      }
       return;
     }
 
     if (heroNeuralCore) heroNeuralCore.style.display = "none";
 
-    const width = container.clientWidth || 280;
-    const height = container.clientHeight || 280;
+    const isChatActive = !!document.querySelector(".stage-inner.chat-active");
+    const defaultDim = isChatActive ? 180 : 280;
+    const width = container.clientWidth > 0 ? container.clientWidth : defaultDim;
+    const height = container.clientHeight > 0 ? container.clientHeight : defaultDim;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
@@ -674,6 +699,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     container.innerHTML = "";
     container.appendChild(renderer.domElement);
+
+    renderer.domElement.addEventListener("webglcontextlost", (event) => {
+      event.preventDefault();
+      console.warn("[Three.js] WebGL context lost; preserving state.");
+    }, false);
+    renderer.domElement.addEventListener("webglcontextrestored", () => {
+      console.info("[Three.js] WebGL context restored.");
+      if (window.__threeCore && window.__threeCore.handleResize) {
+        window.__threeCore.handleResize();
+      }
+    }, false);
 
     const mainGroup = new THREE.Group();
     // Scale slightly down to give generous breathing room and avoid touching container edges
@@ -895,6 +931,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function animate() {
       if (!isThreeJsRunning) return;
       threeJsAnimId = requestAnimationFrame(animate);
+
+      // If chat stage is hidden, pause WebGL rendering to preserve GPU buffer
+      if (stageChat && (stageChat.style.display === "none" || stageChat.classList.contains("stage-hidden"))) {
+        return;
+      }
+
       const delta = Math.min(clock.getDelta(), 0.1);
 
       hoverTransition += ((isHovered ? 1.0 : 0.0) - hoverTransition) * 0.08;
@@ -973,8 +1015,10 @@ document.addEventListener("DOMContentLoaded", () => {
       particleMaterial.size = 0.05 + hoverTransition * 0.02 + clickImpulse * 0.035;
 
       // Dynamically maintain aspect ratio and canvas buffer size
-      const cw = container.clientWidth || 280;
-      const ch = container.clientHeight || 280;
+      const isChatActive = !!document.querySelector(".stage-inner.chat-active");
+      const defaultDim = isChatActive ? 180 : 280;
+      const cw = container.clientWidth > 0 ? container.clientWidth : defaultDim;
+      const ch = container.clientHeight > 0 ? container.clientHeight : defaultDim;
       if (cw > 0 && ch > 0) {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         if (renderer.domElement.width !== Math.round(cw * dpr) || renderer.domElement.height !== Math.round(ch * dpr)) {
@@ -990,13 +1034,24 @@ document.addEventListener("DOMContentLoaded", () => {
     animate();
 
     const handleResize = () => {
-      const w = container.clientWidth || 280;
-      const h = container.clientHeight || 280;
+      const isChatActive = !!document.querySelector(".stage-inner.chat-active");
+      const defaultDim = isChatActive ? 180 : 280;
+      const w = container.clientWidth > 0 ? container.clientWidth : defaultDim;
+      const h = container.clientHeight > 0 ? container.clientHeight : defaultDim;
       if (w > 0 && h > 0) {
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
         renderer.setSize(w, h, false);
+        renderer.render(scene, camera);
       }
+    };
+
+    window.__threeCore = {
+      scene,
+      camera,
+      renderer,
+      container,
+      handleResize
     };
 
     window.addEventListener("resize", handleResize);
@@ -1202,6 +1257,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (stageName === "chat-stage") {
+      const threeContainer = document.getElementById("threejs-container-ANIMATION_34");
+      if (!isThreeJsRunning || (threeContainer && !threeContainer.querySelector("canvas"))) {
+        initThreeJsCore();
+      }
+      if (window.__threeCore && window.__threeCore.handleResize) {
+        requestAnimationFrame(() => {
+          window.__threeCore.handleResize();
+        });
+      }
       if (chatStream && chatStream.children.length > 0) {
         scrollToBottom();
       } else {
@@ -2966,6 +3030,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (stageInner) stageInner.classList.remove("chat-active");
     if (stageChat) stageChat.scrollTop = 0;
     window.dispatchEvent(new Event("resize"));
+    if (window.__threeCore && window.__threeCore.handleResize) {
+      requestAnimationFrame(() => window.__threeCore.handleResize());
+    }
   }
 
   // Clear Chat Desk
