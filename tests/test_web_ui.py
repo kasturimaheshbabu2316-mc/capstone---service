@@ -431,6 +431,41 @@ def test_dual_theme_wallpapers():
     assert "https://" not in css.split(".project-wallpaper-backdrop")[0].split("--project-wallpaper")[1]
 
 
+def test_inactivity_rating_timer_and_closure_prompt():
+    """Validates 3-minute idle rating timer, suppression of per-message prompts, and closure triggers."""
+    app_js = (STATIC_DIR / "app.js").read_text(encoding="utf-8")
+
+    # 1. 3-minute idle timer constant and state variables
+    assert "const IDLE_RATING_DELAY_MS = 3 * 60 * 1000;" in app_js
+    assert "let idleRatingTimer = null;" in app_js
+    assert "function startIdleRatingTimer()" in app_js
+    assert "function clearIdleRatingTimer()" in app_js
+    assert "function presentIdleRatingPrompt" in app_js
+
+    # 2. Per-message rating card suppression
+    append_fn_idx = app_js.find("function appendAssistantResponse(")
+    assert append_fn_idx != -1
+    append_body = app_js[append_fn_idx:append_fn_idx + 16000]
+    assert "bubble.appendChild(ratingCard)" not in append_body
+    assert "startIdleRatingTimer()" in append_body
+
+    # 3. Conversational closure detection
+    assert "function isClosureQuery(" in app_js
+    assert '"thank you"' in app_js
+    assert '"thanks"' in app_js
+
+    # 4. Global test hooks
+    assert "window.__triggerRatingPrompt = presentIdleRatingPrompt;" in app_js
+    assert "window.__idleRatingTimerDelay = IDLE_RATING_DELAY_MS;" in app_js
+
+    # 5. Reset desk cleans up timer
+    reset_fn_idx = app_js.find("function resetChatDesk()")
+    assert reset_fn_idx != -1
+    reset_body = app_js[reset_fn_idx:reset_fn_idx + 1000]
+    assert "clearIdleRatingTimer()" in reset_body
+
+
+
 
 
 

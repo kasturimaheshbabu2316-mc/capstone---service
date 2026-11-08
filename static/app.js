@@ -477,6 +477,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let isPoliciesLoaded = false;
   let isRatingsLoaded = false;
   let lastUserQuery = "";
+  let latestInteractionContext = null;
+  let idleRatingTimer = null;
+  const IDLE_RATING_DELAY_MS = 3 * 60 * 1000;
+  let hasActiveRatingPrompt = false;
+  let isRatingSubmittedForSession = false;
 
   // --------------------------------------------------------------------------
   // 1. Details Toggle (Default OFF, Persisted in localStorage)
@@ -1041,6 +1046,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------------------------------------------------------------------
   if (chatInput) {
     chatInput.addEventListener("input", () => {
+      if (idleRatingTimer) {
+        startIdleRatingTimer();
+      }
       if (tokenText && tokenFill) {
         const estTokens = Math.max(1, Math.round(chatInput.value.length / 4));
         tokenText.textContent = `${estTokens.toLocaleString()} of 2,000 tokens`;
@@ -1057,9 +1065,63 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentQueryAbortController = null;
   let activeRequestId = 0;
 
+  const CLOSURE_PHRASES = [
+    "thank you",
+    "thanks",
+    "thank you so much",
+    "thx",
+    "that helps",
+    "that helped",
+    "all good",
+    "resolved",
+    "issue resolved",
+    "bye",
+    "goodbye",
+    "done",
+    "im done",
+    "i am done",
+    "thats all",
+    "that is all",
+    "no more questions",
+    "no further questions",
+    "perfect thanks"
+  ];
+
+  function isClosureQuery(text) {
+    if (!text) return false;
+    const clean = text
+      .toLowerCase()
+      .replace(/[’']/g, "")
+      .replace(/[^\w\s]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (CLOSURE_PHRASES.includes(clean)) {
+      return true;
+    }
+
+    if (clean.length <= 40) {
+      for (const phrase of CLOSURE_PHRASES) {
+        if (
+          clean === `ok ${phrase}` ||
+          clean === `okay ${phrase}` ||
+          clean === `great ${phrase}` ||
+          clean === `${phrase} bye` ||
+          clean === `${phrase} thanks` ||
+          clean === `thanks ${phrase}` ||
+          clean === `thank you ${phrase}`
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   async function dispatchQuery(queryText) {
     if (!queryText || !queryText.trim()) return;
     lastUserQuery = queryText.trim();
+    clearIdleRatingTimer();
 
     if (currentQueryAbortController) {
       currentQueryAbortController.abort();
@@ -1147,6 +1209,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     userRow.appendChild(userBubble);
     chatStream.appendChild(userRow);
+    scrollToBottom();
+
+    // Check for conversational closure phrases
+    if (isClosureQuery(queryText)) {
+      if (window.Orbit) {
+        window.Orbit.setMode("idle");
+      }
+
+      const closingRow = document.createElement("div");
+      closingRow.className = "msg-row assistant with-avatar";
+
+      const speakerCol = document.createElement("div");
+      speakerCol.className = "assistant-speaker-col";
+      speakerCol.innerHTML = createAgentDogSpeakingAvatar();
+      closingRow.appendChild(speakerCol);
+
+      const closingBubble = document.createElement("div");
+      closingBubble.className = "msg-bubble";
+
+      const answerEl = document.createElement("div");
+      answerEl.className = "answer-text";
+      answerEl.textContent = "You're very welcome! We're glad we could assist you today. Please take a moment to rate our service:";
+      closingBubble.appendChild(answerEl);
+
+      const ctx = latestInteractionContext || {};
+      const ratingCard = createRatingDockCard({
+        query: ctx.query || (lastUserQuery || "").trim(),
+        answer: ctx.answer || "Resolved conversation",
+        ticketId: ctx.ticketId || null,
+        rowEl: closingRow,
+      });
+      closingBubble.appendChild(ratingCard);
+
+      closingRow.appendChild(closingBubble);
+      chatStream.appendChild(closingRow);
+      hasActiveRatingPrompt = true;
+      scrollToBottom();
+      return;
+    }
 
     // Append Animated Agent & Cyber Puppy Retrieval Stage (3D Stage)
     const loadingRow = document.createElement("div");
@@ -1542,18 +1643,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     bubble.appendChild(actionsRow);
 
-    // Requirement 3: Attach 5-star rating prompt and interactive widget to every assistant message
-    const ratingCard = createRatingDockCard({
+    // Cache latest interaction context for deferred rating prompt
+    latestInteractionContext = {
       query: (lastUserQuery || "").trim(),
       answer: answer,
       ticketId: (ticket && (ticket.ticket_id || ticket.record_id)) || (data && data.ticket_id) || null,
-      rowEl: row,
-    });
-    bubble.appendChild(ratingCard);
+    };
 
     row.appendChild(bubble);
     chatStream.appendChild(row);
     scrollToBottom();
+
+    startIdleRatingTimer();
 
     if (window.Orbit) {
       window.Orbit.burst(2.5);
@@ -1825,6 +1926,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const finalRating = currentRating || 5;
       const suggText = (suggInput.value || "").trim();
 
+      isRatingSubmittedForSession = true;
+      hasActiveRatingPrompt = false;
+      clearIdleRatingTimer();
+
       card.classList.add("locked");
       const starsDisplay = "⭐".repeat(finalRating);
       card.innerHTML = `
@@ -1866,6 +1971,83 @@ document.addEventListener("DOMContentLoaded", () => {
 
     return card;
   }
+
+  function clearIdleRatingTimer() {
+    if (idleRatingTimer) {
+      clearTimeout(idleRatingTimer);
+      idleRatingTimer = null;
+    }
+  }
+
+  function startIdleRatingTimer() {
+    clearIdleRatingTimer();
+    if (isRatingSubmittedForSession || hasActiveRatingPrompt) {
+      return;
+    }
+    idleRatingTimer = setTimeout(() => {
+      presentIdleRatingPrompt();
+    }, IDLE_RATING_DELAY_MS);
+  }
+
+  function presentIdleRatingPrompt(force = false) {
+    clearIdleRatingTimer();
+    if (!force && (hasActiveRatingPrompt || isRatingSubmittedForSession)) {
+      return;
+    }
+    hasActiveRatingPrompt = true;
+
+    const stageInner = document.querySelector(".stage-inner");
+    if (stageInner) {
+      stageInner.classList.add("chat-active");
+    }
+    const orbitStage = document.getElementById("chat-orbit-header-stage");
+    if (orbitStage) {
+      orbitStage.classList.add("chat-active");
+    }
+    if (chatEmptyState) {
+      chatEmptyState.classList.add("stage-hidden");
+    }
+    syncOrbit();
+
+    const row = document.createElement("div");
+    row.className = "msg-row assistant with-avatar";
+
+    const speakerCol = document.createElement("div");
+    speakerCol.className = "assistant-speaker-col";
+    speakerCol.innerHTML = createAgentDogSpeakingAvatar();
+    row.appendChild(speakerCol);
+
+    const bubble = document.createElement("div");
+    bubble.className = "msg-bubble";
+
+    const answerEl = document.createElement("div");
+    answerEl.className = "answer-text";
+    answerEl.textContent = "We hope your inquiry was resolved to your satisfaction! Since you've been away for a moment, could you please take a moment to rate our service today?";
+    bubble.appendChild(answerEl);
+
+    const ctx = latestInteractionContext || {};
+    const ratingCard = createRatingDockCard({
+      query: ctx.query || (lastUserQuery || "").trim(),
+      answer: ctx.answer || "Support consultation",
+      ticketId: ctx.ticketId || null,
+      rowEl: row,
+    });
+    bubble.appendChild(ratingCard);
+
+    row.appendChild(bubble);
+    if (chatStream) {
+      chatStream.appendChild(row);
+      scrollToBottom();
+    }
+
+    if (window.Orbit) {
+      window.Orbit.burst(2.0);
+      window.Orbit.setMode("idle");
+    }
+  }
+
+  window.__triggerRatingPrompt = presentIdleRatingPrompt;
+  window.__idleRatingTimerDelay = IDLE_RATING_DELAY_MS;
 
   async function loadRatingsDashboard() {
     const tableBody = document.getElementById("ratings-table-body");
@@ -2903,6 +3085,11 @@ document.addEventListener("DOMContentLoaded", () => {
       currentQueryAbortController = null;
     }
     activeRequestId++;
+
+    clearIdleRatingTimer();
+    hasActiveRatingPrompt = false;
+    isRatingSubmittedForSession = false;
+    latestInteractionContext = null;
 
     // 3. Clear only the message list, restore empty state ("How can I help?"), remove .chat-active, state.resetConversation()
     if (chatStream) chatStream.innerHTML = "";
