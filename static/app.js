@@ -1247,6 +1247,24 @@ document.addEventListener("DOMContentLoaded", () => {
     heroNeuralCore.addEventListener("click", triggerCorePulse);
   }
 
+  const heroThreeWrap = document.getElementById("threejs-hero-wrap");
+  if (heroThreeWrap) {
+    heroThreeWrap.addEventListener("click", () => {
+      if (window.__threeCore && window.__threeCore.pulse) {
+        window.__threeCore.pulse();
+      }
+      playChimeSound();
+      if (chatInput) {
+        chatInput.focus();
+        chatInput.classList.add("input-pulse");
+        setTimeout(() => chatInput.classList.remove("input-pulse"), 600);
+      }
+      if (typeof triggerCompanionState === "function") {
+        triggerCompanionState("wave");
+      }
+    });
+  }
+
   // Mouse gyroscopic rig 3D tracking
   window.addEventListener("mousemove", (e) => {
     if (heroRig && heroNeuralCore && heroNeuralCore.offsetParent !== null) {
@@ -1318,7 +1336,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (stageChat) {
       stageChat.classList.toggle("stage-hidden", stageName !== "chat-stage");
-      stageChat.style.display = stageName === "chat-stage" ? "block" : "none";
+      stageChat.style.display = stageName === "chat-stage" ? "flex" : "none";
     }
     if (stageDirectory) {
       stageDirectory.classList.toggle("stage-hidden", stageName !== "directory-stage");

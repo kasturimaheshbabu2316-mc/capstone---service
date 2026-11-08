@@ -6563,6 +6563,13 @@ body.show-details .composer-footer {
   font-size: 0.88rem;
 }
 
+.composer-input.input-pulse {
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.45);
+  border-radius: 8px;
+  background: rgba(0, 242, 254, 0.08);
+  transition: all 0.3s ease;
+}
+
 .send-btn {
   display: inline-flex;
   align-items: center;
