@@ -1008,7 +1008,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Left Navigation Rail Drawer Controls (from @ui)
   const navSidebarDrawer = document.getElementById("nav-sidebar-drawer");
   const railToggleBtn = document.getElementById("rail-toggle-btn");
-  const headerRailToggleBtn = document.getElementById("header-rail-toggle-btn");
   const mainWorkspace = document.getElementById("main-content-workspace");
   const railSearchBar = document.getElementById("rail-search-bar");
   const railSearchMini = document.getElementById("rail-search-mini");
@@ -1022,10 +1021,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mainWorkspace) {
       mainWorkspace.classList.toggle("rail-open", isNavDrawerOpen);
     }
-    if (headerRailToggleBtn) {
-      headerRailToggleBtn.classList.toggle("active", isNavDrawerOpen);
-      headerRailToggleBtn.setAttribute("aria-expanded", isNavDrawerOpen ? "true" : "false");
-    }
     if (railToggleBtn) {
       railToggleBtn.classList.toggle("active", isNavDrawerOpen);
       railToggleBtn.setAttribute("aria-expanded", isNavDrawerOpen ? "true" : "false");
@@ -1034,10 +1029,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function toggleNavDrawer() {
     setDrawerState(!isNavDrawerOpen);
-  }
-
-  if (headerRailToggleBtn) {
-    headerRailToggleBtn.addEventListener("click", toggleNavDrawer);
   }
 
   if (railToggleBtn) {
