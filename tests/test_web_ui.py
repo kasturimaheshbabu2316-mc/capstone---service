@@ -522,6 +522,46 @@ def test_chatbar_neumorphic_styling():
     assert '[data-theme="light"] .send-btn' in css
 
 
+def test_helpdesk_popover_neumorphic_styling():
+    """Validates authentic Neumorphism (Soft UI) styling for the Help Desk modal & scenario cards in both themes."""
+    css = (STATIC_DIR / "style.css").read_text(encoding="utf-8")
+
+    # 1. Popover modal container has sculpted dual-shadow extrusion
+    assert ".examples-popover" in css
+    assert "-8px -8px 24px rgba(255, 255, 255, 0.04)" in css
+    assert "12px 12px 36px rgba(0, 0, 0, 0.88)" in css
+    assert '[data-theme="light"] .examples-popover' in css
+    assert "-8px -8px 24px #ffffff" in css
+    assert "12px 12px 30px rgba(160, 175, 196, 0.6)" in css
+
+    # 2. Tactile scenario option cards (convex idle + debossed active)
+    assert ".starter-card" in css
+    assert "-3px -3px 8px rgba(255, 255, 255, 0.04)" in css
+    assert "4px 4px 12px rgba(0, 0, 0, 0.65)" in css
+    assert ".starter-card:active" in css
+    assert "inset 2px 2px 6px rgba(0, 0, 0, 0.8)" in css
+
+    assert '[data-theme="light"] .starter-card' in css
+    assert "-3px -3px 8px #ffffff" in css
+    assert "4px 4px 12px rgba(160, 175, 196, 0.5)" in css
+    assert '[data-theme="light"] .starter-card:active' in css
+    assert "inset 2px 2px 6px rgba(160, 175, 196, 0.6)" in css
+
+    # 3. Filter category pill tabs (convex idle + debossed concave active)
+    assert ".bot-filter-btn" in css
+    assert ".bot-filter-btn.active" in css
+    assert "inset 2px 2px 6px rgba(0, 0, 0, 0.75)" in css
+    assert '[data-theme="light"] .bot-filter-btn' in css
+    assert '[data-theme="light"] .bot-filter-btn.active' in css
+
+    # 4. Circular close button
+    assert "#close-examples-btn" in css
+    assert "#close-examples-btn:active" in css
+    assert '[data-theme="light"] #close-examples-btn' in css
+    assert '[data-theme="light"] #close-examples-btn:active' in css
+
+
+
 
 
 

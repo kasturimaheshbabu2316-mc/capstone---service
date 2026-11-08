@@ -3048,45 +3048,86 @@ body.show-details .meta-footer,
 
 .bot-companion-speech strong {
   display: block;
-  font-size: 0.95rem;
-  color: var(--accent-cyan);
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #38bdf8;
   margin-bottom: 2px;
 }
 
 .bot-companion-speech p {
-  color: var(--text-secondary);
-  font-size: 0.8rem;
+  color: #94a3b8;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+#close-examples-btn {
+  background: linear-gradient(145deg, #1b2536, #121925);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    -2px -2px 6px rgba(255, 255, 255, 0.05),
+    3px 3px 8px rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+#close-examples-btn:hover {
+  color: #ffffff;
+  background: linear-gradient(145deg, #202b3e, #141c2a);
+  transform: translateY(-1px);
+}
+
+#close-examples-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 2px 2px 5px rgba(0, 0, 0, 0.8),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.04);
 }
 
 .bot-filter-tabs {
   display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin: 14px 0 16px;
   flex-wrap: wrap;
 }
 
 .bot-filter-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
-  color: var(--text-secondary);
-  font-size: 0.76rem;
+  background: linear-gradient(145deg, #182231, #101622);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    -2px -2px 6px rgba(255, 255, 255, 0.04),
+    3px 3px 7px rgba(0, 0, 0, 0.55);
+  color: #94a3b8;
+  font-size: 0.78rem;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
 }
 
 .bot-filter-btn:hover {
-  color: var(--text-primary);
-  background: rgba(0, 242, 254, 0.1);
-  border-color: var(--glass-border-highlight);
+  color: #e2e8f0;
+  border-color: rgba(56, 189, 248, 0.35);
+  transform: translateY(-1px);
 }
 
 .bot-filter-btn.active {
-  background: rgba(0, 242, 254, 0.18);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
+  background: #0d131e;
+  border-color: rgba(56, 189, 248, 0.45);
+  box-shadow:
+    inset 2px 2px 6px rgba(0, 0, 0, 0.75),
+    inset -1px -1px 4px rgba(255, 255, 255, 0.04);
+  color: #38bdf8;
+  font-weight: 700;
 }
 
 /* Keyframes */
@@ -7208,6 +7249,125 @@ body:not([data-active-view="chat"]) .chat-orbit-header-stage.orbit-stage-expande
   box-shadow:
     inset 2px 2px 6px rgba(0, 0, 0, 0.4),
     inset -2px -2px 6px rgba(255, 255, 255, 0.3);
+}
+
+/* ==============================================================================
+   10. NEUMORPHISM (SOFT UI) HELP DESK OPTIONS & SCENARIO CARDS - LIGHT THEME
+   ============================================================================== */
+
+[data-theme="light"] .examples-popover {
+  background: linear-gradient(145deg, #f5f8fc, #e5edf5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow:
+    -8px -8px 24px #ffffff,
+    -2px -2px 8px rgba(255, 255, 255, 0.95),
+    12px 12px 30px rgba(160, 175, 196, 0.6),
+    4px 4px 12px rgba(160, 175, 196, 0.35) !important;
+}
+
+[data-theme="light"] .bot-companion-speech strong {
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .bot-companion-speech p {
+  color: #475569 !important;
+}
+
+[data-theme="light"] #close-examples-btn {
+  background: linear-gradient(145deg, #ffffff, #e4ecf3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow:
+    -2px -2px 6px #ffffff,
+    3px 3px 8px rgba(160, 175, 196, 0.5) !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] #close-examples-btn:hover {
+  color: #0f172a !important;
+  background: linear-gradient(145deg, #ffffff, #dce6ef) !important;
+}
+
+[data-theme="light"] #close-examples-btn:active {
+  transform: translateY(1px);
+  background: #e2eaf1 !important;
+  box-shadow:
+    inset 2px 2px 5px rgba(160, 175, 196, 0.65),
+    inset -2px -2px 5px #ffffff !important;
+}
+
+[data-theme="light"] .bot-filter-btn {
+  background: linear-gradient(145deg, #ffffff, #e5edf5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  box-shadow:
+    -2px -2px 6px #ffffff,
+    3px 3px 7px rgba(160, 175, 196, 0.45) !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .bot-filter-btn:hover {
+  color: #0f172a !important;
+  border-color: rgba(2, 132, 199, 0.35) !important;
+}
+
+[data-theme="light"] .bot-filter-btn.active {
+  background: #dce5ef !important;
+  border-color: rgba(2, 132, 199, 0.4) !important;
+  box-shadow:
+    inset 2px 2px 5px rgba(160, 175, 196, 0.6),
+    inset -1px -1px 4px #ffffff !important;
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .starter-card {
+  background: linear-gradient(145deg, #ffffff, #e5ecf3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow:
+    -3px -3px 8px #ffffff,
+    4px 4px 12px rgba(160, 175, 196, 0.5) !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .starter-card:hover {
+  background: linear-gradient(145deg, #ffffff, #dbe6f0) !important;
+  border-color: rgba(2, 132, 199, 0.4) !important;
+  box-shadow:
+    -4px -4px 12px #ffffff,
+    6px 6px 16px rgba(160, 175, 196, 0.65),
+    0 0 16px rgba(2, 132, 199, 0.15) !important;
+}
+
+[data-theme="light"] .starter-card:active {
+  transform: translateY(1px) scale(0.985);
+  background: #e2eaf1 !important;
+  box-shadow:
+    inset 2px 2px 6px rgba(160, 175, 196, 0.6),
+    inset -2px -2px 6px #ffffff !important;
+}
+
+[data-theme="light"] .starter-card-top,
+[data-theme="light"] .card-icon-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .card-icon-title svg {
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .starter-badge {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid rgba(2, 132, 199, 0.35) !important;
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-theme="light"] .starter-badge.badge-amber {
+  background: #fef3c7 !important;
+  color: #b45309 !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+
+[data-theme="light"] .starter-card-sub {
+  color: #475569 !important;
 }
 
 /* ==============================================================================
