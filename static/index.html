@@ -133,7 +133,7 @@
           <span class="rail-badge star5-badge hidden-collapsed">5★</span>
         </button>
 
-        <button type="button" class="rail-nav-item" id="rail-nav-telemetry" data-target="telemetry-view" title="Telemetry Feed">
+        <button type="button" class="rail-nav-item" id="rail-nav-telemetry" data-target="telemetry-stage" title="Telemetry Feed">
           <span class="rail-nav-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
           </span>
@@ -147,9 +147,16 @@
         <div class="rail-controls-group">
           <button type="button" class="rail-nav-item rail-control-item" id="details-toggle-btn" title="Toggle technical pipeline details (Details: OFF)" aria-pressed="false">
             <span class="rail-nav-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              <svg class="eye-toggle-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <!-- Eye Contour -->
+                <path class="eye-contour" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <!-- Eye Iris / Pupil (Glows when active) -->
+                <circle class="eye-pupil" cx="12" cy="12" r="3"></circle>
+                <!-- Animated Eyelid for Closed State -->
+                <path class="eye-lid" d="M1 12c3.5 0 7.5 0 11 0s7.5 0 11 0"></path>
+              </svg>
             </span>
-            <span class="rail-nav-label hidden-collapsed">⚙️ Details: <span id="rail-details-status">OFF</span></span>
+            <span class="rail-nav-label hidden-collapsed"><span id="rail-details-status-prefix">👁️</span> Details: <span id="rail-details-status">OFF</span></span>
           </button>
 
           <button type="button" class="rail-nav-item rail-control-item" id="clear-chat-btn" title="Reset Chat (Clear conversation)">
@@ -164,13 +171,13 @@
       <!-- Active Docket context from @ui -->
       <div class="rail-operational-context hidden-collapsed" id="rail-operational-context">
         <span class="context-label">Active Docket</span>
-        <div class="context-card">
+        <button type="button" class="context-card rail-docket-btn" id="rail-active-docket" title="Inspect Active Docket #CRN-9842109">
           <div class="context-row">
             <span class="docket-id">#CRN-9842109</span>
             <span class="docket-status">99.2%</span>
           </div>
           <span class="docket-desc">Dynamic Surge Reconciled</span>
-        </div>
+        </button>
       </div>
     </div>
 
@@ -795,6 +802,99 @@
               <!-- Populated dynamically via app.js -->
             </tbody>
           </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW E: SYSTEM TELEMETRY & LIVE NETWORK HEALTH (Dedicated Unique Window) -->
+    <section class="telemetry-stage stage-hidden" id="telemetry-stage" aria-label="System Telemetry &amp; Live Network Health">
+      <div class="stage-inner">
+        <div class="stage-header-row">
+          <div>
+            <h2 class="stage-title">System Telemetry &amp; Live Feed</h2>
+            <p class="stage-subtitle">Real-time gateway latency, mock LLM uptime, vector database index status, and semantic cache metrics.</p>
+          </div>
+          <div class="stage-actions">
+            <button type="button" class="glass-btn" id="refresh-telemetry-btn">
+              <span>↻ Refresh Feed</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">API Gateway Status</span>
+            <div class="kpi-value text-emerald" id="telem-gateway-status">ONLINE</div>
+            <span class="kpi-sub">BLR-DC-04 Primary Node</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Inference Engine</span>
+            <div class="kpi-value text-cyan" id="telem-llm-mode">Mock LLM Active</div>
+            <span class="kpi-sub">Deterministic Simulation</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Vector Store (ChromaDB)</span>
+            <div class="kpi-value text-purple" id="telem-kb-status">12 Documents</div>
+            <span class="kpi-sub">kb_sentence Index Ready</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Database Health</span>
+            <div class="kpi-value text-emerald" id="telem-db-status">SQLite Operational</div>
+            <span class="kpi-sub">WAL Mode Enabled</span>
+          </div>
+        </div>
+
+        <!-- Real-time Network & Feed Cards -->
+        <div class="telemetry-grid">
+          <div class="telemetry-card">
+            <div class="telemetry-card-header">
+              <span class="telemetry-card-title">📡 Network Ping &amp; WebSocket Health</span>
+              <span class="status-pill status-pill-sm"><span class="status-dot green"></span><span id="telem-ping-val">12ms</span></span>
+            </div>
+            <div class="telemetry-card-body">
+              <div class="telemetry-metric-row">
+                <span>Protocol</span>
+                <span class="metric-highlight">HTTP/1.1 REST + WebSockets</span>
+              </div>
+              <div class="telemetry-metric-row">
+                <span>Active Session ID</span>
+                <span class="metric-highlight" id="telem-session-id">ola-desk-lead-blr</span>
+              </div>
+              <div class="telemetry-metric-row">
+                <span>Semantic Cache Hits</span>
+                <span class="metric-highlight" id="telem-cache-rate">98.4%</span>
+              </div>
+              <div class="telemetry-metric-row">
+                <span>Safety Guardrails</span>
+                <span class="metric-highlight text-emerald">100% Active</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="telemetry-card">
+            <div class="telemetry-card-header">
+              <span class="telemetry-card-title">🛡️ Policy Knowledge Base Integrity</span>
+              <span class="starter-badge">12 Canonical Topics</span>
+            </div>
+            <div class="telemetry-card-body">
+              <div class="telemetry-metric-row">
+                <span>SLA Escalation Matrix</span>
+                <span class="badge-emerald">Verified</span>
+              </div>
+              <div class="telemetry-metric-row">
+                <span>Cancellation &amp; Refund Rules</span>
+                <span class="badge-emerald">Verified</span>
+              </div>
+              <div class="telemetry-metric-row">
+                <span>VIP Customer SLA Rules</span>
+                <span class="badge-emerald">Verified</span>
+              </div>
+              <div class="telemetry-metric-row">
+                <span>Safety Sev-1 Protocol</span>
+                <span class="badge-emerald">Verified</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
