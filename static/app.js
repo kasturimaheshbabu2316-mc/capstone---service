@@ -2728,8 +2728,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const refreshBtn = document.getElementById("refresh-directory-btn");
     if (refreshBtn && !refreshBtn.dataset.bound) {
       refreshBtn.dataset.bound = "true";
-      refreshBtn.addEventListener("click", () => {
-        loadDirectoryDashboard(true);
+      refreshBtn.addEventListener("click", async () => {
+        try {
+          await fetch("/api/tickets/reset-triage", { method: "POST" });
+        } catch (e) {}
+        await loadDirectoryDashboard(true);
+        showToastNotification("Incident directory refreshed & synchronized to baseline");
       });
     }
 
