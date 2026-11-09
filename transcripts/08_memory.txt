@@ -32,7 +32,7 @@ Session ID    : session_b_fresh_isolated (Fresh session, zero prior turns)
 [Turn 1] Preprocessor   : History empty (0 messages); no ticket referent found.
 [Turn 1] Resolved Query : What about its SLA and is that one at risk of escalation?
 [Turn 1] Was Resolved   : False (Reset / Unresolved)
-[Turn 1] Assistant Answer: Unresolved support tickets follow Ola's three-tier organizational escalation matrix.
+[Turn 1] Assistant Answer: Unresolved support tickets follow Ola's three-tier organizational escalation matrix. First-response SLAs for VIP inquiries are capped at 15 minutes across all severity categories with guaranteed resolution within 6 hours.
 [Turn 1] Grounded Status: True
 [Turn 1] Tracked Ticket : None (None - state isolation confirmed)
 

@@ -11,7 +11,7 @@ data_retention_policy          | 4         | Customer Support Data Retention Pol
 escalation_matrix              | 4         | Incident Escalation Matrix
 feedback_collection            | 4         | Customer Feedback and CSAT Collection
 outage_communication           | 4         | Platform Outage Communication Guidelines
-refund_compensation_policy     | 4         | Refund and Compensation Policy
+refund_compensation_policy     | 5         | Refund and Compensation Policy
 repeat_complaint_handling      | 4         | Repeat and Chronic Complaint Handling
 service_credit_policy          | 4         | Service Credit Policy
 sla_by_severity                | 5         | SLA by Severity Policy

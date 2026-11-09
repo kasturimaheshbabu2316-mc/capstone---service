@@ -8,7 +8,7 @@ Result Structure: GuardrailResult(fired, kind, detail, sanitized_text)
 Raw User Input         : Please check status of TKT-0007, my mobile number is +91 98765 43210.
 Guardrail Fired        : True
 Guardrail Kind         : pii
-Guardrail Detail       : Masked 1 Indian phone number(s).
+Guardrail Detail       : Masked 1 sensitive PII token(s).
 Sanitized Text         : Please check status of TKT-0007, my mobile number is [PHONE_MASKED].
 
   [Demonstrating Crew Receives Masked Text]:

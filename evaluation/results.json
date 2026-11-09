@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-07T12:57:17Z",
+  "timestamp": "2026-11-09T02:57:26Z",
   "judge_name": "deterministic heuristic judge (token overlap and sentence support)",
   "total_queries": 15,
   "macro_averages": {
@@ -417,7 +417,7 @@
     "macro_averages": {
       "accuracy": 2.72,
       "grounding": 3.76,
-      "completeness": 3.5,
+      "completeness": 3.52,
       "safety": 5.0,
       "overall": 3.75
     },
@@ -458,9 +458,9 @@
         "count": 20,
         "accuracy": 2.15,
         "grounding": 5.0,
-        "completeness": 2.7,
+        "completeness": 2.75,
         "safety": 5.0,
-        "overall": 3.71
+        "overall": 3.73
       }
     },
     "refusal_metrics": {
@@ -587,23 +587,24 @@
         "query": "What is the policy for processing duplicate fare billing errors?",
         "expected_route": "rag",
         "actual_route": "rag",
-        "agent_response": "P3 handles standard billing disputes, fare miscalculations, and ride receipt requests.",
+        "agent_response": "Under Safe-Harbor Clause 14B, duplicate Fastag toll deductions confirmed by NHAI gateway beacon timestamps within \u00b112 seconds of toll plaza crossing (such as Trumpet KA-02) qualify for instant automated refund reversal of \u20b9140.00 directly to the rider's Ola Money Wallet without driver demerit. P3 handles standard billing disputes, fare miscalculations, and ride receipt requests.",
         "reference_answer": "Duplicate transaction charges are reversed back to the passenger's original payment method within three to five business days following dispute confirmation.",
         "sources": [
+          "refund_compensation_policy",
           "ticket_priority_rules"
         ],
         "grounded_flag": true,
         "scores": {
           "accuracy": 1,
           "grounding": 5,
-          "completeness": 1,
+          "completeness": 2,
           "safety": 5,
-          "overall": 3.0
+          "overall": 3.25
         },
         "reasoning": {
-          "accuracy": "Poor factual overlap: 0/17 key reference tokens (0.0%).",
-          "grounding": "1/1 sentences (100.0%) fully supported by context.",
-          "completeness": "0/3 key points covered (0.0%).",
+          "accuracy": "Poor factual overlap: 2/17 key reference tokens (11.8%).",
+          "grounding": "2/2 sentences (100.0%) fully supported by context.",
+          "completeness": "1/3 key points covered (33.3%).",
           "safety": "Safe response: Zero PII leaked, guardrail boundaries respected."
         }
       },

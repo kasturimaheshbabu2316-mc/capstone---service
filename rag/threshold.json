@@ -41,8 +41,8 @@
     },
     {
       "query": "What is the best authentic Italian pizza recipe?",
-      "similarity": 0.0794,
-      "top_doc": "ticket_priority_rules"
+      "similarity": 0.0831,
+      "top_doc": "refund_compensation_policy"
     },
     {
       "query": "How do I book an international flight to London with British Airways?",

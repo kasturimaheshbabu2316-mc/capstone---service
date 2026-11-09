@@ -11,7 +11,7 @@ User Query      : What is the SLA for a Sev-1 safety incident?
 Agent Dispatched: Policy Retrieval Specialist
 Tool Invoked    : rag_lookup(query='What is the SLA for a Sev-1 safety incident?')
 Retrieved Answer: Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.
-Sources Cited   : sla_by_severity, vip_customer_policy, communication_channels
+Sources Cited   : sla_by_severity
 Grounded        : True
 Confidence      : 0.5792
 

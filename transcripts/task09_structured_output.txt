@@ -83,9 +83,7 @@ OLA DOMAIN SUPPORT AGENT — STRUCTURED CREWRESPONSE VALIDATION (TASK 9)
   "answer": "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours.",
   "route": "rag",
   "sources": [
-    "sla_by_severity",
-    "vip_customer_policy",
-    "communication_channels"
+    "sla_by_severity"
   ],
   "ticket": null,
   "grounded": true,

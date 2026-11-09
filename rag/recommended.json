@@ -4,9 +4,9 @@
   "k": 3,
   "macro_precision_sentence": 0.8333,
   "macro_recall_sentence": 1.0,
-  "macro_precision_fixed": 0.5,
+  "macro_precision_fixed": 0.5833,
   "macro_recall_fixed": 1.0,
-  "recommendation": "Across the benchmark evaluation queries, sentence-based chunking ('kb_sentence') achieved a macro-averaged precision of 83.3% and recall of 100.0%, significantly outperforming fixed-size chunking ('kb_fixed') which scored 50.0% precision. Fixed-size chunking frequently splits operational policy rules across character windows and introduces irrelevant cross-document neighbors. Consequently, 'kb_sentence' is designated as the winning collection and primary index for all downstream grounded generation.",
+  "recommendation": "Across the benchmark evaluation queries, sentence-based chunking ('kb_sentence') achieved a macro-averaged precision of 83.3% and recall of 100.0%, significantly outperforming fixed-size chunking ('kb_fixed') which scored 58.3% precision. Fixed-size chunking frequently splits operational policy rules across character windows and introduces irrelevant cross-document neighbors. Consequently, 'kb_sentence' is designated as the winning collection and primary index for all downstream grounded generation.",
   "eval_fixed": {
     "collection_name": "kb_fixed",
     "k": 3,
@@ -34,8 +34,7 @@
       },
       {
         "retrieved_docs": [
-          "refund_compensation_policy",
-          "service_credit_policy"
+          "refund_compensation_policy"
         ],
         "ground_truth_docs": [
           "refund_compensation_policy"
@@ -44,11 +43,11 @@
           "refund_compensation_policy"
         ],
         "num_correct": 1,
-        "num_retrieved": 2,
+        "num_retrieved": 1,
         "num_relevant": 1,
-        "precision": 0.5,
+        "precision": 1.0,
         "recall": 1.0,
-        "precision_arithmetic": "1/2 = 0.500",
+        "precision_arithmetic": "1/1 = 1.000",
         "recall_arithmetic": "1/1 = 1.000",
         "query_id": "Q2",
         "query": "Under what condition are driver cancellation fees refunded to passengers?"
@@ -138,7 +137,7 @@
         "query": "What are the benefits and response times for VIP Ola Select customers?"
       }
     ],
-    "macro_precision": 0.5,
+    "macro_precision": 0.5833,
     "macro_recall": 1.0
   },
   "eval_sentence": {
