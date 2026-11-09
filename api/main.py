@@ -1310,6 +1310,66 @@ def post_ticket_action_endpoint(ticket_id: str, payload: TicketActionRequest) ->
     )
 
 
+@app.post("/api/tickets/batch-triage")
+def post_batch_triage_endpoint() -> dict[str, Any]:
+    """Autonomously triages all open and in-progress tickets in the directory."""
+    from dataset import SUPPORT_TICKETS
+    from tools.ticket_tool import calculate_escalation_score, ESCALATION_THRESHOLD
+
+    resolved_count = 0
+    escalated_count = 0
+
+    with _dispute_lock:
+        for rec in SUPPORT_TICKETS:
+            tid = rec["record_id"]
+            status = rec["status"]
+            score = calculate_escalation_score(rec)
+
+            # Preserve manual dispute actions
+            if tid in DISPUTE_STATE_OVERLAY and DISPUTE_STATE_OVERLAY[tid].get("reconciled_status") == "Reconciled":
+                continue
+
+            if status in ("Open", "In Progress"):
+                num_part = int(tid.split("-")[1])
+                if score >= ESCALATION_THRESHOLD:
+                    DISPUTE_STATE_OVERLAY[tid] = {
+                        "status": "Escalated",
+                        "reconciled_status": "Supervisor-Queued",
+                        "action": "escalate_to_supervisor",
+                        "timestamp": time.time(),
+                    }
+                    escalated_count += 1
+                else:
+                    DISPUTE_STATE_OVERLAY[tid] = {
+                        "status": "Resolved",
+                        "reconciled_status": "Auto-Triaged",
+                        "txn_id": f"OLA-TRG-{894200 + num_part:06d}",
+                        "amount": 0.0,
+                        "action": "auto_resolve",
+                        "timestamp": time.time(),
+                    }
+                    resolved_count += 1
+
+    return {
+        "success": True,
+        "resolved_count": resolved_count,
+        "escalated_count": escalated_count,
+        "total_processed": resolved_count + escalated_count,
+        "message": f"Autonomous batch triage complete: {resolved_count} standard dossiers resolved, {escalated_count} high-risk dossiers routed to Senior Supervisor.",
+    }
+
+
+@app.post("/api/tickets/reset-triage")
+def post_reset_triage_endpoint() -> dict[str, Any]:
+    """Resets all ticket overlays back to original seed-42 baseline."""
+    with _dispute_lock:
+        DISPUTE_STATE_OVERLAY.clear()
+    return {
+        "success": True,
+        "message": "All dossier states reset to initial seed-42 baseline.",
+    }
+
+
 @app.post("/feedback", response_model=FeedbackResponse)
 def post_feedback_endpoint(payload: FeedbackRequest) -> FeedbackResponse:
     """Records customer feedback and star ratings."""
