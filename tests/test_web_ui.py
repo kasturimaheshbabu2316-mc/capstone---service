@@ -395,6 +395,17 @@ def test_orbit_reset_and_active_view_synchronization():
     # 5. CSS overlay defense guard
     assert '.workspace:not([data-active-view="chat"]) .chat-orbit-header-stage.orbit-stage-expanded' in css
 
+    # 6. Title bar docked orbit clarity & elevation above frosted glass top-nav
+    assert '.workspace {\n  flex: 1;\n  display: flex;\n  overflow: hidden;\n  position: relative;\n  z-index: auto;' in css
+    assert '.nav-sidebar-drawer' in css
+    assert 'pointer-events: auto !important;' in css
+    assert '.chat-orbit-header-stage.orbit-stage-docked' in css
+    assert 'top: 6px;' in css
+    assert 'left: 320px;' in css
+    assert 'width: 56px;' in css
+    assert 'z-index: 9999;' in css
+
+
 
 def test_dual_theme_wallpapers():
     """Validates local wallpaper assets, backdrop element, and dual-theme CSS rules."""

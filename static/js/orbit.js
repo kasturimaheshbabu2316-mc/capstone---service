@@ -531,6 +531,8 @@ export const Orbit = (() => {
       stage.classList.add("orbit-stage-docked");
     }
     setMode("docked");
+    forceResize();
+    resume();
     if (transitionTimer) clearTimeout(transitionTimer);
     transitionTimer = setTimeout(() => {
       forceResize();
@@ -756,6 +758,26 @@ export const Orbit = (() => {
   if (typeof window !== "undefined") {
     window.Orbit = publicAPI;
     window.__threeCore = publicAPI;
+
+    // Click docked orbit to return smoothly to Chat Desk
+    const setupOrbitClick = () => {
+      const stage = document.getElementById("chat-orbit-header-stage");
+      if (stage && !stage._hasDockClick) {
+        stage._hasDockClick = true;
+        stage.addEventListener("click", () => {
+          if (stage.classList.contains("orbit-stage-docked")) {
+            if (typeof window.showView === "function") {
+              window.showView("chat");
+            }
+          }
+        });
+      }
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setupOrbitClick);
+    } else {
+      setupOrbitClick();
+    }
   }
 
   return publicAPI;

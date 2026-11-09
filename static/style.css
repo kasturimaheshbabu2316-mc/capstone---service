@@ -319,7 +319,7 @@ body {
   display: flex;
   overflow: hidden;
   position: relative;
-  z-index: 1;
+  z-index: auto;
 }
 
 .chat-stage {
@@ -5943,7 +5943,8 @@ body.show-details .composer-footer {
   display: flex;
   flex-direction: column;
   padding: 12px 8px;
-  z-index: 40;
+  z-index: 100 !important;
+  pointer-events: auto !important;
   transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   -webkit-user-select: none;
@@ -6849,15 +6850,18 @@ body:not([data-active-view="chat"]) .chat-orbit-header-stage.orbit-stage-expande
   z-index: 9999;
   cursor: pointer;
   pointer-events: auto;
-  opacity: 0.96;
+  opacity: 1;
   visibility: visible;
   transform: translate(0, 0);
-  background: radial-gradient(circle, rgba(0, 242, 254, 0.22) 0%, rgba(13, 20, 36, 0.85) 75%) !important;
-  border: 1.5px solid rgba(0, 242, 254, 0.5) !important;
-  box-shadow: 0 0 18px rgba(0, 242, 254, 0.4), inset 0 0 10px rgba(217, 70, 239, 0.35) !important;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(8, 14, 24, 0.5) 100%) !important;
+  border: 1.5px solid rgba(0, 242, 254, 0.65) !important;
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.45), inset 0 0 10px rgba(217, 70, 239, 0.3) !important;
   overflow: hidden;
+}
+
+.chat-orbit-header-stage.orbit-stage-docked canvas {
+  filter: none !important;
+  opacity: 1 !important;
 }
 
 .chat-orbit-header-stage.orbit-stage-docked:hover {
@@ -6867,9 +6871,9 @@ body:not([data-active-view="chat"]) .chat-orbit-header-stage.orbit-stage-expande
 }
 
 [data-theme="light"] .chat-orbit-header-stage.orbit-stage-docked {
-  background: radial-gradient(circle, rgba(2, 132, 199, 0.18) 0%, rgba(255, 255, 255, 0.95) 75%) !important;
-  border: 1.5px solid rgba(2, 132, 199, 0.55) !important;
-  box-shadow: 0 0 18px rgba(2, 132, 199, 0.35), inset 0 0 10px rgba(217, 70, 239, 0.25) !important;
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.12) 0%, rgba(240, 246, 252, 0.75) 100%) !important;
+  border: 1.5px solid rgba(2, 132, 199, 0.6) !important;
+  box-shadow: -2px -2px 6px #ffffff, 3px 3px 10px rgba(160, 175, 196, 0.5), inset 0 0 10px rgba(2, 132, 199, 0.2) !important;
 }
 
 /* Three.js 3D Holographic Core Hero Display */
