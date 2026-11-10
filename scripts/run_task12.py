@@ -31,10 +31,11 @@ def run():
     last_entries = [json.loads(line) for line in raw_lines[-3:]]
     has_leak = any(test_phone in json.dumps(e) for e in last_entries)
 
+    banner = "=" * 80
     text = (
-        "=" * 80 + "\n"
+        f"{banner}\n"
         "OLA DOMAIN SUPPORT AGENT — STRUCTURED AUDIT LOGGING & ZERO-PII TEST (TASK 12)\n"
-        "=" * 80 + "\n\n"
+        f"{banner}\n\n"
         f"Audit Log Destination: logs/requests.jsonl\n"
         f"Total Logged Entries : {len(raw_lines)}\n\n"
         "--- SAMPLE AUDIT LOG ENTRIES ---\n"
@@ -43,9 +44,9 @@ def run():
         f"Test Phone Sent   : {test_phone}\n"
         f"Leakage Detected  : {has_leak}\n"
         f"Sanitization Check: PASSED (Raw phone number was strictly replaced with [PHONE_MASKED] before writing to disk)\n\n"
-        "=" * 80 + "\n"
+        f"{banner}\n"
         "TASK 12 ACCEPTANCE CRITERIA: STRUCTURED JSONL LOGS WITH ZERO-PHONE LEAKAGE VERIFIED\n"
-        "=" * 80 + "\n"
+        f"{banner}\n"
     )
 
     print(text)
