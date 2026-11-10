@@ -168,14 +168,15 @@ body {
 }
 
 .brand-title {
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   letter-spacing: -0.02em;
   white-space: nowrap;
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 45%, #00f2fe 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.45));
 }
 
 .brand-subtitle {
@@ -5886,23 +5887,24 @@ body.show-details .composer-footer {
 
 .brand-text-col {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
 }
 
 .brand-ops-badge {
-  padding: 2px 9px;
+  padding: 1.5px 7px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, rgba(0, 242, 254, 0.12), rgba(217, 70, 239, 0.15), rgba(251, 191, 36, 0.10));
-  border: 1px solid rgba(0, 242, 254, 0.35);
+  background: linear-gradient(90deg, rgba(0, 242, 254, 0.10), rgba(217, 70, 239, 0.12), rgba(251, 191, 36, 0.08));
+  border: 1px solid rgba(0, 242, 254, 0.25);
   color: #67e8f9;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+  box-shadow: 0 0 6px rgba(0, 242, 254, 0.12);
   white-space: nowrap;
+  line-height: 1.2;
 }
 
 .user-admin-btn {
