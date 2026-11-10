@@ -17,7 +17,7 @@ import json
 import logging
 import re
 import threading
-from typing import Any
+from typing import Any, Literal, overload
 
 from crewai import Crew, Task, Process
 from crew.agents import (
@@ -187,6 +187,30 @@ def get_ticket_crew() -> Crew:
     """Legacy helper returning a fresh ticket crew."""
     crew, _, _ = create_ticket_crew()
     return crew
+
+
+@overload
+def run_support_crew(
+    query: str,
+    session_id: str = ...,
+    structured: Literal[False] = ...,
+) -> dict[str, Any]: ...
+
+
+@overload
+def run_support_crew(
+    query: str,
+    session_id: str = ...,
+    structured: Literal[True] = ...,
+) -> CrewResponse: ...
+
+
+@overload
+def run_support_crew(
+    query: str,
+    session_id: str = ...,
+    structured: bool = ...,
+) -> dict[str, Any] | CrewResponse: ...
 
 
 def run_support_crew(

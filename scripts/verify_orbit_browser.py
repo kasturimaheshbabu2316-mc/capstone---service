@@ -39,7 +39,7 @@ def main():
     browser_bin = find_browser()
     print(f"Using browser: {browser_bin}")
 
-    port = 8877
+    port = int(os.environ.get("PORT", "8000"))
     cdp_port = 9335
 
     # Verify server is healthy

@@ -4,8 +4,18 @@
   "include": [
     "api",
     "crew",
-    "eval",
+    "evaluation",
+    "governance",
+    "rag",
+    "review",
+    "safety",
+    "tools",
     "tests",
+    "scripts",
+    "cache.py",
+    "config.py",
+    "dataset.py",
+    "kb_loader.py",
     "streamlit_app.py"
   ],
   "exclude": [

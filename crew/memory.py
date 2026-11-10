@@ -57,6 +57,8 @@ def extract_last_entities_from_history(history: list[BaseMessage]) -> tuple[str 
 
     for msg in reversed(history):
         content = msg.content if hasattr(msg, "content") else str(msg)
+        if not isinstance(content, str):
+            content = str(content)
 
         # Check for ticket ID with support for paraphrases
         if not last_ticket_id:

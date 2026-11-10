@@ -4,8 +4,15 @@ Measures peak RSS in MB after startup, after the first /ask call, and after 5 /a
 
 import gc
 import os
-import psutil
+import sys
 import time
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+import psutil
 from fastapi.testclient import TestClient
 
 def get_rss_mb() -> float:

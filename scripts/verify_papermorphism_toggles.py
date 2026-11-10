@@ -2,7 +2,13 @@
 
 import asyncio
 import sys
-from playwright.async_api import async_playwright
+
+try:
+    from playwright.async_api import async_playwright
+except ImportError:
+    print("[!] Optional dependency 'playwright' is not installed in current Python environment.")
+    print("[*] Install with: pip install playwright && playwright install chromium")
+    sys.exit(0)
 
 async def verify():
     async with async_playwright() as p:

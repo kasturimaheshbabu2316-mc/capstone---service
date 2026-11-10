@@ -4,7 +4,17 @@ Track: Business Operations / Customer Support (Ola)
 Uses PEP 562 lazy module attributes to prevent unnecessary memory bloat at package import time.
 """
 
-from typing import Any
+from typing import Any, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from crew.schemas import SupportResponse
+    from crew.memory import session_memory
+    from crew.crew import run_support_crew
+    from crew.agents import (
+        create_composer_agent,
+        create_lookup_agent,
+        create_retrieval_agent,
+    )
 
 __all__ = [
     "SupportResponse",

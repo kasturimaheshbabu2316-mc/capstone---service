@@ -46,7 +46,7 @@ class AskResponse(CrewResponse):
     retrieved_sources: list[str] = Field(default_factory=list, description="Direct list of retrieved sources.")
     source_titles: list[str] = Field(default_factory=list, description="Unique list of titles extracted from sources metadata or titles.")
     retrieved_snippet: str | None = Field(default=None, description="Direct excerpt snippet.")
-    review_status: dict[str, Any] = Field(default_factory=dict, description="Secondary review stage metadata.")
+    review_status: dict[str, Any] | None = Field(default_factory=dict, description="Secondary review stage metadata.")
     cache_hit: bool = Field(default=False, description="Flag indicating if served from semantic cache.")
     guardrail_flags: dict[str, Any] = Field(default_factory=dict, description="Safety guardrail audit flags.")
 

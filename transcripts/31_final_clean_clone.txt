@@ -1,6 +1,6 @@
 ================================================================================
 OLA SUPPORT INTELLIGENCE — CLEAN-CLONE OFFLINE VERIFICATION
-Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793900761
+Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1794324499
 Python Executable: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe (3.11.15)
 ================================================================================
 
@@ -37,8 +37,8 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe rag/
   ===========================================================================
   
   1. INDEXING KNOWLEDGE BASE DOCUMENTS (IDEMPOTENT UPSERT)...
-    • Collection 'kb_fixed'    : 28 chunks (300 chars, 60 overlap)
-    • Collection 'kb_sentence' : 50 chunks (regex sentence-based)
+    • Collection 'kb_fixed'    : 29 chunks (300 chars, 60 overlap)
+    • Collection 'kb_sentence' : 51 chunks (regex sentence-based)
     • Embedding Model          : sentence-transformers/all-MiniLM-L6-v2
     • Distance Metric          : Cosine (hnsw:space = cosine)
   
@@ -72,16 +72,16 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe rag/
 [5/6] Running Full PyTest Suite (Offline Socket Guard Active)...
 Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe -m pytest -q
 ================================================================================
-  ........................................................................ [ 39%]
-  ........................................................................ [ 79%]
-  ......................................                                   [100%]
+  ........................................................................ [ 35%]
+  ........................................................................ [ 70%]
+  ...........................................................              [100%]
   ============================== warnings summary ===============================
   tests\test_cache.py:14
-    C:\Users\kastu\AppData\Local\Temp\cleancheck_1793900761\tests\test_cache.py:14: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
+    C:\Users\kastu\AppData\Local\Temp\cleancheck_1794324499\tests\test_cache.py:14: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
       from crew.memory import (
   
   -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-  182 passed, 1 warning in 41.65s
+  203 passed, 1 warning in 41.34s
 [+] Full PyTest Suite (Offline Socket Guard Active): PASS
 
 ================================================================================
@@ -149,13 +149,13 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe eval
   hybrid           | 6     |   2.17   |   2.00    |     3.67     |  5.00  |  3.21  
   lookup           | 10    |   2.60   |   5.00    |     3.90     |  5.00  |  4.12  
   out_of_scope     | 8     |   5.00   |   1.00    |     5.00     |  5.00  |  4.00  
-  policy           | 20    |   2.15   |   5.00    |     2.70     |  5.00  |  3.71  
+  policy           | 20    |   2.15   |   5.00    |     2.75     |  5.00  |  3.73  
   ------------------------------------------------------------------------------
-  OVERALL MACRO    | 50    |   2.72   |   3.76    |     3.50     |  5.00  |  3.75  
+  OVERALL MACRO    | 50    |   2.72   |   3.76    |     3.52     |  5.00  |  3.75  
   ==============================================================================
   Refusal Precision : 100.0%
   Refusal Recall    : 100.0%
-  Groundedness Rate : 93.1%
+  Groundedness Rate : 96.6%
   
   Transcripts saved to: transcripts/task13_eval.txt and 13_eval.txt
   Master results saved to: evaluation/results.json
@@ -359,7 +359,6 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe eval
   [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
   [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
   [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
-  [stderr] Compliance review flagged issue in draft: 'Policy-Compliance-Reviewer verified facts. Final-Editor masked unredacted customer phone PII.'. Adopting compliant revised text.
   [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
   [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
   [stderr] Using an approximate input token count for model 'mock-ola-support-v1': assuming one token per four characters because a native token count is unavailable.
@@ -374,7 +373,7 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe eval
   Running AutoGen Review Demo A (Faithful Draft)...
   Running AutoGen Review Demo B (Draft with Injected Ungrounded Claim)...
   
-  Transcript successfully saved to: C:\Users\kastu\AppData\Local\Temp\cleancheck_1793900761\transcripts\14_review.txt
+  Transcript successfully saved to: C:\Users\kastu\AppData\Local\Temp\cleancheck_1794324499\transcripts\14_review.txt
 [+] AutoGen Review Demo: PASS
 
 ================================================================================
