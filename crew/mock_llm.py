@@ -316,8 +316,9 @@ class MockLLM(BaseLLM):
                 esc = t_data.get("escalation_score", 0.0)
                 rk = t_data.get("risk_level", "Normal")
                 prio_str = "High priority" if esc >= 0.44 else "Standard priority"
+                risk_lbl = "High Risk" if esc >= 0.44 else "Normal"
                 ans = (
-                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str}).\n\nPolicy Guidelines: {policy_text}"
+                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str}). Escalation risk score is {esc:.4f} ({risk_lbl}).\n\nPolicy Guidelines: {policy_text}"
                 )
             elif has_ticket:
                 tid = t_data.get("record_id", "TKT-0001")
@@ -327,8 +328,9 @@ class MockLLM(BaseLLM):
                 esc = t_data.get("escalation_score", 0.0)
                 rk = t_data.get("risk_level", "Normal")
                 prio_str = "High priority" if esc >= 0.44 else "Standard priority"
+                risk_lbl = "High Risk" if esc >= 0.44 else "Normal"
                 ans = (
-                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str})."
+                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str}). Escalation risk score is {esc:.4f} ({risk_lbl})."
                 )
             else:
                 ans = policy_text or context_text

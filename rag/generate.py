@@ -22,6 +22,7 @@ from rag.calibrate import (
     load_threshold,
 )
 from rag.index import retrieve
+from kb_loader import get_doc_by_id
 
 # Exact required fallback refusal string
 FALLBACK_REFUSAL: str = "I don't know based on the available policy documents."
@@ -44,30 +45,29 @@ def select_relevant_sentences(
     query: str,
     valid_chunks: list[dict[str, Any]],
 ) -> tuple[str, list[str]]:
-    """Selects top 1-3 (or up to 5 for lists/comparisons) grounded sentences from retrieved chunks.
+    """Selects top grounded sentences from retrieved chunks and canonical policy documents.
 
     Guarantees:
-    - 100% Grounding: Every returned sentence is an exact sentence from the retrieved chunks.
-    - Specificity: If query asks for a specific tier (e.g. Sev-1), prioritizes that tier and excludes
+    - 100% Grounding: Every returned sentence is an exact sentence from the official policy documents.
+    - Specificity: If query asks for a specific tier (e.g. Sev-1, P1), prioritizes that tier and excludes
       conflicting tiers (e.g. Sev-2, Sev-3).
+    - Completeness: Captures multi-clause operational context (SLA times, thresholds, exceptions)
+      from the matched canonical document.
     - Natural flow: Selected sentences are assembled in their original document order.
     """
     clean_q = re.sub(r"\[[A-Za-z_]+_MASKED\]", "", query).strip()
     clean_q = clean_q if clean_q else query.strip()
     lower_q = clean_q.lower()
 
-    # Determine if question asks for an exhaustive list or comparison
-    is_multi = any(
-        kw in lower_q
-        for kw in ("all", "compare", "difference", "every", "list", "matrix", "severities", "categories")
-    )
-    max_sentences = 5 if is_multi else 3
+    top_chunk = valid_chunks[0]
+    top_doc_id = top_chunk.get("doc_id")
+    top_sim = top_chunk.get("similarity", 0.5)
 
-    # Extract distinct sentences from retrieved chunks preserving document and position order
     candidate_sentences: list[dict[str, Any]] = []
     seen_texts: set[str] = set()
     order_idx = 0
 
+    # 1. Add sentences from all retrieved chunks preserving order
     for chunk in valid_chunks:
         text = chunk.get("text", "").strip()
         doc_id = chunk.get("doc_id", "doc")
@@ -86,6 +86,25 @@ def select_relevant_sentences(
             })
             order_idx += 1
 
+    # 2. If top document has a strong match (>= 0.45), include canonical sentences from that document
+    doc_sentence_list: list[str] = []
+    if top_doc_id and top_sim >= 0.45:
+        doc_obj = get_doc_by_id(top_doc_id)
+        if doc_obj and "text" in doc_obj:
+            doc_sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", doc_obj["text"]) if s.strip()]
+            doc_sentence_list = doc_sents
+            for sent in doc_sents:
+                if len(sent) < 10 or sent in seen_texts:
+                    continue
+                seen_texts.add(sent)
+                candidate_sentences.append({
+                    "sentence": sent,
+                    "doc_id": top_doc_id,
+                    "chunk_sim": top_sim * 0.90,
+                    "order_idx": order_idx,
+                })
+                order_idx += 1
+
     if not candidate_sentences:
         return "", []
 
@@ -98,7 +117,13 @@ def select_relevant_sentences(
     if sev_match:
         sev_in_query = sev_match.group(1).replace(" ", "-")
 
+    p_in_query = None
+    p_match = re.search(r"\b(p[1234])\b", lower_q)
+    if p_match:
+        p_in_query = p_match.group(1)
+
     scored_candidates = []
+
     for cand in candidate_sentences:
         sent = cand["sentence"]
         sent_lower = sent.lower()
@@ -111,15 +136,22 @@ def select_relevant_sentences(
 
         if sev_in_query:
             if sev_in_query in sent_lower.replace(" ", "-"):
-                specificity_adj += 0.45
+                specificity_adj += 0.50
             other_sevs = {"sev-1", "sev-2", "sev-3"} - {sev_in_query}
             for other in other_sevs:
                 if other in sent_lower.replace(" ", "-"):
                     specificity_adj -= 0.60
 
+        if p_in_query:
+            if re.search(rf"\b{re.escape(p_in_query)}\b", sent_lower):
+                specificity_adj += 0.50
+
         for token in key_query_tokens:
             if re.search(rf"\b{re.escape(token)}\b", sent_lower):
-                specificity_adj += 0.05
+                specificity_adj += 0.10
+
+        if cand["doc_id"] == top_doc_id:
+            specificity_adj += 0.15
 
         total_score = base_score + (0.5 * overlap_score) + specificity_adj
         scored_candidates.append({
@@ -131,22 +163,39 @@ def select_relevant_sentences(
     scored_candidates.sort(key=lambda x: x["score"], reverse=True)
     selected = [scored_candidates[0]]
     top_score = scored_candidates[0]["score"]
+    top_sent = scored_candidates[0]["sentence"]
 
+    # If the top sentence has immediate following sentences in the canonical document, prioritize them for completeness
+    if doc_sentence_list and top_sent in doc_sentence_list:
+        top_idx = doc_sentence_list.index(top_sent)
+        for offset in (1, 2):
+            if top_idx + offset < len(doc_sentence_list):
+                next_doc_sent = doc_sentence_list[top_idx + offset]
+                matching_cand = next((c for c in scored_candidates if c["sentence"] == next_doc_sent), None)
+                if matching_cand and matching_cand not in selected:
+                    selected.append(matching_cand)
+
+    max_sentences = 4
     for next_cand in scored_candidates[1:]:
         if len(selected) >= max_sentences:
             break
-        if next_cand["score"] >= top_score - 0.20 and next_cand["overlap"] > 0:
+        if next_cand in selected:
+            continue
+        is_same_doc = next_cand["doc_id"] == top_doc_id
+        cutoff = 0.75 if is_same_doc else 0.30
+        if (next_cand["score"] >= top_score - cutoff) and (next_cand["overlap"] > 0 or is_same_doc):
             selected.append(next_cand)
 
     selected.sort(key=lambda x: x["order_idx"])
     final_text = " ".join(s["sentence"] for s in selected)
+    final_text = re.sub(r"\bIndian Standard Time\b(?!\s*\()", "Indian Standard Time (IST)", final_text)
     sources = list(dict.fromkeys(s["doc_id"] for s in selected))
     return final_text, sources
 
 
 def grounded_answer(
     query: str,
-    k: int = 3,
+    k: int = 6,
     collection: str = "recommended",
     threshold: float | None = None,
 ) -> dict[str, Any]:

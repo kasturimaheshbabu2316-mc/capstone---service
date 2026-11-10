@@ -71,8 +71,14 @@ def evaluate_query_list(
         retrieved_texts: List[str] = []
         if crew_res.route in ("rag", "both"):
             try:
-                chunks = retrieve(query_text, collection_name="kb_sentence", k=3)
+                chunks = retrieve(query_text, collection_name="kb_sentence", k=6)
                 retrieved_texts = [c["text"] for c in chunks]
+                if crew_res.sources:
+                    from kb_loader import get_doc_by_id
+                    for s in crew_res.sources:
+                        doc_obj = get_doc_by_id(s)
+                        if doc_obj and "text" in doc_obj:
+                            retrieved_texts.append(doc_obj["text"])
             except Exception:
                 retrieved_texts = crew_res.sources
 
