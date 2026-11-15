@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ola Support Intelligence — Operations Desk • v4.8</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' ws: wss:; script-src 'self' 'unsafe-inline';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; connect-src 'self' ws: wss:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval';">
   <link rel="stylesheet" href="/static/css/tokens.css?v=48.0">
   <link rel="stylesheet" href="/static/css/base.css?v=48.0">
   <link rel="stylesheet" href="/static/css/components.css?v=48.0">
@@ -258,6 +258,40 @@
 
           <!-- MINIMAL EMPTY STATE TITLE & SUBTITLE (Hidden once message is sent) -->
           <section class="chat-empty-state" id="chat-empty-state">
+            <button type="button" class="empty-bot-wrap" aria-label="Ola Assistant" title="Click to cheer">
+              <div class="bot-full-character">
+                <!-- Antenna -->
+                <div class="bot-antenna-group">
+                  <span class="bot-antenna-mast"></span>
+                  <span class="bot-antenna-beacon"></span>
+                </div>
+                <!-- Head & Face Screen -->
+                <div class="bot-head-box">
+                  <div class="bot-face-screen">
+                    <span class="bot-eye left"></span>
+                    <span class="bot-eye right"></span>
+                    <span class="bot-blush left"></span>
+                    <span class="bot-blush right"></span>
+                    <span class="bot-smile"></span>
+                  </div>
+                </div>
+                <!-- Torso and Hands Row -->
+                <div class="bot-torso-row">
+                  <div class="bot-torso-plate">
+                    <span class="bot-core-light"></span>
+                  </div>
+                  <div class="bot-arm arm-left">
+                    <span class="bot-hand hand-left"></span>
+                  </div>
+                  <!-- Waving Right Hand! 👋 -->
+                  <div class="bot-arm arm-right">
+                    <span class="bot-hand hand-right"></span>
+                  </div>
+                </div>
+                <!-- Radar pulse ring -->
+                <span class="bot-pulse-ring"></span>
+              </div>
+            </button>
             <h1 class="empty-title">How can I help?</h1>
             <p class="empty-subtitle">Ask any official ride policy question or enter a ticket ID to inspect.</p>
           </section>
