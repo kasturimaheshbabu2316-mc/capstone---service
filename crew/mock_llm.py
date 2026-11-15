@@ -315,18 +315,10 @@ class MockLLM(BaseLLM):
                 rt = t_data.get("resolution_time_hours", 0.0)
                 esc = t_data.get("escalation_score", 0.0)
                 rk = t_data.get("risk_level", "Normal")
-                rem = t_data.get("estimated_remaining_hours")
-                if rem is None:
-                    try:
-                        from tools.ticket_tool import calculate_estimated_remaining_hours
-                        rem = calculate_estimated_remaining_hours(t_data)
-                    except Exception:
-                        rem = 0.0 if st in ("Resolved", "Closed") else 4.0
                 prio_str = "High priority" if esc >= 0.44 else "Standard priority"
                 risk_lbl = "High Risk" if esc >= 0.44 else "Normal"
-                rem_str = " Ticket is already resolved." if st in ("Resolved", "Closed") else f" Estimated resolution time remaining: ~{rem}h."
                 ans = (
-                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str}). Escalation risk score is {esc:.4f} ({risk_lbl}).{rem_str}\n\nPolicy Guidelines: {policy_text}"
+                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str}). Escalation risk score is {esc:.4f} ({risk_lbl}).\n\nPolicy Guidelines: {policy_text}"
                 )
             elif has_ticket:
                 tid = t_data.get("record_id", "TKT-0001")
@@ -335,18 +327,10 @@ class MockLLM(BaseLLM):
                 rt = t_data.get("resolution_time_hours", 0.0)
                 esc = t_data.get("escalation_score", 0.0)
                 rk = t_data.get("risk_level", "Normal")
-                rem = t_data.get("estimated_remaining_hours")
-                if rem is None:
-                    try:
-                        from tools.ticket_tool import calculate_estimated_remaining_hours
-                        rem = calculate_estimated_remaining_hours(t_data)
-                    except Exception:
-                        rem = 0.0 if st in ("Resolved", "Closed") else 4.0
                 prio_str = "High priority" if esc >= 0.44 else "Standard priority"
                 risk_lbl = "High Risk" if esc >= 0.44 else "Normal"
-                rem_str = " Ticket is already resolved." if st in ("Resolved", "Closed") else f" Estimated resolution time remaining: ~{rem}h."
                 ans = (
-                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str}). Escalation risk score is {esc:.4f} ({risk_lbl}).{rem_str}"
+                    f"Ticket {tid} ({cat}) is currently {st} with a resolution time of {rt} hours ({prio_str}). Escalation risk score is {esc:.4f} ({risk_lbl})."
                 )
             else:
                 ans = policy_text or context_text
@@ -427,16 +411,8 @@ class MockLLM(BaseLLM):
                 risk = ticket_res.get("risk_level", "Normal")
                 esc_rec = ticket_res.get("recommend_escalation", False)
                 prio_str = "High priority" if esc_score >= 0.44 else "Standard priority"
-                rem = ticket_res.get("estimated_remaining_hours")
-                if rem is None:
-                    try:
-                        from tools.ticket_tool import calculate_estimated_remaining_hours
-                        rem = calculate_estimated_remaining_hours(ticket_res)
-                    except Exception:
-                        rem = 0.0 if status in ("Resolved", "Closed") else 4.0
-                rem_str = " Ticket is already resolved." if status in ("Resolved", "Closed") else f" Estimated resolution time remaining: ~{rem}h."
                 ans = (
-                    f"Ticket {ticket_id} is currently {status} with resolution time of {res_time} hours ({prio_str}).{rem_str}"
+                    f"Ticket {ticket_id} is currently {status} with resolution time of {res_time} hours ({prio_str})."
                 )
                 payload = {
                     "answer": ans,
@@ -487,18 +463,10 @@ class MockLLM(BaseLLM):
             if "error" in ticket_res:
                 ans = f"Ticket {ticket_id} could not be found in the operational database."
             else:
-                rem = ticket_res.get("estimated_remaining_hours")
-                if rem is None:
-                    try:
-                        from tools.ticket_tool import calculate_estimated_remaining_hours
-                        rem = calculate_estimated_remaining_hours(ticket_res)
-                    except Exception:
-                        rem = 0.0 if ticket_res.get("status") in ("Resolved", "Closed") else 4.0
-                rem_str = " Ticket is already resolved." if ticket_res.get("status") in ("Resolved", "Closed") else f" Estimated resolution time remaining: ~{rem}h."
                 ans = (
                     f"Ticket {ticket_id} ({ticket_res['category']}) is currently {ticket_res['status']}. "
                     f"Recorded resolution time is {ticket_res['resolution_time_hours']} hours. "
-                    f"Escalation score: {ticket_res['escalation_score']:.4f} ({ticket_res['risk_level']}).{rem_str}"
+                    f"Escalation score: {ticket_res['escalation_score']:.4f} ({ticket_res['risk_level']})."
                 )
             return f"Thought: I now know the final answer.\nFinal Answer: {ans}"
 

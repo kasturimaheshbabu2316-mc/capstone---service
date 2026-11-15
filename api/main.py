@@ -81,27 +81,6 @@ from safety.guardrails import (
 )
 from tools.ticket_tool import get_all_tickets
 from review.autogen_review import review_support_response, _resolve_context_text
-from observability import (
-    MetricsMiddleware,
-    metrics_endpoint,
-    record_ask_metrics,
-    record_ticket_lookup,
-    record_kb_ingestion,
-    record_cache_operation,
-    record_guardrail_trigger,
-    set_system_metrics,
-    logger as obs_logger,
-)
-from security import (
-    RateLimitMiddleware,
-    RateLimitConfig,
-    SecurityHeadersMiddleware,
-    RequestSizeMiddleware,
-    SecurityConfig,
-    sanitize_input,
-    validate_ticket_id,
-    validate_session_id,
-)
 
 logger = logging.getLogger("ola_domain_agent.api")
 
@@ -173,19 +152,6 @@ async def lifespan(app: FastAPI):
         app.state.kb_ready = collection.count() > 0
         logger.info("Lifespan: SentenceTransformer and '%s' collection ready (count=%d).", winning_col, collection.count())
 
-        # Set system metrics
-        try:
-            fixed_count = get_or_create_collection("kb_fixed").count()
-            sent_count = collection.count()
-            set_system_metrics(
-                chroma_collections=2,
-                chroma_chunks={"kb_fixed": fixed_count, "kb_sentence": sent_count},
-                embedding_loaded=True,
-                mock_llm=os.environ.get("MOCK_LLM", "true").lower() == "true",
-            )
-        except Exception:
-            pass
-
         # Pre-warm CrewAI agents and crews once in lifespan
         try:
             from crew.crew import get_policy_crew, get_ticket_crew
@@ -231,22 +197,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Add Prometheus metrics middleware
-app.add_middleware(MetricsMiddleware)
-
-# Security middlewares (order matters: rate limit -> request size -> security headers)
-security_config = SecurityConfig.from_env()
-if security_config.rate_limit_enabled:
-    app.add_middleware(RateLimitMiddleware, config=RateLimitConfig(
-        requests_per_window=security_config.rate_limit_requests,
-        window_seconds=security_config.rate_limit_window,
-    ))
-
-app.add_middleware(RequestSizeMiddleware, max_size=security_config.max_request_size)
-
-if security_config.security_headers_enabled:
-    app.add_middleware(SecurityHeadersMiddleware, csp_policy=security_config.csp_policy)
 
 
 @app.middleware("http")
@@ -401,7 +351,7 @@ def _init_feedback_store() -> None:
                 "rating": 4,
                 "ticket_id": "TKT-0012",
                 "question": "Is ticket TKT-0012 escalated?",
-                "answer": "Ticket TKT-0012 is currently Open with an escalation score of 0.8124 (High Risk). Estimated resolution time remaining: ~4.2h.",
+                "answer": "Ticket TKT-0012 is currently Open with an escalation score of 0.8124.",
                 "suggestion": "Could you also display the estimated resolution time remaining?",
             },
         ]
@@ -564,13 +514,6 @@ def health_check() -> HealthResponse:
         db_ready=db_ready,
         service="ola-support-agent",
     )
-
-
-@app.get("/metrics")
-def metrics() -> Response:
-    """Prometheus metrics endpoint."""
-    content, status_code, headers = metrics_endpoint()
-    return Response(content=content, status_code=status_code, headers=headers)
 
 
 def run_unified_pipeline(
@@ -959,25 +902,6 @@ def run_unified_pipeline(
         )
 
 
-def _record_ask_metrics(
-    route: str,
-    cache_hit: bool,
-    grounded: bool,
-    status_code: int,
-    latency_ms: float,
-    guardrail_flags: dict | None = None,
-):
-    """Record /ask metrics to Prometheus."""
-    try:
-        record_ask_metrics(route, cache_hit, grounded, status_code, latency_ms)
-        if guardrail_flags:
-            for flag, triggered in guardrail_flags.items():
-                if triggered:
-                    record_guardrail_trigger(flag)
-    except Exception:
-        pass  # Metrics failure should not affect request
-
-
 @app.post("/ask", response_model=AskResponse)
 async def ask_endpoint(
     payload: AskRequest,
@@ -993,9 +917,7 @@ async def ask_endpoint(
         and x_admin_token
         and hmac.compare_digest(x_admin_token.strip(), server_token.strip())
     )
-
-    # Run pipeline and capture result for metrics
-    result = await anyio.to_thread.run_sync(
+    return await anyio.to_thread.run_sync(
         run_unified_pipeline,
         raw_question,
         session_id,
@@ -1003,18 +925,6 @@ async def ask_endpoint(
         None,
         is_admin,
     )
-
-    # Record metrics
-    _record_ask_metrics(
-        route=getattr(result, "route", "unknown"),
-        cache_hit=getattr(result, "cache_hit", False),
-        grounded=getattr(result, "grounded", False),
-        status_code=200,
-        latency_ms=getattr(result, "latency_ms", 0.0),
-        guardrail_flags=getattr(result, "guardrail_flags", None),
-    )
-
-    return result
 
 
 def verify_admin_token(x_admin_token: str | None = Header(None, alias="X-Admin-Token")) -> str:
@@ -1121,8 +1031,6 @@ def _sync_add_document(doc_title: str, doc_text: str) -> AddDocumentResponse:
             guardrail_flags={"cache_invalidated": invalidated_count},
         )
 
-        record_kb_ingestion("success")
-
         return AddDocumentResponse(
             status="indexed",
             title=clean_title,
@@ -1157,7 +1065,6 @@ async def add_document_endpoint(
 def clear_cache_endpoint(admin_token: str = Depends(verify_admin_token)) -> dict[str, Any]:
     """Privileged admin endpoint to invalidate in-memory response cache."""
     invalidated_count = response_cache.clear() if hasattr(response_cache, "clear") else 0
-    record_cache_operation("clear", "all", "success" if invalidated_count >= 0 else "error")
     return {"status": "cleared", "invalidated_entries": invalidated_count}
 
 
@@ -1255,10 +1162,7 @@ def get_ticket_inspector_endpoint(ticket_id: str) -> dict[str, Any]:
     from dataset import SUPPORT_TICKETS_BY_ID
     record = SUPPORT_TICKETS_BY_ID.get(clean_id)
     if not record:
-        record_ticket_lookup(clean_id, found=False)
         raise HTTPException(status_code=404, detail=f"Ticket '{clean_id}' not found in active directory.")
-
-    record_ticket_lookup(clean_id, found=True)
 
     with _dispute_lock:
         overlay = DISPUTE_STATE_OVERLAY.get(clean_id, {})
