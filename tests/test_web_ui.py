@@ -353,10 +353,10 @@ def test_3d_orbit_geometry_and_container_size():
     assert "ring2.add(node2);" in orbit_content
     assert "ring3.add(node3);" in orbit_content
     assert "ring4.add(node4);" in orbit_content
-    assert "node1.position.set(Math.cos(s1) * R1, Math.sin(s1) * R1" in orbit_content
-    assert "node2.position.set(Math.cos(s2) * R2, Math.sin(s2) * R2" in orbit_content
-    assert "node3.position.set(Math.cos(s3) * R3, Math.sin(s3) * R3" in orbit_content
-    assert "node4.position.set(Math.cos(s4) * R4, Math.sin(s4) * R4" in orbit_content
+    assert "node1.position.set(Math.cos(s1) * R1, Math.sin(s1) * R1, 0);" in orbit_content
+    assert "node2.position.set(Math.cos(s2) * R2, Math.sin(s2) * R2, 0);" in orbit_content
+    assert "node3.position.set(Math.cos(s3) * R3, Math.sin(s3) * R3, 0);" in orbit_content
+    assert "node4.position.set(Math.cos(s4) * R4, Math.sin(s4) * R4, 0);" in orbit_content
 
 
 def test_orbit_reset_and_active_view_synchronization():

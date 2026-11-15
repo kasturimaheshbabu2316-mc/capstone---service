@@ -30,165 +30,68 @@ function getMascotSvgMarkup() {
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
-        <filter id="innerGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="1.5" result="blur"/>
-          <feMerge>
-            <feMergeNode in="blur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-        <filter id="metalReflection" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="3" result="blur"/>
-          <feSpecularLighting surfaceScale="5" specularConstant="1.2" specularExponent="30" lighting-color="#ffffff" result="spec">
-            <fePointLight x="80" y="40" z="50"/>
-          </feSpecularLighting>
-          <feComposite in="SourceGraphic" in2="spec" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
-        </filter>
 
-        <!-- Dark Theme: Obsidian Metal & Cyberpunk Neon - Enhanced with multi-stop gradients for depth -->
+        <!-- Dark Theme: Obsidian Metal & Cyberpunk Neon -->
         <linearGradient id="robotBodyDark" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.3"/>
-          <stop offset="15%" stop-color="#0ea5e9"/>
-          <stop offset="35%" stop-color="#0c4a6e"/>
-          <stop offset="55%" stop-color="#082f49"/>
-          <stop offset="75%" stop-color="#061d33"/>
-          <stop offset="100%" stop-color="#02101f"/>
+          <stop offset="0%" stop-color="#00f2fe"/>
+          <stop offset="50%" stop-color="#1e3a5f"/>
+          <stop offset="100%" stop-color="#0a1526"/>
         </linearGradient>
-        <linearGradient id="robotBodyDarkTop" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#0a3d5c"/>
-          <stop offset="50%" stop-color="#0ea5e9"/>
-          <stop offset="100%" stop-color="#0a3d5c"/>
-        </linearGradient>
-        <radialGradient id="robotCoreGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
-          <stop offset="30%" stop-color="#00f2fe" stop-opacity="0.6"/>
-          <stop offset="60%" stop-color="#0ea5e9" stop-opacity="0.3"/>
-          <stop offset="100%" stop-color="#00f2fe" stop-opacity="0"/>
-        </radialGradient>
-
         <linearGradient id="sparkyBodyDark" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.4"/>
-          <stop offset="20%" stop-color="#0ea5e9"/>
-          <stop offset="45%" stop-color="#0c4a6e"/>
-          <stop offset="70%" stop-color="#082f49"/>
-          <stop offset="100%" stop-color="#02101f"/>
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="50%" stop-color="#162e4a"/>
+          <stop offset="100%" stop-color="#0b1728"/>
         </linearGradient>
-        <radialGradient id="sparkyFurHighlight" cx="45%" cy="30%" r="60%">
-          <stop offset="0%" stop-color="#60d5fc" stop-opacity="0.4"/>
-          <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.15"/>
-          <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"/>
-        </radialGradient>
-
         <linearGradient id="earGradientDark" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5"/>
-          <stop offset="60%" stop-color="#ec4899" stop-opacity="0.3"/>
-          <stop offset="100%" stop-color="#be185d" stop-opacity="0.2"/>
+          <stop offset="0%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#ec4899"/>
         </linearGradient>
-        <radialGradient id="earInnerGlow" cx="50%" cy="40%" r="50%">
-          <stop offset="0%" stop-color="#fda4af" stop-opacity="0.4"/>
-          <stop offset="100%" stop-color="#ec4899" stop-opacity="0"/>
-        </radialGradient>
-
         <linearGradient id="collarGradientDark" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stop-color="#00f2fe"/>
-          <stop offset="25%" stop-color="#d946ef"/>
-          <stop offset="50%" stop-color="#fbbf24"/>
-          <stop offset="75%" stop-color="#10b981"/>
-          <stop offset="100%" stop-color="#00f2fe"/>
+          <stop offset="33%" stop-color="#d946ef"/>
+          <stop offset="66%" stop-color="#fbbf24"/>
+          <stop offset="100%" stop-color="#10b981"/>
         </linearGradient>
         <linearGradient id="tagGradientDark" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stop-color="#fbbf24"/>
-          <stop offset="50%" stop-color="#f59e0b"/>
           <stop offset="100%" stop-color="#ec4899"/>
         </linearGradient>
 
-        <!-- Light Theme: Matte Ceramic White & Warm Golden Honey - Enhanced -->
+        <!-- Light Theme: Matte Ceramic White & Warm Golden Honey -->
         <linearGradient id="robotBodyLight" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="30%" stop-color="#e0e7ff"/>
-          <stop offset="60%" stop-color="#c7d2fe"/>
-          <stop offset="100%" stop-color="#a5b4fc"/>
+          <stop offset="100%" stop-color="#e0e7ff"/>
         </linearGradient>
-        <radialGradient id="robotCoreGlowLight" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
-          <stop offset="40%" stop-color="#6366f1" stop-opacity="0.3"/>
-          <stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/>
-        </radialGradient>
-
         <linearGradient id="sparkyBodyLight" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#fef3c7"/>
-          <stop offset="40%" stop-color="#fde68a"/>
-          <stop offset="70%" stop-color="#fcd34d"/>
-          <stop offset="100%" stop-color="#fbbf24"/>
-        </linearGradient>
-        <radialGradient id="sparkyFurHighlightLight" cx="45%" cy="30%" r="60%">
-          <stop offset="0%" stop-color="#fffbeb" stop-opacity="0.6"/>
-          <stop offset="50%" stop-color="#fef3c7" stop-opacity="0.2"/>
-          <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
-        </radialGradient>
-
-        <!-- Shared gradients for UI chips -->
-        <linearGradient id="chipGlowGradient" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#00f2fe"/>
-          <stop offset="100%" stop-color="#38bdf8"/>
+          <stop offset="100%" stop-color="#fde68a"/>
         </linearGradient>
       </defs>
 
-      <!-- Floor Occlusion & Contact Shadow - Multi-layer for depth -->
-      <ellipse class="mascot-floor-shadow" cx="130" cy="132" rx="75" ry="7" fill="url(#floorShadowGrad)"/>
-      <radialGradient id="floorShadowGrad" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="rgba(0, 242, 254, 0.18)"/>
-        <stop offset="40%" stop-color="rgba(0, 0, 0, 0.35)"/>
-        <stop offset="70%" stop-color="rgba(0, 0, 0, 0.15)"/>
-        <stop offset="100%" stop-color="transparent"/>
-      </radialGradient>
-      <ellipse class="mascot-floor-shadow-secondary" cx="130" cy="134" rx="65" ry="5" fill="rgba(0,0,0,0.12)"/>
+      <!-- Floor Occlusion & Contact Shadow -->
+      <ellipse class="mascot-floor-shadow" cx="130" cy="132" rx="75" ry="7"/>
 
-      <!-- ==================== CHARACTER 1: "AI" (ROBOT - "SPARK") ==================== -->
+      <!-- ==================== CHARACTER 1: "AI" (ROBOT) ==================== -->
       <g class="character-ai-group">
-        <!-- Hover Thruster / Lower Body Shadow - Multi-ring -->
-        <ellipse class="ai-thruster-glow-outer" cx="80" cy="118" rx="18" ry="5" fill="rgba(0, 242, 254, 0.08)"/>
-        <ellipse class="ai-thruster-glow-mid" cx="80" cy="117" rx="14" ry="4" fill="rgba(0, 242, 254, 0.15)"/>
+        <!-- Hover Thruster / Lower Body Shadow -->
         <ellipse class="ai-thruster-glow" cx="80" cy="116" rx="14" ry="4"/>
 
-        <!-- Torso with layered depth -->
-        <rect class="ai-torso-backplate" x="60" y="78" width="40" height="34" rx="10" fill="url(#robotBodyDark)" stroke="#00f2fe" stroke-width="1.5" opacity="0.3"/>
+        <!-- Torso -->
         <rect class="ai-torso-plate" x="62" y="80" width="36" height="30" rx="9"/>
-        <!-- Torso panel lines for mechanical detail -->
-        <line class="ai-torso-seam" x1="80" y1="82" x2="80" y2="108" stroke="#00f2fe" stroke-width="0.8" opacity="0.4"/>
-        <line class="ai-torso-panel-l" x1="68" y1="82" x2="68" y2="108" stroke="#00f2fe" stroke-width="0.5" opacity="0.25"/>
-        <line class="ai-torso-panel-r" x1="92" y1="82" x2="92" y2="108" stroke="#00f2fe" stroke-width="0.5" opacity="0.25"/>
-
-        <!-- Pulsing Chest Core Light - Multi-ring reactor -->
-        <circle class="ai-chest-core-outer" cx="80" cy="95" r="8" fill="url(#robotCoreGlow)" filter="url(#neonBloom)" opacity="0.4"/>
-        <circle class="ai-chest-core-mid" cx="80" cy="95" r="6.5" fill="url(#robotCoreGlow)" filter="url(#neonBloom)" opacity="0.6"/>
+        <!-- Pulsing Chest Core Light -->
         <circle class="ai-chest-core" cx="80" cy="95" r="5.5" filter="url(#neonBloom)"/>
         <circle class="ai-chest-core-inner" cx="80" cy="95" r="2.5" fill="#ffffff"/>
-        <circle class="ai-chest-core-spark" cx="80" cy="95" r="1.2" fill="#ffffff" filter="url(#neonBloom)"/>
 
-        <!-- Left Arm & Hand (Holding Book / Steady) - Segmented with joints -->
+        <!-- Left Arm & Hand (Holding Book / Steady) -->
         <g class="ai-arm-left">
-          <path class="ai-arm-upper-l" d="M62 86 Q55 90 48 96" stroke-width="4" stroke-linecap="round" fill="none"/>
-          <circle class="ai-elbow-l" cx="55" cy="90" r="3" fill="url(#robotBodyDark)" stroke="#00f2fe" stroke-width="1.5"/>
-          <path class="ai-arm-limb-l" d="M48 96 Q52 102 58 106" stroke-width="3.2" stroke-linecap="round" fill="none"/>
-          <circle class="ai-wrist-l" cx="58" cy="103" r="2.5" fill="url(#robotBodyDark)" stroke="#00f2fe" stroke-width="1"/>
+          <path class="ai-arm-limb-l" d="M62 86 L48 96 L58 106" stroke-width="3.2" stroke-linecap="round" fill="none"/>
           <circle class="ai-hand-dot-l" cx="58" cy="106" r="3.5"/>
-          <!-- Fingers -->
-          <path class="ai-finger-l1" d="M56 106 L54 111" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.6"/>
-          <path class="ai-finger-l2" d="M58 106 L58 112" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.6"/>
-          <path class="ai-finger-l3" d="M60 106 L62 111" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.6"/>
         </g>
 
         <!-- Right Arm & Hand (Holding Book - Default/Reading) -->
         <g class="ai-arm-right">
-          <path class="ai-arm-upper-r" d="M98 86 Q105 90 112 96" stroke-width="4" stroke-linecap="round" fill="none"/>
-          <circle class="ai-elbow-r" cx="105" cy="90" r="3" fill="url(#robotBodyDark)" stroke="#00f2fe" stroke-width="1.5"/>
-          <path class="ai-arm-limb-r" d="M112 96 Q108 102 104 106" stroke-width="3.2" stroke-linecap="round" fill="none"/>
-          <circle class="ai-wrist-r" cx="104" cy="103" r="2.5" fill="url(#robotBodyDark)" stroke="#00f2fe" stroke-width="1"/>
+          <path class="ai-arm-limb-r" d="M98 86 L112 96 L104 106" stroke-width="3.2" stroke-linecap="round" fill="none"/>
           <circle class="ai-hand-dot-r" cx="104" cy="106" r="3.5"/>
-          <path class="ai-finger-r1" d="M102 106 L100 111" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.6"/>
-          <path class="ai-finger-r2" d="M104 106 L104 112" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.6"/>
-          <path class="ai-finger-r3" d="M106 106 L108 111" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.6"/>
         </g>
 
         <!-- Right Arm Victory Thumbs-Up (Eureka / Success state) -->
@@ -199,12 +102,12 @@ function getMascotSvgMarkup() {
           <circle class="ai-victory-badge" cx="120" cy="46" r="2.5" fill="#10b981" filter="url(#neonBloom)"/>
         </g>
 
-        <!-- Holographic Open Book (Active in searching state) - Enhanced -->
+        <!-- Holographic Open Book (Active in searching state) -->
         <g class="ai-holo-book">
-          <path class="holo-book-cover" d="M60 106 Q80 112 100 106 L102 120 Q80 126 58 120 Z" stroke-width="2" fill="rgba(0, 242, 254, 0.05)"/>
-          <path class="holo-book-pages-l" d="M80 108 L60 106 L59 119 L80 122 Z" fill="rgba(0, 242, 254, 0.08)"/>
-          <path class="holo-book-pages-r" d="M80 108 L100 106 L101 119 L80 122 Z" fill="rgba(0, 242, 254, 0.08)"/>
-          <!-- Holographic text lines inside book -->
+          <path class="holo-book-cover" d="M60 106 Q80 112 100 106 L102 120 Q80 126 58 120 Z" stroke-width="2"/>
+          <path class="holo-book-pages-l" d="M80 108 L60 106 L59 119 L80 122 Z"/>
+          <path class="holo-book-pages-r" d="M80 108 L100 106 L101 119 L80 122 Z"/>
+          <!-- Faint holographic text lines inside book -->
           <line class="holo-book-line" x1="64" y1="110" x2="76" y2="111" stroke-width="1.2" opacity="0.6"/>
           <line class="holo-book-line" x1="64" y1="114" x2="74" y2="115" stroke-width="1.2" opacity="0.6"/>
           <line class="holo-book-line" x1="84" y1="111" x2="96" y2="110" stroke-width="1.2" opacity="0.6"/>
@@ -212,27 +115,17 @@ function getMascotSvgMarkup() {
           <!-- Scanning Laser and Optical Beam Cone -->
           <line class="holo-scan-laser" x1="58" y1="110" x2="102" y2="110" stroke-width="2.2" filter="url(#neonBloom)"/>
           <polygon class="holo-scan-cone" points="60,110 100,110 88,86 72,86" fill="rgba(0, 242, 254, 0.12)" opacity="0"/>
-          <!-- Book spine highlight -->
-          <line class="holo-book-spine" x1="80" y1="106" x2="80" y2="120" stroke="#00f2fe" stroke-width="1" opacity="0.5"/>
         </g>
 
         <!-- Head Unit -->
         <g class="ai-head-unit">
-          <!-- Antenna with Glowing Beacon - Enhanced -->
-          <g class="ai-antenna-group">
-            <line class="ai-antenna-mast" x1="80" y1="36" x2="80" y2="47" stroke-width="2.8" stroke-linecap="round"/>
-            <line class="ai-antenna-mast-inner" x1="80" y1="38" x2="80" y2="45" stroke="#ffffff" stroke-width="1" opacity="0.5" stroke-linecap="round"/>
-            <circle class="ai-antenna-beacon" cx="80" cy="33" r="4.5" filter="url(#neonBloom)"/>
-            <circle class="ai-antenna-beacon-core" cx="80" cy="33" r="2" fill="#ffffff" filter="url(#neonBloom)"/>
-            <!-- Antenna rings -->
-            <circle class="ai-antenna-ring1" cx="80" cy="33" r="8" stroke="#00f2fe" stroke-width="0.8" fill="none" opacity="0.4"/>
-            <circle class="ai-antenna-ring2" cx="80" cy="33" r="12" stroke="#00f2fe" stroke-width="0.5" fill="none" opacity="0.2"/>
-          </g>
+          <!-- Antenna with Glowing Beacon -->
+          <line class="ai-antenna-mast" x1="80" y1="36" x2="80" y2="47" stroke-width="2.8" stroke-linecap="round"/>
+          <circle class="ai-antenna-beacon" cx="80" cy="33" r="4.5" filter="url(#neonBloom)"/>
 
           <!-- Curious Inquiry Beacon (Phase 1) -->
           <g class="ai-curious-beacon">
             <circle cx="94" cy="26" r="6" fill="rgba(0, 242, 254, 0.2)" stroke="#00f2fe" stroke-width="1.5"/>
-            <circle cx="94" cy="26" r="3" fill="#00f2fe" opacity="0.3"/>
             <text x="94" y="29.5" font-size="8" font-weight="900" text-anchor="middle" fill="#00f2fe">?</text>
           </g>
 
@@ -242,45 +135,25 @@ function getMascotSvgMarkup() {
             <path d="M116 32 L118 36 L122 38 L118 40 L116 44 L114 40 L110 38 L114 36 Z" fill="#10b981" filter="url(#neonBloom)" class="sparkle-star s2"/>
             <circle cx="106" cy="24" r="2" fill="#00f2fe" filter="url(#neonBloom)"/>
             <circle cx="54" cy="28" r="2.2" fill="#fbbf24" filter="url(#neonBloom)"/>
-            <!-- Additional micro-sparkles -->
-            <circle class="sparkle-micro" cx="42" cy="40" r="1" fill="#fbbf24" filter="url(#neonBloom)"/>
-            <circle class="sparkle-micro" cx="120" cy="36" r="1" fill="#10b981" filter="url(#neonBloom)"/>
-            <circle class="sparkle-micro" cx="70" cy="20" r="0.8" fill="#00f2fe" filter="url(#neonBloom)"/>
           </g>
 
-          <!-- Helmet Box - Multi-layer for depth -->
-          <rect class="ai-head-helmet-base" x="53" y="44" width="54" height="40" rx="15" fill="#050a14" stroke="#00f2fe" stroke-width="1" opacity="0.4"/>
+          <!-- Helmet Box -->
           <rect class="ai-head-helmet" x="55" y="46" width="50" height="36" rx="13" stroke-width="2.2"/>
-          <rect class="ai-head-helmet-inner" x="57" y="48" width="46" height="32" rx="11" fill="none" stroke="#00f2fe" stroke-width="0.8" opacity="0.3"/>
-          <!-- Visor Specular Reflection - Dynamic -->
+          <!-- Visor Specular Reflection -->
           <path class="ai-visor-glint" d="M58 50 Q80 45 102 50" stroke="#ffffff" stroke-width="1.6" opacity="0.7" stroke-linecap="round"/>
-          <path class="ai-visor-glint-secondary" d="M62 68 Q80 65 98 68" stroke="#00f2fe" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
 
-          <!-- Face Screen & Visor - Layered -->
-          <rect class="ai-visor-screen-bg" x="59" y="50" width="42" height="28" rx="9" fill="#020812" stroke="none"/>
+          <!-- Face Screen & Visor -->
           <rect class="ai-visor-screen" x="61" y="52" width="38" height="24" rx="7"/>
-          <rect class="ai-visor-screen-inner" x="63" y="54" width="34" height="20" rx="5" fill="none" stroke="#00f2fe" stroke-width="0.5" opacity="0.2"/>
 
           <!-- Curious Brow (Phase 1) -->
           <path class="ai-brow-curious" d="M66 55 Q71 51 77 54" stroke="#00f2fe" stroke-width="2.2" stroke-linecap="round" fill="none"/>
 
-          <!-- Expressive Glowing Eyes (Thinking & Scanning) - Multi-layer -->
+          <!-- Expressive Glowing Eyes (Thinking & Scanning) -->
           <g class="ai-eyes-group">
-            <!-- Eye sockets/glow -->
-            <rect class="ai-eye-glow-l" x="65" y="56" width="12.5" height="14" rx="6" fill="#00f2fe" opacity="0.15" filter="url(#neonBloom)"/>
-            <rect class="ai-eye-glow-r" x="82.5" y="56" width="12.5" height="14" rx="6" fill="#00f2fe" opacity="0.15" filter="url(#neonBloom)"/>
-            <!-- Eye base -->
             <rect class="ai-eye-left" x="67" y="58" width="8.5" height="10" rx="4.2" filter="url(#neonBloom)"/>
             <rect class="ai-eye-right" x="84.5" y="58" width="8.5" height="10" rx="4.2" filter="url(#neonBloom)"/>
-            <!-- Pupils with highlight -->
             <circle class="ai-pupil-left" cx="71" cy="62" r="1.8" fill="#ffffff"/>
             <circle class="ai-pupil-right" cx="89" cy="62" r="1.8" fill="#ffffff"/>
-            <!-- Specular highlights on pupils -->
-            <circle class="ai-pupil-highlight-l" cx="69.5" cy="60.5" r="0.6" fill="#ffffff" opacity="0.9"/>
-            <circle class="ai-pupil-highlight-r" cx="87.5" cy="60.5" r="0.6" fill="#ffffff" opacity="0.9"/>
-            <!-- Eye scan lines (subtle) -->
-            <line class="ai-eye-scan-l" x1="67" y1="62" x2="75.5" y2="62" stroke="#00f2fe" stroke-width="0.4" opacity="0.3"/>
-            <line class="ai-eye-scan-r" x1="84.5" y1="62" x2="93" y2="62" stroke="#00f2fe" stroke-width="0.4" opacity="0.3"/>
           </g>
 
           <!-- Happy Crescent Eyes (Phase 3 Eureka Celebration) -->
@@ -289,11 +162,9 @@ function getMascotSvgMarkup() {
             <path class="ai-eye-happy-r" d="M83.5 65 Q88.8 58 94 65" stroke="#00f2fe" stroke-width="2.6" stroke-linecap="round" fill="none" filter="url(#neonBloom)"/>
           </g>
 
-          <!-- Rosy Cheeks - Enhanced -->
-          <ellipse class="ai-blush-left" cx="66" cy="71" rx="3" ry="1.6" fill="rgba(0, 242, 254, 0.35)" filter="url(#innerGlow)"/>
-          <ellipse class="ai-blush-right" cx="94" cy="71" rx="3" ry="1.6" fill="rgba(0, 242, 254, 0.35)" filter="url(#innerGlow)"/>
-          <ellipse class="ai-blush-highlight-l" cx="65" cy="70" rx="1.2" ry="0.6" fill="#ffffff" opacity="0.4"/>
-          <ellipse class="ai-blush-highlight-r" cx="93" cy="70" rx="1.2" ry="0.6" fill="#ffffff" opacity="0.4"/>
+          <!-- Rosy Cheeks -->
+          <ellipse class="ai-blush-left" cx="66" cy="71" rx="3" ry="1.6"/>
+          <ellipse class="ai-blush-right" cx="94" cy="71" rx="3" ry="1.6"/>
 
           <!-- Mouth Variations -->
           <!-- Regular Smile -->
@@ -302,125 +173,69 @@ function getMascotSvgMarkup() {
           <ellipse class="ai-mouth-curious" cx="80" cy="71" rx="2.5" ry="3.2" stroke-width="2" stroke="#00f2fe" fill="none"/>
           <!-- Happy Wide Smile (Phase 3) -->
           <path class="ai-mouth-happy" d="M74 69 Q80 77 86 69 Z" fill="#00f2fe" filter="url(#neonBloom)"/>
-          <!-- Mouth highlight for happy -->
-          <path class="ai-mouth-happy-highlight" d="M75 70 Q80 72 85 70" stroke="#ffffff" stroke-width="1" opacity="0.4" fill="none" stroke-linecap="round"/>
         </g>
       </g>
 
       <!-- ==================== CHARACTER 2: "SPARKY" (COMPANION) ==================== -->
       <g class="character-sparky-group">
-        <!-- Bushy Wagging Tail - Multi-segment for fluid motion -->
+        <!-- Bushy Wagging Tail -->
         <g class="sparky-tail-rig">
-          <path class="sparky-tail-base" d="M192 104 Q205 98 198 90" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.3"/>
-          <path class="sparky-tail-mid" d="M198 90 Q212 82 210 76" stroke-width="4.5" stroke-linecap="round" fill="none" opacity="0.5"/>
           <path class="sparky-tail-path" d="M192 104 Q216 92 210 76 Q200 64 192 78" stroke-width="4" stroke-linecap="round" fill="none" filter="url(#neonBloom)"/>
-          <path class="sparky-tail-tip" d="M210 76 Q214 72 216 68" stroke-width="3" stroke-linecap="round" fill="none" stroke="#38bdf8" opacity="0.6"/>
           <circle class="sparky-tail-pom" cx="210" cy="76" r="3.5" filter="url(#neonBloom)"/>
-          <circle class="sparky-tail-pom-inner" cx="210" cy="76" r="1.8" fill="#ffffff" filter="url(#neonBloom)"/>
-          <!-- Fur tufts on tail -->
-          <g class="sparky-tail-tufts">
-            <path d="M198 94 L193 88" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-            <path d="M202 86 L196 80" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-            <path d="M206 78 L200 72" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-          </g>
         </g>
 
-        <!-- Body - Layered with fur texture suggestion -->
-        <ellipse class="sparky-body-shadow" cx="178" cy="108" rx="20" ry="16" fill="rgba(0,0,0,0.15)"/>
+        <!-- Body -->
         <ellipse class="sparky-body-shape" cx="178" cy="106" rx="19" ry="15" stroke-width="2.2"/>
-        <ellipse class="sparky-body-highlight" cx="172" cy="98" rx="8" ry="5" fill="url(#sparkyFurHighlight)" opacity="0.6"/>
-        <!-- Chest fluff -->
-        <ellipse class="sparky-chest-fluff" cx="178" cy="114" rx="12" ry="6" fill="url(#sparkyFurHighlight)" opacity="0.4"/>
-
         <g class="sparky-paws-group">
           <rect class="sparky-paws-l" x="166" y="115" width="8" height="12" rx="4"/>
           <rect class="sparky-paws-r" x="182" y="115" width="8" height="12" rx="4"/>
-          <!-- Paw pads -->
-          <circle class="sparky-paw-pad-l1" cx="168" cy="125" r="1.2" fill="#ff477e" opacity="0.6"/>
-          <circle class="sparky-paw-pad-l2" cx="171" cy="125" r="1.2" fill="#ff477e" opacity="0.6"/>
-          <circle class="sparky-paw-pad-r1" cx="184" cy="125" r="1.2" fill="#ff477e" opacity="0.6"/>
-          <circle class="sparky-paw-pad-r2" cx="187" cy="125" r="1.2" fill="#ff477e" opacity="0.6"/>
         </g>
 
-        <!-- Collar & Charm - Enhanced -->
-        <path class="sparky-collar" d="M168 90 Q178 96 188 90" stroke-width="2.6" fill="none" filter="url(#neonBloom)"/>
-        <path class="sparky-collar-inner" d="M170 91 Q178 95 186 91" stroke="url(#collarGradientDark)" stroke-width="1.5" fill="none" opacity="0.5"/>
+        <!-- Collar & Charm -->
+        <path class="sparky-collar" d="M168 90 Q178 96 188 90" stroke-width="2.6" fill="none"/>
         <circle class="sparky-collar-tag" cx="178" cy="96" r="3" filter="url(#neonBloom)"/>
-        <circle class="sparky-collar-tag-inner" cx="178" cy="96" r="1.5" fill="url(#tagGradientDark)"/>
-        <text class="sparky-tag-text" x="178" y="98" font-size="3" font-weight="900" text-anchor="middle" fill="#02101f">★</text>
 
         <!-- Head Unit -->
         <g class="sparky-head-unit">
-          <!-- Ears - Floppy with inner detail -->
+          <!-- Ears -->
           <g class="sparky-ear-l">
-            <path class="ear-shape-l" d="M167 76 Q156 62 165 56 Q174 62 171 74" stroke-width="2" fill="url(#earGradientDark)" filter="url(#neonBloom)"/>
-            <path class="ear-inner-l" d="M167 72 Q161 63 166 60 Q171 63 169 71" fill="url(#earInnerGlow)"/>
-            <!-- Ear fluff -->
-            <path class="ear-fluff-l" d="M165 68 L160 62" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+            <path class="ear-shape-l" d="M167 76 Q156 62 165 56 Q174 62 171 74" stroke-width="2" filter="url(#neonBloom)"/>
+            <path class="ear-inner-l" d="M167 72 Q161 63 166 60 Q171 63 169 71"/>
           </g>
           <g class="sparky-ear-r">
-            <path class="ear-shape-r" d="M189 76 Q200 62 191 56 Q182 62 185 74" stroke-width="2" fill="url(#earGradientDark)" filter="url(#neonBloom)"/>
-            <path class="ear-inner-r" d="M189 72 Q195 63 190 60 Q185 63 187 71" fill="url(#earInnerGlow)"/>
-            <path class="ear-fluff-r" d="M191 68 L196 62" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+            <path class="ear-shape-r" d="M189 76 Q200 62 191 56 Q182 62 185 74" stroke-width="2" filter="url(#neonBloom)"/>
+            <path class="ear-inner-r" d="M189 72 Q195 63 190 60 Q185 63 187 71"/>
           </g>
 
-          <!-- Face Base - Layered sphere -->
-          <circle class="sparky-head-shadow" cx="180" cy="82" r="17" fill="rgba(0,0,0,0.12)"/>
+          <!-- Face Base -->
           <circle class="sparky-head-sphere" cx="178" cy="80" r="16" stroke-width="2.2" filter="url(#neonBloom)"/>
-          <circle class="sparky-head-highlight" cx="172" cy="74" r="6" fill="url(#sparkyFurHighlight)" opacity="0.5"/>
 
-          <!-- Big Expressive Eyes - Multi-layer for depth -->
-          <g class="sparky-eyes-group">
-            <!-- Eye whites with subtle blue tint -->
-            <ellipse class="sparky-eye-white-l" cx="172" cy="78" rx="3.5" ry="4.5" fill="#eef8ff"/>
-            <ellipse class="sparky-eye-white-r" cx="184" cy="78" rx="3.5" ry="4.5" fill="#eef8ff"/>
-            <!-- Iris -->
-            <circle class="sparky-iris-l" cx="172" cy="78" r="2.8" fill="#0c4a6e"/>
-            <circle class="sparky-iris-r" cx="184" cy="78" r="2.8" fill="#0c4a6e"/>
-            <!-- Pupils -->
-            <circle class="sparky-pupil-l" cx="172.5" cy="77.5" r="2.2"/>
-            <circle class="sparky-pupil-r" cx="183.5" cy="77.5" r="2.2"/>
-            <!-- Pupil highlights (multiple for realism) -->
-            <circle cx="174" cy="76" r="1" fill="#ffffff"/>
-            <circle cx="185" cy="76" r="1" fill="#ffffff"/>
-            <circle class="sparky-pupil-highlight-2-l" cx="171.5" cy="78.5" r="0.5" fill="#ffffff" opacity="0.6"/>
-            <circle class="sparky-pupil-highlight-2-r" cx="183" cy="78.5" r="0.5" fill="#ffffff" opacity="0.6"/>
-            <!-- Eye rim -->
-            <ellipse class="sparky-eye-rim-l" cx="172" cy="78" rx="3.5" ry="4.5" fill="none" stroke="#0c4a6e" stroke-width="0.8" opacity="0.3"/>
-            <ellipse class="sparky-eye-rim-r" cx="184" cy="78" rx="3.5" ry="4.5" fill="none" stroke="#0c4a6e" stroke-width="0.8" opacity="0.3"/>
-          </g>
+          <!-- Big Expressive Eyes -->
+          <ellipse class="sparky-eye-white-l" cx="172" cy="78" rx="3.5" ry="4.5" fill="#ffffff"/>
+          <circle class="sparky-pupil-l" cx="172.5" cy="77.5" r="2.2"/>
+          <circle cx="174" cy="76" r="1" fill="#ffffff"/>
 
-          <!-- Snout & Nose - 3D shaping -->
-          <ellipse class="sparky-snout-shadow" cx="180" cy="88" rx="6" ry="4" fill="rgba(0,0,0,0.1)"/>
-          <ellipse class="sparky-snout" cx="178" cy="86" rx="5.5" ry="3.8" fill="#0a1626" stroke="#1a3a5c" stroke-width="0.8"/>
-          <ellipse class="sparky-snout-highlight" cx="176" cy="84" rx="2" ry="1" fill="#1a3a5c" opacity="0.4"/>
-          <polygon class="sparky-nose" points="176.5,85 179.5,85 178,87.5" fill="#050a14"/>
-          <polygon class="sparky-nose-highlight" points="177,85 179,85 178,86.5" fill="#1a3a5c" opacity="0.3"/>
+          <ellipse class="sparky-eye-white-r" cx="184" cy="78" rx="3.5" ry="4.5" fill="#ffffff"/>
+          <circle class="sparky-pupil-r" cx="183.5" cy="77.5" r="2.2"/>
+          <circle cx="185" cy="76" r="1" fill="#ffffff"/>
+
+          <!-- Snout & Nose -->
+          <ellipse class="sparky-snout" cx="178" cy="86" rx="5.5" ry="3.8"/>
+          <polygon class="sparky-nose" points="176.5,85 179.5,85 178,87.5"/>
           <path class="sparky-happy-tongue" d="M176.5,88 Q178,92 179.5,88" stroke="#ff477e" stroke-width="2" fill="#ff477e" stroke-linecap="round"/>
-          <path class="sparky-tongue-highlight" d="M177,89 Q178,91 179,89" stroke="#ff7a9e" stroke-width="1" fill="none" stroke-linecap="round"/>
 
-          <!-- Whiskers - Tapered -->
-          <line class="sparky-whisker-l1" x1="164" y1="84" x2="155" y2="82" stroke-width="1.4" opacity="0.6" stroke-linecap="round"/>
-          <line class="sparky-whisker-l2" x1="164" y1="87" x2="156" y2="88" stroke-width="1.2" opacity="0.5" stroke-linecap="round"/>
-          <line class="sparky-whisker-l3" x1="164" y1="90" x2="157" y2="92" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
-          <line class="sparky-whisker-r1" x1="192" y1="84" x2="201" y2="82" stroke-width="1.4" opacity="0.6" stroke-linecap="round"/>
-          <line class="sparky-whisker-r2" x1="192" y1="87" x2="200" y2="88" stroke-width="1.2" opacity="0.5" stroke-linecap="round"/>
-          <line class="sparky-whisker-r3" x1="192" y1="90" x2="199" y2="92" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
-
-          <!-- Brow fur for expression -->
-          <path class="sparky-brow-l" d="M168 72 Q170 70 172 72" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.4"/>
-          <path class="sparky-brow-r" d="M184 72 Q186 70 188 72" stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.4"/>
+          <!-- Whiskers -->
+          <line x1="164" y1="84" x2="157" y2="83" stroke-width="1.2" opacity="0.6"/>
+          <line x1="164" y1="87" x2="158" y2="88" stroke-width="1.2" opacity="0.6"/>
+          <line x1="192" y1="84" x2="199" y2="83" stroke-width="1.2" opacity="0.6"/>
+          <line x1="192" y1="87" x2="198" y2="88" stroke-width="1.2" opacity="0.6"/>
         </g>
 
-        <!-- Magnifying Glass for Investigating - Enhanced -->
+        <!-- Magnifying Glass for Investigating -->
         <g class="sparky-mag-glass">
           <line class="mag-handle" x1="160" y1="104" x2="152" y2="114" stroke-width="2.8" stroke-linecap="round"/>
-          <line class="mag-handle-inner" x1="159" y1="105" x2="153" y2="113" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
           <circle class="mag-rim" cx="163" cy="100" r="8" stroke-width="2.4" filter="url(#neonBloom)"/>
-          <circle class="mag-rim-inner" cx="163" cy="100" r="7.2" stroke="#fbbf24" stroke-width="1" fill="none" opacity="0.4"/>
           <circle class="mag-lens" cx="163" cy="100" r="6.8" fill="rgba(0, 242, 254, 0.22)"/>
-          <circle class="mag-lens-glare" cx="160" cy="97" r="1.5" fill="#ffffff" opacity="0.5"/>
-          <circle class="mag-lens-reflection" cx="166" cy="103" r="1" fill="#00f2fe" opacity="0.3"/>
         </g>
       </g>
     </svg>
