@@ -86,25 +86,6 @@ def select_relevant_sentences(
             })
             order_idx += 1
 
-    # 2. If top document has a strong match (>= 0.45), include canonical sentences from that document
-    doc_sentence_list: list[str] = []
-    if top_doc_id and top_sim >= 0.45:
-        doc_obj = get_doc_by_id(top_doc_id)
-        if doc_obj and "text" in doc_obj:
-            doc_sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", doc_obj["text"]) if s.strip()]
-            doc_sentence_list = doc_sents
-            for sent in doc_sents:
-                if len(sent) < 10 or sent in seen_texts:
-                    continue
-                seen_texts.add(sent)
-                candidate_sentences.append({
-                    "sentence": sent,
-                    "doc_id": top_doc_id,
-                    "chunk_sim": top_sim * 0.90,
-                    "order_idx": order_idx,
-                })
-                order_idx += 1
-
     if not candidate_sentences:
         return "", []
 
@@ -163,23 +144,18 @@ def select_relevant_sentences(
     scored_candidates.sort(key=lambda x: x["score"], reverse=True)
     selected = [scored_candidates[0]]
     top_score = scored_candidates[0]["score"]
-    top_sent = scored_candidates[0]["sentence"]
 
-    # If the top sentence has immediate following sentences in the canonical document, prioritize them for completeness
-    if doc_sentence_list and top_sent in doc_sentence_list:
-        top_idx = doc_sentence_list.index(top_sent)
-        for offset in (1, 2):
-            if top_idx + offset < len(doc_sentence_list):
-                next_doc_sent = doc_sentence_list[top_idx + offset]
-                matching_cand = next((c for c in scored_candidates if c["sentence"] == next_doc_sent), None)
-                if matching_cand and matching_cand not in selected:
-                    selected.append(matching_cand)
+    other_sevs_set = set()
+    if sev_in_query:
+        other_sevs_set = {"sev-1", "sev-2", "sev-3"} - {sev_in_query}
 
     max_sentences = 4
     for next_cand in scored_candidates[1:]:
         if len(selected) >= max_sentences:
             break
         if next_cand in selected:
+            continue
+        if other_sevs_set and any(other in next_cand["sentence"].lower().replace(" ", "-") for other in other_sevs_set):
             continue
         is_same_doc = next_cand["doc_id"] == top_doc_id
         cutoff = 0.75 if is_same_doc else 0.30

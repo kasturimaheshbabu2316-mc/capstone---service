@@ -4,6 +4,8 @@ Tests core user flows: health check, quick actions, ticket lookup, settings draw
 Run with: pytest tests/e2e/test_glassmorphism_ui.spec.py -v --headed (for visual) or headless
 """
 import pytest
+
+playwright = pytest.importorskip("playwright")
 from playwright.sync_api import Page, expect
 
 BASE_URL = "http://127.0.0.1:8000"

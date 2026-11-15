@@ -1,0 +1,99 @@
+================================================================================
+OLA SUPPORT INTELLIGENCE — CLEAN-CLONE OFFLINE VERIFICATION
+Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1794754120
+Python Executable: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe (3.11.15)
+================================================================================
+
+[1/6] Cloning repository into clean temporary directory...
+    -> git clone completed successfully.
+
+[2/6] Syncing working tree changes into clone...
+    -> All working tree changes synchronized.
+
+================================================================================
+[3/6] Running One-Time Model Prefetch Check...
+Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe scripts/prefetch_models.py
+================================================================================
+  ================================================================================
+  OLA SUPPORT INTELLIGENCE — ONE-TIME MODEL PREFETCH
+  ================================================================================
+  [*] Target model: sentence-transformers/all-MiniLM-L6-v2
+  [*] Downloading / verifying model in Hugging Face local cache...
+  [+] Successfully loaded and cached model: SentenceTransformer(
+    (0): Transformer({'transformer_task': 'feature-extraction', 'modality_config': {'text': {'method': 'forward', 'method_output_name': 'last_hidden_state'}}, 'module_output_name': 'token_embeddings', 'architecture': 'BertModel'})
+    (1): Pooling({'embedding_dimension': 384, 'pooling_mode': 'mean', 'include_prompt': True})
+    (2): Normalize({'module_input_name': 'sentence_embedding', 'module_output_name': 'sentence_embedding'})
+  )
+  [+] One-time prefetch completed successfully.
+  [stderr] Could not reach the Hub (Cannot reach https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable.). Using cached commit hash for 'sentence-transformers/all-MiniLM-L6-v2'.
+[+] One-Time Model Prefetch Check: PASS
+
+================================================================================
+[4/6] Running Knowledge Base Ingestion & ChromaDB Indexing...
+Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe rag/index.py
+================================================================================
+  ===========================================================================
+  OLA DOMAIN SUPPORT AGENT — TASK 3: CHUNKING & CHROMADB INDEXING
+  ===========================================================================
+  
+  1. INDEXING KNOWLEDGE BASE DOCUMENTS (IDEMPOTENT UPSERT)...
+    • Collection 'kb_fixed'    : 29 chunks (300 chars, 60 overlap)
+    • Collection 'kb_sentence' : 51 chunks (regex sentence-based)
+    • Embedding Model          : sentence-transformers/all-MiniLM-L6-v2
+    • Distance Metric          : Cosine (hnsw:space = cosine)
+  
+  2. SAMPLE QUERY RETRIEVAL:
+     Query: "What is the resolution SLA for a Sev-1 safety incident?"
+  
+  --- Top-3 Results from 'kb_fixed' ---
+    [1] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_fixed_0 | Similarity: 0.6679
+        Text: "Ola enforces strict resolution Service Level Agreements based on ticket severity levels. Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours. Sev-2 high-priority issues require an initial acknowledgement within 1 hour and res"
+    [2] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_fixed_1 | Similarity: 0.4343
+        Text: "ues require an initial acknowledgement within 1 hour and resolution within 12 hours. Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours. Sev-4 low-priority items must receive an initial response within 12 hours and final closure within 48 hours."
+    [3] Doc ID: escalation_matrix | Chunk ID: escalation_matrix_fixed_0 | Similarity: 0.4245
+        Text: "Unresolved support tickets follow Ola's three-tier organizational escalation matrix. Frontline Tier-1 customer representatives own ticket resolution for the initial 2 hours following creation. If an issue breaches its milestone threshold or requires specialized approval, the ticket automatically esc"
+  
+  --- Top-3 Results from 'kb_sentence' ---
+    [1] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_sent_1 | Similarity: 0.6299
+        Text: "Sev-1 safety incidents require a mandatory first response within 15 minutes and complete operational resolution within 4 hours."
+    [2] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_sent_2 | Similarity: 0.4799
+        Text: "Sev-2 high-priority issues require an initial acknowledgement within 1 hour and resolution within 12 hours."
+    [3] Doc ID: sla_by_severity | Chunk ID: sla_by_severity_sent_3 | Similarity: 0.4755
+        Text: "Sev-3 standard inquiries mandate response within 4 hours and resolution within 24 hours."
+  
+  ===========================================================================
+  TASK 3 VERIFICATION COMPLETE: ALL CHUNKS INDEXED & RETRIEVED SUCCESSFULLY
+  ===========================================================================
+  
+  [Saved transcript to transcripts\03_indexing.txt]
+[+] Knowledge Base Ingestion & ChromaDB Indexing: PASS
+
+================================================================================
+[5/6] Running Full PyTest Suite (Offline Socket Guard Active)...
+Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe -m pytest -q
+================================================================================
+  
+  =================================== ERRORS ====================================
+  __________ ERROR collecting tests/e2e/test_glassmorphism_ui.spec.py ___________
+  ImportError while importing test module 'C:\Users\kastu\AppData\Local\Temp\cleancheck_1794754120\tests\e2e\test_glassmorphism_ui.spec.py'.
+  Hint: make sure your test modules/packages have valid Python names.
+  Traceback:
+  ..\..\..\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\importlib\__init__.py:126: in import_module
+      return _bootstrap._gcd_import(name[level:], package, level)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  E   ModuleNotFoundError: No module named 'test_glassmorphism_ui'
+  ============================== warnings summary ===============================
+  tests\test_cache.py:14
+    C:\Users\kastu\AppData\Local\Temp\cleancheck_1794754120\tests\test_cache.py:14: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
+      from crew.memory import (
+  
+  -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+  =========================== short test summary info ===========================
+  ERROR tests/e2e/test_glassmorphism_ui.spec.py
+  !!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+  1 warning, 1 error in 9.39s
+[!] Full PyTest Suite (Offline Socket Guard Active): FAILED (code 2)
+
+================================================================================
+CLEAN-CLONE OFFLINE VERIFICATION FAILED.
+================================================================================
