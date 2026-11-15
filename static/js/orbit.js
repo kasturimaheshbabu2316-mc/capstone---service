@@ -4,7 +4,7 @@
  * Enhanced with PBR materials, post-processing, physics-based particles, and realistic lighting.
  */
 
-export const Orbit = (() => {
+const Orbit = (() => {
   let instance = null;
   let container = null;
   let canvas = null;
@@ -46,12 +46,12 @@ export const Orbit = (() => {
   function ensurePColors() {
     if (!pColors && typeof THREE !== "undefined") {
       pColors = [
-        0x00f2fe), // cyan
-        0xf43f5e), // rose
-        0xa855f7), // purple
-        0xfbbf24), // gold
-        0x34d399), // emerald
-        0xffffff)  // white
+        0x00f2fe, // cyan
+        0xf43f5e, // rose
+        0xa855f7, // purple
+        0xfbbf24, // gold
+        0x34d399, // emerald
+        0xffffff  // white
       ];
     }
     return pColors;
@@ -359,8 +359,8 @@ export const Orbit = (() => {
     // =====================================================================
     const coreGeo = new THREE.SphereGeometry(0.72, 64, 64);
     coreMat = new THREE.MeshStandardMaterial({
-      color: 0xffffff),
-      emissive: 0x00f2fe),
+      color: 0xffffff,
+      emissive: 0x00f2fe,
       emissiveIntensity: 1.5,
       metalness: 0.0,
       roughness: 0.1,
@@ -374,7 +374,7 @@ export const Orbit = (() => {
     // Core inner glow shell
     const coreGlowGeo = new THREE.SphereGeometry(0.78, 32, 32);
     const coreGlowMat = new THREE.MeshBasicMaterial({
-      color: 0x00f2fe),
+      color: 0x00f2fe,
       transparent: true,
       opacity: 0.15,
       side: THREE.BackSide,
@@ -390,7 +390,7 @@ export const Orbit = (() => {
     // =====================================================================
     const glassGeo = new THREE.SphereGeometry(1.02, 64, 64);
     glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0x8b5cf6),
+      color: 0x8b5cf6,
       transmission: 0.92,
       opacity: 1.0,
       transparent: true,
@@ -406,7 +406,7 @@ export const Orbit = (() => {
     // Outer glass shell for refraction highlights
     const glassShellGeo = new THREE.SphereGeometry(1.08, 64, 64);
     glassShellMat = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff),
+      color: 0xffffff,
       transmission: 0.98,
       opacity: 0.3,
       transparent: true,
@@ -427,7 +427,7 @@ export const Orbit = (() => {
     // =====================================================================
     const wireGeo1 = new THREE.IcosahedronGeometry(0.88, 2);
     wireMat1 = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8),
+      color: 0x38bdf8,
       wireframe: true,
       transparent: true,
       opacity: 0.5,
@@ -439,7 +439,7 @@ export const Orbit = (() => {
 
     const wireGeo2 = new THREE.DodecahedronGeometry(1.14, 1);
     wireMat2 = new THREE.MeshBasicMaterial({
-      color: 0xf43f5e),
+      color: 0xf43f5e,
       wireframe: true,
       transparent: true,
       opacity: 0.3,
@@ -527,7 +527,7 @@ export const Orbit = (() => {
     // =====================================================================
     energyFieldGeom = new THREE.SphereGeometry(2.3, 48, 48);
     energyFieldMat = new THREE.MeshBasicMaterial({
-      color: 0x00f2fe),
+      color: 0x00f2fe,
       transparent: true,
       opacity: 0.03,
       side: THREE.BackSide,
@@ -764,7 +764,7 @@ export const Orbit = (() => {
       clickImpulse = 1.4;
       if (coreMat) {
         coreMat.emissiveIntensity = 2.5;
-        coreMat.emissive = 0x00f2fe);
+        coreMat.emissive.set(0x00f2fe);
       }
       if (bloomPass) {
         bloomPass.strength = 1.0;
@@ -775,7 +775,7 @@ export const Orbit = (() => {
       targetSpeed = 2.2;
       clickImpulse = 1.6;
       if (coreMat) {
-        coreMat.emissive = 0xf43f5e);
+        coreMat.emissive.set(0xf43f5e);
         coreMat.emissiveIntensity = 3.0;
       }
       if (bloomPass) {
@@ -904,7 +904,7 @@ export const Orbit = (() => {
       if (lightMagenta) { lightMagenta.intensity = 4.8; lightMagenta.color.set(0xe11d48); }
       if (lightPurple) { lightPurple.intensity = 4.0; lightPurple.color.set(0x7c3aed); }
       if (lightGold) { lightGold.intensity = 3.8; lightGold.color.set(0xca8a04); }
-      if (hemiLight) { hemiLight.color.set(0x0284c7); hemiLight.groundColor= 0x1a1a3e); hemiLight.intensity = 1.8; }
+      if (hemiLight) { hemiLight.color.set(0x0284c7); hemiLight.groundColor.set(0x1a1a3e); hemiLight.intensity = 1.8; }
       if (dirLight) { dirLight.intensity = 1.0; dirLight.color.set(0xffffff); }
 
       energyFieldMat.color.set(0x0284c7);
@@ -962,7 +962,7 @@ export const Orbit = (() => {
       if (lightMagenta) { lightMagenta.intensity = 4.5; lightMagenta.color.set(0xf43f5e); }
       if (lightPurple) { lightPurple.intensity = 3.8; lightPurple.color.set(0xa855f7); }
       if (lightGold) { lightGold.intensity = 3.5; lightGold.color.set(0xfbbf24); }
-      if (hemiLight) { hemiLight.color.set(0x00f2fe); hemiLight.groundColor= 0x1a1a3e); hemiLight.intensity = 1.5; }
+      if (hemiLight) { hemiLight.color.set(0x00f2fe); hemiLight.groundColor.set(0x1a1a3e); hemiLight.intensity = 1.5; }
       if (dirLight) { dirLight.intensity = 0.8; dirLight.color.set(0xffffff); }
 
       energyFieldMat.color.set(0x00f2fe);
