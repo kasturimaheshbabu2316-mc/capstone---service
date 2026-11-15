@@ -44,6 +44,7 @@ htmlcov/
 
 # Editor & Scratch
 .vscode/
+.claude/
 scratch/
 node_modules/
 ola-support-agent/
