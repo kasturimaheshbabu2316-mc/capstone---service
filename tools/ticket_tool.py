@@ -45,6 +45,34 @@ def calculate_escalation_score(record: dict[str, Any]) -> float:
     return round(float(score), 4)
 
 
+def calculate_estimated_remaining_hours(record: dict[str, Any]) -> float:
+    """Calculates estimated resolution time remaining in hours.
+
+    If status is 'Resolved' or 'Closed', the ticket lifecycle has concluded (0.0h).
+    For active tickets (Open, In Progress, Escalated), calculates remaining SLA window
+    or expedited review window based on target resolution_time_hours and escalation state.
+    """
+    status = record.get("status", "")
+    if status in ("Resolved", "Closed"):
+        return 0.0
+
+    res_target = float(record.get("resolution_time_hours") or 24.0)
+    days = float(record.get("days_since_created") or 0.0)
+    is_escalated = bool(record.get("escalated", False)) or status == "Escalated"
+
+    if is_escalated:
+        # Escalated tickets operate under expedited Tier-2/Tier-3 review window (1.0h - 6.0h)
+        remaining = round(max(1.0, min(6.0, res_target * 0.25)), 1)
+    else:
+        elapsed_hours = days * 24.0
+        if elapsed_hours < res_target:
+            remaining = round(max(0.5, res_target - elapsed_hours), 1)
+        else:
+            remaining = round(max(0.5, min(8.0, res_target * 0.3)), 1)
+
+    return float(remaining)
+
+
 def get_escalation_threshold() -> tuple[float, list[float]]:
     """Calculates the 80th percentile escalation threshold across the seed-42 dataset."""
     all_scores = [calculate_escalation_score(rec) for rec in SUPPORT_TICKETS]
@@ -112,12 +140,16 @@ def check_support_ticket_status(record_id: str, caller_role: str | None = None) 
     recommend_escalation = score >= ESCALATION_THRESHOLD
 
     risk_level = "High Risk" if recommend_escalation else "Normal"
+    rem_hours = calculate_estimated_remaining_hours(record)
+    eta_summary = "Resolved" if record["status"] in ("Resolved", "Closed") else f"~{rem_hours}h remaining"
 
     return {
         "record_id": record["record_id"],
         "category": record["category"],
         "status": record["status"],
         "resolution_time_hours": record["resolution_time_hours"],
+        "estimated_remaining_hours": rem_hours,
+        "resolution_eta_summary": eta_summary,
         "days_since_created": record["days_since_created"],
         "escalated": record["escalated"],
         "escalation_score": score,
@@ -133,12 +165,16 @@ def get_all_tickets() -> list[dict[str, Any]]:
     for record in SUPPORT_TICKETS:
         score = calculate_escalation_score(record)
         recommend_esc = score >= ESCALATION_THRESHOLD
+        rem_hours = calculate_estimated_remaining_hours(record)
+        eta_summary = "Resolved" if record["status"] in ("Resolved", "Closed") else f"~{rem_hours}h remaining"
         results.append({
             "ticket_id": record["record_id"],
             "record_id": record["record_id"],
             "category": record["category"],
             "status": record["status"],
             "resolution_time_hours": record["resolution_time_hours"],
+            "estimated_remaining_hours": rem_hours,
+            "resolution_eta_summary": eta_summary,
             "days_since_created": record["days_since_created"],
             "escalated": record["escalated"],
             "escalation_score": score,
@@ -165,7 +201,7 @@ try:
             f"Escalated: {res.get('escalated', False)}\nEscalation Score: {res['escalation_score']}\n"
             f"Risk Level: {res['risk_level']}\nRecommend Escalation: {res['recommend_escalation']}"
         )
-except ImportError:
+except Exception:
     check_support_ticket_status_crew_tool = check_support_ticket_status
 
 

@@ -351,7 +351,7 @@ def _init_feedback_store() -> None:
                 "rating": 4,
                 "ticket_id": "TKT-0012",
                 "question": "Is ticket TKT-0012 escalated?",
-                "answer": "Ticket TKT-0012 is currently Open with an escalation score of 0.8124.",
+                "answer": "Ticket TKT-0012 is currently Open with an escalation score of 0.8124 (High Risk). Estimated resolution time remaining: ~4.2h.",
                 "suggestion": "Could you also display the estimated resolution time remaining?",
             },
         ]

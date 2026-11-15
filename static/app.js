@@ -1477,8 +1477,13 @@ document.addEventListener("DOMContentLoaded", () => {
       leftSpan.style.color = "var(--accent-cyan)";
       leftSpan.textContent = `🎫 ${tid} — ${ticket.category || "Support"}`;
 
+      const isResolved = String(ticket.status).toLowerCase() === "resolved" || String(ticket.status).toLowerCase() === "closed";
+      const remHours = ticket.estimated_remaining_hours !== undefined 
+        ? (isResolved ? "Resolved" : `~${ticket.estimated_remaining_hours}h left`)
+        : (isResolved ? "Resolved" : null);
+
       const rightSpan = document.createElement("span");
-      rightSpan.textContent = `Resolution time: ${resHours}h`;
+      rightSpan.textContent = remHours ? `Resolution: ${resHours}h · ${remHours}` : `Resolution time: ${resHours}h`;
 
       headerEl.appendChild(leftSpan);
       headerEl.appendChild(rightSpan);
@@ -2657,7 +2662,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 ${escapeHtml(t.status)}
               </span>
             </td>
-            <td><span style="font-weight:600; color:#f1f5f9;">${t.resolution_time_hours ?? 0}h</span></td>
+            <td>
+              <span style="font-weight:600; color:#f1f5f9;">${t.resolution_time_hours ?? 0}h</span>
+              ${t.estimated_remaining_hours !== undefined && t.status !== 'Resolved' && t.status !== 'Closed'
+                ? `<span style="display:block; font-size:0.72rem; color:#38bdf8; font-weight:600;">~${t.estimated_remaining_hours}h left</span>`
+                : (t.status === 'Resolved' || t.status === 'Closed' ? `<span style="display:block; font-size:0.72rem; color:#10b981; font-weight:600;">Resolved</span>` : '')}
+            </td>
             <td>
               <div style="display:flex; align-items:center; gap:10px;">
                 <span style="font-family:monospace; font-size:0.82rem; font-weight:700; color:${isHigh ? '#f43f5e' : '#10b981'}; width:32px;">${score.toFixed(2)}</span>
