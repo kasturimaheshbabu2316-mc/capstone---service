@@ -94,6 +94,7 @@ from observability import (
 )
 from security import (
     RateLimitMiddleware,
+    RateLimitConfig,
     SecurityHeadersMiddleware,
     RequestSizeMiddleware,
     SecurityConfig,

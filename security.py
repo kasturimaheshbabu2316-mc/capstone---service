@@ -198,8 +198,9 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         for key, value in SECURITY_HEADERS.items():
             response.headers[key] = value
 
-        # Remove server header
-        response.headers.pop("Server", None)
+        # Remove server header if present
+        if "server" in response.headers:
+            del response.headers["server"]
 
         return response
 
