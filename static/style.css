@@ -6153,17 +6153,17 @@ body.show-details .composer-footer {
 /* Left Collapsible Navigation Rail - Floating Island in Free Space */
 .nav-sidebar-drawer {
   position: fixed;
-  top: 78px;
+  top: 82px;
   left: 14px;
   bottom: 14px;
-  height: calc(100vh - 92px);
-  max-height: calc(100vh - 92px);
+  height: calc(100vh - 96px);
+  max-height: calc(100vh - 96px);
   width: 64px;
   border-radius: 20px;
   background: linear-gradient(180deg, rgba(14, 21, 34, 0.98) 0%, rgba(10, 15, 24, 0.99) 100%) !important;
   -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
   backdrop-filter: blur(32px) saturate(200%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
   display: flex;
   flex-direction: column;
   padding: 14px 8px;
@@ -6173,13 +6173,19 @@ body.show-details .composer-footer {
   overflow: hidden;
   -webkit-user-select: none;
   user-select: none;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), inset 1px 1px 0 rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 
+    0 20px 48px rgba(0, 0, 0, 0.8),
+    0 6px 18px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.12) !important;
 }
 
 [data-theme="light"] .nav-sidebar-drawer {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.99) 100%) !important;
-  border: 1px solid rgba(203, 213, 225, 0.85) !important;
-  box-shadow: 0 16px 36px rgba(148, 163, 184, 0.35), inset 1px 1px 0 rgba(255, 255, 255, 1) !important;
+  border: 1px solid rgba(203, 213, 225, 0.9) !important;
+  box-shadow: 
+    0 20px 44px rgba(148, 163, 184, 0.35),
+    0 4px 14px rgba(148, 163, 184, 0.2),
+    inset 1px 1px 0 rgba(255, 255, 255, 1) !important;
 }
 
 /* Refraction highlight on nav rail */
@@ -6888,13 +6894,13 @@ body.show-details .composer-footer {
 
 /* Dynamic Workspace Padding with Left Rail */
 .workspace {
-  --rail-current-pad: 64px;
+  --rail-current-pad: 94px;
   padding-left: var(--rail-current-pad);
   transition: padding-left 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .workspace.rail-open {
-  --rail-current-pad: 285px;
+  --rail-current-pad: 320px;
   padding-left: var(--rail-current-pad);
 }
 
