@@ -698,7 +698,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainWorkspace = document.getElementById("main-content-workspace");
   const railSearchBar = document.getElementById("rail-search-bar");
   const railSearchMini = document.getElementById("rail-search-mini");
-  let isNavDrawerOpen = false;
+  let isNavDrawerOpen = true;
 
   function setDrawerState(open) {
     isNavDrawerOpen = open;
