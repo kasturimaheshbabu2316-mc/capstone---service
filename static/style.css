@@ -6150,46 +6150,61 @@ body.show-details .composer-footer {
   color: #f1f5f9;
 }
 
-/* Left Collapsible Navigation Rail - Completely Transparent & Borderless (Free Space) */
+/* Left Collapsible Navigation Rail - Floating Island in Free Space */
 .nav-sidebar-drawer {
   position: fixed;
   top: 82px;
-  left: 14px;
-  bottom: 14px;
-  height: calc(100vh - 96px);
-  max-height: calc(100vh - 96px);
+  left: 16px;
+  bottom: 16px;
+  height: calc(100vh - 98px);
+  max-height: calc(100vh - 98px);
   width: 64px;
-  background: transparent !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-  border: none !important;
-  box-shadow: none !important;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(14, 21, 34, 0.98) 0%, rgba(10, 15, 24, 0.99) 100%) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+  backdrop-filter: blur(32px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
   display: flex;
   flex-direction: column;
   padding: 14px 8px;
   z-index: 100 !important;
   pointer-events: auto !important;
-  transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1), transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1), transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms ease;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-user-select: none;
   user-select: none;
+  box-shadow: 
+    0 20px 48px rgba(0, 0, 0, 0.8),
+    0 6px 18px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.12) !important;
 }
 
 [data-theme="light"] .nav-sidebar-drawer {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.99) 100%) !important;
+  border: 1px solid rgba(203, 213, 225, 0.9) !important;
+  box-shadow: 
+    0 20px 44px rgba(148, 163, 184, 0.35),
+    0 4px 14px rgba(148, 163, 184, 0.2),
+    inset 1px 1px 0 rgba(255, 255, 255, 1) !important;
 }
 
 /* Refraction highlight on nav rail */
 .nav-sidebar-drawer::before {
-  display: none !important;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .nav-sidebar-drawer.expanded {
-  width: 290px;
-  padding: 16px 14px;
+  width: 296px;
+  padding: 16px 20px 16px 16px;
 }
 
 .rail-header {
@@ -6198,7 +6213,7 @@ body.show-details .composer-footer {
   justify-content: space-between;
   padding-bottom: 12px;
   margin-bottom: 8px;
-  border-bottom: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   min-height: 40px;
 }
 
@@ -6446,7 +6461,7 @@ body.show-details .composer-footer {
   display: flex;
   align-items: center;
   height: 46px;
-  padding: 0 12px;
+  padding: 0 14px;
   border-radius: 13px;
   background: linear-gradient(145deg, #162030, #0f1622);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -6476,7 +6491,7 @@ body.show-details .composer-footer {
 
 .rail-nav-item:hover {
   color: #00f2fe;
-  transform: translateX(6px) scale(1.025);
+  transform: translateX(4px) scale(1.015);
   background: linear-gradient(145deg, #223249, #131e30);
   border-color: rgba(0, 242, 254, 0.45);
   box-shadow: 
@@ -6497,7 +6512,7 @@ body.show-details .composer-footer {
       -2px -2px 8px rgba(217, 70, 239, 0.35),
       inset 2px 2px 4px rgba(255, 255, 255, 0.75),
       inset -2px -2px 4px rgba(0, 0, 0, 0.25);
-    transform: translateX(3px) scale(1);
+    transform: translateX(2px) scale(1);
   }
   50% {
     box-shadow: 
@@ -6505,7 +6520,7 @@ body.show-details .composer-footer {
       -2px -2px 14px rgba(217, 70, 239, 0.6),
       inset 2px 2px 5px rgba(255, 255, 255, 0.85),
       inset -2px -2px 4px rgba(0, 0, 0, 0.2);
-    transform: translateX(3px) scale(1.015);
+    transform: translateX(2px) scale(1.01);
   }
 }
 
@@ -6611,7 +6626,7 @@ body.show-details .composer-footer {
 .rail-operational-context {
   margin-top: 14px;
   padding-top: 12px;
-  border-top: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -6620,7 +6635,7 @@ body.show-details .composer-footer {
 .rail-controls-section {
   margin-top: 14px;
   padding-top: 12px;
-  border-top: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -6833,7 +6848,7 @@ body.show-details .composer-footer {
 .rail-footer {
   margin-top: auto;
   padding-top: 12px;
-  border-top: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6886,7 +6901,7 @@ body.show-details .composer-footer {
 }
 
 .workspace.rail-open {
-  --rail-current-pad: 320px;
+  --rail-current-pad: 356px;
   padding-left: var(--rail-current-pad);
 }
 
