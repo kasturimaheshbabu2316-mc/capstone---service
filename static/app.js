@@ -831,7 +831,8 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.classList.add("active");
       const filter = btn.getAttribute("data-filter") || "all";
       let delayIndex = 0;
-      document.querySelectorAll(".starter-card").forEach(card => {
+      const targetCards = examplesPopover ? examplesPopover.querySelectorAll(".starter-card") : document.querySelectorAll(".starter-card");
+      targetCards.forEach(card => {
         const cat = card.getAttribute("data-category");
         const matches = (filter === "all" || cat === filter);
         if (matches) {
