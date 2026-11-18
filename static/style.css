@@ -6150,7 +6150,7 @@ body.show-details .composer-footer {
   color: #f1f5f9;
 }
 
-/* Left Collapsible Navigation Rail - Floating Island in Free Space */
+/* Left Collapsible Navigation Rail - Completely Transparent & Borderless (Free Space) */
 .nav-sidebar-drawer {
   position: fixed;
   top: 82px;
@@ -6159,46 +6159,32 @@ body.show-details .composer-footer {
   height: calc(100vh - 96px);
   max-height: calc(100vh - 96px);
   width: 64px;
-  border-radius: 20px;
-  background: linear-gradient(180deg, rgba(14, 21, 34, 0.98) 0%, rgba(10, 15, 24, 0.99) 100%) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
-  backdrop-filter: blur(32px) saturate(200%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
   display: flex;
   flex-direction: column;
   padding: 14px 8px;
   z-index: 100 !important;
   pointer-events: auto !important;
-  transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1), transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms ease;
-  overflow: hidden;
+  transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1), transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
   -webkit-user-select: none;
   user-select: none;
-  box-shadow: 
-    0 20px 48px rgba(0, 0, 0, 0.8),
-    0 6px 18px rgba(0, 0, 0, 0.5),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.12) !important;
 }
 
 [data-theme="light"] .nav-sidebar-drawer {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.99) 100%) !important;
-  border: 1px solid rgba(203, 213, 225, 0.9) !important;
-  box-shadow: 
-    0 20px 44px rgba(148, 163, 184, 0.35),
-    0 4px 14px rgba(148, 163, 184, 0.2),
-    inset 1px 1px 0 rgba(255, 255, 255, 1) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* Refraction highlight on nav rail */
 .nav-sidebar-drawer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 20px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
-  pointer-events: none;
+  display: none !important;
 }
 
 .nav-sidebar-drawer.expanded {
@@ -6212,7 +6198,7 @@ body.show-details .composer-footer {
   justify-content: space-between;
   padding-bottom: 12px;
   margin-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
   min-height: 40px;
 }
 
@@ -6625,7 +6611,7 @@ body.show-details .composer-footer {
 .rail-operational-context {
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -6634,7 +6620,7 @@ body.show-details .composer-footer {
 .rail-controls-section {
   margin-top: 14px;
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -6847,7 +6833,7 @@ body.show-details .composer-footer {
 .rail-footer {
   margin-top: auto;
   padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
