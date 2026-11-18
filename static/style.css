@@ -234,8 +234,8 @@ body {
 }
 
 .glass-icon-btn {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 10px;
   background: var(--glass-surface-elevated);
   border: 1px solid var(--glass-border);
@@ -247,6 +247,17 @@ body {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
+}
+
+.glass-icon-btn svg,
+.user-avatar-glow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.brand-bolt-inner svg {
+  width: 22px;
+  height: 22px;
 }
 
 .glass-icon-btn:hover {
@@ -507,11 +518,13 @@ body {
 .card-icon-title {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   color: #f8fafc;
 }
 
 .card-icon-title svg {
+  width: 20px;
+  height: 20px;
   color: #38bdf8;
   flex-shrink: 0;
 }
@@ -1906,10 +1919,10 @@ body {
 }
 
 .rover-ai-icon {
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   line-height: 1;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .rover-ai-body {
@@ -2521,6 +2534,8 @@ body {
 }
 
 .card-icon-title svg {
+  width: 20px;
+  height: 20px;
   color: var(--accent-cyan);
   flex-shrink: 0;
 }
@@ -2670,8 +2685,23 @@ body {
   transition-duration: 0.08s;
 }
 
+.btn-examples-toggle .ai-bot-avatar {
+  font-size: 1.28rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-examples-toggle .ai-bot-sparkle {
+  font-size: 1.05rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
 .btn-examples-toggle .ai-bot-arrow {
   display: inline-block;
+  font-size: 0.95rem;
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -6527,12 +6557,17 @@ body.show-details .composer-footer {
 }
 
 .rail-nav-icon {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+.rail-nav-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .rail-nav-label {
