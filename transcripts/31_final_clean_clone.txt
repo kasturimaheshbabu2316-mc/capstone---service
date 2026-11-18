@@ -1,6 +1,6 @@
 ================================================================================
 OLA SUPPORT INTELLIGENCE — CLEAN-CLONE OFFLINE VERIFICATION
-Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1794754218
+Target Directory: C:\Users\kastu\AppData\Local\Temp\cleancheck_1795010225
 Python Executable: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe (3.11.15)
 ================================================================================
 
@@ -77,11 +77,11 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe -m p
   ...........................................................              [100%]
   ============================== warnings summary ===============================
   tests\test_cache.py:14
-    C:\Users\kastu\AppData\Local\Temp\cleancheck_1794754218\tests\test_cache.py:14: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
+    C:\Users\kastu\AppData\Local\Temp\cleancheck_1795010225\tests\test_cache.py:14: LangChainDeprecationWarning: RunnableWithMessageHistory is deprecated. Use LangGraph's built-in persistence instead.
       from crew.memory import (
   
   -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-  203 passed, 1 skipped, 1 warning in 149.05s (0:02:29)
+  203 passed, 1 skipped, 1 warning in 56.66s
 [+] Full PyTest Suite (Offline Socket Guard Active): PASS
 
 ================================================================================
@@ -373,7 +373,7 @@ Command: C:\Users\kastu\Desktop\capstone - service\.venv\Scripts\python.exe eval
   Running AutoGen Review Demo A (Faithful Draft)...
   Running AutoGen Review Demo B (Draft with Injected Ungrounded Claim)...
   
-  Transcript successfully saved to: C:\Users\kastu\AppData\Local\Temp\cleancheck_1794754218\transcripts\14_review.txt
+  Transcript successfully saved to: C:\Users\kastu\AppData\Local\Temp\cleancheck_1795010225\transcripts\14_review.txt
 [+] AutoGen Review Demo: PASS
 
 ================================================================================
