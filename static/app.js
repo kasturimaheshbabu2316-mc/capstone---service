@@ -3481,6 +3481,32 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --------------------------------------------------------------------------
+  // Motional Shockwave Ripple on Option & Toggle Interactions
+  // --------------------------------------------------------------------------
+  document.addEventListener("pointerdown", e => {
+    const target = e.target.closest(
+      ".starter-card, .neo-toggle-pill, .bot-filter-btn, .rail-nav-item, .tab-btn, .btn-examples-toggle, .row-action-btn, .action-btn-gradient, .send-btn, .glass-btn"
+    );
+    if (!target) return;
+    const rect = target.getBoundingClientRect();
+    const ripple = document.createElement("span");
+    ripple.className = "motional-ripple-wave";
+    const size = Math.max(rect.width, rect.height) * 1.5;
+    ripple.style.width = `${size}px`;
+    ripple.style.height = `${size}px`;
+    ripple.style.left = `${e.clientX - rect.left}px`;
+    ripple.style.top = `${e.clientY - rect.top}px`;
+
+    const pos = window.getComputedStyle(target).position;
+    if (pos === "static") target.style.position = "relative";
+
+    target.appendChild(ripple);
+    setTimeout(() => {
+      if (ripple.parentNode) ripple.remove();
+    }, 550);
+  });
+
+  // --------------------------------------------------------------------------
   // 11. URL Parameter Navigation & Quick Query Dispatch
   // --------------------------------------------------------------------------
   try {
