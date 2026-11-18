@@ -823,19 +823,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // AI Bot Popover Filter Tabs
+  // AI Bot Popover Filter Tabs with Silky Option Animation
   document.querySelectorAll(".bot-filter-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
       document.querySelectorAll(".bot-filter-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       const filter = btn.getAttribute("data-filter") || "all";
+      let delayIndex = 0;
       document.querySelectorAll(".starter-card").forEach(card => {
-        if (filter === "all") {
+        const cat = card.getAttribute("data-category");
+        const matches = (filter === "all" || cat === filter);
+        if (matches) {
           card.style.display = "";
+          card.classList.remove("card-enter");
+          card.style.animationDelay = `${delayIndex * 35}ms`;
+          delayIndex++;
+          void card.offsetWidth;
+          card.classList.add("card-enter");
         } else {
-          const cat = card.getAttribute("data-category");
-          card.style.display = (cat === filter) ? "" : "none";
+          card.style.display = "none";
+          card.classList.remove("card-enter");
         }
       });
     });
@@ -2272,6 +2280,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function updatePinnedInspector(ticket) {
     if (!ticket) return;
     currentSelectedTicketId = ticket.ticket_id || currentSelectedTicketId;
+
+    const detailCard = document.getElementById("ticket-detail-card");
+    if (detailCard) {
+      detailCard.classList.remove("inspector-updating");
+      void detailCard.offsetWidth;
+      detailCard.classList.add("inspector-updating");
+    }
 
     const tidEl = document.getElementById("detail-ticket-id");
     const titleEl = document.getElementById("detail-ticket-title");

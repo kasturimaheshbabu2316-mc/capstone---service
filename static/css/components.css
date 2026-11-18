@@ -1073,17 +1073,19 @@
   border-bottom: 2px solid transparent;
   white-space: nowrap;
   min-height: 44px;
-  transition: all 120ms ease;
+  transition: color 0.22s ease, border-color 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.24s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tab-btn:hover {
   color: var(--color-ink);
+  transform: translateY(-1px);
 }
 
 .tab-btn.active {
   color: var(--color-highlight);
   border-bottom-color: var(--color-highlight);
   background: var(--color-highlight-bg);
+  transform: translateY(0);
 }
 
 .sheet-body {
