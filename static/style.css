@@ -6181,7 +6181,8 @@ body.show-details .composer-footer {
 }
 
 .nav-sidebar-drawer.expanded {
-  width: 240px;
+  width: 285px;
+  padding: 12px 12px;
 }
 
 .rail-header {
@@ -6786,6 +6787,8 @@ body.show-details .composer-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  width: 100%;
 }
 
 .docket-id {
@@ -6872,7 +6875,7 @@ body.show-details .composer-footer {
 }
 
 .workspace.rail-open {
-  --rail-current-pad: 240px;
+  --rail-current-pad: 285px;
   padding-left: var(--rail-current-pad);
 }
 
