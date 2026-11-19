@@ -434,8 +434,8 @@ Every incoming request appends a single JSON-Lines record to [logs/requests.json
 
 Served directly from FastAPI root (`/`), providing a road-grounded, tactile interface:
 
-- **3-Zone Spatial Architecture**:
-  - **Zone 1: Sticky Glass Top Navbar (`height: 68px`)**: Brand identity (`⚡ Ola Support Intelligence`), live system active status badge (`● System Active`), theme mode toggle, and collapsible drawer button (`⚙ Settings`).
+- **Spatial Architecture & Interactive Zones**:
+  - **Zone 1: Sticky Glass Top Navbar (`height: 68px`)**: Brand identity (`⚡ Ola Support Intelligence`), live system active status badge (`● System Active`), theme mode toggle (Dark/Light), and collapsible drawer button (`⚙ Settings`).
   - **Zone 2: Main Center Stage (Decoupled Workspace)**:
     - **Welcome Glassmorphic Hero Card**: Visible on initial page load, presenting core operational capabilities (`Official Guidelines`, `Live Support Lookup`, `Data Privacy Protection`).
     - **7 Center-Stage Interactive Quick-Action Cards (Responsive Grid)**:
@@ -449,11 +449,33 @@ Served directly from FastAPI root (`/`), providing a road-grounded, tactile inte
       - Clicking any card immediately dispatches to `/ask` and streams the verified answer into the conversation.
     - **Physical Ticket Stub**: Animated ticket printout displaying a live segmented taxi meter escalation risk gauge with the calibrated `0.44` threshold notch, status progression track (`Open` → `In Progress` → `Escalated` / `Resolved` / `Closed`), resolution SLA chips, and actionable crew routing recommendations.
     - **Floating Glass Composer Dock**: Pinned to the bottom (`max-width: 48rem`) with frosted input field, live token budget estimator (`0 / 2,000 tokens`), and glowing dispatch button.
-  - **Zone 3: Collapsible Glass Settings & Admin Drawer**:
-    - Closed by default on initial page load (`aria-hidden="true"`).
+  - **Zone 3: Claymorphic Left Navigation Rail ("The Operative Rail")**:
+    - **Symmetric 23px Fit & Zero Wall Clipping**: Pinned floating drawer (`width: 308px`) with exact 23px symmetric clearance on both left and right container borders, completely eliminating horizontal wall drift and `overflow-x` cuts.
+    - **Tactile Spring Physics (`cubic-bezier(0.34, 1.56, 0.64, 1)`)**: Physical mechanical key feel on mouse interactions:
+      - *Hover*: Smooth vertical lift (`translateY(-2.5px)`) with expanding multi-layer ambient and cyan specular shadows.
+      - *Active (Click)*: Authentic tactile depress (`transform: translateY(1px) scale(0.982)`) with sunken claymorphic inner bevels.
+    - **Periodic Specular Glass Glint (`railActiveSheen`)**: An angled specular light glint sweeps smoothly across the active card every 4.2 seconds, accompanied by swift hover glints on mouse-over.
+    - **Live Telemetry Radar Beacon**: Real-time pulsing green beacon dot (`● LIVE` via `livePillBeacon`) on the active status badge.
+    - **Bespoke Icon Micro-Interactions**:
+      - *Chat Desk*: Playful conversation bubble squash & bounce (`chatBubblePop`).
+      - *Ticket Directory*: Ticket clipboard lift and inspection tilt (`ticketInspect`) with soft P0 alert flare.
+      - *Policy Explorer*: Dual-page book flutter motion (`bookFlutter`).
+      - *Ratings & Reviews*: 72° star sparkle spin (`starTwinkleSpin`) with a golden drop-shadow glow.
+      - *Telemetry Feed*: Expanding radial pulse wave (`telemetryPing`).
+      - *Reset Chat*: Smooth 180° rewind spring spin (`transform: rotate(-180deg) scale(1.18); color: #f43f5e;`).
+      - *Quick Search*: Inquisitive magnifying glass tilt (`searchGlassTilt`) and glowing `⌘K` keyboard badge.
+      - *Details Toggle*: Interactive SVG eyelid contour, animated sleeping line, and pupil dilation (`eyeAlertPulse`).
+      - *Active Docket Card*: Live surge reconciliation card with hover lift and emerald completion glow.
+      - *Cascading Stagger Entrance*: Micro-staggered slide-in animation (`railItemEntrance`) on drawer expansion.
+  - **Zone 4: 3D Interactive Telemetry Orbit (`orbit.js` / Three.js)**:
+    - Real-time Three.js spatial core rendering gyroscopic rotation rings (`gyroSpinX`, `gyroSpinY`, `gyroSpinZ`), orbiting data particles, and stage-synchronized view transitions.
+  - **Zone 5: Collapsible Settings & Admin Drawer**:
     - Houses System Telemetry & Security Health, Connection Protocol Switcher, Support Tickets Directory with instant search and status filters, and Admin Privileged Tools (`/add-document` and `/clear-cache`).
+- **Client-Side Privacy & PII Masking (`mask.js`)**:
+  - Automatically shields phone numbers (`+91 ••••• ••123`), credit/debit card numbers (`•••• •••• •••• 1234`), customer emails, and initials before rendering ticket details.
+- **Dual-Theme Wallpaper System**:
+  - Seamless toggle between Dark Mode and High-Contrast Light Mode with theme-synchronized claymorphic lighting, high contrast ratios, and custom wallpapers.
 - **Zero External Dependencies**: Zero external CDNs, analytics scripts, remote fonts, or raster media. All typography uses high-performance system font stacks and all icons are hand-crafted inline SVGs.
-- **Client-Side Privacy & PII Masking**: Automatically shields phone numbers (`+91 ••••• ••123`), credit/debit card numbers (`•••• •••• •••• 1234`), and customer emails before rendering ticket details.
 
 ### 2. Streamlit Enterprise Console (`streamlit_app.py`)
 
@@ -647,25 +669,40 @@ pytest -q
 # Expected Output: ~135 passed in ~35s
 ```
 
-### 2. Run Comprehensive 50-Query Evaluation Benchmark
+### 2. Execute Web UI & Security Contract Test Suite (17 Tests)
+
+Validates root static delivery, non-shadowed API endpoints, CSP headers, zero internal string leakage, client-side PII masking, 3D orbit stage geometry, dual-theme styling, and claymorphic UI interactions:
+
+```bash
+python scratch/run_tests.py
+# Or directly:
+pytest tests/test_web_ui.py -v
+# Expected Output: 17 passed in ~37s
+```
+
+### 3. Run Comprehensive 50-Query Evaluation Benchmark
 
 ```bash
 python evaluation/run_eval.py
-# Expected Output: Refusal Precision: 100.0%, Refusal Recall: 100.0%, Groundedness: >95%
+# Expected Output: Refusal Precision: 100.0%, Refusal Recall: 100.0%, Groundedness: 96.6%, Safety: 5.00/5.00
 ```
 
-### 3. Verify Offline Clean Clone Proof
+### 4. Verify Offline Clean Clone Proof
 
 ```bash
 python scripts/verify_clean_clone.py
 # Expected Output: ALL PRE-SUBMISSION CHECKS PASSED. Ready for submission.
 ```
 
-### 4. Launch Local Web UI Console
+### 5. Launch Local Web UI Console
 
 ```bash
-python -m uvicorn api.main:app --host 127.0.0.1 --port 8080
-# Visit: http://localhost:8080
+# Windows:
+.\run.bat
+
+# Or direct uvicorn:
+uvicorn api.main:app --host 127.0.0.1 --port 8000
+# Visit: http://localhost:8000
 ```
 
 ---
